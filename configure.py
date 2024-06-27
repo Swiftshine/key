@@ -205,14 +205,14 @@ cflags_rel = [
     "-sdata2 0",
 ]
 
-config.linker_version = "GC/1.3.2"
+config.linker_version = "Wii/1.3"
 
 
 # Helper function for Dolphin libraries
 def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/1.2.5n",
+        "mw_version": "Wii/1.3",
         "cflags": cflags_base,
         "host": False,
         "objects": objects,
@@ -223,7 +223,7 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
 def Rel(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/1.3.2",
+        "mw_version": "Wii/1.3",
         "cflags": cflags_rel,
         "host": True,
         "objects": objects,

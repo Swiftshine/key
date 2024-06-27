@@ -14,7 +14,7 @@ Sections:
 	.bss        type:bss align:64
 
 Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
-	.text       start:0x8068DD08 end:0x8068DD44
+	.text       start:0x8068DD08 end:0x8068DDEC
 	.ctors      start:0x807E3420 end:0x807E3424 rename:.ctors$10
 	.dtors      start:0x807E37A0 end:0x807E37A4 rename:.dtors$10
 	.dtors      start:0x807E37A4 end:0x807E37A8 rename:.dtors$15
