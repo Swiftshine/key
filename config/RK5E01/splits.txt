@@ -14,7 +14,7 @@ Sections:
 	.bss        type:bss align:64
 
 game/object/FlfGameObj.cpp:
-	.text       start:0x8002BCF8 end:0x8002BE3C
+	.text       start:0x8002BCF8 end:0x8002C004
 
 gfl/string.cpp:
 	.text       start:0x8003D1A0 end:0x8003D1DC
@@ -25,11 +25,18 @@ game/object/FlfHandleObj.cpp:
 gfl/mem.cpp:
 	.text       start:0x8063C4F8 end:0x8063C598
 
-gfl/file.cpp:
-	.text       start:0x80642334 end:0x806423DC
+gfl/file/direntrywii.cpp:
+	.text       start:0x806416DC end:0x8064186C
+
+gfl/file/file.cpp:
+	.text       start:0x80642190 end:0x806423DC
+	.rodata     start:0x8082C424 end:0x8082C428
+
+gfl/file/filesystemwii.cpp:
+	.text       start:0x806424B4 end:0x806425A0
 
 gfl/string/fixedstring.cpp:
-	.text       start:0x80642BA0 end:0x80642C24
+	.text       start:0x80642BA0 end:0x80642CB0
 
 Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC

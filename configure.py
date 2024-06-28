@@ -176,6 +176,7 @@ cflags_base = [
     "-RTTI on",
     "-fp_contract on",
     "-str reuse",
+    "-sdata 0",
     "-code_merging all",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-enc SJIS",
@@ -258,10 +259,12 @@ config.libs = [
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/mem.cpp"),
-            Object(Matching, "gfl/file.cpp"),
-            Object(NonMatching, "gfl/string.cpp"),
             Object(NonMatching, "gfl/string/fixedstring.cpp"),
+            Object(NonMatching, "gfl/string.cpp"),
             Object(NonMatching, "gfl/string/basicstring.cpp"),
+            Object(NonMatching, "gfl/file/file.cpp"),
+            Object(NonMatching, "gfl/file/filesystemwii.cpp"),
+            Object(NonMatching, "gfl/file/direntrywii.cpp"),
         ],
     },
     {
@@ -270,7 +273,8 @@ config.libs = [
         "cflags": cflags_base,
         "host": False,
         "objects": [
-
+            Object(NonMatching, "game/object/FlfHandleObj.cpp"),
+            Object(NonMatching, "game/object/FlfGameObj.cpp"),
         ],
     },
 ]

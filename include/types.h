@@ -2,15 +2,17 @@
 #define FLUFF_TYPES_H
 
 #include <revolution/types.h>
-
+#include <nw4r/math/types.h>
 
 
 struct Vec2f {
+    inline void operator=(float val) { x = val; y = val; }
     float x;
     float y;
 };
 
 struct Vec3f {
+    inline void operator=(float val) { x = val; y = val; z = val; }
     float x;
     float y;
     float z;
@@ -18,4 +20,6 @@ struct Vec3f {
 
 typedef f32 MTX33[3][3];
 typedef f32 MTX34[3][4];
+
+
 #endif

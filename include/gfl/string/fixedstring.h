@@ -2,14 +2,19 @@
 #define GFL_STRING_FIXED_STRING_H
 
 #include <types.h>
+#include <gfl/string/basicstring.h>
 
 namespace gfl {
 namespace String {
-   	struct FixedString {
+   	class FixedString {
+	public:
 		FixedString();
         ~FixedString();
-        void Copy(char* src);
-        
+
+        void operator=(const char* src);
+        void operator=(gfl::String::BasicString* src);
+		bool HasForwardSlash();
+	public:
 		char string[512];
 		u32 len;
    	};
