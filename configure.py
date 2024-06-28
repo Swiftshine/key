@@ -173,9 +173,10 @@ cflags_base = [
     '-pragma "warn_notinlined off"',
     "-maxerrors 1",
     "-nosyspath",
-    "-RTTI off",
+    "-RTTI on",
     "-fp_contract on",
     "-str reuse",
+    "-code_merging all",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-enc SJIS",
     "-i include",
@@ -257,8 +258,19 @@ config.libs = [
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/mem.cpp"),
+            Object(Matching, "gfl/file.cpp"),
             Object(NonMatching, "gfl/string.cpp"),
             Object(NonMatching, "gfl/string/fixedstring.cpp"),
+            Object(NonMatching, "gfl/string/basicstring.cpp"),
+        ],
+    },
+    {
+        "lib" : "game/object",
+        "mw_version": config.linker_version,
+        "cflags": cflags_base,
+        "host": False,
+        "objects": [
+
         ],
     },
 ]

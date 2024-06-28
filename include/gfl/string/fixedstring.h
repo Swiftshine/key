@@ -8,7 +8,8 @@ namespace String {
    	struct FixedString {
 		FixedString();
         ~FixedString();
-
+        void Copy(char* src);
+        
 		char string[512];
 		u32 len;
    	};

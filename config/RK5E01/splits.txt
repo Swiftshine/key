@@ -13,14 +13,23 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
+game/object/FlfGameObj.cpp:
+	.text       start:0x8002BCF8 end:0x8002BE3C
+
 gfl/string.cpp:
 	.text       start:0x8003D1A0 end:0x8003D1DC
+
+game/object/FlfHandleObj.cpp:
+	.text       start:0x8016874C end:0x80168804
 
 gfl/mem.cpp:
 	.text       start:0x8063C4F8 end:0x8063C598
 
+gfl/file.cpp:
+	.text       start:0x80642334 end:0x806423DC
+
 gfl/string/fixedstring.cpp:
-	.text       start:0x80642BA0 end:0x80642BE4
+	.text       start:0x80642BA0 end:0x80642C24
 
 Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC
