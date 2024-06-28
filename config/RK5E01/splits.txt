@@ -13,6 +13,15 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
+gfl/string.cpp:
+	.text       start:0x8003D1A0 end:0x8003D1DC
+
+gfl/mem.cpp:
+	.text       start:0x8063C4F8 end:0x8063C598
+
+gfl/string/fixedstring.cpp:
+	.text       start:0x80642BA0 end:0x80642BE4
+
 Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC
 	.ctors      start:0x807E3420 end:0x807E3424 rename:.ctors$10

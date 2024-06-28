@@ -144,7 +144,7 @@ config.check_sha_path = Path("config") / config.version / "build.sha1"
 config.asflags = [
     "-mgekko",
     "--strip-local-absolute",
-    "-I include",
+    "-i include",
     f"-I build/{config.version}/include",
     f"--defsym version={version_num}",
 ]
@@ -176,8 +176,11 @@ cflags_base = [
     "-RTTI off",
     "-fp_contract on",
     "-str reuse",
-    "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
+    #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
+    "-enc SJIS",
     "-i include",
+    "-i include/stl",
+    "-i include/revolution",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
 ]
@@ -245,6 +248,17 @@ config.libs = [
         "objects": [
             Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
             Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
+        ],
+    },
+    {
+        "lib": "gfl",
+        "mw_version": config.linker_version,
+        "cflags": cflags_base,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "gfl/mem.cpp"),
+            Object(NonMatching, "gfl/string.cpp"),
+            Object(NonMatching, "gfl/string/fixedstring.cpp"),
         ],
     },
 ]
