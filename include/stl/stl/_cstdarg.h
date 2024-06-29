@@ -12,29 +12,13 @@
  * modified is included with the above copyright notice.
  */
 
-#ifndef _STLP_CSTDARG
+#ifndef _STLP_INTERNAL_CSTDARG
+#define _STLP_INTERNAL_CSTDARG
 
-#ifndef _STLP_OUTERMOST_HEADER_ID
-#  define _STLP_OUTERMOST_HEADER_ID 0x113
-#  define _STLP_CSTDARG
-#  include <stl/_prolog.h>
+#include _STLP_NATIVE_CPP_C_HEADER(cstdarg)
+
+namespace _STLP_STD {
+using _STLP_VENDOR_STD::va_list;
+}
+
 #endif
-
-#if (_STLP_OUTERMOST_HEADER_ID != 0x113)
-#  include _STLP_NATIVE_CPP_C_HEADER(cstdarg)
-#else
-#  ifndef _STLP_INTERNAL_CSTDARG
-#    include <stl/_cstdarg.h>
-#  endif
-#endif
-
-#if (_STLP_OUTERMOST_HEADER_ID == 0x113 )
-#  include <stl/_epilog.h>
-#  undef _STLP_OUTERMOST_HEADER_ID
-#endif
-
-#endif /* _STLP_CSTDARG */
-
-// Local Variables:
-// mode:C++
-// End:

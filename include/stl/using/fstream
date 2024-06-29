@@ -1,0 +1,13 @@
+using _STLP_VENDOR_STD::basic_filebuf;
+using _STLP_VENDOR_STD::filebuf;
+using _STLP_VENDOR_STD::basic_ifstream;
+using _STLP_VENDOR_STD::basic_ofstream;
+using _STLP_VENDOR_STD::ifstream;
+using _STLP_VENDOR_STD::ofstream;
+using _STLP_VENDOR_STD::basic_fstream;
+using _STLP_VENDOR_STD::fstream;
+
+using _STLP_VENDOR_STD::wofstream;
+using _STLP_VENDOR_STD::wfilebuf;
+using _STLP_VENDOR_STD::wifstream;
+using _STLP_VENDOR_STD::wfstream;

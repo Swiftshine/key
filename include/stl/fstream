@@ -1,5 +1,8 @@
 /*
  * Copyright (c) 1999
+ * Silicon Graphics Computer Systems, Inc.
+ *
+ * Copyright (c) 1999
  * Boris Fomitchev
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -10,30 +13,36 @@
  * Permission to modify the code and to distribute modified code is granted,
  * provided the above notices are retained, and a notice that the code was
  * modified is included with the above copyright notice.
+ *
  */
 
-#ifndef _STLP_CSTDARG
 
-#ifndef _STLP_OUTERMOST_HEADER_ID
-#  define _STLP_OUTERMOST_HEADER_ID 0x113
-#  define _STLP_CSTDARG
+// This header defines classes basic_filebuf, basic_ifstream,
+// basic_ofstream, and basic_fstream.  These classes represent
+// streambufs and streams whose sources or destinations are files.
+
+#ifndef _STLP_FSTREAM
+#define _STLP_FSTREAM
+
+# ifndef _STLP_OUTERMOST_HEADER_ID
+#  define _STLP_OUTERMOST_HEADER_ID 0x1025
 #  include <stl/_prolog.h>
+# endif
+
+#ifdef _STLP_PRAGMA_ONCE
+# pragma once
 #endif
 
-#if (_STLP_OUTERMOST_HEADER_ID != 0x113)
-#  include _STLP_NATIVE_CPP_C_HEADER(cstdarg)
-#else
-#  ifndef _STLP_INTERNAL_CSTDARG
-#    include <stl/_cstdarg.h>
-#  endif
-#endif
+# include <stl/_ioserr.h>
+# include <stl/_fstream.h>
 
-#if (_STLP_OUTERMOST_HEADER_ID == 0x113 )
+# if (_STLP_OUTERMOST_HEADER_ID == 0x1025)
 #  include <stl/_epilog.h>
 #  undef _STLP_OUTERMOST_HEADER_ID
-#endif
+# endif
 
-#endif /* _STLP_CSTDARG */
+#endif /* _STLP_FSTREAM */
+
 
 // Local Variables:
 // mode:C++
