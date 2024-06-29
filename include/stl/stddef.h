@@ -20,8 +20,6 @@ typedef unsigned long size_t;
 typedef unsigned short wchar_t;
 #endif
 
-typedef void (*funcptr_t)(void);
-
 #ifdef __cplusplus
 }
 #endif

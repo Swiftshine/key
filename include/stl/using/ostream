@@ -1,7 +1,0 @@
-using _STLP_VENDOR_STD::basic_ostream;
-using _STLP_VENDOR_STD::ostream;
-using _STLP_VENDOR_STD::wostream;
-
-using _STLP_VENDOR_STD::endl;
-using _STLP_VENDOR_STD::ends;
-using _STLP_VENDOR_STD::flush;

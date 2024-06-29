@@ -1,3 +1,0 @@
-using _STLP_VENDOR_STD::basic_streambuf;
-using _STLP_VENDOR_STD::streambuf;
-using _STLP_VENDOR_STD::wstreambuf;

@@ -1,6 +1,0 @@
-using _STLP_VENDOR_STD::setiosflags;
-using _STLP_VENDOR_STD::resetiosflags;
-using _STLP_VENDOR_STD::setbase;
-using _STLP_VENDOR_STD::setfill;
-using _STLP_VENDOR_STD::setprecision;
-using _STLP_VENDOR_STD::setw;

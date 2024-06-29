@@ -1,4 +1,0 @@
-using _STLP_VENDOR_STD::strstreambuf;
-using _STLP_VENDOR_STD::istrstream;
-using _STLP_VENDOR_STD::ostrstream;
-using _STLP_VENDOR_STD::strstream;
