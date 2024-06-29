@@ -10,9 +10,9 @@ extern "C" u8 fn_8078a5a0(void*);
 class FlfGameObj : public FlfHandleObj {
 public:
     enum ActorType {
-        Player,
-        Enemy,
-        Gimmick,
+        ActorType_Player,
+        ActorType_Gimmick,
+        ActorType_Enemy,
     };
 public:
     FlfGameObj(u32);
@@ -21,10 +21,18 @@ public:
     void UpdateMatrix();
     void fn_8002BFF8(bool val);
     bool fn_8002C000();
+    void fn_8002C004(u32 unk);
 
+    void ToScreenPos(Vec3f* dst);
     void GetPos(Vec3f* dst);
-    
-    virtual void dummy();
+
+
+    virtual void fn_8000BC4C();
+    virtual void fn_8000BDA4();
+
+
+    f32  GetCullThreshold();
+    void SetCullThreshold(f32);
 public:
     Vec3f position;            
     Vec3f rotation;        

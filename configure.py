@@ -260,7 +260,7 @@ config.libs = [
         "objects": [
             Object(NonMatching, "gfl/mem.cpp"),
             Object(NonMatching, "gfl/string/fixedstring.cpp"),
-            Object(NonMatching, "gfl/string.cpp"),
+            Object(Matching,    "gfl/string.cpp"),
             Object(NonMatching, "gfl/string/basicstring.cpp"),
             Object(NonMatching, "gfl/file/file.cpp"),
             Object(NonMatching, "gfl/file/filesystemwii.cpp"),
@@ -275,6 +275,16 @@ config.libs = [
         "objects": [
             Object(NonMatching, "game/object/FlfHandleObj.cpp"),
             Object(NonMatching, "game/object/FlfGameObj.cpp"),
+            Object(NonMatching, "game/object/Gimmick.cpp"),
+        ],
+    },
+    {
+        "lib" : "game/object/gmk",
+        "mw_version": config.linker_version,
+        "cflags": cflags_base,
+        "host": False,
+        "objects" : [
+            Object(NonMatching, "game/object/gmk/GmkTurtle.cpp"),
         ],
     },
 ]

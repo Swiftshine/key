@@ -14,19 +14,28 @@ Sections:
 	.bss        type:bss align:64
 
 game/object/FlfGameObj.cpp:
-	.text       start:0x8002BCF8 end:0x8002C004
+	.text       start:0x8002BCF8 end:0x8002C090
 
 gfl/string.cpp:
 	.text       start:0x8003D1A0 end:0x8003D1DC
 
+game/object/Gimmick.cpp:
+	.text       start:0x8004DBF4 end:0x8004E650
+
+game/object/PlayerBase.cpp:
+	.text       start:0x80097F94 end:0x80099008
+
 game/object/FlfHandleObj.cpp:
 	.text       start:0x8016874C end:0x80168804
+
+game/object/gmk/GmkTurtle.cpp:
+	.text       start:0x804FA9E4 end:0x804FB358
 
 gfl/mem.cpp:
 	.text       start:0x8063C4F8 end:0x8063C598
 
 gfl/file/direntrywii.cpp:
-	.text       start:0x806416DC end:0x8064186C
+	.text       start:0x806416DC end:0x80641A9C
 
 gfl/file/file.cpp:
 	.text       start:0x80642190 end:0x806423DC

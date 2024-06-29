@@ -47,8 +47,26 @@ bool FlfGameObj::fn_8002C000() {
     return _6C;
 }
 
+void FlfGameObj::fn_8002C004(u32 unk) {
+
+}
+
+void FlfGameObj::ToScreenPos(Vec3f* dst) {
+    dst->x = position.x;
+    dst->y = position.y;
+    dst->z = cullingThreshold;
+}
+
 void FlfGameObj::GetPos(Vec3f* dst) {
     dst->x = this->position.x;
     dst->y = this->position.y;
     dst->z = this->position.z;
 }
+
+void FlfGameObj::fn_8000BC4C() { /* virtual*/ }
+
+void FlfGameObj::fn_8000BDA4() { /* virtual */}
+
+f32 FlfGameObj::GetCullThreshold() { return cullingThreshold; }
+
+void FlfGameObj::SetCullThreshold(f32 val) { cullingThreshold = val; }

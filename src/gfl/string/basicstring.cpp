@@ -1,4 +1,15 @@
-#include <gfl/string.h>
+#include <types.h>
+#include <gfl/string/basicstring.h>
+
+gfl::String::BasicString::BasicString() {
+    Reset();
+}
+
+void gfl::String::BasicString::Reset() {
+    begin   = NULL;
+    end     = NULL;
+    str     = NULL;
+}
 
 gfl::String::BasicString::BasicString(BasicString* src) {
     if (src) {
@@ -16,3 +27,8 @@ gfl::String::BasicString::~BasicString() {
     }
 
 }
+void gfl::String::BasicString::operator=(const char* src) {
+    
+}
+
+void gfl::String::BasicString::operator=(char* src) { }

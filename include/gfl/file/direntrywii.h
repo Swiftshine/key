@@ -12,6 +12,7 @@ public:
     DirEntryWii();
     ~DirEntryWii();
 
+    // virtual void dummy();
 public:
     void* vtable;
     gfl::FileSystemWii* fs;

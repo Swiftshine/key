@@ -2,8 +2,8 @@
 #define TYPES_H
 
 #ifdef __cplusplus
-#include <cstdarg>
-#include <cstddef>
+#include <stdarg.h>
+#include <stddef.h>
 #else
 #include <stdarg.h>
 #include <stddef.h>

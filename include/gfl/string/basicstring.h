@@ -4,8 +4,13 @@
 namespace gfl {
 namespace String {
     struct BasicString {
+        BasicString();
         BasicString(BasicString* src);
         ~BasicString();
+
+        void Reset();
+        void operator=(const char* src);
+        void operator=(char* src);
 
         char* begin;
         char* end;

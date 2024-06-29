@@ -12,6 +12,7 @@ struct Vec2f {
 };
 
 struct Vec3f {
+    inline Vec3f() { x = y = z = 0; }
     inline void operator=(float val) { x = val; y = val; z = val; }
     float x;
     float y;

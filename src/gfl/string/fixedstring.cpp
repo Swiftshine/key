@@ -17,7 +17,7 @@ void gfl::String::FixedString::operator=(const char* src) {
 }
 
 void gfl::String::FixedString::operator=(gfl::String::BasicString* src) {
-    char* s = src->begin;
+    char* s;
     
     if (src->begin) {
         s = src->begin + 1;

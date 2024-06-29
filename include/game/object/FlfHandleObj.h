@@ -15,7 +15,6 @@ public:
     FlfHandleObj();
     ~FlfHandleObj();
 
-    virtual void dummy();
 protected:
     void* task;
     void* _8;
