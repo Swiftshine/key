@@ -1,6 +1,6 @@
 #ifndef RVL_SDK_OS_CONTEXT_H
 #define RVL_SDK_OS_CONTEXT_H
-#include <revolution/types.h>
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

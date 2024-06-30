@@ -1,26 +1,24 @@
 #ifndef RVL_SDK_DVD_FS_H
 #define RVL_SDK_DVD_FS_H
-#include <revolution/types.h>
+#include <revolution/DVD/dvd.h>
+#include <revolution/OS.h>
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct DVDFileInfo;
-
-typedef void (*DVDAsyncCallback)(s32, struct DVDFileInfo *);
-
+extern OSThreadQueue __DVDThreadQueue;
 extern BOOL __DVDLongFileNameFlag;
 
-typedef struct DVDFileInfo {
-    DVDCommandBlock cb;
-    u32 startAddr;
-    u32 length;
-    DVDAsyncCallback callback;
-} DVDFileInfo;
-
-BOOL DVDOpen(const char *fileName, DVDFileInfo *fileInfo);
-
-s32 DVDReadAsyncPrio(DVDFileInfo *fileInfo, void *addr, s32 length, s32 offset, DVDAsyncCallback callback, s32 prio);
+void __DVDFSInit(void);
+s32 DVDConvertPathToEntrynum(const char* path);
+BOOL DVDFastOpen(s32 entrynum, DVDFileInfo* info);
+BOOL DVDOpen(const char* path, DVDFileInfo* info);
+BOOL DVDClose(DVDFileInfo* info);
+BOOL DVDGetCurrentDir(char* buffer, u32 maxlen);
+BOOL DVDReadAsyncPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset,
+                      DVDAsyncCallback callback, s32 prio);
+s32 DVDReadPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset, s32 prio);
 
 #ifdef __cplusplus
 }
