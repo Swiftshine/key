@@ -3,20 +3,24 @@
 
 #include <game/object/FlfHandleObj.h>
 
+// a PPCHalt thunk
+extern "C" void fn_8064122C() DONT_INLINE;
+
 class FlfHandleObjList {
 public:
     static FlfHandleObjList* Instance;
-public:
+public:    
 
-    
     FlfHandleObjList() DONT_INLINE;
     ~FlfHandleObjList();
 
     static void MakeInstance();
+    static void RemoveInstance();
+
 
     void Add(FlfHandleObj* object);
-    void Set(u32 index, FlfHandleObj* object);
     void Remove(FlfHandleObj* object);
+    void Set(u32 index, FlfHandleObj* object);
 public:
     FlfHandleObj* objects[1000];
     u32 count;

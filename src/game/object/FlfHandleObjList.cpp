@@ -1,7 +1,17 @@
 #include <game/object/FlfHandleObjList.h>
-#include <gfl/mem.h>
 #include <revolution/BASE.h>
-#include <MSL/new>
+#include <gfl/mem.h>
+
+FlfHandleObjList* FlfHandleObjList::Instance;
+
+void FlfHandleObjList::MakeInstance() {
+FlfHandleObjList::Instance = new (u8(1)) FlfHandleObjList;
+}
+
+void FlfHandleObjList::RemoveInstance() {
+    gfl::mem::Remove(FlfHandleObjList::Instance, gfl::mem::HeapID::LIB1);
+    FlfHandleObjList::Instance = NULL;
+}
 
 FlfHandleObjList::FlfHandleObjList()
     : count(0)
@@ -10,14 +20,6 @@ FlfHandleObjList::FlfHandleObjList()
     memset(this, '\0', 4000);    
 }
 
-FlfHandleObjList::~FlfHandleObjList() {
-    gfl::mem::Remove(FlfHandleObjList::Instance, gfl::mem::HeapID::LIB1);
-    FlfHandleObjList::Instance = NULL;
-}
-
-void FlfHandleObjList::MakeInstance() {
-    Instance = new FlfHandleObjList;
-}
 
 void FlfHandleObjList::Add(FlfHandleObj* object) {
     u32 lastIndex = this->count;
@@ -49,7 +51,11 @@ void FlfHandleObjList::Add(FlfHandleObj* object) {
         remainingSlots--;
     }
 
-    PPCHalt();
+    fn_8064122C();
+}
+
+void FlfHandleObjList::Remove(FlfHandleObj* object) {
+    *object->listEntry = NULL;
 }
 
 void FlfHandleObjList::Set(u32 index, FlfHandleObj* object) {
@@ -58,8 +64,4 @@ void FlfHandleObjList::Set(u32 index, FlfHandleObj* object) {
     object->listEntry = &this->objects[index];
     this->count = index + 1;
     this->curEntryID++;
-}
-
-void FlfHandleObjList::Remove(FlfHandleObj* object) {
-    *object->listEntry = NULL;
 }

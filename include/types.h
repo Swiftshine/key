@@ -3,7 +3,7 @@
 
 #include <revolution/types.h>
 #include <nw4r/math/types.h>
-
+#include <MSL/stddef.h>
 
 struct Vec2f {
     inline void operator=(float val) { x = val; y = val; }

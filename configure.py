@@ -168,6 +168,7 @@ cflags_base = [
     "-Cpp_exceptions off",
     # "-W all",
     "-O4,p",
+    "-func_align 4",
     "-inline auto",
     '-pragma "cats off"',
     '-pragma "warn_notinlined off"',
@@ -176,12 +177,13 @@ cflags_base = [
     "-RTTI on",
     "-fp_contract on",
     "-str reuse",
-    "-sdata 0",
     "-code_merging all",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-enc SJIS",
     "-i include",
     "-i include/MSL",
+    "-i include/MSL/internal",
+    "-i include/stl",
     "-i include/revolution",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
@@ -253,6 +255,15 @@ config.libs = [
         ],
     },
     {
+        "lib" : "revolution",
+        "mw_version" : config.linker_version,
+        "clags" : cflags_base,
+        "host" : False,
+        "objects" : [
+
+        ],
+    },
+    {
         "lib": "gfl",
         "mw_version": config.linker_version,
         "cflags": cflags_base,
@@ -270,12 +281,17 @@ config.libs = [
     {
         "lib" : "game/object",
         "mw_version": config.linker_version,
-        "cflags": cflags_base,
+        "cflags": [
+            *cflags_base,
+        ],
         "host": False,
         "objects": [
             Object(NonMatching, "game/object/FlfHandleObj.cpp"),
+            Object(Matching, "game/object/FlfHandleObjList.cpp"),
             Object(NonMatching, "game/object/FlfGameObj.cpp"),
+            Object(NonMatching, "game/object/FlfGameObjLocator.cpp"),
             Object(NonMatching, "game/object/Gimmick.cpp"),
+            Object(NonMatching, "game/object/PlayerBase.cpp"),
         ],
     },
     {
@@ -285,6 +301,15 @@ config.libs = [
         "host": False,
         "objects" : [
             Object(NonMatching, "game/object/gmk/GmkTurtle.cpp"),
+        ],
+    },
+    {
+        "lib" : "game/manager",
+        "mw_version": config.linker_version,
+        "cflags": cflags_base,
+        "host": False,
+        "objects" : [
+            Object(NonMatching, "game/manager/GimmickManager.cpp"),
         ],
     },
 ]

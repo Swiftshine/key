@@ -11,3 +11,4 @@ orig/*/*
 !orig/*/.gitkeep
 /*.txt
 ctx.c
+temp

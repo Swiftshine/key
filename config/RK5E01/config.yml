@@ -3,4 +3,4 @@ hash: f4280a2b0709bfde4132be22e9f7fa8ecfa2a130
 symbols: config/RK5E01/symbols.txt
 splits: config/RK5E01/splits.txt
 ldscript_template: config/RK5E01/ldscript.tpl # Needed for correct __ArenaLo alignment
-mw_comment_version: 11
+mw_comment_version: 14
