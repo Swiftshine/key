@@ -2,6 +2,7 @@
 #define FLUFF_GAME_OBJ_H
 
 #include <game/object/FlfHandleObj.h>
+#include <types.h>
 
 typedef u32 ActorType;
 

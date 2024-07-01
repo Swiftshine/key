@@ -24,4 +24,8 @@ void GimmickManager::SetMapbin(Mapdata::Mapbin::Header* header) {
     _0 = 1;
 }
 
-void GimmickManager::ClearGimmicks(int unk) { }
+void GimmickManager::ClearGimmicks(bool clearMapdata) {
+    // while (gimmicks.entries) {
+    //     delete gimmicks.last->data;
+    // }
+}
