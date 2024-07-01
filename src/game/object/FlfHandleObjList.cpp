@@ -5,7 +5,7 @@
 FlfHandleObjList* FlfHandleObjList::Instance;
 
 void FlfHandleObjList::MakeInstance() {
-FlfHandleObjList::Instance = new (u8(1)) FlfHandleObjList;
+FlfHandleObjList::Instance = new (gfl::mem::HeapID::LIB1) FlfHandleObjList;
 }
 
 void FlfHandleObjList::RemoveInstance() {
