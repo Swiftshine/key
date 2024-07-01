@@ -6,8 +6,8 @@ extern "C" {
 #endif
 
 typedef struct OSExecParams {
-    UNKWORD WORD_0x0;
-    UNKWORD WORD_0x4;
+    unsigned int WORD_0x0;
+    unsigned int WORD_0x4;
     char UNK_0x8[0x4];
     void* regionStart; // at 0xC
     void* regionEnd;   // at 0x10

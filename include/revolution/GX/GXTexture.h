@@ -29,8 +29,8 @@ void GXInitTlutObj(GXTlutObj*, void*, GXTlutFmt, u16);
 void GXInvalidateTexAll(void);
 
 // TODO
-UNKTYPE GXSetTexCoordScaleManually(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-UNKTYPE GXSetTexCoordCylWrap(UNKWORD, UNKWORD, UNKWORD);
+UNKTYPE GXSetTexCoordScaleManually(unsigned int, unsigned int, unsigned int, unsigned int);
+UNKTYPE GXSetTexCoordCylWrap(unsigned int, unsigned int, unsigned int);
 
 #ifdef __cplusplus
 }

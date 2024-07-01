@@ -23,9 +23,9 @@ typedef enum {
     WPAD_RESULT_SUCCESS = 0,
 } WPADResult;
 
-UNKTYPE WPADControlSpeaker(s32, UNKWORD, WPADCallback);
+UNKTYPE WPADControlSpeaker(s32, unsigned int, WPADCallback);
 BOOL WPADCanSendStreamData(s32);
-UNKWORD WPADSendStreamData(s32, UNKTYPE*, UNKWORD);
+unsigned int WPADSendStreamData(s32, UNKTYPE*, unsigned int);
 
 s32 WPADProbe(s32 chan, u32* type);
 s32 WPADReadFaceData(s32 chan, void* dst, u32 size, u32 src, WPADCallback cb);

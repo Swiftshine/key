@@ -2,7 +2,7 @@
 #include <revolution/DB.h>
 #include <revolution/OS.h>
 
-static asm void __OSLoadFPUContext(UNKWORD unused, register OSContext* ctx) {
+static asm void __OSLoadFPUContext(unsigned int unused, register OSContext* ctx) {
     // clang-format off
     nofralloc
 
@@ -88,7 +88,7 @@ _exit:
     // clang-format on
 }
 
-static asm void __OSSaveFPUContext(UNKWORD unused, UNKWORD unused1,
+static asm void __OSSaveFPUContext(unsigned int unused, unsigned int unused1,
                                    register OSContext* ctx) {
     // clang-format off
     nofralloc

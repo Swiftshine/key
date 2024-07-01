@@ -15,7 +15,7 @@ typedef struct OSScb {
     BOOL enabled; // at 0x44
     BOOL locked;  // at 0x48
     BOOL sync;    // at 0x4C
-    UNKWORD WORD_0x50;
+    unsigned int WORD_0x50;
 } OSScb;
 
 static OSScb Scb ALIGN(32);

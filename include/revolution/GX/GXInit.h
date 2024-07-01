@@ -8,7 +8,7 @@ extern "C" {
 
 typedef struct _GXData {
     union {
-        UNKWORD WORD_0x0;
+        unsigned int WORD_0x0;
         struct {
             u16 SHORT_0x0;      // at 0x0
             u16 lastWriteWasXF; // at 0x2

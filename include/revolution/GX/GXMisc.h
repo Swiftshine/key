@@ -7,7 +7,7 @@ extern "C" {
 
 typedef void (*GXDrawDoneCallback)(void);
 
-void GXSetMisc(UNKWORD token, UNKWORD val);
+void GXSetMisc(unsigned int token, unsigned int val);
 void GXFlush(void);
 void GXResetWriteGatherPipe(void);
 

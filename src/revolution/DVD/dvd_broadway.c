@@ -33,7 +33,7 @@ typedef enum {
 
 typedef struct DVDLowContext {
     DVDLowCallback callback; // at 0x0
-    UNKWORD WORD_0x4;
+    unsigned int WORD_0x4;
     u8 inUse;  // at 0x8
     u32 magic; // at 0xC
     u32 id;    // at 0x10
@@ -85,7 +85,7 @@ static u8 lastTicketError[32] ALIGN(32);
 DECOMP_FORCEACTIVE(dvd_broadway_c, dvdContexts);
 
 static void nextCommandBuf(void);
-static DVDLowContext* newContext(DVDLowCallback callback, UNKWORD arg2);
+static DVDLowContext* newContext(DVDLowCallback callback, unsigned int arg2);
 
 static void* ddrAllocAligned32(size_t size) {
     u8* lo = IPCGetBufferLo();
@@ -282,7 +282,7 @@ static void nextCommandBuf(void) {
 }
 
 static DECOMP_INLINE DVDLowContext* newContext(DVDLowCallback callback,
-                                               UNKWORD arg2) {
+                                               unsigned int arg2) {
     s32 id;
 
     // The last operation somehow did not complete
