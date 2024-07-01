@@ -1,26 +1,35 @@
 #ifndef GFL_MEM_H
 #define GFL_MEM_H
 
-#include <types.h>
 #include <MSL/internal/mem.h>
+#include <MSL/cstddef>
+#include <revolution/types.h>
+
+void* operator new(std::size_t);
+inline void* operator new(std::size_t, u8);
+
 
 namespace gfl {
 namespace mem {
 
-    enum HeapID {
+namespace HeapID {
+    enum Enum_HeapID {
         None,
-        Lib1,
-        Lib2,
+        LIB1,
+        LIB2,
         String,
         Etc,
         Sound,
         Work,
         Resource,
     };
+}
     
-    void* alloc(u8 heapID, u32 size, int alignment);
-    void  free(void* data);
-    char* memcpy(char* dst, u32 len, char* src);
+    void* Alloc(u8 heapID, u32 size, int alignment);
+    void  Free(void* data);
+    char* Memcpy(char* dst, u32 len, char* src);
+
+    void Remove(void* data, u8 HeapID);
 }
 }
 #endif
