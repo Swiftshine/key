@@ -19,8 +19,7 @@ void gfl::string::FixedString::operator=(const char* src) {
 }
 
 void gfl::string::FixedString::operator=(gfl::string::DynamicString* src) {
-    // todo - make this readable
-    char* s = !(src->ptrAttrib.ptr_val >> 31) ? (char*)src + 1 : src->string;
+    char* s = GFL_DYNAMIC_STRING_CHECK_USE_CHARS(src) ? (char*)src + 1 : src->string;
     gfl::mem::Memcpy(this->string, 0x200, s);
     this->len = strlen(this->string);
 }
