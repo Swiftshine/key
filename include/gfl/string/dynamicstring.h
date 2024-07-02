@@ -1,6 +1,7 @@
 #ifndef GFL_STRING_DYNAMIC_STRING_H
 #define GFL_STRING_DYNAMIC_STRING_H
 
+
 namespace gfl {
 namespace string {
     class DynamicString {
@@ -9,24 +10,40 @@ namespace string {
         DynamicString(DynamicString* src);
         ~DynamicString();
 
-        void Reset();
-        void operator=(const char* src);
-        void operator=(char* src);
+        void Reserve(size_t size);
+        void operator=(DynamicString* src);
+        void Append(u32 offset, u32 numChars, DynamicString* src);
+        void Append(u32 offset, u32 numChars, const char* srcBegin, const char* srcEnd);
 
     public:
         union {
-            char shortStr[8];
+            union {
+                struct {
+                    s8 shortLen;
+                    char shorterStr[7];
+                };
+                char shortStr[8];
+            };
             struct {
                 union {
                     char* ptr;
-                    u32   ptr_val;
+                    int   ptr_val;
                 } ptrAttrib;
                 u32 length;
             };
         };
         char* string;
     };
-}
-}
+
+    // is the DynamicString using its char array?
+    #define GFL_DYNAMIC_STRING_CHECK_USE_CHARS(s) \
+        ((s->ptrAttrib.ptr_val >> 31) & 0)
+
+    // is the DynamicString using its string pointer?
+    #define GFL_DYNAMIC_STRING_CHECK_USE_STRING(s) \
+        ((s->ptrAttrib.ptr_val >> 31) & 1)
+
+} // string
+} // gfl
 
 #endif

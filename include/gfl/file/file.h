@@ -8,6 +8,8 @@
 namespace gfl {
 class File {
 public:
+    static const char EmptyFilename[];
+public:
     File();
     bool Open(const char*);
     void Close();
@@ -22,7 +24,7 @@ public:
 private:
     void*                       vtable;
     gfl::FileSystemWii*         fs;
-    gfl::String::FixedString    filename;
+    gfl::string::FixedString    filename;
     void*                       dvd_fileinfo;
     u8                          _214[0x34];
     u32                         entrynum;

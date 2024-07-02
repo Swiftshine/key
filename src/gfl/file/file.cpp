@@ -1,5 +1,7 @@
 #include <gfl/file.h>
 
+const char gfl::File::EmptyFilename[] = {0, 0, 0, 0};
+
 gfl::File::File() {
 
 }
@@ -15,7 +17,7 @@ void gfl::File::Close() {
 
 void gfl::File::Reset() {
     fs = NULL;
-    filename = "";
+    filename = EmptyFilename;
     dvd_fileinfo = NULL;
 }
 

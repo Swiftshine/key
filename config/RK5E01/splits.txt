@@ -13,6 +13,9 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
+gfl/string/dynamicstring.cpp:
+	.text       start:0x8000C22C end:0x8000C824
+
 game/object/FlfGameObj.cpp:
 	.text       start:0x8002BCF8 end:0x8002C090
 

@@ -1,5 +1,22 @@
 #include <gfl/file/filesystemwii.h>
 #include <revolution/DVD/dvd.h>
+#include <revolution/OS/OS.h>
+
+void gfl::FileSystemWii::MakeInstance() {
+    gfl::FileSystemWii::Instance = new gfl::FileSystemWii;
+}
+
+void gfl::FileSystemWii::ClearInstance() {
+    if (gfl::FileSystemWii::Instance) {
+        delete gfl::FileSystemWii::Instance;
+    }
+
+    gfl::FileSystemWii::Instance = NULL;
+}
+
+gfl::File* gfl::FileSystemWii::GetFileByEntrynum(int entrynum) {
+    return NULL;
+}
 
 gfl::FileSystemWii::FileSystemWii() {
     Init();
