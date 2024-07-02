@@ -2,24 +2,28 @@
 #define GFL_STRING_FIXED_STRING_H
 
 #include <types.h>
-#include <gfl/string/basicstring.h>
 
 namespace gfl {
-namespace String {
+namespace string {
+	class DynamicString;
+
+	
    	class FixedString {
 	public:
 		FixedString();
         ~FixedString();
 
+		static void Remove(FixedString* fixedString, u8 heapID);
+
         void operator=(const char* src);
-        void operator=(gfl::String::BasicString* src);
+        void operator=(gfl::string::DynamicString* src);
 		bool HasForwardSlash();
 	public:
 		char string[512];
 		u32 len;
    	};
 
-	//static_assert(sizeof(gfl::String::FixedString) == 0x204, "gfl::String::FixedString is the wrong size");
+	// static_assert(sizeof(gfl::String::FixedString) == 0x204, "gfl::String::FixedString is the wrong size");
 }
 }
 

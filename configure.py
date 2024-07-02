@@ -272,9 +272,9 @@ config.libs = [
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/mem.cpp"),
-            Object(NonMatching, "gfl/string/fixedstring.cpp"),
+            Object(Matching, "gfl/string/fixedstring.cpp"),
             Object(Matching,    "gfl/string.cpp"),
-            Object(NonMatching, "gfl/string/basicstring.cpp"),
+            Object(NonMatching, "gfl/string/dynamicstring.cpp"),
             Object(NonMatching, "gfl/file/file.cpp"),
             Object(NonMatching, "gfl/file/filesystemwii.cpp"),
             Object(NonMatching, "gfl/file/direntrywii.cpp"),
