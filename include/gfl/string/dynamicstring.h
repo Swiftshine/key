@@ -35,13 +35,14 @@ namespace string {
         char* string;
     };
 
-    // is the DynamicString using its char array?
-    #define GFL_DYNAMIC_STRING_CHECK_USE_CHARS(s) \
-        ((u32)(s->ptrAttrib.ptr_val >> 31) & 0)
-
     // is the DynamicString using its string pointer?
     #define GFL_DYNAMIC_STRING_CHECK_USE_STRING(s) \
         ((u32)(s->ptrAttrib.ptr_val >> 31) & 1)
+    
+    // is the DynamicString using its char array?
+    #define GFL_DYNAMIC_STRING_CHECK_USE_CHARS(s) \
+        !GFL_DYNAMIC_STRING_CHECK_USE_STRING(s)
+
 
 } // string
 } // gfl
