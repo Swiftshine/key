@@ -15,7 +15,7 @@ public:
     // virtual void dummy();
 public:
     void* vtable;
-    gfl::FileSystemWii* fs;
+    gfl::file::FileSystemWii* fs;
     void* dvdDir;
     u32 _C;
     u32 _10;

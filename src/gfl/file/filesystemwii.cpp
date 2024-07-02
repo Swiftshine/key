@@ -2,30 +2,30 @@
 #include <revolution/DVD/dvd.h>
 #include <revolution/OS/OS.h>
 
-void gfl::FileSystemWii::MakeInstance() {
-    gfl::FileSystemWii::Instance = new gfl::FileSystemWii;
+void gfl::file::FileSystemWii::MakeInstance() {
+    gfl::file::FileSystemWii::Instance = new gfl::file::FileSystemWii;
 }
 
-void gfl::FileSystemWii::ClearInstance() {
-    if (gfl::FileSystemWii::Instance) {
-        delete gfl::FileSystemWii::Instance;
+void gfl::file::FileSystemWii::ClearInstance() {
+    if (gfl::file::FileSystemWii::Instance) {
+        delete gfl::file::FileSystemWii::Instance;
     }
 
-    gfl::FileSystemWii::Instance = NULL;
+    gfl::file::FileSystemWii::Instance = NULL;
 }
 
-gfl::File* gfl::FileSystemWii::GetFileByEntrynum(int entrynum) {
+gfl::file::File* gfl::file::FileSystemWii::GetFileByEntrynum(int entrynum) {
     return NULL;
 }
 
-gfl::FileSystemWii::FileSystemWii() {
+gfl::file::FileSystemWii::FileSystemWii() {
     Init();
 }
 
 
-void gfl::FileSystemWii::StartBPEThread() { }
+void gfl::file::FileSystemWii::StartBPEThread() { }
 
-void gfl::FileSystemWii::CancelBPEThead() {
+void gfl::file::FileSystemWii::CancelBPEThead() {
     OSThread* thread = OSGetCurrentThread();
     if (thread != &BPEThread) {
         OSCancelThread(&BPEThread);
@@ -35,11 +35,11 @@ void gfl::FileSystemWii::CancelBPEThead() {
 }
 
 
-gfl::FileSystemWii::~FileSystemWii() {
+gfl::file::FileSystemWii::~FileSystemWii() {
     CancelBPEThead();
 }
 
-void gfl::FileSystemWii::Init() {
+void gfl::file::FileSystemWii::Init() {
     DVDInit();
     StartBPEThread();
 }

@@ -8,6 +8,7 @@
 
 
 namespace gfl {
+namespace file {
     class File;
 
     class FileSystemWii {
@@ -17,13 +18,13 @@ namespace gfl {
         void MakeInstance();
         void ClearInstance();
 
-        gfl::File* GetFileByEntrynum(int entrynum);
+        gfl::file::File* GetFileByEntrynum(int entrynum);
 
     private:
         FileSystemWii();
         ~FileSystemWii();
         
-        gfl::File* GetFileByEntryNumImpl(int entrynum);
+        gfl::file::File* GetFileByEntryNumImpl(int entrynum);
 
         virtual void Init();
         // used to decode Good-Feel's byte-pair-encoded GF Archives
@@ -31,7 +32,7 @@ namespace gfl {
         void CancelBPEThead();
         u32  GetFilesize(const char* filename);
         u32 fn_80642618();
-        gfl::File* Open(const char* filename);
+        gfl::file::File* Open(const char* filename);
         void Close(File* file);
         int Read(File* file, void* address, u32 length, u32 fileOffs);
         int ReadAsync(File* file, void* address, u32 len, u32 fileOffs);
@@ -43,6 +44,6 @@ namespace gfl {
     public:
         DirEntryWii entries[10];
     };
-
-}
+} // file
+} // gfl
 #endif
