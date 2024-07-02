@@ -3,10 +3,8 @@
 
 namespace gfl {
 namespace string {
-    // todo - name "BasicString" to something more fitting
-    // condensed string?
-
-    struct DynamicString {
+    class DynamicString {
+    public:
         DynamicString();
         DynamicString(DynamicString* src);
         ~DynamicString();
@@ -15,6 +13,7 @@ namespace string {
         void operator=(const char* src);
         void operator=(char* src);
 
+    public:
         union {
             char shortStr[8];
             struct {
