@@ -3,29 +3,30 @@
 
 #include <types.h>
 
-
 namespace gfl {
-class FileSystemWii;
+namespace file {
+    class FileSystemWii;
 
-class DirEntryWii {
-public:
-    DirEntryWii();
-    ~DirEntryWii();
+    class DirEntryWii {
+    public:
+        DirEntryWii();
+        ~DirEntryWii();
 
-    // virtual void dummy();
-public:
-    void* vtable;
-    gfl::file::FileSystemWii* fs;
-    void* dvdDir;
-    u32 _C;
-    u32 _10;
-    u32 filecount; // ?
-    bool _18;
-    u8  pad[3];
-    u32 _1C;
-    void* arcHandle;
-    void* _24;
-};
-}
+        // virtual void dummy();
+    public:
+        void* vtable;
+        gfl::file::FileSystemWii* fs;
+        void* dvdDir;
+        u32 _C;
+        u32 _10;
+        u32 filecount; // ?
+        bool _18;
+        u8  pad[3];
+        u32 _1C;
+        void* arcHandle;
+        void* _24;
+    };
+} // file
+} // gfl
 
 #endif
