@@ -176,6 +176,8 @@ cflags_base = [
     "-nosyspath",
     "-RTTI on",
     "-fp_contract on",
+    "-str pool",
+    "-str readonly",
     "-str reuse",
     "-code_merging all",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
@@ -286,8 +288,8 @@ config.libs = [
         ],
         "host": False,
         "objects": [
-            Object(NonMatching, "game/object/FlfHandleObj.cpp"),
-            Object(Matching, "game/object/FlfHandleObjList.cpp"),
+            Object(Matching,    "game/object/FlfHandleObj.cpp"),
+            Object(Matching,    "game/object/FlfHandleObjList.cpp"),
             Object(NonMatching, "game/object/FlfGameObj.cpp"),
             Object(NonMatching, "game/object/FlfGameObjLocator.cpp"),
             Object(NonMatching, "game/object/Gimmick.cpp"),
