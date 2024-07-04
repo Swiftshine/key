@@ -5,7 +5,7 @@
 
 namespace gfl {
 namespace string {
-	class DynamicString;
+	class BasicString;
 
 	
    	class FixedString {
@@ -16,7 +16,7 @@ namespace string {
 		static void Remove(FixedString* fixedString, u8 heapID);
 
         void operator=(const char* src);
-        void operator=(gfl::string::DynamicString* src);
+        void operator=(BasicString* src);
 		bool HasForwardSlash();
 	public:
 		char string[512];

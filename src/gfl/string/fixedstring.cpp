@@ -9,6 +9,8 @@ gfl::string::FixedString::FixedString() {
     len = 0;
 }
 
+gfl::string::FixedString::~FixedString() { }
+
 void gfl::string::FixedString::Remove(gfl::string::FixedString* fixedString, u8 heapID) {
     gfl::mem::Remove(fixedString, heapID);
 }
@@ -18,8 +20,8 @@ void gfl::string::FixedString::operator=(const char* src) {
     this->len = strlen(this->string);
 }
 
-void gfl::string::FixedString::operator=(gfl::string::DynamicString* src) {
-    char* s = GFL_DYNAMIC_STRING_CHECK_USE_CHARS(src) ? (char*)src + 1 : src->string;
+void gfl::string::FixedString::operator=(gfl::string::BasicString* src) {
+    char* s = GFL_BASIC_STRING_CHECK_USE_CHARS(src) ? (char*)src + 1 : src->string;
     gfl::mem::Memcpy(this->string, 0x200, s);
     this->len = strlen(this->string);
 }

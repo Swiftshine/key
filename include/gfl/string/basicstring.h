@@ -1,18 +1,19 @@
-#ifndef GFL_STRING_DYNAMIC_STRING_H
-#define GFL_STRING_DYNAMIC_STRING_H
+#ifndef GFL_STRING_BASIC_STRING_H
+#define GFL_STRING_BASIC_STRING_H
 
+#include <types.h>
 
 namespace gfl {
 namespace string {
-    class DynamicString {
+    class BasicString {
     public:
-        DynamicString();
-        DynamicString(DynamicString* src);
-        ~DynamicString();
+        BasicString();
+        BasicString(BasicString* src);
+        ~BasicString();
 
         void Reserve(size_t size);
-        void operator=(DynamicString* src);
-        void Append(u32 offset, u32 numChars, DynamicString* src);
+        void operator=(BasicString* src);
+        void Append(u32 offset, u32 numChars, BasicString* src);
         void Append(u32 offset, u32 numChars, const char* srcBegin, const char* srcEnd);
 
     public:
@@ -35,13 +36,13 @@ namespace string {
         char* string;
     };
 
-    // is the DynamicString using its string pointer?
-    #define GFL_DYNAMIC_STRING_CHECK_USE_STRING(s) \
+    // is the basicstring using its string pointer?
+    #define GFL_BASIC_STRING_CHECK_USE_STRING(s) \
         ((u32)(s->ptrAttrib.ptr_val >> 31) & 1)
     
-    // is the DynamicString using its char array?
-    #define GFL_DYNAMIC_STRING_CHECK_USE_CHARS(s) \
-        !GFL_DYNAMIC_STRING_CHECK_USE_STRING(s)
+    // is the basicstring using its char array?
+    #define GFL_BASIC_STRING_CHECK_USE_CHARS(s) \
+        !GFL_BASIC_STRING_CHECK_USE_STRING(s)
 
 
 } // string

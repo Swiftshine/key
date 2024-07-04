@@ -13,7 +13,7 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
-gfl/string/dynamicstring.cpp:
+gfl/string/basicstring.cpp:
 	.text       start:0x8000C22C end:0x8000C824
 
 game/object/FlfGameObj.cpp:
@@ -60,6 +60,7 @@ gfl/file/file.cpp:
 gfl/file/filesystemwii.cpp:
 	.text       start:0x806423DC end:0x806428F0
 	.data       start:0x808B7FB8 end:0x808B8000
+	.sbss       start:0x808E5D58 end:0x808E5D5C
 
 gfl/string/fixedstring.cpp:
 	.text       start:0x80642BA0 end:0x80642CB0
