@@ -4,7 +4,7 @@
 #include <types.h>
 
 namespace gfl {
-namespace file {
+
     class FileSystemWii;
 
     class DirEntryWii {
@@ -15,7 +15,7 @@ namespace file {
         // virtual void dummy();
     public:
         void* vtable;
-        gfl::file::FileSystemWii* fs;
+        gfl::FileSystemWii* fs;
         void* dvdDir;
         u32 _C;
         u32 _10;
@@ -26,7 +26,7 @@ namespace file {
         void* arcHandle;
         void* _24;
     };
-} // file
+
 } // gfl
 
 #endif

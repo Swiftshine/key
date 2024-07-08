@@ -1,6 +1,7 @@
 #ifndef FLUFF_TYPES_H
 #define FLUFF_TYPES_H
 
+#include <static_assert.hpp>
 #include <revolution/types.h>
 #include <nw4r/math/types.h>
 #include <MSL/stddef.h>

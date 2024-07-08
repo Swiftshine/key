@@ -4,7 +4,7 @@
 #include <types.h>
 
 namespace gfl {
-namespace string {
+
     class BasicString {
     public:
         BasicString();
@@ -16,36 +16,40 @@ namespace string {
         void Append(u32 offset, u32 numChars, BasicString* src);
         void Append(u32 offset, u32 numChars, const char* srcBegin, const char* srcEnd);
 
+        void Reset();
     public:
         union {
             union {
                 struct {
                     s8 shortLen;
-                    char shorterStr[7];
+                    char shortString[0xC - 1];
                 };
-                char shortStr[8];
+                
+                struct {
+                    u32 shortA;
+                    u32 shortB;
+                    u32 shortC;
+                };
             };
+
             struct {
-                union {
-                    char* ptr;
-                    int   ptr_val;
-                } ptrAttrib;
+                u32 _0;
                 u32 length;
+                char* string;
             };
         };
-        char* string;
+
     };
+
+    STATIC_ASSERT(sizeof(BasicString) == 0xC);
 
     // is the basicstring using its string pointer?
     #define GFL_BASIC_STRING_CHECK_USE_STRING(s) \
-        ((u32)(s->ptrAttrib.ptr_val >> 31) & 1)
-    
+        ((u32)(s->_0 >> 31) & 1)
     // is the basicstring using its char array?
     #define GFL_BASIC_STRING_CHECK_USE_CHARS(s) \
         !GFL_BASIC_STRING_CHECK_USE_STRING(s)
-
-
-} // string
+    
 } // gfl
 
 #endif

@@ -179,7 +179,7 @@ cflags_base = [
     "-str pool",
     "-str readonly",
     "-str reuse",
-    "-code_merging all",
+    "-code_merging aggressive",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-enc SJIS",
     "-i include",
@@ -278,6 +278,7 @@ config.libs = [
             Object(NonMatching, "gfl/file/file.cpp"),
             Object(NonMatching, "gfl/file/filesystemwii.cpp"),
             Object(NonMatching, "gfl/file/direntrywii.cpp"),
+            Object(Matching, "gfl/file/gfarch.cpp"),
         ],
     },
     {

@@ -6,15 +6,17 @@
 #include <gfl/file/filesystemwii.h>
 
 namespace gfl {
-namespace file {
+
 
     class File {
     public:
         static const char EmptyFilename[];
     public:
         File();
-        bool Open(const char*);
-        void Close();
+
+        static bool Open(const char*);
+
+        virtual void Close();
         void Read(void* addr, u32 len, u32 filepos);
         void ReadAsync(void* addr, u32 len, u32 offs, u32 callback);
         void fn_8064229C();
@@ -24,16 +26,14 @@ namespace file {
         void Reset();
         ~File();
     private:
-        void*                       vtable;
-        gfl::file::FileSystemWii*         fs;
+        gfl::FileSystemWii*         fs;
         gfl::string::FixedString    filename;
         void*                       dvd_fileinfo;
         u8                          _214[0x34];
         u32                         entrynum;
     };
 
-} // file
+    // ASSERT_SIZE(File, 0x250)
 } // gfl
 
-// static_assert(sizeof(gfl::file::File) == 0x250, "gfl::file::File is the wrong size");
 #endif

@@ -1,28 +1,39 @@
-#include <gfl/string.h>
+#include <gfl/string/fixedstring.h>
+#include <gfl/string/basicstring.h>
 #include <gfl/mem.h>
 #include <string.h>
 
 // Fixed String
 
-gfl::string::FixedString::FixedString() {
-    memset(string, 0, sizeof(string));
+gfl::string::FixedString::FixedString(const char* src) {
+    gfl::mem::Memcpy(this->string, STRING_SIZE, const_cast<char*>(src));
+    this->len = strlen(this->string);
+}
+
+gfl::string::FixedString::FixedString(BasicString* src) {
+    char* s = GFL_BASIC_STRING_CHECK_USE_CHARS(src) ? (char*)src + 1 : src->string;
+    gfl::mem::Memcpy(this->string, STRING_SIZE, s);
+    this->len = strlen(this->string);
+}
+
+void gfl::string::FixedString::Reset() {
+    memset(string, 0, STRING_SIZE);
     len = 0;
 }
 
-gfl::string::FixedString::~FixedString() { }
-
-void gfl::string::FixedString::Remove(gfl::string::FixedString* fixedString, u8 heapID) {
-    gfl::mem::Remove(fixedString, heapID);
+gfl::string::FixedString::~FixedString() {
+    // gfl::mem::Remove(fixedString, heapID);
 }
 
+
 void gfl::string::FixedString::operator=(const char* src) {
-    gfl::mem::Memcpy(this->string, 0x200, const_cast<char*>(src));
+    gfl::mem::Memcpy(this->string, STRING_SIZE, const_cast<char*>(src));
     this->len = strlen(this->string);
 }
 
 void gfl::string::FixedString::operator=(gfl::string::BasicString* src) {
     char* s = GFL_BASIC_STRING_CHECK_USE_CHARS(src) ? (char*)src + 1 : src->string;
-    gfl::mem::Memcpy(this->string, 0x200, s);
+    gfl::mem::Memcpy(this->string, STRING_SIZE, s);
     this->len = strlen(this->string);
 }
 

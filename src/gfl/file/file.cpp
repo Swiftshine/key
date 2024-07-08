@@ -1,39 +1,43 @@
 #include <gfl/file.h>
+#include <gfl/mem.h>
 
-const char gfl::file::File::EmptyFilename[] = {0, 0, 0, 0};
+const char gfl::File::EmptyFilename[] = {0, 0, 0, 0};
 
-gfl::file::File::File() {
+bool gfl::File::Open(const char* filename) {
+    File* file = FileSystemWii::Instance->Open(filename, 1);
 
+    if (file) {
+        file->Close();
+        return true;
+    }
+    
+    return false;
 }
 
-bool gfl::file::File::Open(const char* file) {
-
-    return fs != NULL;
-}
-
-void gfl::file::File::Close() {
+void gfl::File::Close() {
+    fs->Close(this);
     fs = NULL;
 }
 
-void gfl::file::File::Reset() {
+void gfl::File::Reset() {
     fs = NULL;
     filename = EmptyFilename;
-    dvd_fileinfo = NULL;
+    *(u32*)((u8*)this + 0x20C) = 0;
 }
 
-void gfl::file::File::Read(void* addr, u32 len, u32 filepos) {
-
+void gfl::File::Read(void* addr, u32 len, u32 fileOffs) {
+    fs->Read(this, addr, len, fileOffs);
 }
 
-void gfl::file::File::ReadAsync(void* addr, u32 len, u32 offs, u32 callback) {
-
+void gfl::File::ReadAsync(void* addr, u32 len, u32 fileOffs, u32 callback) {
+    fs->ReadAsync(this, addr, len, fileOffs, callback);
 }
 
-void gfl::file::File::fn_8064229C() { }
-void gfl::file::File::fn_806422CC() { }
-void gfl::file::File::fn_80642304() { }
-void gfl::file::File::fn_8064231C() { }
+void gfl::File::fn_8064229C() { }
+void gfl::File::fn_806422CC() { }
+void gfl::File::fn_80642304() { }
+void gfl::File::fn_8064231C() { }
 
-gfl::file::File::~File() {
+gfl::File::~File() {
 
 }

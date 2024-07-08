@@ -4,27 +4,30 @@
 #include <types.h>
 
 namespace gfl {
-namespace string {
+
 	class BasicString;
 
 	
    	class FixedString {
 	public:
-		FixedString();
+		static const int STRING_SIZE = 0x200;
+	public:
+		FixedString(const char* src);
+		FixedString(BasicString* src);
         ~FixedString();
 
-		static void Remove(FixedString* fixedString, u8 heapID);
+		// static void Remove(FixedString* fixedString, u8 heapID);
 
+		void Reset();
         void operator=(const char* src);
         void operator=(BasicString* src);
 		bool HasForwardSlash();
 	public:
-		char string[512];
+		char string[STRING_SIZE];
 		u32 len;
    	};
 
-	// static_assert(sizeof(gfl::String::FixedString) == 0x204, "gfl::String::FixedString is the wrong size");
-}
+	ASSERT_SIZE(FixedString, 516)
 }
 
 #endif

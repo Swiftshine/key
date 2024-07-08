@@ -12,3 +12,4 @@ orig/*/*
 /*.txt
 ctx.c
 temp
+tools/mangle.py

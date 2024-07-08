@@ -6,9 +6,7 @@
 #include <types.h>
 
 namespace gfl {
-namespace string {
    	u32 ToHash(const char* str); 
-}
 }
 
 #endif
