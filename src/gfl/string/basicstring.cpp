@@ -1,7 +1,7 @@
 #include <types.h>
 #include <gfl/string.h>
 
-gfl::BasicBasicString(BasicString* src) {  
+gfl::BasicString::BasicString(BasicString* src) {  
     s32 a = src->shortA >> 31;
     u32 b;
     u32 c;
@@ -28,17 +28,17 @@ gfl::BasicBasicString(BasicString* src) {
 }
 
 
-gfl::Basic~BasicString() {
+gfl::BasicString::~BasicString() {
     if (GFL_BASIC_STRING_CHECK_USE_STRING(this)) {
         delete string;
     }
 }
 
-void gfl::BasicReserve(size_t size) {
+void gfl::BasicString::Reserve(size_t size) {
 
 }
 
-void gfl::Basicoperator=(BasicString* src) {
+void gfl::BasicString::operator=(BasicString* src) {
     // if (this->ptrAttrib.ptr_val > -1 && src->ptrAttrib.ptr_val > -1) {
     //     ptrAttrib.ptr = src->ptrAttrib.ptr;
     //     length = src->length;
@@ -56,7 +56,7 @@ void gfl::Basicoperator=(BasicString* src) {
     // Append(0, a, src);
 }
 
-void gfl::BasicAppend(u32 offset, u32 numChars, BasicString* src) {
+void gfl::BasicString::Append(u32 offset, u32 numChars, BasicString* src) {
     char* begin;
     int len;
     // if (GFL_BASIC_STRING_CHECK_USE_STRING(src)) {
@@ -70,11 +70,11 @@ void gfl::BasicAppend(u32 offset, u32 numChars, BasicString* src) {
     Append(offset, numChars, begin, begin + len);
 }
 
-void gfl::BasicAppend(u32 offset, u32 numChars, const char* srcBegin, const char* srcEnd) {
+void gfl::BasicString::Append(u32 offset, u32 numChars, const char* srcBegin, const char* srcEnd) {
     
 }
 
-void gfl::BasicReset() {
+void gfl::BasicString::Reset() {
     _0 = 0;
     length = 0;
     string = NULL;
