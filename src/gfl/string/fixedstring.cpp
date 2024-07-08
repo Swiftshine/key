@@ -5,12 +5,12 @@
 
 // Fixed String
 
-gfl::FixedFixedString(const char* src) {
+gfl::FixedString(const char* src) {
     gfl::mem::Memcpy(this->string, STRING_SIZE, const_cast<char*>(src));
     this->len = strlen(this->string);
 }
 
-gfl::FixedFixedString(BasicString* src) {
+gfl::FixedString(BasicString* src) {
     char* s = GFL_BASIC_STRING_CHECK_USE_CHARS(src) ? (char*)src + 1 : src->string;
     gfl::mem::Memcpy(this->string, STRING_SIZE, s);
     this->len = strlen(this->string);
