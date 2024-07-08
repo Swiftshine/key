@@ -3,7 +3,7 @@
 
 gfl::ResFileInfo* gfl::ResFileInfo::Get(const char* name, bool isFolder) {
     ResFileInfo* result;
-    string::FixedString nameFixed;
+    FixedString nameFixed;
 
     
     nameFixed = name;

@@ -27,7 +27,7 @@ namespace gfl {
         ~File();
     private:
         gfl::FileSystemWii*         fs;
-        gfl::string::FixedString    filename;
+        gfl::FixedString    filename;
         void*                       dvd_fileinfo;
         u8                          _214[0x34];
         u32                         entrynum;

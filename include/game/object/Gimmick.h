@@ -40,7 +40,7 @@ public:
     u32 _B8;
     void* _BC[5];
     void* _D0[5];
-    gfl::string::BasicString strings[5];
+    gfl::BasicString strings[5];
     u32 _120;
     void* _124;
     gfl::Task* task2;
