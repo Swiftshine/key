@@ -25,15 +25,31 @@ namespace gfl {
         void fn_8064231C();
         void Reset();
         ~File();
+
+        virtual void dummy();
     private:
-        gfl::FileSystemWii*         fs;
-        gfl::FixedString    filename;
+        FileSystemWii*         fs;
+        FixedString            filename;
+        u32 _20C;
         void*                       dvd_fileinfo;
-        u8                          _214[0x34];
+        u32 _214;
+        u32 _218;
+        u32 _21C;
+        u32 _220;
+        u32 _224;
+        u32 _228;
+        u32 _22C;
+        u32 _230;
+        u32 _234;
+        u32 _238;
+        u32 _23C;
+        u32 _240;
+        u32 _244;
+        u32 _248;
         u32                         entrynum;
     };
 
-    // ASSERT_SIZE(File, 0x250)
+    ASSERT_SIZE(File, 0x250)
 } // gfl
 
 #endif
