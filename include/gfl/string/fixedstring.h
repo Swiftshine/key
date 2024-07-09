@@ -14,11 +14,11 @@ namespace gfl {
 	public:
 		FixedString(const char* src);
 		FixedString(BasicString* src);
-        ~FixedString();
 
-		// static void Remove(FixedString* fixedString, u8 heapID);
+		// dtor
+		void fn_80642BE0(u8 heapID);
 
-		void Reset();
+		FixedString* Reset() DONT_INLINE;
         void operator=(const char* src);
         void operator=(BasicString* src);
 		bool HasForwardSlash();

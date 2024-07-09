@@ -8,6 +8,7 @@ void* operator new (size_t size, u8 heapID) {
     return gfl::mem::Alloc(heapID, size, 4);
 }
 
+
 char* gfl::mem::Memcpy(char* dst, u32 len, char* src) {
     if (!len) {
         return dst;
@@ -22,6 +23,6 @@ char* gfl::mem::Memcpy(char* dst, u32 len, char* src) {
     return dst;
 }
 
-void gfl::mem::Remove(void* data, u8 heapID) {
-    
+void common_dtor(void* data, u8 heapID) {
+    if (heapID) delete data;
 }

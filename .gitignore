@@ -13,3 +13,5 @@ orig/*/*
 ctx.c
 temp
 tools/mangle.py
+.DS_STORE
+notes/

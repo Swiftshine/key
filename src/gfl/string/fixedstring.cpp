@@ -16,15 +16,13 @@ gfl::FixedString::FixedString(BasicString* src) {
     this->len = strlen(this->string);
 }
 
-void gfl::FixedString::Reset() {
+gfl::FixedString* gfl::FixedString::Reset() {
     memset(string, 0, STRING_SIZE);
     len = 0;
+    return this;
 }
 
-gfl::FixedString::~FixedString() {
-    // gfl::mem::Remove(fixedString, heapID);
-}
-
+void gfl::FixedString::fn_80642BE0(u8 heapID) { common_dtor(this, heapID); }
 
 void gfl::FixedString::operator=(const char* src) {
     gfl::mem::Memcpy(this->string, STRING_SIZE, const_cast<char*>(src));

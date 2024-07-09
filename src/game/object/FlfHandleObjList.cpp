@@ -1,15 +1,15 @@
-#include <game/object/FlfHandleObjList.h>
-#include <revolution/BASE.h>
 #include <gfl/mem.h>
+#include <game/object/FlfHandleObjList.h>
+// #include <revolution/BASE.h>
 
 FlfHandleObjList* FlfHandleObjList::Instance;
 
 void FlfHandleObjList::MakeInstance() {
-FlfHandleObjList::Instance = new (gfl::mem::HeapID::LIB1) FlfHandleObjList;
+    FlfHandleObjList::Instance = new (gfl::mem::HeapID::LIB1) FlfHandleObjList;
 }
 
 void FlfHandleObjList::RemoveInstance() {
-    gfl::mem::Remove(FlfHandleObjList::Instance, gfl::mem::HeapID::LIB1);
+    common_dtor(FlfHandleObjList::Instance, gfl::mem::HeapID::LIB1);
     FlfHandleObjList::Instance = NULL;
 }
 
