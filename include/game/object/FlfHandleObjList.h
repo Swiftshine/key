@@ -2,6 +2,7 @@
 #define FLUFF_HANDLE_OBJ_LIST_H
 
 #include <game/object/FlfHandleObj.h>
+#include <decomp/thunks.h>
 
 // a PPCHalt thunk
 extern "C" void fn_8064122C() DONT_INLINE;
