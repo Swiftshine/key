@@ -6,8 +6,9 @@
 namespace gfl {
 
     class BasicString {
-    public:
+    private:
         BasicString();
+    public:
         BasicString(BasicString* src);
         ~BasicString();
 
