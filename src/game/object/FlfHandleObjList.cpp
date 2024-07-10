@@ -1,5 +1,6 @@
 #include <gfl/mem.h>
 #include <game/object/FlfHandleObjList.h>
+
 // #include <revolution/BASE.h>
 
 FlfHandleObjList* FlfHandleObjList::Instance;

@@ -1,7 +1,7 @@
 #include <game/object/PlayerBase.h>
 
 PlayerBase::PlayerBase(gfl::Task* gameMgrTask, u32 flags, u32 unk3, u32 unk4, u32 unk5)
-    : FlfGameObj(ActorType_Player)
+    : FlfGameObj(FlfGameObjTypes::Player)
 {
     
 }
