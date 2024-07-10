@@ -21,7 +21,7 @@ public:
 
     void Add(FlfHandleObj* object);
     void Remove(FlfHandleObj* object);
-    void Set(u32 index, FlfHandleObj* object);
+    void Set(u32 index, FlfHandleObj* object) DONT_INLINE;
 public:
     FlfHandleObj* objects[1000];
     u32 count;

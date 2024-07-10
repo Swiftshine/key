@@ -5,22 +5,17 @@
 
 FlfHandleObjList* FlfHandleObjList::Instance;
 
-void FlfHandleObjList::MakeInstance() {
-    FlfHandleObjList::Instance = new (gfl::mem::HeapID::LIB1) FlfHandleObjList;
+void FlfHandleObjList::Set(u32 index, FlfHandleObj* object) {
+    this->objects[index] = object;
+    object->entryID = this->curEntryID;
+    object->listEntry = &this->objects[index];
+    this->count = index + 1;
+    this->curEntryID++;
 }
 
-void FlfHandleObjList::RemoveInstance() {
-    common_dtor(FlfHandleObjList::Instance, gfl::mem::HeapID::LIB1);
-    FlfHandleObjList::Instance = NULL;
+void FlfHandleObjList::Remove(FlfHandleObj* object) {
+    *object->listEntry = NULL;
 }
-
-FlfHandleObjList::FlfHandleObjList()
-    : count(0)
-    , curEntryID(1)
-{
-    memset(this, '\0', 4000);    
-}
-
 
 void FlfHandleObjList::Add(FlfHandleObj* object) {
     u32 lastIndex = this->count;
@@ -55,14 +50,27 @@ void FlfHandleObjList::Add(FlfHandleObj* object) {
     fn_8064122C();
 }
 
-void FlfHandleObjList::Remove(FlfHandleObj* object) {
-    *object->listEntry = NULL;
+FlfHandleObjList::FlfHandleObjList()
+    : count(0)
+    , curEntryID(1)
+{
+    memset(this, '\0', 4000);    
 }
 
-void FlfHandleObjList::Set(u32 index, FlfHandleObj* object) {
-    this->objects[index] = object;
-    object->entryID = this->curEntryID;
-    object->listEntry = &this->objects[index];
-    this->count = index + 1;
-    this->curEntryID++;
+void FlfHandleObjList::RemoveInstance() {
+    common_dtor(FlfHandleObjList::Instance, gfl::mem::HeapID::LIB1);
+    FlfHandleObjList::Instance = NULL;
 }
+
+void FlfHandleObjList::MakeInstance() {
+    FlfHandleObjList::Instance = new (gfl::mem::HeapID::LIB1) FlfHandleObjList;
+}
+
+
+
+
+
+
+
+
+
