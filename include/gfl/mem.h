@@ -8,7 +8,6 @@
 void* operator new(std::size_t);
 inline void* operator new(std::size_t, u8);
 
-
 namespace gfl {
 namespace mem {
 
@@ -28,8 +27,8 @@ namespace HeapID {
     void* Alloc(u8 heapID, u32 size, int alignment);
     void  Free(void* data);
     char* Memcpy(char* dst, u32 len, char* src);
+    void  Delete(void* data, u8 heapID);
+}
+}
 
-    void Remove(void* data, u8 HeapID);
-}
-}
 #endif

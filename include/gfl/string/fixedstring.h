@@ -2,6 +2,7 @@
 #define GFL_STRING_FIXED_STRING_H
 
 #include <types.h>
+#include <decomp/thunks.h>
 
 namespace gfl {
 

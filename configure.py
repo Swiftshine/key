@@ -169,7 +169,7 @@ cflags_base = [
     # "-W all",
     "-O4,p",
     "-func_align 4",
-    "-inline on",
+    "-inline auto",
     '-pragma "cats off"',
     '-pragma "warn_notinlined off"',
     "-maxerrors 1",
@@ -177,8 +177,9 @@ cflags_base = [
     "-RTTI on",
     "-fp_contract on",
     "-str reuse,pool,readonly",
-    # "-pool on",
     "-code_merging safe,aggressive",
+    # "-ipa file",
+    # "-pool on",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-enc SJIS",
     "-i include",
@@ -265,6 +266,17 @@ config.libs = [
         ],
     },
     {
+        "lib" : "nw4r",
+        "mw_version" : config.linker_version,
+        "clags" : [
+            *cflags_base,
+            "-func_align 32",
+        ],
+        "host" : False,
+        "objects" : [
+        ],
+    },
+    {
         "lib" : "homebutton",
         "mw_version" : config.linker_version,
         "cflags" : [
@@ -282,7 +294,7 @@ config.libs = [
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/mem.cpp"),
-            Object(Matching, "gfl/string/fixedstring.cpp"),
+            Object(Matching,    "gfl/string/fixedstring.cpp"),
             Object(Matching,    "gfl/string.cpp"),
             Object(NonMatching, "gfl/string/basicstring.cpp"),
             Object(NonMatching, "gfl/file/file.cpp"),
@@ -297,6 +309,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [
             *cflags_base,
+            "-inline deferred",
         ],
         "host": False,
         "objects": [

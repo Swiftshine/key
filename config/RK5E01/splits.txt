@@ -21,7 +21,12 @@ gfl/string/basicstring.cpp:
 	.text       start:0x8000C22C end:0x8000C824
 
 game/object/FlfGameObj.cpp:
-	.text       start:0x8002BCF8 end:0x8002C090
+	.text       start:0x8002BCF8 end:0x8002C96C
+	.data       start:0x80839D90 end:0x80839DF8
+	.sdata2     start:0x808E6908 end:0x808E6918
+
+game/manager/CameraManager.cpp:
+	.sdata2     start:0x808E6AF8 end:0x808E6AFC
 
 gfl/string.cpp:
 	.text       start:0x8003D1A0 end:0x8003D1DC

@@ -22,7 +22,3 @@ char* gfl::mem::Memcpy(char* dst, u32 len, char* src) {
     }
     return dst;
 }
-
-void common_dtor(void* data, u8 heapID) {
-    if (heapID) delete data;
-}
