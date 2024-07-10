@@ -25,8 +25,6 @@ namespace gfl {
         void fn_8064231C();
         void Reset();
         ~File();
-
-        virtual void dummy();
     private:
         FileSystemWii*         fs;
         FixedString            filename;
