@@ -6,7 +6,7 @@
 class FlfGameObjLocator : public FlfGameObj {
 public:
     FlfGameObjLocator();
-    ~FlfGameObjLocator() = 0;
+    ~FlfGameObjLocator();
 };
 
 #endif

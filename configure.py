@@ -176,7 +176,9 @@ cflags_base = [
     "-nosyspath",
     "-RTTI on",
     "-fp_contract on",
-    "-str reuse,pool,readonly",
+    "-str readonly",
+    "-str reuse",
+    "-str pool",
     "-code_merging safe,aggressive",
     # "-ipa file",
     # "-pool on",
@@ -314,9 +316,9 @@ config.libs = [
         "host": False,
         "objects": [
             Object(Matching,    "game/object/FlfHandleObj.cpp"),
-            Object(Matching,    "game/object/FlfHandleObjList.cpp"),
             Object(NonMatching, "game/object/FlfGameObj.cpp"),
-            Object(NonMatching, "game/object/FlfGameObjLocator.cpp"),
+            Object(Matching,    "game/object/FlfHandleObjList.cpp"),
+            Object(Matching, "game/object/FlfGameObjLocator.cpp"),
             Object(NonMatching, "game/object/Gimmick.cpp"),
             Object(NonMatching, "game/object/PlayerBase.cpp"),
         ],
@@ -333,10 +335,11 @@ config.libs = [
     {
         "lib" : "game/manager",
         "mw_version": config.linker_version,
-        "cflags": cflags_base,
+        "cflags": [*cflags_base, "-inline deferred",],
         "host": False,
         "objects" : [
             Object(NonMatching, "game/manager/GimmickManager.cpp"),
+            Object(NonMatching, "game/manager/CameraManager.cpp"),
         ],
     },
 ]

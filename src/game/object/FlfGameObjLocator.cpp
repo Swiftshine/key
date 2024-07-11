@@ -1,7 +1,8 @@
 #include <game/object/FlfGameObjLocator.h>
 
+FlfGameObjLocator::~FlfGameObjLocator() { }
+
 FlfGameObjLocator::FlfGameObjLocator()
-    : FlfGameObj(4)
+    : FlfGameObj(FlfGameObjTypes::_4)
 { }
 
-FlfGameObjLocator::~FlfGameObjLocator() { }

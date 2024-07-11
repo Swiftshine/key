@@ -14,9 +14,9 @@ namespace FlfGameObjTypes {
     enum FlfGameObjTypes_Enum {
         Player  = 0,
         Gimmick = 1,
-        Enemy,
-        _3,
-        _4,
+        Enemy   = 2,
+        _3      = 3,
+        _4      = 4,
     };
 }
 
@@ -35,7 +35,7 @@ public:
     virtual void    fn_8002BFF8(bool val);
     virtual bool    fn_8002C000();
     virtual void    fn_8002CB74();
-    virtual Vec3f*  GetPos();
+    virtual Vec3f   GetPos();
     virtual void    SetPos_thunk(Vec3f*);
     virtual void    fn_8000BDA4();
     virtual void    fn_8000BDA0();
