@@ -271,7 +271,7 @@ config.libs = [
         "mw_version" : config.linker_version,
         "clags" : [
             *cflags_base,
-            "-func_align 4",
+            # "-func_align 4",
         ],
         "host" : False,
         "objects" : [
@@ -291,7 +291,7 @@ config.libs = [
     {
         "lib": "gfl",
         "mw_version": config.linker_version,
-        "cflags": cflags_base,
+        "cflags": [*cflags_base, "-func_align 4",],
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/mem.cpp"),
