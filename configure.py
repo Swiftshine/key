@@ -182,6 +182,7 @@ cflags_base = [
     # "-ipa file",
     # "-pool on",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
+    "-func_align 4",
     "-enc SJIS",
     "-i include",
     "-i include/MSL",
@@ -291,7 +292,7 @@ config.libs = [
     {
         "lib": "gfl",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_base, "-func_align 4",],
+        "cflags": [*cflags_base, "-func_align 4"],
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/mem.cpp"),
