@@ -168,7 +168,6 @@ cflags_base = [
     "-Cpp_exceptions off",
     # "-W all",
     "-O4,p",
-    "-func_align 4",
     "-inline auto",
     '-pragma "cats off"',
     '-pragma "warn_notinlined off"',
@@ -272,7 +271,7 @@ config.libs = [
         "mw_version" : config.linker_version,
         "clags" : [
             *cflags_base,
-            "-func_align 32",
+            "-func_align 4",
         ],
         "host" : False,
         "objects" : [
@@ -318,7 +317,7 @@ config.libs = [
             Object(Matching,    "game/object/FlfHandleObj.cpp"),
             Object(NonMatching, "game/object/FlfGameObj.cpp"),
             Object(Matching,    "game/object/FlfHandleObjList.cpp"),
-            Object(Matching, "game/object/FlfGameObjLocator.cpp"),
+            Object(Matching,    "game/object/FlfGameObjLocator.cpp"),
             Object(NonMatching, "game/object/Gimmick.cpp"),
             Object(NonMatching, "game/object/PlayerBase.cpp"),
         ],
