@@ -20,6 +20,9 @@ gfl/functor/functorfunc.cpp:
 gfl/string/basicstring.cpp:
 	.text       start:0x8000C22C end:0x8000C824
 
+gfl/file/resinfo.cpp:
+	.text       start:0x80026494 end:0x800264A4
+
 game/object/FlfGameObj.cpp:
 	.text       start:0x8002BCF8 end:0x8002C96C
 	.data       start:0x80839D90 end:0x80839DF8

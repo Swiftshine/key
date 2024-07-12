@@ -4,15 +4,18 @@
 #include <types.h>
 
 namespace gfl {
-
-    class GfArch;
-
     class ResInfo {
+    protected:
+        ResInfo();
+        ~ResInfo();
     public:
-        virtual ~ResInfo() = 0;
+        virtual void fn_80026494();
     public:
-        
+        u16 flags;
+        u16 _6;
     };
+
+    ASSERT_SIZE(ResInfo, 0x8);
 }
 
 #endif
