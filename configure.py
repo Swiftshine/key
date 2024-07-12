@@ -292,13 +292,14 @@ config.libs = [
     {
         "lib": "gfl",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_base, "-func_align 32",],
+        "cflags": [*cflags_base],
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/mem.cpp"),
             Object(Matching,    "gfl/string/fixedstring.cpp"),
             Object(Matching,    "gfl/string.cpp"),
             Object(NonMatching, "gfl/string/basicstring.cpp"),
+            Object(Matching, "gfl/file/resinfo.cpp"),
             Object(NonMatching, "gfl/file/file.cpp"),
             Object(NonMatching, "gfl/file/filesystemwii.cpp"),
             Object(NonMatching, "gfl/file/direntrywii.cpp"),
