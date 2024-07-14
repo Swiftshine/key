@@ -1,5 +1,50 @@
-// #include <game/object/Gimmick.h>
-// #include <game/manager/GimmickManager.h>
+#include <game/object/Gimmick.h>
+#include <game/manager/GimmickManager.h>
+#include <gfl/functor/functorclassmethod.h>
+
+typedef gfl::FunctorClassMethod0<void, Gimmick, void(Gimmick::*)(void)>;
+
+
+
+Gimmick::Gimmick(u32 gmkID)
+    : FlfGameObj(FlfGameObjTypes::Gimmick)
+    , gimmickID(static_cast<GimmickID>(gmkID))
+    , _84(0)
+
+{    
+    _124 = 0;
+    task = NULL;
+    _12C = NULL;
+    
+    GimmickManager::Instance->AddGimmick(this);
+    fn_8004EC4C();
+}
+
+Gimmick::Gimmick(u32 gmkID, const char* taskName)
+    : FlfGameObj(FlfGameObjTypes::Gimmick)
+    , gimmickID(static_cast<GimmickID>(gmkID))
+    , _84(0)
+{
+    _124 = 0;
+    task = NULL;
+    _12C = NULL;
+
+    task = new gfl::Task();
+    if (task) {
+        task->Init(taskName);
+    } else {
+        delete task;
+        task = NULL;
+    }
+    if (!task) {
+        delete task;
+        task = NULL;
+    }
+
+    GimmickManager::Instance->AddGimmick(this);
+}
+
+void Gimmick::fn_8004DF54() { /*(this->*state1)();*/ return; }
 
 // Gimmick::Gimmick(u32 gmkID, const char* taskName)
 //     : FlfGameObj(FlfGameObjTypes::Gimmick)
@@ -14,37 +59,6 @@
 // }
 
 
-// Gimmick::Gimmick(u32 gmkID)
-//     : FlfGameObj(FlfGameObjTypes::Gimmick)
-//     , id(gmkID)
-//     , _84(0)
-//     , _88(-1)
-//     , _8C()
-//     , _98()
-
-//     , _B0(6)
-//     , _B4(4)
-//     , _B8(0)
-
-//     , _A4(false)
-//     , _AC(65)
-
-//     , _124(0)
-//     , task2(NULL)
-//     , _120(0)
-// {
-    
-
-//     for (int i = 0; i < 5; i++) {
-//         // _BC[i] = 0;
-//         // _D0[i] = 0.0f;
-//         strings[i].begin = "";
-//     }
-
-
-//     GimmickManager::Instance->AddGimmick(this);
-//     fn_8004EC4C();
-// }
 
 // Gimmick::Gimmick(u32 gmkID, StageTask* stageTask) 
 //     : FlfGameObj(FlfGameObjTypes::Gimmick) 
@@ -82,3 +96,4 @@
 // void Gimmick::fn_8004DF54() { /* virtual */ }
 
 // // void Gimmick::fn_8004ED1C() { _12C = 0; }
+
