@@ -2,8 +2,8 @@
 #define GFL_TASK_H
 
 #include <types.h>
-
-
+#include <gfl/functor/functorbase.h>
+#include <gfl/task/taskinfo.h>
 
 namespace gfl {
 
@@ -15,38 +15,27 @@ public:
         Active   = 1,
     };
 
-    struct Info {
-        char name[23];
-        u8   flags;
-        Task* child1;
-        Task* child2;
-        Task::Info* _20;
-        Task* owner;
-    };
-
 public:
     Task();
-    Task(const char* name);
+    void Init(const char* name);
+
     virtual ~Task();
+    virtual int fn_806459E0();
 
     void  SetFlags(u8 newFlags);
     u8    GetFlags();
-    Info* GetLeaf();
+    // TaskInfo* GetLeaf();
     
     // virtual void dummy();
 public:
-    Task::Info* info;
+    TaskInfo* info;
     void* functor;
-    void* functorClassMethod;
+    FunctorBase0<void>* functorClassMethod; // using FunctorBase0* here for inheritance template reasons
     void* child; // ?
     void* _14; // gimmick manager?
 };
 
-
-namespace TaskList {
-    static bool enabled[1400];
-    static Task::Info taskInfo[1400];
-} // namespace Tasklist
+ASSERT_SIZE(Task, 0x18)
 
 } // namespace gfl
 

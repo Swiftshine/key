@@ -1,18 +1,18 @@
-#include <gfl/task.h>
+#include <gfl/task/task.h>
 #include <gfl/mem.h>
-
+#include <gfl/task/taskinfo.h>
 gfl::Task::Task() { }
 
-gfl::Task::Task(const char* newName) {
-    gfl::Task::Info* t_info;
+void gfl::Task::Init(const char* newName) {
+    gfl::TaskInfo* t_info;
 
-    static bool* enabled = &gfl::TaskList::enabled[0];
+    static bool* enabled = &gfl::TaskList::Instance->active[0];
 
     if (!*enabled) {
         for (u32 i = 0; i < 1400; i++) {
-            gfl::Task::Info* inf = &gfl::TaskList::taskInfo[i];
-            inf->child1 = NULL;
-            inf->child2 = NULL;
+            gfl::TaskInfo* inf = &gfl::TaskList::Instance->taskInfo[i];
+            inf->_18 = NULL;
+            inf->_1C = NULL;
             inf->_20 = 0;
             inf->owner = NULL;
             inf->flags = 0;
@@ -25,17 +25,17 @@ gfl::Task::Task(const char* newName) {
 
 LAB_806458c4:
     if (!newName) {
-        gfl::mem::memcpy(t_info->name, 0x17, "NONAME");
+        gfl::mem::Memcpy(t_info->name, 0x17, "NONAME");
     } else {
-        gfl::mem::memcpy(t_info->name, 0x17, (char*)newName);
+        gfl::mem::Memcpy(t_info->name, 0x17, const_cast<char*>(newName));
     }
 
     info = t_info;
 
     info->owner  = this;
     info->flags  = 0xF1;
-    info->child1 = NULL;
-    info->child2 = NULL;
+    info->_18 = NULL;
+    info->_1C = NULL;
     info->_20    = 0;
 }
 
@@ -47,9 +47,4 @@ void gfl::Task::SetFlags(u8 newFlags) {
 
 u8 gfl::Task::GetFlags() {
     return info->flags;
-}
-
-gfl::Task::Info* gfl::Task::GetLeaf() {
-    // unfinished
-    return NULL;
 }

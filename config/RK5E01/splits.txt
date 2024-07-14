@@ -65,6 +65,9 @@ game/object/gmk/GmkTurtle.cpp:
 gfl/mem.cpp:
 	.text       start:0x8063C4F8 end:0x8063C598
 
+gfl/file/resfileinfo.cpp:
+	.text       start:0x8063E364 end:0x8063E38C
+
 gfl/file/gfarch.cpp:
 	.text       start:0x8063F418 end:0x8063F594
 	.rodata     start:0x8082C3A4 end:0x8082C3AC
@@ -83,6 +86,10 @@ gfl/file/filesystemwii.cpp:
 
 gfl/string/fixedstring.cpp:
 	.text       start:0x80642B00 end:0x80642CB0
+
+gfl/task/taskinfo.cpp:
+	.text       start:0x80645718 end:0x8064583C
+	.sbss       start:0x808E5D78 end:0x808E5D80
 
 Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC

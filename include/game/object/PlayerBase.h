@@ -1,7 +1,7 @@
 #ifndef FLUFF_PLAYERBASE_H
 #define FLUFF_PLAYERBASE_H
 
-#include <gfl/task.h>
+#include <gfl/task/task.h>
 #include <game/object/FlfGameObj.h>
 // size: 0xF68
 class PlayerBase : public FlfGameObj {
