@@ -1,12 +1,55 @@
 #include <gfl/file/resfileinfo.h>
 #include <gfl/string/fixedstring.h>
 
-gfl::ResFileInfo* gfl::ResFileInfo::Get(const char* name, bool isFolder) {
-    ResFileInfo* result;
-    FixedString nameFixed;
+gfl::ResFileInfo::ResFileInfo() {
+    flags = 0;
+    level = 0;
+    hash = 0;
+    filename = NULL;
+    entrynum = 0;
+    archive = 0;
+}
+
+// whats odd about this is that this is not a dtor (for once) and yet it calls a dtor...?
+void gfl::ResFileInfo::fn_8063E388(u8 heapID) { common_dtor(this, heapID); }
+
+
+gfl::ResFileInfo* gfl::ResFileInfo::fn_8063E38C(const char* arg1, void* arg2, void* arg3) { return NULL; }
+
+int gfl::ResArchivedFileInfo::Recurse() {
+    if (child) { return child->Recurse(); }
+    return 0;
+}
+
+gfl::GfArch* gfl::ResFileInfo::GetGfArch() {
+    if (flags & ResInfoFlags::ResInfo_GfArch) {
+        return archive;
+    }
+
+    return NULL;
+}
+
+
+gfl::ResArchivedFileInfo::~ResArchivedFileInfo() {
+    if (level) {
+        delete child;
+        child = NULL;
+        data = NULL;
+    }
+}
+
+u32 gfl::ResArchivedFileInfo::GetDataSize() { return fn_807A43D0(this); }
+
+void* gfl::ResArchivedFileInfo::GetData_thunk() { return GetData(); }
+// gfl::ResFileInfo::~ResFileInfo() { }
+
+
+// gfl::ResFileInfo* gfl::ResFileInfo::Get(const char* name, bool isFolder) {
+//     ResFileInfo* result;
+//     // FixedString nameFixed;
 
     
-    nameFixed = name;
+//     nameFixed = name;
 
-    return result;
-}
+//     return result;
+// }
