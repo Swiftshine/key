@@ -17,6 +17,8 @@ namespace FlfGameObjTypes {
         Enemy   = 2,
         _3      = 3,
         _4      = 4,
+
+        _7      = 7,
     };
 }
 

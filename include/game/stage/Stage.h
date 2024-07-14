@@ -3,6 +3,8 @@
 
 #include <types.h>
 
+
+
 struct Stage {
     s32 _0;
     s32 stageID;

@@ -13,7 +13,7 @@ struct Vec2f {
 };
 
 struct Vec3f {
-    inline Vec3f() { x = y = z = 0; }
+    inline Vec3f() { x = 0; y = 0; z = 0; }
     inline void operator=(float val) { x = val; y = val; z = val; }
     float x;
     float y;
@@ -23,5 +23,10 @@ struct Vec3f {
 typedef f32 MTX33[3][3];
 typedef f32 MTX34[3][4];
 
+struct PTMF {
+    int  this_offset;
+    void* vtable;
+    void(* function)();
+};
 
 #endif
