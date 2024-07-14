@@ -1,37 +1,39 @@
 #include <types.h>
 #include <gfl/string.h>
 
+gfl::BasicString::BasicString() { Reset(); }
+
 gfl::BasicString::BasicString(BasicString* src) {  
-    s32 a = src->shortA >> 31;
-    u32 b;
-    u32 c;
-    u32 d;
-    if (a & 1) {
-        b = src->shortB;
-        shortC = src->shortC;
-        shortA = a;
-        shortB = b;
-    } else {
-        shortA = a;
-        shortB = src->shortB;
-        shortC = NULL;
+    // s32 a = src->shortA >> 31;
+    // u32 b;
+    // u32 c;
+    // u32 d;
+    // if (a & 1) {
+    //     b = src->shortB;
+    //     shortC = src->shortC;
+    //     shortA = a;
+    //     shortB = b;
+    // } else {
+    //     shortA = a;
+    //     shortB = src->shortB;
+    //     shortC = NULL;
 
-        Reserve(src->length);
+    //     Reserve(src->length);
 
-        // ???
-        volatile char ch2[4];
-        volatile char ch;
-        ch2[0] = ch;
+    //     // ???
+    //     volatile char ch2[4];
+    //     volatile char ch;
+    //     ch2[0] = ch;
 
-        Append(0, 0, src->string, src->string + src->length);
-    }
+    //     Append(0, 0, src->string, src->string + src->length);
+    // }
 }
 
 
 gfl::BasicString::~BasicString() {
-    if (GFL_BASIC_STRING_CHECK_USE_STRING(this)) {
-        delete string;
-    }
+    // if (GFL_BASIC_STRING_CHECK_USE_STRING(this)) {
+    //     delete string;
+    // }
 }
 
 void gfl::BasicString::Reserve(size_t size) {
