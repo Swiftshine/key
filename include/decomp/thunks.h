@@ -4,6 +4,13 @@
 
 #include <types.h>
 
+struct FILE {
+    u8 dummy;
+};
+
+static FILE* stderr;
+
+
 // MTX34 ctor
 void fn_8066E8A0(void*);
 
@@ -23,4 +30,10 @@ Vec3f fn_800127dc();
 
 // returns *(r3 + 0x14)
 u32 fn_807A43D0(void*);
+
+// fprintf
+void fprintf(FILE*, const char*);
+
+// abort
+void abort();
 #endif

@@ -4,7 +4,7 @@
 #include <gfl/task/taskinfo.h>
 
 gfl::TaskList* gfl::TaskList::Instance;
-gfl::Task* gfl::TaskList::CurrentTask;
+gfl::Task* gfl::TaskInfo::CurrentTask;
 
 inline gfl::TaskList::TaskList() { memset(this->active, false, TASK_COUNT); }
 inline gfl::TaskList::~TaskList() { }
@@ -16,9 +16,9 @@ void gfl::TaskList::MakeInstance() {
 
 gfl::TaskInfo::TaskInfo() {
     flags = 0;
-    _18 = NULL;
-    _1C = NULL;
-    _20 = NULL;
+    parent = NULL;
+    sibling = NULL;
+    child = NULL;
     owner = NULL;
     memset(name, 0, sizeof(name));
 }
@@ -33,6 +33,6 @@ asm gfl::TaskInfo::~TaskInfo(void) {
 void gfl::TaskList::RemoveInstance() {
     delete TaskList::Instance;
     TaskList::Instance = NULL;
-    TaskList::ClearCurrentTask();
+    TaskInfo::ClearCurrentTask();
 }
 
