@@ -15,13 +15,14 @@ ftor_type::FunctorFunc0(ftor_type* src) {
     this->function = src->function;
 }
 
+void ftor_type::operator()() {
+    function();
+}
+
 ftor_type* ftor_type::fn_80008060(ftor_type* src) {
     return new (gfl::mem::HeapID::LIB1) ftor_type(src);
 }
 
-void ftor_type::operator()() {
-    function();
-}
 
 void ftor_type::fn_800080BC(u8 heapID) {
     common_dtor(this, heapID);

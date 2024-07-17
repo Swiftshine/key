@@ -10,8 +10,7 @@ gfl::ResFileInfo::ResFileInfo() {
     archive = 0;
 }
 
-// whats odd about this is that this is not a dtor (for once) and yet it calls a dtor...?
-void gfl::ResFileInfo::fn_8063E388(u8 heapID) { common_dtor(this, heapID); }
+void gfl::ResFileInfo::Free(u8 heapID) { common_dtor(this, heapID); }
 
 
 gfl::ResFileInfo* gfl::ResFileInfo::fn_8063E38C(const char* arg1, void* arg2, void* arg3) { return NULL; }

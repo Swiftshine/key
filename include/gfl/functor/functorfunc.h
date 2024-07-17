@@ -9,15 +9,16 @@
 
 namespace gfl {
     // F - function
-    template <typename F, typename A>
+    // R - return
+    template <typename F, typename R>
     class FunctorFunc0 : FunctorBase0<void> {
-    protected:
     public:
-        inline FunctorFunc0(FunctorFunc0<F, A>* src);
+        inline FunctorFunc0(FunctorFunc0<F, R>* src);
+
+        virtual R operator()();
         virtual ~FunctorFunc0();
 
-        virtual void operator()();
-        static FunctorFunc0<F, A>* fn_80008060(FunctorFunc0<F, A>* src);
+        static FunctorFunc0<F, R>* fn_80008060(FunctorFunc0<F, R>* src);
 
         void fn_800080BC(u8 heapID);
     public:

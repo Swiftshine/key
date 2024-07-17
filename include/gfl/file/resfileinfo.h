@@ -24,9 +24,9 @@ namespace gfl {
     public:
         ResFileInfo();
 
-        void fn_8063E388(u8 heapID);
         static ResFileInfo* fn_8063E38C(const char* arg1, void* arg2, void* arg3);
 
+        void Free(u8 heapID);
 
         virtual ~ResFileInfo();
         virtual GfArch* GetGfArch_thunk();

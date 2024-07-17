@@ -1,6 +1,8 @@
 #include <gfl/functor/functorclassmethod.h>
 #include <gfl/mem.h>
 
+template <typename R, typename C, typename F>
+R gfl::FunctorClassMethod0<R,C,F>::operator()() { this->function(); }
 
 template <typename R, typename C, typename F>
 gfl::FunctorClassMethod0<R,C,F>* gfl::FunctorClassMethod0<R,C,F>::Copy() { 
@@ -18,7 +20,7 @@ gfl::FunctorClassMethod0<R,C,F>* gfl::FunctorClassMethod0<R,C,F>::Copy() {
 template <typename R, typename C, typename F>
 gfl::FunctorClassMethod0<R,C,F>::~FunctorClassMethod0() { }
 
-template <typename R, typename C, typename F>
-R gfl::FunctorClassMethod0<R,C,F>::operator()() { this->function(); }
+
+
 
 

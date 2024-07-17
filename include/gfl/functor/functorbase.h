@@ -11,6 +11,7 @@ namespace gfl {
     template <typename R>
     class FunctorBase0 {
     public:
+        virtual R operator()() = 0;
         virtual ~FunctorBase0() = 0;
     public:
     };

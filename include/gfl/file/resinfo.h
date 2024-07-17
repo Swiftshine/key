@@ -17,7 +17,7 @@ namespace gfl {
     class ResInfo {
     protected:
         ResInfo();
-        ~ResInfo();
+        virtual ~ResInfo();
     public:
         virtual void IncrementLevel();
     public:
