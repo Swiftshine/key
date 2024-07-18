@@ -38,44 +38,54 @@ FlfGameObj::FlfGameObj(u32 newActorType) {
 FlfGameObj::~FlfGameObj() { }
 
 void FlfGameObj::UpdateMatrix() {
-    f32 scratch1;
-    float sinRotX;
-    float sinRotY;
-    float sinRotZ;
-    float cosRotX;
-    float cosRotY;
-    float cosRotZ;
-    float scaleX;
-    float scaleY;
-    float scaleZ;
-    
+    f32 cosRotZ;
+    f32 temp_f4;
+    f32 temp_f9;
+    f32 temp_f10;
+    f32 temp_f11;
+    f32 sinRotY;
+    f32 cosRotY;
+    f32 sinRotZ;
+    f32 scaleX;
+    f32 scaleY;
+    f32 scaleZ;
+    f32 sinRotX;
+    f32 cosRotX;
+
     scaleX = this->scale.x;
     scaleY = this->scale.y;
     scaleZ = this->scale.z;
     
-    sinRotX = nw4r::math::SinF((this->rotation).x);
-    cosRotX = nw4r::math::CosF((this->rotation).x);
-    sinRotY = nw4r::math::SinF((this->rotation).y);
-    cosRotY = nw4r::math::CosF((this->rotation).y);
-    sinRotZ = nw4r::math::SinF((this->rotation).z);
-    cosRotZ = nw4r::math::CosF((this->rotation).z);
+    sinRotX = nw4r::math::SinF(this->rotation.x);
+    cosRotX = nw4r::math::CosF(this->rotation.x);
+    sinRotY = nw4r::math::SinF(this->rotation.y);
+    cosRotY = nw4r::math::CosF(this->rotation.y);
+    sinRotZ = nw4r::math::SinF(this->rotation.z);
+    cosRotZ  = nw4r::math::CosF(this->rotation.z);
+
     
-    this->matrix[0][0] = scaleX * cosRotZ * cosRotY;
-    this->matrix[0][1] = scaleY * (sinRotX * sinRotZ * sinRotY - cosRotX * cosRotZ);
-    this->matrix[0][2] = scaleZ * (cosRotX * sinRotZ * sinRotY + sinRotX * cosRotZ);
-    this->matrix[0][3] = (this->position).x;
+    temp_f11 = cosRotX * sinRotZ;
+    temp_f9 = sinRotX * sinRotZ;
+    temp_f10 = sinRotX * cosRotZ;
+    temp_f4 = cosRotX * cosRotZ;
+
+    this->matrix[0][3] = this->position.x;
+    this->matrix[1][3] = this->position.y;
+    this->matrix[2][3] = this->position.z;
+
     
-    this->matrix[1][0] = scaleX * sinRotZ * cosRotY;
-    this->matrix[1][1] = scaleY * (sinRotX * sinRotZ * sinRotY + cosRotX * cosRotZ);
-    this->matrix[1][2] = scaleZ * (cosRotX * sinRotZ * sinRotY - sinRotX * cosRotZ);
-    this->matrix[1][3] = (this->position).y;
+    this->matrix[0][0] = scaleX * (cosRotZ * cosRotY);
+    this->matrix[0][1] = scaleY * ((temp_f10 * sinRotY) - temp_f11);
+    this->matrix[0][2] = scaleZ * ((temp_f4 * sinRotY) + temp_f9);
+    
+    this->matrix[1][0] = scaleX * (sinRotZ * cosRotY);
+    this->matrix[1][1]= scaleY * ((temp_f9 * sinRotY) + temp_f4);
+    this->matrix[1][2] = scaleZ * ((temp_f11 * sinRotY) - temp_f10);
     
     this->matrix[2][0] = scaleX * -sinRotY;
-    this->matrix[2][1] = scaleY * cosRotY * sinRotX;
-    this->matrix[2][2] = scaleZ * cosRotY * cosRotX;
-    this->matrix[2][3] = (this->position).z;
+    this->matrix[2][1]= scaleY * (cosRotY * sinRotX);
+    this->matrix[2][2] = scaleZ * (cosRotY * cosRotX);
 }
-
 
 void FlfGameObj::fn_8002BFF8(bool val) {
     _6C = val;
@@ -102,10 +112,5 @@ bool FlfGameObj::ShouldCull(CameraManager* camMgr) {
     Vec3f screenPos = GetScreenPos();
     return camMgr->CheckCull(&screenPos);
 }
-
-void FlfGameObj::ProcessCollision(ColObjMod* arg1, u32 arg2, u32 arg3, Vec2f* arg4, u32 arg5) {
-
-}
-
 
 // the rest of the functions are not implemented in this tu
