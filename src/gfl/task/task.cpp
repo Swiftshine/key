@@ -49,7 +49,7 @@ gfl::Task::~Task() { }
 
 
 
-u32 gfl::Task::GetTaskStatus() {
+u32 gfl::Task::PollTask() {
     TaskInfo* myTaskInfo = this->info;
     Task* childTask;
     
@@ -72,7 +72,7 @@ u32 gfl::Task::GetTaskStatus() {
     
     while (childTask) {
         TaskInfo* childTaskInfo = childTask->info;
-        u32 x = childTask->GetTaskStatus();
+        u32 x = childTask->PollTask();
         if (!myTaskInfo->owner) {
             return TaskStatus::ChildrenExecuted;
         }

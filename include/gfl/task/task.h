@@ -32,7 +32,7 @@ public:
     void Init(const char* name);
 
     virtual ~Task();
-    virtual u32 GetTaskStatus();
+    virtual u32 PollTask();
 
     Task* GetParent();
     Task* GetNextChild();

@@ -24,7 +24,7 @@ gfl/file/resinfo.cpp:
 	.text       start:0x80026494 end:0x800264A4
 
 game/object/FlfGameObj.cpp:
-	.text       start:0x8002BCF8 end:0x8002C96C
+	.text       start:0x8002BCF8 end:0x8002C0DC
 	.data       start:0x80839D90 end:0x80839DF8
 	.sdata2     start:0x808E6908 end:0x808E6918
 
