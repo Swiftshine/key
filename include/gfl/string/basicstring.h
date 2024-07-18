@@ -18,7 +18,6 @@ namespace gfl {
         void Append(u32 offset, u32 numChars, BasicString* src);
         void Append(u32 offset, u32 numChars, const char* srcBegin, const char* srcEnd);
         void Set(const char*);
-        void Reset();
     public:
         union {
             struct {

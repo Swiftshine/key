@@ -1,7 +1,10 @@
 #include <types.h>
 #include <gfl/string.h>
+#include <decomp/thunks.h>
 
-gfl::BasicString::BasicString() { Reset(); }
+asm gfl::BasicString::BasicString(void) {
+    b GKI_init_timer_list
+}
 
 gfl::BasicString::BasicString(BasicString* src) {  
     // s32 a = src->shortA >> 31;
@@ -74,10 +77,4 @@ void gfl::BasicString::Append(u32 offset, u32 numChars, BasicString* src) {
 
 void gfl::BasicString::Append(u32 offset, u32 numChars, const char* srcBegin, const char* srcEnd) {
     
-}
-
-void gfl::BasicString::Reset() {
-    _0 = 0;
-    length = 0;
-    string = NULL;
 }
