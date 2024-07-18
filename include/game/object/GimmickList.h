@@ -37,6 +37,35 @@ typedef enum GimmickID {
     Bead_Small_Red   = 25,          // "ビーズ（小）赤", common
     Bead_Small_Purple = 26,         // "ビーズ（小）紫", common
     Bead_Small_Yellow = 27,         // "ビーズ（小）黄", common
-
+    Bead_Medium_White,              // "ビーズ (中) 白", common
+    Bead_Medium_Blue,               // "ビーズ (中) 青", common
+    Bead_Medium_Green,              // "ビーズ (中) 緑", common
+    Bead_Medium_Orange,             // "ビーズ (中) 橙", common
+    Bead_Medium_Red,                // "ビーズ (中) 赤", common
+    Bead_Medium_Purple,             // "ビーズ (中) 紫", common
+    Bead_Medium_Yellow,             // "ビーズ (中) 黄", common
+    Bead_Large_White,               // "ビーズ (大) 白", common
+    Bead_Large_Blue,                // "ビーズ (大) 青", common
+    Bead_Large_Green,               // "ビーズ (大) 緑", common
+    Bead_Large_Orange,              // "ビーズ (大) 橙", common
+    Bead_Large_Red,                 // "ビーズ (大) 赤", common
+    Bead_Large_Purple,              // "ビーズ (大) 紫", common
+    Bead_Large_Yellow,              // "ビーズ (大) 黄", common
+    Bead_ExtraLarge,                // "ビーズ（特大）", common
+    BeadHolder,
+    TurnCloth,                      // "めくれ布"
+    Thumbtack,                      // "鋲"
+    PendulumButton,                 // "振り子ボタン"
+    JumpButton,                     // "ジャンプボタン"
+    PullOutButton01,                // "引き抜きボタン01"
+    PullOutButton02,                // "引き抜きボタン02"
+    PullOutButton03,                // "引き抜きボタン03"
+    MobileScaffold_Small,           // "移動足場（小）"
+    MobileScaffold_Large,           // "移動足場（大）"
+    Curtains,                       // "カーテン"
+    HappyGate_Goal,                 // "ハッピーゲート（ゴール）"
+    TreasureChest,                  // "宝箱"
+    
+    
 } GimmickID;
 #endif
