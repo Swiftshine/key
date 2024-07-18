@@ -43,7 +43,7 @@ public:
     void* rideHitCtrlTrans; // FlfRideHitCtrlTrans*
 };
 
-
+ASSERT_SIZE(GmkTurtle, 0x15C)
 
 
 GmkTurtle::GmkTurtle(StageTask* stageTask)
