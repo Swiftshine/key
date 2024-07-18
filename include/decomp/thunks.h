@@ -36,4 +36,7 @@ void fprintf(FILE*, const char*);
 
 // abort
 void abort();
+
+void GKI_init_timer_list();
+
 #endif
