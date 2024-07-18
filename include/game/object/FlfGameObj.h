@@ -31,7 +31,6 @@ public:
 
     void    UpdateMatrix();
     void    fn_8002C004(bool arg1);
-    void    ProcessCollision(ColObjMod*, u32, u32, Vec2f*, u32);
 
     virtual void    SetPos(Vec3f*);
     virtual void    fn_8002BFF8(bool val);
