@@ -10,7 +10,7 @@ const int MAX_GIMMICK_TYPES = 0x1B2;
 typedef enum GimmickID {
     Invalid = -1,
     None = 0,
-    GMK_TYPE_SIMPLE_MDL = 1,
+    GMK_TYPE_SIMPLE_MDL = 1,        // common
     SimpleMdlCommon = 2,            // common
     SimpleMdlGmk    = 3,            // common
     SimpleNurbsCommon = 4,          // common
@@ -65,7 +65,7 @@ typedef enum GimmickID {
     Curtains,                       // "カーテン"
     HappyGate_Goal,                 // "ハッピーゲート（ゴール）"
     TreasureChest,                  // "宝箱"
-    
+
     
 } GimmickID;
 #endif
