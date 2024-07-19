@@ -1,0 +1,62 @@
+This file is encoded with UTF-8.
+
+Effect: "エフェクト"
+
+CompulsoryCamera: "強制カメラ"
+
+CameraRectangleControl: "カメラ矩形制御"
+
+CameraZoom: "カメラズーム"
+
+CameraTemporaryZoom: "カメラ一時ズーム"
+
+EnemyGenerator: "敵生成"
+
+Beads (small, medium, large) (white, blue, green, orange, red, purple):
+
+"ビーズ（小）白"
+"ビーズ（小）青"
+"ビーズ（小）緑"
+"ビーズ（小）橙"
+"ビーズ（小）赤"
+"ビーズ（小）紫"
+"ビーズ（小）黄"
+"ビーズ (中) 白"
+"ビーズ (中) 青"
+"ビーズ (中) 緑"
+"ビーズ (中) 橙"
+"ビーズ (中) 赤"
+"ビーズ (中) 紫"
+"ビーズ (中) 黄"
+"ビーズ (大) 白"
+"ビーズ (大) 青"
+"ビーズ (大) 緑"
+"ビーズ (大) 橙"
+"ビーズ (大) 赤"
+"ビーズ (大) 紫"
+"ビーズ (大) 黄"
+
+Bead (Extra Large): "ビーズ（特大）"
+
+Turn Cloth: "めくれ布"
+
+Thumbtack: "鋲"
+
+PendulumButton: "振り子ボタン"
+
+JumpButton: "ジャンプボタン"
+
+PullOutButton (1, 2, 3):
+"引き抜きボタン01" 
+"引き抜きボタン02" 
+"引き抜きボタン03" 
+
+MobileScaffold (Small, Large):
+"移動足場（小）"
+"移動足場（大）"
+
+Curtains: "カーテン"
+
+Happy Gate (Goal): "ハッピーゲート（ゴール）"
+
+TreasureChest: "宝箱"

@@ -335,6 +335,7 @@ config.libs = [
         "cflags": cflags_base,
         "host": False,
         "objects" : [
+            Object(NonMatching, "game/object/gmk/GmkSimpleMdl.cpp"),
             Object(NonMatching, "game/object/gmk/GmkTurtle.cpp"),
         ],
     },

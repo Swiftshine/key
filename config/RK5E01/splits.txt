@@ -40,6 +40,9 @@ game/object/Gimmick.cpp:
 game/manager/GimmickManager.cpp:
 	.text       start:0x80050C3C end:0x80051248
 
+game/object/gmk/GmkSimpleMdl.cpp:
+	.text       start:0x80052DD8 end:0x80053914
+
 game/object/PlayerBase.cpp:
 	.text       start:0x80097F94 end:0x80099008
 

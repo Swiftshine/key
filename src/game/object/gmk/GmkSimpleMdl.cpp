@@ -12,12 +12,17 @@ public:
     GmkSimpleMdl();
     virtual ~GmkSimpleMdl();
 
-    virtual void fn_8000BC7C() override; // (this, PlayerBase*)
-    virtual void fn_8000BC74() override; // (this, undefined4, BasicString*)
+    virtual void fn_8000BC7C(); // (this, PlayerBase*)
+    virtual void fn_8000BC74(); // (this, undefined4, BasicString*)
+
+    void fn_80052E44();
+    void fn_80052E48();
+    void fn_80052e4c(u8 heapID);
+
 public:
     gfl::ScnMdlWrapper* modelWrapper;
     NwAnm* anim1;
-    NwAnm* anim2;
+    NwAnm* curAnim;
     NwAnm* anim3;
     Vec3f _140;
     u32 _14C;
@@ -32,3 +37,5 @@ GmkSimpleMdl::GmkSimpleMdl()
 {
 
 }
+
+
