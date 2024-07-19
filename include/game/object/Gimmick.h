@@ -25,6 +25,13 @@ public:
 
     class GimmickBuildInfo {
     public:
+        class CommonGimmickBuildInfo {
+        public:
+            bool isCommon;
+            u8 pad[3];
+            Gimmick* gimmick;
+        };
+    public:
         GimmickID gimmickID;
         Vec3f position;
         Vec3f rotation;
@@ -43,7 +50,7 @@ public:
         s32 intVals[5];
         f32 floatVals[5];
         gfl::BasicString stringVals[5];
-        s32 _98;
+        CommonGimmickBuildInfo* more;
 
         inline GimmickBuildInfo()
             : gimmickID(INVALID_GIMMICK_ID)
@@ -56,7 +63,7 @@ public:
             , _30(0)
 
         {
-            _98 = 0;
+            more = NULL;
             _1C = false;
 
             for (int i = 0; i < 5; i++) {
@@ -77,15 +84,17 @@ public:
         }
     };
 
+    ASSERT_SIZE(GimmickBuildInfo, 0x9C)
+
 public:
     // for the most basic gimmicks
     Gimmick(u32 gmkID);
     // for gimmicks that control things in-level
     Gimmick(u32 gmkID, const char* taskName);
     // for common gimmicks
-    Gimmick(StageTask* stageTask, const char* taskName);
+    Gimmick(GimmickBuildInfo* info, const char* taskName);
     // similar to above?
-    Gimmick(u32 gmkID, StageTask* stageTask);
+    Gimmick(u32 gmkID, GimmickBuildInfo* info);
 
     virtual ~Gimmick();
 

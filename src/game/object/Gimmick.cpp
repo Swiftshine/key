@@ -4,8 +4,6 @@
 
 typedef gfl::FunctorClassMethod0<void, Gimmick, void(Gimmick::*)(void)>;
 
-
-
 Gimmick::Gimmick(u32 gmkID)
     : FlfGameObj(FlfGameObjTypes::Gimmick)
     , gimmickID(static_cast<GimmickID>(gmkID))
