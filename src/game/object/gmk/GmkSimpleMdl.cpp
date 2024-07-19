@@ -53,7 +53,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     , anim1(NULL)
     , curAnim(NULL)
     , anim3(NULL)
-    , _14C(0)
+    , subRotationGmk(NULL)
     , fileInfo(NULL)
     , _140()
 {

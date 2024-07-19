@@ -6,7 +6,7 @@
 
 class GmkSimpleMdlRotZ {
 public:
-    GmkSimpleMdlRotZ();
+    GmkSimpleMdlRotZ(nw4r::g3d::ScnMdl*);
 
     virtual ~GmkSimpleMdlRotZ();
     virtual void vfC(nw4r::g3d::ScnMdl*, u32, void*);
