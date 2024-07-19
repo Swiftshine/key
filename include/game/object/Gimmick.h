@@ -104,9 +104,9 @@ public:
 
     // virtual functions
 
-    void vf40(FlfGameObj* other) override;
+    void vf40(FlfGameObj*) override;
+    void vf64(bool) override;
 
-    virtual void    vf64(u32 arg1);
     virtual void    vf68();
     virtual Vec3f   vf6C();
     virtual u32     GetGimmickID();

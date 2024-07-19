@@ -152,7 +152,7 @@ config.ldflags = [
     "-fp hardware",
     "-nodefaults",
     # "-warn off",
-    # "-listclosure", # Uncomment for Wii linkers
+    "-listclosure", # Uncomment for Wii linkers
 ]
 # Use for any additional files that should cause a re-configure when modified
 config.reconfig_deps = []
