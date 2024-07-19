@@ -87,22 +87,22 @@ void FlfGameObj::UpdateMatrix() {
     this->matrix[2][2] = scaleZ * (cosRotY * cosRotX);
 }
 
-void FlfGameObj::fn_8002BFF8(bool val) {
+void FlfGameObj::vf10(bool val) {
     _6C = val;
 }
 
-bool FlfGameObj::fn_8002C000() {
+bool FlfGameObj::vf14() {
     return fn_8078A5A0(this);
 }
 
 void FlfGameObj::fn_8002C004(bool arg1) {
     if (_6E) {
         if (_6D != arg1) {
-            fn_8000BC4C(arg1);
+            vf64(arg1);
             _6D = arg1;
         }
     } else if (_6D) {
-        fn_8000BC4C(false);
+        vf64(false);
         _6D = false;
     }
 }

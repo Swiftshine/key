@@ -42,7 +42,7 @@ Gimmick::Gimmick(u32 gmkID, const char* taskName)
     GimmickManager::Instance->AddGimmick(this);
 }
 
-void Gimmick::fn_8004DF54() { /*(this->*state1)();*/ return; }
+void Gimmick::vfB0__7GimmickFv() { /*(this->*state1)();*/ return; }
 
 // Gimmick::Gimmick(u32 gmkID, const char* taskName)
 //     : FlfGameObj(FlfGameObjTypes::Gimmick)
@@ -91,7 +91,7 @@ void Gimmick::fn_8004DF54() { /*(this->*state1)();*/ return; }
 
 // }
 
-// void Gimmick::fn_8004DF54() { /* virtual */ }
+// void Gimmick::vfB0__7GimmickFv() { /* virtual */ }
 
 // // void Gimmick::fn_8004ED1C() { _12C = 0; }
 

@@ -21,8 +21,6 @@ extern "C" const char Stage_NullFilename;
 class Gimmick : public FlfGameObj {
 public:
 
-public:
-
     class GimmickBuildInfo {
     public:
         class CommonGimmickBuildInfo {
@@ -103,27 +101,33 @@ public:
     void fn_8004EC4C();
     void fn_8004ED1C();
 
-    virtual void    fn_8004EA14(u32 arg1);
-    virtual void    fn_8004EE0C();
-    virtual Vec3f   fn_8004EE08();
+
+    // virtual functions
+
+    void vf40(FlfGameObj* other) override;
+
+    virtual void    vf64(u32 arg1);
+    virtual void    vf68();
+    virtual Vec3f   vf6C();
     virtual u32     GetGimmickID();
-    virtual int     fn_8004EE04();
-    virtual int     fn_8004EE00();
-    virtual int     fn_8004EDFC();
-    virtual int     fn_8004EDF8();
-    virtual int     fn_8004EDF4();
-    virtual int     fn_8004EDF0();
-    virtual int     fn_8004EDEC();
-    virtual int     fn_8004EDE8();
-    virtual int     fn_8004EDE4();
-    virtual void    fn_8004EDE0();
-    virtual int     fn_8004EDBC();
-    virtual void    fn_8004EDB8();
-    virtual void    fn_8004EDB4();
-    virtual Vec2f   fn_8004EDB0(); // thunk to 8004ed98
-    virtual Vec2f   fn_8004ED98();
-    virtual void    fn_8004DF54();
-    virtual void    fn_8004ED94();
+    virtual int     vf74();
+    virtual int     vf78();
+    virtual int     vf7C();
+    virtual int     vf80();
+    virtual int     vf84();
+    virtual int     vf88();
+    virtual int     vf8C();
+    virtual int     vf90();
+    virtual int     vf94();
+    virtual void    vf98();
+    virtual int     vf9C();
+    virtual void    vfA0();
+    virtual void    vfA4();
+    virtual Vec2f   vfAC();
+    virtual void    vfB0();
+    virtual Vec2f   vfB8();
+    virtual void    vfBC();
+    virtual void    vfC0();
 
 public:
     GimmickID gimmickID;

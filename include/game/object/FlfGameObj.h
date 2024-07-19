@@ -31,28 +31,28 @@ public:
     void    fn_8002C004(bool arg1);
 
     virtual void    SetPos(Vec3f*);
-    virtual void    fn_8002BFF8(bool val);
-    virtual bool    fn_8002C000();
-    virtual void    fn_8002CB74();
+    virtual void    vf10(bool val);
+    virtual bool    vf14();
+    virtual void    vf18();
     virtual Vec3f   GetPos();
     virtual void    SetPos_thunk(Vec3f*);
-    virtual void    fn_8000BDA4();
-    virtual void    fn_8000BDA0();
-    virtual void    fn_8000BCD8(Vec3f*, Vec3f*, Vec3f*);
-    virtual void    fn_8000BCD4();
+    virtual void    vf24();
+    virtual void    vf28();
+    virtual void    vf2C(Vec3f*, Vec3f*, Vec3f*);
+    virtual void    vf30();
     virtual bool    ShouldCull(CameraManager* camMgr);
     virtual Vec3f   GetScreenPos();
-    virtual int     fn_8000BC80();
-    virtual void    fn_8000BC7C();
-    virtual int     fn_8000BC78();
-    virtual void    fn_8002C978(const char* arg1, const char* arg2);
-    virtual void    fn_8000BC74();
-    virtual void    fn_8000BC6C(bool arg1);
-    virtual bool    fn_8000BC64();
-    virtual void    fn_8000BC60();
+    virtual int     vf3C();
+    virtual void    vf40(FlfGameObj*);
+    virtual int     vf44();
+    virtual void    vf48(const char* arg1, const char* arg2);
+    virtual void    vf4C();
+    virtual void    vf50(bool arg1);
+    virtual bool    vf54();
+    virtual void    vf58();
     virtual void    SetCullThreshold(f32 newVal);
     virtual f32     GetCullThreshold();
-    virtual void    fn_8000BC4C(bool);
+    virtual void    vf64(bool);
 
 
 public:
