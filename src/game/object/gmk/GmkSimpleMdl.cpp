@@ -1,5 +1,7 @@
 #include <game/object/Gimmick.h>
 #include <gfl/file/resfileinfo.h>
+#include <game/object/GimmickList.h>
+
 
 namespace gfl { class ScnMdlWrapper; }
 class NwAnm;
@@ -24,3 +26,9 @@ public:
 };
 
 ASSERT_SIZE(GmkSimpleMdl, 0x158)
+
+GmkSimpleMdl::GmkSimpleMdl()
+    : Gimmick(GimmickIDs::GMK_TYPE_SIMPLE_MDL)
+{
+
+}

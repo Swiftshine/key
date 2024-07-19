@@ -10,17 +10,15 @@ typedef u32 FlfGameObjType;
 
 class ColObjMod;
 
-namespace FlfGameObjTypes {
-    enum FlfGameObjTypes_Enum {
-        Player  = 0,
-        Gimmick = 1,
-        Enemy   = 2,
-        _3      = 3,
-        _4      = 4,
+SCOPED_ENUM(FlfGameObjTypes,
+    Player  = 0,
+    Gimmick = 1,
+    Enemy   = 2,
+    _3      = 3,
+    _4      = 4,
 
-        _7      = 7,
-    };
-}
+    _7      = 7,
+);
 
 class FlfGameObj : public FlfHandleObj {
 public:

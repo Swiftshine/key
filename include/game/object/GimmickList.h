@@ -1,13 +1,16 @@
 #ifndef FLUFF_GIMMICK_LIST_H
 #define FLUFF_GIMMICK_LIST_H
 
+#include <types.h>
+
 const int MAX_GIMMICK_TYPES = 0x1B2;
 
 // [id label] = [id number] // "japanese string", [is common]
 
 // entries are written as they appear unless indicated otherwise (e.g., japanese string in a comment)
 
-typedef enum GimmickID {
+SCOPED_ENUM (GimmickIDs,
+
     Invalid = -1,
     None = 0,
     GMK_TYPE_SIMPLE_MDL = 1,        // common
@@ -64,8 +67,6 @@ typedef enum GimmickID {
     MobileScaffold_Large,           // "移動足場（大）"
     Curtains,                       // "カーテン"
     HappyGate_Goal,                 // "ハッピーゲート（ゴール）"
-    TreasureChest,                  // "宝箱"
-
-    
-} GimmickID;
+    TreasureChest,                  // "宝箱"    
+);
 #endif

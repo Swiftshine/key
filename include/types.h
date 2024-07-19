@@ -1,10 +1,25 @@
 #ifndef FLUFF_TYPES_H
 #define FLUFF_TYPES_H
 
-#include <static_assert.hpp>
 #include <revolution/types.h>
 #include <nw4r/math/types.h>
 #include <MSL/stddef.h>
+
+
+// macros 
+
+#define SCOPED_ENUM(name, ...)              \
+    class name {virtual void This_error_means_you_forgot_to_write___type___in_an_object_instanciation()=0;public: \
+        enum __type__ { __VA_ARGS__ };     \
+    }
+
+#define STATIC_ASSERT(expr) \
+    typedef char static_assert[expr ? 1 : -1];
+
+#define ASSERT_SIZE(t, size) STATIC_ASSERT(sizeof(t) == size)
+
+// actual types
+
 
 struct Vec2f {
     inline void operator=(float val) { x = val; y = val; }

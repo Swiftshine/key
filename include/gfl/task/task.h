@@ -9,23 +9,23 @@
 
 namespace gfl {
 
-namespace TaskStatus {
-    enum TaskStatusEnum {
+class Task {
+public:
+    SCOPED_ENUM(Status,
         StillProcessing     = 0,
         TaskExecuted        = 1,
         ChildrenExecuted    = 2,
-    };
-} // TaskStatus
+    );
 
-class Task {
+    SCOPED_ENUM(Flags,
+        Inactive = 0,
+        Active   = 1,
+    );
+    
 public:
     static const char DeathMarker[]; 
     static const char NoName[];
     static const char AllocError[];
-    enum Flags {
-        Inactive = 0,
-        Active   = 1,
-    };
 
 public:
     inline Task();

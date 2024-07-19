@@ -9,15 +9,13 @@ namespace gfl {
     class DirEntryGfArch;
     class BgArchiveLoadTask;
 
-    namespace CompressionType {
-        enum _CompType {
-            None,
-            BytePairEncoding = 1,
-            LZ77_1 = 2, // 2 and 3 are the same
-            LZ77_2 = 3,
-        };
-    };
-
+    SCOPED_ENUM(CompressionType,
+        None = 0,
+        BytePairEncoding = 1,
+        // supposedly values 2 and 3 are the same but there is no such confirmation
+        LZ77 = 3,
+    );
+    
     class GfArch {
     public:
         static const char InitialFilename[];

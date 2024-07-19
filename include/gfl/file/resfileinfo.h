@@ -16,10 +16,10 @@ namespace gfl {
     class ResFileInfo : public ResInfo {
     public:
 
-        enum FileType {
-            FileType_File   = 0,
-            FileType_Folder = 1,
-        };
+        SCOPED_ENUM(Type,
+            File   = 0,
+            Folder = 1,
+        );
 
     public:
         ResFileInfo();

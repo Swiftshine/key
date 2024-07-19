@@ -62,7 +62,7 @@ u32 gfl::Task::PollTask() {
         // after executing, check the task's information to see if the task still exists
         if (!myTaskInfo->owner) {
             // if it doesn't, it was destroyed and has successfully completed its task
-            return TaskStatus::TaskExecuted;
+            return Task::Status::TaskExecuted;
         }
         // if it does, there are child tasks that must be executed as well
     }
@@ -74,11 +74,11 @@ u32 gfl::Task::PollTask() {
         TaskInfo* childTaskInfo = childTask->info;
         u32 x = childTask->PollTask();
         if (!myTaskInfo->owner) {
-            return TaskStatus::ChildrenExecuted;
+            return Task::Status::ChildrenExecuted;
         }
 
         if (x - 1 > 1) {
-            if (x == TaskStatus::StillProcessing) {
+            if (x == Task::Status::StillProcessing) {
                 childTask = TaskInfo::GetNextSibling(childTask->info->sibling);
             }
         }
@@ -87,7 +87,7 @@ u32 gfl::Task::PollTask() {
         }
     }
 
-    return TaskStatus::StillProcessing;
+    return Task::Status::StillProcessing;
 }
 
 void gfl::Task::MakeChild(Task* newChild) {

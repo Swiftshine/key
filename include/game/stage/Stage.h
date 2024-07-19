@@ -11,7 +11,7 @@ struct Stage {
     u32 sectionID;
 };
 
-enum StageIDs {
+SCOPED_ENUM(StageIDs,
     // Misc.
     Stage_WorldMap          = 0,
 
@@ -82,6 +82,6 @@ enum StageIDs {
     Stage_KingDedede        = 305,
     Stage_MetaKnight        = 306,
     Stage_YinYarn           = 307,
-};
+);
 
 #endif

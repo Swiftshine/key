@@ -4,17 +4,19 @@
 #include <types.h>
 
 namespace gfl {
-    
-    namespace ResInfoFlags {
-        enum Flags {
+
+
+
+    class ResInfo {
+    public:
+        SCOPED_ENUM(Flags,
+        
             ResInfo_File        = 1,
             ResInfo_Folder      = 2,
             ResInfo_GfArch      = 4,
             ResInfo_UseFolder = 0x80,
             ResInfo_UseGfArch = 0x100,
-        };
-    }
-    class ResInfo {
+        );
     protected:
         ResInfo();
         virtual ~ResInfo();
