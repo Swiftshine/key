@@ -191,6 +191,7 @@ cflags_base = [
     "-i include/MSL/internal",
     "-i include/stl",
     "-i include/revolution",
+    "-i include/nw4r/",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
 ]
