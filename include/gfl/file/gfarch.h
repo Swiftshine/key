@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_GFARCH_H
 #define GFL_FILE_GFARCH_H
 
-#include <types.h>
+#include <flf_types.h>
 #include <gfl/string/fixedstring.h>
 
 namespace gfl {

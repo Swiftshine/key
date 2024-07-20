@@ -1,7 +1,7 @@
 #ifndef GFL_TASK_INFO_H
 #define GFL_TASK_INFO_H
 
-#include <types.h>
+#include <flf_types.h>
 
 const u32 TASK_COUNT = 1400;
 const u32 TASK_NAME_LENGTH = 0x17;

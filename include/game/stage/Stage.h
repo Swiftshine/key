@@ -1,7 +1,7 @@
 #ifndef FLUFF_STAGE_H
 #define FLUFF_STAGE_H
 
-#include <types.h>
+#include <flf_types.h>
 
 
 

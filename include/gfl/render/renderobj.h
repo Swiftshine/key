@@ -1,7 +1,7 @@
 #ifndef GFL_RENDER_OBJ_H
 #define GFL_RENDER_OBJ_H
 
-#include <types.h>
+#include <flf_types.h>
 #include <revolution/MEM.h>
 
 namespace gfl {

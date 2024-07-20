@@ -1,4 +1,4 @@
-#include <types.h>
+#include <flf_types.h>
 #include <gfl/string.h>
 #include <decomp/thunks.h>
 

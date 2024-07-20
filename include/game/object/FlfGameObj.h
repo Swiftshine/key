@@ -3,7 +3,7 @@
 
 #include <game/manager/CameraManager.h>
 #include <game/object/FlfHandleObj.h>
-#include <types.h>
+#include <flf_types.h>
 #include <decomp/thunks.h>
 #include <gfl/string/basicstring.h>
 

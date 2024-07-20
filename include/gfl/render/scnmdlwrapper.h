@@ -1,9 +1,9 @@
 #ifndef GFL_SCN_MDL_WRAPPER_H
 #define GFL_SCN_MDL_WRAPPER_H
 
-#include <nw4r/g3d/ScnMdl.h>
-#include <nw4r/g3d/LightObj.h>
-#include <types.h>
+#include <nw4r/g3d/g3d_scnmdl.h>
+#include <nw4r/g3d/g3d_lightobj.h>
+#include <flf_types.h>
 #include <gfl/render/renderobj.h>
 
 namespace gfl {

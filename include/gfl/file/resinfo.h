@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_RES_INFO_H
 #define GFL_FILE_RES_INFO_H
 
-#include <types.h>
+#include <flf_types.h>
 
 namespace gfl {
 

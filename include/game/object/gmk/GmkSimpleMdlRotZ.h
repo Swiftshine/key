@@ -2,7 +2,7 @@
 #define FLUFF_GMK_SIMPLE_MDL_ROT_Z
 
 #include <game/object/Gimmick.h>
-#include <nw4r/g3d/ScnMdl.h>
+#include <nw4r/g3d/g3d_scnmdl.h>
 
 class GmkSimpleMdlRotZ {
 public:

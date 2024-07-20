@@ -2,7 +2,7 @@
 #define GFL_FUNCTOR_FUNCTOR_FUNC_H
 
 #include <gfl/functor/functorbase.h>
-#include <types.h>
+#include <flf_types.h>
 #include <decomp/thunks.h>
 
 #pragma inline on

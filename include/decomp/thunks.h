@@ -2,11 +2,9 @@
 #define DECOMP_THUNKS_H
 
 
-#include <types.h>
+#include <flf_types.h>
 
-struct FILE {
-    u8 dummy;
-};
+struct FILE;
 
 static FILE* stderr;
 

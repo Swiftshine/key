@@ -1,7 +1,7 @@
 #ifndef FLUFF_CAMERA_MANAGER_H
 #define FLUFF_CAMERA_MANAGER_H
 
-#include <types.h>
+#include <flf_types.h>
 
 class CameraManager {
 public:

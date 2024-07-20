@@ -1,7 +1,7 @@
 #ifndef GFL_STRING_FIXED_STRING_H
 #define GFL_STRING_FIXED_STRING_H
 
-#include <types.h>
+#include <flf_types.h>
 #include <decomp/thunks.h>
 
 namespace gfl {

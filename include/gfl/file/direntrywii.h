@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_DIR_ENTRY_WII_H
 #define GFL_FILE_DIR_ENTRY_WII_H
 
-#include <types.h>
+#include <flf_types.h>
 
 namespace gfl {
 

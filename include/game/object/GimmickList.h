@@ -1,7 +1,7 @@
 #ifndef FLUFF_GIMMICK_LIST_H
 #define FLUFF_GIMMICK_LIST_H
 
-#include <types.h>
+#include <flf_types.h>
 
 const int MAX_GIMMICK_TYPES = 0x1B2;
 
