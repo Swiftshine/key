@@ -2,9 +2,16 @@
 #define GFL_SCN_MDL_WRAPPER_H
 
 #include <nw4r/g3d/g3d_scnmdl.h>
-#include <nw4r/g3d/g3d_lightobj.h>
+// #include <nw4r/g3d/g3d_lightobj.h>
 #include <flf_types.h>
 #include <gfl/render/renderobj.h>
+
+namespace nw4r { namespace g3d {
+    class LightObjData;
+    class LightObj {
+        LightObjData* data;
+    };
+} }
 
 namespace gfl {
     class ScnMdlWrapper : public RenderObj {
