@@ -16,27 +16,27 @@ namespace nw4r
             
             inline SoundStartable() {}
             inline virtual ~SoundStartable() {} // at 0x8
-            virtual UNKWORD detail_SetupSound(SoundHandle *,
+            virtual u32 detail_SetupSound(SoundHandle *,
                 u32,
                 detail::BasicSound::AmbientArgInfo *,
                 detail::ExternalSoundPlayer *,
                 bool,
                 const StartInfo *) = 0; // at 0xc
-            virtual UNKWORD detail_ConvertLabelStringToSoundId(const char *) = 0; // at 0x10
+            virtual u32 detail_ConvertLabelStringToSoundId(const char *) = 0; // at 0x10
 
-            UNKWORD detail_StartSound(SoundHandle *,
+            u32 detail_StartSound(SoundHandle *,
                 u32,
                 detail::BasicSound::AmbientArgInfo *,
                 detail::ExternalSoundPlayer *,
                 const StartInfo *);
 
-            UNKWORD detail_HoldSound(SoundHandle *,
+            u32 detail_HoldSound(SoundHandle *,
                 u32,
                 detail::BasicSound::AmbientArgInfo *,
                 detail::ExternalSoundPlayer *,
                 const StartInfo *);
 
-            UNKWORD detail_PrepareSound(SoundHandle *,
+            u32 detail_PrepareSound(SoundHandle *,
                 u32,
                 detail::BasicSound::AmbientArgInfo *,
                 detail::ExternalSoundPlayer *,

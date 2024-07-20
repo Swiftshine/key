@@ -20,21 +20,21 @@ namespace nw4r
 					u32 mLabelStringChunkSize; // at 0x14
 					u32 mInfoChunkOffset; // at 0x18
 					u32 mInfoChunkSize; // at 0x1c
-					UNKWORD UNK_0x20[0x8 / sizeof(UNKWORD)]; // at 0x20
+					u32 UNK_0x20[0x8 / sizeof(u32)]; // at 0x20
 				};
 				
 				struct Sound3DParam
 				{
-					UNKWORD WORD_0x0;
+					u32 WORD_0x0;
 					u8 BYTE_0x4;
 					u8 BYTE_0x5;
 				};
 				
 				struct SeqSoundInfo
 				{
-					UNKWORD WORD_0x0;
-					UNKWORD WORD_0x4;
-					UNKWORD WORD_0x8;
+					u32 WORD_0x0;
+					u32 WORD_0x4;
+					u32 WORD_0x8;
 					u8 BYTE_0xC;
 					u8 BYTE_0xD;
 				};
@@ -46,7 +46,7 @@ namespace nw4r
 				
 				struct WaveSoundInfo
 				{
-					UNKWORD WORD_0x0;
+					u32 WORD_0x0;
 					char UNK_0x4[0x4];
 					u8 BYTE_0x8;
 					u8 BYTE_0x9;
@@ -57,15 +57,15 @@ namespace nw4r
 				struct SoundCommonInfo
 				{
 					u32 mSoundStringId; // at 0x0
-					UNKWORD WORD_0x4;
-					UNKWORD WORD_0x8;
+					u32 WORD_0x4;
+					u32 WORD_0x8;
 					Util::DataRef<Sound3DParam, void, void, void> mSound3DParam; // at 0xc
 					u8 BYTE_0x14;
 					u8 BYTE_0x15;
 					u8 mType; // at 0x16
 					u8 BYTE_0x17;
 					SoundInfoOffset mSoundInfoOffset; // at 0x18
-					UNKWORD mSoundUserParam; // at 0x20
+					u32 mSoundUserParam; // at 0x20
 					char UNK_0x24[0x4];
 					u8 BYTE_0x28;
 					u8 BYTE_0x29;
@@ -76,7 +76,7 @@ namespace nw4r
 				struct BankInfo
 				{
 					char UNK_0x0[0x4];
-					UNKWORD WORD_0x4;
+					u32 WORD_0x4;
 				};
 				
 				typedef Util::Table<Util::DataRef<BankInfo, void, void, void> > BankTable;
@@ -85,18 +85,18 @@ namespace nw4r
 				{
 					char UNK_0x0[0x4];
 					u8 BYTE_0x4;
-					UNKWORD WORD_0x8;
+					u32 WORD_0x8;
 				};
 				
 				typedef Util::Table<Util::DataRef<PlayerInfo, void, void, void> > PlayerTable;
 				
 				struct GroupItemInfo
 				{
-					UNKWORD WORD_0x0;
+					u32 WORD_0x0;
 					u32 INT_0x4;
 					u32 INT_0x8;
 					u32 INT_0xC;
-					UNKWORD WORD_0x10;
+					u32 WORD_0x10;
 				};
 				
 				typedef Util::Table<Util::DataRef<GroupItemInfo, void, void, void> > GroupItemTable;
@@ -129,8 +129,8 @@ namespace nw4r
 				
 				struct FileInfo
 				{
-					UNKWORD WORD_0x0;
-					UNKWORD WORD_0x4;
+					u32 WORD_0x0;
+					u32 WORD_0x4;
 					char UNK_0x8[0x4];
 					Util::DataRef<char, void, void, void> mExternalFileName; // at 0xc
 					Util::DataRef<FilePosTable, void, void, void> TABLE_0x14;
@@ -214,7 +214,7 @@ namespace nw4r
 				void SetStringChunk(const void *, u32);
 				void SetInfoChunk(const void *, u32);
 				
-				UNKWORD GetSoundType(u32) const;
+				u32 GetSoundType(u32) const;
 				
 				const SoundArchiveFile::SoundCommonInfo * impl_GetSoundInfo(u32) const; //inlined
 				bool ReadSoundInfo(u32, SoundArchive::SoundInfo *) const;
@@ -237,7 +237,7 @@ namespace nw4r
 				u32 GetSoundStringId(u32) const; //inlined
 				const char * GetString(u32) const; //inlined
 				const char * GetSoundLabelString(u32) const;
-				UNKWORD GetSoundUserParam(u32) const;
+				u32 GetSoundUserParam(u32) const;
 				
 				bool ReadFileInfo(u32, SoundArchive::FileInfo *) const;
 				bool ReadFilePos(u32, u32, SoundArchive::FilePos *) const;

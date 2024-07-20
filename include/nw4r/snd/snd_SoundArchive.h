@@ -11,7 +11,7 @@ namespace nw4r
 		{
 			struct Sound3DParam
 			{
-				UNKWORD WORD_0x0;
+				u32 WORD_0x0;
 				u8 BYTE_0x4;
 				u8 BYTE_0x5;
 			};
@@ -19,31 +19,31 @@ namespace nw4r
 			struct SoundArchivePlayerInfo
 			{
 				u32 SIZE_0x0;
-				UNKWORD WORD_0x4;
+				u32 WORD_0x4;
 				u32 SIZE_0x8;
-				UNKWORD WORD_0xC;
-				UNKWORD WORD_0x10;
+				u32 WORD_0xC;
+				u32 WORD_0x10;
 				u32 SIZE_0x14;
-				UNKWORD WORD_0x18;
+				u32 WORD_0x18;
 			};
 			
 			struct SoundInfo
 			{
-				UNKWORD WORD_0x0;
-				UNKWORD WORD_0x4;
-				UNKWORD WORD_0x8;
-				UNKWORD WORD_0xC;
-				UNKWORD WORD_0x10;
-				UNKWORD WORD_0x14;
-				UNKWORD WORD_0x18;
+				u32 WORD_0x0;
+				u32 WORD_0x4;
+				u32 WORD_0x8;
+				u32 WORD_0xC;
+				u32 WORD_0x10;
+				u32 WORD_0x14;
+				u32 WORD_0x18;
 			};
 			
 			struct SeqSoundInfo
 			{
-				UNKWORD WORD_0x0;
-				UNKWORD WORD_0x4;
-				UNKWORD WORD_0x8;
-				UNKWORD WORD_0xC;
+				u32 WORD_0x0;
+				u32 WORD_0x4;
+				u32 WORD_0x8;
+				u32 WORD_0xC;
 				bool BOOL_0x10;
 			};
 			
@@ -54,20 +54,20 @@ namespace nw4r
 			
 			struct WaveSoundInfo
 			{
-				UNKWORD WORD_0x0;
-				UNKWORD WORD_0x4;
+				u32 WORD_0x0;
+				u32 WORD_0x4;
 				bool BOOL_0x8;
 			};
 			
 			struct BankInfo
 			{
-				UNKWORD WORD_0x0;
+				u32 WORD_0x0;
 			};
 			
 			struct PlayerInfo
 			{
-				UNKWORD WORD_0x0;
-				UNKWORD WORD_0x4;
+				u32 WORD_0x0;
+				u32 WORD_0x4;
 			};
 			
 			struct GroupInfo
@@ -82,17 +82,17 @@ namespace nw4r
 			
 			struct GroupItemInfo
 			{
-				UNKWORD WORD_0x0;
+				u32 WORD_0x0;
 				u32 INT_0x4;
 				u32 INT_0x8;
 				u32 INT_0xC;
-				UNKWORD WORD_0x10;
+				u32 WORD_0x10;
 			};
 			
 			struct FileInfo
 			{
-				UNKWORD WORD_0x0;
-				UNKWORD WORD_0x4;
+				u32 WORD_0x0;
+				u32 WORD_0x4;
 				const char * mExternalFileName; // at 0x8
 				u32 SIZE_0xC;
 			};
@@ -129,8 +129,8 @@ namespace nw4r
 			u32 ConvertLabelStringToPlayerId(const char *) const;
 			u32 ConvertLabelStringToGroupId(const char *) const;
 			
-			UNKWORD GetSoundUserParam(u32) const;
-			UNKWORD GetSoundType(u32) const;
+			u32 GetSoundUserParam(u32) const;
+			u32 GetSoundType(u32) const;
 			
 			bool ReadSoundInfo(u32, SoundInfo *) const;
 			

@@ -17,7 +17,7 @@ namespace nw4r
 				
 				volatile s16 * GetVariablePtr(SeqPlayer *, SeqTrack *, int) const;
 				
-				UNKWORD Parse(MmlSeqTrack *, bool) const;
+				u32 Parse(MmlSeqTrack *, bool) const;
 				virtual void CommandProc(MmlSeqTrack *, u32, s32, s32) const; // at 0x8
 				virtual Channel * NoteOnCommandProc(MmlSeqTrack *, int, int, s32, bool) const; // at 0xc
 				

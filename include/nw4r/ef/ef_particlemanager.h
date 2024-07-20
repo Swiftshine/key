@@ -38,7 +38,7 @@ namespace nw4r
             
             Emitter * mEmitter; // at 0x20
             EmitterResource * mResource; // at 0x24
-            UNKWORD FLAGS_0x28;
+            u32 FLAGS_0x28;
             char UNK_0x2C[0xC];
             ActivityList EFLIST_0x38;
             char UNK_0x54[0x4];
@@ -51,7 +51,7 @@ namespace nw4r
             u8 BYTE_0x89;
             bool BOOL_0x8A;
 
-            UNKWORD FLAGS_0xB4;
+            u32 FLAGS_0xB4;
             
             u16 RetireParticleAll();
             

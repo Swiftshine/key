@@ -16,7 +16,7 @@ namespace nw4r
 			s16 SHORT_0xC;
 			u16 SHORT_0xE;
 			u32 INT_0x10;
-			UNKWORD WORD_0x14;
+			u32 WORD_0x14;
 			u32 mFlags; // at 0x18
 			u16 SHORT_0x1C;
 			u16 SHORT_0x1E;

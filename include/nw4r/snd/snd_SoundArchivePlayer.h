@@ -27,19 +27,19 @@ namespace nw4r
 			SoundArchive * GetSoundArchive() const;
 			SoundPlayer * GetSoundPlayer(u32);
 
-			UNKWORD detail_SetupSound(SoundHandle *,
+			u32 detail_SetupSound(SoundHandle *,
 				u32,
 				detail::BasicSound::AmbientArgInfo *,
 				detail::ExternalSoundPlayer *,
 				bool,
 				const StartInfo *);
 
-			UNKWORD LoadGroup(u32, SoundMemoryAllocatable *, u32);
-			UNKWORD LoadGroup(const char *, SoundMemoryAllocatable *, u32);
+			u32 LoadGroup(u32, SoundMemoryAllocatable *, u32);
+			u32 LoadGroup(const char *, SoundMemoryAllocatable *, u32);
 
 			virtual void InvalidateData(const void *, const void *);
 			virtual void InvalidateWaveData(const void *, const void *);
-			virtual UNKWORD detail_ConvertLabelStringToSoundId(const char *);
+			virtual u32 detail_ConvertLabelStringToSoundId(const char *);
 
 			char UNK_0x4[0x8];
 			SoundHandle mHandle; // at 0xC

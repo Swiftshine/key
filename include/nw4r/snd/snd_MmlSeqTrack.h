@@ -31,7 +31,7 @@ namespace nw4r
 				
 				MmlSeqTrack();
 				
-				UNKWORD Parse(bool); // at 0xc
+				u32 Parse(bool); // at 0xc
 			};
 		}
 	}

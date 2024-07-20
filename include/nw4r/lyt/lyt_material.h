@@ -17,7 +17,7 @@ namespace nw4r
             GXColorS10 COLOR_0x18;
             GXColorS10 COLOR_0x20;
             // . . .
-            UNKWORD WORD_0x40;
+            u32 WORD_0x40;
             // . . .
             u8 BYTE_0x59;
             // . . .

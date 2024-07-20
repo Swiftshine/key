@@ -1,5 +1,6 @@
 #ifndef NW4R_G3D_SCNROOT_H
 #define NW4R_G3D_SCNROOT_H
+
 #include "types_nw4r.h"
 #include "g3d_scnobj.h"
 #include "g3d_camera.h"
@@ -30,9 +31,9 @@ namespace nw4r
             u8 GetCurrentCameraID() const { return mCameraId; }
 
         private:
-            UNKWORD WORD_0xE8;
-            UNKWORD WORD_0xEC;
-            UNKWORD WORD_0xF0;
+            u32 WORD_0xE8;
+            u32 WORD_0xEC;
+            u32 WORD_0xF0;
             u8 mCameraId;
         };
     }

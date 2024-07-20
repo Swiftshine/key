@@ -19,8 +19,8 @@ namespace nw4r
 			
 			void (* mEmissionPrologue)(Emitter *, ParticleManager *, int *, u32 *, float *, u16 *, float *, math::MTX34 *); // at 0x44
 			
-			UNKWORD WORD_0x48;
-			UNKWORD WORD_0x4C;
+			u32 WORD_0x48;
+			u32 WORD_0x4C;
 			u32 mFlags; // at 0x50
 			math::MTX34 mRootMtx; // at 0x54
 			math::VEC3 VEC_0x84;

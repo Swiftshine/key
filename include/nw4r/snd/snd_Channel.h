@@ -81,8 +81,8 @@ namespace nw4r
 				float FLOAT_0xB0;
 				float FLOAT_0xB4;
 				MoveValue<u8, u16> MV_0xB8;
-				UNKWORD INT_0xC0;
-				UNKWORD INT_0xC4;
+				u32 INT_0xC0;
+				u32 INT_0xC4;
 				int mLength; // at 0xc8
 				
 				PanMode mPanMode; // at 0xcc

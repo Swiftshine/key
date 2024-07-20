@@ -28,7 +28,7 @@ namespace nw4r
             void InitSoundSystem(const SoundSystemParam&, void *, u32);
             static void ShutdownSoundSystem();
             static void WaitForResetReady();
-            UNKWORD GetRequiredMemSize(const SoundSystemParam &);
+            u32 GetRequiredMemSize(const SoundSystemParam &);
         };
 	}
 }

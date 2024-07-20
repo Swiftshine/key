@@ -20,7 +20,7 @@ namespace nw4r
 			
 			struct AnmData
 			{
-				UNKWORD WORD_0x0;
+				u32 WORD_0x0;
 				ResColorAnmData mColor; // at 0x4
 			} mAnms[]; // at 0x8
 		};

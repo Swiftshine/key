@@ -16,8 +16,8 @@ namespace nw4r
 		struct ResAnmTexSrtMatData
 		{
 			char UNK_0x0[0x4];
-			UNKWORD FLAGS_0x4;
-			UNKWORD FLAGS_0x8;
+			u32 FLAGS_0x4;
+			u32 FLAGS_0x8;
 			s32 mTexOffsets[]; // at 0xc
 		};
 		

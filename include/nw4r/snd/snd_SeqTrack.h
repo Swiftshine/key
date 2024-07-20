@@ -21,7 +21,7 @@ namespace nw4r
 			struct SeqTrack
 			{
 				virtual ~SeqTrack();
-				virtual UNKWORD Parse(bool) = 0;
+				virtual u32 Parse(bool) = 0;
 				
 				u8 mPlayerTrackNo; // at 0x4
 				bool mOpenFlag; // at 0x5
@@ -49,7 +49,7 @@ namespace nw4r
 				bool BOOL_0x60;
 				
 				int INT_0x64;
-				UNKWORD WORD_0x68;
+				u32 WORD_0x68;
 				
 				LfoParam mLfoParam; // at 0x6c
 				
@@ -94,7 +94,7 @@ namespace nw4r
 				
 				void UpdateChannelRelease(Channel *); //inlined
 				void UpdateChannelLength();
-				UNKWORD ParseNextTick(bool);
+				u32 ParseNextTick(bool);
 				void ReleaseAllChannel(int);
 				UNKTYPE PauseAllChannel(bool);
 				void UpdateChannelParam();

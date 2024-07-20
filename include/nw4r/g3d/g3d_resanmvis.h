@@ -18,7 +18,7 @@ namespace nw4r
 		
 		struct ResAnmVisNodeData
 		{
-			UNKWORD WORD_0x0;
+			u32 WORD_0x0;
 			u32 mFlags; // at 0x4
 			ResBoolAnmFramesData mBoolFrames[]; // at 0x8
 		};

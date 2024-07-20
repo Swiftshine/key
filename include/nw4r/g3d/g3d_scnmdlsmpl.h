@@ -59,7 +59,7 @@ namespace nw4r
             u8 BYTE_0x100;
             u8 BYTE_0x101;
             u16 mNumViewMtx; // at 0x102
-            UNKWORD WORD_0x104;
+            u32 WORD_0x104;
             void *mByteCodeCalc; // at 0x108
             void *mByteCodeMix; // at 0x10C
             void *mByteCodeDrawOpa; // at 0x110

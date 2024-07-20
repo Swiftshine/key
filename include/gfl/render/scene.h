@@ -1,13 +1,13 @@
 #ifndef GFL_SCENE_H
 #define GFL_SCENE_H
 
-// #include <nw4r/g3d/g3d_scnmdl.h>
+#include <nw4r/g3d/g3d_scnroot.h>
 
 namespace gfl {
 
     class Scene {
     public:
-        Scene(u8 heapID, );
+        // Scene(u8 heapID,);
 
         virtual ~Scene();
         virtual void vfC();

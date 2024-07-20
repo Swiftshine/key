@@ -31,7 +31,7 @@ namespace nw4r
 			bool BOOL_0x7;
 			volatile bool BOOL_0x8;
 			
-			UNKWORD WORD_0xC;
+			u32 WORD_0xC;
 			SpeakerCommand CMD_0x10;
 			SpeakerCommand CMD_0x14;
 			WENCInfo UNK_0x18;

@@ -37,8 +37,8 @@ namespace nw4r
 				ANM_COUNT = 8
 			};
 			
-			UNKWORD FLAGS_0x0;
-			UNKWORD FLAGS_0x4;
+			u32 FLAGS_0x0;
+			u32 FLAGS_0x4;
 			TexSrt mSrts[ANM_COUNT * 2]; // at 0x8
 		};
 	}

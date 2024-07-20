@@ -15,11 +15,11 @@ namespace nw4r
             s32 INT_0x4;
             u16 SHORT_0x8;
             u16 SHORT_0xA;
-            UNKWORD WORD_0xC;
-            UNKWORD WORD_0x10;
+            u32 WORD_0xC;
+            u32 WORD_0x10;
             u32 mFlags; // at 0x14
-            UNKWORD WORD_0x18;
-            UNKWORD WORD_0x1C;
+            u32 WORD_0x18;
+            u32 WORD_0x1C;
             math::VEC3 VEC3_0x20;
             math::VEC3 VEC3_0x2C;
             f32 FLOAT_0x38;
@@ -41,7 +41,7 @@ namespace nw4r
             
             bool IsValid() const { return mNode.IsValid(); }
 
-            UNKWORD GetID() const
+            u32 GetID() const
             {
                 if (IsValid())
                     return mNode.ptr()->WORD_0xC;

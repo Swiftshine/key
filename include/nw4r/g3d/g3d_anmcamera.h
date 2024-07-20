@@ -10,7 +10,7 @@ namespace nw4r
     {
         struct CameraAnmResult
         {
-            UNKWORD WORD_0x0;
+            u32 WORD_0x0;
             GXProjectionType projType;
             f32 FLOAT_0x8;
             f32 FLOAT_0xC;

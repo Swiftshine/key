@@ -13,13 +13,13 @@ namespace nw4r
 		public:
 			struct PrevTexture
 			{
-				UNKWORD WORD_0x0;
+				u32 WORD_0x0;
 				f32 FLOAT_0x4;
 				f32 FLOAT_0x8;
 				f32 FLOAT_0xC;
 				f32 FLOAT_0x10;
-				UNKWORD WORD_0x14;
-				UNKWORD WORD_0x18;
+				u32 WORD_0x14;
+				u32 WORD_0x18;
 				math::VEC2 VEC2_0x1C;
 				f32 FLOAT_0x24;
 				math::VEC2 VEC2_0x28;
