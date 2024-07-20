@@ -26,7 +26,7 @@ namespace gfl {
         Heap* GetHeapByAddress(void*);
         u8 GetHeapIDByAddress(void*);
         void Free(void*);
-        Heap* GetHeapByID(u32 heapID);
+        virtual Heap* GetHeapByID(u32 heapID);
     public:
         Heap* heaps[HEAP_COUNT];
     };
