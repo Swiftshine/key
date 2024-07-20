@@ -2,9 +2,10 @@
 #define FLUFF_TYPES_H
 
 #include <revolution/types.h>
-#include <nw4r/math/types.h>
+#include <nw4r/math/math_types.h>
 #include <MSL/stddef.h>
 
+typedef u32 UNKTYPE;
 
 // macros 
 
