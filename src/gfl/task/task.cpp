@@ -1,5 +1,5 @@
 #include <gfl/task/task.h>
-#include <gfl/mem.h>
+#include <gfl/mem/mem.h>
 #include <gfl/task/taskinfo.h>
 #include <decomp/thunks.h>
 

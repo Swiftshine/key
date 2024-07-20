@@ -7,7 +7,7 @@ namespace gfl {
 
     class Scene {
     public:
-        // Scene(u8 heapID,);
+        Scene(u8 heapID, u32 arg2, u32 arg3);
 
         virtual ~Scene();
         virtual void vfC();

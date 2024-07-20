@@ -1,5 +1,5 @@
 #include <gfl/functor/functorfunc.h>
-#include <gfl/mem.h>
+#include <gfl/mem/mem.h>
 
 // this is the only type actually used
 // and i'd rather not type out the whole thing over and over

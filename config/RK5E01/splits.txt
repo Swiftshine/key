@@ -66,7 +66,7 @@ game/object/FlfGameObjLocator.cpp:
 game/object/gmk/GmkTurtle.cpp:
 	.text       start:0x804FA9E4 end:0x804FB358
 
-gfl/mem.cpp:
+gfl/mem/mem.cpp:
 	.text       start:0x8063C4F8 end:0x8063C598
 
 gfl/file/resfileinfo.cpp:

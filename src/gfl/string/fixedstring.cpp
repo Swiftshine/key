@@ -1,6 +1,6 @@
 #include <gfl/string/fixedstring.h>
 #include <gfl/string/basicstring.h>
-#include <gfl/mem.h>
+#include <gfl/mem/mem.h>
 #include <string.h>
 
 // Fixed String

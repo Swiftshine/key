@@ -13,6 +13,8 @@ namespace nw4r
         class ScnRoot : public ScnGroup
         {
         public:
+            static ScnRoot* Construct(MEMAllocator*, u32*, u32, u32, u32, u32);
+            
             Camera GetCamera(int);
             Camera GetCurrentCamera();
             void SetCurrentCamera(int);
