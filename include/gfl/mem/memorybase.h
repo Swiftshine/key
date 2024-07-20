@@ -1,5 +1,5 @@
-#ifndef GFL_MEMORY_BASEH
-#define GFL_MEMORY_BASEH
+#ifndef GFL_MEMORY_BASE_H
+#define GFL_MEMORY_BASE_H
 
 #include <gfl/mem/heap.h>
 #include <flf_types.h>
@@ -14,7 +14,6 @@ namespace gfl {
                 if (heaps[i] && heaps[i]->WithinRange(address)) {
                     return heaps[i];
                 }
-
             }
             return NULL;
         }
