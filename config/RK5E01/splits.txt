@@ -91,6 +91,10 @@ gfl/file/filesystemwii.cpp:
 gfl/string/fixedstring.cpp:
 	.text       start:0x80642B00 end:0x80642CB0
 
+gfl/mem/heap.cpp:
+	.text       start:0x80644264 end:0x8064456C
+	.rodata     start:0x8082C4C0 end:0x8082C4D0
+
 gfl/mem/memorybase.cpp:
 	.text       start:0x80644610 end:0x8064483C
 

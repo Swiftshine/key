@@ -1,6 +1,7 @@
 #ifndef GFL_MEM_H
 #define GFL_MEM_H
 
+#include <flf_types.h>
 #include <MSL/internal/mem.h>
 #include <MSL/cstddef>
 #include <revolution/types.h>
