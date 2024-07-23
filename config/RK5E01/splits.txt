@@ -108,6 +108,10 @@ gfl/task/task.cpp:
 	.sdata      start:0x808E43F8 end:0x808E440C
 	.bss        start:0x808FDC8C end:0x808FDC98
 
+gfl/param/parambase.cpp:
+	.text       start:0x80656BD4 end:0x80656C54
+	.data       start:0x808B8520 end:0x808B8538
+
 Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC
 	.ctors      start:0x807E3420 end:0x807E3424 rename:.ctors$10
