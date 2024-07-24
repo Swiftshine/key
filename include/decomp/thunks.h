@@ -16,7 +16,7 @@ void fn_8066E8A0(void*);
 bool fn_8078A5A0(void*);
 
 // returns 0
-int fn_806B1E40();
+extern "C" void TRKInitializeSerialHandler();
 
 // returns 1
 int fn_806FFEB0();
@@ -36,6 +36,7 @@ void fprintf(FILE*, const char*);
 void abort();
 
 void GKI_init_timer_list();
+
 
 
 #endif

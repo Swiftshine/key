@@ -26,10 +26,10 @@ class Param {
 public:
     Param(const char* newLabel);
 
-    virtual void vf8() = 0;
+    virtual int vf8() = 0;
     virtual void vfC() = 0;
     virtual ~Param();
-    virtual void Print() = 0;
+    virtual void Print(gfl::Console* console, u32 count) = 0;
 
     bool Matches(const char* compLabel, u32 compHash);
     void PrintRepeat(gfl::Console* console, u32 count);
