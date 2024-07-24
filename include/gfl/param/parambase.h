@@ -4,6 +4,8 @@
 #include <flf_types.h>
 #include <gfl/string/basicstring.h>
 #include <gfl/string.h>
+#include <gfl/console/console.h>
+
 namespace gfl {
     
 // struct Param {
@@ -27,7 +29,10 @@ public:
     virtual void vf8() = 0;
     virtual void vfC() = 0;
     virtual ~Param();
-    virtual void vf14() = 0;
+    virtual void Print() = 0;
+
+    bool Matches(const char* compLabel, u32 compHash);
+    void PrintRepeat(gfl::Console* console, u32 count);
 public:
     char label[32];
     u32  hash;
