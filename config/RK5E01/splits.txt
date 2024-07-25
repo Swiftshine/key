@@ -108,13 +108,12 @@ gfl/task/task.cpp:
 	.sdata      start:0x808E43F8 end:0x808E440C
 	.bss        start:0x808FDC8C end:0x808FDC98
 
-gfl/param/param.cpp:
-	.text       start:0x80650838 end:0x80651D6C
+gfl/mem/fixedmemorystream.cpp:
+	.text       start:0x806506A0 end:0x80650838
+	.data       start:0x808B8350 end:0x808B8380
 
-gfl/param/parambase.cpp:
-	.text       start:0x80656BD4 end:0x80656D00
-	.rodata     start:0x8082CD20 end:0x8082CD28
-	.data       start:0x808B8520 end:0x808B8538
+gfl/mem/stream.cpp:
+	.sdata      start:0x808E4470 end:0x808E4478
 
 Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC

@@ -26,6 +26,9 @@ void common_dtor(void*,u8 heapID);
 // gfl::Vec3 ctor
 Vec3f fn_800127dc();
 
+// returns *(r3 + 0xC)
+extern "C" u32 fn_807010E0(void*);
+
 // returns *(r3 + 0x14)
 u32 fn_807A43D0(void*);
 
