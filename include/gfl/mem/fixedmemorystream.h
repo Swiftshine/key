@@ -3,7 +3,7 @@
 
 
 #include <flf_types.h>
-#include <gfl/mem/stream.h>
+#include <gfl/mem/Stream.h>
 
 namespace gfl {
     class FixedMemoryStream : public Stream {

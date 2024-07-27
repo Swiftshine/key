@@ -3,7 +3,7 @@
 
 #include <flf_types.h>
 #include <gfl/string.h>
-#include <gfl/file/filesystemwii.h>
+#include <gfl/file/FileSystemWii.h>
 
 namespace gfl {
 

@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_RES_FILE_INFO_H
 #define GFL_FILE_RES_FILE_INFO_H
 
-#include <gfl/file/resinfo.h>
+#include <gfl/file/ResInfo.h>
 #include <decomp/thunks.h>
 
 namespace gfl {

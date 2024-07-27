@@ -1,5 +1,5 @@
 #include <gfl/functor/FunctorClassMethod.h>
-#include <gfl/mem/mem.h>
+#include <gfl/mem/Mem.h>
 
 template <typename R, typename C, typename F>
 R gfl::FunctorClassMethod0<R,C,F>::operator()() { this->function(); }

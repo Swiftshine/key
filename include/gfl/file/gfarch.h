@@ -2,7 +2,7 @@
 #define GFL_FILE_GFARCH_H
 
 #include <flf_types.h>
-#include <gfl/string/fixedstring.h>
+#include <gfl/string/FixedString.h>
 #include <gfl/file/DirEntry.h>
 
 // The GoodFeel Archive format is in Little Endian.

@@ -2,7 +2,7 @@
 #define GFL_PARAM_BASE_H
 
 #include <flf_types.h>
-#include <gfl/string/basicstring.h>
+#include <gfl/string/BasicString.h>
 #include <gfl/string.h>
 #include <gfl/console/Console.h>
 

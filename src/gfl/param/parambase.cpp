@@ -1,5 +1,5 @@
 #include <gfl/param/ParamBase.h>
-#include <gfl/mem/mem.h>
+#include <gfl/mem/Mem.h>
 #include <decomp/thunks.h>
 #include <string.h>
 

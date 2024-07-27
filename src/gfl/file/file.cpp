@@ -1,5 +1,5 @@
 #include <gfl/File.h>
-#include <gfl/mem/mem.h>
+#include <gfl/mem/Mem.h>
 
 const char gfl::File::EmptyFilename[] = {0, 0, 0, 0};
 

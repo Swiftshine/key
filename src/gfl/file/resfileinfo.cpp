@@ -1,5 +1,5 @@
 #include <gfl/file/ResFileInfo.h>
-#include <gfl/string/fixedstring.h>
+#include <gfl/string/FixedString.h>
 
 gfl::ResFileInfo::ResFileInfo() {
     flags = 0;

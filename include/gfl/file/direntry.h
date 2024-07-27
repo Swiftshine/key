@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_DIR_ENTRY_H
 #define GFL_FILE_DIR_ENTRY_H
 
-#include <gfl/file/filesystemwii.h>
+#include <gfl/file/FileSystemWii.h>
 
 namespace gfl {
     class DirEntry {
