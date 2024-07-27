@@ -10,8 +10,9 @@
 namespace gfl {
 
     class File;
-
-    class FileSystemWii {
+    class FileSystem { };
+    
+    class FileSystemWii : public FileSystem {
     public:
         static FileSystemWii* Instance;
     public:
