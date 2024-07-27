@@ -13,7 +13,7 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
-gfl/functor/functorfunc.cpp:
+gfl/functor/FunctorFunc.cpp:
 	.text       start:0x80008060 end:0x800080C0
 	.rodata     start:0x807E3830 end:0x807E3858
 

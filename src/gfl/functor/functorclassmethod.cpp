@@ -1,4 +1,4 @@
-#include <gfl/functor/functorclassmethod.h>
+#include <gfl/functor/FunctorClassMethod.h>
 #include <gfl/mem/mem.h>
 
 template <typename R, typename C, typename F>

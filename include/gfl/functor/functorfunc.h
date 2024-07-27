@@ -1,7 +1,7 @@
 #ifndef GFL_FUNCTOR_FUNCTOR_FUNC_H
 #define GFL_FUNCTOR_FUNCTOR_FUNC_H
 
-#include <gfl/functor/functorbase.h>
+#include <gfl/functor/FunctorBase.h>
 #include <flf_types.h>
 #include <decomp/thunks.h>
 

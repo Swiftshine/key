@@ -313,7 +313,7 @@ config.libs = [
             Object(NonMatching, "gfl/file/FileSystemWii.cpp"),
             Object(NonMatching, "gfl/file/DirEntryWii.cpp"),
             Object(NonMatching, "gfl/file/GfArch.cpp"),
-            Object(NonMatching, "gfl/functor/functorfunc.cpp"),
+            Object(NonMatching, "gfl/functor/FunctorFunc.cpp"),
         ],
     },
     {

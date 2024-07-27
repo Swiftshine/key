@@ -1,4 +1,4 @@
-#include <gfl/functor/functorfunc.h>
+#include <gfl/functor/FunctorFunc.h>
 #include <gfl/mem/mem.h>
 
 // this is the only type actually used

@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <gfl/file/ResFileInfo.h>
-#include <gfl/render/scnmdlwrapper.h>
+#include <gfl/render/ScnMdlWrapper.h>
 #include <game/object/Gimmick.h>
 #include <game/object/GimmickList.h>
 #include <game/object/gmk/GmkSimpleMdlRotZ.h>

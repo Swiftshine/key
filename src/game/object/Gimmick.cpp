@@ -1,6 +1,6 @@
 #include <game/object/Gimmick.h>
 #include <game/manager/GimmickManager.h>
-#include <gfl/functor/functorclassmethod.h>
+#include <gfl/functor/FunctorClassMethod.h>
 
 typedef gfl::FunctorClassMethod0<void, Gimmick, void(Gimmick::*)(void)>;
 

@@ -2,8 +2,8 @@
 #define GFL_TASK_H
 
 #include <flf_types.h>
-#include <gfl/functor/functorbase.h>
-#include <gfl/functor/functorfunc.h>
+#include <gfl/functor/FunctorBase.h>
+#include <gfl/functor/FunctorFunc.h>
 #include <gfl/task/taskinfo.h>
 
 
