@@ -21,7 +21,7 @@ int gfl::ResArchivedFileInfo::Recurse() {
 }
 
 gfl::GfArch* gfl::ResFileInfo::GetGfArch() {
-    if (flags & ResInfoFlags::ResInfo_GfArch) {
+    if (flags & ResInfo::Flags::GfArch) {
         return archive;
     }
 

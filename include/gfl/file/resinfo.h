@@ -10,12 +10,11 @@ namespace gfl {
     class ResInfo {
     public:
         SCOPED_ENUM(Flags,
-        
-            ResInfo_File        = 1,
-            ResInfo_Folder      = 2,
-            ResInfo_GfArch      = 4,
-            ResInfo_UseFolder = 0x80,
-            ResInfo_UseGfArch = 0x100,
+            File        = 1,
+            Folder      = 2,
+            GfArch      = 4,
+            UseFolder = 0x80,
+            UseGfArch = 0x100,
         );
     protected:
         ResInfo();
