@@ -296,8 +296,8 @@ config.libs = [
         "cflags": [*cflags_base],
         "host": False,
         "objects": [
-            # Object(Matching, "gfl/mem/fixedmemorystream.cpp"),
-            Object(Matching, "gfl/mem/stream.cpp"),
+            Object(Matching, "gfl/mem/fixedmemorystream.cpp"),
+            # Object(Matching, "gfl/mem/stream.cpp"),
             # Object(Matching, "gfl/param/parambase.cpp"),
             Object(Matching, "gfl/mem/memorybase.cpp"),
             Object(NonMatching, "gfl/mem/heap.cpp"),
