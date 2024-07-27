@@ -1,5 +1,5 @@
 #include <gfl/file/GfArch.h>
-#include <gfl/mem/mem.h>
+#include <gfl/mem/Mem.h>
 
 const char gfl::GfArch::InitialFilename[] = {0, '!', '$', '@', '=', '0', '4', 'e'};
 // !$@=04e

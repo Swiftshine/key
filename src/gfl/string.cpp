@@ -1,5 +1,5 @@
 #include <gfl/string.h>
-#include <gfl/mem/mem.h>
+#include <gfl/mem/Mem.h>
 
 u32 gfl::ToHash(const char* src) {
     if (!src) return 0;

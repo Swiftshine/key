@@ -1,5 +1,5 @@
-#include <gfl/mem/heap.h>
-#include <gfl/mem/mem.h>
+#include <gfl/mem/Heap.h>
+#include <gfl/mem/Mem.h>
 
 using namespace gfl;
 MEMAllocatorFuncs Heap::AllocFuncs;

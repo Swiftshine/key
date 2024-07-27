@@ -1,7 +1,7 @@
 #ifndef GFL_MEMORY_H
 #define GFL_MEMORY_H
 
-#include <gfl/mem/memorybase.h>
+#include <gfl/mem/MemoryBase.h>
 
 namespace gfl {
     class Memory : public MemoryBase {

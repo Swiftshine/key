@@ -5,7 +5,7 @@
 #include <MSL/internal/mem.h>
 #include <MSL/cstddef>
 #include <revolution/types.h>
-#include <gfl/mem/memorybase.h>
+#include <gfl/mem/MemoryBase.h>
 
 void* operator new(std::size_t);
 inline void* operator new(std::size_t, u8);

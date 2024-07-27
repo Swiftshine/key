@@ -1,4 +1,4 @@
-#include <gfl/mem/memorybase.h>
+#include <gfl/mem/MemoryBase.h>
 
 using namespace gfl;
 

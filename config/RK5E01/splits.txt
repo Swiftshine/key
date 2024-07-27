@@ -66,7 +66,7 @@ game/object/FlfGameObjLocator.cpp:
 game/object/gmk/GmkTurtle.cpp:
 	.text       start:0x804FA9E4 end:0x804FB358
 
-gfl/mem/mem.cpp:
+gfl/mem/Mem.cpp:
 	.text       start:0x8063C4F8 end:0x8063C598
 
 gfl/file/ResFileInfo.cpp:
@@ -91,11 +91,11 @@ gfl/file/FileSystemWii.cpp:
 gfl/string/FixedString.cpp:
 	.text       start:0x80642B00 end:0x80642CB0
 
-gfl/mem/heap.cpp:
+gfl/mem/Heap.cpp:
 	.text       start:0x80644264 end:0x8064456C
 	.rodata     start:0x8082C4C0 end:0x8082C4D0
 
-gfl/mem/memorybase.cpp:
+gfl/mem/MemoryBase.cpp:
 	.text       start:0x80644610 end:0x8064483C
 
 gfl/task/taskinfo.cpp:
@@ -108,7 +108,7 @@ gfl/task/task.cpp:
 	.sdata      start:0x808E43F8 end:0x808E440C
 	.bss        start:0x808FDC8C end:0x808FDC98
 
-gfl/mem/fixedmemorystream.cpp:
+gfl/mem/FixedMemoryStream.cpp:
 	.text       start:0x806506A0 end:0x80650838
 	.rodata     start:0x8082C940 end:0x8082C964
 	.data       start:0x808B8350 end:0x808B8380

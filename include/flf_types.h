@@ -4,22 +4,10 @@
 #include <revolution/types.h>
 #include <nw4r/math/math_types.h>
 #include <MSL/stddef.h>
+#include <gfl/gfl_types.h>
 
 typedef u32 UNKTYPE;
 
-// macros 
-
-#define SCOPED_ENUM(name, ...)              \
-    class name {virtual void This_error_means_you_forgot_to_write___type___in_an_object_instanciation()=0;public: \
-        enum __type__ { __VA_ARGS__ };     \
-    }
-
-#define STATIC_ASSERT(expr) \
-    typedef char static_assert[expr ? 1 : -1];
-
-#define ASSERT_SIZE(t, size) STATIC_ASSERT(sizeof(t) == size)
- 
-#define override
 
 
 // actual types

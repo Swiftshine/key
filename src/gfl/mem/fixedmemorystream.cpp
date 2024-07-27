@@ -1,6 +1,6 @@
-#include <gfl/mem/fixedmemorystream.h>
+#include <gfl/mem/FixedMemoryStream.h>
 #include <decomp/thunks.h>
-#include <gfl/mem/mem.h>
+#include <gfl/mem/Mem.h>
 
 using namespace gfl;
 
