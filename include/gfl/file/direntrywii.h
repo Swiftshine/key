@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_DIR_ENTRY_WII_H
 #define GFL_FILE_DIR_ENTRY_WII_H
 
-#include <gfl/file/direntry.h>
+#include <gfl/file/DirEntry.h>
 #include <revolution/ARC.h>
 
 namespace gfl {

@@ -4,14 +4,14 @@
 #include <revolution/os.h>
 
 #include <flf_types.h>
-#include <gfl/file/direntrywii.h>
+#include <gfl/file/DirEntryWii.h>
 
 
 namespace gfl {
 
     class File;
     class FileSystem { };
-    
+
     class FileSystemWii : public FileSystem {
     public:
         static FileSystemWii* Instance;

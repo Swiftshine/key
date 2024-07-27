@@ -1,4 +1,4 @@
-#include <gfl/file/resfileinfo.h>
+#include <gfl/file/ResFileInfo.h>
 #include <gfl/string/fixedstring.h>
 
 gfl::ResFileInfo::ResFileInfo() {

@@ -1,3 +1,3 @@
-#include <gfl/file/resinfo.h>
+#include <gfl/file/ResInfo.h>
 
 void gfl::ResInfo::IncrementLevel() { level++; }

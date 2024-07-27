@@ -3,6 +3,7 @@
 
 #include <flf_types.h>
 #include <gfl/string/fixedstring.h>
+#include <gfl/file/DirEntry.h>
 
 // The GoodFeel Archive format is in Little Endian.
 // Any comments about values will be written in Big Endian.
@@ -82,6 +83,10 @@ namespace gfl {
     };
 
     ASSERT_SIZE(GfArch, 0x240)
+
+    class DirEntryGfArch : public DirEntry {
+
+    };
 }
 
 #endif

@@ -1,4 +1,5 @@
-#include <gfl/file/gfarch.h>
+#include <gfl/file/GfArch.h>
+#include <gfl/mem/mem.h>
 
 const char gfl::GfArch::InitialFilename[] = {0, '!', '$', '@', '=', '0', '4', 'e'};
 // !$@=04e
@@ -24,4 +25,14 @@ gfl::GfArch::GfArch(File* newFile, u8 newHeapID, u32 align)
 
 }
 
-gfl::GfArch::~GfArch() { }
+gfl::GfArch::~GfArch() {
+    if (compressedData) {
+        mem::Free(compressedData);
+        compressedData = NULL;
+    }
+
+    if (curData) {
+        mem::Free(curData);
+        curData = NULL;
+    }
+}

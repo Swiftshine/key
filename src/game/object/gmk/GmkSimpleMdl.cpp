@@ -1,5 +1,5 @@
 #include <cstdio>
-#include <gfl/file/resfileinfo.h>
+#include <gfl/file/ResFileInfo.h>
 #include <gfl/render/scnmdlwrapper.h>
 #include <game/object/Gimmick.h>
 #include <game/object/GimmickList.h>

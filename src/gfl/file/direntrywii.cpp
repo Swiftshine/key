@@ -1,4 +1,4 @@
-#include <gfl/file/direntrywii.h>
+#include <gfl/file/DirEntryWii.h>
 
 gfl::DirEntryWii::DirEntryWii() { }
 

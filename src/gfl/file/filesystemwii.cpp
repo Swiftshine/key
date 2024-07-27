@@ -1,4 +1,4 @@
-#include <gfl/file.h>
+#include <gfl/File.h>
 #include <revolution/DVD/dvd.h>
 #include <revolution/OS/OS.h>
 
