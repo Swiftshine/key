@@ -1,7 +1,7 @@
 #ifndef GFL_PARAM_BOOL_H
 #define GFL_PARAM_BOOL_H
 
-#include <gfl/param/parambase.h>
+#include <gfl/param/ParamBase.h>
 
 namespace gfl {
     class ParamBool : public Param {

@@ -1,4 +1,4 @@
-#include <gfl/param/parambase.h>
+#include <gfl/param/ParamBase.h>
 #include <gfl/mem/mem.h>
 #include <decomp/thunks.h>
 #include <string.h>

@@ -4,7 +4,7 @@
 #include <flf_types.h>
 #include <gfl/string/basicstring.h>
 #include <gfl/string.h>
-#include <gfl/console/console.h>
+#include <gfl/console/Console.h>
 
 namespace gfl {
     
