@@ -1,5 +1,5 @@
-#include <gfl/string/fixedstring.h>
-#include <gfl/string/basicstring.h>
+#include <gfl/string/FixedString.h>
+#include <gfl/string/BasicString.h>
 #include <gfl/mem/mem.h>
 #include <string.h>
 

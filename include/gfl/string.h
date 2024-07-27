@@ -1,8 +1,8 @@
 #ifndef GFL_STRING_H
 #define GFL_STRING_H
 
-#include <gfl/string/fixedstring.h>
-#include <gfl/string/basicstring.h>
+#include <gfl/string/FixedString.h>
+#include <gfl/string/BasicString.h>
 #include <flf_types.h>
 
 namespace gfl {

@@ -4,7 +4,7 @@
 #include <nw4r/g3d/g3d_scnmdl.h>
 // #include <nw4r/g3d/g3d_lightobj.h>
 #include <flf_types.h>
-#include <gfl/render/renderobj.h>
+#include <gfl/render/RenderObj.h>
 
 namespace nw4r { namespace g3d {
     class LightObjData;

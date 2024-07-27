@@ -5,7 +5,7 @@
 #include <game/object/FlfHandleObj.h>
 #include <flf_types.h>
 #include <decomp/thunks.h>
-#include <gfl/string/basicstring.h>
+#include <gfl/string/BasicString.h>
 
 typedef u32 FlfGameObjType;
 

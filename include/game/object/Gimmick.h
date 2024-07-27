@@ -2,7 +2,7 @@
 #define FLUFF_GIMMICK_H
 
 #include <game/object/FlfGameObj.h>
-#include <gfl/string/basicstring.h>
+#include <gfl/string/BasicString.h>
 #include <game/stage/StageTask.h>
 
 class Gimmick;

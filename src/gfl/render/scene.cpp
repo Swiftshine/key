@@ -1,4 +1,4 @@
-#include <gfl/render/scene.h>
+#include <gfl/render/Scene.h>
 
 using namespace gfl;
 
