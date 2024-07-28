@@ -3,7 +3,7 @@
 
 #include <gfl/string/FixedString.h>
 #include <gfl/string/BasicString.h>
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 
 namespace gfl {
    	u32 ToHash(const char* str);

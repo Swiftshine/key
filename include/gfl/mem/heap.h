@@ -1,7 +1,7 @@
 #ifndef GFL_MEMORY_HEAP_H
 #define GFL_MEMORY_HEAP_H
 
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 #include <revolution/MEM.h>
 
 namespace gfl {

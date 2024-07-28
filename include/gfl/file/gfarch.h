@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_GFARCH_H
 #define GFL_FILE_GFARCH_H
 
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 #include <gfl/string/FixedString.h>
 #include <gfl/file/DirEntry.h>
 
@@ -44,6 +44,12 @@ namespace gfl {
         };
 
         ASSERT_SIZE(GfArch::FileEntry, 0x10)
+        
+        struct FileEntryEx : public FileEntry {
+            u32 flags;
+        };
+
+        ASSERT_SIZE(GfArch::FileEntryEx, 0x14)
 
         struct CompressionHeader {
             char magic[4];      // "GFCP" - GoodFeel ComPression?
@@ -84,8 +90,10 @@ namespace gfl {
 
     ASSERT_SIZE(GfArch, 0x240)
 
-    class DirEntryGfArch : public DirEntry {
-
+    class DirEntryGfArch : public gfl::DirEntry {
+    public:
+        DirEntryGfArch();
+        virtual ~DirEntryGfArch();
     };
 }
 

@@ -2,7 +2,7 @@
 #define GFL_MEMORY_BASE_H
 
 #include <gfl/mem/Heap.h>
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 
 const u32 HEAP_COUNT = 0x18;
 

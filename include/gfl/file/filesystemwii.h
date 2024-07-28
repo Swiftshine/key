@@ -3,7 +3,7 @@
 
 #include <revolution/os.h>
 
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 #include <gfl/file/DirEntryWii.h>
 
 

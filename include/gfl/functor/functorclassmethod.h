@@ -1,7 +1,7 @@
 #ifndef GFL_FUNCTOR_FUNCTOR_CLASS_METHOD_H
 #define GFL_FUNCTOR_FUNCTOR_CLASS_METHOD_H
 
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 #include <gfl/functor/FunctorBase.h>
 
 namespace gfl {

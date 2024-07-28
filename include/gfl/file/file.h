@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_FILE_H
 #define GFL_FILE_FILE_H
 
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 #include <gfl/string.h>
 #include <gfl/file/FileSystemWii.h>
 

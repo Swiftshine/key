@@ -1,8 +1,11 @@
 #pragma endian little
+#include <std/io.pat>
+#include <std/sys.pat>
 
 struct FileHeader {
     char magic[4];      // "GFAC" - GoodFeel ArChive?
     u32  version;       // 0x0300 in this game - version 3.0
+        std::print("GFA version: {}.{}", version >> 0x8 & 0xFF, version >> 0 & 0xFF);
     bool compressed;    // always true
     u8   pad1[3];
     u32  fileInfoOffset;

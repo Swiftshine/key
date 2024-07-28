@@ -1,7 +1,7 @@
 #ifndef GFL_STRING_BASIC_STRING_H
 #define GFL_STRING_BASIC_STRING_H
 
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 
 namespace gfl {
 

@@ -1,6 +1,8 @@
 #ifndef GFL_TYPES_H
 #define GFL_TYPES_H
 
+#include <revolution/types.h>
+
 // macros 
 
 #define SCOPED_ENUM(name, ...)              \

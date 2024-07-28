@@ -1,8 +1,10 @@
 #ifndef GFL_STRING_FIXED_STRING_H
 #define GFL_STRING_FIXED_STRING_H
 
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 #include <decomp/thunks.h>
+
+// note to self - ctor and Reset functions are swapped.
 
 namespace gfl {
 

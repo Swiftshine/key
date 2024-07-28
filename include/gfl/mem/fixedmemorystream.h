@@ -2,7 +2,7 @@
 #define GFL_FIXED_MEMORY_STREAM_H
 
 
-#include <flf_types.h>
+#include <gfl/gfl_types.h>
 #include <gfl/mem/Stream.h>
 
 namespace gfl {

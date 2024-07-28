@@ -1,14 +1,21 @@
 #ifndef GFL_FILE_DIR_ENTRY_H
 #define GFL_FILE_DIR_ENTRY_H
 
-#include <gfl/file/FileSystemWii.h>
+#include <revolution/types.h>
+
 
 namespace gfl {
+    class FileSystemWii;
+
     class DirEntry {
     protected:
         DirEntry();
     public:
         virtual ~DirEntry() = 0;
+
+        bool FileExists(const char* filename);
+        s32  GetFileIndex(const char* filename, s32 searchIndexBegin);
+
     public:
         FileSystemWii* filesystem;
         void* dvdDir;
