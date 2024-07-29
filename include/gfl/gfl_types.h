@@ -2,6 +2,9 @@
 #define GFL_TYPES_H
 
 #include <revolution/types.h>
+#include <MSL/cmath>
+
+typedef unsigned long size_t;
 
 // macros 
 
@@ -17,5 +20,5 @@
  
 #define override
 
-
+// other
 #endif

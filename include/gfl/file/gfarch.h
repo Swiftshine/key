@@ -25,7 +25,7 @@ namespace gfl {
         struct FileHeader {
             char magic[4];      // "GFAC" - GoodFeel ArChive?
             u32  version;       // 0x0300 in this game - version 3.0
-            bool compressed;    // always true
+            bool isCompressed;    // always true
             u8   pad1[3];
             u32  fileInfoOffset;
             u32  fileInfoSize;
@@ -66,19 +66,30 @@ namespace gfl {
         static const char InitialFilename[];
     public:
         GfArch(File* newFile, u8 newHeapID, u32 align);
-        ~GfArch();
+        virtual ~GfArch();
+        bool IsValid();
+        bool ReadCompressed();
+        bool Decompress();
+        void CreateBgArchiveLoadTask();
+        void DeleteBgArchiveLoadTask();
+        bool EntryExists(const char* filename);
+        virtual u32 GetEntrySize(const char* filename);
+        void GetDataAndSize(const char* filename, void* addr, u32* size);
+        virtual DirEntryGfArch* GetDirEntryGfArch(const char* filename);
+        virtual void DeleteDirEntryGfArch(DirEntryGfArch* dirEntry);
+        bool SetHeader(GfArch::FileHeader* header);
+        bool CheckEntryName(const char* filename, GfArch::FileEntryEx* entry) DONT_INLINE;
 
-        virtual void dummy();
     public:
         File* file;
         u8 heapID;
         u8 pad1[3];
         u32 alignment;
         s32 compType;
-        u32 fileCountOffs;
-        u32 compressedSize;
+        u32 fileInfoOffset;
+        u32 fileInfoSize;
+        u32 compressionHeaderOffset;
         u32 decompressedSize;
-        u32 filesize;
         u32 curDataSize;
         void* compressedData;
         void* curData;

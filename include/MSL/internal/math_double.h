@@ -6,6 +6,28 @@
 extern "C" {
 #endif
 
+f32 ceilf(float);
+f32 floorf(float);
+f32 fmodf(float, float);
+f32 modff(float, float*);
+
+double atan(double x);
+double ceil(double x);
+double copysign(double x, double y);
+double cos(double x);
+double floor(double x);
+double frexp(double x, int* eptr);
+double ldexp(double value, int exp);
+double modf(double x, double* iptr);
+double sin(double x);
+double tan(double x);
+double acos(double x);
+double asin(double x);
+double atan2(double y, double x);
+double fmod(double x, double y);
+double pow(double x, double y);
+double sqrt(double x);
+
 inline float acosf(float x) {
     return acos(x);
 }

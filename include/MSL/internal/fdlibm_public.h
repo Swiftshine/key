@@ -1,6 +1,6 @@
 #ifndef MSL_FDLIBM_PUBLIC_H
 #define MSL_FDLIBM_PUBLIC_H
-#include <types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

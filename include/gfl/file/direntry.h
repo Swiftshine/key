@@ -1,7 +1,7 @@
 #ifndef GFL_FILE_DIR_ENTRY_H
 #define GFL_FILE_DIR_ENTRY_H
 
-#include <revolution/types.h>
+#include <gfl/gfl_types.h>
 
 
 namespace gfl {

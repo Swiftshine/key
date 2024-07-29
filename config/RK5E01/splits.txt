@@ -75,6 +75,7 @@ gfl/file/ResFileInfo.cpp:
 gfl/file/GfArch.cpp:
 	.text       start:0x8063F418 end:0x806400F0
 	.rodata     start:0x8082C3A4 end:0x8082C3AC
+	.sdata      start:0x808E4350 end:0x808E4358
 
 gfl/file/DirEntryWii.cpp:
 	.text       start:0x806416DC end:0x80641A9C

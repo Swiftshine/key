@@ -40,6 +40,7 @@ void abort();
 
 void GKI_init_timer_list();
 
+extern "C" void TRKUARTInterruptHandler();
 
 
 #endif

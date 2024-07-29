@@ -13,18 +13,17 @@ inline void* operator new(std::size_t, u8);
 namespace gfl {
 namespace mem {
 
-namespace HeapID {
-    enum Enum_HeapID {
-        None,
-        LIB1,
-        LIB2,
-        String,
-        Etc,
-        Sound,
-        Work,
-        Resource,
-    };
-}
+SCOPED_ENUM(HeapID,
+    None,
+    LIB1,
+    LIB2,
+    String,
+    Etc,
+    Sound,
+    Work,
+    Resource
+);
+
     
     void* Alloc(u8 heapID, u32 size, int alignment);
     void  Free(void* data);
