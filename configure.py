@@ -179,7 +179,7 @@ cflags_base = [
     "-code_merging all",
     "-code_merging aggressive",
     "-use_lmw_stmw on",
-    "-ipa file",
+    # "-ipa file",
     # "-pool on",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-func_align 4",
