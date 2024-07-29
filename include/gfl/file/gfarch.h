@@ -89,7 +89,7 @@ namespace gfl {
         u32 fileInfoOffset;
         u32 fileInfoSize;
         u32 compressionHeaderOffset;
-        u32 decompressedSize;
+        u32 archiveSize;
         u32 curDataSize;
         void* compressedData;
         void* curData;

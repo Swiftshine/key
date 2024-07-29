@@ -32,7 +32,7 @@ GfArch::GfArch(File* newFile, u8 newHeapID, u32 align)
     , fileInfoOffset(NULL)
     , fileInfoSize(0)
     , compressionHeaderOffset(NULL)
-    , decompressedSize(0)
+    , archiveSize(0)
     , curDataSize(0)
     , compressedData(NULL)
     , curData(NULL)
@@ -123,7 +123,7 @@ bool GfArch::SetHeader(GfArch::FileHeader* header) {
             this->fileInfoOffset = SwapEndianness32(header->fileInfoOffset);
             this->fileInfoSize = SwapEndianness32(header->fileInfoSize);
             this->compressionHeaderOffset = SwapEndianness32(header->compressionHeaderOffset);
-            this->decompressedSize = SwapEndianness32(header->decompressedSize);
+            this->archiveSize = SwapEndianness32(header->filesize);
             return true;
         }
         
