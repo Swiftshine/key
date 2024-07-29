@@ -17,14 +17,14 @@ namespace gfl {
         static bool Open(const char*);
 
         virtual void Close();
-        void Read(void* addr, u32 len, u32 filepos);
-        void ReadAsync(void* addr, u32 len, u32 offs, u32 callback);
-        void fn_8064229C();
-        void fn_806422CC();
-        void fn_80642304();
-        void fn_8064231C();
-        void Reset();
-        ~File();
+        virtual void Read(void* addr, u32 len, u32 filepos);
+        virtual void ReadAsync(void* addr, u32 len, u32 offs, u32 callback);
+        virtual void vf14();
+        virtual void vf18();
+        virtual void vf1C();
+        virtual void vf20();
+        virtual void Reset();
+        virtual ~File();
     private:
         FileSystemWii*         fs;
         FixedString            filename;

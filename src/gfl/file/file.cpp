@@ -33,10 +33,10 @@ void gfl::File::ReadAsync(void* addr, u32 len, u32 fileOffs, u32 callback) {
     fs->ReadAsync(this, addr, len, fileOffs, callback);
 }
 
-void gfl::File::fn_8064229C() { }
-void gfl::File::fn_806422CC() { }
-void gfl::File::fn_80642304() { }
-void gfl::File::fn_8064231C() { }
+void gfl::File::vf14() { }
+void gfl::File::vf18() { }
+void gfl::File::vf1C() { }
+void gfl::File::vf20() { }
 
 gfl::File::~File() {
 
