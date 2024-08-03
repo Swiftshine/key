@@ -5,13 +5,17 @@
 // 3.0
 #define GFA_VERSION 0x0300
 
-const char FileHeaderMagic[4] = {'G', 'F', 'A', 'C'};
+const char* lbl_808E4350 = "GFAC";
 
 inline u32 SwapEndianness32(u32 value) {
-    return  ((value >> 24) & 0x000000FF) |
-            ((value >> 8) & 0x0000FF00)  |
-            ((value << 8) & 0x00FF0000)  |
-            ((value << 24) & 0xFF000000);
+    u32 dst;
+
+    *((u8*)&dst + 0) = *((u8*)&value + 3);
+    *((u8*)&dst + 1) = *((u8*)&value + 2);
+    *((u8*)&dst + 2) = *((u8*)&value + 1);
+    *((u8*)&dst + 3) = *((u8*)&value + 0);
+
+    return dst;
 }
 
 const char* some_func(const char* n) DONT_INLINE {
@@ -112,22 +116,27 @@ void GfArch::DeleteDirEntryGfArch(DirEntryGfArch* dirEntry) {
     delete dirEntry;
 }
 
-bool GfArch::SetHeader(GfArch::FileHeader* header) {
-    if (header->magic[0] == FileHeaderMagic[0] && 
-        header->magic[1] == FileHeaderMagic[1] && 
-        header->magic[2] == FileHeaderMagic[2] && 
-        header->magic[3] == FileHeaderMagic[3]) {
 
-        if (SwapEndianness32(header->version) == GFA_VERSION) {
+
+bool GfArch::SetHeader(GfArch::FileHeader* header) {
+    if (!(header->magic[0] == lbl_808E4350[0] && 
+          header->magic[1] == lbl_808E4350[1] && 
+          header->magic[2] == lbl_808E4350[2] && 
+          header->magic[3] == lbl_808E4350[3])) {
+
+        return false;
+    } else {
+        if ((s32)SwapEndianness32(header->version) != GFA_VERSION) {
+            return false;
+        } else {
             this->compType = header->isCompressed; // gets converted to BPE because that was the only compression used at the time of GFA 3.0
             this->fileInfoOffset = SwapEndianness32(header->fileInfoOffset);
             this->fileInfoSize = SwapEndianness32(header->fileInfoSize);
             this->compressionHeaderOffset = SwapEndianness32(header->compressionHeaderOffset);
             this->archiveSize = SwapEndianness32(header->filesize);
             return true;
+            
         }
-        
-        return false;
     }
 
     return false;
