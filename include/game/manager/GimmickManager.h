@@ -1,7 +1,7 @@
 #ifndef FLUFF_GIMMICK_MANAGER_H
 #define FLUFF_GIMMICK_MANAGER_H
 
-#include <gfl/task/task.h>
+#include <gfl/task/Task.h>
 #include <game/object/Gimmick.h>
 #include <game/mapdata/mapdata.h>
 

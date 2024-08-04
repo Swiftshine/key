@@ -1,6 +1,6 @@
-#include <gfl/task/task.h>
+#include <gfl/task/Task.h>
 #include <gfl/mem/Mem.h>
-#include <gfl/task/taskinfo.h>
+#include <gfl/task/TaskInfo.h>
 #include <decomp/thunks.h>
 
 const char gfl::Task::DeathMarker[] = "@Z";

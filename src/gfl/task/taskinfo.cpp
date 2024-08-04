@@ -1,7 +1,7 @@
 
 #include <gfl/mem/Mem.h>
 #include <decomp/thunks.h>
-#include <gfl/task/taskinfo.h>
+#include <gfl/task/TaskInfo.h>
 
 gfl::TaskList* gfl::TaskList::Instance;
 gfl::Task* gfl::TaskInfo::CurrentTask;

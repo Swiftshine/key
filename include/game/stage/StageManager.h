@@ -1,7 +1,7 @@
 #ifndef FLUFF_STAGE_MANAGER_H
 #define FLUFF_STAGE_MANAGER_H
 
-#include <gfl/task/task.h>
+#include <gfl/task/Task.h>
 #include <game/stage/Stage.h>
 class StageManager : public gfl::Task {
 private:

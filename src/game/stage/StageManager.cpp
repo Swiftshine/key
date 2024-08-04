@@ -1,5 +1,5 @@
 #include <game/stage/StageManager.h>
-#include <gfl/task/task.h>
+#include <gfl/task/Task.h>
 
 // StageManager::StageManager(gfl::Task* parentTask)
 //     : gfl::Task(NULL)
