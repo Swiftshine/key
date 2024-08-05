@@ -6,6 +6,11 @@
 // size: 0xF68
 class PlayerBase : public FlfGameObj {
 public:
+    SCOPED_ENUM(PlayerIDs,
+        Kirby,
+        PrinceFluff,
+    );
+public:
     PlayerBase(gfl::Task* gameMgrTask, u32 flags, u32 unk3, u32 unk4, u32 unk5);
     ~PlayerBase();
 
