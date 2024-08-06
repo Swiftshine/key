@@ -3,85 +3,147 @@
 
 #include <flf_types.h>
 
-
-
 struct Stage {
-    s32 _0;
+    // The actuaol numeric stage number. Level 1 is 1, level 2 is 2...
     s32 stageID;
+    // This is used for finding files from disk. Level 1 is 101, level 2 is 102...
+    s32 resourceID;
+    // This is used for stages that span multiple sections that need to be loaded seperately. A notable example is the world map.
     u32 sectionID;
 };
 
 SCOPED_ENUM(StageIDs,
     // Misc.
-    Stage_WorldMap          = 0,
-
-    // Quilty Square
-    Stage_PatchCastle       = 100,
+    WorldMap = 50,
 
     // Grass Land
-    Stage_FountainGardens   = 101,
-    Stage_FlowerFields      = 102,
-    Stage_RainbowFalls      = 103,
-    Stage_BigBeanVine       = 104,
-    Stage_MoleHole          = 105,
-    Stage_WeirdWoods        = 106,
+    FountainGardens   = 1,
+    FlowerFields      = 2,
+    RainbowFalls      = 3,
+    BigBeanVine       = 4,
+    MoleHole          = 5,
+    WeirdWoods        = 6,
 
     // Hot Land
-    Stage_PyramidSands      = 107,
-    Stage_LavaLanding       = 108,
-    Stage_CoolCave          = 109,
-    Stage_DinoJungle        = 110,
-    Stage_TemperTemple      = 111,
-    Stage_DuskDunes         = 112,
+    PyramidSands      = 7,
+    LavaLanding       = 8,
+    CoolCave          = 9,
+    DinoJungle        = 10,
+    TemperTemple      = 11,
+    DuskDunes         = 12,
 
     // Treat Land
-    Stage_ToyTracks         = 113,
-    Stage_MushroomRun       = 114,
-    Stage_SweetsPark        = 115,
-    Stage_MelodyTown        = 116,
-    Stage_CocoaStation      = 117,
-    Stage_DarkManor         = 118,
+    ToyTracks         = 13,
+    MushroomRun       = 14,
+    SweetsPark        = 15,
+    MelodyTown        = 16,
+    CocoaStation      = 17,
+    DarkManor         = 18,
 
     // Water Land
-    Stage_SplashBeach       = 119,
-    Stage_BlubBlubOcean     = 120,
-    Stage_SecretIsland      = 121,
-    Stage_DeepDiveDeep      = 122,
-    Stage_BoomBoatyard      = 123,
-    Stage_FossilReef        = 124,
+    SplashBeach       = 19,
+    BlubBlubOcean     = 20,
+    SecretIsland      = 21,
+    DeepDiveDeep      = 22,
+    BoomBoatyard      = 23,
+    FossilReef        = 24,
 
     // Snow Land
-    Stage_SnowyFields       = 125,
-    Stage_CozyCabin         = 126,
-    Stage_MtSlide           = 127,
-    Stage_FrostyWheel       = 128,
-    Stage_FrigidFjords      = 129,
-    Stage_EvergreenLift     = 130,
+    SnowyFields       = 25,
+    CozyCabin         = 26,
+    MtSlide           = 27,
+    FrostyWheel       = 28,
+    FrigidFjords      = 29,
+    EvergreenLift     = 30,
 
     // Space Land
-    Stage_FutureCity        = 131,
-    Stage_TubeTown          = 132,
-    Stage_MysteriousUFO     = 133,
-    Stage_StellarWay        = 134,
-    Stage_MoonBase          = 135,
-    Stage_OuterRings        = 136,
+    FutureCity        = 31,
+    TubeTown          = 32,
+    MysteriousUFO     = 33,
+    StellarWay        = 34,
+    MoonBase          = 35,
+    OuterRings        = 36,
 
     // Dream Land
-    Stage_WhispysForest     = 137,
-    Stage_TempestTowers     = 138,
-    Stage_CloudPalace       = 139,
-    Stage_CastleDedede      = 140,
-    Stage_MetaMelonIsle     = 141,
-    Stage_BattleshipHalberd = 142,
+    WhispysForest     = 37,
+    TempestTowers     = 38,
+    CloudPalace       = 39,
+    CastleDedede      = 40,
+    MetaMelonIsle     = 41,
+    BattleshipHalberd = 42,
+);
+
+SCOPED_ENUM(ResourceIDs,
+    // Misc.
+    WorldMap          = 0,
+
+    // Quilty Square
+    PatchCastle       = 100,
+
+    // Grass Land
+    FountainGardens   = 101,
+    FlowerFields      = 102,
+    RainbowFalls      = 103,
+    BigBeanVine       = 104,
+    MoleHole          = 105,
+    WeirdWoods        = 106,
+
+    // Hot Land
+    PyramidSands      = 107,
+    LavaLanding       = 108,
+    CoolCave          = 109,
+    DinoJungle        = 110,
+    TemperTemple      = 111,
+    DuskDunes         = 112,
+
+    // Treat Land
+    ToyTracks         = 113,
+    MushroomRun       = 114,
+    SweetsPark        = 115,
+    MelodyTown        = 116,
+    CocoaStation      = 117,
+    DarkManor         = 118,
+
+    // Water Land
+    SplashBeach       = 119,
+    BlubBlubOcean     = 120,
+    SecretIsland      = 121,
+    DeepDiveDeep      = 122,
+    BoomBoatyard      = 123,
+    FossilReef        = 124,
+
+    // Snow Land
+    SnowyFields       = 125,
+    CozyCabin         = 126,
+    MtSlide           = 127,
+    FrostyWheel       = 128,
+    FrigidFjords      = 129,
+    EvergreenLift     = 130,
+
+    // Space Land
+    FutureCity        = 131,
+    TubeTown          = 132,
+    MysteriousUFO     = 133,
+    StellarWay        = 134,
+    MoonBase          = 135,
+    OuterRings        = 136,
+
+    // Dream Land
+    WhispysForest     = 137,
+    TempestTowers     = 138,
+    CloudPalace       = 139,
+    CastleDedede      = 140,
+    MetaMelonIsle     = 141,
+    BattleshipHalberd = 142,
 
     // Bossfights
-    Stage_Fangora           = 301,
-    Stage_HotWings          = 302,
-    Stage_Squashini         = 303,
-    Stage_Capamari          = 304,
-    Stage_KingDedede        = 305,
-    Stage_MetaKnight        = 306,
-    Stage_YinYarn           = 307,
+    Fangora           = 301,
+    HotWings          = 302,
+    Squashini         = 303,
+    Capamari          = 304,
+    KingDedede        = 305,
+    MetaKnight        = 306,
+    YinYarn           = 307,
 );
 
 #endif
