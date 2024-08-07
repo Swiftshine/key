@@ -6,7 +6,7 @@ asm gfl::BasicString::BasicString(void) {
     b GKI_init_timer_list
 }
 
-gfl::BasicString::BasicString(BasicString* src) {  
+gfl::BasicString::BasicString(const BasicString& src) {  
     // s32 a = src->shortA >> 31;
     // u32 b;
     // u32 c;

@@ -1,8 +1,10 @@
 #include <game/util/MissionUtil.h>
 #include <game/util/Literals.h>
+#include <cstdio>
 
 using namespace FluffUtil;
-
+static const char MissionIndicators[] = "NBTDCS";
+static const char* MissionNameTemplate = "M%c%02d";
 int Mission::GetMissionTypeByCode(int code) {
     int ret = MissionType::None;
     int curType;
@@ -72,23 +74,100 @@ bool Mission::HasMissionIndicator(int type, gfl::BasicString* str) {
     u32 len;
     char target;
     int charIndex;
-    if (type > -1) {
-        if (GFL_BASIC_STRING_CHECK_USE_STRING(str)) {
-            len = str->length;
+    s32 t = static_cast<signed long>(type);
+    
+    if (type >= 0 && t < 6) {
+        if (gfl::BasicString::UseSSO(str)) {
+            len = str->shortLen & 0x7F;
         } else {
-            len = str->shortLen;
+            len = str->length;
         }
 
-        if (len) {
-            target = GetMissionIdentifierByType(type);
-            charIndex = str->FindChar(target, 0);
-
-            if (charIndex != -1) {
-                ret = true;
-            }
+        if (len && str->FindChar(GetMissionIdentifierByType(type), 0) != -1U) {
+            ret = true;
         }
 
     }
 
     return ret;
+}
+
+int Mission::GetMissionIDByInfo(int type, int index) {
+    int id = GetMissionIDBaseByType(type);
+    int count = GetMissionCountByType(type);
+
+    if (index < 0 || count <= index) {
+        id = 0;
+    } else {
+        id += index;
+    }
+
+    return id;
+}
+
+
+void Mission::GetMissionInfoByID(int id, int* destType, int* destIndex) {
+    s32 t;
+    int type;
+    int index;
+    bool isValid = false;
+    
+    isValid = false;
+    type  = id / 100;
+    index = id % 100;
+    t = static_cast<signed long>(type);
+    
+    if (type >= 1 && t < 6) {
+        int count  = GetMissionCountByType(type);
+
+        if (index >= 0 && index < count) {
+            isValid = true;
+        }
+    }
+    
+    if (!isValid) {
+        type = MissionType::None;
+        index = 0;
+    }
+
+    if (destType) {
+        *destType = type;
+    }
+
+    if (destIndex) {
+        *destIndex = index;
+    }
+}
+
+int Mission::GetMissionTypeByID(int id) {
+    int type;
+    GetMissionInfoByID(id, &type, NULL);
+    return type;
+}
+
+int Mission::GetMissionIndexByID(int id) {
+    int index;
+    GetMissionInfoByID(id, NULL, &index);
+    return index;
+}
+
+extern "C" int snprintf(char*, size_t, const char*, ...);
+
+u32 Mission::GetMissionMagicByID(int id) {
+
+    int type;
+    int index;
+    GetMissionInfoByID(id, &type, &index);
+    
+    if (MissionType::None != type) {
+        char types[] = {'\0', 'B', 'T', 'D', 'C', 'S'};
+        char magicStr[16];
+        snprintf(magicStr, sizeof(magicStr), (const char*)MissionNameTemplate, types[type], index);
+        magicStr[4] = 0;
+        
+        gfl::BasicString str1(magicStr);
+        gfl::BasicString str2(str1);
+        return str2.GetMagic();
+    }
+    return LITERAL_NONE;
 }

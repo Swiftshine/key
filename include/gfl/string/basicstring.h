@@ -6,10 +6,17 @@
 namespace gfl {
 
     class BasicString {
+    public:
+        static bool UseSSO(BasicString* s) {
+            return (s->_0 >> 0x1F == 0);
+        }
     private:
     public:
+        inline BasicString(const char* src) {
+            Set(src);
+        }
         BasicString();
-        BasicString(BasicString* src);
+        BasicString(const BasicString& src);
         ~BasicString();
 
 
@@ -43,10 +50,10 @@ namespace gfl {
 
     // is the basicstring using its string pointer?
     #define GFL_BASIC_STRING_CHECK_USE_STRING(s) \
-        ((u32)(s->_0) >> 31) & 1
+        (s->_0 >> 0x1F == 1)
     // is the basicstring using its char array?
     #define GFL_BASIC_STRING_CHECK_USE_CHARS(s) \
-        !GFL_BASIC_STRING_CHECK_USE_STRING(s)
+        (s->_0 >> 0x1F == 0)
     
 } // gfl
 

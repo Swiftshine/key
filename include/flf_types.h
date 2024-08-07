@@ -1,12 +1,12 @@
 #ifndef FLUFF_TYPES_H
 #define FLUFF_TYPES_H
 
-#include <revolution/types.h>
-#include <nw4r/math/math_types.h>
-#include <MSL/stddef.h>
+// #include <revolution/types.h>
+// #include <revolution/macros.h>
+// #include <nw4r/math/math_types.h>
+// #include <MSL/stddef.h>
 #include <gfl/gfl_types.h>
 
-typedef u32 UNKTYPE;
 
 
 

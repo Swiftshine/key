@@ -68,7 +68,7 @@ game/object/FlfGameObjLocator.cpp:
 
 game/util/MissionUtil.cpp:
 	.text       start:0x804C49F4 end:0x804C4E60
-	.sdata2     start:0x808EB2C4 end:0x808EB2CC
+	.sdata2     start:0x808EB2C4 end:0x808EB2E0
 
 game/object/gmk/GmkTurtle.cpp:
 	.text       start:0x804FA9E4 end:0x804FB358

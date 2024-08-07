@@ -173,19 +173,19 @@ namespace Mission {
         Seek    = 500,    
     );
 
-    static const char MissionIndicators[] = "NBTDCS";
+    
 
-    int  GetMissionTypeByCode(int code);
-    int  GetMissionCodeByType(int type);
-    int  GetMissionCountByType(int type);
-    int  GetMissionIDBaseByType(int type);
-    char GetMissionIdentifierByType(int type);
+    int  GetMissionTypeByCode(int code) DONT_INLINE;
+    int  GetMissionCodeByType(int type) DONT_INLINE;
+    int  GetMissionCountByType(int type) DONT_INLINE;
+    int  GetMissionIDBaseByType(int type) DONT_INLINE;
+    char GetMissionIdentifierByType(int type) DONT_INLINE;
     bool HasMissionIndicator(int type, gfl::BasicString* str);
     int  GetMissionIDByInfo(int type, int index);
     void GetMissionInfoByID(int id, int* destType, int* destIndex);
-    int  GetMissionTypeByID(int id);
-    int  GetMissionIndexByID(int id);
-    u32  GetMissionMagic(gfl::BasicString* str);
+    int  GetMissionTypeByID(int id) DONT_INLINE;
+    int  GetMissionIndexByID(int id) DONT_INLINE;
+    u32  GetMissionMagicByID(int id);
 } // Mission
 } // FluffUtil
 

@@ -1,10 +1,27 @@
 #ifndef GFL_TYPES_H
 #define GFL_TYPES_H
 
-#include <revolution/types.h>
-#include <MSL/cmath>
+#include <revolution/macros.h>
+#include <MSL/stddef.h>
+// #include <revolution/types.h>
+// #include <MSL/cmath>
+
+typedef unsigned long long u64;
+typedef signed long long s64;
 
 typedef unsigned long size_t;
+typedef unsigned long u32;
+typedef signed long s32;
+
+typedef unsigned short u16;
+typedef signed short s16;
+
+typedef unsigned char u8;
+typedef signed char s8;
+
+typedef float f32;
+
+typedef u32 UNKTYPE;
 
 // macros 
 
