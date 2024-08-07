@@ -3,6 +3,8 @@
 
 #include <flf_types.h>
 
+// To clarify, PointerManager is a manager for the Wiimote-controlled cursors; called "pointers"
+
 class PointerManager {
 public:
     PointerManager();

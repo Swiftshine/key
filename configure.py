@@ -353,6 +353,15 @@ config.libs = [
             Object(NonMatching, "game/manager/CameraManager.cpp"),
         ],
     },
+    {
+        "lib" : "game/util",
+        "mw_version": config.linker_version,
+        "cflags": cflags_base,
+        "host": False,
+        "objects" : [
+            Object(NonMatching, "game/util/MissionUtil.cpp"),
+        ],
+    },
 ]
 
 if args.mode == "configure":

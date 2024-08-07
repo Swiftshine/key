@@ -3,7 +3,7 @@
 
 #include <gfl/task/Task.h>
 #include <game/object/Gimmick.h>
-#include <game/mapdata/mapdata.h>
+#include <game/mapdata/Mapdata.h>
 
 class GimmickManager {
 public:

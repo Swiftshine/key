@@ -12,6 +12,11 @@ namespace gfl {
         BasicString(BasicString* src);
         ~BasicString();
 
+
+        // Gets a u32 from the first four bytes of the string.
+        u32  GetMagic();
+        u32  FindChar(char target, u32 offs);
+        bool StartsWith(BasicString* other);
         void Reserve(size_t size);
         void operator=(BasicString* src);
         void operator=(const char*);
@@ -26,7 +31,7 @@ namespace gfl {
             };
 
             struct {
-                void* _0;
+                u32 _0;
                 u32 length;
                 char* string;
             };
