@@ -297,6 +297,7 @@ config.libs = [
         "host": False,
         "objects": [
             Object(Matching, "gfl/mem/FixedMemoryStream.cpp"),
+            Object(Matching, "gfl/math/Vector3F.cpp"),
             # Object(Matching, "gfl/mem/Stream.cpp"),
             # Object(Matching, "gfl/param/ParamBase.cpp"),
             Object(Matching, "gfl/mem/MemoryBase.cpp"),
