@@ -22,7 +22,7 @@ namespace gfl {
 
         void fn_800080BC(u8 heapID);
     public:
-        F function;
+        F mFunction;
     };
 
     // // example type

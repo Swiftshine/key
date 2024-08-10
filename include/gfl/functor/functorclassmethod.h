@@ -17,8 +17,8 @@ namespace gfl {
         virtual ~FunctorClassMethod0();
     public:
         // vtable,
-        C* owner;
-        F  function;
+        C* mpOwner;
+        F  mFunction;
     };
 
     // typedef FunctorClassMethod0<void, int, void(*)()> temp;

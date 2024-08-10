@@ -9,7 +9,7 @@ namespace gfl {
     public:
         virtual ~FunctorImpl();
     public:
-        F* functor;
+        F* mpFunctor;
     };
 }
 
