@@ -1,8 +1,0 @@
-#ifndef FLUFF_LITERALS_H
-#define FLUFF_LITERALS_H
-
-
-// "NONE"
-#define LITERAL_NONE 0x4E4F4E45
-
-#endif

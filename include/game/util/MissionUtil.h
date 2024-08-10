@@ -173,7 +173,6 @@ namespace Mission {
         Seek    = 500,    
     );
 
-    
 
     int  GetMissionTypeByCode(int code) DONT_INLINE;
     int  GetMissionCodeByType(int type) DONT_INLINE;

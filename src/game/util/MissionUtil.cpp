@@ -1,5 +1,4 @@
 #include <game/util/MissionUtil.h>
-#include <game/util/Literals.h>
 #include <cstdio>
 
 using namespace FluffUtil;
@@ -162,12 +161,12 @@ u32 Mission::GetMissionMagicByID(int id) {
     if (MissionType::None != type) {
         char types[] = {'\0', 'B', 'T', 'D', 'C', 'S'};
         char magicStr[16];
-        snprintf(magicStr, sizeof(magicStr), (const char*)MissionNameTemplate, types[type], index);
+        snprintf(magicStr, sizeof(magicStr), "M%c%02d", types[type], index);
         magicStr[4] = 0;
         
         gfl::BasicString str1(magicStr);
         gfl::BasicString str2(str1);
         return str2.GetMagic();
     }
-    return LITERAL_NONE;
+    return 'NONE';
 }

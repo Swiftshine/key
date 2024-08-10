@@ -293,7 +293,7 @@ config.libs = [
     {
         "lib": "gfl",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_base, ],
+        "cflags": [*cflags_base],
         "host": False,
         "objects": [
             Object(Matching, "gfl/mem/FixedMemoryStream.cpp"),
@@ -357,10 +357,10 @@ config.libs = [
     {
         "lib" : "game/util",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_base, "-str reuse"],
+        "cflags": [*cflags_base, "-str nopool,reuse"],
         "host": False,
         "objects" : [
-            Object(NonMatching, "game/util/MissionUtil.cpp"),
+            Object(Matching, "game/util/MissionUtil.cpp"),
         ],
     },
 ]
