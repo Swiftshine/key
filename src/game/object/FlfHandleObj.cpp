@@ -6,7 +6,7 @@ FlfHandleObj::~FlfHandleObj() {
 }
 
 FlfHandleObj::FlfHandleObj() {
-    this->listEntry = NULL;
-    this->entryID = 0;
+    this->mpListEntry = NULL;
+    this->mEntryID = 0;
     FlfHandleObjList::Instance->Add(this);
 }

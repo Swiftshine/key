@@ -6,20 +6,20 @@
 FlfHandleObjList* FlfHandleObjList::Instance;
 
 void FlfHandleObjList::Set(u32 index, FlfHandleObj* object) {
-    this->objects[index] = object;
-    object->entryID = this->curEntryID;
-    object->listEntry = &this->objects[index];
-    this->count = index + 1;
-    this->curEntryID++;
+    this->mpObjects[index] = object;
+    object->mEntryID = this->mCurrentEntryID;
+    object->mpListEntry = &this->mpObjects[index];
+    this->mCount = index + 1;
+    this->mCurrentEntryID++;
 }
 
 void FlfHandleObjList::Remove(FlfHandleObj* object) {
-    *object->listEntry = NULL;
+    *object->mpListEntry = NULL;
 }
 
 void FlfHandleObjList::Add(FlfHandleObj* object) {
-    u32 lastIndex = this->count;
-    FlfHandleObj** last = &objects[this->count];
+    u32 lastIndex = this->mCount;
+    FlfHandleObj** last = &mpObjects[this->mCount];
 
     // check if there are any entries 
 
@@ -36,7 +36,7 @@ void FlfHandleObjList::Add(FlfHandleObj* object) {
     
     int curIndex = 0;
     int remainingSlots = 1000;
-    FlfHandleObj** handleObj = this->objects;
+    FlfHandleObj** handleObj = this->mpObjects;
     while (remainingSlots) {
         if (!*handleObj) {
             Set(curIndex, object);
@@ -51,8 +51,8 @@ void FlfHandleObjList::Add(FlfHandleObj* object) {
 }
 
 FlfHandleObjList::FlfHandleObjList()
-    : count(0)
-    , curEntryID(1)
+    : mCount(0)
+    , mCurrentEntryID(1)
 {
     memset(this, '\0', 4000);    
 }
@@ -65,12 +65,3 @@ void FlfHandleObjList::RemoveInstance() {
 void FlfHandleObjList::MakeInstance() {
     FlfHandleObjList::Instance = new (gfl::mem::HeapID::LIB1) FlfHandleObjList;
 }
-
-
-
-
-
-
-
-
-

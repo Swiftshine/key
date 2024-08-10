@@ -23,9 +23,9 @@ public:
     void Remove(FlfHandleObj* object);
     void Set(u32 index, FlfHandleObj* object) DONT_INLINE;
 public:
-    FlfHandleObj* objects[1000];
-    u32 count;
-    u32 curEntryID;
+    FlfHandleObj* mpObjects[1000];
+    u32 mCount;
+    u32 mCurrentEntryID;
 };
 
 #endif

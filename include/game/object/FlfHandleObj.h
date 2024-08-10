@@ -10,8 +10,8 @@ public:
     virtual ~FlfHandleObj();
 
 public:
-    FlfHandleObj** listEntry;
-    u32 entryID;
+    FlfHandleObj** mpListEntry;
+    u32 mEntryID;
 };
 
 #endif
