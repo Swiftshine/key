@@ -111,7 +111,7 @@ public:
     virtual int     vf7C();
     virtual int     vf80();
     virtual int     vf84();
-    virtual int     vf88();
+    virtual int     OnPlayerCollision(class PlayerBase* player);
     virtual int     vf8C();
     virtual int     vf90();
     virtual int     vf94();
@@ -122,7 +122,7 @@ public:
     virtual Vec2f   vfAC();
     virtual void    vfB0();
     virtual Vec2f   vfB8();
-    virtual void    vfBC();
+    virtual void    Update();
     virtual void    vfC0();
 
 public:
