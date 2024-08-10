@@ -9,7 +9,7 @@ namespace gfl {
     class FixedMemoryStream : public Stream {
     private:
         inline bool RangeValid() {
-            return this->streamPos < this->size;
+            return this->mStreamPos < this->mSize;
         }
     public:
         SCOPED_ENUM(SeekType,
@@ -31,9 +31,9 @@ namespace gfl {
         virtual void Reset();
         virtual ~FixedMemoryStream();
     private:
-        u8*   data;
-        u32   size;
-        u32   streamPos;
+        u8*   mpData;
+        u32   mSize;
+        u32   mStreamPos;
     };
 
     ASSERT_SIZE(FixedMemoryStream, 0x10)

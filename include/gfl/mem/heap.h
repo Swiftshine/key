@@ -24,17 +24,17 @@ namespace gfl {
         bool  WithinRange(void* address);
 
     public:
-        u8 heapID;
-        char name[25];
-        bool _1A;
-        u8 _1B; // padding?
-        MEMiHeapHead* expHeap;
-        MEMAllocator allocator;
-        MEMAllocatorFuncs* allocFuncs;
-        MEMiHeapHead* _34;
-        u32 flags;
-        gfl::Heap* self;
-        u32 heapType;
+        u8 mHeapID;
+        char mHeapName[25];
+        bool m_1A;
+        u8 m_1B; // padding?
+        MEMiHeapHead* mpExpHeap;
+        MEMAllocator mAllocator;
+        MEMAllocatorFuncs* mpAllocFuncs;
+        MEMiHeapHead* mp_34;
+        u32 mFlags;
+        gfl::Heap* mpSelf;
+        u32 mHeapType;
     };
 
     ASSERT_SIZE(Heap, 0x44)

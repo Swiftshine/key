@@ -3,40 +3,40 @@
 using namespace gfl;
 
 void MemoryBase::Reset() {
-    heaps[0] = NULL;
-    heaps[1] = NULL;
-    heaps[2] = NULL;
-    heaps[3] = NULL;
-    heaps[4] = NULL;
-    heaps[5] = NULL;
-    heaps[6] = NULL;
-    heaps[7] = NULL;
-    heaps[8] = NULL;
-    heaps[9] = NULL;
-    heaps[0xA] = NULL;
-    heaps[0xB] = NULL;
-    heaps[0xC] = NULL;
-    heaps[0xD] = NULL;
-    heaps[0xE] = NULL;
-    heaps[0xF] = NULL;
-    heaps[0x10] = NULL;
-    heaps[0x11] = NULL;
-    heaps[0x12] = NULL;
-    heaps[0x13] = NULL;
-    heaps[0x14] = NULL;
-    heaps[0x15] = NULL;
-    heaps[0x16] = NULL;
-    heaps[0x17] = NULL;
+    mpHeaps[0] = NULL;
+    mpHeaps[1] = NULL;
+    mpHeaps[2] = NULL;
+    mpHeaps[3] = NULL;
+    mpHeaps[4] = NULL;
+    mpHeaps[5] = NULL;
+    mpHeaps[6] = NULL;
+    mpHeaps[7] = NULL;
+    mpHeaps[8] = NULL;
+    mpHeaps[9] = NULL;
+    mpHeaps[0xA] = NULL;
+    mpHeaps[0xB] = NULL;
+    mpHeaps[0xC] = NULL;
+    mpHeaps[0xD] = NULL;
+    mpHeaps[0xE] = NULL;
+    mpHeaps[0xF] = NULL;
+    mpHeaps[0x10] = NULL;
+    mpHeaps[0x11] = NULL;
+    mpHeaps[0x12] = NULL;
+    mpHeaps[0x13] = NULL;
+    mpHeaps[0x14] = NULL;
+    mpHeaps[0x15] = NULL;
+    mpHeaps[0x16] = NULL;
+    mpHeaps[0x17] = NULL;
 }
 
 void MemoryBase::ReplaceHeap(Heap* other) {
-    heaps[other->heapID] = other;
+    mpHeaps[other->mHeapID] = other;
 }
 
 Heap* MemoryBase::GetHeapByAddress(void* address) {
     for (u32 i = 0; i < HEAP_COUNT; i++) {
-        if (heaps[i] && heaps[i]->WithinRange(address)) {
-            return heaps[i];
+        if (mpHeaps[i] && mpHeaps[i]->WithinRange(address)) {
+            return mpHeaps[i];
         }
     }
     
@@ -45,7 +45,7 @@ Heap* MemoryBase::GetHeapByAddress(void* address) {
 
 u8 MemoryBase::GetHeapIDByAddress(void* address) {
     for (u32 i = 0; i < HEAP_COUNT; i++) {
-        if (heaps[i] && heaps[i]->WithinRange(address)) {
+        if (mpHeaps[i] && mpHeaps[i]->WithinRange(address)) {
             return i & 0xFF;
         }
     }
@@ -54,7 +54,7 @@ u8 MemoryBase::GetHeapIDByAddress(void* address) {
 }
 
 void MemoryBase::Free(void* address) {
-    Heap* heap = FindContainingHeap(heaps, address);
+    Heap* heap = FindContainingHeap(mpHeaps, address);
     if (heap) {
         heap->Free(address);
     }
@@ -62,5 +62,5 @@ void MemoryBase::Free(void* address) {
 
 
 Heap* MemoryBase::GetHeapByID(u32 heapID) {
-    return heaps[heapID & 0xFF];
+    return mpHeaps[heapID & 0xFF];
 }

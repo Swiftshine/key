@@ -8,13 +8,13 @@ MEMAllocatorFuncs Heap::AllocFuncs;
 const char Heap::DefaultName[] = "NOT INITALIZED";
 
 void Heap::SetName(const char* newName) {
-    mem::Memcpy(name, sizeof(name), const_cast<char*>(newName));
+    mem::Memcpy(mHeapName, sizeof(mHeapName), const_cast<char*>(newName));
 }
 
 Heap::Heap() {
-    heapID = 0;
+    mHeapID = 0;
     SetName(DefaultName);
-    expHeap = NULL;
+    mpExpHeap = NULL;
 }
 
 Heap::~Heap() {
@@ -25,13 +25,13 @@ Heap::~Heap() {
     u32 end;
     MEMiHeapHead *exp;
   
-    exp = this->expHeap;
+    exp = this->mpExpHeap;
     if (!exp) { return; }
 
     end = (s32)exp->end;
     MEMDestroyExpHeap(exp);
-    hType = this->heapType;
-    bVar1 = this->_1A;
+    hType = this->mHeapType;
+    bVar1 = this->m_1A;
     
     switch (hType) {
         case 1: {
@@ -90,8 +90,8 @@ Heap::~Heap() {
             }
         }
     }
-    this->expHeap = NULL;
-    this->heapType = 0;
+    this->mpExpHeap = NULL;
+    this->mHeapType = 0;
 }
 
 void Heap::Init(size_t range, u16 optFlag, int hType) {
@@ -101,7 +101,7 @@ void Heap::Init(size_t range, u16 optFlag, int hType) {
     s32 heapHead;
 
     len = range;
-    this->heapType = hType;
+    this->mHeapType = hType;
 
     switch (hType) {
         case 1: {
@@ -153,39 +153,39 @@ void Heap::Init(size_t range, u16 optFlag, int hType) {
     }
 
     heapHead = (s32)MEMCreateExpHeapEx((void*)arenaLo, range, optFlag);
-    this->_1A = false;
+    this->m_1A = false;
 
     Heap::AllocFuncs.freeFunc = HeapFree;
     
-    this->expHeap = (MEMiHeapHead*)heapHead;
-    this->allocator.funcs = &Heap::AllocFuncs;
-    this->allocator.heap = (MEMiHeapHead*)heapHead;
-    this->allocator.heapParam1 = 0x20; // alignment?
-    this->allocator.heapParam2 = (u32)this;
+    this->mpExpHeap = (MEMiHeapHead*)heapHead;
+    this->mAllocator.funcs = &Heap::AllocFuncs;
+    this->mAllocator.heap = (MEMiHeapHead*)heapHead;
+    this->mAllocator.heapParam1 = 0x20; // alignment?
+    this->mAllocator.heapParam2 = (u32)this;
     Heap::AllocFuncs.allocFunc = HeapAlloc;
-    this->allocFuncs = &Heap::AllocFuncs;
-    this->_34 = (MEMiHeapHead*)heapHead;
-    this->flags = 0x10;
-    this->self = this;
+    this->mpAllocFuncs = &Heap::AllocFuncs;
+    this->mp_34 = (MEMiHeapHead*)heapHead;
+    this->mFlags = 0x10;
+    this->mpSelf = this;
 }
 
 void* Heap::Alloc(size_t size, u32 alignment) {
-    return MEMAllocFromExpHeapEx(this->expHeap, size, alignment);
+    return MEMAllocFromExpHeapEx(this->mpExpHeap, size, alignment);
 }
 
 void Heap::Free(void* address) {
-    MEMFreeToExpHeap(this->expHeap, address);
+    MEMFreeToExpHeap(this->mpExpHeap, address);
 }
 
 extern "C" int MEMGetTotalFreeSizeForExpHeap(MEMiHeapHead*);
 
 int Heap::CountFreeBlocks() {
-    return MEMGetTotalFreeSizeForExpHeap(this->expHeap);
+    return MEMGetTotalFreeSizeForExpHeap(this->mpExpHeap);
 }
 
 bool Heap::WithinRange(void* address) {
-    void* end = this->expHeap->end;
-    if (address >= this->expHeap && address <= end) {
+    void* end = this->mpExpHeap->end;
+    if (address >= this->mpExpHeap && address <= end) {
         return true;
     }
     return false;

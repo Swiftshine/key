@@ -8,11 +8,11 @@ namespace gfl {
     private:
         Memory();
     public:
-        Heap lib1Heap;
-        Heap lib2Heap;
-        Heap stringHeap;
-        Heap etcHeap;
-        Heap soundHeap;
+        Heap mLIB1Heap;
+        Heap mLIB2Heap;
+        Heap mStringHeap;
+        Heap mEtcHeap;
+        Heap mSoundHeap;
     };
 
     ASSERT_SIZE(Memory, 0x1B8);

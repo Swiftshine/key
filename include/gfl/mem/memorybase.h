@@ -11,8 +11,8 @@ namespace gfl {
     public:
         inline Heap* FindContainingHeap(Heap** heapArr, void* address) {
             for (u32 i = 0; i < HEAP_COUNT; i++) {
-                if (heaps[i] && heaps[i]->WithinRange(address)) {
-                    return heaps[i];
+                if (mpHeaps[i] && mpHeaps[i]->WithinRange(address)) {
+                    return mpHeaps[i];
                 }
             }
             return NULL;
@@ -28,7 +28,7 @@ namespace gfl {
         void Free(void*);
         virtual Heap* GetHeapByID(u32 heapID);
     public:
-        Heap* heaps[HEAP_COUNT];
+        Heap* mpHeaps[HEAP_COUNT];
     };
 
     ASSERT_SIZE(MemoryBase, 0x64)

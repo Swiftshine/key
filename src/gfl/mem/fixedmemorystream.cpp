@@ -5,9 +5,9 @@
 using namespace gfl;
 
 FixedMemoryStream::FixedMemoryStream(u8* addr, u32 newSize) {
-    data = addr;
-    size = newSize;
-    streamPos = 0;
+    mpData = addr;
+    mSize = newSize;
+    mStreamPos = 0;
 }
 
 asm FixedMemoryStream::~FixedMemoryStream(void) {
@@ -19,16 +19,16 @@ u32 FixedMemoryStream::Read(u8* dst, u32 count) {
     u32 remain;
     u8* offs;
     
-    if (this->streamPos == this->size) {
+    if (this->mStreamPos == this->mSize) {
         return 0;
     }
         
-    offs = (u8*)this->data + this->streamPos;
-    remain = this->size - this->streamPos;
+    offs = (u8*)this->mpData + this->mStreamPos;
+    remain = this->mSize - this->mStreamPos;
     count = (remain < count) ? remain : count;
 
     memcpy(dst, offs, count);
-    this->streamPos += count;
+    this->mStreamPos += count;
     return count;
 }
 
@@ -37,16 +37,16 @@ u32 FixedMemoryStream::Write(u8* src, u32 count) {
     u32 remain;
     u8* offs;
     
-    if (this->streamPos >= this->size) {
+    if (this->mStreamPos >= this->mSize) {
         return 0;
     }
         
-    offs = (u8*)this->data + this->streamPos;
-    remain = this->size - this->streamPos;
+    offs = (u8*)this->mpData + this->mStreamPos;
+    remain = this->mSize - this->mStreamPos;
     count = (remain < count) ? remain : count;
 
     memcpy(offs, src, count);
-    this->streamPos += count;
+    this->mStreamPos += count;
     return count;
 }
 
@@ -60,12 +60,12 @@ bool FixedMemoryStream::Seek(int pos, int seekType) {
         }
 
         case SeekType::Current: {
-            finalPos = pos + this->streamPos;
+            finalPos = pos + this->mStreamPos;
             break;
         }
 
         case SeekType::End: {
-            finalPos = (pos + this->size) - 1;
+            finalPos = (pos + this->mSize) - 1;
             break;
         }
     }
@@ -74,7 +74,7 @@ bool FixedMemoryStream::Seek(int pos, int seekType) {
         return false;
     }
 
-    this->streamPos = finalPos;
+    this->mStreamPos = finalPos;
     return true;
 }
 
@@ -84,8 +84,7 @@ asm u32 FixedMemoryStream::GetStreamPos() {
 }
 
 void FixedMemoryStream::Reset() {
-    data = NULL;
-    size = 0;
-    streamPos = 0;
+    mpData = NULL;
+    mSize = 0;
+    mStreamPos = 0;
 }
-
