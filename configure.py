@@ -360,7 +360,7 @@ config.libs = [
         "cflags": [*cflags_base, "-str nopool,reuse"],
         "host": False,
         "objects" : [
-            Object(Matching, "game/util/MissionUtil.cpp"),
+            Object(NonMatching, "game/util/MissionUtil.cpp"),
         ],
     },
 ]
