@@ -4,45 +4,45 @@
 
 typedef gfl::FunctorClassMethod0<void, Gimmick, void(Gimmick::*)(void)>;
 
-Gimmick::Gimmick(u32 gmkID)
+Gimmick::Gimmick(int gmkID)
     : FlfGameObj(FlfGameObjTypes::Gimmick)
-    , gimmickID(static_cast<GimmickID>(gmkID))
-    , _84(0)
+    , mGimmickID(gmkID)
+    , m_84(0)
 
 {    
-    _124 = 0;
-    task = NULL;
-    _12C = NULL;
+    m_124 = 0;
+    mpTask = NULL;
+    m_12C = NULL;
     
     GimmickManager::Instance->AddGimmick(this);
     fn_8004EC4C();
 }
 
-Gimmick::Gimmick(u32 gmkID, const char* taskName)
+Gimmick::Gimmick(int gmkID, const char* taskName)
     : FlfGameObj(FlfGameObjTypes::Gimmick)
-    , gimmickID(static_cast<GimmickID>(gmkID))
-    , _84(0)
+    , mGimmickID(gmkID)
+    , m_84(0)
 {
-    _124 = 0;
-    task = NULL;
-    _12C = NULL;
+    m_124 = 0;
+    mpTask = NULL;
+    m_12C = NULL;
 
-    task = new gfl::Task();
-    if (task) {
-        task->Init(taskName);
+    mpTask = new gfl::Task();
+    if (mpTask) {
+        mpTask->Init(taskName);
     } else {
-        delete task;
-        task = NULL;
+        delete mpTask;
+        mpTask = NULL;
     }
-    if (!task) {
-        delete task;
-        task = NULL;
+    if (!mpTask) {
+        delete mpTask;
+        mpTask = NULL;
     }
 
     GimmickManager::Instance->AddGimmick(this);
 }
 
-void Gimmick::vfB0__7GimmickFv() { /*(this->*state1)();*/ return; }
+void Gimmick::vfB0() { /*(this->*state1)();*/ return; }
 
 // Gimmick::Gimmick(u32 gmkID, const char* taskName)
 //     : FlfGameObj(FlfGameObjTypes::Gimmick)
@@ -94,4 +94,3 @@ void Gimmick::vfB0__7GimmickFv() { /*(this->*state1)();*/ return; }
 // void Gimmick::vfB0__7GimmickFv() { /* virtual */ }
 
 // // void Gimmick::fn_8004ED1C() { _12C = 0; }
-

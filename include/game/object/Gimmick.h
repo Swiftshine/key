@@ -7,9 +7,6 @@
 
 class Gimmick;
 
-
-typedef u32 GimmickID;
-
 void fn_8051F7A0(void*, int);
 
 
@@ -25,59 +22,58 @@ public:
     public:
         class CommonGimmickBuildInfo {
         public:
-            bool isCommon;
-            u8 pad[3];
-            Gimmick* gimmick;
+            bool mIsCommon;
+            Gimmick* mpOwner;
         };
     public:
-        GimmickID gimmickID;
-        Vec3f position;
-        Vec3f rotation;
-        bool _1C;
-        u8 _1D;
-        u8 _1E;
-        u8 _1F;
-        u32 _20;
-        u8  _24;
-        u8 _25;
-        u8 _26;
-        u8 _27;
-        u32 _28;
-        u32 _2C;
-        u32 _30;
-        s32 intVals[5];
-        f32 floatVals[5];
-        gfl::BasicString stringVals[5];
-        CommonGimmickBuildInfo* more;
+        int mGimmickID;
+        Vec3f mPosition;
+        Vec3f mRotation;
+        bool m_1C;
+        u8 m_1D;
+        u8 m_1E;
+        u8 m_1F;
+        u32 m_20;
+        u8 m_24;
+        u8 m_25;
+        u8 m_26;
+        u8 m_27;
+        u32 m_28;
+        u32 m_2C;
+        u32 m_30;
+        int mIntParams[5];
+        f32 mFloatParams[5];
+        gfl::BasicString mStringParams[5];
+        CommonGimmickBuildInfo* mpExtension;
 
         inline GimmickBuildInfo()
-            : gimmickID(INVALID_GIMMICK_ID)
-            , position()
-            , rotation()
+            : mGimmickID(INVALID_GIMMICK_ID)
+            , mPosition()
+            , mRotation()
 
-            , _24(65)
-            , _28(6)
-            , _2C(4)
-            , _30(0)
+            , m_24(65)
+            , m_28(6)
+            , m_2C(4)
+            , m_30(0)
 
         {
-            more = NULL;
-            _1C = false;
+            mpExtension = NULL;
+            m_1C = false;
 
             for (int i = 0; i < 5; i++) {
-                intVals[i] = 0;
-                floatVals[i] = 0.0f;
-                stringVals[i] = &Stage_NullFilename;
+                mIntParams[i] = 0;
+                mFloatParams[i] = 0.0f;
+                mStringParams[i] = &Stage_NullFilename;
             }
         }
 
         inline ~GimmickBuildInfo() { }
 
         inline void operator=(GimmickBuildInfo& src) {
-            gimmickID = src.gimmickID;
-            position = src.position;
-            rotation = src.rotation;
-            _1C = src._1C;
+            mGimmickID = src.mGimmickID;
+            mPosition = src.mPosition;
+            mRotation = src.mRotation;
+            m_1C = src.m_1C;
             
         }
     };
@@ -86,13 +82,13 @@ public:
 
 public:
     // for the most basic gimmicks
-    Gimmick(u32 gmkID);
+    Gimmick(int gmkID);
     // for gimmicks that control things in-level
-    Gimmick(u32 gmkID, const char* taskName);
+    Gimmick(int gmkID, const char* taskName);
     // for common gimmicks
     Gimmick(GimmickBuildInfo* info, const char* taskName);
     // similar to above?
-    Gimmick(u32 gmkID, GimmickBuildInfo* info);
+    Gimmick(int gmkID, GimmickBuildInfo* info);
 
     virtual ~Gimmick();
 
@@ -130,15 +126,13 @@ public:
     virtual void    vfC0();
 
 public:
-    GimmickID gimmickID;
-    u32 _84;
-    GimmickBuildInfo stageParams;
-    void* _124;
-    gfl::Task* task;
-    u32 _12C;
+    int mGimmickID;
+    u32 m_84;
+    GimmickBuildInfo mStageBuildInfo;
+    void* m_124;
+    gfl::Task* mpTask;
+    u32 m_12C;
 };
-
-
 
 
 ASSERT_SIZE(Gimmick, 0x130)
