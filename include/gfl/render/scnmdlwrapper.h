@@ -5,6 +5,7 @@
 // #include <nw4r/g3d/g3d_lightobj.h>
 #include <gfl/gfl_types.h>
 #include <gfl/render/RenderObj.h>
+#include <gfl/math/Vector3F.h>
 
 namespace nw4r { namespace g3d {
     class LightObjData;
@@ -20,12 +21,11 @@ namespace gfl {
         virtual ~ScnMdlWrapper();
 
     public:
-        nw4r::g3d::LightObj lightObj;
-        bool _1C;
-        u8 pad[3];
-        Vec3f _20;
-        nw4r::g3d::ScnMdl* sceneModel;
-        void* _30;
+        nw4r::g3d::LightObj mLightObj;
+        bool m_1C;
+        gfl::Vec3 m_20;
+        nw4r::g3d::ScnMdl* mpScnMdl;
+        void* mp_30;
     };
 
     ASSERT_SIZE(ScnMdlWrapper, 0x34)

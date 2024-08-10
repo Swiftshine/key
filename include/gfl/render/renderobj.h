@@ -30,14 +30,14 @@ namespace gfl {
         virtual void vf48();
         virtual FullSortScene* GetFullSortScene();
     public:
-        MEMAllocator* allocator;
-        FullSortScene* fullSortScene;
-        bool _C;
-        bool _D;
-        bool _E;
-        bool active;
-        f32 _10;
-        u32 _14;
+        MEMAllocator* mpAllocator;
+        FullSortScene* mpFullSortScene;
+        bool m_C;
+        bool m_D;
+        bool m_E;
+        bool mIsActive;
+        f32 m_10;
+        u32 m_14;
     };
 
     ASSERT_SIZE(RenderObj, 0x18)

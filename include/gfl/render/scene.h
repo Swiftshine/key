@@ -18,20 +18,19 @@ namespace gfl {
         virtual void vf1C();
         virtual void vf20();
     public:
-        bool _4;
-        bool _5;
-        bool _6;
-        u8 pad;
-        u32 _8;
-        u32 _C;
-        u32 _10;
-        u32 _14;
-        u32 _18;
-        u32 _1C;
-        nw4r::g3d::ScnRoot* scnRoot;
-        u32 _24;
-        u32 _28;
-        u32 _2C;
+        bool m_4;
+        bool m_5;
+        bool m_6;
+        u32 m_8;
+        u32 m_C;
+        u32 m_10;
+        u32 m_14;
+        u32 m_18;
+        u32 m_1C;
+        nw4r::g3d::ScnRoot* mpScnRoot;
+        u32 m_24;
+        u32 m_28;
+        u32 m_2C;
     };
 }
 
