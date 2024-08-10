@@ -10,7 +10,7 @@
 class GmkTurtle : public Gimmick {
 public:
     SCOPED_ENUM(State,
-        State_0,
+        InWater,
         MoveLeft,
         TurnRight,
         State_3,
@@ -21,21 +21,29 @@ public:
         State_8,
     );
 
+    SCOPED_ENUM(TurnDirection,
+        Left,
+        Right,
+    );
+
 public:
     GmkTurtle(GimmickBuildInfo* buildInfo);
     virtual ~GmkTurtle();
 
     void vf24() override;
+    int vfA4() override;
 
     int OnPlayerCollision(PlayerBase* player) override;
 
     void Update() override;
 
     void fn_804FB1D4();
+
+    void Turn(int turnDir);
 public:
     int mCounterDefaultValue;
     f32 mSpeed;
-    f32 m_138;
+    f32 mMaxDistance;
     bool m_13C;
     bool m_13D;
     u16 m_13E;

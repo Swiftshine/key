@@ -18,6 +18,7 @@ public:
     void AddGimmick(Gimmick* gmk);
     void RemoveGimmick(Gimmick* gmk);
     void ClearGimmicks(bool clearMapdata);
+    Gimmick* FindGimmickByName(gfl::BasicString* query);
 private:
     u32 _0;
     u32 _4;

@@ -118,7 +118,7 @@ public:
     virtual void    vf98();
     virtual int     vf9C();
     virtual void    vfA0();
-    virtual void    vfA4();
+    virtual int     vfA4();
     virtual Vec2f   vfAC();
     virtual void    vfB0();
     virtual Vec2f   vfB8();
