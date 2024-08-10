@@ -10,15 +10,21 @@ namespace gfl {
     public:
 
     public: 
-        LinkedListNode* prev;
-        LinkedListNode* next;
-        void* data;
+        LinkedListNode* mpPrev;
+        LinkedListNode* mpNext;
+        void* mpData;
     };
 
+    class LinkedListIterator {
+    public:
+        LinkedListNode* mpNode;
+    };
     class LinkedList {
     public:
-        u32 count;
-        LinkedListNode node;
+        void Remove(LinkedListNode* target);
+    public:
+        u32 mCount;
+        LinkedListNode mNode;
     };
 }
 
