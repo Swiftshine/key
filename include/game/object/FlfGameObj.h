@@ -7,8 +7,6 @@
 #include <decomp/thunks.h>
 #include <gfl/string/BasicString.h>
 
-typedef u32 FlfGameObjType;
-
 class ColObjMod;
 
 SCOPED_ENUM(FlfGameObjTypes,
@@ -57,23 +55,23 @@ public:
 
 
 public:
-    Vec3f position;            
-    Vec3f rotation;        
-    Vec3f scale;           
-    MTX34 matrix;                          
-    u32 flags;     
-    u32 _64;        
-    FlfGameObjType type;              
-    bool _6C;              
-    bool _6D;              
-    bool _6E;              
-    bool _6F;              
-    float cullingThreshold;
-    u32 _74;             
-    u32 _78;             
-    bool _7C;              
-    bool _7D;              
-    u16  _7E;              
+    Vec3f mPosition;            
+    Vec3f mRotation;        
+    Vec3f mScale;           
+    MTX34 mMatrix;                          
+    u32 mFlags;     
+    u32 m_64;        
+    u32 mType;              
+    bool m_6C;              
+    bool m_6D;              
+    bool m_6E;              
+    bool m_6F;              
+    float mCullThreshold;
+    u32 m_74;             
+    u32 m_78;             
+    bool m_7C;              
+    bool m_7D;              
+    u16  m_7E;              
 };
 
 ASSERT_SIZE(FlfGameObj, 0x80)
