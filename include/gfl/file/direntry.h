@@ -17,13 +17,12 @@ namespace gfl {
         s32  GetFileIndex(const char* filename, s32 searchIndexBegin);
 
     public:
-        FileSystemWii* filesystem;
-        void* dvdDir;
-        s32 curEntryIndex;
-        s32 prevEntryIndex;
-        s32 fileCount;
-        bool valid;
-        u8 pad[3];
+        FileSystemWii* mpFilesystem;
+        void* mpDvdDir;
+        int mCurEntryIndex;
+        int mPrevEntryIndex;
+        int mFilecount;
+        bool mIsValid;
     };
 
     ASSERT_SIZE(DirEntry, 0x1C)

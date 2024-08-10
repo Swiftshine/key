@@ -26,25 +26,25 @@ namespace gfl {
         virtual void Reset();
         virtual ~File();
     private:
-        FileSystemWii*         fs;
-        FixedString            filename;
-        u32 _20C;
-        void*                       dvd_fileinfo;
-        u32 _214;
-        u32 _218;
-        u32 _21C;
-        u32 _220;
-        u32 _224;
-        u32 _228;
-        u32 _22C;
-        u32 _230;
-        u32 _234;
-        u32 _238;
-        u32 _23C;
-        u32 _240;
-        u32 _244;
-        u32 _248;
-        u32                         entrynum;
+        FileSystemWii* mpFilesystem;
+        FixedString mFilename;
+        u32 m_20C;
+        void* mpDvdFileInfo;
+        u32 m_214;
+        u32 m_218;
+        u32 m_21C;
+        u32 m_220;
+        u32 m_224;
+        u32 m_228;
+        u32 m_22C;
+        u32 m_230;
+        u32 m_234;
+        u32 m_238;
+        u32 m_23C;
+        u32 m_240;
+        u32 m_244;
+        u32 m_248;
+        int mEntrynum;
     };
 
     ASSERT_SIZE(File, 0x250)

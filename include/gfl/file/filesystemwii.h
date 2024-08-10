@@ -43,7 +43,7 @@ namespace gfl {
         static OSThread BPEThread;
         static OSThread* CurrentBPEThread;
     public:
-        DirEntryWii entries[10];
+        DirEntryWii mEntries[10];
     };
 
 } // gfl

@@ -14,9 +14,9 @@ namespace gfl {
         ~DirEntryWii();
 
     public:
-        ARCEntryType arcEntryType;
-        void* arcHandle;
-        void* _24;
+        ARCEntryType mArcEntryType;
+        void* mpArcHandle;
+        void* m_24;
     };
 
     ASSERT_SIZE(DirEntryWii, 0x28)

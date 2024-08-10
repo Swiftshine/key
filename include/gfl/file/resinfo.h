@@ -22,8 +22,8 @@ namespace gfl {
     public:
         virtual void IncrementLevel();
     public:
-        u16 flags;
-        u16 level;
+        u16 mFlags;
+        u16 mLevel;
     };
 
     ASSERT_SIZE(ResInfo, 0x8);

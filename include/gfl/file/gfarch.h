@@ -23,40 +23,39 @@ namespace gfl {
     class GfArch {
     public:
         struct FileHeader {
-            char magic[4];      // "GFAC" - GoodFeel ArChive?
-            u32  version;       // 0x0300 in this game - version 3.0
-            bool isCompressed;    // always true
-            u8   pad1[3];
-            u32  fileInfoOffset;
-            u32  fileInfoSize;
-            u32  compressionHeaderOffset;
-            u32  filesize;      // includes compression header(?)
-            u8   pad2[4];
+            char mMagic[4];      // "GFAC" - GoodFeel ArChive?
+            u32  mVersion;       // 0x0300 in this game - version 3.0
+            bool mIsCompressed;    // always true
+            u32  mFileInfoOffset;
+            u32  mFileInfoSize;
+            u32  mCompressionHeaderOffset;
+            u32  mFilesize;      // includes compression header(?)
+            u8   pad2[4]; // explicit padding -- this is part of the structure
         };
 
         ASSERT_SIZE(GfArch::FileHeader, 0x20)
 
         struct FileEntry {
-            u32 hash;
-            u32 nameOffs;
-            u32 decompressedFilesize;
-            u32 compressedOffs;
+            u32 mHash;
+            u32 mNameOffset;
+            u32 mDecompressedFilesize;
+            u32 mCompressedDataOffset;
         };
 
         ASSERT_SIZE(GfArch::FileEntry, 0x10)
         
         struct FileEntryEx : public FileEntry {
-            u32 flags;
+            u32 mFlags;
         };
 
         ASSERT_SIZE(GfArch::FileEntryEx, 0x14)
 
         struct CompressionHeader {
-            char magic[4];      // "GFCP" - GoodFeel ComPression?
-            u32 _4;
-            s32 compressionType;
-            u32 decompressedSize;
-            u32 compressedSize;
+            char mMagic[4];      // "GFCP" - GoodFeel ComPression?
+            u32 m_4;
+            int mCompressionType;
+            u32 mDecompressedDataSize;
+            u32 mCompressedDataSize;
         };
 
         ASSERT_SIZE(GfArch::CompressionHeader, 0x14)
@@ -81,22 +80,21 @@ namespace gfl {
         bool CheckEntryName(const char* filename, GfArch::FileEntryEx* entry) DONT_INLINE;
 
     public:
-        File* file;
-        u8 heapID;
-        u8 pad1[3];
-        u32 alignment;
-        s32 compType;
-        u32 fileInfoOffset;
-        u32 fileInfoSize;
-        u32 compressionHeaderOffset;
-        u32 archiveSize;
-        u32 curDataSize;
-        void* compressedData;
-        void* curData;
-        void* decompressedData;
-        FixedString filename;
-        DirEntryGfArch* dirEntry;
-        BgArchiveLoadTask* archiveLoadTask;
+        File* mpFile;
+        u8 mHeapID;
+        u32 mAlignment;
+        int mCompressionType;
+        u32 mFileInfoOffset;
+        u32 mFileInfoSize;
+        u32 mCompressionHeaderOffset;
+        u32 mArchiveSize;
+        u32 mCurrentDataSize;
+        void* mpCompressedData;
+        void* mpCurrentData;
+        void* mpDecompressedData;
+        FixedString mFilename;
+        DirEntryGfArch* mpDirEntry;
+        BgArchiveLoadTask* mpBgArchiveLoadTask;
     };
 
     ASSERT_SIZE(GfArch, 0x240)

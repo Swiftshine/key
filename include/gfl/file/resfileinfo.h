@@ -35,10 +35,10 @@ namespace gfl {
 
         // static ResFileInfo* Get(const char* filename, bool isFolder);
     public:
-        u32     hash;
-        char*   filename;
-        u32     entrynum;
-        GfArch* archive;
+        u32 mHash;
+        const char* mpFilename;
+        u32 mEntrynum;
+        GfArch* mpArchive;
     };
 
     ASSERT_SIZE(ResFileInfo, 0x18)
@@ -57,11 +57,11 @@ namespace gfl {
         virtual void* GetData_thunk();
         virtual int Recurse();
     public:
-        void* dvdDir;
-        u32 _C;
-        void* data;
-        u32   size;
-        ResArchivedFileInfo* child;
+        void* mpDvdDir;
+        u32 m_C;
+        void* mpData;
+        u32   mSize;
+        ResArchivedFileInfo* mpChild;
     };
 
     ASSERT_SIZE(ResArchivedFileInfo, 0x1C)
