@@ -7,8 +7,7 @@
 // #include <MSL/stddef.h>
 #include <gfl/gfl_types.h>
 
-
-
+#define nullptr 0
 
 // actual types
 
