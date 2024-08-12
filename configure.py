@@ -190,6 +190,9 @@ cflags_base = [
     "-i include/stl",
     "-i include/revolution",
     "-i include/nw4r/",
+    "-i include/nw4r/g3d/",
+    "-i include/nw4r/math/",
+    "-i include/nw4r/ut/",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
 ]
@@ -363,6 +366,15 @@ config.libs = [
             Object(NonMatching, "game/util/MissionUtil.cpp"),
         ],
     },
+    {
+        "lib" : "game/graphics",
+        "mw_version" : config.linker_version,
+        "cflags" : cflags_base,
+        "host" : False,
+        "objects" : [
+            Object(NonMatching, "game/graphics/NwAnmCtrl.cpp"),
+        ],
+    }
 ]
 
 if args.mode == "configure":

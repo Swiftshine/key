@@ -50,6 +50,9 @@ game/object/gmk/GmkSimpleMdl.cpp:
 game/object/PlayerBase.cpp:
 	.text       start:0x80097F94 end:0x80099008
 
+game/graphics/NwAnmCtrl.cpp:
+	.text       start:0x800E9DDC end:0x800EA4E4
+
 game/object/FlfHandleObj.cpp:
 	.text       start:0x8016874C end:0x80168804
 	.rodata     start:0x807E3A50 end:0x807E3A60
