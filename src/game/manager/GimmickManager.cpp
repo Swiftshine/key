@@ -19,12 +19,12 @@ void GimmickManager::RemoveGimmick(Gimmick* gmk) {
 void GimmickManager::SetupGimmicks() { }
 
 void GimmickManager::SetMapbin(Mapdata::Mapbin::Header* header) {
-    mapbin = header;
-    _4 = 0;
-    _0 = 1;
+    mpMapbin = header;
+    m_4 = 0;
+    m_0 = 1;
 }
 
-void GimmickManager::ClearGimmicks(bool clearMapdata) {
+void GimmickManager::ClearAll(bool clearMapdata) {
     // while (gimmicks.entries) {
     //     delete gimmicks.last->data;
     // }

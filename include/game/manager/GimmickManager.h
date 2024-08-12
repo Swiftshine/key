@@ -4,6 +4,8 @@
 #include <gfl/task/Task.h>
 #include <game/object/Gimmick.h>
 #include <game/mapdata/Mapdata.h>
+#include <gfl/container/LinkedList.h>
+#include <gfl/container/Vector.h>
 
 class GimmickManager {
 public:
@@ -17,25 +19,19 @@ public:
     void SetMapbin(Mapdata::Mapbin::Header* header);
     void AddGimmick(Gimmick* gmk);
     void RemoveGimmick(Gimmick* gmk);
-    void ClearGimmicks(bool clearMapdata);
+    void ClearAll(bool clearMapdata);
+    void PushGimmickToVectorByGimmickID(int targetGimmickID, gfl::Vector* destVector);
+    void PushDataSegLabelToVectorByID(int targetID, gfl::Vector* destVector);
     Gimmick* FindGimmickByName(gfl::BasicString* query);
 private:
-    u32 _0;
-    u32 _4;
-    // std::vector<Gimmick*> gimmicks;
-    // gfl::vector::Vector<Gimmick> gimmicks;
-    Gimmick* gimmicks;
-    u32 _C;
-    u32 _10;
-    u32 _14;
-    u32 _18;
-    u32 _1C;
-    u32 _20;
-    u32 _24;
-    u32 _28;
-    Mapdata::Mapbin::Header* mapbin;
-    gfl::Task* task;
-    u8 _34[0x68 - 0x34];
+    u32 m_0;
+    u32 m_4;
+    gfl::LinkedList<Gimmick> mGimmicks;
+    gfl::LinkedList<void> m_14;
+    gfl::LinkedList<void> m_20;
+    Mapdata::Mapbin::Header* mpMapbin;
+    gfl::Task* mpTask;
+    u8 m_34[0x68 - 0x34];
 };
 
 
