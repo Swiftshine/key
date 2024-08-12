@@ -2,12 +2,12 @@
 #include <gfl/string/FixedString.h>
 
 gfl::ResFileInfo::ResFileInfo() {
-    flags = 0;
-    level = 0;
-    hash = 0;
-    filename = NULL;
-    entrynum = 0;
-    archive = 0;
+    mFlags = 0;
+    mLevel = 0;
+    mHash = 0;
+    mpFilename = NULL;
+    mEntrynum = 0;
+    mpArchive = 0;
 }
 
 void gfl::ResFileInfo::Free(u8 heapID) { common_dtor(this, heapID); }
@@ -16,13 +16,13 @@ void gfl::ResFileInfo::Free(u8 heapID) { common_dtor(this, heapID); }
 gfl::ResFileInfo* gfl::ResFileInfo::fn_8063E38C(const char* arg1, void* arg2, void* arg3) { return NULL; }
 
 int gfl::ResArchivedFileInfo::Recurse() {
-    if (child) { return child->Recurse(); }
+    if (mpChild) { return mpChild->Recurse(); }
     return 0;
 }
 
 gfl::GfArch* gfl::ResFileInfo::GetGfArch() {
-    if (flags & ResInfo::Flags::GfArch) {
-        return archive;
+    if (mFlags & ResInfo::Flags::GfArch) {
+        return mpArchive;
     }
 
     return NULL;
@@ -30,10 +30,10 @@ gfl::GfArch* gfl::ResFileInfo::GetGfArch() {
 
 
 gfl::ResArchivedFileInfo::~ResArchivedFileInfo() {
-    if (level) {
-        delete child;
-        child = NULL;
-        data = NULL;
+    if (mLevel) {
+        delete mpChild;
+        mpChild = NULL;
+        mpData = NULL;
     }
 }
 
