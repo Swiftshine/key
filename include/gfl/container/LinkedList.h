@@ -4,27 +4,30 @@
 #include <gfl/gfl_types.h>
 
 namespace gfl {
-    class LinkedList;
-
+    template <typename T>
     class LinkedListNode {
     public:
 
     public: 
         LinkedListNode* mpPrev;
         LinkedListNode* mpNext;
-        void* mpData;
+        T* mpData;
     };
 
+    template <typename T>
     class LinkedListIterator {
     public:
-        LinkedListNode* mpNode;
+        LinkedListNode<T>* mpNode;
     };
+
+    template <typename T>
     class LinkedList {
     public:
-        void Remove(LinkedListNode* target);
+        void Remove(LinkedListNode<T>* target);
     public:
         u32 mCount;
-        LinkedListNode mNode;
+        LinkedListIterator<T>* mpLast;
+        LinkedListIterator<T>* mpFirst;
     };
 }
 
