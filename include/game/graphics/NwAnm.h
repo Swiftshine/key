@@ -2,10 +2,11 @@
 #define FLUFF_NW_ANM_H
 
 #include <flf_types.h>
-#include <nw4r/g3d/g3d_anmobj.h>
-#include <gfl/render/ScnMdlWrapper.h>
+// #include <gfl/render/ScnMdlWrapper.h>
 #include <gfl/file/ResFileInfo.h>
 
+namespace gfl { class ScnMdlWrapper; }
+namespace nw4r { namespace g3d { class AnmObj; class ResMdl; }}
 class NwAnm {
 public:
     SCOPED_ENUM(Flags,
@@ -33,12 +34,12 @@ public:
     u32 m_C;
 
 
-    nw4r::g3d::AnmObj* mpTexPatAnim; // TexPatRes
-    nw4r::g3d::AnmObj* mpMatClrAnim; // MatClrRes
-    nw4r::g3d::AnmObj* mpTexSrtAnim; // TexSrtRes
-    nw4r::g3d::AnmObj* mpChrAnim; // ChrRes
-    nw4r::g3d::AnmObj* mpVisAnim; // VisRes
-    nw4r::g3d::AnmObj* mpShpAnim; // ShpRes
+    class nw4r::g3d::AnmObj* mpTexPatAnim; // TexPatRes
+    class nw4r::g3d::AnmObj* mpMatClrAnim; // MatClrRes
+    class nw4r::g3d::AnmObj* mpTexSrtAnim; // TexSrtRes
+    class nw4r::g3d::AnmObj* mpChrAnim; // ChrRes
+    class nw4r::g3d::AnmObj* mpVisAnim; // VisRes
+    class nw4r::g3d::AnmObj* mpShpAnim; // ShpRes
 };
 
 ASSERT_SIZE(NwAnm, 0x28);

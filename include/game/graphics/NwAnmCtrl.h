@@ -3,20 +3,21 @@
 
 #include <flf_types.h>
 #include <game/graphics/NwAnm.h>
-#include <gfl/file/ResFileInfo.h>
-#include <gfl/render/ScnMdlWrapper.h>
+// #include <gfl/render/ScnMdlWrapper.h>
 #include <gfl/string/BasicString.h>
-#include <game/stage/FullSortScene.h>
-#include <game/manager/StageManager.h>
-#include <nw4r/g3d/g3d_resmdl.h>
+// #include <game/stage/FullSortScene.h>
+// #include <game/manager/StageManager.h>
+// #include <nw4r/g3d/g3d_resmdl.h>
+
+
 
 class NwAnmCtrl {
 public:
     NwAnmCtrl(u32 animCount, gfl::ResArchivedFileInfo* fileinfo, const char* animName);
     virtual ~NwAnmCtrl();
     void PlayAnimationByNameAndIndex(u32 animIndex, const char* animName);
-    gfl::ScnMdlWrapper* SetupModelWrapper(u32 arg1);
-    void SetFullSortSceneModelWrapper(FullSortScene* scene, u32 arg2);
+    class gfl::ScnMdlWrapper* SetupModelWrapper(u32 arg1);
+    void SetFullSortSceneModelWrapper(class FullSortScene* scene, u32 arg2);
     void SetStageFullSortSceneModelWrapper(u32 arg1);
     u32 fn_800EA1F4();
     NwAnm* GetAnimationByIndex(u32 index);
@@ -35,7 +36,7 @@ public:
     }
 public:
     gfl::ResArchivedFileInfo* mpFileInfo;
-    gfl::ScnMdlWrapper* mpModelWrapper;
+    class gfl::ScnMdlWrapper* mpModelWrapper;
     gfl::BasicString mAnimName;
     u32 mCurrentAnimIndex;
     NwAnm* mpAnimations;

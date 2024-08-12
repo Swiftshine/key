@@ -7,8 +7,12 @@
 #include <revolution/types.h>
 #include <gfl/mem/MemoryBase.h>
 
-void* operator new(std::size_t);
-inline void* operator new(std::size_t, u8);
+// void* operator new(size_t);
+void* operator new(std::size_t size, u8);
+
+inline void* operator new[](std::size_t size, u8 heapID) {
+    return operator new(size, heapID);
+}
 
 namespace gfl {
 namespace mem {

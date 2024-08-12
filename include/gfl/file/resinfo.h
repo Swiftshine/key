@@ -16,11 +16,11 @@ namespace gfl {
             UseFolder = 0x80,
             UseGfArch = 0x100,
         );
+    public:
+        virtual void IncrementLevel();
     protected:
         ResInfo();
         virtual ~ResInfo();
-    public:
-        virtual void IncrementLevel();
     public:
         u16 mFlags;
         u16 mLevel;

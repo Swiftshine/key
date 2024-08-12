@@ -1,4 +1,5 @@
 #include <game/graphics/NwAnm.h>
+#include <nw4r/g3d/g3d_anmobj.h>
 
 f32 NwAnm::GetCurrentFrame() {
     if (mpTexPatAnim) return mpTexPatAnim->GetFrame();

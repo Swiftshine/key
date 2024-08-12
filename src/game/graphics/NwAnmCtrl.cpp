@@ -1,24 +1,25 @@
 #include <game/graphics/NwAnmCtrl.h>
 #include <gfl/mem/mem.h>
 
+
 NwAnmCtrl::NwAnmCtrl(u32 animCount, gfl::ResArchivedFileInfo* fileInfo, const char* animName) {
-
-    // not complete
-
-    mpFileInfo = fileInfo;
     if (fileInfo) {
+        mpFileInfo = fileInfo;
         fileInfo->IncrementLevel();
     }
     mpModelWrapper = nullptr;
+
+    // mAnimName = animName;
     mAnimName.Set(animName);
     mCurrentAnimIndex = 0;
     mpAnimations = nullptr;
     mNumAnims = animCount;
 
-    NwAnm* arr = new NwAnm[animCount];
+    NwAnm* arr = new (gfl::mem::HeapID::Work) NwAnm[animCount];
     
     if (!arr) {
-        delete[] arr;
+        delete[] mpAnimations;
+        mpAnimations = nullptr;
     } else {
         mpAnimations = arr;
     }
@@ -34,16 +35,16 @@ void NwAnmCtrl::PlayAnimationByNameAndIndex(u32 animIndex, const char* animName)
     
 }
 
-gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(u32 arg1) {
+class gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(u32 arg1) {
     return nullptr;
 }
 
-void NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* scene, u32 arg2) {
-    scene->SetModelWrapper(SetupModelWrapper(arg2));
+void NwAnmCtrl::SetFullSortSceneModelWrapper(class FullSortScene* scene, u32 arg2) {
+    // scene->SetModelWrapper(SetupModelWrapper(arg2));
 }
 
 void NwAnmCtrl::SetStageFullSortSceneModelWrapper(u32 arg1) {
-    SetFullSortSceneModelWrapper(StageManager::Instance->GetFullSortSceneByID(6), arg1);
+    // SetFullSortSceneModelWrapper(StageManager::Instance->GetFullSortSceneByID(6), arg1);
 }
 
 u32 NwAnmCtrl::fn_800EA1F4() {
@@ -95,8 +96,8 @@ bool NwAnmCtrl::HasAnim(u32 index) {
     return false;
 }
 
-extern "C" Vec3f& fn_8001DCB0(NwAnm*, gfl::ScnMdlWrapper*, nw4r::g3d::ResMdl*);
+extern "C" Vec3f& fn_8001DCB0(NwAnm*, gfl::ScnMdlWrapper*, class nw4r::g3d::ResMdl*);
 
-Vec3f& NwAnmCtrl::fn_800EA480(nw4r::g3d::ResMdl* resmdl) {
+Vec3f& NwAnmCtrl::fn_800EA480(class nw4r::g3d::ResMdl* resmdl) {
     return fn_8001DCB0(GetCurrentAnimation(), mpModelWrapper, resmdl);
 }
