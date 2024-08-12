@@ -18,14 +18,15 @@ namespace gfl {
 namespace mem {
 
 SCOPED_ENUM(HeapID,
-    None,
-    LIB1,
-    LIB2,
-    String,
-    Etc,
-    Sound,
-    Work,
-    Resource
+    None = 0,
+    LIB1 = 1,
+    LIB2 = 2,
+    String = 3,
+    Etc = 4,
+    Sound = 5,
+
+    Work = 10,
+    Resource = 11,
 );
 
     

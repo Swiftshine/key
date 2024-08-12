@@ -2,33 +2,33 @@
 #include <gfl/mem/mem.h>
 
 
-NwAnmCtrl::NwAnmCtrl(u32 animCount, gfl::ResArchivedFileInfo* fileInfo, const char* animName) {
-    if (fileInfo) {
-        mpFileInfo = fileInfo;
-        fileInfo->IncrementLevel();
-    }
-    mpModelWrapper = nullptr;
+NwAnmCtrl::NwAnmCtrl(u32 animCount, gfl::ScopedPointer<gfl::ResArchivedFileInfo>& fileInfo, const char* animName) {
+    mpFileInfo = fileInfo.get();
 
-    // mAnimName = animName;
+    if (mpFileInfo.get()) {
+        mpFileInfo->IncrementLevel();
+    }
+    
+    // mpModelWrapper = nullptr
+    mpModelWrapper.Reset();
     mAnimName.Set(animName);
     mCurrentAnimIndex = 0;
     mpAnimations = nullptr;
     mNumAnims = animCount;
 
-    NwAnm* arr = new (gfl::mem::HeapID::Work) NwAnm[animCount];
-    
-    if (!arr) {
-        delete[] mpAnimations;
-        mpAnimations = nullptr;
-    } else {
-        mpAnimations = arr;
-    }
+    mpAnimations.Create(animCount);
+
 }
 
 NwAnmCtrl::~NwAnmCtrl() {
-    delete[] mpAnimations;
-    delete mpModelWrapper;
-    delete mpFileInfo;
+    // mpAnimations.Destroy();
+
+    // if (mpModelWrapper) {
+    //     delete mpModelWrapper;
+    // }
+    // mpModelWrapper = nullptr;
+    
+    // delete mpFileInfo;
 }
 
 void NwAnmCtrl::PlayAnimationByNameAndIndex(u32 animIndex, const char* animName) {
@@ -56,7 +56,7 @@ NwAnm* NwAnmCtrl::GetAnimationByIndex(u32 index) {
 }
 
 void NwAnmCtrl::SetCurrentAnimationIndex(u32 index) {
-    GetAnimationByIndex(index)->SetModelWrapper(mpModelWrapper, true);
+    GetAnimationByIndex(index)->SetModelWrapper(mpModelWrapper.get(), true);
     mCurrentAnimIndex = index;
 }
 
@@ -89,15 +89,11 @@ bool NwAnmCtrl::IsAnimationDone() {
 }
 
 bool NwAnmCtrl::HasAnim(u32 index) {
-    if (index < mNumAnims) {
-        return GetAnimationByIndex(index)->HasAnim();
-    }
-
-    return false;
+    return index >= mNumAnims ? false : GetAnimationByIndex(index)->HasAnim();
 }
 
 extern "C" Vec3f& fn_8001DCB0(NwAnm*, gfl::ScnMdlWrapper*, class nw4r::g3d::ResMdl*);
 
 Vec3f& NwAnmCtrl::fn_800EA480(class nw4r::g3d::ResMdl* resmdl) {
-    return fn_8001DCB0(GetCurrentAnimation(), mpModelWrapper, resmdl);
+    return fn_8001DCB0(GetCurrentAnimation(), mpModelWrapper.get(), resmdl);
 }

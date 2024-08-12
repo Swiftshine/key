@@ -12,10 +12,11 @@ namespace gfl {
         }
     private:
     public:
+        inline BasicString() { }
         inline BasicString(const char* src) {
             Set(src);
         }
-        BasicString();
+        // BasicString();
         BasicString(const BasicString& src);
         ~BasicString();
 

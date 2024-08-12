@@ -52,6 +52,7 @@ game/object/PlayerBase.cpp:
 
 game/graphics/NwAnmCtrl.cpp:
 	.text       start:0x800E9DDC end:0x800EA4E4
+	.data       start:0x808420B8 end:0x808420C8
 
 game/object/FlfHandleObj.cpp:
 	.text       start:0x8016874C end:0x80168804

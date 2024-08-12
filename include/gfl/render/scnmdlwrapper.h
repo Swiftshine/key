@@ -18,6 +18,7 @@ namespace gfl {
     class ScnMdlWrapper : public RenderObj {
     public:
         ScnMdlWrapper();
+        
         virtual ~ScnMdlWrapper();
 
     public:
