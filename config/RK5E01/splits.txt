@@ -110,11 +110,11 @@ gfl/mem/Heap.cpp:
 gfl/mem/MemoryBase.cpp:
 	.text       start:0x80644610 end:0x8064483C
 
-gfl/task/taskinfo.cpp:
+gfl/task/TaskInfo.cpp:
 	.text       start:0x80645718 end:0x8064583C
 	.sbss       start:0x808E5D78 end:0x808E5D80
 
-gfl/task/task.cpp:
+gfl/task/Task.cpp:
 	.text       start:0x8064583C end:0x80645E3C
 	.data       start:0x808B80D0 end:0x808B8100
 	.sdata      start:0x808E43F8 end:0x808E440C
