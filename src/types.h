@@ -3,6 +3,8 @@
 
 #define nullptr 0
 
-typedef unsigned int uint;
+#include <cstdint>
+
+typedef uint32_t uint;
 
 #endif

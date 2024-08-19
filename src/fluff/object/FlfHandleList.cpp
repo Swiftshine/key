@@ -1,6 +1,8 @@
-#include "object/FlfHandleList.h"
+#include <string.h>
 
-#include <
+#include "object/FlfHandleList.h"
+#include "gflMemory.h"
+
 FlfHandleList* FlfHandleList::sInstance;
 
 void FlfHandleList::Set(uint index, FlfHandleObj* object) {
@@ -60,5 +62,14 @@ FlfHandleList::FlfHandleList()
     : mHandleCount(0)
     , mLastHandleID(1)
 {
-    
+    memset(mHandles, 0, sizeof(mHandles));
+}
+
+void FlfHandleList::DestroyInstance() {
+    operator delete(sInstance, 1);
+    sInstance = nullptr;
+}
+
+void FlfHandleList::InitInstance() {
+    sInstance = new (1) FlfHandleList;
 }

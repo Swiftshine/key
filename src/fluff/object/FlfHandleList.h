@@ -1,9 +1,7 @@
 #ifndef FLUFF_FLFHANDLELIST_H
 #define FLUFF_FLFHANDLELIST_H
 
-
 #include "object/FlfHandleObj.h"
-
 
 #define FLF_HANDLE_LIST_MAX_HANDLES 1000
 
