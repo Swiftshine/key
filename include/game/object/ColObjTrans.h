@@ -8,8 +8,8 @@ public:
     ColObjTrans();
     virtual ~ColObjTrans();
 public:
-    void* _1C;
-    void* _20;
+    void* mpCollisionData1;
+    void* mpCollisionData2;
 };
 
 ASSERT_SIZE(ColObjTrans, 0x24)

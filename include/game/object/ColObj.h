@@ -4,17 +4,21 @@
 #include <flf_types.h>
 
 class FlfGameObj;
+class KdTree;
 
 class ColObj {
 protected:
     ColObj();
 public:
-    virtual ~ColObj() = 0;
+    virtual ~ColObj();
+    virtual int vfC();
+    virtual void vf10();
+    virtual void RemoveFromTree();
 public:
-    u32 _4;
-    FlfGameObj* owner;
-    u32 _C;
-    Vec3f posiition;
+    u32 m_4;
+    FlfGameObj* mpOwner;
+    KdTree* mpTree;
+    Vec3f mPosition;
 };
 
 ASSERT_SIZE(ColObj, 0x1C)
