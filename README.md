@@ -1,4 +1,4 @@
-Kirby's Epic Yarn [![Discord Badge]][discord]
+# Kirby's Epic Yarn [![Discord Badge]][discord]
 
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
