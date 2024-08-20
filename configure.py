@@ -323,7 +323,7 @@ config.libs = [
             # Object(NonMatching, "gfl/task/Task.cpp"),
             # # Object(Matching,     "gfl/task/TaskInfo.cpp"),
             # Object(NonMatching, "gfl/string/BasicString.cpp"),
-            # # Object(Matching,    "gfl/file/ResInfo.cpp"),
+            Object(Matching,    "gfl/gflResInfo.cpp"),
             # Object(NonMatching,    "gfl/file/ResFileInfo.cpp"),
             # Object(NonMatching, "gfl/file/File.cpp"),
             # Object(NonMatching, "gfl/file/FileSystemWii.cpp"),

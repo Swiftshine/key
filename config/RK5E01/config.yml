@@ -4,5 +4,3 @@ symbols: config/RK5E01/symbols.txt
 splits: config/RK5E01/splits.txt
 ldscript_template: config/RK5E01/ldscript.tpl # Needed for correct __ArenaLo alignment
 mw_comment_version: 14
-force_active:
-  - __dt__Q210homebutton18GroupAnmControllerFv
