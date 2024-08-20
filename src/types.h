@@ -6,6 +6,8 @@
 #include "macros.h"
 #include <revolution/types.h>
 
+#define override
+
 typedef float MTX34[3][4];
 
 typedef uint32_t uint;
