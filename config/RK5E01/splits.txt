@@ -13,6 +13,11 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
+fluff/object/FlfGameObj.cpp:
+	.text       start:0x8002BCF8 end:0x8002C0DC
+	.data       start:0x80839D90 end:0x80839DF8
+	.sdata2     start:0x808E6908 end:0x808E6918
+
 fluff/object/FlfHandleObj.cpp:
 	.text       start:0x8016874C end:0x80168804
 	.rodata     start:0x807E3A50 end:0x807E3A60
@@ -22,6 +27,12 @@ fluff/object/FlfHandleObj.cpp:
 fluff/object/FlfHandleList.cpp:
 	.text       start:0x80168804 end:0x80168960
 	.sbss       start:0x808E4FF8 end:0x808E4FFC
+
+fluff/object/FlfGameObjLocator.cpp:
+	.text       start:0x802FCB6C end:0x802FCC04
+	.rodata     start:0x80803E50 end:0x80803E64
+	.data       start:0x8086A9D8 end:0x8086AA58
+	.sdata      start:0x808E1578 end:0x808E1580
 
 gfl/gflFixedMemoryStream.cpp:
 	.text       start:0x806506A0 end:0x80650838

@@ -342,9 +342,9 @@ config.libs = [
         "host": False,
         "objects": [
             Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
-            # Object(NonMatching, "game/object/FlfGameObj.cpp"),
+            Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
-            # # Object(Matching,    "game/object/FlfGameObjLocator.cpp"),
+            Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
             # Object(NonMatching, "game/object/Gimmick.cpp"),
             # Object(NonMatching, "game/object/PlayerBase.cpp"),
         ],
