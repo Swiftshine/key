@@ -29,7 +29,7 @@
 #define RELEASEARRAY(x)	{ delete[] (ubyte*)x;	x = null; }
 
 #define ASSERT_SIZE(T, size) \
-    typedef char assert_size_##T[(sizeof(T) == size) ? 1 : -1]
+    typedef char assert_size_##T[(sizeof(T) == size) ? 1 : -1];
 
 #define ENUM_CLASS(name, ...)              \
     class name {virtual void This_error_means_you_forgot_to_write___type___in_an_object_instantiation()=0;public: \
