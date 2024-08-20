@@ -340,7 +340,7 @@ config.libs = [
         ],
         "host": False,
         "objects": [
-            # # Object(Matching,    "game/object/FlfHandleObj.cpp"),
+            Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
             # Object(NonMatching, "game/object/FlfGameObj.cpp"),
             Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
             # # Object(Matching,    "game/object/FlfGameObjLocator.cpp"),

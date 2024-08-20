@@ -9,6 +9,10 @@ class FlfHandleList {
 private:
     static FlfHandleList* sInstance;
 public:
+    static inline FlfHandleList* Instance() {
+        return sInstance;
+    }
+
     FlfHandleList() DONT_INLINE_CLASS;
     DECL_WEAK ~FlfHandleList() DONT_INLINE_CLASS;
 
