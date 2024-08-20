@@ -315,7 +315,7 @@ config.libs = [
             # Object(Matching, "gfl/math/Vector3F.cpp"),
             # Object(Matching, "gfl/mem/Stream.cpp"),
             # Object(Matching, "gfl/param/ParamBase.cpp"),
-            # Object(Matching, "gfl/mem/MemoryBase.cpp"),
+            Object(Matching, "gfl/gflMemoryBase.cpp"),
             # Object(NonMatching, "gfl/mem/Heap.cpp"),
             # Object(NonMatching, "gfl/mem/Mem.cpp"),
             Object(NonMatching,    "gfl/gflFixedString.cpp"),

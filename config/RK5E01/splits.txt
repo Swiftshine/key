@@ -43,6 +43,9 @@ fluff/object/FlfGameObjLocator.cpp:
 gfl/gflFixedString.cpp:
 	.text       start:0x80642B00 end:0x80642CB0
 
+gfl/gflMemoryBase.cpp:
+	.text       start:0x80644610 end:0x8064483C
+
 gfl/gflFixedMemoryStream.cpp:
 	.text       start:0x806506A0 end:0x80650838
 	.rodata     start:0x8082C940 end:0x8082C964

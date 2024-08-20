@@ -1,21 +1,22 @@
-#ifndef GFL_MEMORY_BASE_H
-#define GFL_MEMORY_BASE_H
+#ifndef GFL_MEMORYBASE_H
+#define GFL_MEMORYBASE_H
 
-#include <gfl/mem/Heap.h>
-#include <gfl/gfl_types.h>
+#include "types.h"
+#include "gflHeap.h"
 
-const u32 HEAP_COUNT = 0x18;
+#define GFL_MEMORYBASE_HEAP_COUNT 24
 
 namespace gfl {
     class MemoryBase {
     public:
         inline Heap* FindContainingHeap(Heap** heapArr, void* address) {
-            for (u32 i = 0; i < HEAP_COUNT; i++) {
-                if (mpHeaps[i] && mpHeaps[i]->WithinRange(address)) {
-                    return mpHeaps[i];
+            for (uint i = 0; i < GFL_MEMORYBASE_HEAP_COUNT; i++) {
+                if (mHeaps[i] && mHeaps[i]->WithinRange(address)) {
+                    return mHeaps[i];
                 }
             }
-            return NULL;
+
+            return nullptr;
         }
     public:
         inline MemoryBase() { }
@@ -26,9 +27,9 @@ namespace gfl {
         Heap* GetHeapByAddress(void*);
         u8 GetHeapIDByAddress(void*);
         void Free(void*);
-        virtual Heap* GetHeapByID(u32 heapID);
+        virtual Heap* GetHeapByID(uint heapID);
     public:
-        Heap* mpHeaps[HEAP_COUNT];
+        Heap* mHeaps[GFL_MEMORYBASE_HEAP_COUNT];
     };
 
     ASSERT_SIZE(MemoryBase, 0x64)
