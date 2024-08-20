@@ -37,6 +37,9 @@ fluff/object/FlfGameObjLocator.cpp:
 	.data       start:0x8086A9D8 end:0x8086AA58
 	.sdata      start:0x808E1578 end:0x808E1580
 
+gfl/gflFixedString.cpp:
+	.text       start:0x80642B00 end:0x80642CB0
+
 gfl/gflFixedMemoryStream.cpp:
 	.text       start:0x806506A0 end:0x80650838
 	.rodata     start:0x8082C940 end:0x8082C964
@@ -49,6 +52,3 @@ PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp:
 	.dtors      start:0x807E37A0 end:0x807E37A4 rename:.dtors$10
 	.dtors      start:0x807E37A4 end:0x807E37A8 rename:.dtors$15
 	.sdata      start:0x808E46D8 end:0x808E46E0
-
-homebutton/GroupAnmController.cpp:
-	.text       start:0x806FF9C0 end:0x806FFA20

@@ -20,5 +20,7 @@ namespace gfl {
         Work        = 10,
         Resource    = 11,
     );
+
+    void* Memcpy(void* dest, size_t len, void* src);
 }
 #endif

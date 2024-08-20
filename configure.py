@@ -318,7 +318,7 @@ config.libs = [
             # Object(Matching, "gfl/mem/MemoryBase.cpp"),
             # Object(NonMatching, "gfl/mem/Heap.cpp"),
             # Object(NonMatching, "gfl/mem/Mem.cpp"),
-            # # Object(Matching,    "gfl/string/FixedString.cpp"),
+            Object(NonMatching,    "gfl/gflFixedString.cpp"),
             # # Object(Matching,    "gfl/string.cpp"),
             # Object(NonMatching, "gfl/task/Task.cpp"),
             # # Object(Matching,     "gfl/task/TaskInfo.cpp"),
