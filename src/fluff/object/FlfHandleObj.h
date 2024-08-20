@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-typedef FlfHandleObj* FlfHandle;
+typedef class FlfHandleObj* FlfHandle;
 
 class FlfHandleObj {
 public:
@@ -14,8 +14,8 @@ public:
         mHandleID = id;
     }
 
-    inline void SetHandle(FlfHandle handle) {
-        *mHandle = handle;
+    inline void SetHandle(FlfHandle* handle) {
+        mHandle = handle;
     }
 
     inline void ClearHandle() {

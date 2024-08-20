@@ -28,4 +28,9 @@
 #define RELEASE(x)		{ delete x;		x = null; }
 #define RELEASEARRAY(x)	{ delete[] (ubyte*)x;	x = null; }
 
+#define ENUM_CLASS(name, ...)              \
+    class name {virtual void This_error_means_you_forgot_to_write___type___in_an_object_instanciation()=0;public: \
+        enum __type__ { __VA_ARGS__ };     \
+    }
+
 #endif

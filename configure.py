@@ -134,7 +134,7 @@ if args.no_asm:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20231018"
-config.dtk_tag = "v0.9.0"
+config.dtk_tag = "v0.9.4"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.11"
 
@@ -190,6 +190,7 @@ cflags_base = [
     "-i src/PowerPC_EABI_Support/",
     "-i src/PowerPC_EABI_Support/MSL/",
     "-i src/PowerPC_EABI_Support/MSL/MSL_C/",
+    "-i src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/",
     "-i src/PowerPC_EABI_Support/MSL/MSL_C++/",
     "-i src/PowerPC_EABI_Support/MetroTRK/",
     "-i src/PowerPC_EABI_Support/Runtime/",
@@ -268,8 +269,8 @@ config.libs = [
         "cflags": cflags_runtime,
         "host": False,
         "objects": [
-            # Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
-            # Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
+            # Object(NonMatching, "PowerPC_EABI_Support/Runtime/global_destructor_chain.c"),
+            # Object(NonMatching, "PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp"),
         ],
     },
     {
@@ -331,7 +332,7 @@ config.libs = [
         ],
     },
     {
-        "lib" : "game/object",
+        "lib" : "fluff/object",
         "mw_version": config.linker_version,
         "cflags": [
             *cflags_base,
@@ -341,7 +342,7 @@ config.libs = [
         "objects": [
             # # Object(Matching,    "game/object/FlfHandleObj.cpp"),
             # Object(NonMatching, "game/object/FlfGameObj.cpp"),
-            # # Object(Matching,    "game/object/FlfHandleObjList.cpp"),
+            Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
             # # Object(Matching,    "game/object/FlfGameObjLocator.cpp"),
             # Object(NonMatching, "game/object/Gimmick.cpp"),
             # Object(NonMatching, "game/object/PlayerBase.cpp"),

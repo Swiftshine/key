@@ -2,8 +2,10 @@
 
 #include "object/FlfHandleList.h"
 #include "gflMemory.h"
+#include "gflMisc.h"
 
 FlfHandleList* FlfHandleList::sInstance;
+// FlfHandleList::~FlfHandleList() { }
 
 void FlfHandleList::Set(uint index, FlfHandleObj* object) {
     mHandles[index] = object;
@@ -17,8 +19,6 @@ void FlfHandleList::Remove(FlfHandleObj* object) {
     object->ClearHandle();
 }
 
-extern "C" void PPCHalt();
-
 void FlfHandleList::Add(FlfHandleObj* object) {
     uint curCount = mHandleCount;
     FlfHandle* lastHandle = &mHandles[mHandleCount];
@@ -31,8 +31,8 @@ void FlfHandleList::Add(FlfHandleObj* object) {
             return;
         }
 
-        curCount++;
         lastHandle++;
+        curCount++;
     }
 
     // there aren't any empty slots, add to end
@@ -54,8 +54,9 @@ void FlfHandleList::Add(FlfHandleObj* object) {
 
     // should never get here
 
-    PPCHalt();
+    GFL_HALT();
 }
+
 
 
 FlfHandleList::FlfHandleList()
@@ -65,11 +66,14 @@ FlfHandleList::FlfHandleList()
     memset(mHandles, 0, sizeof(mHandles));
 }
 
+FlfHandleList::~FlfHandleList() { }
+
+
 void FlfHandleList::DestroyInstance() {
-    operator delete(sInstance, 1);
+    delete sInstance;
     sInstance = nullptr;
 }
 
 void FlfHandleList::InitInstance() {
-    sInstance = new (1) FlfHandleList;
+    sInstance = new (gfl::HeapID::LIB1) FlfHandleList;
 }
