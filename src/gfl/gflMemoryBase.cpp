@@ -34,7 +34,7 @@ void MemoryBase::ReplaceHeap(Heap* other) {
 }
 
 Heap* MemoryBase::GetHeapByAddress(void* address) {
-    for (u32 i = 0; i < GFL_MEMORYBASE_HEAP_COUNT; i++) {
+    for (uint i = 0; i < GFL_MEMORYBASE_HEAP_COUNT; i++) {
         if (mHeaps[i] && mHeaps[i]->WithinRange(address)) {
             return mHeaps[i];
         }
@@ -44,7 +44,7 @@ Heap* MemoryBase::GetHeapByAddress(void* address) {
 }
 
 u8 MemoryBase::GetHeapIDByAddress(void* address) {
-    for (u32 i = 0; i < GFL_MEMORYBASE_HEAP_COUNT; i++) {
+    for (uint i = 0; i < GFL_MEMORYBASE_HEAP_COUNT; i++) {
         if (mHeaps[i] && mHeaps[i]->WithinRange(address)) {
             return i & 0xFF;
         }
