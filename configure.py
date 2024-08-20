@@ -194,6 +194,7 @@ cflags_base = [
     "-i src/PowerPC_EABI_Support/MSL/MSL_C++/",
     "-i src/PowerPC_EABI_Support/MetroTRK/",
     "-i src/PowerPC_EABI_Support/Runtime/",
+    "-i src/revolution",
     # "-i include",
     # "-i include/MSL",
     # "-i include/MSL/internal",

@@ -10,6 +10,8 @@ namespace gfl {
 
         inline ~Vec3() {}
         
+
+        inline void operator=(float val) { x = val; y = val; z = val; }
         Vec3 operator-(Vec3& other);
         Vec3 operator+(Vec3& other);
 
