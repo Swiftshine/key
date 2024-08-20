@@ -1,12 +1,12 @@
 #ifndef GFL_MEMORY_H
 #define GFL_MEMORY_H
 
-#include <gfl/mem/MemoryBase.h>
+#include "gflMemoryBase.h"
 
 namespace gfl {
     class Memory : public MemoryBase {
-    private:
-        Memory();
+    public:
+        inline Memory() { }
     public:
         Heap mLIB1Heap;
         Heap mLIB2Heap;
@@ -17,4 +17,5 @@ namespace gfl {
 
     ASSERT_SIZE(Memory, 0x1B8);
 }
+
 #endif
