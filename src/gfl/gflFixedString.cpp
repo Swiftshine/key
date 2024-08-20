@@ -1,7 +1,7 @@
 #include <string.h> // strlen
 
 #include "gflFixedString.h"
-#include "gflMemory.h"
+#include "gflMemoryUtil.h"
 using namespace gfl;
 
 

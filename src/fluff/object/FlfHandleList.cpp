@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "object/FlfHandleList.h"
-#include "gflMemory.h"
+#include "gflMemoryUtil.h"
 #include "gflMisc.h"
 
 FlfHandleList* FlfHandleList::sInstance;
