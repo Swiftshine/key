@@ -23,6 +23,12 @@ fluff/object/FlfHandleList.cpp:
 	.text       start:0x80168804 end:0x80168960
 	.sbss       start:0x808E4FF8 end:0x808E4FFC
 
+gfl/gflFixedMemoryStream.cpp:
+	.text       start:0x806506A0 end:0x80650838
+	.rodata     start:0x8082C940 end:0x8082C964
+	.data       start:0x808B8350 end:0x808B8380
+	.sdata      start:0x808E4468 end:0x808E4478
+
 PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC
 	.ctors      start:0x807E3420 end:0x807E3424 rename:.ctors$10

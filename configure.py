@@ -310,7 +310,7 @@ config.libs = [
         "cflags": [*cflags_base],
         "host": False,
         "objects": [
-            # Object(Matching, "gfl/mem/FixedMemoryStream.cpp"),
+            Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
             # Object(Matching, "gfl/math/Vector3F.cpp"),
             # Object(Matching, "gfl/mem/Stream.cpp"),
             # Object(Matching, "gfl/param/ParamBase.cpp"),
