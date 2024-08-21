@@ -1,7 +1,7 @@
-#ifndef FLUFF_POINTER_MANAGER_H
-#define FLUFF_POINTER_MANAGER_H
+#ifndef FLUFF_POINTERMANAGER_H
+#define FLUFF_POINTERMANAGER_H
 
-#include <flf_types.h>
+#include "types.h"
 
 // To clarify, PointerManager is a manager for the Wiimote-controlled cursors; called "pointers"
 

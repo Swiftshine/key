@@ -1,18 +1,18 @@
 #ifndef FLUFF_STAGE_H
 #define FLUFF_STAGE_H
 
-#include <flf_types.h>
+#include "types.h"
 
 struct Stage {
     // The actuaol numeric stage number. Level 1 is 1, level 2 is 2...
-    s32 stageID;
+    int stageID;
     // This is used for finding files from disk. Level 1 is 101, level 2 is 102...
-    s32 resourceID;
+    int resourceID;
     // This is used for stages that span multiple sections that need to be loaded seperately. A notable example is the world map.
-    u32 sectionID;
+    uint sectionID;
 };
 
-SCOPED_ENUM(StageIDs,
+ENUM_CLASS(StageIDs,
     // Misc.
     WorldMap = 50,
 
@@ -73,7 +73,7 @@ SCOPED_ENUM(StageIDs,
     BattleshipHalberd = 42,
 );
 
-SCOPED_ENUM(ResourceIDs,
+ENUM_CLASS(ResourceIDs,
     // Misc.
     WorldMap          = 0,
 

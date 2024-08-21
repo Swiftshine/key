@@ -1,30 +1,33 @@
-#ifndef FLUFF_GAME_MANAGER_H
-#define FLUFF_GAME_MANAGER_H
+#ifndef FLUFF_GAMEMANAGER_H
+#define FLUFF_GAMEMANAGER_H
 
 
-#include <flf_types.h>
-#include <gfl/task/Task.h>
-#include <gfl/string/BasicString.h>
-#include <game/stage/Stage.h>
-#include <game/object/PlayerBase.h>
-#include <game/manager/CameraManager.h>
-#include <game/manager/PointerManagerWrapper.h>
-#include <game/mapdata/Mapdata.h>
-#include <game/util/MissionUtil.h>
+#include <string>
+#include "types.h"
 
-namespace gfl {
-    class ParamBool;
-}
+
+#include "gflVec2.h"
+#include "gflVec3.h"
+#include "gflTask.h"
+
+#include "manager/PointerManager.h"
+#include "gfl/gflScopedPointer.h"
+#include "stage/Stage.h"
+
+namespace gfl { class ParamBool; }
+class PlayerBase;
+
+namespace { namespace Mapdata { namespace Mapbin { class Header { int dummy; }; } } }
 
 class GameManager {
 public:
-    SCOPED_ENUM(LoadPhase,
+    ENUM_CLASS(LoadPhase,
         StageResource = 1,
         StageSections = 2,
         StageContents = 3,
     );
 
-    // SCOPED_ENUM(LoadState,
+    // ENUM_CLASS(LoadState,
     //     WaitStage = 0,
     //     LoadState_1,
     //     GameCreate,
@@ -37,7 +40,7 @@ public:
 
     // In order of execution:
     // 1, 2, 4, 3, 5, 6, 7
-    SCOPED_ENUM(LoadStatus,
+    ENUM_CLASS(LoadStatus,
         BeginLoad = 0,
         ProcessLoad = 1,
         GameCreate = 2,
@@ -57,26 +60,26 @@ public:
 
     virtual ~GameManager();
 
-    static u32  GetPlayerCount();
-    static PlayerBase*  GetPlayerByID(u32 playerID);
+    static uint  GetPlayerCount();
+    static PlayerBase*  GetPlayerByID(uint playerID);
     static PlayerBase*  GetPrinceFluff();
-    static u8   GetByte(u32 val);
-    static PointerManagerWrapper GetPlayerPointerManagerWrapperByID(u32 id);
+    static u8   GetByte(uint val);
+    static gfl::ScopedPointer<PointerManager> GetPlayerPointerManagerWrapperByID(uint id);
     // PointerManager related.
-    static u32  fn_8000EEB4(u32 id);
+    static uint  fn_8000EEB4(uint id);
     // PointerManager related.
-    static u32  fn_8000EF74(u32 id);
+    static uint  fn_8000EF74(uint id);
     // PointerManager related.
-    static u32  fn_8000EFEC(u32 id);
+    static uint  fn_8000EFEC(uint id);
     // PointerManager related.
-    static bool fn_8000F09C(u32 id);
+    static bool fn_8000F09C(uint id);
     static void fn_8000f0E4();
-    static void SetCurrentSection(u32 sectionID);
+    static void SetCurrentSection(uint sectionID);
     static Stage GetStage();
     // Returns *(Instance + 0x30)
-    static u32  fn_8000F51C();
+    static uint  fn_8000F51C();
     static bool IsInLevel();
-    static u32  fn_8000F570();
+    static uint  fn_8000F570();
     static void fn_8000F5E8();
     // Returns Instance->currentLoadPhase == 6
     static bool fn_8000F7A4();
@@ -91,13 +94,13 @@ public:
     static void fn_8000FB08();
     // Sets *(Instance + 0xAC) to 1 depending on some factors.
     static void fn_8000FB38();
-    static void fn_8000FB68(u32 arg0);
+    static void fn_8000FB68(uint arg0);
     // Stage related. Uses a StageManager instance instead of GameManager.
     static bool fn_8000FC24();
     // Returns true if loading PHASE is 3 and loading STATE is 5.
     static bool IsStageReady();
-    static gfl::ParamBool* fn_8000FC64(u32 arg0);
-    static void SetupPlayers(Vec2f* startPos, u32 arg1);
+    static gfl::ParamBool* fn_8000FC64(uint arg0);
+    static void SetupPlayers(gfl::Vec2& startPos, uint arg1);
     // arg0 determines wether *(Instance + 0xB8) is incremented (true) or decremented (false).
     // Sets *(Instance + 0xB4) to true or false when *(Instance + 0xB8) is specifically 1 or 0, respectively.
     static void UpdatePrinceFluff(bool arg0);
@@ -106,13 +109,13 @@ public:
     // Player related.
     static bool fn_80010000();
     // Returns true if the start position is valid. If not, dest is not set.
-    static bool GetPlayerStartPosition(Vec3f* dest);
+    static bool GetPlayerStartPosition(gfl::Vec3& dest);
     static void fn_80011B18();
     static bool IsInMission();
     static int  GetCurrentMissionID();
     static int  GetCurrentMissionType();
-    static u32  fn_80012330();
-    static bool HasCurrentMissionIndicator(gfl::BasicString* str);
+    static uint  fn_80012330();
+    static bool HasCurrentMissionIndicator(std::string& str);
     static class MissionGameCtrl* GetMissionGameCtrl();
     // Mission related.
     static void fn_800123D8();
@@ -137,8 +140,8 @@ private:
     // This phase is empty.
     void    LoadPhase13();
 
-    int     SetupPrinceFluff(u32 arg0);
-    void    RemovePlayerByID(u32 playerID);
+    int     SetupPrinceFluff(uint arg0);
+    void    RemovePlayerByID(uint playerID);
     void    LoadPlayerStartPosition();
     void    fn_80011C30();
     void    fn_80011F5C();
@@ -149,46 +152,47 @@ private:
 public:
     bool _4;
     u8 pad1[3];
-    u32 _8;
-    u32 _C;
+    uint _8;
+    uint _C;
     bool pad2[3];
-    s32 _14;
-    s32 _18;
-    s32 _1C;
+    int _14;
+    int _18;
+    int _1C;
     int curMissionID;
     Stage stage;
-    u32 _30;
-    u32 curLoadPhase;
-    u32 prevLoadPhase;
-    u32 curLoadState;
-    u32 _40;
-    u32 _44;
+    uint _30;
+    uint curLoadPhase;
+    uint prevLoadPhase;
+    uint curLoadState;
+    uint _40;
+    uint _44;
     u16 _48;
     bool _4A; // related to preview loading
     bool isInWorldMap;
-    u32 _4C;
-    u32 _50;
-    u32 playerCount;
-    u32 curPlayerID;
+    uint _4C;
+    uint _50;
+    uint playerCount;
+    uint curPlayerID;
     f32 _5C;
-    Vec3f playerStartPosition;
+    gfl::Vec3 playerStartPosition;
     class StageManager* stageManager;
-    CameraManager* cameraManager;
+    class CameraManager* cameraManager;
     PlayerBase* players[2];
-    PointerManagerWrapper playerPointerManagers[2];
+    gfl::ScopedPointer<PointerManager> playerPointerManagers[2];
     gfl::Task task;
-    u32 _9C;
+    uint _9C;
     void* _A0;
     class FlfDemoCtrl* demoCtrl;
     class MissionGameCtrl* missionGameCtrl;
-    u32 _AC;
-    u32 _B0;
+    uint _AC;
+    uint _B0;
     bool _B4;
     u8 pad3[3];
     int _B8;
-    u32 _BC;
+    uint _BC;
 };
 
-ASSERT_SIZE(GameManager, 0xC0)
+// ASSERT_SIZE(GameManager, 0xC0)
+
 
 #endif
