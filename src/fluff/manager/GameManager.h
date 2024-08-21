@@ -6,17 +6,26 @@
 #include "types.h"
 
 
-#include "gflVec2.h"
-#include "gflVec3.h"
-#include "gflTask.h"
+#include "gfl/gflVec2.h"
+#include "gfl/gflVec3.h"
+#include "gfl/gflTask.h"
+#include "gfl/gflArray.h"
 
 #include "manager/PointerManager.h"
-#include "gfl/gflScopedPointer.h"
-#include "gfl/gflArray.h"
+#include "object/PlayerBase.h"
 #include "stage/Stage.h"
 
 namespace gfl { class ParamBool; }
-class PlayerBase;
+
+class PointerManagerWrapper {
+public:
+    PointerManagerWrapper();
+    ~PointerManagerWrapper();
+
+    PointerManager* GetPointerManager() { return mManager; }
+private:
+    PointerManager* mManager;
+};
 
 namespace { namespace Mapdata { namespace Mapbin { class Header { int dummy; }; } } }
 
@@ -54,9 +63,11 @@ public:
         PlayerRelatedB = 7,
     );
 
+private:
+    static GameManager* sInstance;
 public:
-    static GameManager* Instance;
-public:
+    static inline GameManager* Instance() { return sInstance; }
+    
     GameManager();
 
     virtual ~GameManager();
@@ -65,7 +76,7 @@ public:
     static PlayerBase*  GetPlayerByID(uint playerID);
     static PlayerBase*  GetPrinceFluff();
     static u8   GetByte(uint val);
-    static gfl::ScopedPointer<PointerManager> GetPlayerPointerManagerWrapperByID(uint id);
+    static PointerManagerWrapper GetPlayerPointerManagerWrapperByID(uint id);
     // PointerManager related.
     static uint  fn_8000EEB4(uint id);
     // PointerManager related.
@@ -150,7 +161,7 @@ private:
     void    StartLoadPhase9();
     void    StartLoadPhase7();
     void    StartLoadPhase13();
-public:
+private:
     bool m_4;
     uint m_8;
     uint m_C;
@@ -177,7 +188,7 @@ public:
     class StageManager* mStageManager;
     class CameraManager* mCameraManager;
     gfl::FixedArray<PlayerBase*, 2> mPlayers;
-    gfl::FixedArray<gfl::ScopedPointer<PointerManager>, 2> mPlayerPointerManagers;
+    gfl::FixedArray<PointerManagerWrapper, 2> mPlayerPointerManagers;
     gfl::Task mTask;
     uint m_9C;
     void* m_A0;

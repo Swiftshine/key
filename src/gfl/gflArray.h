@@ -45,8 +45,15 @@ namespace gfl {
 
     template <typename T, uint N>
     class FixedArray {
+    public:
         inline FixedArray() { }
         inline ~FixedArray() { }
+
+        inline T& operator[](size_t index) {
+            return mArray[index];
+        }
+
+        inline T* get() { return mArray; }
     private:
         T mArray[N];
     };
