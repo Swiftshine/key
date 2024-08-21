@@ -27,4 +27,6 @@ private:
     uint mHandleID;
 };
 
+ASSERT_SIZE(FlfHandleObj, 0xC);
+
 #endif

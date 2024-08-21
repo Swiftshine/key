@@ -1,16 +1,13 @@
-#ifndef FLUFF_GIMMICK_LIST_H
-#define FLUFF_GIMMICK_LIST_H
+#ifndef FLUFF_GIMMICKLIST_H
+#define FLUFF_GIMMICKLIST_H
 
-#include <flf_types.h>
+#include "types.h"
 
-const int MAX_GIMMICK_TYPES = 0x1B2;
+// [ID label] = [ID number] // [is common]
 
-// [id label] = [id number] // "japanese string", [is common]
+// A large portion of these Gimmick names are written in Japanese.
 
-// entries are written as they appear unless indicated otherwise (e.g., japanese string in a comment)
-
-SCOPED_ENUM (GimmickIDs,
-
+ENUM_CLASS(GimmickIDs,
     Invalid = -1,
     None = 0,
     GMK_TYPE_SIMPLE_MDL = 1,        // common
@@ -68,8 +65,6 @@ SCOPED_ENUM (GimmickIDs,
     Curtains,                       
     HappyGate_Goal,                 
     TreasureChest,                  
+    GimmickTypeCount = 0x1B2
 );
-
 #endif
-
-namespace dummy { }

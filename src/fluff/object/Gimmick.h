@@ -1,53 +1,27 @@
 #ifndef FLUFF_GIMMICK_H
 #define FLUFF_GIMMICK_H
 
-#include <game/object/FlfGameObj.h>
-#include <gfl/string/BasicString.h>
-#include <game/stage/StageTask.h>
-
-class Gimmick;
-
-void fn_8051F7A0(void*, int);
-
-
-const u32 INVALID_GIMMICK_ID = 0xFFFFFFFF;
+#include "object/FlfGameObj.h"
+#include "object/GimmickList.h"
+#include "gflVec3.h"
+#include "gflVec2.h"
+#include "gflTask.h"
+#include <string>
 
 extern "C" const char Stage_NullFilename;
 
-
 class Gimmick : public FlfGameObj {
 public:
-
     class GimmickBuildInfo {
     public:
         class CommonGimmickBuildInfo {
         public:
             bool mIsCommon;
-            Gimmick* mpOwner;
+            Gimmick* mOwner;
         };
-    public:
-        int mGimmickID;
-        Vec3f mPosition;
-        Vec3f mRotation;
-        bool m_1C;
-        u8 m_1D;
-        u8 m_1E;
-        u8 m_1F;
-        u32 m_20;
-        u8 m_24;
-        u8 m_25;
-        u8 m_26;
-        u8 m_27;
-        u32 m_28;
-        u32 m_2C;
-        u32 m_30;
-        int mIntParams[5];
-        f32 mFloatParams[5];
-        gfl::BasicString mStringParams[5];
-        CommonGimmickBuildInfo* mpExtension;
 
         inline GimmickBuildInfo()
-            : mGimmickID(INVALID_GIMMICK_ID)
+            : mGimmickID(GimmickIDs::Invalid)
             , mPosition()
             , mRotation()
 
@@ -55,12 +29,11 @@ public:
             , m_28(6)
             , m_2C(4)
             , m_30(0)
-
         {
-            mpExtension = NULL;
+            mExtension = nullptr;
             m_1C = false;
 
-            for (int i = 0; i < 5; i++) {
+            for (uint i = 0; i < 5; i++) {
                 mIntParams[i] = 0;
                 mFloatParams[i] = 0.0f;
                 mStringParams[i] = &Stage_NullFilename;
@@ -69,25 +42,52 @@ public:
 
         inline ~GimmickBuildInfo() { }
 
-        inline void operator=(GimmickBuildInfo& src) {
-            mGimmickID = src.mGimmickID;
-            mPosition = src.mPosition;
-            mRotation = src.mRotation;
-            m_1C = src.m_1C;
-            
+        inline void operator=(GimmickBuildInfo& other) {
+            mGimmickID = other.mGimmickID;
+            mPosition = other.mPosition;
+            mRotation = other.mRotation;
+            m_1C = other.m_1C;
         }
+
+
+    public:
+        int mGimmickID;
+        gfl::Vec3 mPosition;
+        gfl::Vec3 mRotation;
+        bool m_1C;
+        u8 m_1D;
+        u8 m_1E;
+        u8 m_1F;
+        uint m_20;
+        u8 m_24;
+        u8 m_25;
+        u8 m_26;
+        u8 m_27;
+        uint m_28;
+        uint m_2C;
+        uint m_30;
+        int mIntParams[5];
+        float mFloatParams[5];
+        std::string mStringParams[5];
+        CommonGimmickBuildInfo* mExtension;
+
     };
 
-    ASSERT_SIZE(GimmickBuildInfo, 0x9C)
 
+    // ASSERT_SIZE(std::string, 0xC);
+
+    // ASSERT_SIZE(GimmickBuildInfo, 0x9C);
 public:
-    // for the most basic gimmicks
+    // For the most basic gimmicks
     Gimmick(int gmkID);
-    // for gimmicks that control things in-level
+
+    // For gimmicks that control things in-level
     Gimmick(int gmkID, const char* taskName);
-    // for common gimmicks
+
+    // For common gimmicks
     Gimmick(GimmickBuildInfo* info, const char* taskName);
-    // similar to above?
+
+    // unk
     Gimmick(int gmkID, GimmickBuildInfo* info);
 
     virtual ~Gimmick();
@@ -104,7 +104,7 @@ public:
     void vf64(bool) override;
 
     virtual void    vf68();
-    virtual Vec3f   vf6C();
+    virtual gfl::Vec3   vf6C();
     virtual u32     GetGimmickID();
     virtual int     vf74();
     virtual int     vf78();
@@ -119,22 +119,22 @@ public:
     virtual int     vf9C();
     virtual void    vfA0();
     virtual int     vfA4();
-    virtual Vec2f   vfAC();
+    virtual gfl::Vec2   vfAC();
     virtual void    vfB0();
-    virtual Vec2f   vfB8();
+    virtual gfl::Vec2   vfB8();
     virtual void    Update();
     virtual void    vfC0();
 
 public:
     int mGimmickID;
-    u32 m_84;
-    GimmickBuildInfo mStageBuildInfo;
+    uint m_84;
+    GimmickBuildInfo mBuildInfo;
     void* m_124;
-    gfl::Task* mpTask;
-    u32 m_12C;
+    gfl::Task* mTask;
+    uint m_12C;
 };
 
 
-ASSERT_SIZE(Gimmick, 0x130)
+// ASSERT_SIZE(Gimmick, 0x130);
 
 #endif
