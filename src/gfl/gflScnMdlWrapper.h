@@ -1,7 +1,9 @@
 #ifndef GFL_SCNMDLWRAPPER_H
 #define GFL_SCNMDLWRAPPER_H
 
-#include <nw4r/g3d/g3d_obj.h>
+#include <nw4r/g3d/g3d_scnmdl.h>
+#include "gflRenderObj.h"
+#include "gflVec3.h"
 
 namespace nw4r { namespace g3d {
     class LightObjData;
@@ -10,6 +12,24 @@ namespace nw4r { namespace g3d {
     };
 } }
 
+
+namespace gfl {
+    class ScnMdlWrapper : public RenderObj {
+    public:
+        ScnMdlWrapper();
+        
+        virtual ~ScnMdlWrapper();
+
+    public:
+        nw4r::g3d::LightObj mLightObj;
+        bool m_1C;
+        gfl::Vec3 m_20;
+        nw4r::g3d::ScnMdl* mScnMdl;
+        void* m_30;
+    };
+
+    ASSERT_SIZE(ScnMdlWrapper, 0x34)
+}
 
 
 #endif
