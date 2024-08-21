@@ -11,6 +11,7 @@
 typedef float MTX34[3][4];
 
 typedef uint32_t uint;
+typedef unsigned long ulong;
 
 // typedef uint16_t u16;
 // typedef int16_t s16;
