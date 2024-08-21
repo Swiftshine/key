@@ -1,13 +1,12 @@
-#ifndef GFL_RENDER_OBJ_H
-#define GFL_RENDER_OBJ_H
+#ifndef GFL_RENDEROBJ_H
+#define GFL_RENDEROBJ_H
 
-#include <gfl/gfl_types.h>
+#include "types.h"
 #include <revolution/MEM.h>
 
 namespace gfl {
     class FullSortScene;
 
-    
     class RenderObj {
         RenderObj();
         virtual ~RenderObj();
@@ -39,8 +38,6 @@ namespace gfl {
         f32 m_10;
         u32 m_14;
     };
-
-    ASSERT_SIZE(RenderObj, 0x18)
-}
+};
 
 #endif
