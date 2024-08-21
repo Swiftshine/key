@@ -1,7 +1,7 @@
 #ifndef GFL_TASKINFO_H
 #define GFL_TASKINFO_H
 
-#define GFL_TASKINFO_TASK_COUNT 1400
+#define GFL_TASKLIST_TASK_COUNT 1400
 
 
 #include <string.h> // memset
@@ -35,8 +35,20 @@ namespace gfl {
             return mParentInfo;
         }
 
+        inline void SetParentInfo(TaskInfo* info) {
+            mParentInfo = info;
+        }
+
+        inline void SetSiblingInfo(TaskInfo* info) {
+            mSiblingInfo = info;
+        }
+
         inline TaskInfo* GetSiblingInfo() {
             return mSiblingInfo;
+        }
+
+        inline void SetChildInfo(TaskInfo* info) {
+            mChildInfo = info;
         }
 
         inline TaskInfo* GetChildInfo() {
@@ -47,6 +59,17 @@ namespace gfl {
             return mOwner;
         }
 
+        inline void SetOwner(Task* t) {
+            mOwner = t;
+        }
+
+        inline void SetFlags(u8 newFlags) {
+            mFlags = newFlags;
+        }
+
+        inline void ClearName() {
+            memset(mName, 0, sizeof(mName));
+        }
         static inline Task* GetParentTask(TaskInfo* ti) {
             TaskInfo* pi = ti->GetParentInfo();
             if (pi) {
@@ -100,16 +123,35 @@ namespace gfl {
         static TaskList* sInstance;
     public:
         inline TaskList() {
-            memset(mTaskActive, false, GFL_TASKINFO_TASK_COUNT);
+            memset(mTaskActive, false, GFL_TASKLIST_TASK_COUNT);
         }
 
         inline ~TaskList() { }
 
+        // this function is inlined in GFL 2010, but not in GFL 2015
+        inline TaskInfo* GetNextAvailableTaskInfo() {
+            for (uint i = 0; i < GFL_TASKLIST_TASK_COUNT; i++) {
+                if (!mTaskActive[i]) {
+                    TaskInfo* info = &mTaskInfo[i];
+                    mTaskInfo[i].SetParentInfo(nullptr);
+                    mTaskInfo[i].SetSiblingInfo(nullptr);
+                    mTaskInfo[i].SetChildInfo(nullptr);
+                    mTaskInfo[i].SetOwner(nullptr);
+                    mTaskInfo[i].SetFlags(0);
+                    mTaskInfo[i].ClearName();
+                    mTaskActive[i] = true;
+                    return info;
+                }
+            }
+
+            return nullptr;
+        }
+
         static void InitInstance();
         static void DestroyInstance();
     private:
-        bool mTaskActive[GFL_TASKINFO_TASK_COUNT];
-        TaskInfo mTaskInfo[GFL_TASKINFO_TASK_COUNT];
+        bool mTaskActive[GFL_TASKLIST_TASK_COUNT];
+        TaskInfo mTaskInfo[GFL_TASKLIST_TASK_COUNT];
     };
 
     ASSERT_SIZE(TaskList, 0xE038);
