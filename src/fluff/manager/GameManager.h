@@ -12,6 +12,7 @@
 
 #include "manager/PointerManager.h"
 #include "gfl/gflScopedPointer.h"
+#include "gfl/gflArray.h"
 #include "stage/Stage.h"
 
 namespace gfl { class ParamBool; }
@@ -150,46 +151,43 @@ private:
     void    StartLoadPhase7();
     void    StartLoadPhase13();
 public:
-    bool _4;
-    u8 pad1[3];
-    uint _8;
-    uint _C;
-    bool pad2[3];
-    int _14;
-    int _18;
-    int _1C;
-    int curMissionID;
-    Stage stage;
-    uint _30;
-    uint curLoadPhase;
-    uint prevLoadPhase;
-    uint curLoadState;
-    uint _40;
-    uint _44;
-    u16 _48;
-    bool _4A; // related to preview loading
-    bool isInWorldMap;
-    uint _4C;
-    uint _50;
-    uint playerCount;
-    uint curPlayerID;
-    f32 _5C;
-    gfl::Vec3 playerStartPosition;
-    class StageManager* stageManager;
-    class CameraManager* cameraManager;
-    PlayerBase* players[2];
-    gfl::ScopedPointer<PointerManager> playerPointerManagers[2];
-    gfl::Task task;
-    uint _9C;
-    void* _A0;
-    class FlfDemoCtrl* demoCtrl;
-    class MissionGameCtrl* missionGameCtrl;
-    uint _AC;
-    uint _B0;
-    bool _B4;
-    u8 pad3[3];
-    int _B8;
-    uint _BC;
+    bool m_4;
+    uint m_8;
+    uint m_C;
+    int m_14;
+    int m_18;
+    int m_1C;
+    int mCurrentMissionID;
+    Stage mStage;
+    uint m_30;
+    uint mCurrentLoadPhase;
+    uint mPreviousLoadPhase;
+    uint mCurrrentLoadState;
+    uint m_40;
+    uint m_44;
+    u16 m_48;
+    bool m_4A; // related to preview loading
+    bool mIsInWorldMap;
+    uint m_4C;
+    uint m_50;
+    uint mPlayerCount;
+    uint mCurrentPlayerID;
+    float m_5C;
+    gfl::Vec3 mPlayerStartPosition;
+    class StageManager* mStageManager;
+    class CameraManager* mCameraManager;
+    gfl::FixedArray<PlayerBase*, 2> mPlayers;
+    gfl::FixedArray<gfl::ScopedPointer<PointerManager>, 2> mPlayerPointerManagers;
+    gfl::Task mTask;
+    uint m_9C;
+    void* m_A0;
+    class FlfDemoCtrl* mDemoCtrl;
+    class MissionGameCtrl* mMissionGameCtrl;
+    uint m_AC;
+    uint m_B0;
+    bool m_B4;
+    int m_B8;
+    uint m_BC;
 };
 
 // ASSERT_SIZE(GameManager, 0xC0)

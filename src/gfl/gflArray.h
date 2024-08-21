@@ -42,6 +42,14 @@ namespace gfl {
     private:
         T* mArray;
     };
+
+    template <typename T, uint N>
+    class FixedArray {
+        inline FixedArray() { }
+        inline ~FixedArray() { }
+    private:
+        T mArray[N];
+    };
 }
 
 #endif
