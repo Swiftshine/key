@@ -1,8 +1,6 @@
-#include <game/graphics/NwAnmCtrl.h>
-#include <gfl/mem/mem.h>
+#include "graphics/NwAnmCtrl.h"
 
-
-NwAnmCtrl::NwAnmCtrl(u32 animCount, gfl::ScopedPointer<gfl::ResArchivedFileInfo>& fileInfo, const char* animName) {
+NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ScopedPointer<gfl::ResArchivedFileInfo>& fileInfo, const char* animName) {
     mpFileInfo = fileInfo.get();
 
     if (mpFileInfo.get()) {
@@ -11,7 +9,7 @@ NwAnmCtrl::NwAnmCtrl(u32 animCount, gfl::ScopedPointer<gfl::ResArchivedFileInfo>
     
     // mpModelWrapper = nullptr
     mpModelWrapper.Reset();
-    mAnimName.Set(animName);
+    mAnimName = animName;
     mCurrentAnimIndex = 0;
     mpAnimations = nullptr;
     mNumAnims = animCount;
@@ -31,31 +29,31 @@ NwAnmCtrl::~NwAnmCtrl() {
     // delete mpFileInfo;
 }
 
-void NwAnmCtrl::PlayAnimationByNameAndIndex(u32 animIndex, const char* animName) {
+void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* animName) {
     
 }
 
-class gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(u32 arg1) {
+class gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint arg1) {
     return nullptr;
 }
 
-void NwAnmCtrl::SetFullSortSceneModelWrapper(class FullSortScene* scene, u32 arg2) {
+void NwAnmCtrl::SetFullSortSceneModelWrapper(class FullSortScene* scene, uint arg2) {
     // scene->SetModelWrapper(SetupModelWrapper(arg2));
 }
 
-void NwAnmCtrl::SetStageFullSortSceneModelWrapper(u32 arg1) {
+void NwAnmCtrl::SetStageFullSortSceneModelWrapper(uint arg1) {
     // SetFullSortSceneModelWrapper(StageManager::Instance->GetFullSortSceneByID(6), arg1);
 }
 
-u32 NwAnmCtrl::fn_800EA1F4() {
+uint NwAnmCtrl::fn_800EA1F4() {
     return 0;
 }
 
-NwAnm* NwAnmCtrl::GetAnimationByIndex(u32 index) {
+NwAnm* NwAnmCtrl::GetAnimationByIndex(uint index) {
     return &mpAnimations[index];
 }
 
-void NwAnmCtrl::SetCurrentAnimationIndex(u32 index) {
+void NwAnmCtrl::SetCurrentAnimationIndex(uint index) {
     GetAnimationByIndex(index)->SetModelWrapper(mpModelWrapper.get(), true);
     mCurrentAnimIndex = index;
 }
@@ -88,12 +86,12 @@ bool NwAnmCtrl::IsAnimationDone() {
     return true;
 }
 
-bool NwAnmCtrl::HasAnim(u32 index) {
+bool NwAnmCtrl::HasAnim(uint index) {
     return index >= mNumAnims ? false : GetAnimationByIndex(index)->HasAnim();
 }
 
-extern "C" Vec3f& fn_8001DCB0(NwAnm*, gfl::ScnMdlWrapper*, class nw4r::g3d::ResMdl*);
+extern "C" gfl::Vec3& fn_8001DCB0(NwAnm*, gfl::ScnMdlWrapper*, class nw4r::g3d::ResMdl*);
 
-Vec3f& NwAnmCtrl::fn_800EA480(class nw4r::g3d::ResMdl* resmdl) {
+gfl::Vec3 & NwAnmCtrl::fn_800EA480(class nw4r::g3d::ResMdl* resmdl) {
     return fn_8001DCB0(GetCurrentAnimation(), mpModelWrapper.get(), resmdl);
 }

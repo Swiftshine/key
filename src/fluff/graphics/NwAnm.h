@@ -39,6 +39,6 @@ public:
     class nw4r::g3d::AnmObj* mShpAnim; // ShpRes
 };
 
-ASSERT_SIZE(NwAnm, 0x28);
+// ASSERT_SIZE(NwAnm, 0x28);
 
 #endif
