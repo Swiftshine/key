@@ -1,7 +1,8 @@
 #ifndef FLUFF_COL_OBJ_H
 #define FLUFF_COL_OBJ_H
 
-#include <flf_types.h>
+#include "types.h"
+#include "gflVec3.h"
 
 class FlfGameObj;
 class KdTree;
@@ -15,10 +16,10 @@ public:
     virtual void vf10();
     virtual void RemoveFromTree();
 public:
-    u32 m_4;
-    FlfGameObj* mpOwner;
-    KdTree* mpTree;
-    Vec3f mPosition;
+    uint m_4;
+    FlfGameObj* mOwner;
+    KdTree* mTree;
+    gfl::Vec3 mPosition;
 };
 
 ASSERT_SIZE(ColObj, 0x1C)
