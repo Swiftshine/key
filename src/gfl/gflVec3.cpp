@@ -1,4 +1,5 @@
-#include <gfl/math/Vector3F.h>
+#include "gflVec3.h"
+
 using namespace gfl;
 
 extern "C" float ZeroFloat;
