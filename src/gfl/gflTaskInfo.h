@@ -67,6 +67,10 @@ namespace gfl {
             mFlags = newFlags;
         }
 
+        inline const char* GetName() {
+            return mName;
+        }
+        
         inline void ClearName() {
             memset(mName, 0, sizeof(mName));
         }
@@ -122,6 +126,10 @@ namespace gfl {
     private:
         static TaskList* sInstance;
     public:
+        static inline TaskList* Instance() {
+            return sInstance;
+        }
+
         inline TaskList() {
             memset(mTaskActive, false, GFL_TASKLIST_TASK_COUNT);
         }

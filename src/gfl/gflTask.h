@@ -25,6 +25,7 @@ namespace gfl {
 
     public:
         inline Task() { }
+        void Init(const char* newname);
 
         virtual ~Task();
         virtual uint PollTask();
@@ -39,7 +40,7 @@ namespace gfl {
         void  SetTaskName(const char* newName);
         void  CreateSubtask(u8 groupID);
     public:
-        TaskInfo* mInfo;
+        TaskInfo* mTaskInfo;
         void* mFunctor;
         void* mFunctorFunc; // gfl::FunctorFunc0<void(*)(), void>
         int m_10;
