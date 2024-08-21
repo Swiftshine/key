@@ -20,6 +20,9 @@ namespace gfl {
         void operator=(const char* src);
         void operator=(const std::string& src);
         bool HasForwardSlash();
+
+        inline const char* GetString() const { return mString; }
+        inline uint GetLength() const { return mLen; }
     private:
         char mString[512];
         uint mLen;
