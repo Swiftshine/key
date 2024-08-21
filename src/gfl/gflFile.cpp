@@ -7,7 +7,7 @@ using namespace gfl;
 const char gfl::File::EmptyFilename[] = {0, 0, 0, 0};
 
 bool gfl::File::Open(const char* filename) {
-    File* file = FileSystemWii::Instance->Open(filename, 1);
+    File* file = FileSystemWii::Instance()->Open(filename, 1);
 
     if (file) {
         file->Close();
@@ -18,22 +18,22 @@ bool gfl::File::Open(const char* filename) {
 }
 
 void gfl::File::Close() {
-    fs->Close(this);
-    fs = NULL;
+    mFilesystem->Close(this);
+    mFilesystem = nullptr;
 }
 
 void gfl::File::Reset() {
-    fs = NULL;
-    filename = EmptyFilename;
-    *(u32*)((u8*)this + 0x20C) = 0;
+    mFilesystem = nullptr;
+    mFilename = EmptyFilename;
+    *(uint*)((u8*)this + 0x20C) = 0;
 }
 
-void gfl::File::Read(void* addr, u32 len, u32 fileOffs) {
-    fs->Read(this, addr, len, fileOffs);
+void gfl::File::Read(void* addr, uint len, uint fileOffs) {
+    mFilesystem->Read(this, addr, len, fileOffs);
 }
 
-void gfl::File::ReadAsync(void* addr, u32 len, u32 fileOffs, u32 callback) {
-    fs->ReadAsync(this, addr, len, fileOffs, callback);
+void gfl::File::ReadAsync(void* addr, uint len, uint fileOffs, uint callback) {
+    mFilesystem->ReadAsync(this, addr, len, fileOffs, callback);
 }
 
 void gfl::File::vf14() { }

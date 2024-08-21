@@ -16,6 +16,9 @@ namespace gfl {
         static OSThread BPEThread;
         static OSThread* CurrentBPEThread;
     public:
+        static inline FileSystemWii* Instance() {
+            return sInstance;
+        }
         static void InitInstance();
         static void DestroyInstance();
 
