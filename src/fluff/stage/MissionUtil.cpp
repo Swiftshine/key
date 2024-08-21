@@ -1,10 +1,9 @@
-#include <game/util/MissionUtil.h>
+#include "stage/MissionUtil.h"
 #include <cstdio>
 
-using namespace FluffUtil;
 static const char MissionIndicators[] = "NBTDCS";
 static const char* MissionNameTemplate = "M%c%02d";
-int Mission::GetMissionTypeByCode(int code) {
+int MissionUtil::GetMissionTypeByCode(int code) {
     int ret = MissionType::None;
     int curType;
     int c;
@@ -20,7 +19,7 @@ int Mission::GetMissionTypeByCode(int code) {
     return ret;
 }
 
-int Mission::GetMissionCodeByType(int type) {
+int MissionUtil::GetMissionCodeByType(int type) {
     int ret = MissionCode::None;
     switch (type) {
         case MissionType::Bead:   ret = MissionCode::Bead; break;
@@ -32,7 +31,7 @@ int Mission::GetMissionCodeByType(int type) {
     return ret;
 }
 
-int Mission::GetMissionCountByType(int type) {
+int MissionUtil::GetMissionCountByType(int type) {
     int ret = MissionCount::None;
     switch (type) {
         case MissionType::Bead:   ret = MissionCount::Bead; break;
@@ -44,7 +43,7 @@ int Mission::GetMissionCountByType(int type) {
     return ret;
 }
 
-int Mission::GetMissionIDBaseByType(int type) {
+int MissionUtil::GetMissionIDBaseByType(int type) {
     int ret = MissionIDBase::None;
     switch (type) {
         case MissionType::Bead:   ret = MissionIDBase::Bead; break;
@@ -56,7 +55,7 @@ int Mission::GetMissionIDBaseByType(int type) {
     return ret;
 }
 
-char Mission::GetMissionIdentifierByType(int type) {
+char MissionUtil::GetMissionIdentifierByType(int type) {
     char ret = 0;
     int t = static_cast<signed long>(type);
 
@@ -68,30 +67,23 @@ char Mission::GetMissionIdentifierByType(int type) {
     return ret;
 }
 
-bool Mission::HasMissionIndicator(int type, gfl::BasicString* str) {
+bool MissionUtil::HasMissionIndicator(int type, std::string& str) {
     bool ret = false;
-    u32 len;
+    uint len;
     char target;
     int charIndex;
-    s32 t = static_cast<signed long>(type);
+    signed long t = static_cast<signed long>(type);
     
     if (type >= 0 && t < 6) {
-        if (gfl::BasicString::UseSSO(str)) {
-            len = str->shortLen & 0x7F;
-        } else {
-            len = str->length;
-        }
-
-        if (len && str->FindChar(GetMissionIdentifierByType(type), 0) != -1U) {
+        if (0 != str.size() /* && str.find(GetMissionIdentifierByType(type)) != std::string::npos */) {
             ret = true;
         }
-
     }
 
     return ret;
 }
 
-int Mission::GetMissionIDByInfo(int type, int index) {
+int MissionUtil::GetMissionIDByInfo(int type, int index) {
     int id = GetMissionIDBaseByType(type);
     int count = GetMissionCountByType(type);
 
@@ -105,8 +97,8 @@ int Mission::GetMissionIDByInfo(int type, int index) {
 }
 
 
-void Mission::GetMissionInfoByID(int id, int* destType, int* destIndex) {
-    s32 t;
+void MissionUtil::GetMissionInfoByID(int id, int* destType, int* destIndex) {
+    signed long t;
     int type;
     int index;
     bool isValid = false;
@@ -138,22 +130,21 @@ void Mission::GetMissionInfoByID(int id, int* destType, int* destIndex) {
     }
 }
 
-int Mission::GetMissionTypeByID(int id) {
+int MissionUtil::GetMissionTypeByID(int id) {
     int type;
-    GetMissionInfoByID(id, &type, NULL);
+    GetMissionInfoByID(id, &type, nullptr);
     return type;
 }
 
-int Mission::GetMissionIndexByID(int id) {
+int MissionUtil::GetMissionIndexByID(int id) {
     int index;
-    GetMissionInfoByID(id, NULL, &index);
+    GetMissionInfoByID(id, nullptr, &index);
     return index;
 }
 
 extern "C" int snprintf(char*, size_t, const char*, ...);
 
-u32 Mission::GetMissionMagicByID(int id) {
-
+uint MissionUtil::GetMissionMagicByID(int id) {
     int type;
     int index;
     GetMissionInfoByID(id, &type, &index);
@@ -164,9 +155,10 @@ u32 Mission::GetMissionMagicByID(int id) {
         snprintf(magicStr, sizeof(magicStr), "M%c%02d", types[type], index);
         magicStr[4] = 0;
         
-        gfl::BasicString str1(magicStr);
-        gfl::BasicString str2(str1);
-        return str2.GetMagic();
+        std::string str1(magicStr);
+        std::string str2(str1);
+
+        // return str2.substr(0, 4).c_str();
     }
     return 'NONE';
 }

@@ -1,12 +1,11 @@
-#ifndef FLUFF_UTIL_MISSION_H
-#define FLUFF_UTIL_MISSION_H
+#ifndef FLUFF_MISSIONUTIL_H
+#define FLUFF_MISSIONUTIL_H
+
+#include "types.h"
+#include <string>
 
 
-#include <flf_types.h>
-#include <gfl/string/BasicString.h>
-
-namespace FluffUtil {
-namespace Mission {
+namespace MissionUtil {
     // Prefixes to enumerators are defined by what the corresponding mapbin is prefixed with for each Quilty Square resident.
     // mb - Beadrix - bead collection
     // mt - Mara - time trial against Mara
@@ -14,7 +13,7 @@ namespace Mission {
     // ms - Zeke - seeking Zeke
     // mc - Carrie - carrying Carrie to the goal
 
-    SCOPED_ENUM(MissionID,
+    ENUM_CLASS(MissionID,
         NoMission = 0,
 
         // Beadrix's Run - Collect beads within the time limit
@@ -128,7 +127,7 @@ namespace Mission {
         MS_DarkManor = 517
     );
 
-    SCOPED_ENUM(MissionType,
+    ENUM_CLASS(MissionType,
         None    = 0,
         Bead    = 1,
         Time    = 2,
@@ -137,7 +136,7 @@ namespace Mission {
         Seek    = 5,
     );
     
-    SCOPED_ENUM(MissionIndicator,
+    ENUM_CLASS(MissionIndicator,
         None    = 'N', 
         Bead    = 'B',
         Time    = 'T',
@@ -146,7 +145,7 @@ namespace Mission {
         Seek    = 'S',
     );
 
-    SCOPED_ENUM(MissionCode,
+    ENUM_CLASS(MissionCode,
         None    = -1,
         Bead    = 0,
         Time    = 1,
@@ -155,7 +154,7 @@ namespace Mission {
         Defeat  = 4,
     );
 
-    SCOPED_ENUM(MissionCount,
+    ENUM_CLASS(MissionCount,
         None    = 0,
         Bead    = 20,
         Time    = 30,
@@ -164,7 +163,7 @@ namespace Mission {
         Seek    = 18,
     );
 
-    SCOPED_ENUM(MissionIDBase,
+    ENUM_CLASS(MissionIDBase,
         None    = 0,
         Bead    = 100,
         Time    = 200,
@@ -179,13 +178,12 @@ namespace Mission {
     int  GetMissionCountByType(int type) DONT_INLINE;
     int  GetMissionIDBaseByType(int type) DONT_INLINE;
     char GetMissionIdentifierByType(int type) DONT_INLINE;
-    bool HasMissionIndicator(int type, gfl::BasicString* str);
+    bool HasMissionIndicator(int type, std::string& str);
     int  GetMissionIDByInfo(int type, int index);
     void GetMissionInfoByID(int id, int* destType, int* destIndex);
     int  GetMissionTypeByID(int id) DONT_INLINE;
     int  GetMissionIndexByID(int id) DONT_INLINE;
-    u32  GetMissionMagicByID(int id);
-} // Mission
-} // FluffUtil
+    uint  GetMissionMagicByID(int id);
+} // MissionUtil
 
 #endif
