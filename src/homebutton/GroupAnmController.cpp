@@ -1,10 +1,11 @@
-#include <homebutton/GroupAnmController.h>
+#include "homebutton/GroupAnmController.h"
+
 
 homebutton::GroupAnmController::GroupAnmController()
-    : _20(NULL)
-    , _24(NULL)
+    : m_20(nullptr)
+    , m_24(nullptr) 
 { }
 
 homebutton::GroupAnmController::~GroupAnmController() { }
 
-void homebutton::GroupAnmController::fn_806FF870() { }
+// void homebutton::GroupAnmController::fn_806FF870() { }

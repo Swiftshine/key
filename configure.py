@@ -134,7 +134,7 @@ if args.no_asm:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20231018"
-config.dtk_tag = "v0.9.0"
+config.dtk_tag = "v0.9.4"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.11"
 
@@ -182,18 +182,20 @@ cflags_base = [
     # "-ipa file",
     # "-pool on",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
-    "-func_align 4",
     "-enc SJIS",
-    "-i include",
-    "-i include/MSL",
-    "-i include/MSL/internal",
-    "-i include/stl",
-    "-i include/revolution",
-    "-i include/nw4r/",
-    "-i include/nw4r/g3d/",
-    "-i include/nw4r/math/",
-    "-i include/nw4r/ut/",
-    f"-i build/{config.version}/include",
+    "-func_align 4",
+    "-i src/",
+    "-i src/gfl/",
+    "-i src/fluff/",
+    "-i src/PowerPC_EABI_Support/",
+    "-i src/PowerPC_EABI_Support/MSL/",
+    "-i src/PowerPC_EABI_Support/MSL/MSL_C/",
+    "-i src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/",
+    "-i src/PowerPC_EABI_Support/MSL/MSL_C++/",
+    "-i src/PowerPC_EABI_Support/MetroTRK/",
+    "-i src/PowerPC_EABI_Support/Runtime/",
+    "-i src/revolution",
+    f"-i build/{config.version}/src/",
     f"-DVERSION={version_num}",
 ]
 
@@ -258,8 +260,8 @@ config.libs = [
         "cflags": cflags_runtime,
         "host": False,
         "objects": [
-            Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
-            Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
+            # Object(NonMatching, "PowerPC_EABI_Support/Runtime/global_destructor_chain.c"),
+            # Object(NonMatching, "PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp"),
         ],
     },
     {
@@ -290,7 +292,7 @@ config.libs = [
         ],
         "host" : False,
         "objects" : [
-            Object(NonMatching, "homebutton/GroupAnmController.cpp"),
+            # Object(NonMatching, "homebutton/GroupAnmController.cpp"),
         ],
     },
     {
@@ -299,29 +301,17 @@ config.libs = [
         "cflags": [*cflags_base],
         "host": False,
         "objects": [
-            Object(Matching, "gfl/mem/FixedMemoryStream.cpp"),
-            Object(Matching, "gfl/math/Vector3F.cpp"),
-            # Object(Matching, "gfl/mem/Stream.cpp"),
-            # Object(Matching, "gfl/param/ParamBase.cpp"),
-            Object(Matching, "gfl/mem/MemoryBase.cpp"),
-            Object(NonMatching, "gfl/mem/Heap.cpp"),
-            Object(NonMatching, "gfl/mem/Mem.cpp"),
-            Object(Matching,    "gfl/string/FixedString.cpp"),
-            Object(Matching,    "gfl/string.cpp"),
-            Object(NonMatching, "gfl/task/Task.cpp"),
-            Object(Matching,     "gfl/task/TaskInfo.cpp"),
-            Object(NonMatching, "gfl/string/BasicString.cpp"),
-            Object(Matching,    "gfl/file/ResInfo.cpp"),
-            Object(NonMatching,    "gfl/file/ResFileInfo.cpp"),
-            Object(NonMatching, "gfl/file/File.cpp"),
-            Object(NonMatching, "gfl/file/FileSystemWii.cpp"),
-            Object(NonMatching, "gfl/file/DirEntryWii.cpp"),
-            Object(NonMatching, "gfl/file/GfArch.cpp"),
-            Object(NonMatching, "gfl/functor/FunctorFunc.cpp"),
+            Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
+            Object(Matching, "gfl/gflVec3.cpp"),
+            Object(Matching, "gfl/gflMemoryBase.cpp"),
+            Object(NonMatching,    "gfl/gflFixedString.cpp"),
+            Object(Matching,    "gfl/gflChecksum.cpp"),
+            Object(NonMatching,     "gfl/gflTaskInfo.cpp"),
+            Object(Matching,    "gfl/gflResInfo.cpp"),
         ],
     },
     {
-        "lib" : "game/object",
+        "lib" : "fluff/object",
         "mw_version": config.linker_version,
         "cflags": [
             *cflags_base,
@@ -329,12 +319,10 @@ config.libs = [
         ],
         "host": False,
         "objects": [
-            Object(Matching,    "game/object/FlfHandleObj.cpp"),
-            Object(NonMatching, "game/object/FlfGameObj.cpp"),
-            Object(Matching,    "game/object/FlfHandleObjList.cpp"),
-            Object(Matching,    "game/object/FlfGameObjLocator.cpp"),
-            Object(NonMatching, "game/object/Gimmick.cpp"),
-            Object(NonMatching, "game/object/PlayerBase.cpp"),
+            Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
+            Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
+            Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
+            Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
         ],
     },
     {
@@ -343,8 +331,7 @@ config.libs = [
         "cflags": cflags_base,
         "host": False,
         "objects" : [
-            Object(NonMatching, "game/object/gmk/GmkSimpleMdl.cpp"),
-            Object(NonMatching, "game/object/gmk/GmkTurtle.cpp"),
+
         ],
     },
     {
@@ -353,8 +340,7 @@ config.libs = [
         "cflags": [*cflags_base, "-inline deferred",],
         "host": False,
         "objects" : [
-            Object(NonMatching, "game/manager/GimmickManager.cpp"),
-            Object(NonMatching, "game/manager/CameraManager.cpp"),
+
         ],
     },
     {
@@ -363,7 +349,7 @@ config.libs = [
         "cflags": [*cflags_base, "-str nopool,reuse"],
         "host": False,
         "objects" : [
-            Object(NonMatching, "game/util/MissionUtil.cpp"),
+
         ],
     },
     {
@@ -372,7 +358,7 @@ config.libs = [
         "cflags" : cflags_base,
         "host" : False,
         "objects" : [
-            Object(NonMatching, "game/graphics/NwAnmCtrl.cpp"),
+
         ],
     }
 ]

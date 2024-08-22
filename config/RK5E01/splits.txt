@@ -13,126 +13,55 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
-gfl/functor/FunctorFunc.cpp:
-	.text       start:0x80008060 end:0x800080C0
-	.rodata     start:0x807E3830 end:0x807E3858
-
-gfl/string/BasicString.cpp:
-	.text       start:0x8000C22C end:0x8000C824
-
-gfl/math/Vector3F.cpp:
+gfl/gflVec3.cpp:
 	.text       start:0x800127CC end:0x80012858
 
-gfl/file/ResInfo.cpp:
+gfl/gflResInfo.cpp:
 	.text       start:0x80026494 end:0x800264A4
 
-game/object/FlfGameObj.cpp:
+fluff/object/FlfGameObj.cpp:
 	.text       start:0x8002BCF8 end:0x8002C0DC
 	.data       start:0x80839D90 end:0x80839DF8
 	.sdata2     start:0x808E6908 end:0x808E6918
 
-game/manager/CameraManager.cpp:
-	.sdata2     start:0x808E6AF8 end:0x808E6AFC
-
-gfl/string.cpp:
+gfl/gflChecksum.cpp:
 	.text       start:0x8003D1A0 end:0x8003D1DC
 
-game/object/Gimmick.cpp:
-	.text       start:0x8004DBF4 end:0x8004E650
-
-game/manager/GimmickManager.cpp:
-	.text       start:0x80050C3C end:0x80051248
-
-game/object/gmk/GmkSimpleMdl.cpp:
-	.text       start:0x80052DD8 end:0x80053914
-	.data       start:0x8083D408 end:0x8083D4CC
-
-game/object/PlayerBase.cpp:
-	.text       start:0x80097F94 end:0x80099008
-
-game/graphics/NwAnmCtrl.cpp:
-	.text       start:0x800E9DDC end:0x800EA4E4
-	.data       start:0x808420B8 end:0x808420C8
-
-game/object/FlfHandleObj.cpp:
+fluff/object/FlfHandleObj.cpp:
 	.text       start:0x8016874C end:0x80168804
 	.rodata     start:0x807E3A50 end:0x807E3A60
 	.data       start:0x80849798 end:0x808497A4
 	.sdata      start:0x808DF460 end:0x808DF468
 
-game/object/FlfHandleObjList.cpp:
+fluff/object/FlfHandleList.cpp:
 	.text       start:0x80168804 end:0x80168960
 	.sbss       start:0x808E4FF8 end:0x808E4FFC
 
-game/object/FlfGameObjLocator.cpp:
+fluff/object/FlfGameObjLocator.cpp:
 	.text       start:0x802FCB6C end:0x802FCC04
 	.rodata     start:0x80803E50 end:0x80803E64
 	.data       start:0x8086A9D8 end:0x8086AA58
 	.sdata      start:0x808E1578 end:0x808E1580
 
-game/util/MissionUtil.cpp:
-	.text       start:0x804C49F4 end:0x804C4E60
-	.sdata2     start:0x808EB2C4 end:0x808EB2E0
-
-game/object/gmk/GmkTurtle.cpp:
-	.text       start:0x804FA9E4 end:0x804FB358
-
-gfl/mem/Mem.cpp:
-	.text       start:0x8063C4F8 end:0x8063C598
-
-gfl/file/ResFileInfo.cpp:
-	.text       start:0x8063E364 end:0x8063E38C
-
-gfl/file/GfArch.cpp:
-	.text       start:0x8063F418 end:0x806400F0
-	.rodata     start:0x8082C3A4 end:0x8082C3AC
-	.sdata      start:0x808E4350 end:0x808E4358
-
-gfl/file/DirEntryWii.cpp:
-	.text       start:0x806416DC end:0x80641A9C
-
-gfl/file/file.cpp:
-	.text       start:0x80642190 end:0x806423DC
-	.rodata     start:0x8082C424 end:0x8082C428
-
-gfl/file/FileSystemWii.cpp:
-	.text       start:0x806423DC end:0x806428F0
-	.data       start:0x808B7FB8 end:0x808B8000
-	.sbss       start:0x808E5D58 end:0x808E5D5C
-
-gfl/string/FixedString.cpp:
+gfl/gflFixedString.cpp:
 	.text       start:0x80642B00 end:0x80642CB0
 
-gfl/mem/Heap.cpp:
-	.text       start:0x80644264 end:0x8064456C
-	.rodata     start:0x8082C4C0 end:0x8082C4D0
-
-gfl/mem/MemoryBase.cpp:
+gfl/gflMemoryBase.cpp:
 	.text       start:0x80644610 end:0x8064483C
 
-gfl/task/TaskInfo.cpp:
+gfl/gflTaskInfo.cpp:
 	.text       start:0x80645718 end:0x8064583C
 	.sbss       start:0x808E5D78 end:0x808E5D80
 
-gfl/task/Task.cpp:
-	.text       start:0x8064583C end:0x80645E3C
-	.data       start:0x808B80D0 end:0x808B8100
-	.sdata      start:0x808E43F8 end:0x808E440C
-	.bss        start:0x808FDC8C end:0x808FDC98
-
-gfl/mem/FixedMemoryStream.cpp:
+gfl/gflFixedMemoryStream.cpp:
 	.text       start:0x806506A0 end:0x80650838
 	.rodata     start:0x8082C940 end:0x8082C964
 	.data       start:0x808B8350 end:0x808B8380
 	.sdata      start:0x808E4468 end:0x808E4478
 
-Runtime.PPCEABI.H/__init_cpp_exceptions.cpp:
+PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC
 	.ctors      start:0x807E3420 end:0x807E3424 rename:.ctors$10
 	.dtors      start:0x807E37A0 end:0x807E37A4 rename:.dtors$10
 	.dtors      start:0x807E37A4 end:0x807E37A8 rename:.dtors$15
 	.sdata      start:0x808E46D8 end:0x808E46E0
-
-homebutton/GroupAnmController.cpp:
-	.text       start:0x806FF870 end:0x806FFA20
-	.data       start:0x808D7BB0 end:0x808D7BC0
