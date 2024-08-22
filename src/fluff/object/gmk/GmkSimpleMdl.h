@@ -28,9 +28,9 @@ public:
     void vf4C(uint arg1, std::string& arg2) override;
 public:
     gfl::ScnMdlWrapper* mModelWrapper;
-    NwAnm* mPreviousAnim; // guessed
+    NwAnm* mAnim1; // guessed
     NwAnm* mCurrentAnim;
-    NwAnm* mNextAnim; // guessed
+    NwAnm* mAnim3; // guessed
     gfl::Vec3 m_140;
     GmkSimpleMdlRotZ* mZRotationGmk;
     gfl::ResArchivedFileInfo* mFileInfo;
