@@ -3,6 +3,7 @@
 
 #include "object/FlfGameObj.h"
 #include "object/GimmickList.h"
+#include "manager/GimmickManager.h"
 #include "gflVec3.h"
 #include "gflVec2.h"
 #include "gflTask.h"
@@ -12,6 +13,14 @@ extern "C" const char Stage_NullFilename;
 
 class Gimmick : public FlfGameObj {
 public:
+    ENUM_CLASS(ParameterID,
+        FIRST = 0,
+        SECOND = 1,
+        THIRD = 2,
+        FOURTH = 3,
+        FIFTH = 4
+    );
+
     class GimmickBuildInfo {
     public:
         class CommonGimmickBuildInfo {
@@ -49,7 +58,14 @@ public:
             m_1C = other.m_1C;
         }
 
+        inline int GetGimmickID() { return mGimmickID; }
 
+        inline bool IsCommon() { return mExtension->mIsCommon; }
+
+        inline int GetIntParam(int index) { return mIntParams[index]; }
+        inline float GetFloatParam(int index) { return mFloatParams[index]; }
+        inline std::string& GetStringParam(int index) { return mStringParams[index]; }
+        
     public:
         int mGimmickID;
         gfl::Vec3 mPosition;
