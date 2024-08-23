@@ -37,21 +37,21 @@ ENUM_CLASS(GimmickIDs,
     Bead_Small_Red   = 25,          // common
     Bead_Small_Purple = 26,         // common
     Bead_Small_Yellow = 27,         // common
-    Bead_Medium_White,              // common
-    Bead_Medium_Blue,               // common
-    Bead_Medium_Green,              // common
-    Bead_Medium_Orange,             // common
-    Bead_Medium_Red,                // common
-    Bead_Medium_Purple,             // common
-    Bead_Medium_Yellow,             // common
-    Bead_Large_White,               // common
-    Bead_Large_Blue,                // common
-    Bead_Large_Green,               // common
-    Bead_Large_Orange,              // common
-    Bead_Large_Red,                 // common
-    Bead_Large_Purple,              // common
-    Bead_Large_Yellow,              // common
-    Bead_ExtraLarge,                // common
+    Bead_Medium_White = 28,              // common
+    Bead_Medium_Blue = 29,               // common
+    Bead_Medium_Green = 30,              // common
+    Bead_Medium_Orange = 31,             // common
+    Bead_Medium_Red = 32,                // common
+    Bead_Medium_Purple = 33,             // common
+    Bead_Medium_Yellow = 34,             // common
+    Bead_Large_White = 35,               // common
+    Bead_Large_Blue = 36,                // common
+    Bead_Large_Green = 37,               // common
+    Bead_Large_Orange = 38,              // common
+    Bead_Large_Red = 39,                 // common
+    Bead_Large_Purple = 40,              // common
+    Bead_Large_Yellow = 41,              // common
+    Bead_ExtraLarge = 42,                // common
     BeadHolder,
     TurnCloth,                      
     Thumbtack,                      

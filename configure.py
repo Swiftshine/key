@@ -165,7 +165,7 @@ cflags_base = [
     "-align powerpc",
     "-enum int",
     "-fp hardware",
-    "-Cpp_exceptions off",
+    "-Cpp_exceptions on",
     # "-W all",
     "-O4,p",
     "-inline auto",
@@ -187,6 +187,13 @@ cflags_base = [
     "-i src/",
     "-i src/gfl/",
     "-i src/fluff/",
+    "-i src/nw4r/",
+    "-i src/nw4r/g3d/",
+    "-i src/nw4r/ut/",
+    "-i src/nw4r/lyt/",
+    "-i src/nw4r/math/",
+    "-i src/nw4r/snd/",
+    "-i src/nw4r/ef/",
     "-i src/PowerPC_EABI_Support/",
     "-i src/PowerPC_EABI_Support/MSL/",
     "-i src/PowerPC_EABI_Support/MSL/MSL_C/",
@@ -331,7 +338,7 @@ config.libs = [
         "cflags": cflags_base,
         "host": False,
         "objects" : [
-
+            Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
         ],
     },
     {

@@ -27,6 +27,9 @@ fluff/object/FlfGameObj.cpp:
 gfl/gflChecksum.cpp:
 	.text       start:0x8003D1A0 end:0x8003D1DC
 
+fluff/object/gmk/GmkSimpleMdl.cpp:
+	.text       start:0x80052D58 end:0x80053914
+
 fluff/object/FlfHandleObj.cpp:
 	.text       start:0x8016874C end:0x80168804
 	.rodata     start:0x807E3A50 end:0x807E3A60
