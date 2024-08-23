@@ -18,8 +18,6 @@ namespace gfl {
         static ResFileInfo* fn_8063E38C(const char* arg1, void* arg2, void* arg3);
 
         DECL_WEAK ~ResFileInfo();
-
-        virtual ~ResFileInfo();
         virtual GfArch* GetGfArch_thunk();
         virtual uint     GetFilesize();
         virtual GfArch* GetGfArch();
