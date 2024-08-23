@@ -1,4 +1,4 @@
-#ifndef GFL_VEC3_h
+#ifndef GFL_VEC3_H
 #define GFL_VEC3_H
 
 
