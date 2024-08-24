@@ -210,8 +210,8 @@ else:
     cflags_base.append("-DNDEBUG=1")
 
 cflags_fluff = [
-    "-Cpp_exceptions on", 
     *cflags_base,
+    # "-Cpp_exceptions on", 
     "-RTTI on",
     "-inline auto,deferred",
     "-use_lmw_stmw on",
@@ -362,11 +362,15 @@ config.libs = [
             Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
 
-
-            # fluff/object/gmk/
+        ],
+    },
+    {
+        "lib" : "fluff/object/gmk/",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff, "-Cpp_exceptions on"],
+        "host": False,
+        "objects": [
             Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
-
-
         ],
     },
 
