@@ -20,7 +20,9 @@ namespace gfl {
         
         virtual ~ScnMdlWrapper();
 
-    public:
+        inline nw4r::g3d::ScnMdl* GetScnMdl() { return mScnMdl; }
+
+    private:
         nw4r::g3d::LightObj mLightObj;
         bool m_1C;
         gfl::Vec3 m_20;
