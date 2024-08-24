@@ -34,6 +34,12 @@ namespace std {
     using ::frexp;
     using ::ldexp;
     using ::modf;
+
+    float ceilf(float);
+    float floorf(float);
+    float fmodf(float, float);
+    float modff(float, float*);
+    float tanf(float);
 }
 
 #endif

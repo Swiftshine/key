@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_EMFORM_H
 #define NW4R_EF_EMFORM_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

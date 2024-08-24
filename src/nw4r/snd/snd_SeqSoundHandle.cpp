@@ -1,4 +1,4 @@
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ut_RuntimeTypeInfo.h"
 #include "snd_SeqSound.h"
 #include "snd_SeqSoundHandle.h"

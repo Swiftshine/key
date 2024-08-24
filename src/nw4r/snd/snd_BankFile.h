@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_BANK_FILE_H
 #define NW4R_SND_BANK_FILE_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ut_binaryFileFormat.h"
 #include "ut_algorithm.h"
 #include "snd_Util.h"

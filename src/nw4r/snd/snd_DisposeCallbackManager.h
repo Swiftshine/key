@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_DISPOSE_CALLBACK_MANAGER_H
 #define NW4R_SND_DISPOSE_CALLBACK_MANAGER_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "snd_DisposeCallback.h"
 #include "ut_LinkList.h"
 

@@ -1,7 +1,7 @@
 #ifndef NW4R_G3D_SCNROOT_H
 #define NW4R_G3D_SCNROOT_H
 
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "g3d_scnobj.h"
 #include "g3d_camera.h"
 #include "g3d_fog.h"

@@ -3,7 +3,7 @@
 #include "snd_MmlSeqTrack.h"
 #include "snd_MmlParser.h"
 #include "snd_InstancePool.h"
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

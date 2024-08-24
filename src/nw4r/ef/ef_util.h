@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_UTIL
 #define NW4R_EF_UTIL
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ut_list.h"
 
 namespace nw4r

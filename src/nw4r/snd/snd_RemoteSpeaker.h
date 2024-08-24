@@ -3,7 +3,7 @@
 #include <OS.h>
 #include <OSAlarm.h>
 #include <revolution/WENC.h>
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

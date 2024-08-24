@@ -3,7 +3,7 @@
 #include <AXFXDelay.h>
 #include "snd_FxBase.h"
 #include "snd_AxfxImpl.h"
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

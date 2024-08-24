@@ -3,7 +3,7 @@
 #include <revolution/OS/OSMessage.h>
 #include <revolution/OS/OSThread.h>
 #include <revolution/OS/OSMutex.h>
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ut_LinkList.h"
 #include "snd_AxManager.h"
 

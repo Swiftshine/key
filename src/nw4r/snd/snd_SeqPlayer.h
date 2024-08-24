@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_SEQ_PLAYER_H
 #define NW4R_SND_SEQ_PLAYER_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ut_lock.h"
 #include "snd_BasicPlayer.h"
 #include "snd_InstancePool.h"

@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_EFFECTSYSTEM
 #define NW4R_EF_EFFECTSYSTEM
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ef_creationqueue.h"
 #include "ef_ref.h"
 #include "ef_rand.h"

@@ -1,7 +1,7 @@
 #ifndef NW4R_SND_MML_SEQ_TRACK_H
 #define NW4R_SND_MML_SEQ_TRACK_H
 #include "snd_SeqTrack.h"
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

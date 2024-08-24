@@ -1,4 +1,4 @@
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ef_effect.h"
 #include "ef_effectsystem.h"
 #include "ef_memorymanager.h"

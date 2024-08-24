@@ -1,7 +1,7 @@
 #ifndef NW4R_SND_SOUND_ARCHIVE_H
 #define NW4R_SND_SOUND_ARCHIVE_H
 #include "ut_FileStream.h"
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

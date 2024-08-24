@@ -1,7 +1,7 @@
 #ifndef NW4R_EF_EMITTER
 #define NW4R_EF_EMITTER
 #include <math.h>
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ef_ref.h"
 #include "ut_list.h"
 #include "ef_list.h"

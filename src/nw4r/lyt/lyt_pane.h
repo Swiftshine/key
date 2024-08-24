@@ -1,6 +1,6 @@
 #ifndef NW4R_LYT_PANE_H
 #define NW4R_LYT_PANE_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "math_types.h"
 #include "ut_LinkList.h"
 #include "ut_RuntimeTypeInfo.h"

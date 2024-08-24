@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_PARTICLE_H
 #define NW4R_EF_PARTICLE_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ef_ref.h"
 
 namespace nw4r

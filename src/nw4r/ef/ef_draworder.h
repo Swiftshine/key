@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_DRAWORDER
 #define NW4R_EF_DRAWORDER
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ef_particlemanager.h"
 #include "ef_draworderbase.h"
 

@@ -1,6 +1,6 @@
 #ifndef NW4R_G3D_ANMOBJ_H
 #define NW4R_G3D_ANMOBJ_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "g3d_rescommon.h"
 #include "g3d_resmdl.h"
 #include "g3d_obj.h"

@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_REF
 #define NW4R_EF_REF
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "math_types.h"
 
 namespace nw4r

@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_PARTICLEMANAGER
 #define NW4R_EF_PARTICLEMANAGER
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "math_types.h"
 #include "ef_list.h"
 #include "ef_ref.h"

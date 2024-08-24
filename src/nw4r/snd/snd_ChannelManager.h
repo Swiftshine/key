@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_CHANNEL_MANAGER_H
 #define NW4R_SND_CHANNEL_MANAGER_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

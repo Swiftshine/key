@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_SOUND_SYSTEM_H
 #define NW4R_SND_SOUND_SYSTEM_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "snd_AxManager.h"
 
 namespace nw4r

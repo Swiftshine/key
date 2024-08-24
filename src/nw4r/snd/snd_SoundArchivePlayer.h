@@ -4,7 +4,7 @@
 #include "snd_SoundHandle.h"
 #include "snd_DisposeCallback.h"
 #include "snd_SoundMemoryAllocatable.h"
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

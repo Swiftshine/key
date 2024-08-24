@@ -1,6 +1,6 @@
 #ifndef NW4R_G3D_RESCOMMON_H
 #define NW4R_G3D_RESCOMMON_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 #define NW4R_G3D_CREATE_RES_NAME_DATA(VAR,VAL) ResNameData ResNameData_##VAR = { sizeof(VAL) - 1, VAL }
 

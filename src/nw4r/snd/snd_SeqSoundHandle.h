@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_SEQ_SOUND_HANDLE_H
 #define NW4R_SND_SEQ_SOUND_HANDLE_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "snd_SoundHandle.h"
 
 namespace nw4r

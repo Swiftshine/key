@@ -20,6 +20,11 @@ extern "C" {
 #define HUGE_VALL
 */
 
+#ifndef M_PI
+#    define M_PI 3.14159265358979323846
+#endif
+
+
 #define FP_NAN 1
 #define FP_INFINITE 2
 #define FP_ZERO 3

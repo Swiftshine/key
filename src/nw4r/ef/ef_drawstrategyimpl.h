@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_DRAW_STRATEGY_IMPL_H
 #define NW4R_EF_DRAW_STRATEGY_IMPL_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ef_drawstrategy.h"
 #include "math_types.h"
 

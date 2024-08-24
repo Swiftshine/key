@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_SOUND_ARCHIVE_FILE_H
 #define NW4R_SND_SOUND_ARCHIVE_FILE_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ut_binaryFileFormat.h"
 #include "snd_Util.h"
 #include "snd_SoundArchive.h"

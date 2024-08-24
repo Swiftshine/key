@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_RESOURCE
 #define NW4R_EF_RESOURCE
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

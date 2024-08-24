@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_FRAME_HEAP_H
 #define NW4R_SND_FRAME_HEAP_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ut_LinkList.h"
 #include "ut_algorithm.h"
 

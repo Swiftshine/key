@@ -2,7 +2,7 @@
 #define NW4R_SND_SOUND_ARCHIVE_LOADER_H
 #include "snd_SoundMemoryAllocatable.h"
 #include "ut_FileStream.h"
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include <OSMutex.h>
 
 namespace nw4r

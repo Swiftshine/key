@@ -1,6 +1,6 @@
 #ifndef NW4R_EF_EFFECT
 #define NW4R_EF_EFFECT
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "math_types.h"
 #include "ef_ref.h"
 #include "ut_list.h"

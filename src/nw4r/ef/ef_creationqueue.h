@@ -1,7 +1,7 @@
 #ifndef NW4R_EF_CREATIONQUEUE
 #define NW4R_EF_CREATIONQUEUE
 #include "ef_emitter.h"
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 namespace nw4r
 {

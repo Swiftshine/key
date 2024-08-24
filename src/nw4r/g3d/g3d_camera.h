@@ -1,6 +1,6 @@
 #ifndef NW4R_G3D_CAMERA_H
 #define NW4R_G3D_CAMERA_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "g3d_rescommon.h"
 #include "math_types.h"
 #include <revolution/MTX.h>

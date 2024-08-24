@@ -165,7 +165,7 @@ cflags_base = [
     "-align powerpc",
     "-enum int",
     "-fp hardware",
-    "-Cpp_exceptions on",
+    "-Cpp_exceptions off",
     # "-W all",
     "-O4,p",
     "-inline auto",
@@ -187,7 +187,6 @@ cflags_base = [
     "-i src/",
     "-i src/gfl/",
     "-i src/fluff/",
-    "-i src/nw4r/",
     "-i src/nw4r/g3d/",
     "-i src/nw4r/ut/",
     "-i src/nw4r/lyt/",
@@ -204,6 +203,11 @@ cflags_base = [
     "-i src/revolution",
     f"-i build/{config.version}/src/",
     f"-DVERSION={version_num}",
+]
+
+cflags_fluff = [
+    *cflags_base,
+    "-Cpp_exceptions on",
 ]
 
 # Debug flags
@@ -333,9 +337,9 @@ config.libs = [
         ],
     },
     {
-        "lib" : "game/object/gmk",
+        "lib" : "fluff/object/gmk",
         "mw_version": config.linker_version,
-        "cflags": cflags_base,
+        "cflags": cflags_fluff,
         "host": False,
         "objects" : [
             Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),

@@ -1,6 +1,6 @@
 #ifndef NW4R_G3D_DRAW1_MAT1_SHP_H
 #define NW4R_G3D_DRAW1_MAT1_SHP_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "g3d_resmat.h"
 #include "g3d_resshp.h"
 

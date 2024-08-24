@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_SOUND_HEAP_H
 #define NW4R_SND_SOUND_HEAP_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "snd_FrameHeap.h"
 #include "snd_SoundMemoryAllocatable.h"
 #include <OSMutex.h>

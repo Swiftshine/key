@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_WAVESOUND_H
 #define NW4R_SND_WAVESOUND_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "snd_BasicSound.h"
 #include "snd_WsdPlayer.h"
 #include "ut_RuntimeTypeInfo.h"

@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_STRMCHANNEL_H
 #define NW4R_SND_STRMCHANNEL_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 
 #define BLOCK_MAX 0x20
 

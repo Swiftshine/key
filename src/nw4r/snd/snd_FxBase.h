@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_FX_BASE_H
 #define NW4R_SND_FX_BASE_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "snd_Common.h"
 #include "ut_LinkList.h"
 

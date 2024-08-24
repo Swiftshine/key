@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_TASK_H
 #define NW4R_SND_TASK_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ut_LinkList.h"
 
 namespace nw4r

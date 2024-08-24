@@ -1,5 +1,5 @@
 #ifdef __DECOMP_NON_MATCHING
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "ef_emitter.h"
 #include "ef_emform.h"
 #include "ef_emitterform.h"

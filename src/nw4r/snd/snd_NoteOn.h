@@ -1,6 +1,6 @@
 #ifndef NW4R_SND_NOTE_ON_H
 #define NW4R_SND_NOTE_ON_H
-#include "types_nw4r.h"
+#include "nw4r/types_nw4r.h"
 #include "snd_Channel.h"
 
 namespace nw4r
