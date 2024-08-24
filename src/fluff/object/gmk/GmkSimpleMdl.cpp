@@ -1,5 +1,7 @@
 #include <cstdio>
+#include <rand.h>
 
+#include "stage/FullSortScene.h"
 #include "object/gmk/GmkSimpleMdl.h"
 
 const char GmkSimpleMdl::BRRES_path_template[] = "bggimmick/%s/%s.brres";
@@ -8,19 +10,36 @@ const char GmkSimpleMdl::MDL0_name_template[] = "%s_00_000";
 // function declarations
 void fn_8003D93C(void*, s16);
 float GetZOrder(int sceneIndex, int arg1);
+extern "C" float ZeroFloat;
 // 
+
+
+float GmkSimpleMdl::RandomFloat(int max) {
+    float ret;
+
+    if (max >= 0) {
+        ret = static_cast<float>(max);
+    } else {
+        return static_cast<float>(rand() % -max);
+    }
+    return ret;
+}
 
 GmkSimpleMdl::GmkSimpleMdl()
     : Gimmick(GimmickIDs::GMK_TYPE_SIMPLE_MDL)
-
     , mPrimaryModelWrapper(nullptr)
     , mPrimaryAnim(nullptr)
     , mSecondaryModelWrapper(nullptr)
     , mSecondaryAnim(nullptr)
     , mZRotationGmk(nullptr)
     , mFileInfo(nullptr)
-    , m_140()
+    , m_140(0)
+    , m_144(0)
+    , m_148(0)
 { }
+
+DECL_WEAK gfl::ScopedPointer<gfl::ScnMdlWrapper>::~ScopedPointer() { }
+
 
 GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     : Gimmick(GimmickIDs::GMK_TYPE_SIMPLE_MDL, buildInfo)
@@ -31,23 +50,47 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     , mSecondaryAnim(nullptr)
     , mZRotationGmk(nullptr)
     , mFileInfo(nullptr)
-    , m_140()
+    , m_140(0)
+    , m_144(0)
+    , m_148(0)
 {
-    int useAnim = mBuildInfo.GetIntParam(ParameterID::SECOND);
-    int id = this->GetGimmickID();
-    const char* firstString;
+
+    int secondVal = mBuildInfo.GetIntParam(ParameterID::SECOND);
+    int gmkID = GetGimmickID();
+
     char brresPath[0x200];
     char resMdlName[0x200];
+    if (gmkID - 2 < 2) {
+        const char* resourceName = mBuildInfo.GetStringParam(Parameter::ResourceName).begin();
+        snprintf(brresPath, sizeof(brresPath), "bggimmick/%s/%s.brres", resourceName, resourceName);
+        snprintf(resMdlName, sizeof(resMdlName), "%s_00_000", resourceName);
 
-    if (id - 2 < GimmickIDs::SimpleMdlCommon) {
-        firstString = mBuildInfo.mStringParams[0].begin();
+        SetModel(brresPath, resMdlName, secondVal != 0);
 
-        snprintf(brresPath, 0x200, BRRES_path_template, firstString, firstString);
-        snprintf(resMdlName, 0x200, MDL0_name_template, firstString);
-        SetModel(brresPath, resMdlName, useAnim != false);
-        int sortScene = mBuildInfo.GetIntParam(ParameterID::FIRST) + 6;
-        mPosition.z = GetZOrder(sortScene, 4);
+        int sortSceneIndex = mBuildInfo.GetIntParam(Parameter::SortSceneIndex) + 6;
+        mPosition.z = FullSortScene::GetZOrder(sortSceneIndex, 4);
         UpdateModel();
+        SetModelWrapperBySceneIndex(sortSceneIndex);
+
+        // GmkSimpleMdl uses an auxiliary gimmick for Z rotation if it's needed
+        if (0.0 != mBuildInfo.GetFloatParam(Parameter::Z_Rotation)) {
+            GmkSimpleMdlRotZ* zRotationGmk = new GmkSimpleMdlRotZ(mPrimaryModelWrapper->GetScnMdl());
+
+            if (nullptr == zRotationGmk) {
+                delete zRotationGmk;
+                mZRotationGmk = nullptr;
+            } else {
+                mZRotationGmk = zRotationGmk;
+            }
+
+            mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::Z_Rotation));
+        }
+
+
+        if (0 != mBuildInfo.GetIntParam(Parameter::InitialFrameIndex)) {
+            float frame = RandomFloat(mBuildInfo.GetIntParam(Parameter::InitialFrameIndex));
+            
+        }
     }
 }
 

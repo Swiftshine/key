@@ -7,6 +7,8 @@
 class FullSortScene : public gfl::Scene {
 public:
     void SetModelWrapper(gfl::ScnMdlWrapper* modelWrapper);
+
+    static float GetZOrder(int index, int arg1);
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include "object/Gimmick.h"
 #include <nw4r/g3d/g3d_scnmdl.h>
 
+// An auxiliary Gimmick used by GmkSimpleMdl to handle rotation on the Z axis.
 class GmkSimpleMdlRotZ {
 public:
     GmkSimpleMdlRotZ(nw4r::g3d::ScnMdl*);
@@ -13,8 +14,10 @@ public:
     virtual void vf10();
     virtual void vf14();
     
-public:
-    float mRotation;
+    inline float GetValue() const { return mValue; }
+    inline void SetValue(float value) { mValue = value; }
+private:
+    float mValue;
     int m_8;
     int m_C;
 };
