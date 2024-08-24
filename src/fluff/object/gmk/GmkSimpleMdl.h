@@ -25,12 +25,6 @@ public:
         InitialFrameIndex = 2, // int 2
     );
 public:
-
-    // it's likely this function doesn't strictly belong to GmkSimpleMdl,
-    // since it's used by GmkSimpleNurbs and GmkColAnimMdl as well
-    static float RandomFloat(int arg1);
-
-
     GmkSimpleMdl();
     GmkSimpleMdl(GimmickBuildInfo* buildInfo);
     virtual ~GmkSimpleMdl();

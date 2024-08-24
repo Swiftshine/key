@@ -170,7 +170,9 @@ namespace std {
             do_replace(0, 0, str, str + length, random_access_iterator_tag());
         }
 
-        ~basic_string() {
+        basic_string(const basic_string& other, size_t pos, size_t count);
+
+        ~basic_string() DONT_INLINE_CLASS {
             rep_s &rep = m.first();
             if (!rep.is_short()) {
                 m.second().deallocate(
@@ -178,6 +180,8 @@ namespace std {
                 );
             }
         }
+
+        DONT_INLINE_CLASS basic_string substr(size_t pos, size_t count);
 
         allocator_type get_allocator() const { return m.second(); }
 
@@ -216,6 +220,8 @@ namespace std {
                 rep.longBuf.length = 0;
             }
         }
+
+        int compare(const char* str);
 
         void append(const basic_string &str) {
             random_access_iterator_tag tag; // required to be here to match

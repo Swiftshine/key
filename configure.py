@@ -377,11 +377,11 @@ config.libs = [
     {
         "lib" : "fluff/util",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_base, "-str nopool,reuse"],
+        "cflags": [*cflags_fluff, "-Cpp_exceptions on"],
         "host": False,
         "objects" : [
             # fluff/util/
-
+            Object(NonMatching, "fluff/util/SimpleMdlCommon.cpp"),
         ],
     },
 ]

@@ -3,6 +3,7 @@
 
 #include "stage/FullSortScene.h"
 #include "object/gmk/GmkSimpleMdl.h"
+#include "util/SimpleMdlCommon.h"
 
 const char GmkSimpleMdl::BRRES_path_template[] = "bggimmick/%s/%s.brres";
 const char GmkSimpleMdl::MDL0_name_template[] = "%s_00_000";
@@ -11,19 +12,7 @@ const char GmkSimpleMdl::MDL0_name_template[] = "%s_00_000";
 void fn_8003D93C(void*, s16);
 float GetZOrder(int sceneIndex, int arg1);
 extern "C" float ZeroFloat;
-// 
 
-
-float GmkSimpleMdl::RandomFloat(int max) {
-    float ret;
-
-    if (max >= 0) {
-        ret = static_cast<float>(max);
-    } else {
-        return static_cast<float>(rand() % -max);
-    }
-    return ret;
-}
 
 GmkSimpleMdl::GmkSimpleMdl()
     : Gimmick(GimmickIDs::GMK_TYPE_SIMPLE_MDL)
@@ -88,8 +77,8 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 
 
         if (0 != mBuildInfo.GetIntParam(Parameter::InitialFrameIndex)) {
-            float frame = RandomFloat(mBuildInfo.GetIntParam(Parameter::InitialFrameIndex));
-            
+            float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(Parameter::InitialFrameIndex));
+
         }
     }
 }
