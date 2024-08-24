@@ -202,14 +202,6 @@ cflags_base = [
     f"-DVERSION={version_num}",
 ]
 
-cflags_fluff = [
-    "-Cpp_exceptions on", 
-    *cflags_base,
-    "-RTTI on",
-    "-inline deferred",
-    "-use_lmw_stmw on",
-    "-str reuse,pool,readonly",
-]
 
 # Debug flags
 if config.debug:
@@ -217,6 +209,26 @@ if config.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
+cflags_fluff = [
+    "-Cpp_exceptions on", 
+    *cflags_base,
+    "-RTTI on",
+    "-inline auto,deferred",
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+]
+
+cflags_msl = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-common off",
+    "-inline auto,deferred",
+]
+
+cflags_MSL_C = [
+    *cflags_base,
+]
 # Metrowerks library flags
 cflags_runtime = [
     *cflags_base,
@@ -280,10 +292,10 @@ config.libs = [
     {
         "lib" : "MSL_C",
         "mw_version" : config.linker_version,
-        "cflags" : cflags_base,
+        "cflags" : cflags_MSL_C,
         "host": False,
         "objects" : [
-
+            Object(Matching, "PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/rand.c"),
         ],
     },
     {

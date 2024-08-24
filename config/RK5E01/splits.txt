@@ -68,3 +68,7 @@ PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp:
 	.dtors      start:0x807E37A0 end:0x807E37A4 rename:.dtors$10
 	.dtors      start:0x807E37A4 end:0x807E37A8 rename:.dtors$15
 	.sdata      start:0x808E46D8 end:0x808E46E0
+
+PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/rand.c:
+	.text       start:0x806945D4 end:0x806945FC
+	.sdata      start:0x808E46E8 end:0x808E46EC
