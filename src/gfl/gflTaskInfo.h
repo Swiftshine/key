@@ -3,9 +3,6 @@
 
 #define GFL_TASKLIST_TASK_COUNT 1400
 
-
-#include <string.h> // memset
-
 #include "types.h"
 
 namespace gfl {
