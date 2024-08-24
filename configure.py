@@ -175,10 +175,7 @@ cflags_base = [
     "-nosyspath",
     "-RTTI on",
     "-fp_contract on",
-    "-str reuse,pool,readonly",
-    "-code_merging all",
-    "-code_merging aggressive",
-    "-use_lmw_stmw on",
+
     # "-ipa file",
     # "-pool on",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
@@ -206,8 +203,12 @@ cflags_base = [
 ]
 
 cflags_fluff = [
+    "-Cpp_exceptions on", 
     *cflags_base,
-    "-Cpp_exceptions on",
+    "-RTTI on",
+    "-inline deferred",
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
 ]
 
 # Debug flags
@@ -224,6 +225,7 @@ cflags_runtime = [
     "-gccinc",
     "-common off",
     "-inline auto",
+    "-str reuse,pool,readonly",
 ]
 
 # REL flags
@@ -276,6 +278,15 @@ config.libs = [
         ],
     },
     {
+        "lib" : "MSL_C",
+        "mw_version" : config.linker_version,
+        "cflags" : cflags_base,
+        "host": False,
+        "objects" : [
+
+        ],
+    },
+    {
         "lib" : "revolution",
         "mw_version" : config.linker_version,
         "clags" : cflags_base,
@@ -322,56 +333,41 @@ config.libs = [
         ],
     },
     {
-        "lib" : "fluff/object",
+        "lib" : "fluff",
         "mw_version": config.linker_version,
-        "cflags": [
-            *cflags_base,
-            "-inline deferred",
-        ],
+        "cflags": cflags_fluff,
         "host": False,
         "objects": [
+            # fluff/graphics/
+            
+            # fluff/manager/
+
+
+            # fluff/object/
+
             Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
             Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
-        ],
-    },
-    {
-        "lib" : "fluff/object/gmk",
-        "mw_version": config.linker_version,
-        "cflags": cflags_fluff,
-        "host": False,
-        "objects" : [
+
+
+            # fluff/object/gmk/
             Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
-        ],
-    },
-    {
-        "lib" : "game/manager",
-        "mw_version": config.linker_version,
-        "cflags": [*cflags_base, "-inline deferred",],
-        "host": False,
-        "objects" : [
+
 
         ],
     },
+
     {
-        "lib" : "game/util",
+        "lib" : "fluff/util",
         "mw_version": config.linker_version,
         "cflags": [*cflags_base, "-str nopool,reuse"],
         "host": False,
         "objects" : [
+            # fluff/util/
 
         ],
     },
-    {
-        "lib" : "game/graphics",
-        "mw_version" : config.linker_version,
-        "cflags" : cflags_base,
-        "host" : False,
-        "objects" : [
-
-        ],
-    }
 ]
 
 if args.mode == "configure":
