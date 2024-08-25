@@ -10,8 +10,8 @@ void* operator new(size_t size, u8 heapID);
 void* operator new[](size_t size, u8 heapID);
 
 #define GFL_ALLOC_WORK(dest, type) \
-    type* ptr = new (gfl::HeapID::Work) type; \
-    if (nullptr == ptr) { delete dest; dest = nullptr; } else { dest = ptr; }
+    type* temporary_pointer = new (gfl::HeapID::Work) type; \
+    if (nullptr == temporary_pointer ) { delete dest; dest = nullptr; } else { dest = temporary_pointer ; }
 
 namespace gfl {
     ENUM_CLASS(HeapID,
