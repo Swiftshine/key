@@ -27,6 +27,9 @@ fluff/object/FlfGameObj.cpp:
 gfl/gflChecksum.cpp:
 	.text       start:0x8003D1A0 end:0x8003D1DC
 
+fluff/manager/StageResourceManager.cpp:
+	.text       start:0x80045310 end:0x80045ED4
+
 fluff/util/SimpleMdlCommon.cpp:
 	.text       start:0x80052B80 end:0x80052DD8
 

@@ -353,7 +353,7 @@ config.libs = [
             # fluff/graphics/
             
             # fluff/manager/
-
+            Object(NonMatching, "fluff/manager/StageResourceManager.cpp"),
 
             # fluff/object/
 
