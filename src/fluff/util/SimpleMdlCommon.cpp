@@ -17,8 +17,29 @@ Gimmick* SimpleMdlCommon::Build(Gimmick::GimmickBuildInfo* buildInfo) {
     return new (gfl::HeapID::Work) GmkColAnimMdl(buildInfo);
 }
 
+extern "C" void fn_800D5960(Gimmick::GimmickBuildInfo*);
+extern "C" void fn_80052060(void*, const char*);
+extern "C" void* lbl_808E4DC8;
 void SimpleMdlCommon::fn_80052C8C(Gimmick::GimmickBuildInfo* buildInfo) {
+    void* list = lbl_808E4DC8;
 
+    std::string prefix(buildInfo->GetStringParam(Parameter::Name), 0, 2);
+
+    bool cmp = prefix.compare(lbl_808E6EE0) == 0;
+
+    if (cmp) {
+        // GimmickUtil::AddToNameList(buildInfo);
+        fn_800D5960(buildInfo);
+        return;
+    } else if (buildInfo->GetIntParam(Parameter::UnkInt1) < 10) {
+        // GimmickUtil::AddToNameList(buildInfo->GetStringParam(Parameter::Name).begin());
+        fn_80052060(list, buildInfo->GetStringParam(Parameter::Name).begin());
+    } else {
+        fn_800D5960(buildInfo);
+        return;
+    }
+
+    // GimmickUtil::AddToNameList(buildInfo)
 }
 
 float SimpleMdlCommon::GetInitialAnimFrame(int frameIndex) {

@@ -381,7 +381,7 @@ config.libs = [
         "host": False,
         "objects" : [
             # fluff/util/
-            Object(NonMatching, "fluff/util/SimpleMdlCommon.cpp"),
+            Object(Equivalent, "fluff/util/SimpleMdlCommon.cpp"),
         ],
     },
 ]
