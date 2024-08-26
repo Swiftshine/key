@@ -4,12 +4,12 @@
 
 #include "types.h"
 #include "gfl/gflTask.h"
+#include "mapdata/Mapdata.h"
 #include <vector>
 #include <string>
 
 class Gimmick;
 
-namespace Mapdata { namespace Mapbin { class Header; }}
 
 class GimmickManager {
 private:

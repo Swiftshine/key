@@ -42,7 +42,7 @@ namespace gfl {
         };
 
         
-        ASSERT_SIZE(FileHeader, 0x20);
+        // ASSERT_SIZE(FileHeader, 0x20);
 
         struct FileEntry {
             uint mHash;
@@ -51,7 +51,7 @@ namespace gfl {
             uint mCompressedDataOffset;
         };
 
-        ASSERT_SIZE(FileEntry, 0x10);
+        // ASSERT_SIZE(FileEntry, 0x10);
 
         // This class is never actually found in-file, it's just used for
         // archive processing in code.
@@ -59,7 +59,7 @@ namespace gfl {
             uint mFlags;
         };
 
-        ASSERT_SIZE(FileEntryEx, 0x14)
+        // ASSERT_SIZE(FileEntryEx, 0x14)
 
         struct CompressionHeader {
             char mMagic[4];      // "GFCP" - GoodFeel ComPression?

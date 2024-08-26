@@ -10,6 +10,9 @@
 #include <MSL_C++/memory>
 #include <MSL_C++/stdexcept>
 
+#include <MSL_C++/cstdio>
+#include <MSL_C++/cstdlib>
+
 #include "MSL_C++/Metrowerks/compressed_pair.h"
 
 #include "compiler_macros.h"
@@ -292,13 +295,17 @@ namespace std {
             }
 
             if (cur_size > length) {
-                throw out_of_range("basic_string: out_of_range");
+                // throw out_of_range("basic_string: out_of_range");
+                fprintf(stderr, "basic_string: out_of_range");
+                abort();
             }
 
             size_t remaining = min(length - cur_size, append_size);
             size_t dist = end - start;
             if (dist > (INT_MAX - 1) || (INT_MAX - dist) < (length - remaining)) {
-                throw length_error("basic_string: length_error");
+                // throw length_error("basic_string: length_error");
+                fprintf(stderr, "basic_string: length_error");
+                abort();
             }
 
             size_t final_size = dist + (length - remaining);

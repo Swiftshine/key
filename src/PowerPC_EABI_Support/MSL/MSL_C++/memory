@@ -4,6 +4,8 @@
 #include <MSL_C++/iosfwd>
 #include <MSL_C++/new>
 
+#include <MSL_C++/cstdio>
+#include <MSL_C++/cstdlib>
 #include <MSL_C++/MSL_Common/type_traits.h>
 
 namespace std {
@@ -34,7 +36,9 @@ namespace std {
 
         pointer allocate(size_type count, const void *hint = 0) {
             if (count > max_size()) {
-                throw bad_alloc();
+                // throw bad_alloc();
+                fprintf(stderr, "bad alloc");
+                abort();
             }
             return reinterpret_cast<pointer>(operator new(count * sizeof(T)));
         }

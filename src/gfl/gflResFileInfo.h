@@ -19,6 +19,7 @@ namespace gfl {
 
         // DECL_WEAK ~ResFileInfo();
         virtual void Destroy();
+        // note to self, this should be GetData()
         virtual GfArch* GetGfArch_thunk();
         virtual uint     GetFilesize();
         virtual GfArch* GetGfArch();

@@ -136,7 +136,7 @@ public:
     virtual void ProcessLoadingTasks();
 public:
     // utility inlines
-    inline bool IsLoadingPreview() { return mIsLoadingPreview;}
+    inline bool IsBGLoadedManually() { return mManualBGLoad;}
 private:
     /* Member functions */
 
@@ -181,7 +181,11 @@ private:
     uint m_40;
     uint m_44;
     u16 m_48;
-    bool mIsLoadingPreview;
+    // it's not quite clear what this does, but setting this to true
+    // causes graphics to be loaded with a Y position significantly
+    // higher than it would otherwise; this value is typically set to false
+    // as a result. probably debug related.
+    bool mManualBGLoad; 
     bool mIsInWorldMap;
     uint m_4C;
     uint m_50;

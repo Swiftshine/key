@@ -17,7 +17,7 @@ public:
     ~StageResourceManager();
 
     void LoadStage(int stageID);
-    void LoadResources();
+    bool LoadResources();
     Mapdata* GetLevelSection(int sectionID);
     void ClearMapdata();
 private:
@@ -34,11 +34,11 @@ private:
     BGData* mBGData;
     gfl::ResFileInfo* mCommonResFileInfo;
     bool mCommonValid;
-    bool m_11;
-    int mCurrentStageID;
-    bool m_18;
+    bool mLevelProcessed;
+    int mFolderStageID;
+    bool mLoadFromArchive;
     int m_1C;
-    int m_20;
+    int mArchiveStageID;
     int m_24;
     gfl::ResFileInfo* mMapdataResFileInfo;
     // due to the fact that there's a for loop in this class's destructor,
