@@ -1,4 +1,5 @@
 #include <cstring>
+#include <cstdio>
 
 #include "gfl/gflGfArch.h"
 #include "gfl/gflMemoryUtil.h"
@@ -21,8 +22,6 @@ StageResourceManager::StageResourceManager()
     , m_24(1)
     , mMapdataResFileInfo(nullptr)
 {
-    // GFL_ALLOC_WORK(mResourceList, StageResourceList);
-    // mResourceList.Init();
     mResourceList.Create(gfl::HeapID::Work);
     memset(&mCurrentSections, 0, 0x78);
 }
@@ -155,4 +154,42 @@ bool StageResourceManager::LoadResources() {
     }
 
     return ret;
+}
+
+Mapdata* StageResourceManager::GetLevelSection(int sectionID) {
+    return mCurrentSections[sectionID];
+}
+
+bool StageResourceManager::LoadBGFromArchive(int resourceID) {
+    BGData* bgdata;
+    char* path;
+    gfl::ResArchivedFileInfo* archivedFileInfo;
+
+    snprintf(path, 0x200, "stage/stage%03d/bg.dat", resourceID);
+    archivedFileInfo = gfl::ResArchivedFileInfo::FromArchive(path);
+
+    if ((gfl::ResInfo**)&mBGResFileInfo != (gfl::ResInfo**)&archivedFileInfo) {
+        if (nullptr != mBGResFileInfo) {
+            mBGResFileInfo->Destroy();
+        }
+
+        mBGResFileInfo = (gfl::ResFileInfo*)archivedFileInfo;
+
+        if (nullptr != archivedFileInfo) {
+            archivedFileInfo->IncrementLevel();
+        }
+    }
+
+    if (nullptr != archivedFileInfo) {
+        delete archivedFileInfo;
+    }
+
+    if (nullptr != mBGResFileInfo) {
+        bgdata = (BGData*)mBGResFileInfo->GetGfArch();
+    } else {
+        bgdata = nullptr;
+    }
+
+    CopyBGData(bgdata);
+    return true;
 }

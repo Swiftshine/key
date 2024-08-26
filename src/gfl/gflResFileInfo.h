@@ -47,6 +47,10 @@ namespace gfl {
         DECL_WEAK virtual uint GetDataSize();
         virtual void* GetData_thunk();
         virtual int Recurse();
+
+    public:
+        static ResArchivedFileInfo* FromArchive(const char* path);
+        static ResArchivedFileInfo* FromFolder(const char* path);
     public:
         void* mDvdDir;
         uint m_C;
