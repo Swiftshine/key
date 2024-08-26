@@ -14,6 +14,7 @@
 #include "manager/PointerManager.h"
 #include "object/PlayerBase.h"
 #include "stage/Stage.h"
+#include "mapdata/Mapdata.h"
 
 namespace gfl { class ParamBool; }
 
@@ -27,7 +28,6 @@ private:
     PointerManager* mManager;
 };
 
-namespace { namespace Mapdata { namespace Mapbin { class Header { int dummy; }; } } }
 
 class GameManager {
 public:
@@ -134,6 +134,9 @@ public:
     /* Virtual functions */
 
     virtual void ProcessLoadingTasks();
+public:
+    // utility inlines
+    inline bool IsLoadingPreview() { return mIsLoadingPreview;}
 private:
     /* Member functions */
 
@@ -165,6 +168,7 @@ private:
     bool m_4;
     uint m_8;
     uint m_C;
+    bool m_10;
     int m_14;
     int m_18;
     int m_1C;
@@ -177,7 +181,7 @@ private:
     uint m_40;
     uint m_44;
     u16 m_48;
-    bool m_4A; // related to preview loading
+    bool mIsLoadingPreview;
     bool mIsInWorldMap;
     uint m_4C;
     uint m_50;
@@ -201,7 +205,7 @@ private:
     uint m_BC;
 };
 
-// ASSERT_SIZE(GameManager, 0xC0)
+ASSERT_SIZE(GameManager, 0xC0)
 
 
 #endif
