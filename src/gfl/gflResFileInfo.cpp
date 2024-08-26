@@ -12,7 +12,7 @@ ResFileInfo::ResFileInfo() {
     mArchive = 0;
 }
 
-ResFileInfo::~ResFileInfo() { }
+// ResFileInfo::~ResFileInfo() { }
 
 ResFileInfo* gfl::ResFileInfo::fn_8063E38C(const char* arg1, void* arg2, void* arg3) { return nullptr; }
 

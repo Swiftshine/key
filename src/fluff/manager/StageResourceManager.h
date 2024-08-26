@@ -2,10 +2,12 @@
 #define FLUFF_STAGERESOURCEMANAGER_H
 
 #include "gfl/gflResFileInfo.h"
+#include "gfl/gflScopedPointer.h"
 #include "gfl/gflArray.h"
 #include "types.h"
 
 #include "stage/Stage.h"
+#include "stage/StageResourceList.h"
 #include "mapdata/Mapdata.h"
 #include "mapdata/BGData.h"
 // size unk
@@ -27,7 +29,7 @@ private:
     bool LoadMapdataFromFolder(int stageID);
     void ProcessLevelData();
 private:
-    class StageResourceList* mResourceList;
+    gfl::ScopedPointer<StageResourceList> mResourceList;
     gfl::ResFileInfo* mBGResFileInfo;
     BGData* mBGData;
     gfl::ResFileInfo* mCommonResFileInfo;
@@ -39,6 +41,9 @@ private:
     int m_20;
     int m_24;
     gfl::ResFileInfo* mMapdataResFileInfo;
-    Mapdata* mCurrentSections;
+    // due to the fact that there's a for loop in this class's destructor,
+    // this is probably some kind of array container rather than just
+    // a raw array
+    Mapdata* mCurrentSections[0x1E];
 };
 #endif

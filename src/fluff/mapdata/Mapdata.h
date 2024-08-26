@@ -3,7 +3,14 @@
 
 
 class Mapdata {
+public:
+    class Mapbin {
+    public:
+        class Header {
 
+
+        };
+    };
 };
 
 
