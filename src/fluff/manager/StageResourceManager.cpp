@@ -162,11 +162,11 @@ Mapdata* StageResourceManager::GetLevelSection(int sectionID) {
 
 bool StageResourceManager::LoadBGFromArchive(int resourceID) {
     BGData* bgdata;
-    char* path;
     gfl::ResArchivedFileInfo* archivedFileInfo;
-
+    char path[0x200];
+    
     snprintf(path, 0x200, "stage/stage%03d/bg.dat", resourceID);
-    archivedFileInfo = gfl::ResArchivedFileInfo::FromArchive(path);
+    gfl::ResArchivedFileInfo::FromArchive((gfl::ResArchivedFileInfo**)&archivedFileInfo, path);
 
     if ((gfl::ResInfo**)&mBGResFileInfo != (gfl::ResInfo**)&archivedFileInfo) {
         if (nullptr != mBGResFileInfo) {
@@ -180,9 +180,7 @@ bool StageResourceManager::LoadBGFromArchive(int resourceID) {
         }
     }
 
-    if (nullptr != archivedFileInfo) {
-        delete archivedFileInfo;
-    }
+    ((gfl::ResFileInfo*)(archivedFileInfo))->Destroy();
 
     if (nullptr != mBGResFileInfo) {
         bgdata = (BGData*)mBGResFileInfo->GetGfArch();
@@ -193,3 +191,53 @@ bool StageResourceManager::LoadBGFromArchive(int resourceID) {
     CopyBGData(bgdata);
     return true;
 }
+
+void StageResourceManager::LoadBGFromFolder(int resourceID) {
+    gfl::ResFileInfo* resFileInfo;
+    char path[0x200];
+
+    snprintf(path, sizeof(path), "stage/stage%03d/bg.dat", resourceID);
+
+    gfl::ResArchivedFileInfo::FromFolder((gfl::ResArchivedFileInfo**)&resFileInfo, path);
+
+    if (&mBGResFileInfo != &resFileInfo) {
+        if (nullptr != mBGResFileInfo) {
+            mBGResFileInfo->Destroy();
+        }
+
+        mBGResFileInfo = resFileInfo;
+        if (resFileInfo != nullptr) {
+            resFileInfo->IncrementLevel();
+        }
+    }
+
+    if (resFileInfo != nullptr) {
+        resFileInfo->Destroy();
+    }
+}
+
+/*
+void StageResourceManager::LoadBGFromFolder(StageResourceManager *param_1,u32 stageID)
+
+{
+  ResFileInfo *resfileinfo;
+  char acStack_210 [512];
+  
+  snprintf(acStack_210,0x200,"stage/stage%03d/bg.dat",stageID);
+  gfl::ResArchivedFileInfo::FromFolder(&resfileinfo,acStack_210);
+  if (&param_1->mBGResFileInfo != &resfileinfo) {
+    if (param_1->mBGResFileInfo != 0x0) {
+      (*param_1->mBGResFileInfo->vtable->Destroy)();
+    }
+    param_1->mBGResFileInfo = resfileinfo;
+    if (resfileinfo != 0x0) {
+      (*resfileinfo->vtable->IncrementLevel)();
+    }
+  }
+  if (resfileinfo != 0x0) {
+    (*resfileinfo->vtable->Destroy)();
+  }
+  return;
+}
+
+*/

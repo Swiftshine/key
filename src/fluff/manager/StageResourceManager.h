@@ -21,8 +21,8 @@ public:
     Mapdata* GetLevelSection(int sectionID);
     void ClearMapdata();
 private:
-    bool LoadBGFromArchive(int stageID);
-    void LoadBGFromFolder(int stageID);
+    bool LoadBGFromArchive(int resourceID);
+    void LoadBGFromFolder(int resourceID);
     bool LoadCommonFromArchive(int stageID);
     bool LoadCommonFromFolder(int stageID);
     void CopyBGData(BGData* data);

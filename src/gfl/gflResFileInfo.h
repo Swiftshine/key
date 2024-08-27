@@ -3,6 +3,8 @@
 
 #include "gflResInfo.h"
 
+// todo - fix everything (because most of this is innacurate)
+
 namespace gfl {
     class GfArch;
 
@@ -49,8 +51,8 @@ namespace gfl {
         virtual int Recurse();
 
     public:
-        static ResArchivedFileInfo* FromArchive(const char* path);
-        static ResArchivedFileInfo* FromFolder(const char* path);
+        static ResArchivedFileInfo* FromArchive(ResArchivedFileInfo** out, const char* path);
+        static ResArchivedFileInfo* FromFolder(ResArchivedFileInfo** out, const char* path);
     public:
         void* mDvdDir;
         uint m_C;
