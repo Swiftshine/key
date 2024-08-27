@@ -17,6 +17,7 @@ namespace gfl {
         virtual void IncrementLevel();
     protected:
         ResInfo();
+        ~ResInfo();
     public:
         u16 mFlags;
         u16 mLevel;
