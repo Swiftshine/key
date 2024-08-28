@@ -3,8 +3,6 @@
 
 #include "gflResInfo.h"
 
-// todo - fix everything (because most of this is innacurate)
-
 namespace gfl {
     class GfArch;
 
@@ -49,16 +47,12 @@ namespace gfl {
         DECL_WEAK virtual uint GetDataSize();
         virtual void* GetData_thunk();
         virtual int Recurse();
-
-    public:
-        static ResArchivedFileInfo* FromArchive(ResArchivedFileInfo** out, const char* path);
-        static ResArchivedFileInfo* FromFolder(ResArchivedFileInfo** out, const char* path);
     public:
         void* mDvdDir;
         uint m_C;
         void* mData;
         uint   mSize;
-        ResArchivedFileInfo* mChild;
+        ResArchivedFileInfo* mParent;
     };
 
     ASSERT_SIZE(ResArchivedFileInfo, 0x1C)

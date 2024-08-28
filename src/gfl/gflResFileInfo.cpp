@@ -17,7 +17,7 @@ ResFileInfo::ResFileInfo() {
 ResFileInfo* gfl::ResFileInfo::fn_8063E38C(const char* arg1, void* arg2, void* arg3) { return nullptr; }
 
 int gfl::ResArchivedFileInfo::Recurse() {
-    if (mChild) { return mChild->Recurse(); }
+    if (mParent) { return mParent->Recurse(); }
     return 0;
 }
 
@@ -31,8 +31,8 @@ GfArch* gfl::ResFileInfo::GetGfArch() {
 
 ResArchivedFileInfo::~ResArchivedFileInfo() {
     if (mLevel) {
-        delete mChild;
-        mChild = nullptr;
+        delete mParent;
+        mParent = nullptr;
         mData = nullptr;
     }
 }
