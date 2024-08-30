@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "cstdint": "cpp",
+        "cstring": "cpp",
+        "string": "cpp",
+        "xstring": "cpp",
+        "iosfwd": "cpp",
+        "xutility": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp",
+        "typeinfo": "cpp",
+        "cmath": "cpp",
+        "new": "cpp",
+        "stdexcept": "cpp",
+        "rand.h": "c",
+        "cstdio": "cpp",
+        "algorithm": "cpp",
+        "vector": "cpp"
+    },
+    "C_Cpp.default.compilerPath": ""
+}

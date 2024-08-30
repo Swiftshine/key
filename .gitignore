@@ -1,6 +1,5 @@
 __pycache__
 .idea
-.vscode
 .ninja_*
 .mypy_cache
 *.exe
