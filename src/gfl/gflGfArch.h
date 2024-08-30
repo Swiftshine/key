@@ -75,7 +75,7 @@ namespace gfl {
     public:
         GfArch(File* newFile, u8 newHeapID, uint align);
         virtual ~GfArch();
-        bool IsValid();
+        bool Validate();
         bool ReadCompressed();
         bool Decompress();
         void CreateBgArchiveLoadTask();

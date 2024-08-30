@@ -77,7 +77,7 @@ uint GfArch::GetEntrySize(const char* filename) {
     return entry.mDecompressedFilesize;
 }
 
-bool GfArch::IsValid() {
+bool GfArch::Validate() {
     File* f = mFile;
     GfArch::FileHeader* header;
     bool valid;
