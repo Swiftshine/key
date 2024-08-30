@@ -20,8 +20,8 @@
 		"prefix" : "k_FI",
 		"body" : [
 			"/**",
-			" * @note Address: $1",
-			" * @note Size: $2",
+			" * @note Address: 0x$1",
+			" * @note Size: 0x$2",
 			" */"
 		],
 		"description" : "Use this to insert a comment with information about the size and address of a function."
