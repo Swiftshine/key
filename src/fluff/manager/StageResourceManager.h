@@ -2,6 +2,7 @@
 #define FLUFF_STAGERESOURCEMANAGER_H
 
 #include "gfl/gflResFileInfo.h"
+#include "gfl/gflResArchivedFileInfo.h"
 #include "gfl/gflScopedPointer.h"
 #include "gfl/gflArray.h"
 #include "types.h"

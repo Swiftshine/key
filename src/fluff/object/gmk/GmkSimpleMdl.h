@@ -6,6 +6,7 @@
 
 #include "object/Gimmick.h"
 #include "gfl/gflResFileInfo.h"
+#include "gfl/gflResArchivedFileInfo.h"
 #include "gfl/gflScnMdlWrapper.h"
 #include "gfl/gflScopedPointer.h"
 #include "object/gmk/GmkSimpleMdlRotZ.h"

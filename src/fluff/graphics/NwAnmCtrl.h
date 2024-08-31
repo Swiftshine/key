@@ -9,6 +9,7 @@
 #include "gfl/gflArray.h"
 #include "gfl/gflVec3.h"
 #include "gfl/gflResFileInfo.h"
+#include "gfl/gflResArchivedFileInfo.h"
 
 #include <string>
 #include <memory>
