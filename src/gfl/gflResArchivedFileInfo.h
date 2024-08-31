@@ -2,29 +2,25 @@
 #define GFL_RESARCHIVEDFILEINFO_H
 
 #include "gflResInfo.h"
-
+#include "gflFixedString.h"
 
 // todo - map out ResArchivedFileInfo
 namespace gfl {
     class ResArchivedFileInfo : public ResInfo {
     public:
-        // multiple ctors, all inlined
         ResArchivedFileInfo();
-        // ResArchivedFileInfo();
-        // ResArchivedFileInfo();
-        // ResArchivedFileInfo();
-        void* GetData();
 
         virtual ~ResArchivedFileInfo();
-        DECL_WEAK virtual uint GetDataSize();
-        virtual void* GetData_thunk();
-        virtual int Recurse();
-    public:
-        void* mDvdDir;
+        DECL_WEAK virtual size_t GetDataSize();
+        DECL_WEAK virtual void* GetData();
+        virtual GfArch* TryGetGfArch();
+
+    // private:
+        void* mDVDDir;
         uint m_C;
         void* mData;
-        uint   mSize;
-        ResArchivedFileInfo* mParent;
+        size_t mDataSize;
+        ResFileInfo* mOwner;
     };
 
     ASSERT_SIZE(ResArchivedFileInfo, 0x1C)

@@ -141,10 +141,32 @@ namespace gfl {
         virtual void Destroy();
 
         /**
+         * @note Address: 0x8063EBA8
+         * @note Size: 0x4
+         * @note The difference between this function and `gfl::ResFileInfo::TryGetGfArch` is
+         * that no flag validation is performed. The archive is immediately returned.
+         */
+        DECL_WEAK virtual GfArch* GetGfArch();
+
+        /**
+         * @note Address: 0x8063EB30
+         * @note Size: 0x78
+         */
+        virtual size_t GetFilesize();
+
+        /**
+         * @note Address: 0x8063ea8c
+         * @note Size: 0x1C
+         * @note The difference between this function and `gfl::ResFileInfo::GetGfArch` is
+         * that this function performs a flag validation before returning its archive.
+         */
+        virtual GfArch* TryGetGfArch();
+        /**
          * @note Address: 0x8063E364
          * @note Size: 0x20
          */
         ResFileInfo();
+    
         /**
          * @note Address: 0x8063E388
          * @note Size: 0x4

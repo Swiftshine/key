@@ -87,6 +87,11 @@ namespace gfl {
         virtual void DeleteDirEntryGfArch(DirEntryGfArch* dirEntry);
         bool SetHeader(GfArch::FileHeader* header);
         bool CheckEntryName(const char* filename, GfArch::FileEntryEx* entry) DONT_INLINE_CLASS;
+    
+    public:
+        inline size_t GetDataSize() {
+            return mCurrentDataSize;
+        }
     public:
         File* mFile;
         u8 mHeapID;
