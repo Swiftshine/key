@@ -7,19 +7,64 @@
 #include <utility>
 
 namespace gfl {
+    class ResArchivedFileInfo;
+    class GfArch;
+
     class ResFileInfo : public ResInfo {
     public:
-        
+        // ENUM_CLASS(Type,
+        //     File = 0,
+        //     Folder = 1,
+        // );
+    public:
         /**
-         * @note Address: 0x8063E364
-         * @note Size: 0x20
-         */
-        ResFileInfo();
-        /**
-         * @note Address: 0x8063E388
+         * @note Address: 0x8063C624
          * @note Size: 0x4
          */
-        DECL_WEAK ~ResFileInfo();
+        static void InitAsync_thunk();
+        /**
+         * @note Address: 0x8063C628
+         * @note Size: 0x4
+         */
+        static void DestroyAsync_thunk();
+        /**
+         * @note Address: 0x8063C62C
+         * @note Size: 0x38
+         */
+        static void ConfigureFromArchive(ResFileInfo* dest, const char* path);
+        /**
+         * @note Address: 0x8063c664
+         * @note Size: 0x38
+         */
+        static void ConfigureFromFolder(ResFileInfo* dest, const char* path);
+        /**
+         * @note Address: 0x8063C69C
+         * @note Size: 0x7C
+         */
+        static bool OpenArchive(const char* path);
+        
+        /**
+         * @note Address: 0x8063C718
+         * @note Size: 0x6C
+         */
+        static bool FileExists(const char* path);
+
+        /**
+         * @note Address: 0x8063C784
+         * @note Size: 0x4
+         */
+        static bool IsInArchive_thunk(const char* path);
+        /**
+         * @note Address: 0x8063C83C
+         * @note Size: 0x18C
+         */
+        static void InitAsync();
+
+        /**
+         * @note Address: 0x8063c9c8
+         * @note Size: 0x38
+         */
+        static void DestroyAsync();
 
         /**
          * @note Address: 0x8063CA00
@@ -63,6 +108,12 @@ namespace gfl {
          * @param directory The directory of the requested folder or archive.
          */
         static void Configure(ResFileInfo* dest, std::pair<bool, const char*>& name, uint checksum, const char* directory);
+
+        /**
+         * @note Address: 0x8063E38C
+         * @note Size: 0x6DC
+         */
+        ResArchivedFileInfo* fn_8063E38C(const char* folderPath, bool* arg1, FixedString* arg2);
     private:
         /**
          * @note Address: 0x8063CC04
@@ -76,54 +127,34 @@ namespace gfl {
          */
         static ResFileInfo* CreateFromPath(const char* path, bool isFolder);
 
-    };
-
-
-    class ResArchivedFileInfo : public ResInfo {
-    private:
-        inline ResArchivedFileInfo(ResArchivedFileInfo* parent)
-            : mDVDDir(nullptr)
-            , m_C(0)
-            , mData(nullptr)
-            , mDataSize(0)
-            , mParent(parent)
-        {
-            mLevel = 1;
-            mFlags = 8;
-
-            u16 tempFlags = parent->GetFlags();
-
-            if (0 == tempFlags & 0x400) {
-                if (0 != tempFlags & 0x800) {
-                    AddFlag(0x800);
-                }
-            } else {
-                AddFlag(0x400);
-            }
-
-            IncrementLevel();
-        }
-
+        /**
+         * @note Address: 0x8063D8A8
+         * @note Size: 0x430
+         */
+        static ResArchivedFileInfo* GetChildFromPath(ResFileInfo* parent, const char* path, bool isFolder);
     public:
-        static ResArchivedFileInfo* Create(const char* filename, bool useFolder);
+        /**
+         * @note Address: 0x8063C788
+         * @note Size: 0xB4
+         */
+        virtual void Destroy();
 
-        virtual ~ResArchivedFileInfo();
-        // Thunk to non-virtual GetData()
-        virtual void* GetData_thunk();
-        DECL_WEAK size_t GetDataSize();
-        // This doesn't do anything useful; this function is (presumably) never called by the game
-        virtual int Recurse();
+        /**
+         * @note Address: 0x8063E364
+         * @note Size: 0x20
+         */
+        ResFileInfo();
+        /**
+         * @note Address: 0x8063E388
+         * @note Size: 0x4
+         */
+        DECL_WEAK ~ResFileInfo();
+
+    
     private:
-
-        static ResArchivedFileInfo* CreateChild(ResArchivedFileInfo* parent, char* filename, bool useFolder);
-        void* GetData();
-    public:
-        class DVDDir* mDVDDir;
-        uint m_C;
-        void* mData;
-        size_t mDataSize;
-        ResArchivedFileInfo* mParent;
+        uint mChecksum;
+        const char* mDirectory;
+        uint mEntrynum;
+        GfArch* mArchive;
     };
-
-    ASSERT_SIZE(ResArchivedFileInfo, 0x1C);
 }
