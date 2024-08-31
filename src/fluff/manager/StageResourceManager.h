@@ -26,8 +26,8 @@ private:
     void LoadBGFromFolder(int resourceID);
     void LoadCommonFromArchive(int stageID);
     bool LoadCommonFromFolder(int stageID);
-    void CopyBGData(BGData* data);
-    bool LoadMapdataFromFolder(int stageID);
+    void CopyBGData(BGData* data) DONT_INLINE_CLASS;
+    void LoadMapdataFromFolder(int stageID);
     void ProcessLevelData();
 private:
     gfl::ScopedPointer<StageResourceList> mResourceList;

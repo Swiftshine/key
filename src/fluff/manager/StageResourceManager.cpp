@@ -9,8 +9,11 @@
 #include "manager/StageResourceManager.h"
 #include "stage/StageResourceList.h"
 
+#include "mapdata/Mapdata.h"
 #include "object/Gimmick.h"
 #include "object/FlfMdlDraw.h"
+
+static uint lbl_808E6BE8 = 0;
 
 StageResourceManager::StageResourceManager()
     : mResourceList(nullptr)
@@ -240,7 +243,7 @@ void StageResourceManager::LoadBGFromFolder(int resourceID) {
     }
 }
 
-
+// technically already matching v
 void StageResourceManager::LoadCommonFromArchive(int stageID) {
     bool bgRelated;
     char resourceName[0x100];
@@ -279,12 +282,114 @@ void StageResourceManager::LoadCommonFromArchive(int stageID) {
             }
         }
 
-
         if (nullptr != fileInfo) {
             fileInfo->Destroy();
         }
         mCommonValid = true;
     } else {
         mCommonValid = false;
+    }
+}
+
+void StageResourceManager::CopyBGData(BGData* bgdata) {
+    if (0 == bgdata->m_8) {
+        bgdata->m_10 = (uint)(bgdata->mMagic + bgdata->m_10);
+        bgdata->m_8 = 1;
+    }
+
+    mBGData = bgdata;
+}
+
+void StageResourceManager::LoadMapdataFromFolder(int resourceID) {
+    gfl::ResFileInfo* fileInfo;
+    char mapdataPath[0x100];
+
+    snprintf(mapdataPath, sizeof(mapdataPath), "mapdata/stage%03d", resourceID);
+
+    FlfMdlDraw::GetFileInfoFromFolder((gfl::ResInfo**)(&fileInfo), mapdataPath);
+    if (&mMapdataResFileInfo != &fileInfo) {
+        if (nullptr != mMapdataResFileInfo) {
+            mMapdataResFileInfo->Destroy();
+        }
+
+        mMapdataResFileInfo = fileInfo;
+
+        if (nullptr != mMapdataResFileInfo) {
+            mMapdataResFileInfo->IncrementLevel();
+        }
+    }
+
+    if (nullptr != fileInfo) {
+        fileInfo->Destroy();
+    }
+
+}
+
+struct unk_struct {
+    u8 m_0[0x2C];
+    Mapdata::Mapbin::Header* mHeader;
+};
+
+void StageResourceManager::ProcessLevelData() {
+    bool inMission = GameManager::IsInMission();
+    bool bgRelated = nullptr != GameManager::Instance() ? GameManager::Instance()->IsBGLoadedManually() : false;
+    unk_struct* unkStruct;
+
+    if (bgRelated) {
+        char unkPath[0x200];
+        gfl::FixedString* fStr = GameManager::Instance()->GetUnk8();
+        const char* unk = fStr[1].GetString();
+        unkStruct = (unk_struct*)this;
+
+        for (uint i = 0; i < 0x1E; i++) {
+            if (i < fStr->GetLength()) {
+                snprintf(unkPath, sizeof(unkPath), "%s%s", fStr->GetString(), unk);
+                ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = Mapdata::Parse(unkPath, inMission);
+            } else {
+                ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = nullptr;
+            }
+
+            unkStruct = (unk_struct*)(((u8*)unkStruct) + 4);
+            unk += 0x400;
+        }
+    } else {
+        char mapbinPath[0x100];
+        uint unk = lbl_808E6BE8;
+
+        if (GameManager::IsInMission()) {
+            unk = GameManager::fn_80012330();
+        }
+
+        unkStruct = (unk_struct*)this;
+        for (uint i = 0; i < 0x1E; i++) {
+            snprintf(mapbinPath, sizeof(mapbinPath), "mapdata/stage%03d/%s%d.mapbin", mFolderStageID, unk);
+            if (gfl::ResFileInfo::FileExists(mapbinPath)) {
+                ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = Mapdata::Parse(mapbinPath, inMission);
+            } else {
+                ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = nullptr;
+            }
+
+            unkStruct = (unk_struct*)(((u8*)unkStruct) + 4);
+        }
+        
+    }
+}
+
+void StageResourceManager::ClearMapdata() {
+    gfl::ResFileInfo* fileInfo = nullptr;
+    if (&mMapdataResFileInfo != &fileInfo) {
+        if (nullptr != mMapdataResFileInfo) {
+            mMapdataResFileInfo->Destroy();
+        }
+
+        mMapdataResFileInfo = fileInfo;
+
+        if (nullptr != mMapdataResFileInfo) {
+            mMapdataResFileInfo->IncrementLevel();
+        }
+    }
+
+    if (nullptr != fileInfo) {
+        fileInfo->Destroy();
     }
 }

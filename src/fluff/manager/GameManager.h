@@ -10,6 +10,7 @@
 #include "gfl/gflVec3.h"
 #include "gfl/gflTask.h"
 #include "gfl/gflArray.h"
+#include "gfl/gflFixedString.h"
 
 #include "manager/PointerManager.h"
 #include "object/PlayerBase.h"
@@ -136,7 +137,8 @@ public:
     virtual void ProcessLoadingTasks();
 public:
     // utility inlines
-    inline bool IsBGLoadedManually() { return mManualBGLoad;}
+    inline bool IsBGLoadedManually() { return mManualBGLoad; }
+    inline gfl::FixedString* GetUnk8() { return m_8; }
 private:
     /* Member functions */
 
@@ -166,7 +168,7 @@ private:
     void    StartLoadPhase13();
 private:
     bool m_4;
-    uint m_8;
+    gfl::FixedString* m_8;
     uint m_C;
     bool m_10;
     int m_14;

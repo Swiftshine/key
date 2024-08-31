@@ -351,6 +351,7 @@ config.libs = [
             Object(Matching,    "gfl/gflChecksum.cpp"),
             Object(NonMatching,     "gfl/gflTaskInfo.cpp"),
             Object(Matching,    "gfl/gflResInfo.cpp"),
+            Object(NonMatching, "gfl/gflResArchivedFileInfo.cpp"),
         ],
     },
     {
