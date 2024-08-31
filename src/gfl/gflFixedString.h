@@ -13,8 +13,8 @@ namespace gfl {
     public:
         FixedString(const char* src);
         FixedString(const std::string& src);
+        FixedString() DONT_INLINE_CLASS;
 
-        FixedString* Reset() DONT_INLINE_CLASS;
         DECL_WEAK ~FixedString() DONT_INLINE_CLASS;
 
         void operator=(const char* src);

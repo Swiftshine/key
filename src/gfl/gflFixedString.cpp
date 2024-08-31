@@ -15,10 +15,9 @@ FixedString::FixedString(const std::string& src) {
     mLen = strlen(mString);
 }
 
-FixedString* FixedString::Reset() {
+FixedString::FixedString() {
     memset(mString, 0, sizeof(mString));
     mLen = 0;
-    return this;
 }
 
 FixedString::~FixedString() { }
