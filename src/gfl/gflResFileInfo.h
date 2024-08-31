@@ -73,7 +73,7 @@ namespace gfl {
          * @param path This path can be structured as if the target was either a folder or an archive.
          * A distinction is made between folder and archive when returning the file info.
          */
-        static ResFileInfo* GetFromPath(const char* path, bool isFolder);
+        static ResInfo* GetFromPath(const char* path, bool isFolder);
 
         /**
          * @note Address: 0x8063D284

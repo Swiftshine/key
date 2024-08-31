@@ -3,11 +3,14 @@
 
 #include "gfl/gflGfArch.h"
 #include "gfl/gflMemoryUtil.h"
-#include "object/Gimmick.h"
+#include "gfl/gflFile.h"
 
 #include "manager/GameManager.h"
 #include "manager/StageResourceManager.h"
 #include "stage/StageResourceList.h"
+
+#include "object/Gimmick.h"
+#include "object/FlfMdlDraw.h"
 
 StageResourceManager::StageResourceManager()
     : mResourceList(nullptr)
@@ -85,7 +88,7 @@ bool StageResourceManager::LoadResources() {
 
         if (nullptr == resFileInfo) {
             ret = true;
-        } else if (resFileInfo->mFlags & gfl::ResInfo::Flags::UseGfArch == 0) {
+        } else if (resFileInfo->GetFlags() & gfl::ResInfo::Flags::UseGfArch == 0) {
             ret = false;
         } else {
             ret = true;
@@ -94,7 +97,7 @@ bool StageResourceManager::LoadResources() {
         if (ret) {
             if (nullptr == mMapdataResFileInfo) {
                 ret = true;
-            } else if (mMapdataResFileInfo->mFlags & gfl::ResInfo::Flags::UseGfArch == 0) {
+            } else if (mMapdataResFileInfo->GetFlags() & gfl::ResInfo::Flags::UseGfArch == 0) {
                 ret = false;
             } else {
                 ret = true;
@@ -135,6 +138,24 @@ bool StageResourceManager::LoadResources() {
         ProcessLevelData();
         // unfinished section
 
+        /* // crude Ghidra output
+
+            mapdata = StageResources::GetLevelSection(resources,0);
+            iVar6 = NULL;
+            for (i = *(mapdata + 0x20); i != 0; i--) {
+              iVar1 = *(mapdata + 0x24);
+              if (*(iVar6->mIntParams + iVar1 + -0x34) == 0x13) {
+                resources->_1C = -1;
+                resources->mArchiveStageID = -1;
+                resources->_24 = 1;
+                resources->mArchiveStageID = *(iVar6->mIntParams + iVar1);
+                resources->_24 = *(iVar6->mIntParams + iVar1 + 4);
+                resources->mLoadFromArchive = true;
+                break;
+              }
+              iVar6 += 1;
+            }
+        */
 
         //
         if (mLoadFromArchive) {
@@ -162,25 +183,28 @@ Mapdata* StageResourceManager::GetLevelSection(int sectionID) {
 
 bool StageResourceManager::LoadBGFromArchive(int resourceID) {
     BGData* bgdata;
-    gfl::ResArchivedFileInfo* archivedFileInfo;
+    gfl::ResFileInfo* fileInfo;
     char path[0x200];
+
     
     snprintf(path, 0x200, "stage/stage%03d/bg.dat", resourceID);
-    gfl::ResArchivedFileInfo::FromArchive((gfl::ResArchivedFileInfo**)&archivedFileInfo, path);
+    FlfMdlDraw::GetFileInfoFromArchive((gfl::ResInfo**)(&fileInfo), path);
 
-    if ((gfl::ResInfo**)&mBGResFileInfo != (gfl::ResInfo**)&archivedFileInfo) {
-        if (nullptr != mBGResFileInfo) {
+    if (&mBGResFileInfo != &fileInfo) {
+        if (mBGResFileInfo != nullptr) {
             mBGResFileInfo->Destroy();
         }
 
-        mBGResFileInfo = (gfl::ResFileInfo*)archivedFileInfo;
-
-        if (nullptr != archivedFileInfo) {
-            archivedFileInfo->IncrementLevel();
+        mBGResFileInfo = fileInfo;
+        
+        if (nullptr != mBGResFileInfo) {
+            mBGResFileInfo->IncrementLevel();
         }
     }
 
-    ((gfl::ResFileInfo*)(archivedFileInfo))->Destroy();
+    if (nullptr != fileInfo) {
+        fileInfo->Destroy();
+    }
 
     if (nullptr != mBGResFileInfo) {
         bgdata = (BGData*)mBGResFileInfo->GetGfArch();
@@ -195,10 +219,9 @@ bool StageResourceManager::LoadBGFromArchive(int resourceID) {
 void StageResourceManager::LoadBGFromFolder(int resourceID) {
     gfl::ResFileInfo* resFileInfo;
     char path[0x200];
-
-    snprintf(path, sizeof(path), "stage/stage%03d/bg.dat", resourceID);
-
-    gfl::ResArchivedFileInfo::FromFolder((gfl::ResArchivedFileInfo**)&resFileInfo, path);
+ 
+    snprintf(path, 0x200, "stage/stage%03d/bg.dat", resourceID);
+    FlfMdlDraw::GetFileInfoFromFolder((gfl::ResInfo**)(&resFileInfo), path);
 
     if (&mBGResFileInfo != &resFileInfo) {
         if (nullptr != mBGResFileInfo) {
@@ -206,38 +229,62 @@ void StageResourceManager::LoadBGFromFolder(int resourceID) {
         }
 
         mBGResFileInfo = resFileInfo;
-        if (resFileInfo != nullptr) {
-            resFileInfo->IncrementLevel();
+
+        if (nullptr != mBGResFileInfo) {
+            mBGResFileInfo->IncrementLevel();
         }
     }
 
-    if (resFileInfo != nullptr) {
+    if (nullptr != resFileInfo) {
         resFileInfo->Destroy();
     }
 }
 
-/*
-void StageResourceManager::LoadBGFromFolder(StageResourceManager *param_1,u32 stageID)
 
-{
-  ResFileInfo *resfileinfo;
-  char acStack_210 [512];
-  
-  snprintf(acStack_210,0x200,"stage/stage%03d/bg.dat",stageID);
-  gfl::ResArchivedFileInfo::FromFolder(&resfileinfo,acStack_210);
-  if (&param_1->mBGResFileInfo != &resfileinfo) {
-    if (param_1->mBGResFileInfo != 0x0) {
-      (*param_1->mBGResFileInfo->vtable->Destroy)();
+void StageResourceManager::LoadCommonFromArchive(int stageID) {
+    bool bgRelated;
+    char resourceName[0x100];
+    char stageCommonPath[0x200];
+
+    if (nullptr != GameManager::Instance()) {
+        bgRelated = GameManager::Instance()->IsBGLoadedManually();
+    } else {
+        bgRelated = false;
     }
-    param_1->mBGResFileInfo = resfileinfo;
-    if (resfileinfo != 0x0) {
-      (*resfileinfo->vtable->IncrementLevel)();
+
+    if (bgRelated) {
+        snprintf(resourceName, sizeof(resourceName), "preview", stageID);
+    } else {
+        snprintf(resourceName, sizeof(resourceName), "stage%03d", stageID);
     }
-  }
-  if (resfileinfo != 0x0) {
-    (*resfileinfo->vtable->Destroy)();
-  }
-  return;
+
+    snprintf(stageCommonPath, sizeof(stageCommonPath), "stage/%s/common.gfa", resourceName, stageID);
+    
+    if (gfl::File::Open(stageCommonPath)) {
+        gfl::ResFileInfo* fileInfo;
+        
+        snprintf(stageCommonPath, sizeof(stageCommonPath), "stage/%s/common/", resourceName, stageID);
+
+        FlfMdlDraw::GetFileInfoFromArchive((gfl::ResInfo**)(&fileInfo), stageCommonPath);
+
+        if (&mCommonResFileInfo != &fileInfo) {
+            if (nullptr != mCommonResFileInfo) {
+                mCommonResFileInfo->Destroy();
+            }
+
+            mCommonResFileInfo = fileInfo;
+
+            if (nullptr != mCommonResFileInfo) {
+                mCommonResFileInfo->IncrementLevel();
+            }
+        }
+
+
+        if (nullptr != fileInfo) {
+            fileInfo->Destroy();
+        }
+        mCommonValid = true;
+    } else {
+        mCommonValid = false;
+    }
 }
-
-*/

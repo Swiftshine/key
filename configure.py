@@ -209,13 +209,22 @@ if config.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
-cflags_fluff = [
+cflags_fluff_base = [
     *cflags_base,
-    # "-Cpp_exceptions on", 
     "-RTTI on",
     "-inline auto,deferred",
     "-use_lmw_stmw on",
-    "-str reuse,pool,readonly",
+]
+
+cflags_fluff = [
+    *cflags_fluff_base,
+    "-str reuse,readonly",
+]
+
+
+cflags_fluff_manager = [
+    *cflags_fluff_base,
+    "-str reuse"
 ]
 
 cflags_msl = [
@@ -351,9 +360,6 @@ config.libs = [
         "host": False,
         "objects": [
             # fluff/graphics/
-            
-            # fluff/manager/
-            Object(NonMatching, "fluff/manager/StageResourceManager.cpp"),
 
             # fluff/object/
 
@@ -362,6 +368,15 @@ config.libs = [
             Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
 
+        ],
+    },
+    {
+        "lib" : "fluff/manager",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_manager],
+        "host": False,
+        "objects": [
+            Object(NonMatching, "fluff/manager/StageResourceManager.cpp"),
         ],
     },
     {

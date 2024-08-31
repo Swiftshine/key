@@ -24,7 +24,7 @@ public:
 private:
     bool LoadBGFromArchive(int resourceID);
     void LoadBGFromFolder(int resourceID);
-    bool LoadCommonFromArchive(int stageID);
+    void LoadCommonFromArchive(int stageID);
     bool LoadCommonFromFolder(int stageID);
     void CopyBGData(BGData* data);
     bool LoadMapdataFromFolder(int stageID);

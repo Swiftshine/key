@@ -4,7 +4,6 @@
 #include "gflResInfo.h"
 #include "gflFixedString.h"
 
-// todo - map out ResArchivedFileInfo
 namespace gfl {
     class ResArchivedFileInfo : public ResInfo {
     public:
