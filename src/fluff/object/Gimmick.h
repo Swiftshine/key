@@ -23,11 +23,6 @@ public:
 
     class GimmickBuildInfo {
     public:
-        class CommonGimmickBuildInfo {
-        public:
-            bool mIsCommon;
-            Gimmick* mOwner;
-        };
 
         inline GimmickBuildInfo()
             : mGimmickID(GimmickIDs::Invalid)
@@ -60,7 +55,7 @@ public:
 
         inline int GetGimmickID() { return mGimmickID; }
 
-        inline bool IsCommon() { return mExtension->mIsCommon; }
+        inline bool IsCommon() { return mExtension->first; }
 
         inline int GetIntParam(int index) { return mIntParams[index]; }
         inline float GetFloatParam(int index) { return mFloatParams[index]; }
@@ -85,12 +80,10 @@ public:
         int mIntParams[5];
         float mFloatParams[5];
         std::string mStringParams[5];
-        CommonGimmickBuildInfo* mExtension;
-
+        // bool - indicates whether or not this is a common gimmick
+        // Gimmick* - owner
+        std::pair<bool, Gimmick*>* mExtension;
     };
-
-
-    // ASSERT_SIZE(std::string, 0xC);
 
     // ASSERT_SIZE(GimmickBuildInfo, 0x9C);
 public:
