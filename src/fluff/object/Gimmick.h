@@ -7,6 +7,8 @@
 #include "gflVec3.h"
 #include "gflVec2.h"
 #include "gflTask.h"
+
+#include <utility>
 #include <string>
 
 extern "C" const char Stage_NullFilename;
