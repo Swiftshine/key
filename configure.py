@@ -209,6 +209,14 @@ if config.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
+cflags_gfl = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    # "-common off",
+    # "-inline auto,deferred",
+]
+
 cflags_fluff_base = [
     *cflags_base,
     "-RTTI on",
@@ -341,7 +349,7 @@ config.libs = [
     {
         "lib": "gfl",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_base],
+        "cflags": [*cflags_gfl],
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
@@ -352,6 +360,7 @@ config.libs = [
             Object(NonMatching,     "gfl/gflTaskInfo.cpp"),
             Object(Matching,    "gfl/gflResInfo.cpp"),
             Object(NonMatching, "gfl/gflResArchivedFileInfo.cpp"),
+            Object(NonMatching, "gfl/gflParam.cpp"),
         ],
     },
     {
