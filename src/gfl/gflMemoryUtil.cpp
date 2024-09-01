@@ -1,13 +1,5 @@
 #include "gflMemoryUtil.h"
 
-void* operator new(size_t size) {
-    return gfl::Alloc(gfl::HeapID::ETC ,size, 4);
-}
-
-void* operator new(size_t size, u8 heapID) {
-    return gfl::Alloc(heapID, size, 4);
-}
-
 void* gfl::Memcpy(void* dst, size_t len, void* src) {
     if (0 == len) {
         return dst;
