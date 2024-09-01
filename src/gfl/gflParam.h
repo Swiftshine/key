@@ -1,6 +1,8 @@
 #ifndef GFL_PARAM_H
 #define GFL_PARAM_H
 
+#include <string>
+
 #include "types.h"
 #include "gflConsole.h"
 
@@ -9,17 +11,33 @@ namespace gfl {
     public:
         Param(const char* newLabel);
 
-        virtual void vf8() = 0;
+        virtual int vf8() = 0;
         virtual void vfC() = 0;
         DECL_WEAK virtual ~Param();
-        // virtual void vf14() = 0;
+        virtual void Print(Console* console, uint numTabs) = 0;
 
         bool Matches(const char* queryLabel, uint queryChecksum);
         void PrintTabs(Console* console, uint count);
     public:
         char mLabel[32];
         uint mChecksum;
+    };
 
+    // 'A' means 'array'
+    class ParamStrA : public Param {
+    public:
+        ParamStrA(const char* label, uint count);
+        virtual ~ParamStrA();
+
+        DECL_WEAK virtual int vf8() override;
+        virtual void vfC() override;
+        virtual void Print(Console* console, uint numTabs) override;
+
+        inline uint GetCount() { return mCount; }
+        inline std::string& operator[](uint index) { return mArray[index]; }
+    private:
+        std::string* mArray;
+        uint mCount;
     };
 }
 

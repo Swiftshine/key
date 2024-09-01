@@ -7,7 +7,7 @@
 
 
 void* operator new(size_t size, u8 heapID);
-void* operator new[](size_t size, u8 heapID);
+inline void* operator new[](size_t size, u8 heapID) { return operator new(size, heapID); }
 
 #define GFL_ALLOC_WORK(dest, type) \
     type* temporary_pointer = new (gfl::HeapID::Work) type; \
