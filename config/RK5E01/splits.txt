@@ -52,6 +52,11 @@ fluff/object/FlfGameObjLocator.cpp:
 	.data       start:0x8086A9D8 end:0x8086AA58
 	.sdata      start:0x808E1578 end:0x808E1580
 
+fluff/object/gmk/GmkCamRectCtrl.cpp:
+	.text       start:0x804F0388 end:0x804F044C
+	.rodata     start:0x8081B258 end:0x8081B268
+	.data       start:0x80893120 end:0x80893200
+
 gfl/gflResArchivedFileInfo.cpp:
 	.text       start:0x8063EA68 end:0x8063EBAC
 

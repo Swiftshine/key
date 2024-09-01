@@ -383,10 +383,11 @@ config.libs = [
     {
         "lib" : "fluff/object/gmk/",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff, "-Cpp_exceptions on"],
+        "cflags": [*cflags_fluff],
         "host": False,
         "objects": [
             Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
+            Object(NonMatching, "fluff/object/gmk/GmkCamRectCtrl.cpp"),
         ],
     },
 
