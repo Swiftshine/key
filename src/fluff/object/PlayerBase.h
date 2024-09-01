@@ -3,8 +3,9 @@
 
 #include "types.h"
 #include "object/FlfGameObj.h"
+#include "collision/IObjHitCB.h"
 
-class PlayerBase : public FlfGameObj {
+class PlayerBase : public FlfGameObj, public IObjHitCB {
 public:
     ENUM_CLASS(PlayerIDs,
         Kirby,
