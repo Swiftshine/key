@@ -20,7 +20,6 @@ namespace gfl {
         }
     public:
         inline MemoryBase() { }
-        virtual ~MemoryBase() = 0;
 
         void Reset();
         void ReplaceHeap(Heap*);
