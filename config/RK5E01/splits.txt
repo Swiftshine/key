@@ -79,6 +79,9 @@ gfl/gflMemory.cpp:
 gfl/gflAlloc.cpp:
 	.text       start:0x80644A2C end:0x80644A60
 
+gfl/gflGfCompression.cpp:
+	.text       start:0x806456A0 end:0x80645718
+
 gfl/gflTaskInfo.cpp:
 	.text       start:0x80645718 end:0x8064583C
 	.sbss       start:0x808E5D78 end:0x808E5D80
