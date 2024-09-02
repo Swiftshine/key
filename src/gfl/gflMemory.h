@@ -33,7 +33,7 @@ namespace gfl {
         static OSMutex* ValidateHeapMutex(u8 searchID, OSMutex* mutex, u8 maxID);
         static inline void SetCurrentMutex(OSMutex* mutex) { sCurrentMutex = mutex; }
         static inline OSMutex* GetCurrentMutex() { return sCurrentMutex; }
-        
+
         static inline void CheckInit() {
             if (!sIsInited) {
                 InitInstance();
@@ -54,7 +54,15 @@ namespace gfl {
                 InitInstance();
             }
         }
-    public:
+
+        inline Heap* GetLIB1Heap() { return &mLIB1Heap; }
+        inline Heap* GetLIB2Heap() { return &mLIB2Heap; }
+        inline Heap* GetStringHeap() { return &mStringHeap; }
+        inline Heap* GetEtcHeap() { return &mEtcHeap; }
+        inline Heap* GetSoundHeap() { return &mSoundHeap; }
+
+        void SetupHeaps();
+    private:
         Heap mLIB1Heap;
         Heap mLIB2Heap;
         Heap mStringHeap;

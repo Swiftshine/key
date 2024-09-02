@@ -12,8 +12,9 @@ namespace gfl {
         static MEMAllocatorAllocFunc HeapAlloc;
         static MEMAllocatorFreeFunc  HeapFree;
     public:
+        inline Heap() { CreateHeap(this); }
         void SetName(const char* name) DONT_INLINE_CLASS;
-        Heap();
+        static Heap* CreateHeap(Heap*);
         ~Heap();
         void Init(size_t range, u16 optFlag, int heapType);
         void* Alloc(size_t size, uint alignment);

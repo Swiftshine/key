@@ -352,6 +352,7 @@ config.libs = [
         "cflags": [*cflags_gfl],
         "host": False,
         "objects": [
+            Object(NonMatching, "gfl/gflMemory.cpp"),
             Object(NonMatching, "gfl/gflHeap.cpp"),
             Object(Matching, "gfl/gflMemoryManagement.cpp"),
             Object(Matching, "gfl/gflAlloc.cpp"),

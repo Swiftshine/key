@@ -73,6 +73,9 @@ gfl/gflHeap.cpp:
 gfl/gflMemoryBase.cpp:
 	.text       start:0x80644610 end:0x8064483C
 
+gfl/gflMemory.cpp:
+	.text       start:0x80644840 end:0x80644A2C
+
 gfl/gflAlloc.cpp:
 	.text       start:0x80644A2C end:0x80644A60
 

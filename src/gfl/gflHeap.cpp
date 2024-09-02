@@ -11,11 +11,13 @@ void Heap::SetName(const char* newName) {
     gfl::Memcpy(mHeapName, sizeof(mHeapName), (void*)newName);
 }
 
-Heap::Heap() {
-    mHeapID = 0;
-    SetName(DefaultName);
-    mExpHeap = NULL;
+Heap* Heap::CreateHeap(Heap* heap) {
+    heap->mHeapID = 0;
+    heap->SetName(DefaultName);
+    heap->mExpHeap = nullptr;
+    return heap;
 }
+
 
 Heap::~Heap() {
     u32 arenaLo;
@@ -43,7 +45,7 @@ Heap::~Heap() {
             break;
         }
         default: {
-            arenaLo = NULL;
+            arenaLo = nullptr;
             break;
         }
     }
@@ -58,7 +60,7 @@ Heap::~Heap() {
             break;
         }
         default: {
-            arenaHi = NULL;
+            arenaHi = nullptr;
             break;
         }
     }
@@ -90,7 +92,7 @@ Heap::~Heap() {
             }
         }
     }
-    this->mExpHeap = NULL;
+    this->mExpHeap = nullptr;
     this->mHeapType = 0;
 }
 
@@ -113,7 +115,7 @@ void Heap::Init(size_t range, u16 optFlag, int hType) {
             break;
         }
         default: {
-            arenaLo = NULL;
+            arenaLo = nullptr;
             break;
         }
     }
@@ -128,7 +130,7 @@ void Heap::Init(size_t range, u16 optFlag, int hType) {
             break;
         }
         default: {
-            arenaHi = NULL;
+            arenaHi = nullptr;
             break;
         }
     }
