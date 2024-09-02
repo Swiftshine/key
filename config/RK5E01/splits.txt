@@ -63,6 +63,9 @@ gfl/gflResArchivedFileInfo.cpp:
 gfl/gflFixedString.cpp:
 	.text       start:0x80642B00 end:0x80642CB0
 
+gfl/gflMemoryManagement.cpp:
+	.text       start:0x80644060 end:0x80644264
+
 gfl/gflHeap.cpp:
 	.text       start:0x80644264 end:0x8064456C
 	.rodata     start:0x8082C4C0 end:0x8082C4D0

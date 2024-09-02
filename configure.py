@@ -353,7 +353,7 @@ config.libs = [
         "host": False,
         "objects": [
             Object(NonMatching, "gfl/gflHeap.cpp"),
-            # Object(Matching, "gfl/gflMemoryManagement.cpp"),
+            Object(Matching, "gfl/gflMemoryManagement.cpp"),
             Object(Matching, "gfl/gflAlloc.cpp"),
             Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
             Object(Matching, "gfl/gflVec3.cpp"),
