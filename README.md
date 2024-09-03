@@ -1,8 +1,7 @@
-# Kirby's Epic Yarn ![Progress Badge] [![Discord Badge]][discord]
+# Kirby's Epic Yarn ![Static Badge](https://img.shields.io/badge/DOL-0.02%25-blue) [![Discord Badge]][discord]
 
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
-[Progress Badge]: https://img.shields.io/badge/DOL-0.02%-blue
 =============
 
 A work-in-progress decompilation of Kirby's Epic Yarn.
