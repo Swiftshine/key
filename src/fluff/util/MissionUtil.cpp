@@ -68,6 +68,8 @@ char MissionUtil::GetMissionIdentifierByType(int type) {
     return ret;
 }
 
+// last nonmatching function in TU
+// https://decomp.me/scratch/iXPFH
 bool MissionUtil::HasMissionIndicator(int type, const std::string& str) {
     bool ret = false;
     uint len;
@@ -76,7 +78,7 @@ bool MissionUtil::HasMissionIndicator(int type, const std::string& str) {
     signed long t = static_cast<signed long>(type);
     
     if (type >= 0 && t < 6) {
-        if (0 != str.size() /* && str.find(GetMissionIdentifierByType(type)) != std::string::npos */) {
+        if (0 != str.size() && str.rfind(GetMissionIdentifierByType(type), 0) != std::string::npos) {
             ret = true;
         }
     }
@@ -145,7 +147,7 @@ int MissionUtil::GetMissionIndexByID(int id) {
 
 extern "C" int snprintf(char*, size_t, const char*, ...);
 
-// https://decomp.me/scratch/Jk78k
+const char magic_template[] = "M%c%02d";
 uint MissionUtil::GetMissionMagicByID(int id) {
     int type;
     int index;
@@ -154,7 +156,7 @@ uint MissionUtil::GetMissionMagicByID(int id) {
     if (MissionType::None != type) {
         char types[] = {'\0', 'B', 'T', 'D', 'C', 'S'};
         char magicStr[16];
-        snprintf(magicStr, sizeof(magicStr), "M%c%02d", types[type], index);
+        snprintf(magicStr, sizeof(magicStr), magic_template, types[type], index);
         magicStr[4] = 0;
         
         return SignatureUtil::GetSignature(std::string(std::string(magicStr)));

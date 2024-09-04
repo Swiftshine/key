@@ -23,7 +23,6 @@ namespace ec {
 }
 
 namespace std {
-
     template <class CharT>
     struct char_traits {};
 
@@ -54,6 +53,8 @@ namespace std {
         class Traits = char_traits<CharT>,
         class Allocator = allocator<CharT> >
     class basic_string {
+    public:
+        static const size_t npos = -1U;
     public:
         typedef Traits traits_type;
         typedef CharT value_type;
@@ -277,7 +278,9 @@ namespace std {
         DONT_INLINE_CLASS void operator+=(const char *str) { append(str); }
         DONT_INLINE_CLASS void operator+=(CharT c) { append(c); }
 
-        inline char operator[](size_t n) const { return get_pointer()[n]; }
+        inline CharT operator[](size_t n) const { return get_pointer()[n]; }
+
+        size_t rfind(CharT c, size_t pos = npos) const;
     private:
         void do_replace(
             size_t cur_size,
