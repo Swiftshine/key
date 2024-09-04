@@ -150,7 +150,7 @@ namespace std {
         basic_string() DONT_INLINE_CLASS { zero(); }
         basic_string(const Allocator &alloc) : m(alloc) { zero(); }
 
-        basic_string(const basic_string &other) : m(other.m.second()) {
+        basic_string(const basic_string &other) DONT_INLINE_CLASS : m(other.m.second()) {
             const rep_s &other_rep = other.m.first();
             if (other_rep.is_short()) {
                 m.first() = other_rep;

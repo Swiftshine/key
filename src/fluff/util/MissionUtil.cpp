@@ -1,4 +1,5 @@
 #include "util/MissionUtil.h"
+#include "util/SignatureUtil.h"
 #include <cstdio>
 
 static const char MissionIndicators[] = "NBTDCS";
@@ -67,7 +68,7 @@ char MissionUtil::GetMissionIdentifierByType(int type) {
     return ret;
 }
 
-bool MissionUtil::HasMissionIndicator(int type, std::string& str) {
+bool MissionUtil::HasMissionIndicator(int type, const std::string& str) {
     bool ret = false;
     uint len;
     char target;
@@ -155,10 +156,7 @@ uint MissionUtil::GetMissionMagicByID(int id) {
         snprintf(magicStr, sizeof(magicStr), "M%c%02d", types[type], index);
         magicStr[4] = 0;
         
-        std::string str1(magicStr);
-        std::string str2(str1);
-
-        // return str2.substr(0, 4).c_str();
+        return SignatureUtil::GetSignature(std::string(std::string(magicStr)));
     }
     return 'NONE';
 }
