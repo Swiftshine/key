@@ -217,7 +217,7 @@ namespace std {
 
         size_t length() const {
             const rep_s &rep = m.first();
-            return rep.is_short() ? rep.shortBuf.length : rep.longBuf.length;
+            return rep.is_short() ? rep.shortBuf.length & 0x7F : rep.longBuf.length;
         }
 
         void clear() {

@@ -78,7 +78,7 @@ bool MissionUtil::HasMissionIndicator(int type, const std::string& str) {
     signed long t = static_cast<signed long>(type);
     
     if (type >= 0 && t < 6) {
-        if (0 != str.size() && str.rfind(GetMissionIdentifierByType(type), 0) != std::string::npos) {
+        if (0 != str.length() && std::string::npos != str.rfind(GetMissionIdentifierByType(type), 0)) {
             ret = true;
         }
     }
