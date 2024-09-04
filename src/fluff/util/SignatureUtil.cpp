@@ -1,5 +1,7 @@
 #include "util/SignatureUtil.h"
 
+// last remaining nonmatching function in this TU
+// https://decomp.me/scratch/yfkZ1
 uint SignatureUtil::GetSignature(const std::string& str) {
     u32 len = str.length();
 

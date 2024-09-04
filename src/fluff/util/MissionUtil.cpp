@@ -145,6 +145,7 @@ int MissionUtil::GetMissionIndexByID(int id) {
 
 extern "C" int snprintf(char*, size_t, const char*, ...);
 
+// https://decomp.me/scratch/Jk78k
 uint MissionUtil::GetMissionMagicByID(int id) {
     int type;
     int index;
