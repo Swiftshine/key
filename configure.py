@@ -224,6 +224,13 @@ cflags_fluff_base = [
     "-use_lmw_stmw on",
 ]
 
+cflags_fluff_util = [
+    *cflags_base,
+    "-RTTI on",
+    "-inline auto",
+    "-use_lmw_stmw on",
+]
+
 cflags_fluff = [
     *cflags_fluff_base,
     "-str reuse,readonly",
@@ -408,12 +415,12 @@ config.libs = [
     {
         "lib" : "fluff/util",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff],
+        "cflags": [*cflags_fluff_util],
         "host": False,
         "objects" : [
             # fluff/util/
             Object(Equivalent, "fluff/util/SimpleMdlCommon.cpp"),
-            Object(NonMatching, "fluff/util/MissionUtil.cpp"),
+            Object(Equivalent, "fluff/util/MissionUtil.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
         ],
     },

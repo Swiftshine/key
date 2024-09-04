@@ -68,8 +68,6 @@ char MissionUtil::GetMissionIdentifierByType(int type) {
     return ret;
 }
 
-// last nonmatching function in TU
-// https://decomp.me/scratch/iXPFH
 bool MissionUtil::HasMissionIndicator(int type, const std::string& str) {
     bool ret = false;
     uint len;
@@ -144,8 +142,6 @@ int MissionUtil::GetMissionIndexByID(int id) {
     GetMissionInfoByID(id, nullptr, &index);
     return index;
 }
-
-extern "C" int snprintf(char*, size_t, const char*, ...);
 
 const char magic_template[] = "M%c%02d";
 uint MissionUtil::GetMissionMagicByID(int id) {
