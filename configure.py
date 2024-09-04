@@ -408,11 +408,13 @@ config.libs = [
     {
         "lib" : "fluff/util",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff, "-Cpp_exceptions on"],
+        "cflags": [*cflags_fluff],
         "host": False,
         "objects" : [
             # fluff/util/
             Object(Equivalent, "fluff/util/SimpleMdlCommon.cpp"),
+            Object(NonMatching, "fluff/util/MissionUtil.cpp"),
+            Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
         ],
     },
 ]

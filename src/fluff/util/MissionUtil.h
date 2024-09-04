@@ -173,16 +173,16 @@ namespace MissionUtil {
     );
 
 
-    int  GetMissionTypeByCode(int code) DONT_INLINE;
-    int  GetMissionCodeByType(int type) DONT_INLINE;
-    int  GetMissionCountByType(int type) DONT_INLINE;
-    int  GetMissionIDBaseByType(int type) DONT_INLINE;
-    char GetMissionIdentifierByType(int type) DONT_INLINE;
+    int DONT_INLINE GetMissionTypeByCode(int code) ;
+    int DONT_INLINE GetMissionCodeByType(int type) ;
+    int  DONT_INLINE GetMissionCountByType(int type) ;
+    int  DONT_INLINE GetMissionIDBaseByType(int type);
+    char  DONT_INLINE GetMissionIdentifierByType(int type);
     bool HasMissionIndicator(int type, std::string& str);
     int  GetMissionIDByInfo(int type, int index);
     void GetMissionInfoByID(int id, int* destType, int* destIndex);
-    int  GetMissionTypeByID(int id) DONT_INLINE;
-    int  GetMissionIndexByID(int id) DONT_INLINE;
+    int DONT_INLINE GetMissionTypeByID(int id) ;
+    int  DONT_INLINE GetMissionIndexByID(int id) ;
     uint  GetMissionMagicByID(int id);
 } // MissionUtil
 

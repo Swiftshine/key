@@ -165,7 +165,7 @@ namespace std {
             }
         }
 
-        basic_string(const CharT *str) {
+        basic_string(const CharT *str) DONT_INLINE_CLASS {
             zero();
 
             size_t length = Traits::length(str);
@@ -192,6 +192,7 @@ namespace std {
         // much easier to analyze things when you can force the right inlining lol
 
         inline iterator begin() { return get_pointer(); }
+        inline const char* c_str() const { return get_pointer(); }
         DONT_INLINE_CLASS const_iterator begin() const { return get_pointer(); }
 
         DONT_INLINE_CLASS iterator end() {
@@ -209,6 +210,11 @@ namespace std {
         }
 
         size_t size() const {
+            const rep_s &rep = m.first();
+            return rep.is_short() ? rep.shortBuf.length : rep.longBuf.length;
+        }
+
+        size_t length() const {
             const rep_s &rep = m.first();
             return rep.is_short() ? rep.shortBuf.length : rep.longBuf.length;
         }
@@ -271,6 +277,7 @@ namespace std {
         DONT_INLINE_CLASS void operator+=(const char *str) { append(str); }
         DONT_INLINE_CLASS void operator+=(CharT c) { append(c); }
 
+        inline char operator[](size_t n) const { return get_pointer()[n]; }
     private:
         void do_replace(
             size_t cur_size,

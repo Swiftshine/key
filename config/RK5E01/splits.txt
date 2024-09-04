@@ -52,6 +52,14 @@ fluff/object/FlfGameObjLocator.cpp:
 	.data       start:0x8086A9D8 end:0x8086AA58
 	.sdata      start:0x808E1578 end:0x808E1580
 
+fluff/util/SignatureUtil.cpp:
+	.text       start:0x803D8098 end:0x803D820C
+	.sdata2     start:0x808EA3D8 end:0x808EA3DC
+
+fluff/util/MissionUtil.cpp:
+	.text       start:0x804C49F4 end:0x804C4E60
+	.sdata2     start:0x808EB2C4 end:0x808EB2E0
+
 fluff/object/gmk/GmkCamRectCtrl.cpp:
 	.text       start:0x804F0388 end:0x804F044C
 	.rodata     start:0x8081B258 end:0x8081B268
