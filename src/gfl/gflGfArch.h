@@ -48,7 +48,7 @@ namespace gfl {
             uint mHash;
             uint mNameOffset;
             uint mDecompressedFilesize;
-            uint mCompressedDataOffset;
+            uint mDecompressedDataOffset;
         };
 
         // ASSERT_SIZE(FileEntry, 0x10);
