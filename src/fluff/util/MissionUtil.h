@@ -178,7 +178,7 @@ namespace MissionUtil {
     int  DONT_INLINE GetMissionCountByType(int type) ;
     int  DONT_INLINE GetMissionIDBaseByType(int type);
     char  DONT_INLINE GetMissionIdentifierByType(int type);
-    bool HasMissionIndicator(int type, std::string& str);
+    bool HasMissionIndicator(int type, const std::string& str);
     int  GetMissionIDByInfo(int type, int index);
     void GetMissionInfoByID(int id, int* destType, int* destIndex);
     int DONT_INLINE GetMissionTypeByID(int id) ;

@@ -23,7 +23,6 @@ namespace ec {
 }
 
 namespace std {
-
     template <class CharT>
     struct char_traits {};
 
@@ -54,6 +53,8 @@ namespace std {
         class Traits = char_traits<CharT>,
         class Allocator = allocator<CharT> >
     class basic_string {
+    public:
+        static const size_t npos = -1U;
     public:
         typedef Traits traits_type;
         typedef CharT value_type;
@@ -150,7 +151,7 @@ namespace std {
         basic_string() DONT_INLINE_CLASS { zero(); }
         basic_string(const Allocator &alloc) : m(alloc) { zero(); }
 
-        basic_string(const basic_string &other) : m(other.m.second()) {
+        basic_string(const basic_string &other) DONT_INLINE_CLASS : m(other.m.second()) {
             const rep_s &other_rep = other.m.first();
             if (other_rep.is_short()) {
                 m.first() = other_rep;
@@ -216,7 +217,7 @@ namespace std {
 
         size_t length() const {
             const rep_s &rep = m.first();
-            return rep.is_short() ? rep.shortBuf.length : rep.longBuf.length;
+            return rep.is_short() ? rep.shortBuf.length & 0x7F : rep.longBuf.length;
         }
 
         void clear() {
@@ -277,7 +278,9 @@ namespace std {
         DONT_INLINE_CLASS void operator+=(const char *str) { append(str); }
         DONT_INLINE_CLASS void operator+=(CharT c) { append(c); }
 
-        inline char operator[](size_t n) const { return get_pointer()[n]; }
+        inline CharT operator[](size_t n) const { return get_pointer()[n]; }
+
+        size_t rfind(CharT c, size_t pos = npos) const;
     private:
         void do_replace(
             size_t cur_size,

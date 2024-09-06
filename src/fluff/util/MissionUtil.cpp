@@ -1,4 +1,5 @@
 #include "util/MissionUtil.h"
+#include "util/SignatureUtil.h"
 #include <cstdio>
 
 static const char MissionIndicators[] = "NBTDCS";
@@ -67,7 +68,7 @@ char MissionUtil::GetMissionIdentifierByType(int type) {
     return ret;
 }
 
-bool MissionUtil::HasMissionIndicator(int type, std::string& str) {
+bool MissionUtil::HasMissionIndicator(int type, const std::string& str) {
     bool ret = false;
     uint len;
     char target;
@@ -75,7 +76,7 @@ bool MissionUtil::HasMissionIndicator(int type, std::string& str) {
     signed long t = static_cast<signed long>(type);
     
     if (type >= 0 && t < 6) {
-        if (0 != str.size() /* && str.find(GetMissionIdentifierByType(type)) != std::string::npos */) {
+        if (0 != str.length() && std::string::npos != str.rfind(GetMissionIdentifierByType(type), 0)) {
             ret = true;
         }
     }
@@ -142,8 +143,7 @@ int MissionUtil::GetMissionIndexByID(int id) {
     return index;
 }
 
-extern "C" int snprintf(char*, size_t, const char*, ...);
-
+const char magic_template[] = "M%c%02d";
 uint MissionUtil::GetMissionMagicByID(int id) {
     int type;
     int index;
@@ -152,13 +152,10 @@ uint MissionUtil::GetMissionMagicByID(int id) {
     if (MissionType::None != type) {
         char types[] = {'\0', 'B', 'T', 'D', 'C', 'S'};
         char magicStr[16];
-        snprintf(magicStr, sizeof(magicStr), "M%c%02d", types[type], index);
+        snprintf(magicStr, sizeof(magicStr), magic_template, types[type], index);
         magicStr[4] = 0;
         
-        std::string str1(magicStr);
-        std::string str2(str1);
-
-        // return str2.substr(0, 4).c_str();
+        return SignatureUtil::GetSignature(std::string(std::string(magicStr)));
     }
     return 'NONE';
 }
