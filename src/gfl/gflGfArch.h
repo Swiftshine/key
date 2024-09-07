@@ -36,7 +36,7 @@ namespace gfl {
             bool mIsCompressed;    // always true
             uint  mFileInfoOffset;
             uint  mFileInfoSize;
-            uint  mCompressionHeaderOffset;
+            uint  mCompressionHeaderOffset; // the compression header is padded to an offset of 0x20
             uint  mFilesize;      // includes compression header(?)
             u8 pad2[4]; // explicit padding -- this is part of the structure
         };
