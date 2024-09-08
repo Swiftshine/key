@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "gflMemoryManagement.h"
+#include "gflAlloc.h"
 #include "types.h"
 
 

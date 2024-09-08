@@ -404,7 +404,7 @@ config.libs = [
     {
         "lib" : "fluff/object/gmk/",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff],
+        "cflags": [*cflags_fluff,],
         "host": False,
         "objects": [
             Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
@@ -415,12 +415,12 @@ config.libs = [
     {
         "lib" : "fluff/util",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_util],
+        "cflags": [*cflags_fluff_util, "-pragma \"merge_float_consts on\""],
         "host": False,
         "objects" : [
             # fluff/util/
-            Object(Equivalent, "fluff/util/SimpleMdlCommon.cpp"),
-            Object(Equivalent, "fluff/util/MissionUtil.cpp"),
+            Object(Matching, "fluff/util/SimpleMdlCommon.cpp"),
+            Object(NonMatching, "fluff/util/MissionUtil.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
         ],
     },

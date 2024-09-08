@@ -2,12 +2,12 @@
 #include "gfl/gflMemoryUtil.h"
 #include <rand.h>
 
-const char lbl_808E6EE0[2] = {'N', '_'};
+const char NurbsPrefix[] = "N_";
 
 Gimmick* SimpleMdlCommon::Build(Gimmick::GimmickBuildInfo* buildInfo) {
     std::string prefix(buildInfo->GetStringParam(Parameter::Name), 0, 2);
 
-    bool cmp = prefix.compare(lbl_808E6EE0) == 0;
+    bool cmp = prefix.compare(NurbsPrefix) == 0;
     if (cmp) {
         return new (gfl::HeapID::Work) GmkSimpleNurbs(buildInfo);
     } else if (buildInfo->GetIntParam(Parameter::UnkInt1) < 10) {
@@ -25,7 +25,7 @@ void SimpleMdlCommon::fn_80052C8C(Gimmick::GimmickBuildInfo* buildInfo) {
 
     std::string prefix(buildInfo->GetStringParam(Parameter::Name), 0, 2);
 
-    bool cmp = prefix.compare(lbl_808E6EE0) == 0;
+    bool cmp = prefix.compare(NurbsPrefix) == 0;
 
     if (cmp) {
         // GimmickUtil::AddToNameList(buildInfo);
@@ -33,7 +33,7 @@ void SimpleMdlCommon::fn_80052C8C(Gimmick::GimmickBuildInfo* buildInfo) {
         return;
     } else if (buildInfo->GetIntParam(Parameter::UnkInt1) < 10) {
         // GimmickUtil::AddToNameList(buildInfo->GetStringParam(Parameter::Name).begin());
-        fn_80052060(list, buildInfo->GetStringParam(Parameter::Name).begin());
+        fn_80052060(list, buildInfo->GetStringParam(Parameter::Name).c_str());
     } else {
         fn_800D5960(buildInfo);
         return;
