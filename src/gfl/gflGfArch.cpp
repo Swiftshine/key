@@ -128,7 +128,7 @@ bool GfArch::SetHeader(GfArch::FileHeader* header) {
             mFileInfoOffset = SwapEndianness32(header->mFileInfoOffset);
             mFileInfoSize = SwapEndianness32(header->mFileInfoSize);
             mCompressionHeaderOffset = SwapEndianness32(header->mCompressionHeaderOffset);
-            mArchiveSize = SwapEndianness32(header->mFilesize);
+            mArchiveSize = SwapEndianness32(header->mCompressedBlockSize);
             return true;
             
         }

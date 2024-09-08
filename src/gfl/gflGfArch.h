@@ -5,6 +5,8 @@
 #include "gflFixedString.h"
 #include "gflDirEntry.h"
 
+// The GfArch format is in Little-Endian.
+
 namespace gfl {
     class File;
     class DirEntryGfArch;
@@ -37,7 +39,7 @@ namespace gfl {
             uint  mFileInfoOffset;
             uint  mFileInfoSize;
             uint  mCompressionHeaderOffset; // the compression header is padded to an offset of 0x20
-            uint  mFilesize;      // includes compression header(?)
+            uint  mCompressedBlockSize; // the size of the compressed block, including the compression header
             u8 pad2[4]; // explicit padding -- this is part of the structure
         };
 
@@ -48,7 +50,7 @@ namespace gfl {
             uint mChecksum;
             uint mNameOffset; // if this entry is the last one, a flag of 0x80000000 is applied.
             uint mDecompressedFilesize;
-            uint mDecompressedDataOffset;
+            uint mDecompressedDataOffset; // calculated as if the compression header was absent from the archive
         };
 
         // ASSERT_SIZE(FileEntry, 0x10);
