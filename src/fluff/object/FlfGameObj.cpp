@@ -1,4 +1,5 @@
 #include "object/FlfGameObj.h"
+#include "manager/CameraManager.h"
 #include <revolution/MTX.h>
 #include <nw4r/math.h>
 
@@ -49,6 +50,7 @@ FlfGameObj::FlfGameObj(uint newActorType)
 
 FlfGameObj::~FlfGameObj() { }
 
+// https://decomp.me/scratch/ZwbYU
 void FlfGameObj::UpdateMatrix() {
     f32 cosRotZ;
     f32 temp_f4;
@@ -104,7 +106,7 @@ void FlfGameObj::vf10(bool val) {
 }
 
 bool FlfGameObj::vf14() {
-    // return fn_8078A5A0(this);
+    return m_6C;
 }
 
 void FlfGameObj::fn_8002C004(bool arg1) {
@@ -120,9 +122,7 @@ void FlfGameObj::fn_8002C004(bool arg1) {
 }
 
 
-bool FlfGameObj::ShouldCull(class CameraManager* camMgr) {
-    // Vec3f screenPos = GetScreenPos();
-    // return camMgr->CheckCull(&screenPos);
+bool FlfGameObj::ShouldCull(CameraManager* camMgr) {
+    gfl::Vec3 screenPos = GetScreenPos();
+    return camMgr->CheckCull(screenPos);
 }
-
-// the rest of the functions are not implemented in this tu

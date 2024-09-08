@@ -17,7 +17,7 @@ public:
 
     virtual void    SetPos(gfl::Vec3*);
     virtual void    vf10(bool val);
-    virtual bool    vf14();
+    DECL_WEAK virtual bool    vf14();
     virtual void    vf18();
     virtual gfl::Vec3   GetPos();
     virtual void    SetPos_thunk(gfl::Vec3*);
