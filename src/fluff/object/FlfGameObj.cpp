@@ -1,17 +1,23 @@
 #include "object/FlfGameObj.h"
+#include <revolution/MTX.h>
+#include <nw4r/math.h>
 
 namespace nw4r {
     namespace math {
-        float SinF(float);
-        float CosF(float);
+        inline float SinF(float value) {
+            return SinFIdx(NW4R_MATH_RAD_TO_FIDX(value));
+        }
+        inline float CosF(float value) {
+            return CosFIdx(NW4R_MATH_RAD_TO_FIDX(value));
+        }
     }
 }
 
-FlfGameObj::FlfGameObj(uint newActorType) {
-    mPosition = 0.0f;
-    mRotation = 0.0f;
-    mScale    = 1.0f;
-
+FlfGameObj::FlfGameObj(uint newActorType)
+    : mPosition(0.0f)
+    , mRotation(0.0f)
+    , mScale(1.0f) 
+{
     mMatrix[0][0] = 0.0f;
     mMatrix[0][1] = 0.0f;
     mMatrix[0][2] = 0.0f;
@@ -32,13 +38,13 @@ FlfGameObj::FlfGameObj(uint newActorType) {
     m_6D = false;
     m_6E = true;
     m_6F = false;
-    // mCullThreshold = CameraManager::CullingThreshold;
+    mCullThreshold = 18.666666f;
     m_74 = 0;
     m_78 = 2;
     m_7C = false;
     m_7D = false;
 
-    // fn_8066E8A0((void*)&this->mMatrix);
+    PSMTXIdentity(mMatrix);
 }
 
 FlfGameObj::~FlfGameObj() { }
@@ -67,7 +73,7 @@ void FlfGameObj::UpdateMatrix() {
     sinRotY = nw4r::math::SinF(this->mRotation.y);
     cosRotY = nw4r::math::CosF(this->mRotation.y);
     sinRotZ = nw4r::math::SinF(this->mRotation.z);
-    cosRotZ  = nw4r::math::CosF(this->mRotation.z);
+    cosRotZ = nw4r::math::CosF(this->mRotation.z);
 
     
     temp_f11 = cosRotX * sinRotZ;

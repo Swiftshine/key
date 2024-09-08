@@ -7,7 +7,7 @@ namespace gfl {
     public:
         Vec3(float, float, float);
         Vec3();
-
+        inline Vec3(float val) { x = val; y = val; z = val; }
         inline ~Vec3() {}
         
 
