@@ -30,6 +30,9 @@ gfl/gflChecksum.cpp:
 fluff/manager/StageResourceManager.cpp:
 	.text       start:0x80045310 end:0x80045ED4
 
+fluff/util/GimmickUtil.cpp:
+	.text       start:0x800505C8 end:0x800507F4
+
 fluff/util/SimpleMdlCommon.cpp:
 	.text       start:0x80052B80 end:0x80052DD8
 	.sdata2     start:0x808E6EE0 end:0x808E6EE4

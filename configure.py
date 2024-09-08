@@ -422,6 +422,7 @@ config.libs = [
             Object(Matching, "fluff/util/SimpleMdlCommon.cpp"),
             Object(NonMatching, "fluff/util/MissionUtil.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
+            Object(NonMatching, "fluff/util/GimmickUtil.cpp"),
         ],
     },
 ]
