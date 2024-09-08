@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include "object/FlfGameObj.h"
-#include "collision/IObjHitCB.h"
+#include "object/collision/IObjHitCB.h"
 
 class PlayerBase : public FlfGameObj, public IObjHitCB {
 public:
