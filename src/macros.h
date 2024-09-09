@@ -38,4 +38,7 @@
         enum __type__ { __VA_ARGS__ };     \
     }
 
+#define SET_FLAG(x, flag) x |= flag;
+#define CLEAR_FLAG(x, flag) x &= ~flag;
+
 #endif
