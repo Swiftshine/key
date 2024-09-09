@@ -1,0 +1,6 @@
+"File", "Functions", "Issue",
+"fluff/util/GimmickUtil.cpp", "100%", "cyclic dependency",
+"fluff/util/MissionUtil.cpp", "100%", "standard library functions included in TU",
+"fluff/util/SignatureUtil.cpp", "74%", "instruction mismatches",
+"fluff/object/FlfHandleList.cpp", "100%*", "*weak destructor (branch)",
+"gfl/gflTaskInfo.cpp", "100%*", "*weak destructor (branch)",
