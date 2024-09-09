@@ -4,6 +4,7 @@
 #define GFL_TASKLIST_TASK_COUNT 1400
 
 #include "types.h"
+#include <cstring>
 
 namespace gfl {
     class Task;
