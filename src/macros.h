@@ -40,5 +40,6 @@
 
 #define SET_FLAG(x, flag) x |= flag;
 #define CLEAR_FLAG(x, flag) x &= ~flag;
+#define CHECK_FLAG(x, flag) (x & flag) != 0;
 
 #endif
