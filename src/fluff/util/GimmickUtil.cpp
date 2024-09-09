@@ -73,7 +73,6 @@ int GimmickUtil::fn_80050700(int id) {
     }
 }
 
-// https://decomp.me/scratch/XVL8D
 int GimmickUtil::fn_80050764(int arg0, int arg1) {
     if (arg0 >= 4) {
         return 0x15;
@@ -87,7 +86,9 @@ int GimmickUtil::fn_80050764(int arg0, int arg1) {
         return 0x2A;
     }
 
-   return (arg1 + arg0 * 7) + 0x15;
+    int temp = arg0 * 7 + 0x15;
+    temp += arg1;
+    return temp;
 }
 
 bool GimmickUtil::fn_800507A8(int id) {
