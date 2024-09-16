@@ -6,7 +6,7 @@
 
 class KdTreeNode {
 public:
-    KdTreeNode();
+    inline KdTreeNode();
     virtual ~KdTreeNode();
 private:
     bool m_4;
