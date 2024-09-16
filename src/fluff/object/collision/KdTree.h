@@ -4,6 +4,7 @@
 #include "types.h"
 #include "object/collision/ColData.h"
 
+// size: 0x34
 class KdTreeNode {
 public:
     inline KdTreeNode();
@@ -17,9 +18,10 @@ private:
     float m_18;
     float m_1C;
     uint m_20;
-    ColData* mColData;
+    KdTreeNode* mParent;
     KdTreeNode* mChild1;
     KdTreeNode* mChild2;
+    ColData* mColData;
     uint m_30;
 };
 
