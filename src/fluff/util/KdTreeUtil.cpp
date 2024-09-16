@@ -1,15 +1,14 @@
 #include "util/KdTreeUtil.h"
 
-int KdTreeUtil::DetermineNodePlacement(SplitInfo& splitInfo, gfl::Vec2& point) {
-    float val;
-    if (splitInfo.first) {
+int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, gfl::Vec2& point) {
+    float coordinate;
+    if (splitInfo.mSplitY) {
         // the node is split on the Y axis
-        val = point.y;
-        if (val > splitInfo.second) {
-            return NodePlacement::Child1;
-        }
+        coordinate = point.y;
 
-        if (val < splitInfo.second) {
+        if (coordinate > splitInfo.mMidpoint) {
+            return NodePlacement::Child1;
+        } else if (coordinate < splitInfo.mMidpoint) {
             return NodePlacement::Child2;
         }
         
@@ -17,12 +16,12 @@ int KdTreeUtil::DetermineNodePlacement(SplitInfo& splitInfo, gfl::Vec2& point) {
     }
 
     // the node is split on the X axis
-    val = point.x;
-    if (val > splitInfo.second) {
+    coordinate = point.x;
+    if (coordinate > splitInfo.mMidpoint) {
         return NodePlacement::Child1;
     }
 
-    if (val < splitInfo.second) {
+    if (coordinate < splitInfo.mMidpoint) {
         return NodePlacement::Child2;
     }
 
@@ -37,7 +36,26 @@ int KdTreeUtil::DetermineNodePlacementByProximity(SplitInfo& splitInfo, PointPai
     return NodePlacement::Self;
 }
 
-int KdTreeUtil::DetermineNodePlacement(SplitInfo& splitInfo, PointPair& points) {
+int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, PointPair& points) {
+    if (splitInfo.mSplitY) {
+        // y axis
+
+        if (points.first.y > splitInfo.mMidpoint) {
+            return NodePlacement::Child1;
+        } else if (points.second.y < splitInfo.mMidpoint) {
+            return NodePlacement::Child2;
+        }
     
+        return NodePlacement::Self;
+    }
+
+    // x axis
+    
+    if (points.first.x > splitInfo.mMidpoint) {
+        return NodePlacement::Child1;
+    } else if (points.second.x < splitInfo.mMidpoint) {
+        return NodePlacement::Child2;
+    }
+
     return NodePlacement::Self;
 }

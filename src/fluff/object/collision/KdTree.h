@@ -4,6 +4,7 @@
 #include "types.h"
 #include "object/collision/ColData.h"
 #include <utility>
+#include "util/KdTreeUtil.h"
 
 // size: 0x34
 class KdTreeNode {
@@ -38,9 +39,7 @@ public:
     }
 
 private:
-    // bool - indicates whether or not to split on Y axis
-    // float - midpoint
-    std::pair<bool, float> mSplitInfo;
+    KdTreeSplitInfo mSplitInfo;
     uint mDepth;
     gfl::Vec2 mMin;
     gfl::Vec2 mMax;
