@@ -6,6 +6,10 @@ namespace gfl {
     struct Vec2 {
         Vec2() : x(0.0f), y(0.0f) {}
         float x, y;
+        inline void operator=(float val) {
+            x = val;
+            y = val;
+        }
     };
 }
 

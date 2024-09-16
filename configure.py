@@ -423,6 +423,7 @@ config.libs = [
             Object(NonMatching, "fluff/util/MissionUtil.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
             Object(NonMatching, "fluff/util/GimmickUtil.cpp"),
+            Object(NonMatching, "fluff/util/KdTreeUtil.cpp"),
         ],
     },
 ]

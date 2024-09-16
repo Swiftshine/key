@@ -30,6 +30,9 @@ gfl/gflChecksum.cpp:
 fluff/manager/StageResourceManager.cpp:
 	.text       start:0x80045310 end:0x80045ED4
 
+fluff/util/KdTreeUtil.cpp:
+	.text       start:0x80048354 end:0x8004855C
+
 fluff/util/GimmickUtil.cpp:
 	.text       start:0x800505C8 end:0x800507F4
 

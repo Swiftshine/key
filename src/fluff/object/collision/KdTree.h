@@ -3,25 +3,52 @@
 
 #include "types.h"
 #include "object/collision/ColData.h"
+#include <utility>
 
 // size: 0x34
 class KdTreeNode {
 public:
-    inline KdTreeNode();
+    inline KdTreeNode(KdTreeNode* parent) {
+        mDepth = parent->GetDepth() + 1;
+        mMin = 0.0f;
+        mMax = 0.0f;
+        mParent = parent;
+        mChild1 = nullptr;
+        mChild2 = nullptr;
+        mColData = nullptr;
+        mColDataCount = 0;
+        mMin.x = parent->GetMin().x;
+        mMin.y = parent->GetMin().y;
+        mMax.x = parent->GetMax().x;
+        mMax.y = parent->GetMax().y;
+    }
+
     virtual ~KdTreeNode();
+
+    inline uint GetDepth() {
+        return mDepth;
+    }
+
+    inline gfl::Vec2& GetMin() {
+        return mMin;
+    }
+
+    inline gfl::Vec2& GetMax() {
+        return mMax;
+    }
+
 private:
-    bool m_4;
-    uint m_8;
-    uint m_C;
-    float m_10;
-    float m_14;
-    float m_18;
-    float m_1C;
+    // bool - indicates whether or not to split on Y axis
+    // float - midpoint
+    std::pair<bool, float> mSplitInfo;
+    uint mDepth;
+    gfl::Vec2 mMin;
+    gfl::Vec2 mMax;
     KdTreeNode* mParent;
     KdTreeNode* mChild1;
     KdTreeNode* mChild2;
     ColData* mColData;
-    uint m_30;
+    uint mColDataCount;
 };
 
 class KdTree {

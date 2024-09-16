@@ -11,7 +11,7 @@ KdTreeNode::~KdTreeNode() {
     }
 
     mColData = nullptr;
-    m_30 = 0;
+    mColDataCount = 0;
 
     delete mChild1;
     delete mChild2;
