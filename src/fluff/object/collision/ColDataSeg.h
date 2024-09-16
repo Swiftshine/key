@@ -1,0 +1,6 @@
+#ifndef FLUFF_COLDATASEG_H
+#define FLUFF_COLDATASEG_H
+
+
+
+#endif
