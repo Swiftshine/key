@@ -17,7 +17,6 @@ private:
     float m_14;
     float m_18;
     float m_1C;
-    uint m_20;
     KdTreeNode* mParent;
     KdTreeNode* mChild1;
     KdTreeNode* mChild2;
