@@ -15,6 +15,7 @@ typedef unsigned long ulong;
 typedef int32_t UNKTYPE;
 
 typedef char string32[0x20];
+typedef char string64[0x40];
 
 // typedef uint16_t u16;
 // typedef int16_t s16;
