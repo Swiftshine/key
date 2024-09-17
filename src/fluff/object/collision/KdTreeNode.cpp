@@ -82,6 +82,62 @@ void KdTreeNode::Propagate(ColDataSeg* coldataseg) {
 
 }
 
+
+
+void KdTreeNode::Add(ColDataSeg* coldataseg) {
+
+}
+
+void KdTreeNode::ConsolidateNodes() {
+    if (nullptr == mChild1) {
+        return;
+    }
+
+    if (mColDataSegCount > 1) {
+        return;
+    }
+
+    KdTreeNode* parent = mParent;
+
+    if (nullptr == parent) {
+        return;
+    }
+
+    if (nullptr == parent->GetChild1()->GetChild1()) {
+        return;
+    }
+
+    if (nullptr == parent->GetChild2()->GetChild1()) {
+        return;
+    }
+
+    if (parent->GetChild1()->GetColDataSegCount() + parent->GetChild2()->GetColDataSegCount() + parent->GetColDataSegCount() > 5) {
+        return;
+    }
+
+    parent->ClearAll();
+}
+
+void KdTreeNode::TryPropagate(ColDataSeg* coldataseg) {
+    if (coldataseg->ArePointsInRect(&mMin)) {
+        Propagate(coldataseg);
+    } else {
+        if (nullptr != mParent) {
+            mParent->TryPropagate(coldataseg);
+        } else {
+            Propagate(coldataseg);
+        }
+    }
+}
+
+void KdTreeNode::CreateChildren() {
+
+}
+
+void KdTreeNode::ClearAll() {
+
+}
+
 KdTreeNode::~KdTreeNode() {
     ColData* current = mColDataSeg;
 

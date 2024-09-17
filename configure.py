@@ -389,7 +389,6 @@ config.libs = [
             Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
-            Object(NonMatching, "fluff/object/collision/KdTreeNode.cpp"),
 
         ],
     },
@@ -413,6 +412,15 @@ config.libs = [
         ],
     },
 
+    {
+        "lib" : "fluff/object/collision/",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_util, "-pragma \"merge_float_consts on\""],
+        "host": False,
+        "objects" : [
+            Object(NonMatching, "fluff/object/collision/KdTreeNode.cpp"),
+        ],
+    },
     {
         "lib" : "fluff/util",
         "mw_version": config.linker_version,

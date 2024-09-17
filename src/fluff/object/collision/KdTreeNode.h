@@ -67,11 +67,12 @@ public:
         mColDataSegCount = val;
     }
 
-    void Add(ColDataSeg* coldataseg);
     void Propagate(ColDataSeg* coldataseg) DONT_INLINE_CLASS;
-
+    void Add(ColDataSeg* coldataseg);
     void ConsolidateNodes() DONT_INLINE_CLASS;
+    void TryPropagate(ColDataSeg* coldataseg) DONT_INLINE_CLASS;
     void CreateChildren() DONT_INLINE_CLASS;
+    void ClearAll() DONT_INLINE_CLASS;
 private:
     KdTreeSplitInfo mSplitInfo;
     uint mDepth;
