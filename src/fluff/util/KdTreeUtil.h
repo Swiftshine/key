@@ -14,6 +14,20 @@ struct KdTreeSplitInfo {
     float mMidpoint;
 };
 
+struct KdTreeBounds {
+    inline KdTreeBounds() {
+        mMinX = 0.0f;
+        mMinY = 0.0f;
+        mMaxX = 0.0f;
+        mMaxY = 0.0f;
+    }
+    
+    float mMinX;
+    float mMinY;
+    float mMaxX;
+    float mMaxY;
+};
+
 // todo: find better names for these functions
 
 namespace KdTreeUtil {

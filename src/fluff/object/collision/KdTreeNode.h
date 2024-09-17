@@ -12,17 +12,15 @@ class KdTreeNode {
 public:
     inline KdTreeNode(KdTreeNode* parent, float minX, float minY) {
         mDepth = parent->GetDepth() + 1;
-        mMin = 0.0f;
-        mMax = 0.0f;
         mParent = parent;
         mChild1 = nullptr;
         mChild2 = nullptr;
         mColDataSeg = nullptr;
         mColDataSegCount = 0;
-        mMin.x = minX;
-        mMin.y = minY;
-        mMax.x = parent->GetMax().x;
-        mMax.y = parent->GetMax().y;
+        SetMinX(minX);
+        SetMinY(minY);
+        SetMaxX(parent->GetMaxX());
+        SetMaxY(parent->GetMaxY());
     }
 
     // inline KdTreeNode(KdTreeNode* parent, float maxX, float maxY) {
@@ -33,14 +31,6 @@ public:
 
     inline uint GetDepth() {
         return mDepth;
-    }
-
-    inline gfl::Vec2& GetMin() {
-        return mMin;
-    }
-
-    inline gfl::Vec2& GetMax() {
-        return mMax;
     }
 
     inline KdTreeNode* GetParent() {
@@ -54,6 +44,41 @@ public:
     inline KdTreeNode* GetChild2() {
         return mChild2;
     }
+
+    inline float GetMinX() {
+        return mBounds.mMinX;
+    }
+
+    inline float GetMinY() {
+        return mBounds.mMinY;
+    }
+
+    inline float GetMaxX() {
+        return mBounds.mMaxX;
+    }
+
+    inline float GetMaxY() {
+        return mBounds.mMaxX;
+    }
+
+    inline void SetMinX(float val) {
+        mBounds.mMinX = val;
+    }
+
+    inline void SetMinY(float val) {
+        mBounds.mMinY = val;
+    }
+
+    inline void SetMaxX(float val) {
+        mBounds.mMaxX = val;
+    }
+
+    inline void SetMaxY(float val) {
+        mBounds.mMaxY = val;
+    }
+
+
+
 
     inline ColDataSeg* GetColDataSeg() {
         return mColDataSeg;
@@ -80,8 +105,7 @@ public:
 private:
     KdTreeSplitInfo mSplitInfo;
     uint mDepth;
-    gfl::Vec2 mMin;
-    gfl::Vec2 mMax;
+    KdTreeBounds mBounds;
     KdTreeNode* mParent;
     KdTreeNode* mChild1;
     KdTreeNode* mChild2;
