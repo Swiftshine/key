@@ -14,6 +14,8 @@ struct KdTreeSplitInfo {
     float mMidpoint;
 };
 
+// todo: find better names for these functions
+
 namespace KdTreeUtil {
     ENUM_CLASS(NodePlacement,
         Child1 = 0,
@@ -26,8 +28,16 @@ namespace KdTreeUtil {
      * @note Size: 0x64
      */
     int DetermineNodePlacement(KdTreeSplitInfo& splitInfo, gfl::Vec2& point);
-    int DetermineNodePlacementStrictly(SplitInfo& splitInfo, PointPair& points);
-    int DetermineNodePlacementByProximity(SplitInfo& splitInfo, PointPair& points);
+
+    /**
+     * @note Address: 0x800483b8
+     * @note Size: 0x64
+     */
+
+    int DetermineNodePlacementStrictly(KdTreeSplitInfo& splitInfo, PointPair& points);
+    
+    int DetermineNodePlacementByProximity(KdTreeSplitInfo& splitInfo, PointPair& points);
+
     /**
      * @note Address: 0x800484e8
      * @note Size: 0x74

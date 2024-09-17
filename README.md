@@ -1,4 +1,4 @@
-# Kirby's Epic Yarn ![Static Badge](https://img.shields.io/badge/DOL-0.03%25-blue) [![Discord Badge]][discord]
+# Kirby's Epic Yarn ![Static Badge](https://img.shields.io/badge/DOL-0.04%25-blue) [![Discord Badge]][discord]
 
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV

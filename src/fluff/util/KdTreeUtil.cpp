@@ -19,20 +19,60 @@ int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, gfl::Vec2& po
     coordinate = point.x;
     if (coordinate > splitInfo.mMidpoint) {
         return NodePlacement::Child1;
-    }
-
-    if (coordinate < splitInfo.mMidpoint) {
+    } else if (coordinate < splitInfo.mMidpoint) {
         return NodePlacement::Child2;
     }
 
     return NodePlacement::Self;
 }
-int KdTreeUtil::DetermineNodePlacementStrictly(SplitInfo& splitInfo, PointPair& points) {
+int KdTreeUtil::DetermineNodePlacementStrictly(KdTreeSplitInfo& splitInfo, PointPair& points) {
+    if (splitInfo.mSplitY) {
+        // y axis
+        if (points.first.y > splitInfo.mMidpoint && points.second.y > splitInfo.mMidpoint) {
+            return NodePlacement::Child1;
+        } else if (points.first.y < splitInfo.mMidpoint && points.second.y < splitInfo.mMidpoint) {
+            return NodePlacement::Child2;
+        }
 
+        return NodePlacement::Self;
+    }
+    // x axis
+    if (points.first.x > splitInfo.mMidpoint && points.second.x > splitInfo.mMidpoint) {
+        return NodePlacement::Child1;
+    } else if (points.first.x < splitInfo.mMidpoint && points.second.x < splitInfo.mMidpoint) {
+        return NodePlacement::Child2;
+    }
     return NodePlacement::Self;
 }
 
-int KdTreeUtil::DetermineNodePlacementByProximity(SplitInfo& splitInfo, PointPair& points) {
+int KdTreeUtil::DetermineNodePlacementByProximity(KdTreeSplitInfo& splitInfo, PointPair& points) {
+    float two;
+    float one;
+
+    if (splitInfo.mSplitY) {
+        // y axis
+        one = points.first.y;
+        two = points.second.x;
+
+        if (one - two > splitInfo.mMidpoint) {
+            return NodePlacement::Child1;
+        } else if (one + two < splitInfo.mMidpoint) {
+            return NodePlacement::Child2;
+        }
+
+        return NodePlacement::Self;
+    }
+
+    // x axis
+    two = points.first.x;
+    one = points.second.x;
+
+    if (two - one > splitInfo.mMidpoint) {
+        return NodePlacement::Child1;
+    } else if (two + one < splitInfo.mMidpoint) {
+        return NodePlacement::Child2;
+    }
+
     return NodePlacement::Self;
 }
 
