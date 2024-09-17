@@ -35,7 +35,11 @@ namespace KdTreeUtil {
      */
 
     int DetermineNodePlacementStrictly(KdTreeSplitInfo& splitInfo, PointPair& points);
-    
+
+    /**
+     * @note Address: 0x80048464
+     * @note Size: 0x84
+     */
     int DetermineNodePlacementByProximity(KdTreeSplitInfo& splitInfo, PointPair& points);
 
     /**
