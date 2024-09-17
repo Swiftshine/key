@@ -33,6 +33,9 @@ fluff/manager/StageResourceManager.cpp:
 fluff/util/KdTreeUtil.cpp:
 	.text       start:0x80048354 end:0x8004855C
 
+fluff/object/collision/KdTreeNode.cpp:
+	.text       start:0x8004855C end:0x80048D7C
+
 fluff/util/GimmickUtil.cpp:
 	.text       start:0x800505C8 end:0x800507F4
 

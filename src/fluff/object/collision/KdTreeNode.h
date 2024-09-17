@@ -4,6 +4,9 @@
 #include "object/collision/ColDataSeg.h"
 #include "util/KdTreeUtil.h"
 
+#define KDTREE_COUNT_THRESHOLD 5
+#define KDTREE_DEPTH_THRESHOLD 0xF
+
 // size: 0x34
 class KdTreeNode {
 public:
@@ -14,8 +17,8 @@ public:
         mParent = parent;
         mChild1 = nullptr;
         mChild2 = nullptr;
-        mColData = nullptr;
-        mColDataCount = 0;
+        mColDataSeg = nullptr;
+        mColDataSegCount = 0;
         mMin.x = parent->GetMin().x;
         mMin.y = parent->GetMin().y;
         mMax.x = parent->GetMax().x;
@@ -47,7 +50,28 @@ public:
     inline KdTreeNode* GetChild2() {
         return mChild2;
     }
-    
+
+    inline ColDataSeg* GetColDataSeg() {
+        return mColDataSeg;
+    }
+
+    inline void SetColDataSeg(ColDataSeg* coldata) {
+        mColDataSeg = coldata;
+    }
+
+    inline uint GetColDataSegCount() {
+        return mColDataSegCount;
+    }
+
+    inline void SetColDataSegCount(uint val) {
+        mColDataSegCount = val;
+    }
+
+    void Add(ColDataSeg* coldataseg);
+    void Propagate(ColDataSeg* coldataseg) DONT_INLINE_CLASS;
+
+    void ConsolidateNodes() DONT_INLINE_CLASS;
+    void CreateChildren() DONT_INLINE_CLASS;
 private:
     KdTreeSplitInfo mSplitInfo;
     uint mDepth;
@@ -56,8 +80,8 @@ private:
     KdTreeNode* mParent;
     KdTreeNode* mChild1;
     KdTreeNode* mChild2;
-    ColData* mColData;
-    uint mColDataCount;
+    ColDataSeg* mColDataSeg;
+    uint mColDataSegCount;
 };
 
 #endif

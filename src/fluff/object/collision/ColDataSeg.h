@@ -6,12 +6,13 @@
 #include "gfl/gflVec2.h"
 #include "object/collision/ColData.h"
 #include <utility>
+#include "util/KdTreeUtil.h"
 
 class ColDataSeg : public ColData {
 public:
     ColDataSeg();
 
-    virtual int GetNodePlacement();
+    virtual int GetNodePlacement(KdTreeSplitInfo&);
     virtual bool ArePointsInRect(Rect& rect);
     DECL_WEAK virtual ~ColDataSeg();
 

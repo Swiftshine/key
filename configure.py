@@ -389,6 +389,7 @@ config.libs = [
             Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
+            Object(NonMatching, "fluff/object/collision/KdTreeNode.cpp"),
 
         ],
     },

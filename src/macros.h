@@ -42,4 +42,8 @@
 #define CLEAR_FLAG(x, flag) x &= ~flag;
 #define CHECK_FLAG(x, flag) (x & flag) != 0;
 
+// for classes that have RTTI due to multiple inheritance and not a vtable
+#define TEMPORARY_VIRTUAL() \
+    virtual void dummy_temp();
+
 #endif
