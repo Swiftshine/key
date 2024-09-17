@@ -11,9 +11,6 @@
 class ColDataSeg : public ColData {
 public:
     ColDataSeg();
-
-    virtual int GetNodePlacement(KdTreeSplitInfo&);
-    virtual bool ArePointsInRect(gfl::Vec2*);
     DECL_WEAK virtual ~ColDataSeg();
 
     void AddSelf();

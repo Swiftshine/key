@@ -84,10 +84,42 @@ void KdTreeNode::Propagate(ColDataSeg* coldataseg) {
 
 }
 
-
-
+// https://decomp.me/scratch/bpt6d - 98.43%
 void KdTreeNode::Add(ColDataSeg* coldataseg) {
-
+    if (nullptr == mChild1 && coldataseg->ArePointsInRect(mBounds)) {
+        return;
+    }
+    bool shouldAdd;
+    ColDataSeg* seg = mColDataSeg;
+    if (nullptr == seg) {
+        shouldAdd = false;
+    } else if (seg == coldataseg) {
+        mColDataSeg = static_cast<ColDataSeg*>(coldataseg->GetNext());
+        shouldAdd = true;
+        coldataseg->SetNext(nullptr);
+        mColDataSegCount--;
+    } else {
+        ColDataSeg* segnext = static_cast<ColDataSeg*>(seg->GetNext());
+        ColDataSeg* cur;
+        while (nullptr != cur) {
+            if (cur == coldataseg) {
+                seg->SetNext(coldataseg->GetNext());
+                shouldAdd = true;
+                coldataseg->SetNext(nullptr);
+                mColDataSegCount--;
+                goto end;
+            }
+            seg = cur;
+            cur = static_cast<ColDataSeg*>(cur->GetNext());
+        }
+        shouldAdd = false;
+    }
+    end:
+    if (shouldAdd) {
+        coldataseg->SetTreeNode(nullptr);
+    }
+    TryPropagate(coldataseg);
+    ConsolidateNodes();
 }
 
 void KdTreeNode::ConsolidateNodes() {
@@ -124,7 +156,7 @@ void KdTreeNode::ConsolidateNodes() {
 }
 
 void KdTreeNode::TryPropagate(ColDataSeg* coldataseg) {
-    if (coldataseg->ArePointsInRect(&mMin)) {
+    if (coldataseg->ArePointsInRect(mBounds)) {
         Propagate(coldataseg);
     } else {
         if (nullptr != mParent) {
@@ -144,32 +176,33 @@ void KdTreeNode::CreateChildren() {
     float midX;
     float midY;
 
-    xDiff = mMin.x - mMax.x;
+    xDiff = GetMinX() - GetMaxX();
     if (0.0f > xDiff) {
         xDiff = -xDiff;
     }
 
-    yDiff = mMin.y - mMax.y;
+    yDiff = GetMinY() - GetMaxY();
     if (0.0f > yDiff) {
         yDiff = -yDiff;
     }
 
     if (xDiff <= yDiff) {
-        minX = mMin.x;
-        midY = 0.5f * yDiff + mMin.y;
-        midX = mMax.x;
+        minX = GetMinX();
+        midY = 0.5f * yDiff + GetMinY();
+        midX = GetMaxX();
         mSplitInfo.mSplitY = true;
         mSplitInfo.mMidpoint = midY;
     } else {
-        minY = mMin.y;
-        midX = 0.5f * xDiff + mMin.x;
-        midY = mMax.y;
+        minY = GetMinY();
+        midX = 0.5f * xDiff + GetMinX();
+        midY = GetMaxY();
         mSplitInfo.mSplitY = false;
         mSplitInfo.mMidpoint = midX;
     }
 
     // there are more than one inline constructor.
     // i need to figure out what the signature is
+
 
     mChild1 = new (gfl::HeapID::Work) KdTreeNode(this, minX, minY);
     mChild2 = new (gfl::HeapID::Work) KdTreeNode(this, midX, midY);
@@ -187,8 +220,81 @@ void KdTreeNode::CreateChildren() {
 
 }
 
+// https://decomp.me/scratch/LzCBJ - regswaps
 void KdTreeNode::ClearAll() {
+    ColDataSeg* seg;
+    ColDataSeg* childseg;
+    KdTreeNode* child;
+    uint childsegcount;
+    
+    for (ColDataSeg* seg = mChild1->GetColDataSeg(); nullptr != seg; seg = static_cast<ColDataSeg*>(seg->GetNext())) {
+        seg->SetTreeNode(this);
+    }
 
+    for (ColDataSeg* seg = mChild2->GetColDataSeg(); nullptr != seg; seg = static_cast<ColDataSeg*>(seg->GetNext())) {
+        seg->SetTreeNode(this);
+    }
+
+    child = mChild1;
+
+    childseg = child->GetColDataSeg();
+    childsegcount = child->GetColDataSegCount();
+    child->SetColDataSeg(nullptr);
+    child->SetColDataSegCount(0);
+    seg = mColDataSeg;
+
+    if (nullptr != seg) {
+        ColDataSeg* segnext = static_cast<ColDataSeg*>(seg->GetNext());
+        ColDataSeg* cur;
+        while (cur = segnext, nullptr != cur) {
+            seg = cur;
+            segnext = static_cast<ColDataSeg*>(cur->GetNext());
+        }
+    } else {
+        seg = nullptr;
+    }
+
+    if (nullptr != seg) {
+        seg->SetNext(childseg);
+        mColDataSegCount += childsegcount;
+    } else {
+        mColDataSeg = childseg;
+        mColDataSegCount = childsegcount;
+    }
+    
+
+    child = mChild2;
+    
+    childseg = child->GetColDataSeg();
+    childsegcount = child->GetColDataSegCount();
+    child->SetColDataSeg(nullptr);
+    child->SetColDataSegCount(0);
+    seg = mColDataSeg;
+
+    if (nullptr != seg) {
+        ColDataSeg* cur;
+        ColDataSeg* segnext = static_cast<ColDataSeg*>(seg->GetNext());
+        while (cur = segnext, nullptr != cur) {
+            seg = cur;
+            segnext = static_cast<ColDataSeg*>(cur->GetNext());
+        }
+    } else {
+        seg = nullptr;
+    }
+
+    if (nullptr != seg) {
+        seg->SetNext(childseg);
+        mColDataSegCount += childsegcount;
+    } else {
+        mColDataSeg = childseg;
+        mColDataSegCount = childsegcount;
+    }
+
+    
+    delete mChild1;
+    mChild1 = nullptr;
+    delete mChild2;
+    mChild2 = nullptr;
 }
 
 KdTreeNode::~KdTreeNode() {

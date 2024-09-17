@@ -18,7 +18,7 @@ public:
     }
 
     virtual int GetNodePlacement(KdTreeSplitInfo&);
-    virtual bool ArePointsInRect(gfl::Vec2*);
+    virtual bool ArePointsInRect(KdTreeBounds&);
     
 protected:
     KdTreeNode* mTreeNode;
