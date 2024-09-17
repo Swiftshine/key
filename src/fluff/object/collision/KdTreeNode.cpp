@@ -1,4 +1,6 @@
 #include "object/collision/KdTreeNode.h"
+#include "gfl/gflMisc.h"
+#include "gfl/gflMemoryUtil.h"
 
 void ColDataSeg::AddSelf() {
     KdTreeNode* node = mTreeNode;
@@ -89,11 +91,11 @@ void KdTreeNode::Add(ColDataSeg* coldataseg) {
 }
 
 void KdTreeNode::ConsolidateNodes() {
-    if (nullptr == mChild1) {
+    if (nullptr != mChild1) {
         return;
     }
 
-    if (mColDataSegCount > 1) {
+    if (mColDataSegCount >= 2) {
         return;
     }
 
@@ -103,15 +105,18 @@ void KdTreeNode::ConsolidateNodes() {
         return;
     }
 
-    if (nullptr == parent->GetChild1()->GetChild1()) {
+    KdTreeNode* parentChild1 = parent->GetChild1();
+    KdTreeNode* parentChild2 = parent->GetChild2();
+    
+    if (nullptr != parentChild1->GetChild1()) {
         return;
     }
 
-    if (nullptr == parent->GetChild2()->GetChild1()) {
+    if (nullptr != parentChild2->GetChild1()) {
         return;
     }
 
-    if (parent->GetChild1()->GetColDataSegCount() + parent->GetChild2()->GetColDataSegCount() + parent->GetColDataSegCount() > 5) {
+    if (5 < parent->GetColDataSegCount() + parentChild1->GetColDataSegCount() + parentChild2->GetColDataSegCount()) {
         return;
     }
 
@@ -130,7 +135,55 @@ void KdTreeNode::TryPropagate(ColDataSeg* coldataseg) {
     }
 }
 
+// https://decomp.me/scratch/iLbfd
 void KdTreeNode::CreateChildren() {
+    float xDiff;
+    float yDiff;
+    float minX;
+    float minY;
+    float midX;
+    float midY;
+
+    xDiff = mMin.x - mMax.x;
+    if (0.0f > xDiff) {
+        xDiff = -xDiff;
+    }
+
+    yDiff = mMin.y - mMax.y;
+    if (0.0f > yDiff) {
+        yDiff = -yDiff;
+    }
+
+    if (xDiff <= yDiff) {
+        minX = mMin.x;
+        midY = 0.5f * yDiff + mMin.y;
+        midX = mMax.x;
+        mSplitInfo.mSplitY = true;
+        mSplitInfo.mMidpoint = midY;
+    } else {
+        minY = mMin.y;
+        midX = 0.5f * xDiff + mMin.x;
+        midY = mMax.y;
+        mSplitInfo.mSplitY = false;
+        mSplitInfo.mMidpoint = midX;
+    }
+
+    // there are more than one inline constructor.
+    // i need to figure out what the signature is
+
+    mChild1 = new (gfl::HeapID::Work) KdTreeNode(this, minX, minY);
+    mChild2 = new (gfl::HeapID::Work) KdTreeNode(this, midX, midY);
+
+    ColDataSeg* coldataseg = mColDataSeg;
+    ColDataSeg* cur;
+
+    while (nullptr != coldataseg) {
+        cur = static_cast<ColDataSeg*>(coldataseg->GetNext());
+        coldataseg->SetNext(nullptr);
+        coldataseg->SetTreeNode(nullptr);
+        Propagate(coldataseg);
+        coldataseg = cur;
+    }
 
 }
 

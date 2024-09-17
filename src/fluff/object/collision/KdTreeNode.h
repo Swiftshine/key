@@ -10,7 +10,7 @@
 // size: 0x34
 class KdTreeNode {
 public:
-    inline KdTreeNode(KdTreeNode* parent) {
+    inline KdTreeNode(KdTreeNode* parent, float minX, float minY) {
         mDepth = parent->GetDepth() + 1;
         mMin = 0.0f;
         mMax = 0.0f;
@@ -19,11 +19,15 @@ public:
         mChild2 = nullptr;
         mColDataSeg = nullptr;
         mColDataSegCount = 0;
-        mMin.x = parent->GetMin().x;
-        mMin.y = parent->GetMin().y;
+        mMin.x = minX;
+        mMin.y = minY;
         mMax.x = parent->GetMax().x;
         mMax.y = parent->GetMax().y;
     }
+
+    // inline KdTreeNode(KdTreeNode* parent, float maxX, float maxY) {
+
+    // }
 
     virtual ~KdTreeNode();
 
