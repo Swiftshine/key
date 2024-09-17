@@ -3,6 +3,7 @@
 
 
 #include "types.h"
+#include "util/KdTreeUtil.h"
 
 class KdTreeNode;
 
@@ -15,6 +16,9 @@ public:
     inline void SetTreeNode(KdTreeNode* node) {
         mTreeNode = node;
     }
+
+    virtual int GetNodePlacement(KdTreeSplitInfo&);
+    virtual bool ArePointsInRect(Rect& rect);
     
 protected:
     KdTreeNode* mTreeNode;

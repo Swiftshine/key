@@ -49,12 +49,11 @@ end:
     node->ConsolidateNodes();
 }
 
-// https://decomp.me/scratch/j7COa
 void KdTreeNode::Propagate(ColDataSeg* coldataseg) {
     ColDataSeg* temp;
 
     if (nullptr == mChild1) {
-        if (mColDataSegCount < KDTREE_COUNT_THRESHOLD || mDepth <= KDTREE_DEPTH_THRESHOLD) {
+        if (mColDataSegCount >= KDTREE_COUNT_THRESHOLD && mDepth <= KDTREE_DEPTH_THRESHOLD) {
             CreateChildren();
         } else {
             temp = mColDataSeg;
