@@ -8,8 +8,6 @@ class KdTreeNode;
 
 class KdTreeData {
 public:
-    virtual ~KdTreeData();
-
     inline KdTreeNode* GetTreeNode() {
         return mTreeNode;
     }
