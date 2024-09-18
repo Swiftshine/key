@@ -4,9 +4,8 @@
 #include "types.h"
 #include "gflVec2.h"
 #include "gflVec3.h"
-
-class FlfGameObj;
-class KdTree;
+#include "object/collision/KdTree.h"
+#include "object/FlfGameObj.h"
 
 class ColObj {
 public:
