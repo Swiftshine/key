@@ -23,6 +23,25 @@ public:
         SetMaxY(parent->GetMaxY());
     }
 
+    inline KdTreeNode(gfl::Vec2& min, gfl::Vec2& max) {
+        mDepth = 0;
+        float z = 0.0f;
+        SetMinX(z);
+        SetMinY(z);
+        SetMaxX(z);
+        SetMaxY(z);
+
+        mParent = nullptr;
+        mChild1 = nullptr;
+        mChild2 = nullptr;
+        mColDataSeg = nullptr;
+        mColDataSegCount = 0;
+
+        SetMinX(min.x);
+        SetMinY(min.y);
+        SetMaxX(max.x);
+        SetMaxY(max.y);
+    }
     // inline KdTreeNode(KdTreeNode* parent, float maxX, float maxY) {
 
     // }

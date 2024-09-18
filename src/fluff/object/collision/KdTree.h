@@ -5,32 +5,38 @@
 #include "object/collision/ColData.h"
 #include <utility>
 #include "util/KdTreeUtil.h"
-#include "object/collision/KdTree.h"
+#include "object/collision/KdTreeNode.h"
+
+#define KDTREE_HITRESULT_NODE_COUNT 400
 
 class KdTree {
-private:
-    static KdTree* sColObjTree;
 public:
     class HitResult {
     public:
-        struct HitResultStruct {
-            char mContents[0x40];
-        };
-
+        ColDataSeg* GetCurrentColDataSeg();
+        
         inline HitResult() {
-
+            mNumNodes = 0;
+            mCurrentColDataSeg = nullptr;
+            mNumOverflow = -1U;
+            for (uint i = 0; i < KDTREE_HITRESULT_NODE_COUNT; i++) {
+                mNodes[i] = nullptr;
+            }
         }
 
         DECL_WEAK virtual ~HitResult();
+
     private:
-        uint mCount;
-        HitResultStruct mStructs[10];
-        uint m_648;
-        int m_64C;
+        uint mNumNodes;
+        KdTreeNode* mNodes[KDTREE_HITRESULT_NODE_COUNT];
+        ColDataSeg* mCurrentColDataSeg;
+        uint mNumOverflow;
     };
 public:
-    static inline KdTree* ColObjTree() { return sColObjTree; }
-
+    KdTree();
+    virtual ~KdTree();
+    
+    void CreateRootNode(gfl::Vec2& min, gfl::Vec2& max);
     void AddItem(void*);
     void RemoveItem(void*);
 private:
