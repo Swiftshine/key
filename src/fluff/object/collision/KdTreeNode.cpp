@@ -167,14 +167,10 @@ void KdTreeNode::TryPropagate(ColDataSeg* coldataseg) {
     }
 }
 
-// https://decomp.me/scratch/iLbfd
+// https://decomp.me/scratch/3HOVE
 void KdTreeNode::CreateChildren() {
     float xDiff;
     float yDiff;
-    float minX;
-    float minY;
-    float midX;
-    float midY;
 
     xDiff = GetMinX() - GetMaxX();
     if (0.0f > xDiff) {
@@ -186,26 +182,43 @@ void KdTreeNode::CreateChildren() {
         yDiff = -yDiff;
     }
 
+    gfl::Vec2 v0;
+    gfl::Vec2 v1;
+    const float* p;
+
     if (xDiff <= yDiff) {
-        minX = GetMinX();
-        midY = 0.5f * yDiff + GetMinY();
-        midX = GetMaxX();
+        p = &mBounds.mMinY;
+
+        float mid = 0.5f * yDiff + GetMinX();
+
+        v0.y = GetMinY();
+        v0.x = mid;
+
+        v1.y = GetMaxY();
+        v1.x = mid;
+
         mSplitInfo.mSplitY = true;
-        mSplitInfo.mMidpoint = midY;
+        mSplitInfo.mMidpoint = mid;
     } else {
-        minY = GetMinY();
-        midX = 0.5f * xDiff + GetMinX();
-        midY = GetMaxY();
-        mSplitInfo.mSplitY = false;
-        mSplitInfo.mMidpoint = midX;
+        p = &mBounds.mMinX;
+
+        float mid = 0.5f * xDiff + GetMinY();
+
+        v0.x = GetMinX();
+        v0.y = mid;
+
+        v1.x = GetMinX();
+        v1.y = mid;
+        
+        mSplitInfo.mSplitY = true;
+        mSplitInfo.mMidpoint = mid;
     }
 
     // there are more than one inline constructor.
     // i need to figure out what the signature is
 
-
-    mChild1 = new (gfl::HeapID::Work) KdTreeNode(this, minX, minY);
-    mChild2 = new (gfl::HeapID::Work) KdTreeNode(this, midX, midY);
+    mChild1 = new (gfl::HeapID::Work) KdTreeNode(this, v0.x, v0.y);
+    mChild2 = new (gfl::HeapID::Work) KdTreeNode(this, v1.x, v1.y);
 
     ColDataSeg* coldataseg = mColDataSeg;
     ColDataSeg* cur;
