@@ -84,7 +84,6 @@ void KdTreeNode::Propagate(ColDataSeg* coldataseg) {
 
 }
 
-// https://decomp.me/scratch/bpt6d - 98.43%
 void KdTreeNode::Add(ColDataSeg* coldataseg) {
     if (nullptr == mChild1 && coldataseg->ArePointsInRect(mBounds)) {
         return;
@@ -99,8 +98,9 @@ void KdTreeNode::Add(ColDataSeg* coldataseg) {
         coldataseg->SetNext(nullptr);
         mColDataSegCount--;
     } else {
+        ColDataSeg* cur = static_cast<ColDataSeg*>(seg->GetNext());
         ColDataSeg* segnext = static_cast<ColDataSeg*>(seg->GetNext());
-        ColDataSeg* cur;
+        
         while (nullptr != cur) {
             if (cur == coldataseg) {
                 seg->SetNext(coldataseg->GetNext());
@@ -297,14 +297,12 @@ void KdTreeNode::ClearAll() {
     mChild2 = nullptr;
 }
 
-KdTreeNode::~KdTreeNode() {
-    ColData* current = mColDataSeg;
 
-    while (nullptr != current) {
-        ColData* temp = current->GetNext();
-        current->SetNext(nullptr);
-        delete current;
-        current = temp;
+KdTreeNode::~KdTreeNode() {
+    for (ColDataSeg* c = mColDataSeg; nullptr != c; ) {
+        ColDataSeg* temp = static_cast<ColDataSeg*>(c->GetNext());
+        c->SetNext(nullptr);
+        c = temp;
     }
 
     mColDataSeg = nullptr;

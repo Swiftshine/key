@@ -27,7 +27,7 @@ public:
 
     // }
 
-    virtual ~KdTreeNode();
+    virtual ~KdTreeNode() DONT_INLINE_CLASS;
 
     inline uint GetDepth() {
         return mDepth;
@@ -76,9 +76,6 @@ public:
     inline void SetMaxY(float val) {
         mBounds.mMaxY = val;
     }
-
-
-
 
     inline ColDataSeg* GetColDataSeg() {
         return mColDataSeg;

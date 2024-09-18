@@ -35,6 +35,7 @@ fluff/util/KdTreeUtil.cpp:
 
 fluff/object/collision/KdTreeNode.cpp:
 	.text       start:0x8004855C end:0x80048D7C
+	.data       start:0x8083B148 end:0x8083B158
 
 fluff/util/GimmickUtil.cpp:
 	.text       start:0x800505C8 end:0x800507F4
