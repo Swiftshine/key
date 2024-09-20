@@ -24,7 +24,7 @@ namespace gfl {
                 mNext = next;
             }
 
-            inline Node* GetPrev() {
+            inline Node* GetNext() {
                 return mNext;
             }
 
