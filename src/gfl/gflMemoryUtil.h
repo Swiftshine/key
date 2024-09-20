@@ -1,5 +1,5 @@
-#ifndef GFL_MEMORY_H
-#define GFL_MEMORY_H
+#ifndef GFL_MEMORYUTIL_H
+#define GFL_MEMORYUTIL_H
 
 #include <stddef.h>
 #include <string.h>

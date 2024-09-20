@@ -114,6 +114,9 @@ gfl/gflTaskInfo.cpp:
 	.text       start:0x80645718 end:0x8064583C
 	.sbss       start:0x808E5D78 end:0x808E5D80
 
+gfl/gflRenderObj.cpp:
+	.text       start:0x80647A64 end:0x80647F74
+
 gfl/gflFixedMemoryStream.cpp:
 	.text       start:0x806506A0 end:0x80650838
 	.rodata     start:0x8082C940 end:0x8082C964

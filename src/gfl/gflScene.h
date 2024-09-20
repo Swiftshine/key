@@ -5,11 +5,17 @@
 
 namespace nw4r { namespace g3d { class ScnRoot; } }
 
+
 namespace gfl {
+class RenderObj;
+
 class Scene {
     public:
         Scene(u8 heapID, uint arg2, uint arg3);
 
+        void Destroy(gfl::RenderObj* renderObj);
+        void fn_80649178(gfl::RenderObj* renderObj);
+        
         virtual ~Scene();
         virtual void vfC();
         virtual void vf10();

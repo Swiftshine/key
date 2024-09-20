@@ -22,6 +22,10 @@ namespace gfl {
         uint CountFreeBlocks();
         bool WithinRange(void* address);
 
+        inline MEMAllocator& GetAllocator() {
+            return mAllocator;
+        }
+        
     public:
         u8 mHeapID;
         char mHeapName[25];
