@@ -24,12 +24,9 @@ LevelManager::~LevelManager() {
 }
 
 // last nonmatching function of this TU
-// https://decomp.me/scratch/97B8U
+// https://decomp.me/scratch/YnCAm
 void LevelManager::SetGraphicsStage() {
     bool manualBGLoad;
-    Stage stage;
-    Stage archiveStage;
-    
 
     if (nullptr != GameManager::Instance()) {
         manualBGLoad = GameManager::Instance()->IsBGLoadedManually();
@@ -38,12 +35,11 @@ void LevelManager::SetGraphicsStage() {
     }
 
     if (manualBGLoad) {
-        stage = mStage;
+        Stage stage = StageManager::Instance()->GetStage();
         mGraphicResources.SetStage(stage);
-        return;
     } else {
-        archiveStage = StageManager::Instance()->GetStage();
-        mGraphicResources.SetStage(archiveStage);
+        Stage stage = mStage;
+        mGraphicResources.SetStage(stage);
     }
 }
 

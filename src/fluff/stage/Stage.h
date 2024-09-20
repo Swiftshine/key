@@ -13,6 +13,12 @@ public:
         mSectionID = other.mSectionID;
     }
 
+    inline Stage(const Stage* other) {
+        mStageID = other->mStageID;
+        mResourceID = other->mResourceID;
+        mSectionID = other->mSectionID;
+    }
+
     inline void operator=(const Stage& other) {
         mStageID = other.mStageID;
         mResourceID = other.mResourceID;
