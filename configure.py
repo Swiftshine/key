@@ -236,9 +236,14 @@ cflags_fluff = [
     "-str reuse,readonly",
 ]
 
+cflags_fluff_base_no_inline_deferred = [
+    *cflags_base,
+    "-RTTI on",
+    "-use_lmw_stmw on",
+]
 
 cflags_fluff_manager = [
-    *cflags_fluff_base,
+    *cflags_fluff_base_no_inline_deferred,
     "-str reuse"
 ]
 
@@ -399,7 +404,7 @@ config.libs = [
         "host": False,
         "objects": [
             Object(NonMatching, "fluff/manager/StageResourceManager.cpp"),
-            Object(NonMatching, "fluff/manager/LevelManager.cpp"),
+            Object(Matching, "fluff/manager/LevelManager.cpp"),
         ],
     },
     {
