@@ -4,6 +4,8 @@
 #include "stage/FullSortScene.h"
 #include "gflTask.h"
 #include "stage/Stage.h"
+#include "manager/StageResourceManager.h"
+#include "manager/LevelManager.h"
 
 class StageManager {
 private:
@@ -19,6 +21,12 @@ public:
     gfl::Task mSceneGameTop;
     gfl::Task mSceneWorldMtxTop;
     gfl::Task mSceneDrawTop;
+    FullSortScene* mFullSortScenes[12];
+    StageResourceManager* mStageResourceManager;
+    LevelManager* mLevelManager;
+    u32 m_15C;
+    class FbDof* mFbDof;
+    u32 m_164;
 };
 
 #endif
