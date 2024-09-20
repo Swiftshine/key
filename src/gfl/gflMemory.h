@@ -28,6 +28,13 @@ namespace gfl {
 
             return m;
         }
+        static inline Heap* TryGetHeapByAddress(void* addr) {
+            Memory* mem = Instance();
+            if (nullptr == Instance()) {
+                mem = InitInstance();
+            }
+            return mem->GetHeapByAddress(addr);
+        }
         static inline bool IsInited() { return sIsInited; }
         static inline void SetInited(bool inited) { sIsInited = inited; }
         static OSMutex* ValidateHeapMutex(u8 searchID, OSMutex* mutex, u8 maxID);

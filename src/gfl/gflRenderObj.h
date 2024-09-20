@@ -9,6 +9,7 @@ namespace gfl {
     class Scene;
 
     class RenderObj {
+    public:
         RenderObj();
         virtual ~RenderObj();
 
@@ -16,7 +17,7 @@ namespace gfl {
 
         static bool fn_80647DA4(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj);
         static bool fn_80647E8C(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj);
-        
+
         virtual void vf0C();
         DECL_WEAK virtual int vf10();
         virtual void vf14(bool arg1);

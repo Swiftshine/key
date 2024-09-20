@@ -127,6 +127,9 @@ gfl/gflParam.cpp:
 	.text       start:0x80656BD4 end:0x80656D00
 	.data       start:0x808B84C0 end:0x808B84D8
 
+gfl/gflCustomRenderObj.cpp:
+	.text       start:0x8065CF98 end:0x8065D5E8
+
 PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC
 	.ctors      start:0x807E3420 end:0x807E3424 rename:.ctors$10

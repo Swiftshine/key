@@ -379,6 +379,7 @@ config.libs = [
             Object(NonMatching, "gfl/gflResArchivedFileInfo.cpp"),
             Object(NonMatching, "gfl/gflParam.cpp"),
             Object(NonMatching, "gfl/gflRenderObj.cpp"),
+            Object(NonMatching, "gfl/gflCustomRenderObj.cpp"),
         ],
     },
     {
