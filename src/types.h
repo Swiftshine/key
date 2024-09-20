@@ -24,6 +24,7 @@ struct Rect {
     float h;
 };
 
+typedef int placeholder_t;
 // typedef uint16_t u16;
 // typedef int16_t s16;
 
