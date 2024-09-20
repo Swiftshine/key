@@ -20,7 +20,7 @@ public:
     void LoadLevelGraphics();
     bool fn_800C566C();
     void fn_800C56D0();
-    void SetColDataSeg(uint index, ColDataSeg* coldataseg);
+    void fn_800C57AC(uint index, void* data);
     void fn_800C57C4();
     void fn_800C59A4();
     void fn_800C59BC();

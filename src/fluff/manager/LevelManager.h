@@ -20,7 +20,7 @@ public:
     void LoadLevelGraphics() DONT_INLINE_CLASS;
     bool fn_800444C0() DONT_INLINE_CLASS;
     void fn_800444C8() DONT_INLINE_CLASS;
-    void SetColDataSeg(uint index, ColDataSeg* coldataseg) DONT_INLINE_CLASS;
+    void fn_800444D0(uint index, void* data) DONT_INLINE_CLASS;
     // related to loading phase
     void fn_800444D8() DONT_INLINE_CLASS;
     void fn_80044564() DONT_INLINE_CLASS;
