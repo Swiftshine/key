@@ -6,6 +6,7 @@
 #include "stage/Stage.h"
 #include "manager/StageResourceManager.h"
 #include "manager/LevelManager.h"
+#include "graphics/FbDof.h"
 
 class StageManager {
 private:
@@ -25,7 +26,7 @@ public:
     StageResourceManager* mStageResourceManager;
     LevelManager* mLevelManager;
     u32 m_15C;
-    class FbDof* mFbDof;
+    FbDof* mFbDof;
     u32 m_164;
 };
 
