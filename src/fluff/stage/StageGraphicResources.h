@@ -18,7 +18,7 @@ private:
     bool m_10;
     bool m_11;
     Stage mStage;
-    uint m_20;
+    bool m_20;
     ColDataSegLabel* mColDataSegLabel;
     uint m_28;
     uint m_2C;
