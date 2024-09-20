@@ -21,6 +21,9 @@ public:
     bool LoadResources();
     Mapdata* GetLevelSection(int sectionID);
     void ClearMapdata();
+    inline Stage* GetArchiveStage() {
+        return &mArchiveStage;
+    }
 private:
     bool LoadBGFromArchive(int resourceID);
     void LoadBGFromFolder(int resourceID) DONT_INLINE_CLASS;
@@ -38,9 +41,7 @@ private:
     bool mLevelProcessed;
     int mFolderStageID;
     bool mLoadFromArchive;
-    int m_1C;
-    int mArchiveStageID;
-    int m_24;
+    Stage mArchiveStage;
     gfl::ResFileInfo* mMapdataResFileInfo;
     // due to the fact that there's a for loop in this class's destructor,
     // this is probably some kind of array container rather than just

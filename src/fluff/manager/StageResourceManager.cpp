@@ -23,9 +23,7 @@ StageResourceManager::StageResourceManager()
     , mCommonValid(false)
     , mLevelProcessed(false)
     , mLoadFromArchive(false)
-    , m_1C(-1)
-    , mArchiveStageID(-1)
-    , m_24(1)
+    , mArchiveStage(-1)
     , mMapdataResFileInfo(nullptr)
 {
     mResourceList.Create(gfl::HeapID::Work);
@@ -162,8 +160,8 @@ bool StageResourceManager::LoadResources() {
 
         //
         if (mLoadFromArchive) {
-            LoadBGFromArchive(mArchiveStageID);
-            LoadCommonFromArchive(mArchiveStageID);
+            LoadBGFromArchive(mArchiveStage.GetStageID());
+            LoadCommonFromArchive(mArchiveStage.GetStageID());
             BGData* bgData;
 
             if (nullptr == mBGResFileInfo) {

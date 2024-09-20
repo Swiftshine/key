@@ -13,6 +13,12 @@ public:
         mSectionID = other.mSectionID;
     }
 
+    inline Stage(int val) {
+        mStageID = val;
+        mResourceID = val;
+        mSectionID = val;
+    }
+
     inline Stage(const Stage* other) {
         mStageID = other->mStageID;
         mResourceID = other->mResourceID;

@@ -28,6 +28,10 @@ public:
     Mapdata::Mapbin::Header* GetLevelSection(int section);
 
     void fn_8024F630();
+
+    inline StageResourceManager& GetStageResourceManager() {
+        return mStageResourceManager;
+    }
 public:
     gfl::Task m_0;
     gfl::Task mStageTask;
@@ -36,7 +40,7 @@ public:
     gfl::Task mSceneWorldMtxTop;
     gfl::Task mSceneDrawTop;
     FullSortScene* mFullSortScenes[12];
-    StageResourceManager* mStageResourceManager;
+    StageResourceManager mStageResourceManager;
     LevelManager* mLevelManager;
     u32 m_15C;
     FbDof* mFbDof;

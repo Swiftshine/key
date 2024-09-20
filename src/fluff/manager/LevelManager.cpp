@@ -23,8 +23,6 @@ LevelManager::~LevelManager() {
     mColObjTree.Destroy();
 }
 
-// last nonmatching function of this TU
-// https://decomp.me/scratch/YnCAm
 void LevelManager::SetGraphicsStage() {
     bool manualBGLoad;
 
@@ -35,7 +33,7 @@ void LevelManager::SetGraphicsStage() {
     }
 
     if (manualBGLoad) {
-        Stage stage = StageManager::Instance()->GetStage();
+        Stage stage = StageManager::Instance()->GetStageResourceManager().GetArchiveStage();
         mGraphicResources.SetStage(stage);
     } else {
         Stage stage = mStage;
