@@ -28,6 +28,8 @@ public:
     // void PushGimmickToVectorByGimmickID(int targetGimmickID, std::vector<class Gimmick>& destVector);
     // void PushDataSegLabelToVectorByID(int targetID, std::vector<class DataSegLabel>& destVector);
     Gimmick* FindGimmickByName(std::string& query);
+
+    bool fn_801C1A60();
 private:
     uint m_0;
     uint m_4;

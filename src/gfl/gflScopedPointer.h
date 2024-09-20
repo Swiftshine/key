@@ -33,6 +33,11 @@ public:
         mPointer = nullptr;
     }
 
+    inline void Destroy() {
+        delete mPointer;
+        mPointer = nullptr;
+    }
+
     inline void operator=(T* other) {
         mPointer = other;
     }

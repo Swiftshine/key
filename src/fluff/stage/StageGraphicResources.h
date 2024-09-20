@@ -9,9 +9,25 @@
 #include "gfl/gflResFileInfo.h"
 #include "graphics/BGSTFile.h"
 #include "graphics/FbDof.h"
+
 class StageGraphicResources {
 public:
+    StageGraphicResources();
+    ~StageGraphicResources();
 
+    void SetStage(Stage& stage);
+    bool IsLoadedFromFolder();
+    void LoadLevelGraphics();
+    bool fn_800C566C();
+    void fn_800C56D0();
+    void SetColDataSeg(uint index, ColDataSeg* coldataseg);
+    void fn_800C57C4();
+    void fn_800C59A4();
+    void fn_800C59BC();
+
+    inline void SetUnk20(bool val) {
+        m_20 = val;
+    }
 private:
     uint mLoadPhase;
     gfl::Vec3 mBGPosition;

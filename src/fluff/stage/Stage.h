@@ -3,13 +3,58 @@
 
 #include "types.h"
 
-struct Stage {
+class Stage {
+public:
+    inline Stage() { }
+
+    inline Stage(const Stage& other) {
+        mStageID = other.mStageID;
+        mResourceID = other.mResourceID;
+        mSectionID = other.mSectionID;
+    }
+
+    inline void operator=(const Stage& other) {
+        mStageID = other.mStageID;
+        mResourceID = other.mResourceID;
+        mSectionID = other.mSectionID;
+    }
+
+    inline void operator=(const Stage* other) {
+        mStageID = other->mStageID;
+        mResourceID = other->mResourceID;
+        mSectionID = other->mSectionID;
+    }
+
+    int GetStageID() {
+        return mStageID;
+    }
+
+    int GetResourceID() {
+        return mResourceID;
+    }
+
+    int GetSectionID() {
+        return mSectionID;
+    }
+
+    void SetStageID(int id) {
+        mStageID = id;
+    }
+
+    void SetResourceID(int id) {
+        mResourceID = id;
+    }
+
+    void SetSectionID(int id) {
+        mSectionID = id;
+    }
+private:
     // The actual numeric stage number. Level 1 is 1, level 2 is 2...
-    int stageID;
+    int mStageID;
     // This is used for finding files from disk. Level 1 is 101, level 2 is 102...
-    int resourceID;
+    int mResourceID;
     // This is used for stages that span multiple sections that need to be loaded seperately. A notable example is the world map.
-    uint sectionID;
+    uint mSectionID;
 };
 
 ENUM_CLASS(StageIDs,

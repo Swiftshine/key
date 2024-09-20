@@ -7,6 +7,7 @@
 #include "manager/StageResourceManager.h"
 #include "manager/LevelManager.h"
 #include "graphics/FbDof.h"
+#include "mapdata/Mapdata.h"
 
 class StageManager {
 private:
@@ -14,9 +15,21 @@ private:
     ~StageManager();
     static StageManager* sInstance;
 public:
-    static StageManager* Instance() { return sInstance; }
+    static inline StageManager* Instance() {
+        return sInstance;
+    }
+    
     FullSortScene* GetFullSortSceneByID(uint sceneID);
+
+    inline Stage* GetStage() {
+        return &mStage;
+    }
+
+    Mapdata::Mapbin::Header* GetLevelSection(int section);
+
+    void fn_8024F630();
 public:
+    gfl::Task m_0;
     gfl::Task mStageTask;
     Stage mStage;
     gfl::Task mSceneGameTop;

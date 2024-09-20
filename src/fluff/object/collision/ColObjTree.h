@@ -3,12 +3,20 @@
 
 
 #include "object/collision/KdTree.h"
-
+#include "mapdata/Mapdata.h"
 
 // size: 0xA88
 class ColObjTree {
+public:
+    ColObjTree();
+    ~ColObjTree();
+
+    void SetSection(Mapdata::Mapbin::Header* mapbin);
+    void fn_800CBCF4();
 private:
     KdTree mTree;
+
+    u8 rest[0xA88 - sizeof(KdTree)];
 };
 
 

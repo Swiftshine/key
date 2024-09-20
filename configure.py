@@ -399,6 +399,7 @@ config.libs = [
         "host": False,
         "objects": [
             Object(NonMatching, "fluff/manager/StageResourceManager.cpp"),
+            Object(NonMatching, "fluff/manager/LevelManager.cpp"),
         ],
     },
     {
