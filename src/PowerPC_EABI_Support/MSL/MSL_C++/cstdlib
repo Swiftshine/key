@@ -15,7 +15,7 @@ namespace std {
 
     using ::abort;
     using ::atexit;
-    using ::exit;
+    // using ::exit;
     using ::getenv;
     using ::system;
 

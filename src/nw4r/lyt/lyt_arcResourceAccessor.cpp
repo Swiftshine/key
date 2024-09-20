@@ -5,9 +5,9 @@
 
 namespace
 {
-    u32 FindNameResource(ARCHandle *pHandle, const char *name)
+    UNKWORD FindNameResource(ARCHandle *pHandle, const char *name)
     {
-        u32 resource = -1;
+        UNKWORD resource = -1;
         ARCDir dir;
         ARCEntry entry;
         

@@ -13,7 +13,7 @@ typedef struct _AXPROFILE {
     s64 timeUserFrameEnd;    // at 0x20
     s64 timeEnd;             // at 0x28
     s32 numVoices;           // at 0x30
-    unsigned int WORD_0x34;
+    UNKWORD WORD_0x34;
 } AXPROFILE;
 
 AXPROFILE* __AXGetCurrentProfile(void);

@@ -10,7 +10,7 @@ namespace nw4r
 		struct ReferencedObject
 		{
 			char UNK_0x0[0xC];
-			u32 WORD_0xC;
+			UNKWORD WORD_0xC;
 			u32 mRefCount; // at 0x10
 			char UNK_0x14[0x8];
 			

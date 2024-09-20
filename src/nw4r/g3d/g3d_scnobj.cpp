@@ -286,6 +286,8 @@ namespace nw4r
 
         ScnObj::ForEachResult ScnLeaf::ForEach(ForEachAction action, void *r5, bool b)
         {
+        #pragma unused(b)
+        
             ForEachResult result = (*action)(this, r5);
             return (result != FOREACH_RESULT_1) ? FOREACH_RESULT_0 : FOREACH_RESULT_1;
         }
@@ -427,7 +429,7 @@ namespace nw4r
 
         void ScnGroup::ScnGroup_G3DPROC_GATHER_SCNOBJ(u32 arg1, IScnObjGather *gather)
         {
-            u32 ret = gather->Add(this,
+            UNKWORD ret = gather->Add(this,
                 !TestScnObjFlag(FLAG_20000000), !TestScnObjFlag(FLAG_40000000));
 
             if (ret == 0)

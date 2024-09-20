@@ -12,7 +12,8 @@ typedef float MTX34[3][4];
 
 typedef uint32_t uint;
 typedef unsigned long ulong;
-typedef int32_t UNKTYPE;
+typedef void UNKTYPE;
+typedef uint32_t UNKWORD;
 
 typedef char string32[0x20];
 typedef char string64[0x40];

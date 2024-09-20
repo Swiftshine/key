@@ -19,8 +19,8 @@ namespace nw4r
 			
 			void (* mEmissionPrologue)(Emitter *, ParticleManager *, int *, u32 *, float *, u16 *, float *, math::MTX34 *); // at 0x44
 			
-			u32 WORD_0x48;
-			u32 WORD_0x4C;
+			UNKWORD WORD_0x48;
+			UNKWORD WORD_0x4C;
 			u32 mFlags; // at 0x50
 			math::MTX34 mRootMtx; // at 0x54
 			math::VEC3 VEC_0x84;
@@ -35,8 +35,8 @@ namespace nw4r
 			virtual void Calc(bool);
 			virtual void Draw(const DrawInfo &);
 			
-			bool SendClosing();
-			UNKTYPE DestroyFunc();
+			virtual bool SendClosing();
+			virtual UNKTYPE DestroyFunc();
 			bool Closing(Emitter *);
 			Emitter * CreateEmitter(EmitterResource *, u8, u16);
 			bool RetireEmitter(Emitter *);

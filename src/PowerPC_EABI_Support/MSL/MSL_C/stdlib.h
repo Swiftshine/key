@@ -31,7 +31,7 @@ int system(const char *command);
 char *getenv(const char *name);
 
 int atexit(void (*func)(void));
-void exit(int);
+// void exit(int);
 void abort(void);
 void _Exit(int exit_code);
 

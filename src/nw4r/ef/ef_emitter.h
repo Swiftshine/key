@@ -33,8 +33,8 @@ namespace nw4r
 
 		struct EmitterDesc
 		{
-			u32 FLAGS_0x0; // at 0x0/0x8
-			u32 EMFORMTYPE_0x4; // at 0x4/0xc
+			UNKWORD FLAGS_0x0; // at 0x0/0x8
+			UNKWORD EMFORMTYPE_0x4; // at 0x4/0xc
 			u16 SHORT_0x8; // at 0x8/0x10
 			u16 SHORT_0xA; // at 0xa/0x12
 			s8 SBYTE_0xC; // at 0xc/0x14
@@ -81,7 +81,7 @@ namespace nw4r
 			u8 BYTE_0x84; // at 0x84/0x8c
 			u8 BYTE_0x85; // at 0x85/0x8d
 			u8 BYTE_0x86; // at 0x86/0x8e
-			u32 WORD_0x88;
+			UNKWORD WORD_0x88;
 		};
 		
 		struct EmitTrack
@@ -144,7 +144,7 @@ namespace nw4r
 			virtual void CalcBillboard(); // at 0x24
 			
 			u32 mFlags;
-			u32 WORD_0x24;
+			UNKWORD WORD_0x24;
 			
 			//char UNK_0x28[0x8C];
 			float FLOAT_0x28;
@@ -198,7 +198,7 @@ namespace nw4r
 			*/
 			math::VEC3 VEC_0xA8;
 			
-			u32 WORD_0xB4;
+			UNKWORD WORD_0xB4;
 			EmitterResource * mResource; // at 0xb8
 			Effect * mEffect; // at 0xbc
 			ActivityList mManagers; // at 0xc0
@@ -206,7 +206,7 @@ namespace nw4r
 			u8 BYTE_0xDC;
 			u16 SHORT_0xDE;
 			u16 SHORT_0xE0;
-			u32 WORD_0xE4;
+			UNKWORD WORD_0xE4;
 			u16 SHORT_0xE8;
 			u16 SHORT_0xEA;
 			Random mRandom; // at 0xec
@@ -224,8 +224,8 @@ namespace nw4r
 			~Emitter();
 			
 			u16 RetireParticleAll();
-			bool SendClosing();
-			void DestroyFunc();
+			virtual bool SendClosing();
+			virtual void DestroyFunc();
 			bool Closing(ParticleManager *);
 			bool RetireParticleManager(ParticleManager *);
 			u16 RetireParticleManagerAll();

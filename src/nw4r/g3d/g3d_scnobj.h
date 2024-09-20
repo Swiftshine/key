@@ -17,7 +17,7 @@ namespace nw4r
         struct IScnObjGather
         {
             virtual ~IScnObjGather();
-            virtual u32 Add(ScnObj *, bool, bool) = 0;
+            virtual UNKWORD Add(ScnObj *, bool, bool) = 0;
         };
 
         class ScnObj : public G3dObj

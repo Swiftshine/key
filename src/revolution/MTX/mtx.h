@@ -1,6 +1,6 @@
 #ifndef RVL_SDK_MTX_MTX_H
 #define RVL_SDK_MTX_MTX_H
-#include <revolution/types.h>
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
