@@ -443,6 +443,7 @@ config.libs = [
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
             Object(NonMatching, "fluff/util/GimmickUtil.cpp"),
             Object(Matching, "fluff/util/KdTreeUtil.cpp"),
+            Object(NonMatching, "fluff/util/FullSortSceneUtil.cpp"),
         ],
     },
 ]
