@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include <cstdarg>
 #include "macros.h"
 #include <revolution/types.h>
 
@@ -32,5 +33,11 @@ typedef int placeholder_t;
 // typedef uint8_t u8;
 // typedef int8_t s8;
 
+
+namespace nw4r {
+namespace db {
+    void Panic(...);
+}
+}
 
 #endif

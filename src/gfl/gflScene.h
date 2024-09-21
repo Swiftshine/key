@@ -15,6 +15,7 @@ class Scene {
 
         void Destroy(gfl::RenderObj* renderObj);
         void fn_80649178(gfl::RenderObj* renderObj);
+        void AddRenderObj(gfl::RenderObj* renderObj);
         
         virtual ~Scene();
         virtual void vfC();

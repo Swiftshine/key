@@ -42,9 +42,32 @@ public:
         mPointer = other;
     }
 
-    inline T* get() { return mPointer; }
-    inline T& operator*() { return *mPointer; }
-    inline T* operator->() const { return mPointer; }
+    inline T* get() {
+        return mPointer;
+    }
+
+    inline T& operator*() {
+        return *mPointer;
+    }
+    inline T* operator->() const {
+        return mPointer;
+    }
+
+    inline T** operator&() {
+        return &mPointer;
+    }
+
+    inline bool operator==(T* other) const {
+        return mPointer == other;
+    }
+
+    inline bool operator!=(T* other) const {
+        return mPointer != other;
+    }
+
+    inline bool IsValid() const {
+        return nullptr != mPointer;
+    }
 
 private:
     T* mPointer;

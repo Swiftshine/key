@@ -410,6 +410,15 @@ config.libs = [
         ],
     },
     {
+        "lib": "fluff/graphics/",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_base_no_inline_deferred],
+        "host": False,
+        "objects": [
+            Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
+        ],
+    },
+    {
         "lib" : "fluff/object/gmk/",
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff,],
