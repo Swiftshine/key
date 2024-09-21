@@ -33,8 +33,8 @@ namespace gfl {
         virtual void vf3C();
         virtual void vf40() = 0;
         virtual void vf44() = 0;
-        virtual void vf48();
-        virtual Scene* GetScene();
+        DECL_WEAK virtual void SetScene(gfl::Scene* scene);
+        virtual gfl::Scene* GetScene();
     public:
         MEMAllocator* mAllocator;
         Scene* mScene;
