@@ -8,7 +8,7 @@
 #include "types.h"
 
 #include "stage/Stage.h"
-#include "stage/StageResourceList.h"
+#include "stage/StageResources.h"
 #include "mapdata/Mapdata.h"
 #include "mapdata/BGData.h"
 // size unk
@@ -33,7 +33,7 @@ private:
     void LoadMapdataFromFolder(int stageID) DONT_INLINE_CLASS;
     void ProcessLevelData();
 private:
-    gfl::ScopedPointer<StageResourceList> mResourceList;
+    gfl::ScopedPointer<StageResources> mResourceList;
     gfl::ResFileInfo* mBGResFileInfo;
     BGData* mBGData;
     gfl::ResFileInfo* mCommonResFileInfo;

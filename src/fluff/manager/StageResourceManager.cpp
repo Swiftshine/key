@@ -7,7 +7,7 @@
 
 #include "manager/GameManager.h"
 #include "manager/StageResourceManager.h"
-#include "stage/StageResourceList.h"
+#include "stage/StageResources.h"
 
 #include "mapdata/Mapdata.h"
 #include "object/Gimmick.h"
