@@ -7,6 +7,9 @@
 #include "gflConsole.h"
 
 namespace gfl {
+    class ParamS32;
+    class ParamBool;
+    
     class Param {
     public:
         Param(const char* newLabel);
