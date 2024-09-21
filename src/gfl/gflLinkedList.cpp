@@ -22,3 +22,34 @@ void LinkedList<T>::Node::Insert(LinkedList<T>& list, Node& next, T& data) {
     list->IncrementCount();
     mPrev = node;
 }
+
+template <typename T>
+LinkedList<T>::Iterator* LinkedList<T>::Iterator::Erase(LinkedList<T>* list, Iterator* start, Iterator* end) {
+    Node* endNode = start->GetNode();
+    Node* startNode = start->GetNode();
+    Node* curNode;
+    if (endNode == startNode) {
+        return this;
+    } else {
+        endNode = endNode->GetPrev();
+        startNode->GetPrev()->SetNext(endNode->GetNext());
+        
+        while (true) {
+            Node* curNode = start->GetNode();
+
+            if (curNode == end->GetNode()) {
+                break;
+            }
+            
+            delete curNode->GetPrev();
+            endNode = start->GetNode();
+            start->SetNode(endNode->GetNext());
+            delete endNode;
+            list->DecrementCount();
+        }
+
+        SetNode(end->GetNode());
+    }
+
+    return reinterpret_cast<Iterator*>(curNode);
+}

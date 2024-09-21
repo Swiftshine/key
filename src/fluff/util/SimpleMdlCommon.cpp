@@ -19,9 +19,9 @@ Gimmick* SimpleMdlCommon::Build(Gimmick::GimmickBuildInfo* buildInfo) {
 
 extern "C" void fn_800D5960(Gimmick::GimmickBuildInfo*);
 extern "C" void fn_80052060(void*, const char*);
-extern "C" void* lbl_808E4DC8;
+
 void SimpleMdlCommon::fn_80052C8C(Gimmick::GimmickBuildInfo* buildInfo) {
-    void* list = lbl_808E4DC8;
+    void* list = StageResources::Instance();
 
     std::string prefix(buildInfo->GetStringParam(Parameter::Name), 0, 2);
 

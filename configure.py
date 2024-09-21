@@ -455,6 +455,17 @@ config.libs = [
             Object(NonMatching, "fluff/util/FullSortSceneUtil.cpp"),
         ],
     },
+    {
+        "lib" : "fluff/sage",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_util,],
+        "host": False,
+        "objects" : [
+            # fluff/stage
+            Object(NonMatching, "fluff/stage/StageResources.cpp"),
+
+        ],
+    },
 ]
 
 if args.mode == "configure":

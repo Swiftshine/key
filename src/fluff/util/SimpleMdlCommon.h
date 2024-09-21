@@ -5,6 +5,7 @@
 #include "object/gmk/GmkSimpleMdl.h"
 #include "object/gmk/GmkSimpleNurbs.h"
 #include "object/gmk/GmkColAnimMdl.h"
+#include "stage/StageResources.h"
 
 namespace SimpleMdlCommon {
     ENUM_CLASS(Parameter,

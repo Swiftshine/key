@@ -7,15 +7,22 @@
 #include "object/Gimmick.h"
 
 class StageResources {
+private:
+    static StageResources* sInstance;
 public:
     StageResources();
     ~StageResources();
+
+    static inline StageResources* Instance() {
+        return sInstance;
+    }
+
 private:
-    gfl::LinkedList<std::string*> mResourceNameList;
+    gfl::LinkedList<std::string*> mGimmickResourceNameList;
     gfl::LinkedList<std::string*> mGimmickNameList;
-    gfl::LinkedList<placeholder_t> m_18;
+    gfl::LinkedList<std::string*> mCharaResourceNameList;
     gfl::LinkedList<Gimmick::GimmickBuildInfo*> mGimmickBuildInfoList;
-    gfl::LinkedList<placeholder_t> m_30;
+    gfl::LinkedList<int> mGimmickIDList;
 };
 
 ASSERT_SIZE(StageResources, 0x3C);

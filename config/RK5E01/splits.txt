@@ -49,6 +49,9 @@ fluff/object/collision/ColObj.cpp:
 fluff/util/GimmickUtil.cpp:
 	.text       start:0x800505C8 end:0x800507F4
 
+fluff/stage/StageResources.cpp:
+	.text       start:0x80051DE8 end:0x80052828
+
 fluff/util/SimpleMdlCommon.cpp:
 	.text       start:0x80052B80 end:0x80052DD8
 	.sdata2     start:0x808E6EE0 end:0x808E6EE4
