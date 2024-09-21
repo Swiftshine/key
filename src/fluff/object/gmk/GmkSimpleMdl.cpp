@@ -4,6 +4,7 @@
 #include "stage/FullSortScene.h"
 #include "object/gmk/GmkSimpleMdl.h"
 #include "util/SimpleMdlCommon.h"
+#include "util/FullSortSceneUtil.h"
 
 const char GmkSimpleMdl::BRRES_path_template[] = "bggimmick/%s/%s.brres";
 const char GmkSimpleMdl::MDL0_name_template[] = "%s_00_000";
@@ -57,7 +58,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
         SetModel(brresPath, resMdlName, secondVal != 0);
 
         int sortSceneIndex = mBuildInfo.GetIntParam(Parameter::SortSceneIndex) + 6;
-        mPosition.z = FullSortScene::GetZOrder(sortSceneIndex, 4);
+        mPosition.z = FullSortSceneUtil::GetZOrder(sortSceneIndex, 4);
         UpdateModel();
         SetModelWrapperBySceneIndex(sortSceneIndex);
 
