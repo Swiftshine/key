@@ -4,4 +4,4 @@
 "fluff/util/SignatureUtil.cpp", "74%", "instruction mismatches",
 "fluff/object/FlfHandleList.cpp", "100%*", "*weak destructor (branch)",
 "gfl/gflTaskInfo.cpp", "100%*", "*weak destructor (branch)",
-"fluff/util/FullSortSceneUtil.cpp", "100%", "data"
+"fluff/util/FullSortSceneUtil.cpp", "100%", "data",
