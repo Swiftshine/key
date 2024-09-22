@@ -11,7 +11,7 @@
 
 #include "mapdata/Mapdata.h"
 #include "object/Gimmick.h"
-#include "object/FlfMdlDraw.h"
+#include "graphics/FlfMdlDraw.h"
 
 static uint lbl_808E6BE8 = 0;
 

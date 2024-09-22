@@ -1,5 +1,5 @@
 #include "util/GimmickUtil.h"
-#include "object/FlfMdlDraw.h"
+#include "graphics/FlfMdlDraw.h"
 
 int GimmickUtil::GetGimmickIDByDescription(const char* description) {
     GimmickEntry* entry = GimmickTable;
