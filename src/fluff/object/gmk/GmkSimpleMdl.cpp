@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <rand.h>
 
-#include "stage/FullSortScene.h"
+#include "graphics/FullSortScene.h"
 #include "object/gmk/GmkSimpleMdl.h"
 #include "util/SimpleMdlCommon.h"
 #include "util/FullSortSceneUtil.h"

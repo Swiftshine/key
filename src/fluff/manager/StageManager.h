@@ -1,7 +1,7 @@
 #ifndef FLUFF_STAGEMANAGER_H
 #define FLUFF_STAGEMANAGER_H
 
-#include "stage/FullSortScene.h"
+#include "graphics/FullSortScene.h"
 #include "gflTask.h"
 #include "stage/Stage.h"
 #include "manager/StageResourceManager.h"

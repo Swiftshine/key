@@ -1,7 +1,7 @@
 #include "graphics/BgBackImage.h"
 #include "object/FlfMdlDraw.h"
 #include "util/FullSortSceneUtil.h"
-#include "stage/FullSortScene.h"
+#include "graphics/FullSortScene.h"
 #include "manager/StageManager.h"
 #include "manager/CameraManager.h"
 
