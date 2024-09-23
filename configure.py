@@ -435,6 +435,7 @@ config.libs = [
         "cflags": [*cflags_fluff_util, "-pragma \"merge_float_consts on\""],
         "host": False,
         "objects" : [
+            Object(NonMatching, "fluff/object/collision/FlfRideHitBase.cpp"),
             Object(NonMatching, "fluff/object/collision/KdTreeNode.cpp"),
             Object(NonMatching, "fluff/object/collision/KdTree.cpp"),
             Object(NonMatching, "fluff/object/collision/ColObj.cpp"),
