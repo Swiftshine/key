@@ -19,6 +19,9 @@ gfl/gflVec3.cpp:
 gfl/gflResInfo.cpp:
 	.text       start:0x80026494 end:0x800264A4
 
+fluff/util/CollisionFlagUtil.cpp:
+	.text       start:0x8002BCEC end:0x8002BCF8
+
 fluff/object/FlfGameObj.cpp:
 	.text       start:0x8002BCF8 end:0x8002C0DC
 	.data       start:0x80839D90 end:0x80839DF8

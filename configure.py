@@ -447,6 +447,7 @@ config.libs = [
         "host": False,
         "objects" : [
             # fluff/util/
+            Object(Matching, "fluff/util/CollisionFlagUtil.cpp"),
             Object(Matching, "fluff/util/SimpleMdlCommon.cpp"),
             Object(NonMatching, "fluff/util/MissionUtil.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
