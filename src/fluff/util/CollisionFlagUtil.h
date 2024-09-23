@@ -9,7 +9,7 @@ namespace CollisionFlagUtil {
      * @note Address: 0x8002BCEC
      * @note Size: 0xC
      */
-    uint64_t GetFlag(uint a, uint b);
+    u64 GetFlag(uint a, uint b);
 }
 
 #endif
