@@ -10,7 +10,7 @@ RenderObj::RenderObj() {
     mScene = nullptr;
     m_C = true;
     m_D = true;
-    m_E = true;
+    mShouldUpdate = true;
     mIsActive = false;
     m_10 = 0.0f;
     m_14 = 0;
@@ -28,7 +28,7 @@ RenderObj::~RenderObj() {
 
 void RenderObj::vf14(bool arg1) {
     vf18(arg1);
-    vf38(arg1);
+    SetUpdate(arg1);
 }
 
 void RenderObj::vf18(bool arg1) {
@@ -45,7 +45,7 @@ void RenderObj::vf20(bool arg1) {
     m_D = arg1;
 
     if (mIsActive) {
-        vf38(arg1);
+        SetUpdate(arg1);
     }
 
     if (nullptr != mScene) {
@@ -80,8 +80,8 @@ bool RenderObj::vf34(float& arg0, float& arg1, float& arg2, float& arg3) {
     return b;
 }
 
-void RenderObj::vf38(bool arg1)  {
-    m_E = arg1;
+void RenderObj::SetUpdate(bool arg1)  {
+    mShouldUpdate = arg1;
 
     if (nullptr == mScene) {
         return;
