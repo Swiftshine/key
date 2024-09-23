@@ -26,9 +26,9 @@ RenderObj::~RenderObj() {
     }
 }
 
-void RenderObj::vf14(bool arg1) {
+void RenderObj::SetUpdate(bool arg1) {
     vf18(arg1);
-    SetUpdate(arg1);
+    Update(arg1);
 }
 
 void RenderObj::vf18(bool arg1) {
@@ -45,7 +45,7 @@ void RenderObj::vf20(bool arg1) {
     m_D = arg1;
 
     if (mIsActive) {
-        SetUpdate(arg1);
+        Update(arg1);
     }
 
     if (nullptr != mScene) {
@@ -80,7 +80,7 @@ bool RenderObj::vf34(float& arg0, float& arg1, float& arg2, float& arg3) {
     return b;
 }
 
-void RenderObj::SetUpdate(bool arg1)  {
+void RenderObj::Update(bool arg1)  {
     mShouldUpdate = arg1;
 
     if (nullptr == mScene) {

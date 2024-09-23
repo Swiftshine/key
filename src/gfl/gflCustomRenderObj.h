@@ -19,7 +19,7 @@ namespace gfl {
         virtual void vf18() override;
         virtual void vf20(float& arg1) override;
         virtual void vf28() override;
-        virtual void SetUpdate(bool arg1) override;
+        virtual void Update(bool arg1) override;
         virtual void vf40() override;
         virtual void vf44() override;
 
