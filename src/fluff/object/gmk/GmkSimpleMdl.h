@@ -38,7 +38,7 @@ public:
 
 
 
-    void vf4C(uint arg1, std::string& arg2) override;
+    void SetState(uint arg1, std::string& arg2) override;
 public:
     gfl::ScnMdlWrapper* mPrimaryModelWrapper;
     NwAnm* mPrimaryAnim;
