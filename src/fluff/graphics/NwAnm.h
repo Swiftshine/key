@@ -28,6 +28,10 @@ public:
     bool HasAnim();
 
     bool Init(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName, nw4r::g3d::ResName* resName /* ? */);
+
+    inline uint GetFlags() {
+        return mFlags;
+    }
 public:
     uint mFlags;
     float mAnimationEndFrame;

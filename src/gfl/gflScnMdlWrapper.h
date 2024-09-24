@@ -23,6 +23,8 @@ namespace gfl {
 
         inline nw4r::g3d::ScnMdl* GetScnMdl() { return mScnMdl; }
         
+        void fn_8004DB94(gfl::Vec3&);
+
         /* gfl::RenderObj */
         virtual void vf28(gfl::Vec3&) override;
         virtual void vf40() override;

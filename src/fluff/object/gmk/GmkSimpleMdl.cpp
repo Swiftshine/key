@@ -240,5 +240,40 @@ NwAnm* GmkSimpleMdl::CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlN
 }
 
 void GmkSimpleMdl::SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim) {
-    
+    char shadowName[0x100];
+    snprintf(shadowName, sizeof(shadowName), "%s_shadow", name);
+    nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(name);
+
+    if (0 != *reinterpret_cast<u32*>(&resMdl)) {
+        uint flags = 0;
+
+        if (createAnim) {
+            NwAnm* anim = new (gfl::HeapID::Work) NwAnm;
+
+            if (nullptr == anim) {
+                mShadowAnim.Destroy();
+            } else {
+                mShadowAnim = anim;
+            }
+        }
+
+        if (mShadowAnim.IsValid()) {
+            flags = mShadowAnim->GetFlags();
+        }
+
+        gfl::ScnMdlWrapper* modelWrapper = CreateModelWrapper(resFile, name, flags);
+
+        if (nullptr == modelWrapper) {
+            mShadowModelWrapper.Destroy();
+        } else {
+            mShadowModelWrapper = modelWrapper;
+        }
+
+        if (createAnim && mShadowAnim.IsValid()) {
+            mShadowAnim->SetModelWrapper(mShadowModelWrapper.Get(), true);
+        }
+
+        mShadowModelWrapper->SetActive(true);
+        mShadowModelWrapper->fn_8004DB94(mModelScale);
+    }
 }
