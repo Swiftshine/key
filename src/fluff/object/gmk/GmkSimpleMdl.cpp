@@ -218,12 +218,25 @@ void GmkSimpleMdl::SetState(uint arg1, std::string& stateStr) {
     }
 }
 
-gfl::ScnMdlWrapper* GmkSimpleMdl::CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flag) {
-    
+gfl::ScnMdlWrapper* GmkSimpleMdl::CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flags) {
+    nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(filepath);
+    char name[0x100];
+    snprintf(name, 0x100, "GmkSimpleMdl:%s", filepath);
+
+    gfl::ScnMdlWrapper* modelWrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags);
+    modelWrapper->SetUpdate(true);
+    return modelWrapper;
 }
 
 NwAnm* GmkSimpleMdl::CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName) {
-    
+    NwAnm* anim = new (gfl::HeapID::Work) NwAnm;
+
+    if (anim->Init(resFile, resMdlName, animName, nullptr)) {
+        return anim;
+    }
+
+    delete anim;
+    return nullptr;
 }
 
 void GmkSimpleMdl::SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim) {

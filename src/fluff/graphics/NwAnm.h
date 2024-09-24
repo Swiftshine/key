@@ -26,6 +26,8 @@ public:
     float GetUpdateRate();
     bool IsAnimationDone();
     bool HasAnim();
+
+    bool Init(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName, nw4r::g3d::ResName* resName /* ? */);
 public:
     uint mFlags;
     float mAnimationEndFrame;
