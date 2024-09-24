@@ -17,15 +17,21 @@ namespace gfl {
     class ScnMdlWrapper : public RenderObj {
     public:
         ScnMdlWrapper();
+        ScnMdlWrapper(nw4r::g3d::ResMdl& resMdl, uint flags);
         
         virtual ~ScnMdlWrapper();
 
         inline nw4r::g3d::ScnMdl* GetScnMdl() { return mScnMdl; }
         
+        /* gfl::RenderObj */
+        virtual void vf28(gfl::Vec3&) override;
+        virtual void vf40() override;
+        virtual void ScnMdlProc() override;
+        
         /* gfl::ScnMdlWrapper */
         virtual bool SetMatrix(MTX34* mtx);
         virtual bool SetMatrix_thunk(MTX34* mtx);
-        virtual bool GSetMatrix(MTX34* mtx);
+        virtual bool GetMatrix(MTX34* mtx);
     private:
         nw4r::g3d::LightObj mLightObj;
         bool m_1C;

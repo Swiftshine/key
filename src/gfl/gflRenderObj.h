@@ -4,6 +4,7 @@
 #include "types.h"
 #include <revolution/MEM.h>
 #include <nw4r/g3d/g3d_scnobj.h>
+#include "gfl/gflVec3.h"
 
 namespace gfl {
     class Scene;
@@ -25,14 +26,14 @@ namespace gfl {
         virtual bool vf1C();
         virtual void vf20(bool arg1);
         virtual void vf24();
-        virtual void vf28(float& arg1) = 0;
+        virtual void vf28(gfl::Vec3& arg1) = 0;
         virtual float vf2C();
         virtual void vf30(float arg1);
         virtual bool vf34(float& arg0, float& arg1, float& arg2, float& arg3);
         virtual void Update(bool shouldUpdate);
         virtual void vf3C();
         virtual void vf40() = 0;
-        virtual void vf44() = 0;
+        virtual void ScnMdlProc() = 0;
         DECL_WEAK virtual void SetScene(gfl::Scene* scene);
         virtual gfl::Scene* GetScene();
     public:

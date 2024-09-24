@@ -18,10 +18,10 @@ namespace gfl {
         virtual int vf10() override;
         virtual void vf18() override;
         virtual void vf20(float& arg1) override;
-        virtual void vf28() override;
+        virtual void vf28(gfl::Vec3&) override;
         virtual void Update(bool arg1) override;
         virtual void vf40() override;
-        virtual void vf44() override;
+        virtual void ScnMdlProc() override;
 
         /* gfl::CustomRenderObj */
         virtual void vf78();
@@ -33,7 +33,7 @@ namespace gfl {
         virtual void vf90();
         virtual void vf94();
         // calls nw4r::g3d::ScnLeaf::G3dProc(1, 0, arg1)
-        virtual void Proc(void* arg1); 
+        virtual void ScnLeafProc(void* arg1); 
         virtual void vf9C();
         virtual void vfA0();
         virtual void vfA4();
