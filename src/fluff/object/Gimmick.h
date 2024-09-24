@@ -99,7 +99,7 @@ public:
     Gimmick(GimmickBuildInfo* info, const char* taskName);
 
     // unk
-    Gimmick(int gmkID, GimmickBuildInfo* info);
+    Gimmick(GimmickBuildInfo* info);
 
     virtual ~Gimmick();
 

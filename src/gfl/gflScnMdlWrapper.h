@@ -21,7 +21,11 @@ namespace gfl {
         virtual ~ScnMdlWrapper();
 
         inline nw4r::g3d::ScnMdl* GetScnMdl() { return mScnMdl; }
-
+        
+        /* gfl::ScnMdlWrapper */
+        virtual bool SetMatrix(MTX34* mtx);
+        virtual bool SetMatrix_thunk(MTX34* mtx);
+        virtual bool GSetMatrix(MTX34* mtx);
     private:
         nw4r::g3d::LightObj mLightObj;
         bool m_1C;

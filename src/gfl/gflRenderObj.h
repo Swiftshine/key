@@ -27,7 +27,7 @@ namespace gfl {
         virtual void vf24();
         virtual void vf28(float& arg1) = 0;
         virtual float vf2C();
-        virtual void vf30();
+        virtual void vf30(float arg1);
         virtual bool vf34(float& arg0, float& arg1, float& arg2, float& arg3);
         virtual void Update(bool shouldUpdate);
         virtual void vf3C();

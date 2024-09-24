@@ -182,6 +182,57 @@ namespace gfl {
     };
 
     ASSERT_SIZE(ResFileInfo, 0x18);
+
+
+    class ResFileInfoPointer {
+    public:
+        ResFileInfoPointer(ResFileInfo* info)
+            : mPointer(info)
+        { }
+
+        ~ResFileInfoPointer() {
+            if (mPointer) {
+                mPointer->Destroy();
+            }
+        }
+
+        ResFileInfo* Get() const {
+            return mPointer;
+        }
+
+        inline void Reset() {
+            mPointer = nullptr;
+        }
+
+        inline void operator=(ResFileInfo* other) {
+            mPointer = other;
+        }
+
+        inline ResFileInfo& operator*() {
+        return *mPointer;
+    }
+        inline ResFileInfo* operator->() const {
+            return mPointer;
+        }
+
+        inline ResFileInfo** operator&() {
+            return &mPointer;
+        }
+
+        inline bool operator==(ResFileInfo* other) const {
+            return mPointer == other;
+        }
+
+        inline void Destroy() {
+            mPointer->Destroy();
+        }
+
+        inline bool IsValid() const {
+            return nullptr != mPointer;
+        }
+    private:
+        ResFileInfo* mPointer;
+    };
 }
 
 #endif

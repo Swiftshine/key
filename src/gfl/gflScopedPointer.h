@@ -42,7 +42,7 @@ public:
         mPointer = other;
     }
 
-    inline T* get() {
+    inline T* Get() const {
         return mPointer;
     }
 
@@ -59,6 +59,10 @@ public:
 
     inline bool operator==(T* other) const {
         return mPointer == other;
+    }
+
+    inline friend bool operator==(T* other, const ScopedPointer<T>& obj) {
+        return other == obj.Get();
     }
 
     inline bool operator!=(T* other) const {

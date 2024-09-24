@@ -556,6 +556,11 @@ inline MTX34* MTX34Trans(MTX34* pOut, const VEC3* pTrans, const MTX34* pIn) {
     return pOut;
 }
 
+inline MTX34* MTX34Trans(MTX34* pOut, const MTX34* pIn, const VEC3* pTrans) {
+    PSMTXTransApply(*pIn, *pOut, pTrans->x, pTrans->y, pTrans->z);
+    return pOut;
+}
+
 /******************************************************************************
  *
  * MTX44 functions

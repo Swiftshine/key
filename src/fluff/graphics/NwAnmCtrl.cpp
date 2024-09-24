@@ -1,9 +1,9 @@
 #include "graphics/NwAnmCtrl.h"
 
 NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ScopedPointer<gfl::ResArchivedFileInfo>& fileInfo, const char* animName) {
-    mpFileInfo = fileInfo.get();
+    mpFileInfo = fileInfo.Get();
 
-    if (mpFileInfo.get()) {
+    if (mpFileInfo.Get()) {
         mpFileInfo->IncrementLevel();
     }
     
@@ -54,7 +54,7 @@ NwAnm* NwAnmCtrl::GetAnimationByIndex(uint index) {
 }
 
 void NwAnmCtrl::SetCurrentAnimationIndex(uint index) {
-    GetAnimationByIndex(index)->SetModelWrapper(mpModelWrapper.get(), true);
+    GetAnimationByIndex(index)->SetModelWrapper(mpModelWrapper.Get(), true);
     mCurrentAnimIndex = index;
 }
 
@@ -93,5 +93,5 @@ bool NwAnmCtrl::HasAnim(uint index) {
 extern "C" gfl::Vec3& fn_8001DCB0(NwAnm*, gfl::ScnMdlWrapper*, class nw4r::g3d::ResMdl*);
 
 gfl::Vec3 & NwAnmCtrl::fn_800EA480(class nw4r::g3d::ResMdl* resmdl) {
-    return fn_8001DCB0(GetCurrentAnimation(), mpModelWrapper.get(), resmdl);
+    return fn_8001DCB0(GetCurrentAnimation(), mpModelWrapper.Get(), resmdl);
 }

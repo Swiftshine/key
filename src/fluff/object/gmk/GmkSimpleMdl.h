@@ -29,26 +29,23 @@ public:
     GmkSimpleMdl();
     GmkSimpleMdl(GimmickBuildInfo* buildInfo);
     virtual ~GmkSimpleMdl();
-    void SetModelWrapperBySceneIndex(int index);
+    void SetModelWrapperByFullSortSceneIndex(int index);
     void SetModel(const char* brres, const char* modelName, bool playAnim);
     void UpdateModel();
+    virtual void SetState(uint arg1, std::string& strState) override;
+    gfl::ScnMdlWrapper* CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flag);
+    NwAnm* CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName);
+    void SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim);
 
-    void fn_80052E44(s16);
-    void fn_80052E48(s16);
-
-
-
-    void SetState(uint arg1, std::string& arg2) override;
 public:
-    gfl::ScnMdlWrapper* mPrimaryModelWrapper;
-    NwAnm* mPrimaryAnim;
-    gfl::ScnMdlWrapper* mSecondaryModelWrapper;
-    NwAnm* mSecondaryAnim;
-    float m_140;
-    float m_144;
-    float m_148;
-    GmkSimpleMdlRotZ* mZRotationGmk;
-    gfl::ResArchivedFileInfo* mFileInfo;
+    gfl::ScopedPointer<gfl::ScnMdlWrapper> mModelWrapper;
+    gfl::ScopedPointer<NwAnm> mAnim;
+    gfl::ScopedPointer<gfl::ScnMdlWrapper> mShadowModelWrapper;
+    gfl::ScopedPointer<NwAnm> mShadowAnim;
+    gfl::Vec3 mModelScale;
+    gfl::ScopedPointer<GmkSimpleMdlRotZ> mZRotationGmk;
+    gfl::ResFileInfoPointer mResFileInfo;
+    // gfl::ResFileInfo* mResFileInfo;
     uint m_154;
 };
 
