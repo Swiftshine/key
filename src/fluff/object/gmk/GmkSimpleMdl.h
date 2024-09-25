@@ -22,6 +22,7 @@ public:
         Z_Rotation = 0,     // float 0
         ResourceName = 0,   // string 0
 
+        PlayAnim = 1,       // int 1
 
         InitialFrameIndex = 2, // int 2
     );

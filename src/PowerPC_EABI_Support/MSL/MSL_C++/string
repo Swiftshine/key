@@ -237,6 +237,10 @@ namespace std {
             return 0 == compare(str);
         }
 
+        inline bool empty() {
+            return 0 == compare("");
+        }
+
         void append(const basic_string &str) {
             random_access_iterator_tag tag; // required to be here to match
 
