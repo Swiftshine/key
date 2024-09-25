@@ -186,11 +186,13 @@ namespace gfl {
 
     class ResFileInfoPointer {
     public:
+        inline ResFileInfoPointer() { }
+
         ResFileInfoPointer(ResFileInfo* info)
             : mPointer(info)
         { }
 
-        ~ResFileInfoPointer() {
+        inline ~ResFileInfoPointer() {
             if (mPointer) {
                 mPointer->Destroy();
             }

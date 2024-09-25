@@ -19,7 +19,8 @@ private:
     float mWidth;
     float mHeight;
     // gfl::ResFileInfo* mResFileInfo;
-    gfl::ResFileInfo* mResFileInfo;
+    // gfl::ResFileInfo* mResFileInfo;
+    gfl::ResFileInfoPointer mResFileInfo;
 };
 
 ASSERT_SIZE(BgBackImage, 0x130);

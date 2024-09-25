@@ -7,28 +7,21 @@
 
 #include <nw4r/g3d.h>
 
+const char BRTEX_path[] = "gimmick/bgTex/bgTex.brtex";
+const char twopend[] = "2pend";
+
 BgBackImage::BgBackImage()
     : CustomRenderObj(true, false)
 {
     mResFileInfo = nullptr;
     gfl::ResFileInfo* fileInfo;
-    FlfMdlDraw::FromArchive(mResFileInfo, "gimmick/bgTex/bgTex.brtex");
+    FlfMdlDraw::FromArchive((gfl::ResFileInfo*&)mResFileInfo, BRTEX_path);
 
-    nw4r::g3d::ResFile* resfile;
+    nw4r::g3d::ResFile resfile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
 
-    if (nullptr != mResFileInfo) {
-        resfile = reinterpret_cast<nw4r::g3d::ResFile*>(mResFileInfo->GetGfArch());
-    } else {
-        resfile = nullptr;
-    }
+    NW4R_G3D_RESFILE_AC_ASSERT(resfile);
 
-
-    // this is likely an nw4r assertion inline
-    if (0 == ((u32)resfile & 0x1F)) {
-        nw4r::db::Panic("g3d_resfile_ac.h", 0x3C, "NW4R:Failed assertion !((u32)p & 0x1F)");
-    }
-
-    nw4r::g3d::ResTex tex = resfile->GetResTex("2pend");
+    nw4r::g3d::ResTex tex = resfile.GetResTex(twopend);
 
     void* image;
     u16 width;
@@ -73,9 +66,7 @@ BgBackImage::BgBackImage()
     fss->AddRenderObj(static_cast<gfl::RenderObj*>(this));
 }
 
-BgBackImage::~BgBackImage() {
-    mResFileInfo->Destroy();
-}
+BgBackImage::~BgBackImage() { }
 
 void BgBackImage::Render() {
     float float1;
