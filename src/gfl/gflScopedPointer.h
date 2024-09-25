@@ -14,18 +14,26 @@ public:
         delete mPointer;
         mPointer = nullptr;
     }
-    void Create() {
+
+    inline void Create() {
         mPointer = new T;
     }
 
-    void Create(u8 heapID) {
-        T* temp = new (heapID) T;
-
-        if (!temp) {
-            delete mPointer;
-            mPointer = nullptr;
+    inline void Create(T* ptr) {
+        if (nullptr == ptr) {
+            Destroy();
         } else {
-            mPointer = temp;
+            mPointer = ptr;
+        }
+    }
+
+    inline void Create(u8 heapID) {
+        T* ptr = new (heapID) T;
+
+        if (!ptr) {
+            Destroy();
+        } else {
+            mPointer = ptr;
         }
     }
 

@@ -63,14 +63,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 
         // GmkSimpleMdl uses an auxiliary gimmick for Z rotation if it's needed
         if (0.0f != mBuildInfo.GetFloatParam(Parameter::Z_Rotation)) {
-            GmkSimpleMdlRotZ* zRotationGmk = new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mModelWrapper->GetScnMdl());
-
-            if (nullptr == zRotationGmk) {
-                mZRotationGmk.Destroy();
-            } else {
-                mZRotationGmk = zRotationGmk;
-            }
-
+            mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mModelWrapper->GetScnMdl()));
             mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::Z_Rotation));
         }
 
@@ -90,13 +83,16 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 
     float secondFloat = mBuildInfo.GetFloatParam(ParameterID::THIRD);
 
-    if (0.0f != secondFloat) {
-        mModelWrapper->vf30(secondFloat);
-
-        if (mShadowModelWrapper.IsValid()) {
-            mShadowModelWrapper->vf30(secondFloat);
-        }
+    if (0.0f == secondFloat) {
+        return;
     }
+
+    mModelWrapper->vf30(secondFloat);
+
+    if (mShadowModelWrapper.IsValid()) {
+        mShadowModelWrapper->vf30(secondFloat);
+    }
+
 }
 
 GmkSimpleMdl::~GmkSimpleMdl() { }
@@ -113,39 +109,38 @@ void GmkSimpleMdl::SetModelWrapperByFullSortSceneIndex(int index) {
 void GmkSimpleMdl::SetModel(const char* brresPath, const char* modelName, bool playAnim) {
     gfl::ResFileInfo* fileInfo;
 
-    // FlfMdlDraw::GetFileInfoFromArchive((gfl::ResInfo**)&fileInfo, brresPath);
-
-    // if (&mResFileInfo != &fileInfo) {
-    //     if (mResFileInfo.IsValid()) {
-    //         mResFileInfo->Destroy();
-    //     }
-
-    //     mResFileInfo
-    // }
-
     FlfMdlDraw::FromArchive((gfl::ResFileInfo*&)mResFileInfo, brresPath);
 
-    nw4r::g3d::ResFile* resfile;
-    if (!mResFileInfo.IsValid()) {
-        resfile = nullptr;
-    } else {
-        resfile = reinterpret_cast<nw4r::g3d::ResFile*>(mResFileInfo->GetGfArch());
-    }
+    nw4r::g3d::ResFile resfile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
 
-    if (0 == ((u32)resfile & 0x1F)) {
-        nw4r::db::Panic("g3d_resfile_ac.h",0x3c,"NW4R:Failed assertion !((u32)p & 0x1f)");
-    }
+    NW4R_G3D_RESFILE_AC_ASSERT(resfile);
 
-    resfile->Release();
-    resfile->Bind(*resfile);
+    resfile.Release();
+    resfile.Bind();
 
     uint flags = 0;
 
-    // unfinished
+    if (playAnim) {
+        mAnim.Create(CreateAnim(resfile, modelName, modelName));
+
+        if (mAnim.IsValid()) {
+            flags = mAnim->GetFlags();
+        }
+    }
+
+    mModelWrapper.Create(CreateModelWrapper(resfile, modelName, flags));
+
+    if (playAnim && mAnim.IsValid()) {
+        mAnim->SetModelWrapper(mModelWrapper.Get(), true);
+    }
+
+    mModelWrapper->SetActive(true);
+    SetShadow(resfile, modelName, playAnim);
+    UpdateModel();
 }
 
 void GmkSimpleMdl::UpdateModel() {
-        MTX34 mtx1;
+    MTX34 mtx1;
     MTX34 mtx2;
 
     UpdateMatrix();
@@ -248,26 +243,15 @@ void GmkSimpleMdl::SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool
         uint flags = 0;
 
         if (createAnim) {
-            NwAnm* anim = new (gfl::HeapID::Work) NwAnm;
-
-            if (nullptr == anim) {
-                mShadowAnim.Destroy();
-            } else {
-                mShadowAnim = anim;
-            }
+            mShadowAnim.Create(gfl::HeapID::Work);
         }
 
         if (mShadowAnim.IsValid()) {
             flags = mShadowAnim->GetFlags();
         }
 
-        gfl::ScnMdlWrapper* modelWrapper = CreateModelWrapper(resFile, name, flags);
+        mShadowModelWrapper.Create(CreateModelWrapper(resFile, name, flags));
 
-        if (nullptr == modelWrapper) {
-            mShadowModelWrapper.Destroy();
-        } else {
-            mShadowModelWrapper = modelWrapper;
-        }
 
         if (createAnim && mShadowAnim.IsValid()) {
             mShadowAnim->SetModelWrapper(mShadowModelWrapper.Get(), true);

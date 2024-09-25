@@ -29,13 +29,13 @@ public:
     GmkSimpleMdl();
     GmkSimpleMdl(GimmickBuildInfo* buildInfo);
     virtual ~GmkSimpleMdl();
-    void SetModelWrapperByFullSortSceneIndex(int index);
-    void SetModel(const char* brres, const char* modelName, bool playAnim);
-    void UpdateModel();
+    void SetModelWrapperByFullSortSceneIndex(int index) DONT_INLINE_CLASS;
+    void SetModel(const char* brres, const char* modelName, bool playAnim) DONT_INLINE_CLASS;
+    void UpdateModel() DONT_INLINE_CLASS;
     virtual void SetState(uint arg1, std::string& strState) override;
-    gfl::ScnMdlWrapper* CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flag);
-    NwAnm* CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName);
-    void SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim);
+    gfl::ScnMdlWrapper* CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flag) DONT_INLINE_CLASS;
+    NwAnm* CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName) DONT_INLINE_CLASS;
+    void SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim) DONT_INLINE_CLASS;
 
 public:
     gfl::ScopedPointer<gfl::ScnMdlWrapper> mModelWrapper;

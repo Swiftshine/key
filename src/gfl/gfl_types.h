@@ -3,6 +3,16 @@
 
 #include "types.h"
 
+const char g3d_resfile_ac_h[] = "g3d_resfile_ac.h";
+const char NW4R_Failed_assertion_p_and_0x1f[] = "NW4R:Failed assertion !((u32)p & 0x1f)";
+
+#define NW4R_G3D_RESFILE_AC_ASSERT(resfile) \
+    do { \
+        if (0 != ((u32)resfile.ptr() & 0x1F)) { \
+            nw4r::db::Panic(g3d_resfile_ac_h, 0x3C, NW4R_Failed_assertion_p_and_0x1f); \
+        } \
+    } while (0);
+
 #define NW4R_ASSERT(x)                                                         \
     ((x) && 1 || (nw4r::db::Panic(__FILE__, __LINE__, #x), 0))
 

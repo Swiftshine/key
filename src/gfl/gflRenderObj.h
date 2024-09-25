@@ -4,7 +4,8 @@
 #include "types.h"
 #include <revolution/MEM.h>
 #include <nw4r/g3d/g3d_scnobj.h>
-#include "gfl/gflVec3.h"
+#include "gflVec3.h"
+#include "gfl_types.h"
 
 namespace gfl {
     class Scene;
