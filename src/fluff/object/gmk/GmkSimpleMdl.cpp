@@ -9,8 +9,11 @@
 #include "graphics/FlfMdlDraw.h"
 #include "nw4r/g3d.h"
 
+const char MdlWrapperStr[] = "GmkSimpleMdl:%s";
 const char GmkSimpleMdl::BRRES_path_template[] = "bggimmick/%s/%s.brres";
 const char GmkSimpleMdl::MDL0_name_template[] = "%s_00_000";
+const char on[] = "ON";
+const char off[] = "OFF";
 
 // function declarations
 void fn_8003D93C(void*, s16);
@@ -30,9 +33,7 @@ GmkSimpleMdl::GmkSimpleMdl()
 { }
 
 // DECL_WEAK gfl::ScopedPointer<gfl::ScnMdlWrapper>::~ScopedPointer() { }
-
-
-// https://decomp.me/scratch/bpctd
+// https://decomp.me/scratch/skAg9
 GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     : Gimmick(buildInfo)
     , mModelWrapper(nullptr)
@@ -92,7 +93,6 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     if (mShadowModelWrapper.IsValid()) {
         mShadowModelWrapper->vf30(secondFloat);
     }
-
 }
 
 GmkSimpleMdl::~GmkSimpleMdl() { }
@@ -140,8 +140,6 @@ void GmkSimpleMdl::SetModel(const char* brresPath, const char* modelName, bool p
 }
 
 void GmkSimpleMdl::UpdateModel() {
-    MTX34 mtx1;
-    MTX34 mtx2;
 
     UpdateMatrix();
     mModelWrapper->SetMatrix(&mMatrix);
@@ -149,6 +147,24 @@ void GmkSimpleMdl::UpdateModel() {
     if (!mShadowModelWrapper.IsValid()) {
         return;
     }
+
+    MTX34 mtx1;
+    MTX34 mtx2;
+
+    mtx1[0][0] = 0.0f;
+    mtx1[0][1] = 0.0f;
+    mtx1[0][2] = 0.0f;
+    mtx1[0][3] = 0.0f;
+
+    mtx1[1][0] = 0.0f;
+    mtx1[1][1] = 0.0f;
+    mtx1[1][2] = 0.0f;
+    mtx1[1][3] = 0.0f;
+
+    mtx1[2][0] = 0.0f;
+    mtx1[2][1] = 0.0f;
+    mtx1[2][2] = 0.0f;
+    mtx1[2][3] = 0.0f;
 
     mtx2[0][0] = 0.0f;
     mtx2[0][1] = 0.0f;
@@ -165,31 +181,16 @@ void GmkSimpleMdl::UpdateModel() {
     mtx2[2][2] = 0.0f;
     mtx2[2][3] = 0.0f;
 
-    mtx1[0][0] = 0.0f;
-    mtx1[0][1] = 0.0f;
-    mtx1[0][2] = 0.0f;
-    mtx1[0][3] = 0.0f;
-
-    mtx1[1][0] = 0.0f;
-    mtx1[1][1] = 0.0f;
-    mtx1[1][2] = 0.0f;
-    mtx1[1][3] = 0.0f;
-
-    mtx1[2][0] = 0.0f;
-    mtx1[2][1] = 0.0f;
-    mtx1[2][2] = 0.0f;
-    mtx1[2][3] = 0.0f;
-    PSMTXIdentity(mtx1);
-    nw4r::math::MTX34Trans((nw4r::math::MTX34*)mtx1, (nw4r::math::MTX34*)&mtx1, reinterpret_cast<nw4r::math::VEC3*>(&mModelScale));
-    PSMTXConcat(mMatrix, mtx1, mtx2);
-    mShadowModelWrapper->SetMatrix(&mtx2);
+    PSMTXIdentity(mtx2);
+    nw4r::math::MTX34Trans((nw4r::math::MTX34*)mtx2, (nw4r::math::MTX34*)mtx2, reinterpret_cast<nw4r::math::VEC3*>(&mModelScale));
+    PSMTXConcat(mMatrix, mtx2, mtx1);
+    mShadowModelWrapper->SetMatrix(&mtx1);
 }
 
-// https://decomp.me/scratch/rmrHF
-void GmkSimpleMdl::SetState(uint arg1, std::string& stateStr) {
-    int result = stateStr.compare("ON");
 
-    if (0 == result) {
+
+void GmkSimpleMdl::SetState(uint arg1, std::string& stateStr) {
+    if (on == stateStr) {
 
         if (mModelWrapper.IsValid()) {
             mModelWrapper->SetUpdate(true);
@@ -199,9 +200,7 @@ void GmkSimpleMdl::SetState(uint arg1, std::string& stateStr) {
             mShadowModelWrapper->SetUpdate(true);
         }
     } else {
-        result = stateStr.compare("OFF");
-        
-        if (0 == result) {
+        if (off == stateStr) {
             if (mModelWrapper.IsValid()) {
                 mModelWrapper->SetUpdate(false);
             }
@@ -213,10 +212,11 @@ void GmkSimpleMdl::SetState(uint arg1, std::string& stateStr) {
     }
 }
 
+// https://decomp.me/scratch/3zXZY
 gfl::ScnMdlWrapper* GmkSimpleMdl::CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flags) {
     nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(filepath);
     char name[0x100];
-    snprintf(name, 0x100, "GmkSimpleMdl:%s", filepath);
+    snprintf(name, 0x100, MdlWrapperStr, filepath);
 
     gfl::ScnMdlWrapper* modelWrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags);
     modelWrapper->SetUpdate(true);
@@ -234,30 +234,33 @@ NwAnm* GmkSimpleMdl::CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlN
     return nullptr;
 }
 
+// https://decomp.me/scratch/J9kFg
 void GmkSimpleMdl::SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim) {
     char shadowName[0x100];
     snprintf(shadowName, sizeof(shadowName), "%s_shadow", name);
-    nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(name);
+    nw4r::g3d::ResMdl resMdl(resFile.GetResMdl(shadowName));
 
-    if (0 != *reinterpret_cast<u32*>(&resMdl)) {
-        uint flags = 0;
+    if (!resMdl.IsValid()) {
+        return;
+    }
 
-        if (createAnim) {
-            mShadowAnim.Create(gfl::HeapID::Work);
-        }
+    uint flags = 0;
+
+    if (createAnim) {
+        mShadowAnim.Create(CreateAnim(resFile, shadowName, shadowName));
 
         if (mShadowAnim.IsValid()) {
             flags = mShadowAnim->GetFlags();
         }
-
-        mShadowModelWrapper.Create(CreateModelWrapper(resFile, name, flags));
-
-
-        if (createAnim && mShadowAnim.IsValid()) {
-            mShadowAnim->SetModelWrapper(mShadowModelWrapper.Get(), true);
-        }
-
-        mShadowModelWrapper->SetActive(true);
-        mShadowModelWrapper->fn_8004DB94(mModelScale);
     }
+
+    mShadowModelWrapper.Create(CreateModelWrapper(resFile, name, flags));
+    
+    if (createAnim && mShadowAnim.IsValid()) {
+        mShadowAnim->SetModelWrapper(mShadowModelWrapper.Get(), true);
+    }
+    
+
+    mShadowModelWrapper->SetActive(true);
+    mShadowModelWrapper->fn_8004DB94(mModelScale);
 }

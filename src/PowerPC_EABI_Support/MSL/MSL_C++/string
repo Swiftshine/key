@@ -233,6 +233,10 @@ namespace std {
 
         int compare(const char* str);
 
+        inline bool operator==(const char* str) {
+            return 0 == compare(str);
+        }
+
         void append(const basic_string &str) {
             random_access_iterator_tag tag; // required to be here to match
 
@@ -492,6 +496,11 @@ namespace std {
     template <class CharT, class Traits, class Allocator>
     basic_istream<CharT, Traits> &
     getline(basic_istream<CharT, Traits> &is, basic_string<CharT, Traits, Allocator> &str);
+
+    template <class CharT, class Traits, class Allocator>
+    static inline bool operator==(const char* cstr, std::basic_string<CharT, Traits, Allocator>& str) {
+        return 0 == str.compare(cstr);
+    }
 }
 
 #endif
