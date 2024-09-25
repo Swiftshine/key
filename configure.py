@@ -425,6 +425,7 @@ config.libs = [
         "host": False,
         "objects": [
             Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
+            Object(NonMatching, "fluff/object/gmk/GmkColAnimMdl.cpp"),
             Object(NonMatching, "fluff/object/gmk/GmkCamRectCtrl.cpp"),
         ],
     },

@@ -26,7 +26,7 @@ public:
     void SetFullSortSceneModelWrapper(class FullSortScene* scene, uint arg2);
     void SetStageFullSortSceneModelWrapper(uint arg1);
     uint fn_800EA1F4();
-    NwAnm* GetAnimationByIndex(uint index) DONT_INLINE;
+    NwAnm* GetAnimationByIndex(uint index) DONT_INLINE_CLASS;
     void SetCurrentAnimationIndex(uint index);
     f32 GetEndFrame();
     f32 GetCurrentFrame();
@@ -43,6 +43,14 @@ public:
 
     inline void SomeInline(NwAnm** a) {
         delete[] *a;
+    }
+
+    inline uint GetCurrentAnimationIndex() {
+        return mCurrentAnimIndex;
+    }
+
+    inline gfl::ScnMdlWrapper* GetScnMdlWrapper() {
+        return mpModelWrapper.Get();
     }
 
 public:

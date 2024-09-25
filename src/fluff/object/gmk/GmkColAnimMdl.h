@@ -7,26 +7,32 @@
 #include "graphics/NwAnmCtrl.h"
 #include "gfl/gflVec3.h"
 #include "object/gmk/GmkSimpleMdlRotZ.h"
-
-class GmkColAnimCtrl;
+#include "object/gmk/GmkColAnimCtrl.h"
 
 // size: 0x150
 class GmkColAnimMdl : public Gimmick {
 public:
     static GmkColAnimMdl* Build(GimmickBuildInfo* buildInfo);
 
-
-    GmkColAnimMdl(GimmickBuildInfo*);
+    GmkColAnimMdl(GimmickBuildInfo*) DONT_INLINE_CLASS;
     virtual ~GmkColAnimMdl();
+
+    void SetAnimationIndex(uint index);
+    bool HasAnimation(uint index);
+    uint GetCurrentAnimationIndex();
+    bool CheckAnimationProgress();
+    bool IsAnimationDone();
+    void SetUpdate(bool state);
+    bool fn_800D60FC();
+
 private:
     gfl::ResFileInfoPointer mResFileInfo;
-    NwAnmCtrl* mAnimCtrl;
-    NwAnmCtrl* mShadowAnimCtrl;
-    GmkColAnimCtrl* mColAnimCtrlGmk;
-    GmkSimpleMdlRotZ* mZRotationGmk;
+    gfl::ScopedPointer<NwAnmCtrl> mAnimCtrl;
+    gfl::ScopedPointer<NwAnmCtrl> mShadowAnimCtrl;
+    gfl::ScopedPointer<GmkColAnimCtrl> mColAnimCtrlGmk;
+    gfl::ScopedPointer<GmkSimpleMdlRotZ> mZRotationGmk;
     gfl::Vec3 mModelScale;
 };
 
-// ASSERT_SIZE(GmkColAnimCtrl, 0x150);
 
 #endif

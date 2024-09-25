@@ -2,6 +2,7 @@
 #define FLUFF_NWANM_H
 
 #include "types.h"
+#include <nw4r/g3d.h>
 
 namespace gfl { class ScnMdlWrapper; }
 namespace nw4r { namespace g3d { class AnmObj; class ResMdl; } }
