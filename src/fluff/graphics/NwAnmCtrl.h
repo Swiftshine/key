@@ -19,7 +19,7 @@ class ResArchivedFileInfo;
 
 class NwAnmCtrl {
 public:
-    NwAnmCtrl(uint animCount, gfl::ScopedPointer<gfl::ResArchivedFileInfo>& fileInfo, const char* animName);
+    NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName);
     virtual ~NwAnmCtrl();
     void PlayAnimationByNameAndIndex(uint animIndex, const char* animName);
     class gfl::ScnMdlWrapper* SetupModelWrapper(uint arg1);
@@ -50,15 +50,15 @@ public:
     }
 
     inline gfl::ScnMdlWrapper* GetScnMdlWrapper() {
-        return mpModelWrapper.Get();
+        return mModelWrapper.Get();
     }
 
 public:
-    gfl::ScopedPointer<gfl::ResArchivedFileInfo> mpFileInfo;
-    gfl::ScopedPointer<gfl::ScnMdlWrapper> mpModelWrapper;
+    gfl::ResFileInfoPointer mFileInfo;
+    gfl::ScopedPointer<gfl::ScnMdlWrapper> mModelWrapper;
     std::string mAnimName;
     uint mCurrentAnimIndex;
-    gfl::Array<NwAnm> mpAnimations;
+    gfl::Array<NwAnm> mAnimations;
     uint mNumAnims;
 };
 

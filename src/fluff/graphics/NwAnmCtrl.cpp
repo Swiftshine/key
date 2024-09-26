@@ -1,20 +1,20 @@
 #include "graphics/NwAnmCtrl.h"
 
-NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ScopedPointer<gfl::ResArchivedFileInfo>& fileInfo, const char* animName) {
-    mpFileInfo = fileInfo.Get();
+NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName) {
+    mFileInfo = fileInfo.Get();
 
-    if (mpFileInfo.Get()) {
-        mpFileInfo->IncrementLevel();
+    if (mFileInfo.Get()) {
+        mFileInfo->IncrementLevel();
     }
     
     // mpModelWrapper = nullptr
-    mpModelWrapper.Reset();
+    mModelWrapper.Reset();
     mAnimName = animName;
     mCurrentAnimIndex = 0;
-    mpAnimations = nullptr;
+    mAnimations = nullptr;
     mNumAnims = animCount;
 
-    mpAnimations.Create(animCount);
+    mAnimations.Create(animCount);
 
 }
 
@@ -50,11 +50,11 @@ uint NwAnmCtrl::fn_800EA1F4() {
 }
 
 NwAnm* NwAnmCtrl::GetAnimationByIndex(uint index) {
-    return &mpAnimations[index];
+    return &mAnimations[index];
 }
 
 void NwAnmCtrl::SetCurrentAnimationIndex(uint index) {
-    GetAnimationByIndex(index)->SetModelWrapper(mpModelWrapper.Get(), true);
+    GetAnimationByIndex(index)->SetModelWrapper(mModelWrapper.Get(), true);
     mCurrentAnimIndex = index;
 }
 
@@ -93,5 +93,5 @@ bool NwAnmCtrl::HasAnim(uint index) {
 extern "C" gfl::Vec3& fn_8001DCB0(NwAnm*, gfl::ScnMdlWrapper*, class nw4r::g3d::ResMdl*);
 
 gfl::Vec3 & NwAnmCtrl::fn_800EA480(class nw4r::g3d::ResMdl* resmdl) {
-    return fn_8001DCB0(GetCurrentAnimation(), mpModelWrapper.Get(), resmdl);
+    return fn_8001DCB0(GetCurrentAnimation(), mModelWrapper.Get(), resmdl);
 }
