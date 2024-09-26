@@ -39,25 +39,24 @@ BgBackImage::BgBackImage()
 
     MTX34 matrix;
 
-    float zero = 0.0f;
-
-    matrix[0][0] = zero;
-    matrix[0][1] = zero;
-    matrix[0][2] = zero;
-    matrix[0][3] = zero;
-    matrix[1][0] = zero;
-    matrix[1][1] = zero;
-    matrix[1][2] = zero;
-    matrix[1][3] = zero;
-    matrix[2][0] = zero;
-    matrix[2][1] = zero;
-    matrix[2][2] = zero;
-    matrix[2][3] = zero;
+    matrix[0][0] = 0.0f;
+    matrix[0][1] = 0.0f;
+    matrix[0][2] = 0.0f;
+    matrix[0][3] = 0.0f;
+    matrix[1][0] = 0.0f;
+    matrix[1][1] = 0.0f;
+    matrix[1][2] = 0.0f;
+    matrix[1][3] = 0.0f;
+    matrix[2][0] = 0.0f;
+    matrix[2][1] = 0.0f;
+    matrix[2][2] = 0.0f;
+    matrix[2][3] = 0.0f;
 
     PSMTXIdentity(matrix);
 
     float zOrder = FullSortSceneUtil::GetZOrder(0, 1);
-    gfl::Vec3 vec(0.0f, 0.0f, (zOrder - 105.0f) - 100.0f);
+    gfl::Vec3 vec(0.0f);
+    vec.z = (zOrder - 105.0f) - 100.0f;
     matrix[0][3] = vec.x;
     matrix[1][3] = vec.y;
     matrix[2][3] = vec.z;
