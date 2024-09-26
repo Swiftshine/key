@@ -193,7 +193,7 @@ namespace gfl {
         { }
 
         inline ~ResFileInfoPointer() {
-            if (mPointer) {
+            if (IsValid()) {
                 mPointer->Destroy();
             }
         }

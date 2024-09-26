@@ -37,6 +37,10 @@ namespace GimmickUtil {
     bool fn_800507A8(int id) DONT_INLINE_CLASS;
     bool fn_800507C8(int id) DONT_INLINE_CLASS;
     void GetButtonBRRES(gfl::ResInfo** dest) DONT_INLINE_CLASS;
+
+    // not in this TU, likely doesnt belong to this namespace
+
+    void AddGimmickName(Gimmick::GimmickBuildInfo*) DONT_INLINE_CLASS;
 }
 
 // i dont know how many entries there are yet

@@ -17,6 +17,8 @@ public:
         return sInstance;
     }
 
+    void AddGimmickName(const char*);
+
 private:
     gfl::LinkedList<std::string*> mGimmickResourceNameList;
     gfl::LinkedList<std::string*> mGimmickNameList;

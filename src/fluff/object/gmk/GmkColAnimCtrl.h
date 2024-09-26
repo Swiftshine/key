@@ -4,6 +4,7 @@
 #include "types.h"
 #include <string>
 #include "object/collision/ColObj.h"
+#include "object/gmk/GmkAnimChg.h"
 
 class GmkColAnimCtrl {
 public:
@@ -12,6 +13,8 @@ public:
     virtual bool vfC(FlfGameObj*, uint);
     virtual bool vf10(FlfGameObj*, uint);
     void SetState(uint, std::string&);
+
+    void Update();
 private:
     void* m_4;
     void* m_8;

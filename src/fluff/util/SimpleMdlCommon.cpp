@@ -1,5 +1,7 @@
 #include "util/SimpleMdlCommon.h"
 #include "gfl/gflMemoryUtil.h"
+#include "util/GimmickUtil.h"
+#include "stage/StageResources.h"
 #include <rand.h>
 
 const char NurbsPrefix[] = "N_";
@@ -17,29 +19,20 @@ Gimmick* SimpleMdlCommon::Build(Gimmick::GimmickBuildInfo* buildInfo) {
     return new (gfl::HeapID::Work) GmkColAnimMdl(buildInfo);
 }
 
-extern "C" void fn_800D5960(Gimmick::GimmickBuildInfo*);
-extern "C" void fn_80052060(void*, const char*);
-
-void SimpleMdlCommon::fn_80052C8C(Gimmick::GimmickBuildInfo* buildInfo) {
-    void* list = StageResources::Instance();
-
+void SimpleMdlCommon::AddGimmickName(Gimmick::GimmickBuildInfo* buildInfo) {
+    StageResources* resources = StageResources::Instance();
+    
     std::string prefix(buildInfo->GetStringParam(Parameter::Name), 0, 2);
 
-    bool cmp = prefix.compare(NurbsPrefix) == 0;
-
-    if (cmp) {
-        // GimmickUtil::AddToNameList(buildInfo);
-        fn_800D5960(buildInfo);
+    if (NurbsPrefix == prefix) {
+        GimmickUtil::AddGimmickName(buildInfo);
         return;
     } else if (buildInfo->GetIntParam(Parameter::UnkInt1) < 10) {
-        // GimmickUtil::AddToNameList(buildInfo->GetStringParam(Parameter::Name).begin());
-        fn_80052060(list, buildInfo->GetStringParam(Parameter::Name).c_str());
+        resources->AddGimmickName(buildInfo->GetStringParam(Parameter::Name).c_str());
     } else {
-        fn_800D5960(buildInfo);
+        GimmickUtil::AddGimmickName(buildInfo);
         return;
     }
-
-    // GimmickUtil::AddToNameList(buildInfo)
 }
 
 float SimpleMdlCommon::GetInitialAnimFrame(int frameIndex) {

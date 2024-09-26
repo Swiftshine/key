@@ -8,9 +8,10 @@
 #include "gfl/gflVec3.h"
 #include "object/gmk/GmkSimpleMdlRotZ.h"
 #include "object/gmk/GmkColAnimCtrl.h"
+#include "object/gmk/GmkAnimChg.h"
 
 // size: 0x150
-class GmkColAnimMdl : public Gimmick {
+class GmkColAnimMdl : public Gimmick, public GmkAnimChg {
 public:
     static GmkColAnimMdl* Build(GimmickBuildInfo* buildInfo);
 
@@ -20,11 +21,13 @@ public:
     /* FlfGameObj */
 
     virtual void SetState(uint arg1, std::string& stateStr) override;
-
+    virtual void vf64(bool) override;
     /* Gimmick */
 
     virtual bool vf88(FlfGameObj*, uint) override;
     virtual bool vfA4(FlfGameObj*, uint) override;
+    virtual void Update() override;
+
     /* GmkColAnimMdl */
     
     virtual void SetAnimationIndex(uint index);
@@ -33,6 +36,9 @@ public:
     virtual bool CheckAnimationProgress();
     virtual bool IsAnimationDone();
     virtual void SetUpdate(bool state);
+
+
+    void UpdateModel();
 
 private:
     gfl::ResFileInfoPointer mResFileInfo;

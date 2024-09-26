@@ -14,7 +14,7 @@ namespace SimpleMdlCommon {
         UnkInt1 = 1, // int 1
     );
     Gimmick* Build(Gimmick::GimmickBuildInfo* info);
-    void fn_80052C8C(Gimmick::GimmickBuildInfo* info);
+    void AddGimmickName(Gimmick::GimmickBuildInfo* info);
     float GetInitialAnimFrame(int frameIndex);
 }
 

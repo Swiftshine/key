@@ -140,8 +140,7 @@ void GmkSimpleMdl::SetModel(const char* brresPath, const char* modelName, bool p
 }
 
 void GmkSimpleMdl::UpdateModel() {
-
-    UpdateMatrix();
+    FlfGameObj::UpdateMatrix();
     mModelWrapper->SetMatrix(&mMatrix);
 
     if (!mShadowModelWrapper.IsValid()) {
