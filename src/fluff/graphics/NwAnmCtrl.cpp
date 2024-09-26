@@ -1,33 +1,22 @@
 #include "graphics/NwAnmCtrl.h"
 
-NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName) {
-    mFileInfo = fileInfo.Get();
-
-    if (mFileInfo.Get()) {
+NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName)
+    : mFileInfo(fileInfo)
+{
+    if (mFileInfo.IsValid()) {
         mFileInfo->IncrementLevel();
     }
-    
-    // mpModelWrapper = nullptr
-    mModelWrapper.Reset();
+
+    mModelWrapper = nullptr;
     mAnimName = animName;
     mCurrentAnimIndex = 0;
     mAnimations = nullptr;
     mNumAnims = animCount;
 
     mAnimations.Create(animCount);
-
 }
 
-NwAnmCtrl::~NwAnmCtrl() {
-    // mpAnimations.Destroy();
-
-    // if (mpModelWrapper) {
-    //     delete mpModelWrapper;
-    // }
-    // mpModelWrapper = nullptr;
-    
-    // delete mpFileInfo;
-}
+NwAnmCtrl::~NwAnmCtrl() { }
 
 void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* animName) {
     

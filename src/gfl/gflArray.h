@@ -16,7 +16,7 @@ namespace gfl {
         }
 
         inline void Create(size_t len) {
-            T* temp = new (gfl::mem::HeapID::Work) T[len];
+            T* temp = new (gfl::HeapID::Work) T[len];
 
             if (!temp) {
                 Destroy();

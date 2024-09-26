@@ -148,7 +148,7 @@ namespace std {
         }
 
     public:
-        basic_string() DONT_INLINE_CLASS { zero(); }
+        basic_string() { }
         basic_string(const Allocator &alloc) : m(alloc) { zero(); }
 
         basic_string(const basic_string &other) DONT_INLINE_CLASS : m(other.m.second()) {

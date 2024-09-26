@@ -388,7 +388,6 @@ config.libs = [
         "cflags": cflags_fluff,
         "host": False,
         "objects": [
-            # fluff/graphics/
 
             # fluff/object/
 
@@ -415,6 +414,7 @@ config.libs = [
         "cflags": [*cflags_fluff_base_no_inline_deferred],
         "host": False,
         "objects": [
+            Object(NonMatching, "fluff/graphics/NwAnmCtrl.cpp"),
             Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
         ],
     },

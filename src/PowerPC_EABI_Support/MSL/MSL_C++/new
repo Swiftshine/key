@@ -24,8 +24,10 @@ namespace std {
 
 void *operator new(std::size_t size);
 void *operator new[](std::size_t size);
-void operator delete(void *ptr) throw();
-void operator delete[](void *ptr) throw();
+// void operator delete(void *ptr) throw();
+void operator delete(void *ptr);
+// void operator delete[](void *ptr) throw();
+void operator delete[](void *ptr);
 
 // Placement new/delete
 inline void *operator new(std::size_t size, void *place) throw() {

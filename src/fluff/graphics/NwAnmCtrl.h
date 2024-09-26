@@ -10,7 +10,7 @@
 #include "gfl/gflVec3.h"
 #include "gfl/gflResFileInfo.h"
 #include "gfl/gflResArchivedFileInfo.h"
-
+#include "gfl/gflMemoryManagement.h"
 #include <string>
 #include <memory>
 
