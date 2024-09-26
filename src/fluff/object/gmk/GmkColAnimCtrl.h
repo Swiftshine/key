@@ -8,17 +8,18 @@
 
 class GmkColAnimCtrl {
 public:
-    GmkColAnimCtrl();
+    GmkColAnimCtrl(Gimmick* owner, int arg2, Gimmick::GimmickBuildInfo* buildInfo);
     virtual ~GmkColAnimCtrl();
     virtual bool vfC(FlfGameObj*, uint);
     virtual bool vf10(FlfGameObj*, uint);
     void SetState(uint, std::string&);
 
     void Update();
+    void fn_800D5130(void*);
 private:
-    void* m_4;
+    int m_4;
     void* m_8;
-    void* m_C;
+    Gimmick::GimmickBuildInfo* mBuildInfo;
     ColObjTrans mColObj;
     bool m_34;
     bool m_35;

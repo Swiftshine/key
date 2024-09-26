@@ -55,14 +55,33 @@ public:
             m_1C = other.m_1C;
         }
 
-        inline int GetGimmickID() { return mGimmickID; }
+        inline int GetGimmickID() {
+            return mGimmickID;
+        }
 
-        inline bool IsCommon() { return mExtension->first; }
-        inline Gimmick* GetOwner() { return mExtension->second; }
-        inline int GetIntParam(int index) { return mIntParams[index]; }
-        inline float GetFloatParam(int index) { return mFloatParams[index]; }
-        inline std::string& GetStringParam(int index) { return mStringParams[index]; }
-        
+        inline bool IsCommon() {
+            return mExtension->first;
+        }
+
+        inline Gimmick* GetOwner() {
+            return mExtension->second;
+        }
+
+        inline int GetIntParam(int index) {
+            return mIntParams[index];
+        }
+
+        inline float GetFloatParam(int index) {
+            return mFloatParams[index];
+        }
+
+        inline std::string& GetStringParam(int index) {
+            return mStringParams[index];
+        }
+
+        inline bool GetBoolParam(int index) {
+            return static_cast<bool>(mIntParams[index]);
+        }
     public:
         int mGimmickID;
         gfl::Vec3 mPosition;

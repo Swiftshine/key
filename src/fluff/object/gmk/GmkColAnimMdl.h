@@ -10,8 +10,18 @@
 #include "object/gmk/GmkColAnimCtrl.h"
 #include "object/gmk/GmkAnimChg.h"
 
+#define GMKCOLANIMMDL_ANIM_COUNT 4
+
 // size: 0x150
 class GmkColAnimMdl : public Gimmick, public GmkAnimChg {
+private:
+    ENUM_CLASS(Parameter,
+        SortSceneIndex = 0, // int 0
+        ZRotation = 0,      // float 0
+        AnimationName = 0,  // string 0
+
+        InitialFrameIndex = 2, // int 2
+    );
 public:
     static GmkColAnimMdl* Build(GimmickBuildInfo* buildInfo);
 
