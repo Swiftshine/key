@@ -63,9 +63,9 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
         SetModelWrapperByFullSortSceneIndex(sortSceneIndex);
 
         // GmkSimpleMdl uses an auxiliary gimmick for Z rotation if it's needed
-        if (0.0f != mBuildInfo.GetFloatParam(Parameter::Z_Rotation)) {
+        if (0.0f != mBuildInfo.GetFloatParam(Parameter::ZRotation)) {
             mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mModelWrapper->GetScnMdl()));
-            mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::Z_Rotation));
+            mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::ZRotation));
         }
 
 

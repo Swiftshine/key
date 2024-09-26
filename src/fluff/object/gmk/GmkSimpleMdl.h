@@ -19,7 +19,7 @@ public:
 
     ENUM_CLASS(Parameter,
         SortSceneIndex = 0, // int 0
-        Z_Rotation = 0,     // float 0
+        ZRotation = 0,     // float 0
         ResourceName = 0,   // string 0
 
         PlayAnim = 1,       // int 1
