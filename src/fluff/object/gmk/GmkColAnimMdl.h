@@ -17,13 +17,22 @@ public:
     GmkColAnimMdl(GimmickBuildInfo*) DONT_INLINE_CLASS;
     virtual ~GmkColAnimMdl();
 
-    void SetAnimationIndex(uint index);
-    bool HasAnimation(uint index);
-    uint GetCurrentAnimationIndex();
-    bool CheckAnimationProgress();
-    bool IsAnimationDone();
-    void SetUpdate(bool state);
-    bool fn_800D60FC();
+    /* FlfGameObj */
+
+    virtual void SetState(uint arg1, std::string& stateStr) override;
+
+    /* Gimmick */
+
+    virtual bool vf88(FlfGameObj*, uint) override;
+    virtual bool vfA4(FlfGameObj*, uint) override;
+    /* GmkColAnimMdl */
+    
+    virtual void SetAnimationIndex(uint index);
+    virtual bool HasAnimation(uint index);
+    virtual uint GetCurrentAnimationIndex();
+    virtual bool CheckAnimationProgress();
+    virtual bool IsAnimationDone();
+    virtual void SetUpdate(bool state);
 
 private:
     gfl::ResFileInfoPointer mResFileInfo;

@@ -9,8 +9,8 @@ class GmkColAnimCtrl {
 public:
     GmkColAnimCtrl();
     virtual ~GmkColAnimCtrl();
-    virtual bool vfC(float, float);
-    virtual bool vf10(float, float);
+    virtual bool vfC(FlfGameObj*, uint);
+    virtual bool vf10(FlfGameObj*, uint);
     void SetState(uint, std::string&);
 private:
     void* m_4;

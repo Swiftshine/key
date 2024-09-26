@@ -107,7 +107,8 @@ void GmkTurtle::Update() {
     }
 }
 
-int GmkTurtle::OnPlayerCollision(PlayerBase* player) {
+bool GmkTurtle::vf88(FlfGameObj* player, uint arg2) {
+    // player = (PlayerBase*)player;
     /*
     
     if (player->mCurrentState == PlayerBase::State::Weight) {

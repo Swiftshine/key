@@ -122,7 +122,7 @@ public:
     virtual int     vf7C();
     virtual int     vf80();
     virtual int     vf84();
-    virtual int     OnPlayerCollision(class PlayerBase* player);
+    virtual bool    vf88(FlfGameObj*, uint arg2);     
     virtual int     vf8C();
     virtual int     vf90();
     virtual int     vf94();

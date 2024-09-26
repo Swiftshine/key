@@ -30,13 +30,17 @@ public:
     GmkTurtle(GimmickBuildInfo* buildInfo);
     virtual ~GmkTurtle();
 
+    /* FlfGameObj */
+
     void vf24() override;
-    int vfA4() override;
 
-    int OnPlayerCollision(PlayerBase* player) override;
+    /* Gimmick */
+    virtual int vfA4() override;
+    virtual bool vf88(FlfGameObj* player, uint arg2) override;
+    virtual void Update() override;
 
-    void Update() override;
-
+    /* GmkTurtle */
+    
     void fn_804FB1D4();
 
     void Turn(int turnDir);

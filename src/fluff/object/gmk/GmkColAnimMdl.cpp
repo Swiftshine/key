@@ -53,6 +53,10 @@ void GmkColAnimMdl::SetUpdate(bool state) {
     }
 }
 
-bool GmkColAnimMdl::fn_800D60FC() {
-    // return mColAnimCtrlGmk->vfC();
+bool GmkColAnimMdl::vf88(FlfGameObj* arg1, uint arg2) {
+    return mColAnimCtrlGmk->vfC(arg1, arg2);
+}
+
+bool GmkColAnimMdl::vfA4(FlfGameObj* arg1, uint arg2) {
+    return mColAnimCtrlGmk->vf10(arg1, arg2);
 }
