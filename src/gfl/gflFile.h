@@ -14,6 +14,7 @@ namespace gfl {
     public:
         File();
 
+        static gfl::File* Open(const char*, int);
         static bool Open(const char*);
 
         virtual void Close();
@@ -21,7 +22,7 @@ namespace gfl {
         virtual void ReadAsync(void* addr, uint len, uint offs, uint callback);
         virtual void vf14();
         virtual void vf18();
-        virtual void vf1C();
+        virtual int GetFileStatus();
         virtual void vf20();
         virtual void Reset();
         virtual ~File();

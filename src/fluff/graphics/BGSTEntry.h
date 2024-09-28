@@ -8,8 +8,12 @@
 class BgImage2;
 
 namespace BGST {
+    class File;
+
     class Entry {
+    
     private:
+    friend class File;
         bool m_0;
         u32 m_4;
         u32 m_8;

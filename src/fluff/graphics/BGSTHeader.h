@@ -2,9 +2,13 @@
 #define FLUFF_BGSTHEADER_H
 
 #include "types.h"
+#include "gfl/gflMemoryManagement.h"
 
 namespace BGST {
     struct Header {
+        inline void operatordelete() {
+            gfl::Free(this);
+        }
         char mMagic; // "BGST"
         uint m_4;
         uint mImageWidth; // pixels

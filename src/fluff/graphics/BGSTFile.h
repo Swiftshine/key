@@ -3,7 +3,10 @@
 
 #include "graphics/BGSTHeader.h"
 #include "graphics/BGSTEntry.h"
+#include "graphics/BGSTLoadState.h"
+#include "graphics/BGSTImage.h"
 #include "gfl/gflFile.h"
+#include "gfl/gflScopedPointer.h"
 
 namespace BGST {
     class File {
@@ -14,12 +17,14 @@ namespace BGST {
         bool IsColumnValid(int index);
 
         // what exactly is being returned here has not been determined yet
-        void* GetByGrid(int sceneID, int xGridIndex, int yGridIndex);
+        void* GetByGrid(int sceneID, int xGridIndex, int yGridIndex) DONT_INLINE_CLASS;
 
         BGST::Entry* GetColumnByIndex(int index);
 
         // the kind of data being returned has not been determined yet
         void* GetByIndex(int index);
+
+        void* fn_80165B3C(int index);
 
         // returns if SetHeader() was successful, and updates loading state
         bool TrySetHeader(const char* path);
@@ -31,15 +36,20 @@ namespace BGST {
 
 
     private:
+
         // returns if file reading and header setting was sucessful
         bool SetHeader(const char* path);
 
-        void ReadImage();
-        void LoadGrid();
+        void ReadImage() DONT_INLINE_CLASS;
+        void SetupImage() DONT_INLINE_CLASS;
+        void LoadGrid() DONT_INLINE_CLASS;
     private:
         int mLoadState;
-        BGST::Header* mHeader;
-        void* mOutputImage;
+        gfl::FreedScopedPointer<BGST::Header> mHeader;
+
+        // i can't use void* with this structure and it's usually a fixed size anyways
+        
+        gfl::FreedScopedPointer<BGST::Image> mOutputImage;
         size_t mImageFilesize;
         int mGridCount;
         BGST::Entry* mColumns[12]; // ?

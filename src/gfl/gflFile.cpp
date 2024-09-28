@@ -38,7 +38,7 @@ void gfl::File::ReadAsync(void* addr, uint len, uint fileOffs, uint callback) {
 
 void gfl::File::vf14() { }
 void gfl::File::vf18() { }
-void gfl::File::vf1C() { }
+int gfl::File::GetFileStatus() { }
 void gfl::File::vf20() { }
 
 gfl::File::~File() {
