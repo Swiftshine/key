@@ -416,6 +416,7 @@ config.libs = [
         "objects": [
             Object(NonMatching, "fluff/graphics/NwAnmCtrl.cpp"),
             Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
+            Object(NonMatching, "fluff/graphics/BGSTFile.cpp"),
         ],
     },
     {

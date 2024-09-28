@@ -43,7 +43,7 @@ private:
     uint m_38;
     uint m_3C;
     uint m_40;
-    BGSTFile* mBGSTFile;
+    BGST::File* mBGSTFile;
     void* mBGSTEntries;
     BgBackImage* mBgBackImage;
 };
