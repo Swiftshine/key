@@ -128,7 +128,6 @@ void BGST::File::ReadImage() {
 
 extern "C" int sixteen;
 
-// https://decomp.me/scratch/ZvyCc - regswap
 void BGST::File::SetupImage() {
     if (sixteen == mHeader->m_4) {
         mHeader->mYOffset = 1.0f;
@@ -139,18 +138,22 @@ void BGST::File::SetupImage() {
     int gridCount = 0;
 
     for (int i = 0; i < 12; i++) {
-        if (header->CheckColumns(i)) {
+        if (header->mColumnEnabled[i]) {
             gridCount++;
         }
     }
 
     mGridCount = gridCount;
 
-    if (0 != gridCount) {
-        size_t size = ROUND_UP(mHeader->mGridHeight * mHeader->mGridWidth * 0x10 * gridCount, 32);
-        mImageFilesize = size;
-        mOutputImage.Create((BGST::Image*)gfl::Alloc(gfl::Heap0, size, 0x20));
+    if (0 == gridCount) {
+        return;
     }
+
+    uint gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
+    uint biggerArea = gridArea *0x10 ;
+    uint temp3 = biggerArea * mGridCount;
+    mImageFilesize = ROUND_UP(temp3  , 0x20);
+    mOutputImage.Create((BGST::Image*)gfl::Alloc(gfl::Heap0, mImageFilesize, 0x20));
 }
 
 // https://decomp.me/scratch/hPAnH
