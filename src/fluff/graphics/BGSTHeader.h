@@ -9,6 +9,11 @@ namespace BGST {
         inline void operatordelete() {
             gfl::Free(this);
         }
+
+        inline bool CheckColumns(int index) {
+            return mColumnEnabled[index];
+        }
+
         char mMagic; // "BGST"
         uint m_4;
         uint mImageWidth; // pixels
@@ -16,18 +21,7 @@ namespace BGST {
         uint mGridWidth;
         uint mGridHeight;
         u32 mSomeOffset1;
-        bool mGrid1Enabled;
-        bool mGrid2Enabled;
-        bool mGrid3Enabled;
-        bool mGrid4Enabled;
-        bool mGrid5Enabled;
-        bool mGrid6Enabled;
-        bool mGrid7Enabled;
-        bool mGrid8Enabled;
-        bool mGrid9Enabled;
-        bool mGrid10Enabled;
-        bool mGrid11Enabled;
-        bool mGrid12Enabled;
+        bool mColumnEnabled[12];
         u32 mImageDataOffset;
         u32 mSomeOffset3;
         float mYOffset;

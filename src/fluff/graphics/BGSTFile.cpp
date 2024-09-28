@@ -126,12 +126,49 @@ void BGST::File::ReadImage() {
     mFile->ReadAsync(mOutputImage.Get(), mImageFilesize, mHeader->mImageDataOffset, 2);
 }
 
-// not started
-void BGST::File::SetupImage() {
+extern "C" int sixteen;
 
+// https://decomp.me/scratch/ZvyCc - regswap
+void BGST::File::SetupImage() {
+    if (sixteen == mHeader->m_4) {
+        mHeader->mYOffset = 1.0f;
+    }
+
+    BGST::Header* header = mHeader.Get();
+
+    int gridCount = 0;
+
+    for (int i = 0; i < 12; i++) {
+        if (header->CheckColumns(i)) {
+            gridCount++;
+        }
+    }
+
+    mGridCount = gridCount;
+
+    if (0 != gridCount) {
+        size_t size = ROUND_UP(mHeader->mGridHeight * mHeader->mGridWidth * 0x10 * gridCount, 32);
+        mImageFilesize = size;
+        mOutputImage.Create((BGST::Image*)gfl::Alloc(gfl::Heap0, size, 0x20));
+    }
 }
 
-// not started
+// https://decomp.me/scratch/hPAnH
 void BGST::File::LoadGrid() {
+    if (0 == mGridCount) {
+        return;
+    }
 
+    const uint gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
+    uint totalGridArea = 0;
+
+    for (int i = 0; i < 12; i++) {
+        if (mHeader->CheckColumns(i)) {
+            int area = 0x10 * totalGridArea;
+            totalGridArea += gridArea;
+            mColumns[i] = (BGST::Entry*)(mOutputImage.Get() + area);
+        } else {
+            mColumns[i] = nullptr;
+        }
+    }
 }
