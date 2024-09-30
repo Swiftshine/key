@@ -24,10 +24,8 @@ bool BGST::File::IsColumnValid(int index) {
     return nullptr != mColumns[index];
 }
 
-// https://decomp.me/scratch/j8Bva
 void* BGST::File::GetByGrid(int sceneID, int xGridIndex, int yGridIndex) {
-    // int offset = (xGridIndex * 0x10) + (yGridIndex * 0x10 * mHeader->mGridWidth);
-    // return &mColumns[sceneID]->m_0 + offset;
+    return this->mColumns[sceneID] + xGridIndex + yGridIndex * this->mHeader->mGridWidth;
 }
 
 BGST::Column* BGST::File::GetColumnByIndex(int index) {
