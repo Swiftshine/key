@@ -124,10 +124,10 @@ void BGST::File::ReadImage() {
     mFile->ReadAsync(mOutputImage.Get(), mImageFilesize, mHeader->mImageDataOffset, 2);
 }
 
-extern "C" int sixteen;
+extern "C" int lbl_808E0368;
 
 void BGST::File::SetupImage() {
-    if (sixteen == mHeader->m_4) {
+    if (lbl_808E0368 == mHeader->m_4) {
         mHeader->mYOffset = 1.0f;
     }
 
@@ -154,7 +154,6 @@ void BGST::File::SetupImage() {
     mOutputImage.Create((BGST::Image*)gfl::Alloc(gfl::Heap0, mImageFilesize, 0x20));
 }
 
-// https://decomp.me/scratch/tard5 - regswap
 void BGST::File::LoadGrid() {
     if (0 == mGridCount) {
         return;
@@ -163,7 +162,7 @@ void BGST::File::LoadGrid() {
     uint gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
     uint totalGridArea = 0;
 
-    for (int i = 0; i < 12; i++) {
+    for (size_t i = 0; i < 12; i++) {
         if (mHeader->mColumnEnabled[i]) {
             mColumns[i] = &((BGST::Column*)(mOutputImage.Get()))[gridArea * totalGridArea];
             totalGridArea++;
