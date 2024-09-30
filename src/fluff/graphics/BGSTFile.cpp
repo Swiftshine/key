@@ -26,11 +26,11 @@ bool BGST::File::IsColumnValid(int index) {
 
 // https://decomp.me/scratch/j8Bva
 void* BGST::File::GetByGrid(int sceneID, int xGridIndex, int yGridIndex) {
-    int offset = (xGridIndex * 0x10) + (yGridIndex * 0x10 * mHeader->mGridWidth);
-    return &mColumns[sceneID]->m_0 + offset;
+    // int offset = (xGridIndex * 0x10) + (yGridIndex * 0x10 * mHeader->mGridWidth);
+    // return &mColumns[sceneID]->m_0 + offset;
 }
 
-BGST::Entry* BGST::File::GetColumnByIndex(int index) {
+BGST::Column* BGST::File::GetColumnByIndex(int index) {
     return mColumns[index];
 }
 
@@ -156,20 +156,19 @@ void BGST::File::SetupImage() {
     mOutputImage.Create((BGST::Image*)gfl::Alloc(gfl::Heap0, mImageFilesize, 0x20));
 }
 
-// https://decomp.me/scratch/hPAnH
+// https://decomp.me/scratch/tard5 - regswap
 void BGST::File::LoadGrid() {
     if (0 == mGridCount) {
         return;
     }
 
-    const uint gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
+    uint gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
     uint totalGridArea = 0;
 
     for (int i = 0; i < 12; i++) {
-        if (mHeader->CheckColumns(i)) {
-            int area = 0x10 * totalGridArea;
-            totalGridArea += gridArea;
-            mColumns[i] = (BGST::Entry*)(mOutputImage.Get() + area);
+        if (mHeader->mColumnEnabled[i]) {
+            mColumns[i] = &((BGST::Column*)(mOutputImage.Get()))[gridArea * totalGridArea];
+            totalGridArea++;
         } else {
             mColumns[i] = nullptr;
         }

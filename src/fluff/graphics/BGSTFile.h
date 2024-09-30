@@ -5,8 +5,11 @@
 #include "graphics/BGSTEntry.h"
 #include "graphics/BGSTLoadState.h"
 #include "graphics/BGSTImage.h"
+#include "graphics/BGSTColumn.h"
 #include "gfl/gflFile.h"
 #include "gfl/gflScopedPointer.h"
+
+// todo - rename these "grid" functions to "column"
 
 namespace BGST {
     class File {
@@ -19,7 +22,7 @@ namespace BGST {
         // what exactly is being returned here has not been determined yet
         void* GetByGrid(int sceneID, int xGridIndex, int yGridIndex) DONT_INLINE_CLASS;
 
-        BGST::Entry* GetColumnByIndex(int index);
+        BGST::Column* GetColumnByIndex(int index);
 
         // the kind of data being returned has not been determined yet
         void* GetByIndex(int index);
@@ -46,13 +49,10 @@ namespace BGST {
     private:
         int mLoadState;
         gfl::FreedScopedPointer<BGST::Header> mHeader;
-
-        // i can't use void* with this structure and it's usually a fixed size anyways
-        
         gfl::FreedScopedPointer<BGST::Image> mOutputImage;
         size_t mImageFilesize;
         int mGridCount;
-        BGST::Entry* mColumns[12]; // ?
+        BGST::Column* mColumns[12];
         gfl::File* mFile;
     };
 
