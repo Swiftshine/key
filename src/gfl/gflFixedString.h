@@ -1,5 +1,5 @@
-#ifndef GFL_FIXEDSTRING__H
-#define GFL_FIXEDSTRING__H
+#ifndef GFL_FIXEDSTRING_H
+#define GFL_FIXEDSTRING_H
 
 #include "types.h"
 
