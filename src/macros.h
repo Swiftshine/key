@@ -46,4 +46,6 @@
 #define TEMPORARY_VIRTUAL() \
     virtual void dummy_temp();
 
+#define STRUCT_FILL(size) u8 unk_contents[size];
+
 #endif
