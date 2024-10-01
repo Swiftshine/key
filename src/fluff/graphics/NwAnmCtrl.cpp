@@ -24,21 +24,49 @@ void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* animName
     anim->Play(mResFileInfo, mResMdlName.c_str(), animName, nullptr);
 }
 
-gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(gfl::ScnMdlWrapper* modelWrapper) {
-    return nullptr;
+gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint flags) {
+    nw4r::g3d::ResFile resFile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
+
+    NW4R_G3D_RESFILE_AC_ASSERT(resFile);
+
+    resFile.Release();
+    resFile.Bind();
+
+    nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(mResMdlName.c_str());
+
+    gfl::ScnMdlWrapper* wrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, CalculateFlags());
+
+    wrapper->SetUpdate(true);
+
+    if (nullptr == wrapper) {
+        gfl::ScnMdlWrapper* ptr = mModelWrapper.Get();
+
+        if (nullptr != ptr) {
+            delete ptr;
+        }
+
+        mModelWrapper = ptr;
+    } else {
+        mModelWrapper = wrapper;
+    }
+
+    if (0 != mNumAnims) {
+        SetCurrentAnimationIndex(0);
+    }
+
+    return wrapper;
 }
 
-void NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* scene, gfl::ScnMdlWrapper* modelWrapper) {
-    SetupModelWrapper(modelWrapper);
-    scene->AddRenderObj(modelWrapper);
+void NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* scene, uint flags) {
+    scene->AddRenderObj(SetupModelWrapper(flags));
 }
 
-void NwAnmCtrl::SetStageFullSortSceneModelWrapper(gfl::ScnMdlWrapper* modelWrapper) {
+void NwAnmCtrl::SetStageFullSortSceneModelWrapper(uint flags) {
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(6);
-    SetFullSortSceneModelWrapper(scene, modelWrapper);
+    SetFullSortSceneModelWrapper(scene, flags);
 }
 
-uint NwAnmCtrl::fn_800EA1F4() {
+uint NwAnmCtrl::CalculateFlags() {
     return 0;
 }
 
@@ -83,8 +111,6 @@ bool NwAnmCtrl::HasAnim(uint index) {
     return index >= mNumAnims ? false : GetAnimationByIndex(index)->HasAnim();
 }
 
-extern "C" gfl::Vec3& fn_8001DCB0(NwAnm*, gfl::ScnMdlWrapper*, class nw4r::g3d::ResMdl*);
-
-gfl::Vec3 & NwAnmCtrl::fn_800EA480(class nw4r::g3d::ResMdl* resmdl) {
-    return fn_8001DCB0(GetCurrentAnimation(), mModelWrapper.Get(), resmdl);
+gfl::Vec3 NwAnmCtrl::GetCurrentAnimationPosition(nw4r::g3d::ResMdl& resmdl) {
+    return GetCurrentAnimation()->GetPosition(mModelWrapper.Get(), resmdl);
 }

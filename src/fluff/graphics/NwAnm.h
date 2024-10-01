@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "gfl/gflResFileInfo.h"
+#include "gfl/gflVec3.h"
 #include <nw4r/g3d.h>
 
 namespace gfl { class ScnMdlWrapper; }
@@ -30,6 +31,7 @@ public:
     bool HasAnim();
     void Play(gfl::ResFileInfoPointer&, const char* resMdlName, const char* animName, void* resName /* ?*/ );
     bool Init(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName, nw4r::g3d::ResName* resName /* ? */);
+    gfl::Vec3 GetPosition(gfl::ScnMdlWrapper*, nw4r::g3d::ResMdl& resMdl);
 
     inline uint GetFlags() {
         return mFlags;

@@ -24,10 +24,10 @@ public:
     NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName);
     virtual ~NwAnmCtrl();
     void PlayAnimationByNameAndIndex(uint animIndex, const char* animName);
-    gfl::ScnMdlWrapper* SetupModelWrapper(gfl::ScnMdlWrapper* modelWrapper) DONT_INLINE_CLASS;
-    void SetFullSortSceneModelWrapper(FullSortScene* scene, gfl::ScnMdlWrapper* modelWrapper) DONT_INLINE_CLASS;
-    void SetStageFullSortSceneModelWrapper(gfl::ScnMdlWrapper* modelWrapper) DONT_INLINE_CLASS;
-    uint fn_800EA1F4();
+    gfl::ScnMdlWrapper* SetupModelWrapper(uint flags) DONT_INLINE_CLASS;
+    void SetFullSortSceneModelWrapper(FullSortScene* scene, uint flags) DONT_INLINE_CLASS;
+    void SetStageFullSortSceneModelWrapper(uint flags) DONT_INLINE_CLASS;
+    uint CalculateFlags();
     NwAnm* GetAnimationByIndex(uint index) DONT_INLINE_CLASS;
     void SetCurrentAnimationIndex(uint index);
     f32 GetEndFrame();
@@ -37,7 +37,7 @@ public:
     f32 GetUpdateRate();
     bool IsAnimationDone();
     bool HasAnim(uint index);
-    gfl::Vec3& fn_800EA480(nw4r::g3d::ResMdl* resmdl);
+    gfl::Vec3 GetCurrentAnimationPosition(nw4r::g3d::ResMdl& resmdl);
 
     inline NwAnm* GetCurrentAnimation() {
         return GetAnimationByIndex(mCurrentAnimIndex);
