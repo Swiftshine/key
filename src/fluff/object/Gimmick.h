@@ -149,8 +149,10 @@ public:
     virtual int     vf9C();
     virtual void    vfA0();
     virtual int     vfA4();
+    virtual void    vfA8();
     virtual gfl::Vec2   vfAC();
     virtual void    vfB0();
+    virtual void    vfB4();
     virtual gfl::Vec2   vfB8();
     virtual void    Update();
     virtual void    vfC0();
