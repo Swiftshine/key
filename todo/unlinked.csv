@@ -5,4 +5,3 @@
 "fluff/object/FlfHandleList.cpp", "100%*", "*weak destructor (branch)",
 "gfl/gflTaskInfo.cpp", "100%*", "*weak destructor (branch)",
 "fluff/util/FullSortSceneUtil.cpp", "100%", "data",
-"fluff/graphics/BGSTFile.cpp","100%","not determined yet",

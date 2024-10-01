@@ -411,12 +411,12 @@ config.libs = [
     {
         "lib": "fluff/graphics/",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_base_no_inline_deferred],
+        "cflags": [*cflags_fluff_base_no_inline_deferred, "-pragma \"merge_float_consts on\""],
         "host": False,
         "objects": [
             Object(NonMatching, "fluff/graphics/NwAnmCtrl.cpp"),
             Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
-            Object(NonMatching, "fluff/graphics/BGSTFile.cpp"),
+            Object(Matching, "fluff/graphics/BGSTFile.cpp"),
         ],
     },
     {

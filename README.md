@@ -1,4 +1,4 @@
-# Kirby's Epic Yarn ![Code Progress Badge](https://img.shields.io/badge/code-0.05%25-blue) ![Data Progress Badge](https://img.shields.io/badge/data-0.01%25-blue) [![Discord Badge]][discord]
+# Kirby's Epic Yarn ![Code Progress Badge](https://img.shields.io/badge/code-0.07%25-blue) ![Data Progress Badge](https://img.shields.io/badge/data-0.01%25-blue) [![Discord Badge]][discord]
 
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV

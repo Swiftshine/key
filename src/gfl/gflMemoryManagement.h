@@ -24,8 +24,6 @@ namespace gfl {
     void* Alloc(u8 heapID, size_t size, uint align);
     void* Alloc(Heap* heap, size_t size, uint align);
     void Free(void*);
-
-    static Heap* Heap0;
 }
 
 

@@ -2,6 +2,15 @@
 #include "gfl/gflMemoryManagement.h"
 #include <cstring>
 
+// heap
+extern "C" void* lbl_808E4D00;
+extern "C" float lbl_808E6908;
+extern "C" int lbl_808E0368;
+extern "C" void* lbl_808E4FD8;
+extern "C" void* GetBgImageSquare(void*, u16 index);
+
+
+
 BGST::File::File()
     : mLoadState(BGST::LoadState::BGST_LOADING_NOT_INITED)
     , mHeader(nullptr)
@@ -71,13 +80,12 @@ bool BGST::File::ProcessLoadState() {
             }
             
         }
+
     }
 
     return result;
 }
 
-extern "C" void* lbl_808E4FD8;
-extern "C" void* GetBgImageSquare(void*, u16 index);
 
 void BGST::File::CopyImageData(void** cmprImage, void** i4Image, int id, int xGridIndex, int yGridIndex) {
     struct unkstruct {
@@ -108,7 +116,7 @@ void BGST::File::CopyImageData(void** cmprImage, void** i4Image, int id, int xGr
 }
 
 bool BGST::File::SetHeader(const char* path) {    
-    mHeader.Create((BGST::Header*)gfl::Alloc(gfl::Heap0, 0x40, 0x20));
+    mHeader.Create((BGST::Header*)gfl::Alloc((gfl::Heap*)lbl_808E4D00, 0x40, 0x20));
 
     mFile = gfl::File::Open(path, 1);
     
@@ -124,11 +132,10 @@ void BGST::File::ReadImage() {
     mFile->ReadAsync(mOutputImage.Get(), mImageFilesize, mHeader->mImageDataOffset, 2);
 }
 
-extern "C" int lbl_808E0368;
 
 void BGST::File::SetupImage() {
     if (lbl_808E0368 == mHeader->m_4) {
-        mHeader->mYOffset = 1.0f;
+        mHeader->mYOffset = lbl_808E6908;
     }
 
     BGST::Header* header = mHeader.Get();
@@ -151,7 +158,7 @@ void BGST::File::SetupImage() {
     uint biggerArea = gridArea *0x10 ;
     uint temp3 = biggerArea * mGridCount;
     mImageFilesize = ROUND_UP(temp3  , 0x20);
-    mOutputImage.Create((BGST::Image*)gfl::Alloc(gfl::Heap0, mImageFilesize, 0x20));
+    mOutputImage.Create((BGST::Image*)gfl::Alloc((gfl::Heap*)lbl_808E4D00, mImageFilesize, 0x20));
 }
 
 void BGST::File::LoadGrid() {
