@@ -11,6 +11,8 @@
 #include "gfl/gflResFileInfo.h"
 #include "gfl/gflResArchivedFileInfo.h"
 #include "gfl/gflMemoryManagement.h"
+#include "graphics/FullSortScene.h"
+
 #include <string>
 #include <memory>
 
@@ -22,9 +24,9 @@ public:
     NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName);
     virtual ~NwAnmCtrl();
     void PlayAnimationByNameAndIndex(uint animIndex, const char* animName);
-    class gfl::ScnMdlWrapper* SetupModelWrapper(uint arg1);
-    void SetFullSortSceneModelWrapper(class FullSortScene* scene, uint arg2);
-    void SetStageFullSortSceneModelWrapper(uint arg1);
+    gfl::ScnMdlWrapper* SetupModelWrapper(gfl::ScnMdlWrapper* modelWrapper) DONT_INLINE_CLASS;
+    void SetFullSortSceneModelWrapper(FullSortScene* scene, gfl::ScnMdlWrapper* modelWrapper) DONT_INLINE_CLASS;
+    void SetStageFullSortSceneModelWrapper(gfl::ScnMdlWrapper* modelWrapper) DONT_INLINE_CLASS;
     uint fn_800EA1F4();
     NwAnm* GetAnimationByIndex(uint index) DONT_INLINE_CLASS;
     void SetCurrentAnimationIndex(uint index);
@@ -53,10 +55,10 @@ public:
         return mModelWrapper.Get();
     }
 
-public:
-    gfl::ResFileInfoPointer mFileInfo;
+private:
+    gfl::ResFileInfoPointer mResFileInfo;
     gfl::ScopedPointer<gfl::ScnMdlWrapper> mModelWrapper;
-    std::string mAnimName;
+    std::string mResMdlName;
     uint mCurrentAnimIndex;
     gfl::Array<NwAnm> mAnimations;
     uint mNumAnims;

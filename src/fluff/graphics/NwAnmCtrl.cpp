@@ -1,14 +1,15 @@
 #include "graphics/NwAnmCtrl.h"
+#include "manager/StageManager.h"
 
 NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName)
-    : mFileInfo(fileInfo)
+    : mResFileInfo(fileInfo)
 {
-    if (mFileInfo.IsValid()) {
-        mFileInfo->IncrementLevel();
+    if (mResFileInfo.IsValid()) {
+        mResFileInfo->IncrementLevel();
     }
 
     mModelWrapper = nullptr;
-    mAnimName = animName;
+    mResMdlName = animName;
     mCurrentAnimIndex = 0;
     mAnimations = nullptr;
     mNumAnims = animCount;
@@ -19,19 +20,22 @@ NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const ch
 NwAnmCtrl::~NwAnmCtrl() { }
 
 void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* animName) {
-    
+    NwAnm* anim = GetAnimationByIndex(animIndex);
+    anim->Play(mResFileInfo, mResMdlName.c_str(), animName, nullptr);
 }
 
-class gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint arg1) {
+gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(gfl::ScnMdlWrapper* modelWrapper) {
     return nullptr;
 }
 
-void NwAnmCtrl::SetFullSortSceneModelWrapper(class FullSortScene* scene, uint arg2) {
-    // scene->SetModelWrapper(SetupModelWrapper(arg2));
+void NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* scene, gfl::ScnMdlWrapper* modelWrapper) {
+    SetupModelWrapper(modelWrapper);
+    scene->AddRenderObj(modelWrapper);
 }
 
-void NwAnmCtrl::SetStageFullSortSceneModelWrapper(uint arg1) {
-    // SetFullSortSceneModelWrapper(StageManager::Instance->GetFullSortSceneByID(6), arg1);
+void NwAnmCtrl::SetStageFullSortSceneModelWrapper(gfl::ScnMdlWrapper* modelWrapper) {
+    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(6);
+    SetFullSortSceneModelWrapper(scene, modelWrapper);
 }
 
 uint NwAnmCtrl::fn_800EA1F4() {

@@ -2,6 +2,7 @@
 #define FLUFF_NWANM_H
 
 #include "types.h"
+#include "gfl/gflResFileInfo.h"
 #include <nw4r/g3d.h>
 
 namespace gfl { class ScnMdlWrapper; }
@@ -27,7 +28,7 @@ public:
     float GetUpdateRate();
     bool IsAnimationDone();
     bool HasAnim();
-
+    void Play(gfl::ResFileInfoPointer&, const char* resMdlName, const char* animName, void* resName /* ?*/ );
     bool Init(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName, nw4r::g3d::ResName* resName /* ? */);
 
     inline uint GetFlags() {
