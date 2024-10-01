@@ -1,9 +1,11 @@
 #include "object/gmk/GmkWoolRope.h"
 
-Gimmick::GimmickBuildInfo GmkWoolRope::BuildInfo;
+Gimmick::GimmickBuildInfo GmkWoolRope::GBuildInfo;
+WoolBaseTask::WoolBuildInfo GmkWoolRope::WBuildInfo;
+const char WoolBridgePath[] = "gimmick/wool_bridge/wool_bridge.brres";
 
 GmkWoolRope::GmkWoolRope(GmkWoolHook* first, GmkWoolHook* second, int colorIndex, uint arg4, uint arg5, const char* taskName)
-    : Gimmick(&BuildInfo, taskName)
+    : Gimmick(&GBuildInfo, taskName)
     , m_134(m_130)
 {
     m_130 = 0;
@@ -36,8 +38,23 @@ void GmkWoolRope::SetHooks(GmkWoolHook* first, GmkWoolHook* second) {
     mSecondWoolHook = second;
 }
 
-void GmkWoolRope::LoadTextures() {
-    // not started
+
+void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* wBuildInfo, const char* path) {
+    if (nullptr == wBuildInfo) {
+        wBuildInfo = &WBuildInfo;
+    }
+
+    if (nullptr == path) {
+        path = WoolBridgePath;
+    }
+
+    if (wBuildInfo->m_34 < 2) {
+        GmkWoolHook* first = mFirstWoolHook;
+        GmkWoolHook* second = mSecondWoolHook;
+
+        
+        gfl::Vec3 distance;
+    }
 }
 
 void GmkWoolRope::Update() {

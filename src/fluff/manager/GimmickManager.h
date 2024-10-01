@@ -37,6 +37,6 @@ private:
     gfl::LinkedList<placeholder_t> m_14;
     gfl::LinkedList<placeholder_t> m_20;
     Mapdata::Mapbin::Header* mMapbin;
-    gfl::Task* mTask;
+    gfl::Task* mCurrentTask;
 };
 #endif

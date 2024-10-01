@@ -32,7 +32,9 @@ public:
         PinkZipper = 51,
     );
 
-    static GimmickBuildInfo BuildInfo;
+    static GimmickBuildInfo GBuildInfo;
+    static WoolBaseTask::WoolBuildInfo WBuildInfo;
+
 public:
     GmkWoolRope(GmkWoolHook* firstHook, GmkWoolHook* secondHook, int woolColorIndex, uint arg4, uint arg5, const char* taskName);
     virtual ~GmkWoolRope();
@@ -44,7 +46,7 @@ public:
     virtual void Update() override;
 
     /* GmkWoolRope */
-    virtual void LoadTextures();
+    virtual void LoadTextures(WoolBaseTask::WoolBuildInfo* wBuildInfo, const char* path);
     virtual void vfC8() DONT_INLINE_CLASS;
     virtual void vfCC() DONT_INLINE_CLASS;
     virtual void SetHooks(GmkWoolHook* first, GmkWoolHook* second) DONT_INLINE_CLASS;

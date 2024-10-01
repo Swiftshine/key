@@ -8,7 +8,7 @@
 // size: 0x214
 class WoolLinkObj : public WoolBaseTask {
 public:
-    WoolLinkObj(u32, u32, int**, u32, u32, u32, u32);
+    WoolLinkObj(u32, WoolBuildInfo* wBuildInfo, int**, u32, u32, u32, u32);
     virtual ~WoolLinkObj();
 
     /* FlfGameObj */
