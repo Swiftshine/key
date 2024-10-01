@@ -4,7 +4,7 @@
 #include "gflResInfo.h"
 #include "gflFixedString.h"
 #include "gflFileSystemWii.h"
-
+#include "gfl_types.h"
 #include <utility>
 
 namespace gfl {

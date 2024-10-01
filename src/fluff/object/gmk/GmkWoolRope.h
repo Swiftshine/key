@@ -6,8 +6,9 @@
 #include "gfl/gflResFileInfo.h"
 #include "graphics/FlfMdlDraw.h"
 #include "object/Gimmick.h"
+#include "object/gmk/GmkWoolHook.h"
 
-class GmkWoolHook;
+class WoolLinkObjBase;
 
 // size: 0x160
 class GmkWoolRope : public Gimmick {
@@ -36,7 +37,7 @@ public:
     static WoolBaseTask::WoolBuildInfo WBuildInfo;
 
 public:
-    GmkWoolRope(GmkWoolHook* firstHook, GmkWoolHook* secondHook, int woolColorIndex, uint arg4, uint arg5, const char* taskName);
+    GmkWoolRope(GmkWoolHook* firstHook, GmkWoolHook* secondHook, int woolColorIndex, uint arg4, void* arg5, const char* taskName);
     virtual ~GmkWoolRope();
 
     /* FlfGameObj */
@@ -58,12 +59,16 @@ private:
     uint m_138;
     uint m_13C;
     uint m_140;
+
+    // mWoolLink is actually a `WoolLinkObjBase`, not a `WoolLinkObj`.
+    // `WoolLinkObj` does *not* inherit from `WoolLinkObjBase`, however
     WoolLinkObj* mWoolLink;
+
     int mWoolColorIndex;
     uint m_14C;
     GmkWoolHook* mFirstWoolHook;
     GmkWoolHook* mSecondWoolHook;
-    uint m_158;
+    void* m_158;
     gfl::ResFileInfoPointer mResFileInfo;
 };
 
