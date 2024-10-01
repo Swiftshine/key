@@ -2,6 +2,7 @@
 #define FLUFF_GMKWOOLROPE_H
 
 #include "object/wool/WoolLinkObj.h"
+#include "gfl/gflScopedPointer.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/FlfMdlDraw.h"
 #include "object/Gimmick.h"
@@ -30,6 +31,8 @@ public:
         GreenCoil = 50,
         PinkZipper = 51,
     );
+
+    static GimmickBuildInfo BuildInfo;
 public:
     GmkWoolRope(GmkWoolHook* firstHook, GmkWoolHook* secondHook, int woolColorIndex, uint arg4, uint arg5, const char* taskName);
     virtual ~GmkWoolRope();
@@ -42,11 +45,11 @@ public:
 
     /* GmkWoolRope */
     virtual void LoadTextures();
-    virtual void vfC8();
-    virtual void vfCC();
-    virtual void SetHooks(GmkWoolHook* first, GmkWoolHook* second);
-    virtual void vfD4();
-    virtual void vfD8();
+    virtual void vfC8() DONT_INLINE_CLASS;
+    virtual void vfCC() DONT_INLINE_CLASS;
+    virtual void SetHooks(GmkWoolHook* first, GmkWoolHook* second) DONT_INLINE_CLASS;
+    virtual void vfD4() DONT_INLINE_CLASS;
+    virtual void vfD8() DONT_INLINE_CLASS;
 private:
     uint m_130;
     uint m_134;
@@ -59,7 +62,7 @@ private:
     GmkWoolHook* mFirstWoolHook;
     GmkWoolHook* mSecondWoolHook;
     uint m_158;
-    gfl::ResFileInfo* mResFileInfo;
+    gfl::ResFileInfoPointer mResFileInfo;
 };
 
 // ASSERT_SIZE(GmkWoolRope, 0x160);

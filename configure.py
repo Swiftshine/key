@@ -425,9 +425,10 @@ config.libs = [
         "cflags": [*cflags_fluff,],
         "host": False,
         "objects": [
-            Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
-            Object(NonMatching, "fluff/object/gmk/GmkColAnimMdl.cpp"),
             Object(NonMatching, "fluff/object/gmk/GmkCamRectCtrl.cpp"),
+            Object(NonMatching, "fluff/object/gmk/GmkColAnimMdl.cpp"),
+            Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
+            Object(NonMatching, "fluff/object/gmk/GmkWoolRope.cpp"),
         ],
     },
 
