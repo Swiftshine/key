@@ -20,7 +20,7 @@ namespace gfl {
         }
 
         virtual ReturnT operator()(); // not confirmed
-        virtual void operator=(); // not confirmed
+        virtual void operator=(const FunctorBase0<ReturnT>&); // not confirmed
 
         virtual ~FunctorBase0();
     private:
@@ -45,6 +45,13 @@ namespace gfl {
         FunctorT* mFunctor;
     };
 
+    /* Functor0 */
+    template <typename ReturnT>
+    class Functor0 : public FunctorImpl<FunctorBase0<void>> {
+    public:
+        inline Functor0() { }
+        virtual ~Functor0();
+    };
 
     /* FunctorClassMethod */
 
@@ -60,7 +67,7 @@ namespace gfl {
         }
 
         virtual ReturnT operator()();
-        virtual void operator=();
+        virtual void operator=(const FunctorClassMethod0<ReturnT, OwnerT, FunctionT>&);
         virtual ~FunctorClassMethod0();
     private:
         OwnerT mOwner;

@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "gflTaskInfo.h"
+#include "gflFunctor.h"
 
 namespace gfl {
     class Task {
@@ -24,7 +25,11 @@ namespace gfl {
         static const char AllocError[];
 
     public:
-        inline Task() { }
+        template <typename ReturnT, typename OwnerT, typename FunctionT>
+        inline Task() {
+
+        }
+
         void Init(const char* newname);
 
         virtual ~Task();
@@ -39,12 +44,12 @@ namespace gfl {
         u8    GetFlags();
         void  SetTaskName(const char* newName);
         void  CreateSubtask(u8 groupID);
-    public:
+    private:
         TaskInfo* mTaskInfo;
-        void* mFunctor;
-        void* mFunctorFunc; // gfl::FunctorFunc0<void(*)(), void>
-        int m_10;
-        int m_14; // owner?
+        gfl::Functor0<void>* mFunctor;
+        void* mFunctorClassMethod;
+        int mFlags;
+        int m_14;
     };
 
     ASSERT_SIZE(Task, 0x18);
