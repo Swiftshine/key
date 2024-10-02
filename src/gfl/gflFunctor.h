@@ -48,14 +48,22 @@ namespace gfl {
 
     /* FunctorClassMethod */
 
+    // OwnerT is typically a pointer anyways
+    // e.g. `gfl::FunctorClassMethod0<void, Gimmick*, void (Gimmick::*)()const>`
     template <typename ReturnT, typename OwnerT, typename FunctionT>
     class FunctorClassMethod0 {
     public:
+    
+        inline FunctorClassMethod0(OwnerT owner, FunctionT function) {
+            mOwner = owner;
+            mFunction = function;
+        }
+
         virtual ReturnT operator()();
         virtual void operator=();
         virtual ~FunctorClassMethod0();
     private:
-        OwnerT* mOwner;
+        OwnerT mOwner;
         FunctionT mFunction;
     };
 }
