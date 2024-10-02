@@ -47,7 +47,7 @@ namespace gfl {
 
     /* Functor0 */
     template <typename ReturnT>
-    class Functor0 : public FunctorImpl<FunctorBase0<void>> {
+    class Functor0 /* : public FunctorImpl<FunctorBase0<ReturnT>> */ {
     public:
         inline Functor0() { }
         virtual ~Functor0();
