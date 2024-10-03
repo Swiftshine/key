@@ -18,6 +18,13 @@ namespace gfl {
     inline char* Strcpy(const char* dst, size_t len, const char* src) {
         return Strcpy(const_cast<char*>(dst), len, src);
     }
-    // void* Memcpy(void* dest, size_t len, void* src);
+    
+    // this function:
+    // - appends chars from `src` to `dst` while ensuring that the result is null-terminated
+    // - always assigns 0 to `dst[len - 1]`
+    char* Strncat(char* dst, size_t len, const char* src);
+    inline char* Strncat(const char* dst, size_t len, const char* src) {
+        return Strncat(const_cast<char*>(dst), len, src);
+    }
 }
 #endif

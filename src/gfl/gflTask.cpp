@@ -3,6 +3,9 @@
 
 using namespace gfl;
 
+const char DeathMarker[] = "@Z";
+const char NoName[] = "NONAME";
+
 void Task::Init(const char* newname) {
     TaskInfo* tinfo = TaskList::Instance()->GetNextAvailableTaskInfo();
     mTaskInfo = tinfo;
@@ -25,6 +28,12 @@ void Task::Init(const char* newname) {
 
 Task::~Task() {
     mTaskInfo->SetOwner(nullptr);
+    gfl::Strncat(mTaskInfo->GetName(), 0x17, DeathMarker);
+
+    if (nullptr != mFunctor) {
+        delete mFunctor;
+        reinterpret_cast< gfl::FunctorClassMethod0<void, dummy_t, void(*)()>* >(mFunctorClassMethod)->~FunctorClassMethod0();
+    }
 }
 
 uint Task::PollTask() {
@@ -34,7 +43,7 @@ uint Task::PollTask() {
     // if the task is about to execute and it has the means to do so, it will
     if (!(mFlags & ~m_14) && nullptr != mFunctorClassMethod) {
         TaskInfo::SetCurrentTask(this);
-        reinterpret_cast< gfl::FunctorClassMethod0<void, Task*, void(*)()>* >(mFunctorClassMethod)->operator()();
+        reinterpret_cast< gfl::FunctorClassMethod0<void, dummy_t, void(*)()>* >(mFunctorClassMethod)->operator()();
         TaskInfo::ClearCurrentTask();
 
         // after executing, check the task's information to see if the task still exists

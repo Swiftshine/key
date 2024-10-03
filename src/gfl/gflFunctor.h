@@ -50,7 +50,7 @@ namespace gfl {
     class Functor0 : public FunctorImpl< FunctorBase0<void> > {
     public:
         inline Functor0() { }
-        virtual ~Functor0();
+        inline virtual ~Functor0() { }
     };
 
     /* FunctorClassMethod */
