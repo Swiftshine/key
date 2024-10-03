@@ -86,8 +86,64 @@ Task* Task::GetNextSibling() {
     return mTaskInfo->GetNextSiblingTask();
 }
 
+// https://decomp.me/scratch/sH5cA
 void Task::MakeChild(Task* newChild) {
-    
+    TaskInfo* newChildInfo = newChild->GetTaskInfo();
+    TaskInfo* myTaskInfo = mTaskInfo;
+    u8 newChildFlags = newChildInfo->GetFlags();
+    newChildInfo->SetParentInfo(myTaskInfo);
+    TaskInfo* myChildInfo = myTaskInfo->GetChildInfo();
+
+    if (nullptr == myChildInfo) {
+        myTaskInfo->SetChildInfo(newChildInfo);
+        return;
+    }
+
+    if ((s8)0xF0 == newChildFlags) {
+        myTaskInfo->SetChildInfo(newChildInfo);
+        newChildInfo->SetSiblingInfo(myChildInfo);
+        newChildInfo->SetFlags(0xF0);
+        return;
+    }
+
+    if (0xF1 == newChildFlags) {
+        TaskInfo* child;
+        do {
+            child = myChildInfo;
+            myChildInfo = child->GetSiblingInfo();
+        } while (nullptr != child->GetSiblingInfo());
+
+        child->SetSiblingInfo(newChildInfo);
+        newChildInfo->SetFlags(0xF1);
+        return;
+    }
+
+    TaskInfo* newSiblingInfo = nullptr;
+
+    while (true) {
+        if (nullptr == myChildInfo) {
+            newSiblingInfo->SetSiblingInfo(newChildInfo);
+            newChildInfo->SetFlags(newChildFlags);
+            return;
+        }
+
+        if (newChildFlags < myChildInfo->GetFlags()) {
+            break;
+        }
+
+        newSiblingInfo = myChildInfo;
+        myChildInfo = myChildInfo->GetSiblingInfo();
+    }
+
+    if (nullptr != newSiblingInfo) {
+        newSiblingInfo->SetSiblingInfo(newChildInfo);
+        newChildInfo->SetSiblingInfo(myChildInfo);
+    } else {
+        myTaskInfo->SetChildInfo(newChildInfo);
+        newChildInfo->SetSiblingInfo(myChildInfo);
+    }
+
+    newChildInfo->SetFlags(newChildFlags);
 }
 
 // https://decomp.me/scratch/ovKEv
