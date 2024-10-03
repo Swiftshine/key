@@ -383,6 +383,15 @@ config.libs = [
         ],
     },
     {
+        "lib": "fluff/main",
+        "mw_version": config.linker_version,
+        "cflags": cflags_fluff,
+        "host": False,
+        "objects": [
+            Object(Matching, "fluff/main.cpp"),
+        ],
+    },
+    {
         "lib" : "fluff",
         "mw_version": config.linker_version,
         "cflags": cflags_fluff,
