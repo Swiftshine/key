@@ -5,85 +5,113 @@
 #include "gflMemoryUtil.h"
 
 namespace gfl {
-template <typename T>
-class ScopedPointer {
-public:
-    inline ScopedPointer() { }
-    inline ScopedPointer(T* other) { mPointer = other; }
-    inline ~ScopedPointer() {
-        delete mPointer;
-        mPointer = nullptr;
-    }
 
-    inline void Create() {
-        mPointer = new T;
-    }
+    template <typename T>
+    class PointerBase {
+    public:
+        inline PointerBase() { }
+        inline PointerBase(T* ptr) { }
 
-    inline void Create(T* ptr) {
-        if (nullptr == ptr) {
-            Destroy();
-        } else {
+        inline void Create() { }
+        inline void Create(T* ptr) { }
+        inline void Create(u8 heapID) { }
+
+        inline void Destroy() { }
+
+        inline void operator=(T* ptr) {
             mPointer = ptr;
         }
+
+        inline bool operator==(T* other) const {
+            return mPointer == other;
+        }
+
+        inline bool operator==(PointerBase* other) const {
+            return mPointer == other->Get();
+        }
+
+        inline bool operator!=(T* other) const {
+            return mPointer != other;
+        }
+
+        inline bool operator!=(PointerBase* other) const {
+            return mPointer != other->Get();
+        }
+
+        inline T& operator*() const {
+            return *mPointer;
+        }
+
+        inline T* operator->() const {
+            return mPointer;
+        }
+
+        inline T* Get() const {
+            return mPointer;
+        }
+
+        inline T* ptr() const {
+            return mPointer;
+        }
+
+        inline bool IsValid() const {
+            return nullptr != mPointer;
+        }
+    protected:
+        T* mPointer;
+    };
+
+    template <typename T>
+    inline bool operator==(T* lhs, PointerBase<T>* rhs) {
+        return rhs != lhs;
     }
 
-    inline void Create(u8 heapID) {
-        T* ptr = new (heapID) T;
+    template <typename T>
+    inline bool operator==(T* lhs, PointerBase<T>& rhs) {
+        return rhs != lhs;
+    }
 
-        if (!ptr) {
-            Destroy();
-        } else {
+    template <typename T>
+    class ScopedPointer : public PointerBase<T> {
+    public:
+        inline ScopedPointer() { }
+        inline ScopedPointer(T* ptr) {
             mPointer = ptr;
         }
-    }
 
-    inline void Reset() {
-        mPointer = nullptr;
-    }
+        inline ~ScopedPointer() {
+            delete mPointer;
+            mPointer = nullptr;
+        }
 
-    inline void Destroy() {
-        delete mPointer;
-        mPointer = nullptr;
-    }
+        inline void Create() {
+            mPointer = new T;
+        }
 
-    inline void operator=(T* other) {
-        mPointer = other;
-    }
+        inline void Create(T* ptr) {
+            if (nullptr == ptr) {
+                Destroy();
+            } else {
+                mPointer = ptr;
+            }
+        }
 
-    inline T* Get() const {
-        return mPointer;
-    }
+        inline void Create(u8 heapID) {
+            T* ptr = new (heapID) T;
 
-    inline T& operator*() {
-        return *mPointer;
-    }
-    inline T* operator->() const {
-        return mPointer;
-    }
+            if (!ptr) {
+                Destroy();
+            } else {
+                mPointer = ptr;
+            }
+        }
 
-    inline T** operator&() {
-        return &mPointer;
-    }
+        inline void Destroy() {
+            delete mPointer;
+            mPointer = nullptr;
+        }
+    };
 
-    inline bool operator==(T* other) const {
-        return mPointer == other;
-    }
-
-    inline friend bool operator==(T* other, const ScopedPointer<T>& obj) {
-        return other == obj.Get();
-    }
-
-    inline bool operator!=(T* other) const {
-        return mPointer != other;
-    }
-
-    inline bool IsValid() const {
-        return nullptr != mPointer;
-    }
-
-private:
-    T* mPointer;
-};
 
 template <typename T>
 class FreedScopedPointer {

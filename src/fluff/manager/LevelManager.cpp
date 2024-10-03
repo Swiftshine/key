@@ -9,13 +9,7 @@ LevelManager::LevelManager(Stage& stage)
     , mColObjTree(nullptr)
     , mGimmickManager(nullptr)
 {
-    GimmickManager* mgr = new (gfl::HeapID::Work) GimmickManager;
-
-    if (nullptr == mgr) {
-        mGimmickManager.Destroy();
-    } else {
-        mGimmickManager = mgr;
-    }
+    mGimmickManager.Create(gfl::HeapID::Work);
 }
 
 LevelManager::~LevelManager() {
@@ -51,13 +45,8 @@ void LevelManager::ResetPhase() {
 
 void LevelManager::InitColObjTree() {
     Mapdata::Mapbin::Header* mapbin = StageManager::Instance()->GetLevelSection(StageManager::Instance()->GetStage()->GetSectionID());
-    ColObjTree* tree = new (gfl::HeapID::Work) ColObjTree;
-    
-    if (nullptr == tree) {
-        mColObjTree.Destroy();
-    } else {
-        mColObjTree = tree;
-    }
+
+    mColObjTree.Create(gfl::HeapID::Work);
 
     mColObjTree->SetSection(mapbin);
     mColObjTree->fn_800CBCF4();
