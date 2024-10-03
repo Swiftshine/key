@@ -1,6 +1,6 @@
 #include "gflMemoryUtil.h"
 
-void* gfl::Memcpy(void* dst, size_t len, void* src) {
+char* gfl::Strcpy(char* dst, size_t len, const char* src) {
     if (0 == len) {
         return dst;
     }

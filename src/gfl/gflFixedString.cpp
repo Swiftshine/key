@@ -6,12 +6,12 @@ using namespace gfl;
 
 
 FixedString::FixedString(const char* src) {
-    gfl::Memcpy(mString, sizeof(mString), (void*)src);
+    gfl::Strcpy(mString, sizeof(mString), src);
     mLen = strlen(mString);
 }
 
 FixedString::FixedString(const std::string& src) {
-    gfl::Memcpy(mString, sizeof(mString), (void*)src.begin());
+    gfl::Strcpy(mString, sizeof(mString), src.c_str());
     mLen = strlen(mString);
 }
 
@@ -23,12 +23,12 @@ FixedString::FixedString() {
 FixedString::~FixedString() { }
 
 void FixedString::operator=(const char* src) {
-    gfl::Memcpy(mString, sizeof(mString), (void*)src);
+    gfl::Strcpy(mString, sizeof(mString), src);
     mLen = strlen(mString);
 }
 
 void FixedString::operator=(const std::string& src) {
-    gfl::Memcpy(mString, sizeof(mString), (void*)src.begin());
+    gfl::Strcpy(mString, sizeof(mString), src.c_str());
     mLen = strlen(mString);
 }
 

@@ -14,6 +14,10 @@
     if (nullptr == temporary_pointer ) { delete dest; dest = nullptr; } else { dest = temporary_pointer ; }
 
 namespace gfl {
-    void* Memcpy(void* dest, size_t len, void* src);
+    char* Strcpy(char* dst, size_t len, const char* src);
+    inline char* Strcpy(const char* dst, size_t len, const char* src) {
+        return Strcpy(const_cast<char*>(dst), len, src);
+    }
+    // void* Memcpy(void* dest, size_t len, void* src);
 }
 #endif

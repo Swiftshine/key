@@ -8,7 +8,7 @@ MEMAllocatorFuncs Heap::AllocFuncs;
 const char Heap::DefaultName[] = "NOT INITALIZED";
 
 void Heap::SetName(const char* newName) {
-    gfl::Memcpy(mHeapName, sizeof(mHeapName), (void*)newName);
+    gfl::Strcpy(mHeapName, sizeof(mHeapName), newName);
 }
 
 Heap* Heap::CreateHeap(Heap* heap) {

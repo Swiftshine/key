@@ -9,10 +9,10 @@ void Task::Init(const char* newname) {
 
 
     if (nullptr == newname) {
-        gfl::Memcpy((void*)mTaskInfo->GetName(), 0x17, (void*)NoName);
+        gfl::Strcpy(mTaskInfo->GetName(), 0x17, NoName);
 
     } else {
-        gfl::Memcpy((void*)mTaskInfo->GetName(), 0x17, (void*)newname);
+        gfl::Strcpy(mTaskInfo->GetName(), 0x17, newname);
     }
 
     mTaskInfo->SetOwner(this);
@@ -23,7 +23,9 @@ void Task::Init(const char* newname) {
 }
 
 
-Task::~Task() { }
+Task::~Task() {
+    mTaskInfo->SetOwner(nullptr);
+}
 
 uint Task::PollTask() {
     TaskInfo* myTaskInfo = mTaskInfo;
@@ -32,7 +34,7 @@ uint Task::PollTask() {
     // if the task is about to execute and it has the means to do so, it will
     if (!(mFlags & ~m_14) && nullptr != mFunctorClassMethod) {
         TaskInfo::SetCurrentTask(this);
-        // mFunctorClassMethod();
+        reinterpret_cast< gfl::FunctorClassMethod0<void, Task*, void(*)()>* >(mFunctorClassMethod)->operator()();
         TaskInfo::ClearCurrentTask();
 
         // after executing, check the task's information to see if the task still exists

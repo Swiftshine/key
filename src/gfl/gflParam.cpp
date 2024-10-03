@@ -48,7 +48,7 @@ void ParamStrA::Print(Console* console, uint numTabs) {
 // Base Class
 
 Param::Param(const char* newLabel) {
-    gfl::Memcpy(mLabel, sizeof(mLabel), (void*)newLabel);
+    gfl::Strcpy(mLabel, sizeof(mLabel), newLabel);
     mChecksum = gfl::Checksum(newLabel);
 }
 
