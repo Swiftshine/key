@@ -61,6 +61,10 @@ namespace gfl {
             mOwner = t;
         }
 
+        inline u8 GetFlags() {
+            return mFlags;
+        }
+        
         inline void SetFlags(u8 newFlags) {
             mFlags = newFlags;
         }
@@ -72,37 +76,48 @@ namespace gfl {
         inline void ClearName() {
             memset(mName, 0, sizeof(mName));
         }
-        static inline Task* GetParentTask(TaskInfo* ti) {
-            TaskInfo* pi = ti->GetParentInfo();
-            if (pi) {
-                return pi->GetOwner();
+
+        inline Task* GetParentTask() {
+            TaskInfo* parent = GetParentInfo();
+            if (nullptr != parent) {
+                return parent->GetOwner();
             }
 
             return nullptr;
         }
 
-        static inline Task* GetNextSiblingTask(TaskInfo* ti) {
-            while (ti) {
-                Task* t = ti->GetOwner();
-                if (t) {
-                    return t;
+        inline Task* GetNextSiblingTask() {
+            TaskInfo* tinfo = GetSiblingInfo();
+
+            while (nullptr != tinfo) {
+                Task* task = tinfo->GetOwner();
+
+                if (nullptr != task) {
+                    return task;
                 }
-                ti = ti->GetSiblingInfo();
+
+                tinfo = tinfo->GetSiblingInfo();
             }
 
             return nullptr;
         }
 
-        static inline Task* GetNextChildTask(TaskInfo* ti) {
-            if (ti) {
-                ti = ti->GetChildInfo();
-                Task* t;
-                while (ti) {
-                    t = ti->GetOwner();
-                    if (t) {
-                        return t;
+
+        inline Task* GetNextChildTask() {
+            TaskInfo* tinfo = this;
+
+            if (nullptr != tinfo) {
+                tinfo = tinfo->GetChildInfo();
+                Task* task;
+
+                while (nullptr != tinfo) {
+                    task = tinfo->GetOwner();
+
+                    if (nullptr != task) {
+                        return task;
                     }
-                    ti = ti->GetSiblingInfo();
+
+                    tinfo = tinfo->GetSiblingInfo();
                 }
             }
 

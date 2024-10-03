@@ -39,6 +39,12 @@ namespace gfl {
         u8    GetFlags();
         void  SetTaskName(const char* newName);
         void  CreateSubtask(u8 groupID);
+
+
+        inline TaskInfo* GetTaskInfo() {
+            return mTaskInfo;
+        }
+        
     private:
         TaskInfo* mTaskInfo;
         gfl::Functor0<void> mFunctor;
