@@ -18,12 +18,7 @@ namespace gfl {
             Inactive = 0,
             Active = 1
         );
-
-    public:
-        static const char DeathMarker[]; 
-        static const char NoName[];
-        static const char AllocError[];
-
+        
     public:
         template <typename ReturnT, typename OwnerT, typename FunctionT>
         inline Task() {
@@ -46,8 +41,7 @@ namespace gfl {
         void  CreateSubtask(u8 groupID);
     private:
         TaskInfo* mTaskInfo;
-        gfl::Functor0<void>* mFunctor;
-        void* mFunctorClassMethod;
+        gfl::Functor0<void> mFunctor;
         int mFlags;
         int m_14;
     };

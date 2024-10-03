@@ -3,8 +3,8 @@
 
 using namespace gfl;
 
-const char DeathMarker[] = "@Z";
-const char NoName[] = "NONAME";
+const char Task_DeathMarker[3] = "@Z";
+const char Task_NoName[7] = "NONAME";
 
 void Task::Init(const char* newname) {
     TaskInfo* tinfo = TaskList::Instance()->GetNextAvailableTaskInfo();
@@ -12,7 +12,7 @@ void Task::Init(const char* newname) {
 
 
     if (nullptr == newname) {
-        gfl::Strcpy(mTaskInfo->GetName(), 0x17, NoName);
+        gfl::Strcpy(mTaskInfo->GetName(), 0x17, Task_NoName);
 
     } else {
         gfl::Strcpy(mTaskInfo->GetName(), 0x17, newname);
@@ -28,12 +28,7 @@ void Task::Init(const char* newname) {
 
 Task::~Task() {
     mTaskInfo->SetOwner(nullptr);
-    gfl::Strncat(mTaskInfo->GetName(), 0x17, DeathMarker);
-
-    if (nullptr != mFunctor) {
-        delete mFunctor;
-        reinterpret_cast< gfl::FunctorClassMethod0<void, dummy_t, void(*)()>* >(mFunctorClassMethod)->~FunctorClassMethod0();
-    }
+    gfl::Strncat(mTaskInfo->GetName(), 0x17, Task_DeathMarker);
 }
 
 uint Task::PollTask() {
@@ -41,9 +36,9 @@ uint Task::PollTask() {
     Task* childTask;
     
     // if the task is about to execute and it has the means to do so, it will
-    if (!(mFlags & ~m_14) && nullptr != mFunctorClassMethod) {
+    if (!(mFlags & ~m_14) && mFunctor.HasFunctor()) {
         TaskInfo::SetCurrentTask(this);
-        reinterpret_cast< gfl::FunctorClassMethod0<void, dummy_t, void(*)()>* >(mFunctorClassMethod)->operator()();
+        mFunctor();
         TaskInfo::ClearCurrentTask();
 
         // after executing, check the task's information to see if the task still exists

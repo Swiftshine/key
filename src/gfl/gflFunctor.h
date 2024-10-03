@@ -1,6 +1,8 @@
 #ifndef GFL_FUNCTOR_H
 #define GFL_FUNCTOR_H
 
+#include "gflScopedPointer.h"
+
 namespace gfl {
 
     // the number at the end indicates how many parameters
@@ -33,26 +35,6 @@ namespace gfl {
     template <typename ReturnT, typename PT1, typename PT2>
     class FunctorBase2;
 
-    /* FunctorImpl */
-
-    // FunctorT - `gfl::FunctorBaseX` class
-    template <typename FunctorT>
-    class FunctorImpl {
-    public:
-        FunctorImpl();
-        virtual ~FunctorImpl();
-    private:
-        FunctorT* mFunctor;
-    };
-
-    /* Functor0 */
-    template <typename ReturnT>
-    class Functor0 : public FunctorImpl< FunctorBase0<void> > {
-    public:
-        inline Functor0() { }
-        inline virtual ~Functor0() { }
-    };
-
     /* FunctorClassMethod */
 
     // OwnerT is typically a pointer anyways
@@ -73,6 +55,45 @@ namespace gfl {
         OwnerT mOwner;
         FunctionT mFunction;
     };
+
+    /* FunctorImpl */
+
+    // FunctorT - `gfl::FunctorBaseX` class
+    template <typename FunctorT>
+    class FunctorImpl {
+    public:
+
+        template <typename ReturnT, typename OwnerT, typename FunctionT>
+        inline FunctorImpl(OwnerT* owner, FunctionT function)
+            : mFunctor(gfl::FunctorClassMethod0<ReturnT, OwnerT, FunctionT>(owner, function))
+        {
+
+        }
+
+        virtual ~FunctorImpl() {
+            delete mFunctor;
+        }
+
+        inline bool HasFunctor() {
+            return nullptr != mFunctor;
+        }
+
+        inline void operator()() {
+            mFunctor->operator()();
+        }
+    private:
+        FunctorT* mFunctor;
+    };
+
+    /* Functor0 */
+    template <typename ReturnT>
+    class Functor0 : public FunctorImpl< FunctorBase0<void> > {
+    public:
+        inline Functor0() { }
+        inline virtual ~Functor0() { }
+    };
+
+    
 }
 
 #endif
