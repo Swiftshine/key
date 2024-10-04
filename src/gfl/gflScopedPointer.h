@@ -112,90 +112,51 @@ namespace gfl {
         }
     };
 
+    template <typename T>
+    class FreedScopedPointer : public PointerBase<T> {
+    public:
+        inline FreedScopedPointer() { }
+        inline FreedScopedPointer(T* ptr) {
+            mPointer = ptr;
+        }
 
-template <typename T>
-class FreedScopedPointer {
-public:
-    inline FreedScopedPointer() { }
-    inline FreedScopedPointer(T* other) { mPointer = other; }
-    inline ~FreedScopedPointer() {
-        if (nullptr != mPointer) {
+        inline ~FreedScopedPointer() {
+            if (nullptr != mPointer) {
+                gfl::Free(mPointer);
+                mPointer = nullptr;
+            }
+        }
+
+        inline void Destroy() {
             gfl::Free(mPointer);
             mPointer = nullptr;
         }
-    }
 
-    inline void Create() {
-        mPointer = new T;
-    }
+        inline void Create() {
+            mPointer = new T;
+        }
 
-    inline void Create(T* ptr) {
-        if (nullptr == ptr) {
-            if (nullptr != mPointer) {
-                Destroy();
+        inline void Create(T* ptr) {
+            if (nullptr == ptr) {
+                if (nullptr != mPointer) {
+                    Destroy();
+                }
+            } else {
+                mPointer = ptr;
             }
-        } else {
-            mPointer = ptr;
         }
-    }
 
-    inline void Create(u8 heapID) {
-        T* ptr = new (heapID) T;
+        inline void Create(u8 heapID) {
+            T* ptr = new (heapID) T;
 
-        if (!ptr) {
-            Destroy();
-        } else {
-            mPointer = ptr;
+            if (!ptr) {
+                Destroy();
+            } else {
+                mPointer = ptr;
+            }
         }
-    }
+    };
 
-    inline void Reset() {
-        mPointer = nullptr;
-    }
-
-    inline void Destroy() {
-        gfl::Free(mPointer);
-        mPointer = nullptr;
-    }
-
-    inline void operator=(T* other) {
-        mPointer = other;
-    }
-
-    inline T* Get() const {
-        return mPointer;
-    }
-
-    inline T& operator*() {
-        return *mPointer;
-    }
-    inline T* operator->() const {
-        return mPointer;
-    }
-
-    inline T** operator&() {
-        return &mPointer;
-    }
-
-    inline bool operator==(T* other) const {
-        return mPointer == other;
-    }
-
-    inline friend bool operator==(T* other, const FreedScopedPointer<T>& obj) {
-        return other == obj.Get();
-    }
-
-    inline bool operator!=(T* other) const {
-        return mPointer != other;
-    }
-
-    inline bool IsValid() const {
-        return nullptr != mPointer;
-    }
-
-private:
-    T* mPointer;
-};
 
 }
 
