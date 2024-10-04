@@ -20,10 +20,11 @@ namespace gfl {
         );
         
     public:
-        template <typename ReturnT, typename OwnerT, typename FunctionT>
-        inline Task() {
-
-        }
+        inline Task()
+            : mFunctor()
+            , mFlags(0)
+            , m_14(0)
+        { }
 
         void Init(const char* newname);
 

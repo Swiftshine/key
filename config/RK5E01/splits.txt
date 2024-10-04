@@ -49,6 +49,9 @@ fluff/object/collision/KdTree.cpp:
 fluff/object/collision/ColObj.cpp:
 	.text       start:0x800497B0 end:0x80049B5C
 
+fluff/object/Gimmick.cpp:
+	.text       start:0x8004DBF4 end:0x8004E650
+
 fluff/util/GimmickUtil.cpp:
 	.text       start:0x800505C8 end:0x800507F4
 

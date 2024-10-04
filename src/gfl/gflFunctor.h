@@ -63,9 +63,17 @@ namespace gfl {
     class FunctorImpl {
     public:
 
-        template <typename ReturnT, typename OwnerT, typename FunctionT>
-        inline FunctorImpl(OwnerT* owner, FunctionT function)
-            : mFunctor(gfl::FunctorClassMethod0<ReturnT, OwnerT, FunctionT>(owner, function))
+        // template <typename ReturnT, typename OwnerT, typename FunctionT>
+        // inline FunctorImpl(OwnerT* owner, FunctionT function)
+        //     : mFunctor(new gfl::FunctorClassMethod0<ReturnT, OwnerT, FunctionT>(owner, function))
+        // {
+
+        // }
+
+        
+
+        inline FunctorImpl()
+            : mFunctor(new FunctorT)
         {
 
         }
@@ -89,7 +97,10 @@ namespace gfl {
     template <typename ReturnT>
     class Functor0 : public FunctorImpl< FunctorBase0<void> > {
     public:
-        inline Functor0() { }
+        inline Functor0()
+            : FunctorImpl()
+        { }
+
         inline virtual ~Functor0() { }
     };
 

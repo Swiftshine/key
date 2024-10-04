@@ -403,6 +403,7 @@ config.libs = [
 
             Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
             Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
+            Object(NonMatching, "fluff/object/Gimmick.cpp"),
             Object(NonMatching,    "fluff/object/FlfHandleList.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
 

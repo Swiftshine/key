@@ -5,13 +5,14 @@ Gimmick::Gimmick(int gmkID)
     : FlfGameObj(1)
     , mGimmickID(gmkID)
     , m_84(0)
+
 {
     m_124 = 0;
     mTask = nullptr;
-    m_12C = nullptr;
+    mCommand = nullptr;
 
     GimmickManager::Instance()->AddGimmick(this);
-    fn_8004EC4C();
+    InitCommand();
 }
 
 Gimmick::Gimmick(int gmkID, const char* taskName)
@@ -21,9 +22,12 @@ Gimmick::Gimmick(int gmkID, const char* taskName)
 {
     m_124 = 0;
     mTask = nullptr;
-    m_12C = nullptr;
+    mCommand = nullptr;
     
-    mTask = new gfl::Task();
+
+    // "gfl::FunctorClassMethod0<void, Gimmick *, void (Gimmick::*)()const >"
+
+    mTask = new gfl::Task;
     if (mTask) {
         mTask->Init(taskName);
     } else {
