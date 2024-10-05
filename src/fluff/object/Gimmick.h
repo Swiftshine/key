@@ -4,7 +4,7 @@
 #include "object/FlfGameObj.h"
 #include "object/GimmickList.h"
 #include "manager/GimmickManager.h"
-#include "demo/event_demo/EventDemoGimmickCommand.h"
+#include "demo/EventDemoGimmickCommand.h"
 #include "gflVec3.h"
 #include "gflVec2.h"
 #include "gflTask.h"

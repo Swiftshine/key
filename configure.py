@@ -472,7 +472,17 @@ config.libs = [
         ],
     },
     {
-        "lib" : "fluff/sage",
+        "lib": "fluff/demo",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_util],
+        "host": False,
+        "objects": [
+            Object(NonMatching, "fluff/demo/DemoObject.cpp"),
+        ],
+    },
+
+    {
+        "lib" : "fluff/stage",
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_util,],
         "host": False,

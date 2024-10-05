@@ -26,6 +26,15 @@ namespace gfl {
             , m_14(0)
         { }
 
+        inline Task(void* owner, void* functor)
+            : mFunctor()
+            , mFlags(0)
+            , m_14(0)
+        {
+            
+        }
+            
+
         void Init(const char* newname);
 
         virtual ~Task();
@@ -44,6 +53,10 @@ namespace gfl {
 
         inline TaskInfo* GetTaskInfo() {
             return mTaskInfo;
+        }
+
+        inline void OrUnk14(int value) {
+            m_14 |= value;
         }
         
     private:
