@@ -32,12 +32,12 @@ namespace gfl {
          * @note Address: 0x8063C62C
          * @note Size: 0x38
          */
-        static void ConfigureFromArchive(ResFileInfo* dest, const char* path);
+        static void ConfigureFromArchive(ResFileInfo** dest, const char* path);
         /**
          * @note Address: 0x8063c664
          * @note Size: 0x38
          */
-        static void ConfigureFromFolder(ResFileInfo* dest, const char* path);
+        static void ConfigureFromFolder(ResFileInfo** dest, const char* path);
         /**
          * @note Address: 0x8063C69C
          * @note Size: 0x7C
