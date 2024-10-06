@@ -14,10 +14,13 @@
 #include "graphics/FlfMdlDraw.h"
 
 
-extern "C" const char lbl_808E6BE0[] = "%s%s";
-extern "C" const char lbl_808E6BE8[] = "";
-extern "C" const char lbl_807E4EF8[] = "mapdata/stage%03d/%s%d.mapbin";
+const char StageResourceManager::lbl_808E6BE0[] = "%s%s";
+const char StageResourceManager::lbl_808E6BE8[] = "";
+const char StageResourceManager::lbl_807E4EF8[] = "mapdata/stage%03d/%s%d.mapbin";
+const char StageResourceManager::lbl_807E4E98[] = "stage/stage%03d/bg.dat";
+
 extern "C" void DestroyMapdata(Mapdata::Mapbin::File* mapdata);
+
 StageResourceManager::StageResourceManager()
     : mStageResources(nullptr)
     , mBGResFileInfo(nullptr)
@@ -149,7 +152,7 @@ bool StageResourceManager::LoadBGFromArchive(int resourceID) {
     char path[0x200];
 
     
-    snprintf(path, 0x200, "stage/stage%03d/bg.dat", resourceID);
+    snprintf(path, 0x200, lbl_807E4E98, resourceID);
 
     FlfMdlDraw::FromArchive(mBGResFileInfo, path);
 

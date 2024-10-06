@@ -16,6 +16,11 @@
 
 // size unk
 class StageResourceManager {
+private:
+    static const char lbl_808E6BE0[];
+    static const char lbl_808E6BE8[];
+    static const char lbl_807E4EF8[];
+    static const char lbl_807E4E98[];
 public:
     StageResourceManager();
     ~StageResourceManager();
