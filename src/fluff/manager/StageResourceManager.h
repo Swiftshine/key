@@ -11,6 +11,9 @@
 #include "stage/StageResources.h"
 #include "mapdata/Mapdata.h"
 #include "mapdata/BGData.h"
+
+#define STAGE_RESOURCE_MANAGER_STAGE_COUNT 30
+
 // size unk
 class StageResourceManager {
 public:
@@ -19,7 +22,7 @@ public:
 
     void LoadStage(int stageID);
     bool LoadResources();
-    Mapdata* GetLevelSectionByIndex(int sectionID);
+    Mapdata::Mapbin::File* GetLevelSectionByIndex(int sectionID) DONT_INLINE_CLASS;
     void ClearMapdata();
     inline Stage* GetArchiveStage() {
         return &mArchiveStage;
@@ -27,8 +30,8 @@ public:
 private:
     bool LoadBGFromArchive(int resourceID) DONT_INLINE_CLASS;
     void LoadBGFromFolder(int resourceID) DONT_INLINE_CLASS;
-    void LoadCommonFromArchive(int stageID);
-    bool LoadCommonFromFolder(int stageID) DONT_INLINE_CLASS;
+    void LoadCommonFromArchive(int stageID) DONT_INLINE_CLASS;
+    void LoadCommonFromFolder(int stageID) DONT_INLINE_CLASS;
     void CopyBGData(BGData* data) DONT_INLINE_CLASS;
     void LoadMapdataFromFolder(int stageID) DONT_INLINE_CLASS;
     void ProcessLevelData() DONT_INLINE_CLASS;
@@ -43,6 +46,6 @@ private:
     bool mLoadFromArchive;
     Stage mArchiveStage;
     gfl::ResFileInfo* mMapdataResFileInfo;
-    Mapdata* mCurrentSections[0x1E];
+    Mapdata::Mapbin::File* mCurrentSections[STAGE_RESOURCE_MANAGER_STAGE_COUNT];
 };
 #endif

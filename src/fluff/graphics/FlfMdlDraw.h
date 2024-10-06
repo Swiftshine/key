@@ -30,6 +30,28 @@ public:
             temp->Destroy();
         }
     }
+    static inline void FromFolder(gfl::ResFileInfo*& src, const char* path) {
+        gfl::ResFileInfo* temp;
+
+        GetFileInfoFromFolder((gfl::ResInfo**)(&temp), path);
+
+        if (&src != &temp) {
+            if (nullptr != src) {
+                src->Destroy();
+            }
+
+            src = temp;
+
+            if (nullptr != src) {
+                src->IncrementLevel();
+            }
+        }
+
+
+        if (nullptr != temp) {
+            temp->Destroy();
+        }
+    }
     
 };
 

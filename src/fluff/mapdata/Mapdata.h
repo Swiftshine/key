@@ -11,6 +11,28 @@ class Mapdata {
 public:
     class Mapbin {
     public:
+        struct File {
+            gfl::Vec2 mBoundsMin;
+            gfl::Vec2 mBoundsMax;
+            u32 mNumWalls;
+            u32 mWallOffset;
+            u32 mNumLabeledWalls;
+            u32 mLabeledWallOffset;
+            u32 mNumCommonGimmicks;
+            u32 mCommonGimmickOffset;
+            u32 mNumGimmicks;
+            u32 mGimmickOffset;
+            u32 mNumPaths;
+            u32 mPathOffset;
+            u32 mNumZones;
+            u32 mZoneOffset;
+            u32 mNumCourseInfo;
+            u32 mCourseInfoOffset;
+            u32 mCommonGimmickNameOffset;
+            u32 mColbinTypeOffset;
+            u32 mLabeledWallLabels;
+        };
+
         struct Header {
             f32 m_0;
             gfl::Vec2 mBoundsMin;
@@ -59,8 +81,7 @@ public:
             int mIntParams2[4];
             float mFloatParams2[3];
             float mFloatParams3[3];
-            string32 mStringParam1;
-            u8 mTheRest[0x120];
+            string64 mStringParams[3];
         };
 
         struct CommonGimmick {
@@ -68,6 +89,7 @@ public:
             gfl::Vec3 mPosition;
             CommonGimmickParams mParams;
         };
+
 
         // variable length structure
         struct Path {
@@ -92,13 +114,21 @@ public:
             MapdataParams mParams;
             gfl::Vec3 mPosition;
         };
+
     };
 
-    static Mapdata* Parse(const char* mapbinPath, bool isMission);
+    static Mapdata::Mapbin::File* Parse(const char* mapbinPath, bool isMission);
 
+    struct StageInfo {
+
+    };
 
 public:
-    
+    STRUCT_FILL(0x1C);
+    int mStageCount;
+    StageInfo* mStageInfo;
+
+    // size unk
 };
 
 
