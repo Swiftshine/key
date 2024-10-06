@@ -24,6 +24,7 @@ public:
     bool LoadResources();
     Mapdata::Mapbin::File* GetLevelSectionByIndex(int sectionID) DONT_INLINE_CLASS;
     void ClearMapdata();
+
     inline Stage* GetArchiveStage() {
         return &mArchiveStage;
     }
@@ -35,6 +36,42 @@ private:
     void CopyBGData(BGData* data) DONT_INLINE_CLASS;
     void LoadMapdataFromFolder(int stageID) DONT_INLINE_CLASS;
     void ProcessLevelData() DONT_INLINE_CLASS;
+
+    inline bool CheckBGResFileInfo() {
+        if (nullptr != mBGResFileInfo) {
+            if (0 != (256 & mBGResFileInfo->GetFlags())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    inline bool CheckMapdataResFileInfo() {
+        if (nullptr != mMapdataResFileInfo) {
+            if (0 != (256 & mMapdataResFileInfo->GetFlags())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    inline bool CheckCommonResFileInfo() {
+        if (nullptr != mCommonResFileInfo) {
+            if (0 != (256 & mCommonResFileInfo->GetFlags())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
 private:
     gfl::ScopedPointer<StageResources> mStageResources;
     gfl::ResFileInfo* mBGResFileInfo;
