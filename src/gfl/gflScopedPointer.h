@@ -62,14 +62,25 @@ namespace gfl {
     };
 
     template <typename T>
-    inline bool operator==(T* lhs, PointerBase<T>* rhs) {
+    static inline bool operator==(T* lhs, PointerBase<T>& rhs) {
+        return rhs == lhs;
+    }
+
+    template <typename T>
+    static inline bool operator!=(T* lhs, PointerBase<T>& rhs) {
         return rhs != lhs;
     }
 
     template <typename T>
-    inline bool operator==(T* lhs, PointerBase<T>& rhs) {
-        return rhs != lhs;
+    static inline bool operator==(int lhs, PointerBase<T>& rhs) {
+        return rhs == (T*)lhs;
     }
+
+    template <typename T>
+    static inline bool operator!=(int lhs, PointerBase<T>& rhs) {
+        return (T*)lhs != rhs;
+    }
+
 
     template <typename T>
     class ScopedPointer : public PointerBase<T> {
@@ -111,6 +122,7 @@ namespace gfl {
             mPointer = nullptr;
         }
     };
+
 
     template <typename T>
     class FreedScopedPointer : public PointerBase<T> {
