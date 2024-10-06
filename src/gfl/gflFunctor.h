@@ -54,19 +54,19 @@ namespace gfl {
         virtual FunctorT* Clone();
         virtual ~FunctorClassMethod0();
 
-        inline SetOwner(OwnerT owner) {
+        inline void SetOwner(OwnerT owner) {
             mOwner = owner;
         }
 
-        inline SetOwner(void* owner) {
+        inline void SetOwner(void* owner) {
             mOwner = (OwnerT)owner;
         }
 
-        inline SetFunction(FunctionT function) {
+        inline void SetFunction(FunctionT function) {
             mFunction = function;
         }
 
-        inline SetFunction(void* function) {
+        inline void SetFunction(void* function) {
             mFunction = function;
         }
     private:
