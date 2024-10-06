@@ -30,8 +30,6 @@ StageResourceManager::StageResourceManager()
     memset(mCurrentSections, 0, 0x78);
 }
 
-// this is actually a destructor but i haven't 
-// figured out the whole mapdata thing yet
 extern "C" void DestroyMapdata(Mapdata::Mapbin::File* mapdata);
 
 StageResourceManager::~StageResourceManager() {
