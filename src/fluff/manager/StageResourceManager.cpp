@@ -70,7 +70,6 @@ void StageResourceManager::LoadStage(int stageID) {
     mLevelProcessed = false;
 }
 
-// not matched yet
 bool StageResourceManager::LoadResources() {
     gfl::GfArch* archive;
     bool preview;
@@ -118,52 +117,51 @@ bool StageResourceManager::LoadResources() {
 
             CopyBGData(bgData);
         }
-        ret = true;
+        return true;
     } else {
-        gfl::ResFileInfo* resFileInfo = mBGResFileInfo;
-
-        if (nullptr != resFileInfo) {
-            if (0 == 256 & resFileInfo->GetFlags()) {
-                ret = false;
-            } else {
+        if (nullptr != mBGResFileInfo) {
+            if (0 != (256 & mBGResFileInfo->GetFlags())) {
                 ret = true;
+            } else {
+                ret = false;
             }
         } else {
             ret = true;
         }
 
-        if (ret) {
+        
+        if (!ret) {
+            ret = false;
+        } else {
             if (nullptr != mMapdataResFileInfo) {
-                if (0 == 256 & resFileInfo->GetFlags()) {
-                    ret = false;
-                } else {
+                if (0 != (256 & resFileInfo->GetFlags())) {
                     ret = true;
+                } else {
+                    ret = false;
                 }
             } else {
                 ret = true;
             }
 
-            if (ret) {
-                if (!mCommonValid) {
-
+            if (!ret) {
+                return false;
+            } else {
+                if (mCommonValid) {
                     if (nullptr != mCommonResFileInfo) {
-                        if (0 == 256 & mCommonResFileInfo->mFlags) {
-                            ret = false;
-                        } else {
+                        if (0 != (256 & mCommonResFileInfo->mFlags)) {
                             ret = true;
+                        } else {
+                            ret = false;
                         }
                     } else {
                         ret = true;
                     }
-
-
                     if (!ret) {
                         return false;
                     }
                 }
-
                 if (!mLevelProcessed) {
-                    void* archive = nullptr != resFileInfo ? resFileInfo->GetGfArch() : nullptr;
+                    void* archive = nullptr != mBGResFileInfo ? mBGResFileInfo->GetGfArch() : nullptr;
                     if (nullptr != archive) {
                         BGData* data = nullptr != mBGResFileInfo ? (BGData*)mBGResFileInfo->GetGfArch() : nullptr;
                         CopyBGData(data);
@@ -171,15 +169,16 @@ bool StageResourceManager::LoadResources() {
                     ProcessLevelData();
                     mLevelProcessed = true;
                 }
-                // return true;
                 
             }
+            ret = false;
         }
 
         ret = true;
     }
     return ret;
 }
+
 
 Mapdata::Mapbin::File* StageResourceManager::GetLevelSectionByIndex(int sectionID) {
     return mCurrentSections[sectionID];
