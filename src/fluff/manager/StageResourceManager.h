@@ -19,21 +19,21 @@ public:
 
     void LoadStage(int stageID);
     bool LoadResources();
-    Mapdata* GetLevelSection(int sectionID);
+    Mapdata* GetLevelSectionByIndex(int sectionID);
     void ClearMapdata();
     inline Stage* GetArchiveStage() {
         return &mArchiveStage;
     }
 private:
-    bool LoadBGFromArchive(int resourceID);
+    bool LoadBGFromArchive(int resourceID) DONT_INLINE_CLASS;
     void LoadBGFromFolder(int resourceID) DONT_INLINE_CLASS;
     void LoadCommonFromArchive(int stageID);
     bool LoadCommonFromFolder(int stageID) DONT_INLINE_CLASS;
     void CopyBGData(BGData* data) DONT_INLINE_CLASS;
     void LoadMapdataFromFolder(int stageID) DONT_INLINE_CLASS;
-    void ProcessLevelData();
+    void ProcessLevelData() DONT_INLINE_CLASS;
 private:
-    gfl::ScopedPointer<StageResources> mResourceList;
+    gfl::ScopedPointer<StageResources> mStageResources;
     gfl::ResFileInfo* mBGResFileInfo;
     BGData* mBGData;
     gfl::ResFileInfo* mCommonResFileInfo;
@@ -43,9 +43,6 @@ private:
     bool mLoadFromArchive;
     Stage mArchiveStage;
     gfl::ResFileInfo* mMapdataResFileInfo;
-    // due to the fact that there's a for loop in this class's destructor,
-    // this is probably some kind of array container rather than just
-    // a raw array
     Mapdata* mCurrentSections[0x1E];
 };
 #endif

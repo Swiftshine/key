@@ -127,7 +127,8 @@ public:
     static bool IsInMission();
     static int  GetCurrentMissionID();
     static int  GetCurrentMissionType();
-    static uint  fn_80012330();
+    // Returns a string related to the current mission type.
+    static const char* GetCurrentMissionString();
     static bool HasCurrentMissionIndicator(std::string& str);
     static class MissionGameCtrl* GetMissionGameCtrl();
     // Mission related.

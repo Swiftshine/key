@@ -16,18 +16,18 @@
 static uint lbl_808E6BE8 = 0;
 
 StageResourceManager::StageResourceManager()
-    : mResourceList(nullptr)
+    : mStageResources(nullptr)
     , mBGResFileInfo(nullptr)
     , mBGData(nullptr)
     , mCommonResFileInfo(nullptr)
     , mCommonValid(false)
     , mLevelProcessed(false)
     , mLoadFromArchive(false)
-    , mArchiveStage(-1)
+    , mArchiveStage(-1, -1, 1)
     , mMapdataResFileInfo(nullptr)
 {
-    mResourceList.Create(gfl::HeapID::Work);
-    memset(&mCurrentSections, 0, 0x78);
+    mStageResources.Create(gfl::HeapID::Work);
+    memset(mCurrentSections, 0, 0x78);
 }
 
 // this is actually a destructor but i haven't 
@@ -72,6 +72,7 @@ void StageResourceManager::LoadStage(int stageID) {
     mLevelProcessed = false;
 }
 
+// not matched yet
 bool StageResourceManager::LoadResources() {
     gfl::GfArch* archive;
     bool preview;
@@ -137,28 +138,23 @@ bool StageResourceManager::LoadResources() {
         ret = false;
     } else {
         ProcessLevelData();
-        // unfinished section
+        Mapdata* mapdata = GetLevelSectionByIndex(0);
+        u8* unkPtr = nullptr;
 
-        /* // crude Ghidra output
-
-            mapdata = StageResources::GetLevelSection(resources,0);
-            iVar6 = NULL;
-            for (i = *(mapdata + 0x20); i != 0; i--) {
-              iVar1 = *(mapdata + 0x24);
-              if (*(iVar6->mIntParams + iVar1 + -0x34) == 0x13) {
-                resources->_1C = -1;
-                resources->mArchiveStageID = -1;
-                resources->_24 = 1;
-                resources->mArchiveStageID = *(iVar6->mIntParams + iVar1);
-                resources->_24 = *(iVar6->mIntParams + iVar1 + 4);
-                resources->mLoadFromArchive = true;
+        for (int i = *((u8*)mapdata + 0x20); 0 != i; i++) {
+            unkPtr = *((u8**)mapdata + 0x24);
+            int unkInt = *((u8*)mapdata + 0x24);
+            if (0x13 == *(unkPtr + unkInt)) {
+                mArchiveStage = Stage(-1, -1, 1);
+                mArchiveStage.SetResourceID(*(unkPtr + unkInt + 0x34));
+                mArchiveStage.SetSectionID(*(unkPtr + unkInt + 0x38));
+                mLoadFromArchive = true;
                 break;
-              }
-              iVar6 += 1;
             }
-        */
 
-        //
+            unkPtr += 0x9C;
+        }
+
         if (mLoadFromArchive) {
             LoadBGFromArchive(mArchiveStage.GetStageID());
             LoadCommonFromArchive(mArchiveStage.GetStageID());
@@ -178,7 +174,7 @@ bool StageResourceManager::LoadResources() {
     return ret;
 }
 
-Mapdata* StageResourceManager::GetLevelSection(int sectionID) {
+Mapdata* StageResourceManager::GetLevelSectionByIndex(int sectionID) {
     return mCurrentSections[sectionID];
 }
 
@@ -347,20 +343,20 @@ void StageResourceManager::ProcessLevelData() {
                 ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = nullptr;
             }
 
-            unkStruct = (unk_struct*)(((u8*)unkStruct) + 4);
             unk += 0x400;
+            unkStruct = (unk_struct*)(((u8*)unkStruct) + 4);
         }
     } else {
         char mapbinPath[0x100];
-        uint unk = lbl_808E6BE8;
+        const char* mapbinType = "";
 
         if (GameManager::IsInMission()) {
-            unk = GameManager::fn_80012330();
+            mapbinType = GameManager::GetCurrentMissionString();
         }
 
         unkStruct = (unk_struct*)this;
         for (uint i = 0; i < 0x1E; i++) {
-            snprintf(mapbinPath, sizeof(mapbinPath), "mapdata/stage%03d/%s%d.mapbin", mFolderStageID, unk);
+            snprintf(mapbinPath, sizeof(mapbinPath), "mapdata/stage%03d/%s%d.mapbin", mFolderStageID, mapbinType, i);
             if (gfl::ResFileInfo::FileExists(mapbinPath)) {
                 ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = Mapdata::Parse(mapbinPath, inMission);
             } else {
