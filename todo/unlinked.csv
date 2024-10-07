@@ -5,4 +5,4 @@
 "fluff/object/FlfHandleList.cpp","100%*","*weak destructor (branch)",
 "gfl/gflTaskInfo.cpp","100%*","*weak destructor (branch)",
 "fluff/util/FullSortSceneUtil.cpp","100%","data",
-"fluff/manager/StageResourceManager.cpp","100%","data (strings)",
+"fluff/manager/StageResourceManager.cpp","100%","cyclic dependency/string data",
