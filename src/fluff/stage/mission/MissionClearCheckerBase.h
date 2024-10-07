@@ -2,6 +2,9 @@
 #define FLUFF_MISSIONCLEARCHECKERBASE_H
 
 #include "types.h"
+#include "gfl/gflMemoryUtil.h"
+#include "stage/mission/MissionInfo.h"
+#include "manager/WorkManager.h"
 
 class MissionGameCtrl;
 
@@ -13,18 +16,27 @@ protected:
         Failed = 2,
     );
 
+    ENUM_CLASS(MissionEndReason,
+        Succeeded = 0,
+
+        Bead_TimeUp = 2,
+    );
+
 public:
     MissionClearCheckerBase();
     virtual ~MissionClearCheckerBase();
 
-    DECL_WEAK virtual void vfC();
+    DECL_WEAK virtual void ResetMissionStatus();
     // returns the current mission status
     virtual int Process() = 0;
-    virtual void vf14();
-    virtual void vf18();
+    virtual void InitMissionRequirements();
+    virtual void InitMissionTimer();
 
-    void fn_804F5720(int arg1, int arg2);
-    bool fn_804F5738(void* arg1);
+    void EndMission(int status, int reason);
+    bool TimeRanOut(InStageWork* stageWork);
+    void SetMissionGameCtrl(MissionGameCtrl* missionGameCtrl);
+
+    static void InitChecker(MissionClearCheckerBase* checker, MissionGameCtrl* missionGameCtrl);
 protected:
     int mMissionStatus;
     int m_8;

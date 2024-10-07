@@ -415,7 +415,7 @@ config.libs = [
         "cflags": [*cflags_fluff_manager],
         "host": False,
         "objects": [
-            Object(NonMatching, "fluff/manager/StageResourceManager.cpp"),
+            Object(Equivalent, "fluff/manager/StageResourceManager.cpp"),
             Object(Matching, "fluff/manager/LevelManager.cpp"),
         ],
     },
@@ -489,6 +489,17 @@ config.libs = [
         "objects" : [
             # fluff/stage
             Object(NonMatching, "fluff/stage/StageResources.cpp"),
+
+        ],
+    },
+    {
+        "lib" : "fluff/stage/mission",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_util,],
+        "host": False,
+        "objects" : [
+            # fluff/stage/mission/
+            Object(Equivalent, "fluff/stage/mission/MissionBeadClearChecker.cpp"),
 
         ],
     },

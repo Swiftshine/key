@@ -7,12 +7,18 @@ class MissionBeadClearChecker : public MissionClearCheckerBase {
 public:
     static MissionBeadClearChecker* Build(MissionGameCtrl* missionGameCtrl);
 
-    MissionBeadClearChecker(MissionGameCtrl* missionGameCtrl);
+    MissionBeadClearChecker();
     virtual ~MissionBeadClearChecker();
 
     virtual int Process() override;
-    virtual void vf14() override;
-    virtual void vf18() override;
+    virtual void InitMissionRequirements() override;
+    virtual void InitMissionTimer() override;
+
+    void SetMissionGameCtrl(MissionGameCtrl* missionGameCtrl);
+
+    inline void SetBeadThreshold(int newThreshold) {
+        mBeadThreshold = newThreshold;
+    }
 private:
     int mBeadThreshold;
 };

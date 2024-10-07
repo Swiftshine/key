@@ -117,6 +117,10 @@ fluff/object/gmk/GmkCamRectCtrl.cpp:
 	.rodata     start:0x8081B258 end:0x8081B268
 	.data       start:0x80893120 end:0x80893200
 
+fluff/stage/mission/MissionBeadClearChecker.cpp:
+	.text       start:0x804F5750 end:0x804F5970
+	.data       start:0x80893560 end:0x80893588
+
 fluff/graphics/BgBackImage.cpp:
 	.text       start:0x80638AD0 end:0x8063914C
 
