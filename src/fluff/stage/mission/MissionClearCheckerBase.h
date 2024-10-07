@@ -6,19 +6,27 @@
 class MissionGameCtrl;
 
 class MissionClearCheckerBase {
+protected:
+    ENUM_CLASS(MissionStatus,
+        Playing = 0,
+        Succeeded = 1,
+        Failed = 2,
+    );
+
 public:
     MissionClearCheckerBase();
     virtual ~MissionClearCheckerBase();
 
     DECL_WEAK virtual void vfC();
-    virtual void vf10() = 0;
+    // returns the current mission status
+    virtual int Process() = 0;
     virtual void vf14();
     virtual void vf18();
 
     void fn_804F5720(int arg1, int arg2);
     bool fn_804F5738(void* arg1);
-private:
-    int m_4;
+protected:
+    int mMissionStatus;
     int m_8;
     MissionGameCtrl* mMissionGameCtrl;
 };
