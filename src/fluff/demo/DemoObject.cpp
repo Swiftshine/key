@@ -2,13 +2,12 @@
 
 using namespace demo;
 
-uint lbl_80800ff8[8];
+const uint lbl_80800ff8[8] = {};
 
-// https://decomp.me/scratch/yFeMe
 DemoObject::DemoObject(gfl::Task* parentTask, const char* taskName, uint index)
     : mTask(nullptr)
+    , m_8(lbl_80800ff8[index])
 {
-    m_8 = lbl_80800ff8[index];
     mTask.Create(InitTask(parentTask, 0xF1, taskName, m_8));
 }
 
