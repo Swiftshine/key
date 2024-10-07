@@ -24,7 +24,7 @@ protected:
 
 public:
     MissionClearCheckerBase();
-    virtual ~MissionClearCheckerBase();
+    DECL_WEAK virtual ~MissionClearCheckerBase();
 
     DECL_WEAK virtual void ResetMissionStatus();
     // returns the current mission status
@@ -39,7 +39,7 @@ public:
     static void InitChecker(MissionClearCheckerBase* checker, MissionGameCtrl* missionGameCtrl);
 protected:
     int mMissionStatus;
-    int m_8;
+    int mMissionEndReason;
     MissionGameCtrl* mMissionGameCtrl;
 };
 

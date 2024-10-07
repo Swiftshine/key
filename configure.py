@@ -499,7 +499,8 @@ config.libs = [
         "host": False,
         "objects" : [
             # fluff/stage/mission/
-            Object(Equivalent, "fluff/stage/mission/MissionBeadClearChecker.cpp"),
+            Object(NonMatching, "fluff/stage/mission/MissionClearCheckerBase.cpp"),
+            Object(NonMatching, "fluff/stage/mission/MissionBeadClearChecker.cpp"),
 
         ],
     },
