@@ -1,4 +1,53 @@
-#include "stage/mission/MissionBeadClearChecker.h"
+#include "stage/mission/MissionClearChecker.h"
+
+/* Base */
+
+MissionClearCheckerBase::MissionClearCheckerBase() { }
+
+MissionClearCheckerBase::~MissionClearCheckerBase() { }
+
+void MissionClearCheckerBase::SetMissionGameCtrl(MissionGameCtrl* missionGameCtrl) {
+    mMissionStatus = MissionStatus::Playing;
+    mMissionEndReason = 0;
+    mMissionGameCtrl = missionGameCtrl;
+}
+
+void MissionClearCheckerBase::ResetMissionStatus() {
+    mMissionStatus = 0;
+    mMissionEndReason = 0;
+}
+
+void MissionClearCheckerBase::InitMissionRequirements() {
+    EndMission(1, 0);
+}
+
+void MissionClearCheckerBase::InitMissionTimer() {
+    EndMission(2, 2);
+}
+
+void MissionClearCheckerBase::EndMission(int status, int reason) {
+    if (MissionStatus::Playing != mMissionStatus) {
+        return;
+    }
+
+    mMissionStatus = status;
+    mMissionEndReason = reason;
+}
+
+bool MissionClearCheckerBase::TimeRanOut(InStageWork* work) {
+    int remain = work->GetTimeRemaining();
+
+    bool ret = false;
+    
+    if (remain <= 0) {
+        ret = true;
+    }
+    
+    return ret;
+}
+
+
+/* Bead */
 
 MissionBeadClearChecker* MissionBeadClearChecker::Build(MissionGameCtrl* missionGameCtrl) {
     MissionBeadClearChecker* checker = new (gfl::HeapID::Work) MissionBeadClearChecker;
@@ -22,7 +71,7 @@ void MissionClearCheckerBase::InitChecker(MissionClearCheckerBase* checker, Miss
     checker->SetMissionGameCtrl(missionGameCtrl);
     
     // we'll just use MissionBeadClearChecker as an example
-    ((MissionBeadClearChecker*)(checker))->SetBeadThreshold(fn_80723480(fn_80013654(missionGameCtrl)));
+    // ((MissionBeadClearChecker*)(checker))->SetBeadThreshold(fn_80723480(fn_80013654(missionGameCtrl)));
 }
 
 int MissionBeadClearChecker::Process() {
@@ -36,7 +85,7 @@ int MissionBeadClearChecker::Process() {
 
         if (TimeRanOut(work)) {
             // ...because we ran out of time
-            EndMission(MissionStatus::Failed, MissionEndReason::Bead_TimeUp);
+            EndMission(MissionStatus::Failed, MissionEndReason::TimeUp);
         } // ...because we're not done yet
     }
 
