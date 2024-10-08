@@ -118,7 +118,7 @@ fluff/object/gmk/GmkCamRectCtrl.cpp:
 	.data       start:0x80893120 end:0x80893200
 
 fluff/stage/mission/MissionClearChecker.cpp:
-	.text 		start:0x804f56dc end:0x804f5f34
+	.text       start:0x804F56DC end:0x804F5F34
 
 fluff/graphics/BgBackImage.cpp:
 	.text       start:0x80638AD0 end:0x8063914C
