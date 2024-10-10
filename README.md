@@ -1,7 +1,15 @@
-# Kirby's Epic Yarn  ![Matched progress Badge](https://img.shields.io/badge/matched-0.25%25-blue) ![Linked progress Badge](https://img.shields.io/badge/linked-0.07%25-blue) ![Data Progress Badge](https://img.shields.io/badge/data-0.01%25-blue) [![Discord Badge]][discord]
+# Kirby's Epic Yarn
+[![Code Progress]][progress] [![Linked Progress]][progress] [![Data Progress]][progress] [![Discord Badge]][discord]
+
+=============
+
+[Code Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=code&label=Code
+[Linked Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=complete_code&label=Linked%20Code&category=all
+[Data Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=code&label=Data
 
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
+[progress]: decomp.dev/Swiftshine/key
 
 A work-in-progress decompilation of Kirby's Epic Yarn.
 
