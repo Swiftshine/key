@@ -3,9 +3,9 @@
 
 =============
 
-[Code Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=code&label=Code
-[Linked Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=complete_code&label=Linked%20Code&category=all
-[Data Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=code&label=Data
+[Code Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=code&label=code
+[Linked Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=complete_code&label=linked%20code&category=all
+[Data Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=data&label=data
 
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
