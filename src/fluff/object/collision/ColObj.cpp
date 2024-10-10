@@ -1,8 +1,9 @@
 #include "object/collision/ColObj.h"
 #include "object/collision/KdTree.h"
+#include "object/collision/ColObjTree.h"
 
 void ColObj::AddToTree() {
-    KdTree* tree = KdTree::ColObjTree();
+    KdTree* tree = (KdTree*) new ColObjTree;
     tree->AddItem(this);
     mTree = tree;
 }

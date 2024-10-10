@@ -100,5 +100,5 @@ bool GimmickUtil::fn_800507C8(int id) {
 }
 
 void GimmickUtil::GetButtonBRRES(gfl::ResInfo** dest) {
-    FlfMdlDraw::GetFileInfoFromArchive(dest, "gimmick/button/button.brres");
+    FlfMdlDraw::GetFileInfoFromArchive((gfl::ResFileInfo*&)dest, "gimmick/button/button.brres");
 }
