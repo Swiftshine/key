@@ -11,17 +11,17 @@ public:
     virtual ~InStageWork();
 
     void SetBeadCount(int index, int max);
-    void SetTimeRemaining(uint time);
+    void SetTimeRemaining(int time);
     
-    inline uint GetTimeLimit() {
+    inline int GetTimeLimit() {
         return mTimeLimit;
     }
 
-    inline uint GetTimeRemaining() {
+    inline int GetTimeRemaining() {
         return mTimeRemaining;
     }
 
-    inline uint GetTimeElapsed() {
+    inline int GetTimeElapsed() {
         return mTimeLimit - mTimeRemaining;
     }
 
@@ -36,8 +36,8 @@ private:
     Stage mStage;
     void* m_10;
     int m_14;
-    uint mTimeLimit; // milliseconds
-    uint mTimeRemaining; // milliseconds
+    int mTimeLimit; // milliseconds
+    int mTimeRemaining; // milliseconds
     int mNumBeadsCollected;
     int m_24;
 
