@@ -6,6 +6,7 @@
 #include "gflVec3.h"
 #include "object/collision/KdTree.h"
 #include "object/FlfGameObj.h"
+#include "object/collision/CollisionData.h"
 
 class ColObj {
 public:
@@ -39,8 +40,8 @@ public:
 
     void Update();
 public:
-    void* mCollisionData1;
-    void* mCollisionData2;
+    CollisionData* mCollisionData1;
+    CollisionData* mCollisionData2;
 };
 
 ASSERT_SIZE(ColObjTrans, 0x24)

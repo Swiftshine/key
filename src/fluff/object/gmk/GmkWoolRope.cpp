@@ -115,7 +115,7 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* wBuildInfo, const ch
 
     gfl::ResFileInfo* resfileinfo;
 
-    FlfMdlDraw::GetFileInfoFromArchive((gfl::ResInfo**)&resfileinfo, path);
+    FlfMdlDraw::GetFileInfoFromArchive(resfileinfo, path);
 
     nw4r::g3d::ResFile resFile(nullptr != resfileinfo ? resfileinfo->GetGfArch() : nullptr);
 

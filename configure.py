@@ -19,6 +19,7 @@ from typing import Any, Dict, List
 
 from tools.project import (
     Object,
+    ProgressCategory,
     ProjectConfig,
     calculate_progress,
     generate_build,
@@ -72,11 +73,6 @@ parser.add_argument(
     help="generate map file(s)",
 )
 parser.add_argument(
-    "--no-asm",
-    action="store_true",
-    help="don't incorporate .s files from asm directory",
-)
-parser.add_argument(
     "--debug",
     action="store_true",
     help="build with debug info (non-matching)",
@@ -95,6 +91,12 @@ parser.add_argument(
     help="path to decomp-toolkit binary or source (optional)",
 )
 parser.add_argument(
+    "--objdiff",
+    metavar="BINARY | DIR",
+    type=Path,
+    help="path to objdiff-cli binary or source (optional)",
+)
+parser.add_argument(
     "--sjiswrap",
     metavar="EXE",
     type=Path,
@@ -111,6 +113,12 @@ parser.add_argument(
     action="store_true",
     help="builds equivalent (but non-matching) or modded objects",
 )
+parser.add_argument(
+    "--no-progress",
+    dest="progress",
+    action="store_false",
+    help="disable progress calculation",
+)
 args = parser.parse_args()
 
 config = ProjectConfig()
@@ -120,21 +128,24 @@ version_num = VERSIONS.index(config.version)
 # Apply arguments
 config.build_dir = args.build_dir
 config.dtk_path = args.dtk
+config.objdiff_path = args.objdiff
 config.binutils_path = args.binutils
 config.compilers_path = args.compilers
-config.debug = args.debug
 config.generate_map = args.map
 config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
+config.progress = args.progress
 if not is_windows():
     config.wrapper = args.wrapper
-if args.no_asm:
+# Don't build asm unless we're --non-matching
+if not config.non_matching:
     config.asm_dir = None
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20231018"
+config.compilers_tag = "20240706"
 config.dtk_tag = "v1.1.0"
+config.objdiff_tag = "v2.2.1"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.11"
 
@@ -144,18 +155,23 @@ config.check_sha_path = Path("config") / config.version / "build.sha1"
 config.asflags = [
     "-mgekko",
     "--strip-local-absolute",
-    "-i include",
+    "-I include",
     f"-I build/{config.version}/include",
     f"--defsym version={version_num}",
 ]
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
-    # "-warn off",
-    "-listclosure", # Uncomment for Wii linkers
 ]
+if args.debug:
+    config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
+if args.map:
+    config.ldflags.append("-mapunused")
+    # config.ldflags.append("-listclosure") # For Wii linkers
+
 # Use for any additional files that should cause a re-configure when modified
 config.reconfig_deps = []
+
 
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
@@ -204,7 +220,7 @@ cflags_base = [
 
 
 # Debug flags
-if config.debug:
+if args.debug:
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
     cflags_base.append("-DNDEBUG=1")
@@ -363,6 +379,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_gfl, "-pragma \"merge_float_consts on\""],
         "host": False,
+        "progress_category": "gfl",
         "objects": [
             Object(Matching, "gfl/gflGfCompression.cpp"),
             Object(NonMatching, "gfl/gflMemory.cpp"),
@@ -388,6 +405,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": cflags_fluff,
         "host": False,
+        "progress_category": "fluff",
         "objects": [
             Object(Matching, "fluff/main.cpp"),
         ],
@@ -397,6 +415,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": cflags_fluff,
         "host": False,
+        "progress_category": "fluff",
         "objects": [
 
             # fluff/object/
@@ -414,6 +433,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_manager],
         "host": False,
+        "progress_category": "fluff",
         "objects": [
             Object(Equivalent, "fluff/manager/StageResourceManager.cpp"),
             Object(Matching, "fluff/manager/LevelManager.cpp"),
@@ -424,6 +444,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_base_no_inline_deferred, "-pragma \"merge_float_consts on\""],
         "host": False,
+        "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/graphics/NwAnmCtrl.cpp"),
             Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
@@ -435,6 +456,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff,],
         "host": False,
+        "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/object/gmk/GmkCamRectCtrl.cpp"),
             Object(NonMatching, "fluff/object/gmk/GmkColAnimMdl.cpp"),
@@ -448,6 +470,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_util, "-pragma \"merge_float_consts on\""],
         "host": False,
+        "progress_category": "fluff",
         "objects" : [
             Object(NonMatching, "fluff/object/collision/FlfRideHitBase.cpp"),
             Object(NonMatching, "fluff/object/collision/KdTreeNode.cpp"),
@@ -460,6 +483,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_util, "-pragma \"merge_float_consts on\""],
         "host": False,
+        "progress_category": "fluff",
         "objects" : [
             # fluff/util/
             Object(Matching, "fluff/util/CollisionFlagUtil.cpp"),
@@ -476,6 +500,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_util],
         "host": False,
+        "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/demo/DemoObject.cpp"),
         ],
@@ -486,6 +511,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_util,],
         "host": False,
+        "progress_category": "fluff",
         "objects" : [
             # fluff/stage
             Object(NonMatching, "fluff/stage/StageResources.cpp"),
@@ -497,6 +523,7 @@ config.libs = [
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_util,],
         "host": False,
+        "progress_category": "fluff",
         "objects" : [
             # fluff/stage/mission/
             Object(NonMatching, "fluff/stage/mission/MissionClearChecker.cpp"),
@@ -504,6 +531,14 @@ config.libs = [
         ],
     },
 ]
+
+config.progress_categories = [
+    ProgressCategory("fluff", "Game Code"),
+    ProgressCategory("gfl", "Good-Feel Library Code"),
+    ProgressCategory("sdk", "SDK Code"),
+]
+
+config.progress_each_module = args.verbose
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json

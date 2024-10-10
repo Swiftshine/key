@@ -56,26 +56,26 @@ void RenderObj::vf20(bool arg1) {
 // https://decomp.me/scratch/EKLdu
 bool RenderObj::vf34(float& arg0, float& arg1, float& arg2, float& arg3) {
     bool b;
-    float f1;
-    float f2;
-    float f3;
+    // float f1;
+    // float f2;
+    // float f3;
 
-    if (!vf1C()) {
-        b = true;
-    } else {
-        f3 = vf2C();
+    // if (!vf1C()) {
+    //     b = true;
+    // } else {
+    //     f3 = vf2C();
 
-        if (0.0f > f3) {
-            vf28(f1);
-            if ((arg0 - f1) * (arg0 - f1) <= (arg2 + f3) * (arg2 + f3)) {
-                b = (arg3 + f3) * (arg3 + f3) < (arg1 - f2) * (arg1 - f2);
-            } else {
-                b = true;
-            }
-        } else {
-            b = false;
-        }
-    }
+    //     if (0.0f > f3) {
+    //         vf28(f1);
+    //         if ((arg0 - f1) * (arg0 - f1) <= (arg2 + f3) * (arg2 + f3)) {
+    //             b = (arg3 + f3) * (arg3 + f3) < (arg1 - f2) * (arg1 - f2);
+    //         } else {
+    //             b = true;
+    //         }
+    //     } else {
+    //         b = false;
+    //     }
+    // }
 
     return b;
 }
