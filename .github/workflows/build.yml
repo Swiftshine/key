@@ -48,7 +48,7 @@ jobs:
       continue-on-error: true
       env:
         # Replace with your project slug
-        PROGRESS_SLUG: prime
+        PROGRESS_SLUG: key
         # Set the API key in your repository secrets
         PROGRESS_API_KEY: ${{ secrets.PROGRESS_API_KEY }}
       run: |
