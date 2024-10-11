@@ -1,6 +1,4 @@
-# Kirby's Epic Yarn
-[![Code Progress]][progress] [![Linked Progress]][progress] [![Data Progress]][progress] [![Discord Badge]][discord]
-=============
+# Kirby's Epic Yarn [![Code Progress]][progress] [![Linked Progress]][progress] [![Data Progress]][progress] [![Discord Badge]][discord]
 
 [Code Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=code&label=code
 [Linked Progress]: https://decomp.dev/Swiftshine/key.svg?mode=shield&measure=complete_code&label=linked%20code&category=all
