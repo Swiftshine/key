@@ -61,7 +61,7 @@ private:
     float m_140;
     int m_144;
     int m_148;
-    int m_148;
+    int m_14C;
 };
 
 ASSERT_SIZE(SpringBase, 0x150);
