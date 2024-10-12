@@ -530,6 +530,17 @@ config.libs = [
 
         ],
     },
+    {
+        "lib" : "fluff/stage/work",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_util,],
+        "host": False,
+        "progress_category": "fluff",
+        "objects" : [
+            # fluff/work/
+            Object(NonMatching, "fluff/work/InStageWork.cpp"),
+        ],
+    },
 ]
 
 config.progress_categories = [

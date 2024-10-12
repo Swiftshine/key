@@ -92,6 +92,9 @@ fluff/object/FlfHandleList.cpp:
 fluff/object/collision/FlfRideHitBase.cpp:
 	.text       start:0x80183CD8 end:0x80183DB8
 
+fluff/work/InStageWork.cpp:
+	.text       start:0x801FED48 end:0x801FFAC0
+
 fluff/demo/DemoObject.cpp:
 	.text       start:0x802A4DD8 end:0x802A5038
 
