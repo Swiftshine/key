@@ -4,7 +4,11 @@
 #include "gflResInfo.h"
 #include "gflFixedString.h"
 
+
 namespace gfl {
+    class GfArch;
+    class ResFileInfo;
+    
     class ResArchivedFileInfo : public ResInfo {
     public:
         ResArchivedFileInfo();

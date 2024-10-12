@@ -14,10 +14,10 @@ public:
         mSecond = 0.0f;
     }
 
-    virtual ~KeyFrame();
+    inline virtual ~KeyFrame();
 private:
     void* m_4;
-    void* m_8;
+    int m_8;
     void* m_C;
     // these fields are guessed
     T mFirst;

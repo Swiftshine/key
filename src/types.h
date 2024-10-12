@@ -26,6 +26,18 @@ struct Rect {
     float h;
 };
 
+struct Vec2f {
+    float x;
+    float y;
+};
+
+struct Vec3f {
+    float x;
+    float y;
+    float z;
+};
+
+
 typedef int placeholder_t;
 
 typedef struct dummy_t { } dummy_t;
