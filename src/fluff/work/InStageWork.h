@@ -2,16 +2,22 @@
 #define FLUFF_INSTAGEWORK_H
 
 #include "types.h"
+#include "gfl/gflVec3.h"
 #include "stage/Stage.h"
 
 // size: 0x1E4
 class InStageWork {
+private:
+    struct InStageWork_struct {
+        STRUCT_FILL(0x30);
+    };
+
 public:
     InStageWork();
     DECL_WEAK virtual ~InStageWork();
 
     void Reset();
-    void CopyStage(Stage& stage, void* arg2);
+    void CopyStage(const Stage& stage, void* arg2);
     void Init();
     void fn_801FEEB8(int arg1);
     void SetTimeLimit(int limit);
@@ -29,7 +35,7 @@ public:
     int fn_801FF400();
     void AddNumZekeFound(int num);
     void SetMaxZekeFound(int max);
-    int GetNumZekeFound();
+    int GetMaxZekeFound();
     void fn_801FF428(float& arg1, int arg2);
     float fn_801FF448(int arg1);
     int fn_801FF46C(int arg1);
@@ -50,7 +56,7 @@ public:
     void fn_801FF964();
     void fn_801FF9A4();
     int fn_801FFA24();
-    void ResetMission();
+    void ResetMission(int arg1);
     void fn_801FFA84(int resourceID);
     bool fn_801FFAA0(int stageID);
 
@@ -75,11 +81,50 @@ private:
     int m_14;
     int mTimeLimit; // milliseconds
     int mTimeRemaining; // milliseconds
-    int mNumBeadsCollected;
-    int m_24;
 
-    // todo; research the rest
-    STRUCT_FILL(0x1E4 - 0x28);
+    union {
+        struct {
+            int mNumBeadsCollected;
+            int m_24;
+        };
+
+        struct {
+            int mBeadCollection_2[2];
+        };
+
+        struct {
+            bool mBeadsCounted;
+            int mBeadsCollected_3;
+        };
+    };
+
+    int m_28;
+    int m_2C;
+    bool m_30;
+    bool m_31;
+    bool m_32;
+    int m_34;
+    bool m_38;
+    int m_3C;
+    int m_40;
+    int m_44;
+    int mNumZekeFound;
+    int mMaxZekeFound;
+    float m_50;
+    float m_54;
+    float m_58;
+    int m_5C;
+    int m_60[4];
+    int m_70;
+    int m_74;
+    u8 m_78[0x18];
+    bool m_90;
+    bool m_91;
+    bool m_92;
+    bool m_93;
+    
+    // todo: the rest of this struct
+    STRUCT_FILL(0x1E4 - 0x94);
 };
 
 ASSERT_SIZE(InStageWork, 0x1E4);

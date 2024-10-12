@@ -43,15 +43,15 @@ public:
         mSectionID = other->mSectionID;
     }
 
-    int GetStageID() {
+    int GetStageID() const {
         return mStageID;
     }
 
-    int GetResourceID() {
+    int GetResourceID() const {
         return mResourceID;
     }
 
-    int GetSectionID() {
+    int GetSectionID() const {
         return mSectionID;
     }
 
