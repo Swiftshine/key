@@ -2,6 +2,7 @@
 #define FLUFF_SPRINGBASE_H
 
 #include "object/FlfGameObj.h"
+#include "gfl/gflTask.h"
 #include "graphics/KeyFrame.h"
 #include "gfl/gflArray.h"
 #include "gfl/gflResArchivedFileInfo.h"
@@ -57,7 +58,7 @@ public:
     };
 
     struct UnkStruct1 {
-        STRUCT_FILL(0x30);
+        STRUCT_FILL(0x34);
         int mCount;
     };
 
@@ -82,13 +83,13 @@ public:
 
 
     int fn_800086B0();
-    void fn_800086BC(uint index, bool value);
+    void fn_800086BC(uint index, bool value) DONT_INLINE_CLASS;
     void fn_800086D0(bool value);
     bool fn_80008738(uint index);
     void SetParticleEffectPositionByIndex(uint index, Vec3f& pos, bool syncPosition);
-    Vec3f GetParticleEffectPositionByIndex(uint index);
+    Vec3f GetParticleEffectPositionByIndex(uint index) DONT_INLINE_CLASS;
     void OffsetParticleEffectPositionByIndex(uint index, Vec3f& offset, bool syncPosition);
-    void OffsetParticleEffectPositionByIndex(uint index, Vec2f& vec, bool syncPosition);
+    void OffsetParticleEffectPositionByIndex(uint index, Vec2f& offset, bool syncPosition);
     Vec3f GetParticleEffectOffsetByIndex(uint index);
     Vec3f fn_80008908(uint index);
     Vec3f fn_80008930(uint index);

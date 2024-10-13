@@ -38,7 +38,18 @@ namespace gfl {
             mArray = other;
         }
 
-        inline T* get() { return mArray; }
+        inline T* get() {
+            return mArray;
+        }
+
+        inline T* ptr() {
+            return mArray;
+        }
+
+        operator T*() const {
+            return mArray;
+        }
+        
     private:
         T* mArray;
     };

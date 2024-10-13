@@ -32,6 +32,18 @@ struct Vec2f {
 };
 
 struct Vec3f {
+    inline Vec3f() {
+        x = 0.0f;
+        y = 0.0f;
+        z = 0.0f;
+    }
+
+    inline Vec3f(const Vec3f& other) {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+    }
+
     float x;
     float y;
     float z;
