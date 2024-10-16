@@ -88,8 +88,6 @@ bool BGST::File::ProcessLoadState() {
 
 
 void BGST::File::CopyImageData(void** cmprImage, void** i4Image, int id, int xGridIndex, int yGridIndex) {
-
- 
     BGST::Column* column = (BGST::Column*)GetByGrid(id, xGridIndex, yGridIndex);
     BGST::List* list = BGST::List::Instance();
     

@@ -10,7 +10,6 @@
 
 #include "gfl/gflFile.h"
 #include "gfl/gflScopedPointer.h"
-// todo - rename these "grid" functions to "column"
 
 namespace BGST {
     class File {
