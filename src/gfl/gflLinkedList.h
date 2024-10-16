@@ -79,11 +79,16 @@ namespace gfl {
             Iterator* mPrev;
         };
     public:
-        inline LinkedList()
-            : mCount(0)
-        { 
-            mFirst = reinterpret_cast<Node*>(&mLast);
+        inline LinkedList() {
+            mCount = 0; 
+            mFirst = (Node*)&mLast;
             mLast = mFirst;
+        }
+        
+        inline LinkedList(void* owner) {
+            mCount = 0; 
+            mFirst = (Node*)&mLast;
+            mLast = (Node*)owner;
         }
         
         inline ~LinkedList() {

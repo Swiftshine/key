@@ -88,25 +88,18 @@ bool BGST::File::ProcessLoadState() {
 
 
 void BGST::File::CopyImageData(void** cmprImage, void** i4Image, int id, int xGridIndex, int yGridIndex) {
-    struct unkstruct {
-        unsigned short m_0;
-        u32 m_4;
-        short m_8;
-        unsigned short m_A;
-        unsigned short mImageIndex;
-        unsigned short mShadowImageIndex;
-    };
- 
-    unkstruct* img = (unkstruct*)GetByGrid(id, xGridIndex, yGridIndex);
-    void* unk = lbl_808E4FD8;
-    
-    if (1 >= (unsigned short)(img->m_0 + 0xFFF9)) {
-        *cmprImage = GetBgImageSquare(unk, img->mImageIndex);
 
-        if (0xFFFE == img->m_A) {
+ 
+    BGST::Column* column = (BGST::Column*)GetByGrid(id, xGridIndex, yGridIndex);
+    BGST::List* list = BGST::List::Instance();
+    
+    if (1 >= (unsigned short)(column->m_0 + 0xFFF9)) {
+        *cmprImage = list->GetImageByIndex(column->mImageIndex);
+
+        if ((u16)0xFFFE == column->m_A) {
             *i4Image = (void*)-1U;
         } else {
-            *i4Image = GetBgImageSquare(unk, img->mShadowImageIndex);
+            *i4Image = list->GetImageByIndex(column->mShadowImageIndex);
         }
         
     } else {

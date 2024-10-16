@@ -6,9 +6,10 @@
 #include "graphics/BGSTLoadState.h"
 #include "graphics/BGSTImage.h"
 #include "graphics/BGSTColumn.h"
+#include "graphics/BGSTList.h"
+
 #include "gfl/gflFile.h"
 #include "gfl/gflScopedPointer.h"
-
 // todo - rename these "grid" functions to "column"
 
 namespace BGST {

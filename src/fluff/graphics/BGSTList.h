@@ -1,44 +1,49 @@
-#ifndef FLUFF_BGSTLIST_H
-#define FLUFF_BGSTLIST_H
+#ifndef FLUFF_List_H
+#define FLUFF_List_H
 
 #include "types.h"
 #include <bitset>
+#include "gfl/gflScopedPointer.h"
 #include "gfl/gflLinkedList.h"
 #include "gfl/gflMemory.h"
+#include "gfl/gflMemoryUtil.h"
 #include "graphics/BGSTImage.h"
 #include "graphics/BGSTColumn.h"
 #include "graphics/BGSTEntry.h"
 
-class BgImageData;
+class StageGraphicResources;
 
-class BGSTList {
-private:
-    static BGSTList* sInstance;
-public:
-    static BGSTList* Instance() {
-        return sInstance;
-    }
+namespace BGST {
+    class List {
+    private:
+        static List* sInstance;
+    public:
+        static List* Instance() {
+            return sInstance;
+        }
 
-    DECL_WEAK void CutFunction() { }
+        DECL_WEAK void CutFunction() { }
 
-    BGSTList(void* arg1, size_t count);
-    ~BGSTList();
-    BGST::Image* GetImageByIndex(s16 index);
-    void SetBit(size_t index);
-    s16 GetNextImageIndex();
-    // returns true if both the main and shadow image indices were successfully set
-    bool AssignImageIndices(BGST::Column* column);
-    void AddEntry(BGST::Entry* entry);
-    void RemoveEntry(BGST::Entry* entry);
-    void RemoveColumn(BGST::Column* column);
-    void ResetBit(size_t index);
-private:
-    BGST::Image* mImages;
-    size_t mCount; // signed instead?
-    std::bitset<200> mBitset;
-    gfl::LinkedList<BGST::Entry> mEntryList;
-    void* m_30;
-};
+        List(StageGraphicResources* arg1, size_t count);
+        ~List();
+        BGST::Image* GetImageByIndex(u16 index);
+        void SetBit(size_t index);
+        s16 GetNextImageIndex();
+        // returns true if both the main and shadow image indices were successfully set
+        bool AssignImageIndices(BGST::Column* column);
+        void AddEntry(BGST::Entry* entry);
+        void RemoveEntry(BGST::Entry* entry);
+        void RemoveColumn(BGST::Column* column);
+        void ResetBit(size_t index);
+    private:
+        gfl::FreedScopedPointer<BGST::Image> mImages;
+        size_t mCount; // signed instead?
+        std::bitset<200> mBitset;
+        gfl::LinkedList<BGST::Entry> mEntryList;
+        StageGraphicResources* mResources;
+    };
+    
+}
 
 
 #endif

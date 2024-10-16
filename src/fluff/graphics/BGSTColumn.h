@@ -3,8 +3,14 @@
 
 namespace BGST {
 
-    class Column {
-        char contents[0x10];
+    struct Column {
+    
+        unsigned short m_0;
+        u32 m_4;
+        short m_8;
+        unsigned short m_A;
+        unsigned short mImageIndex;
+        unsigned short mShadowImageIndex;
     };
 }
 
