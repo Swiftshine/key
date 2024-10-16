@@ -19,7 +19,7 @@ namespace std {
         void set();
 
         inline void reset(size_t index) {
-            if (index > N - 1) {
+            if (index >= N) {
                 fprintf(stderr, "index out of range of bitset::reset");
                 abort();
             }
@@ -28,7 +28,7 @@ namespace std {
         }
 
         inline void set(size_t index) {
-            if (index > N - 1) {
+            if (index >= N) {
                 fprintf(stderr, "index out of range of bitset::set");
                 abort();
             }

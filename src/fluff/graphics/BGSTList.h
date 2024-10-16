@@ -22,13 +22,13 @@ namespace BGST {
             return sInstance;
         }
 
-        DECL_WEAK void CutFunction() { }
+        inline void CutFunction();
 
         List(StageGraphicResources* arg1, size_t count);
         ~List();
         BGST::Image* GetImageByIndex(u16 index);
         void SetBit(size_t index);
-        s16 GetNextImageIndex();
+        u16 GetNextImageIndex();
         // returns true if both the main and shadow image indices were successfully set
         bool AssignImageIndices(BGST::Column* column);
         void AddEntry(BGST::Entry* entry);
