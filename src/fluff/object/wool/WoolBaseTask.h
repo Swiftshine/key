@@ -41,7 +41,7 @@ public:
     
     /* no overrides */
 
-private:
+protected:
     WoolBuildInfo mWoolBuildInfo;
     WoolBaseMdl* mModel;
 };
