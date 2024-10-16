@@ -1,0 +1,50 @@
+#ifndef _STD_BITSET_H
+#define _STD_BITSET_H
+
+
+#include <MSL_C++/cstdio>
+#include <MSL_C++/cstdlib>
+
+namespace std {
+    template <size_t N>
+    class bitset {
+    private:
+        static const int BITS_PER_WORD = 32;
+        static const int NUM_WORDS = (N + BITS_PER_WORD - 1) / BITS_PER_WORD;
+    public:
+        bitset();
+        ~bitset();
+
+        void reset();
+        void set();
+
+        inline void reset(size_t index) {
+            if (index > N - 1) {
+                fprintf("index out of range of bitset::reset");
+                abort();
+            }
+
+            do_reset(index);
+        }
+
+        inline void set(size_t index) {
+            if (index > N - 1) {
+                fprintf("index out of range of bitset::set");
+                abort();
+            }
+
+            do_set(index);
+        }
+        
+        bool test(size_t index);
+    private:
+        void do_reset(size_t index);
+        void do_set(size_t index, bool value = true);
+    private:
+        unsigned int mContents [NUM_WORDS];
+    };
+
+}
+
+
+#endif

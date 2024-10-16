@@ -33,7 +33,9 @@
         "iterator": "cpp",
         "limits": "cpp",
         "locale": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "climits": "cpp",
+        "bitset": "cpp",
     },
     "C_Cpp.default.compilerPath": ""
 }
