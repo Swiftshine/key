@@ -94,7 +94,7 @@ void BGST::File::CopyImageData(void** cmprImage, void** i4Image, int id, int xGr
     if (1 >= (unsigned short)(column->m_0 + 0xFFF9)) {
         *cmprImage = list->GetImageByIndex(column->mImageIndex);
 
-        if ((u16)0xFFFE == column->m_A) {
+        if ((u16)0xFFFE == column->mType) {
             *i4Image = (void*)-1U;
         } else {
             *i4Image = list->GetImageByIndex(column->mShadowImageIndex);

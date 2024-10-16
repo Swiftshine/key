@@ -8,7 +8,7 @@ namespace BGST {
         unsigned short m_0;
         u32 m_4;
         short m_8;
-        unsigned short m_A;
+        unsigned short mType;
         unsigned short mImageIndex;
         unsigned short mShadowImageIndex;
     };
