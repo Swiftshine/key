@@ -507,6 +507,17 @@ config.libs = [
         ],
     },
 
+        {
+        "lib": "fluff/language",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_util],
+        "host": False,
+        "progress_category": "fluff",
+        "objects": [
+            Object(NonMatching, "fluff/language/Language.cpp"),
+        ],
+    },
+
     {
         "lib" : "fluff/stage",
         "mw_version": config.linker_version,

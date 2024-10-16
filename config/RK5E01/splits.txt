@@ -16,6 +16,9 @@ Sections:
 fluff/object/SpringBase.cpp:
 	.text       start:0x8000818C end:0x8000BC4C
 
+fluff/language/Language.cpp:
+	.text       start:0x8000CEE8 end:0x8000D008
+
 gfl/gflVec3.cpp:
 	.text       start:0x800127CC end:0x80012858
 

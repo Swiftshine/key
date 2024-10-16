@@ -40,16 +40,39 @@ namespace Language {
         KR_Korean = 12,
     );
 
-    static int CurrentRegionType;
-    static int CurrentRegionCode;
-    static int CurrentLanguageType;
-
     void SetCurrentRegionType(int type);
-    int GetCurrentRegionType();
-    uint GetCurrentRegionCode(int type);
+    int GetCurrentRegionType() DONT_INLINE_CLASS;
+    uint GetCurrentRegionCode();
     uint GetRegionCodeByRegionType(int type);
     int GetLanguageType(int regionType, SCLanguage language);
     void SetCurrentLanguageType(int type);
+    int GetCurrentLanguageType();
+
+    // utility inlines for clarity
+    int GetLanguageType_US(SCLanguage lang) {
+        if (SC_LANG_FR == lang) {
+            return LanguageType::US_French;
+        } else if (SC_LANG_SP == lang) {
+            return LanguageType::US_Spanish;
+        }
+
+        return LanguageType::US_English;
+    }
+
+    int GetLanguageType_Europe(SCLanguage lang) {
+        switch (lang) {
+            case SC_LANG_EN:
+                return LanguageType::EU_English;
+            case SC_LANG_DE:
+                return LanguageType::EU_German;
+            case SC_LANG_FR:
+                return LanguageType::EU_French;
+            case SC_LANG_SP:
+                return LanguageType::EU_Spanish;
+            case SC_LANG_IT:
+                return LanguageType::EU_Italian;
+        }
+    }
 }
 
 #endif
