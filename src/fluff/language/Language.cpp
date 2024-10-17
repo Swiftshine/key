@@ -1,8 +1,9 @@
 #include "language/Language.h"
 
-static int CurrentRegionType = Language::RegionType::US;
-static uint CurrentRegionCode = Language::RegionCode::US;
-static int CurrentLanguageType = Language::LanguageType::US_English;
+int CurrentRegionType = Language::RegionType::US;
+
+// sbss, but cyclic dependency error
+static int CurrentLanguageType;
 
 void Language::SetCurrentRegionType(int type) {
     CurrentRegionType = type;
@@ -29,20 +30,48 @@ uint Language::GetRegionCodeByRegionType(int type) {
     return 0;
 }
 
-// not done
-int Language::GetLanguageType(int regionType, SCLanguage lang) {
-    if (RegionType::Japan == regionType) {
-        return LanguageType::JP_Japanese;
+
+int Language::GetLanguageType(int regionType, SCLanguage language) {
+    uint lang = language;
+    
+    switch (regionType) {
+        case RegionType::Japan:
+            return LanguageType::JP_Japanese;
+    
+        case RegionType::US: {
+            if (SC_LANG_FR != lang) {
+                if (SC_LANG_SP == lang) {
+                    return LanguageType::US_Spanish;
+                }
+                return LanguageType::US_English;
+            }
+            return LanguageType::US_French;
+        }
+
+        case RegionType::Europe: {
+            switch (lang) {
+                default:
+                    return LanguageType::EU_English;
+
+                case SC_LANG_DE:
+                    return LanguageType::EU_German;
+
+                case SC_LANG_FR:
+                    return LanguageType::EU_French;
+
+                case SC_LANG_SP:
+                    return LanguageType::EU_Spanish;
+
+                case SC_LANG_IT:
+                    return LanguageType::EU_Italian;
+            }
+
+            return LanguageType::EU_Spanish;
+        }
+        
     }
 
-    if (RegionType::US == regionType) {
-
-    }
-
-    if (RegionType::Europe != regionType) {
-        return LanguageType::JP_Japanese;
-    }
-
+    return LanguageType::JP_Japanese;
 }
 
 void Language::SetCurrentLanguageType(int type) {

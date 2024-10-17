@@ -6,3 +6,4 @@
 "gfl/gflTaskInfo.cpp","100%*","*weak destructor (branch)",
 "fluff/util/FullSortSceneUtil.cpp","100%","data",
 "fluff/manager/StageResourceManager.cpp","100%","cyclic dependency/string data",
+"fluff/language/Language.cpp","100%","incorrect address (CurrentRegionType), cyclic dependency (CurrentLanguageType)",

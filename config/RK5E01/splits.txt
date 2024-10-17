@@ -18,6 +18,7 @@ fluff/object/SpringBase.cpp:
 
 fluff/language/Language.cpp:
 	.text       start:0x8000CEE8 end:0x8000D008
+	.sbss       start:0x808E4D34 end:0x808E4D38
 
 gfl/gflVec3.cpp:
 	.text       start:0x800127CC end:0x80012858
