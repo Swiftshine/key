@@ -65,6 +65,6 @@ ENUM_CLASS(GimmickIDs,
     Curtains,                       
     HappyGate_Goal,                 
     TreasureChest,                  
-    GimmickTypeCount = 0x1B2
+    GimmickTypeCount = 0x1B3
 );
 #endif
