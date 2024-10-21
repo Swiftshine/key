@@ -12,7 +12,7 @@ public:
     virtual ~GmkColAnimCtrl();
     virtual bool vfC(FlfGameObj*, uint);
     virtual bool vf10(FlfGameObj*, uint);
-    void SetState(uint, std::string&);
+    void SetState(FlfGameObj* setter, std::string& state);
 
     void Update();
     void fn_800D5130(void*);

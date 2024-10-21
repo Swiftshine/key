@@ -164,8 +164,8 @@ bool GmkColAnimMdl::vfA4(FlfGameObj* arg1, uint arg2) {
     return mColAnimCtrlGmk->vf10(arg1, arg2);
 }
 
-void GmkColAnimMdl::SetState(uint arg1, std::string& stateStr) {
-    mColAnimCtrlGmk->SetState(arg1, stateStr);
+void GmkColAnimMdl::SetState(FlfGameObj* setter, std::string& stateStr) {
+    mColAnimCtrlGmk->SetState(setter, stateStr);
 }
 
 void GmkColAnimMdl::vf64(bool arg1) {

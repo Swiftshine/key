@@ -31,7 +31,9 @@ public:
     virtual void    vf40(FlfGameObj*);
     virtual int     vf44();
     virtual void    vf48(const char* arg1, const char* arg2);
-    virtual void    SetState(uint arg1, std::string& arg2); 
+    // the "setter" field is a pointer to the FlfGameObj that induced the call.
+    // this field is in most cases, not used. a usecase is to be seen.
+    virtual void    SetState(FlfGameObj* setter, std::string& state); 
     virtual void    vf50(bool arg1);
     virtual bool    vf54();
     virtual void    vf58();

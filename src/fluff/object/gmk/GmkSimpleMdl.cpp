@@ -188,7 +188,7 @@ void GmkSimpleMdl::UpdateModel() {
 
 
 
-void GmkSimpleMdl::SetState(uint arg1, std::string& stateStr) {
+void GmkSimpleMdl::SetState(FlfGameObj* setter, std::string& stateStr) {
     if (on == stateStr) {
 
         if (mModelWrapper.IsValid()) {
