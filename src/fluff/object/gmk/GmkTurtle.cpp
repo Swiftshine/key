@@ -99,9 +99,6 @@ GmkTurtle::~GmkTurtle() {
 
 }
 
-std::string emtyString;
-
-
 void GmkTurtle::Update() {
     // incomplete
 
