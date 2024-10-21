@@ -32,6 +32,11 @@ public:
     inline StageResourceManager& GetStageResourceManager() {
         return mStageResourceManager;
     }
+
+    inline LevelManager* GetLevelManager() {
+        return mLevelManager;
+    }
+    
 public:
     gfl::Task m_0;
     gfl::Task mStageTask;

@@ -54,6 +54,10 @@ public:
         }
     }
     
+public:
+    virtual ~FlfMdlDraw();
+
+    void fn_800234AC(bool, bool);
 };
 
 #endif

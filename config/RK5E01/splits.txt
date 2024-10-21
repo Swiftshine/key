@@ -117,6 +117,9 @@ fluff/object/FlfGameObjLocator.cpp:
 	.data       start:0x8086A9D8 end:0x8086AA58
 	.sdata      start:0x808E1578 end:0x808E1580
 
+fluff/object/gmk/GmkSunriseCurtain.cpp:
+	.text       start:0x803C9A84 end:0x803CAA74
+
 fluff/util/SignatureUtil.cpp:
 	.text       start:0x803D8098 end:0x803D820C
 	.sdata2     start:0x808EA3D8 end:0x808EA3DC

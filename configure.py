@@ -462,6 +462,7 @@ config.libs = [
             Object(NonMatching, "fluff/object/gmk/GmkCamRectCtrl.cpp"),
             Object(NonMatching, "fluff/object/gmk/GmkColAnimMdl.cpp"),
             Object(NonMatching, "fluff/object/gmk/GmkSimpleMdl.cpp"),
+            Object(NonMatching, "fluff/object/gmk/GmkSunriseCurtain.cpp"),
             Object(NonMatching, "fluff/object/gmk/GmkWoolRope.cpp"),
         ],
     },

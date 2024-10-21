@@ -64,8 +64,8 @@ void LevelManager::fn_800444C8() {
     return mGraphicResources.fn_800C56D0();
 }
 
-void LevelManager::fn_800444D0(uint index, void* data) {
-    mGraphicResources.fn_800C57AC(index, data);
+void LevelManager::SetBGSTEntryEnabled(uint index, bool value) {
+    mGraphicResources.SetBGSTEntryEnabled(index, value);
 }
 
 void LevelManager::fn_800444D8() {
