@@ -129,7 +129,8 @@ void GmkTurtle::vf24() {
 
 }
 
-void GmkTurtle::fn_804FB1D4() {
+// this function is called by `GmkSunriseCurtain::OnTimeSwitch()`
+void GmkTurtle::BecomeActive() {
     // incomlete
 
     int num = mNumTurtles;

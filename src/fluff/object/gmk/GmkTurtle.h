@@ -41,7 +41,7 @@ public:
 
     /* GmkTurtle */
     
-    void fn_804FB1D4();
+    void BecomeActive();
 
     void Turn(int turnDir);
 public:
