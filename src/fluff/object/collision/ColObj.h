@@ -37,7 +37,7 @@ public:
     void SetColbin(const char* path);
     void SetColbin(void* data);
     void SetPosition(gfl::Vec2& pos);
-
+    void SetEnabled(bool enabled);
     void Update();
 public:
     CollisionData* mCollisionData1;

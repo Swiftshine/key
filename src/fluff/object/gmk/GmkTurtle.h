@@ -3,10 +3,14 @@
 
 #include "object/Gimmick.h"
 #include "object/PlayerBase.h"
+#include "object/collision/ColObj.h"
+#include "object/collision/FlfRideHitCtrlTrans.h"
 #include "graphics/NwAnmCtrl.h"
+#include "misc/ScopedPointers.h"
+#include "util/FullSortSceneUtil.h"
+#include "manager/StageManager.h"
+
 // size: 0x15C
-
-
 class GmkTurtle : public Gimmick {
 public:
     ENUM_CLASS(State,
@@ -26,6 +30,15 @@ public:
         Right,
     );
 
+    ENUM_CLASS(Parameter,
+        NumTurtles = 1, // int 1
+        ShouldMoveRight = 2, // int (bool) 2
+
+        CounterDefaultValue = 0, // float 0
+        Speed = 1, // float 1
+        MaxDistance = 2, // float 2
+    );
+
 public:
     GmkTurtle(GimmickBuildInfo* buildInfo);
     virtual ~GmkTurtle();
@@ -35,8 +48,8 @@ public:
     void vf24() override;
 
     /* Gimmick */
-    virtual int vfA4() override;
     virtual bool vf88(FlfGameObj* player, uint arg2) override;
+    virtual int vf98() override;
     virtual void Update() override;
 
     /* GmkTurtle */
@@ -45,19 +58,19 @@ public:
 
     void Turn(int turnDir);
 public:
-    int mCounterDefaultValue;
+    uint mCounterDefaultValue;
     float mSpeed;
     float mMaxDistance;
-    bool m_13C;
+    bool mShouldMoveRight;
     bool m_13D;
     u16 m_13E;
     int mCounter;
     int mNumTurtles;
     int mCurrentState;
     Gimmick* mWater;
-    class NwAnmCtrl* mAnmCtrl;
-    class ColObjTrans* mColObjTrans;
-    class RideHitCtrlTrans* mRideHitCtrlTrans;
+    gfl::ScopedPointer<NwAnmCtrl> mAnmCtrl;
+    gfl::ScopedPointer<ColObjTrans> mColObjTrans;
+    gfl::ScopedPointer<FlfRideHitCtrlTrans> mRideHitCtrlTrans;
 };
 
 // ASSERT_SIZE(GmkTurtle, 0x15C)

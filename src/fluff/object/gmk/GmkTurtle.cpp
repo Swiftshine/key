@@ -8,21 +8,102 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     , mAnmCtrl(nullptr)
     , mColObjTrans(nullptr)
     , mRideHitCtrlTrans(nullptr)
+    , mCounterDefaultValue(static_cast<uint>(60.0f * buildInfo->GetFloatParam(Parameter::CounterDefaultValue)))
+    , mSpeed(buildInfo->GetFloatParam(Parameter::Speed) / 60.0f)
+    , mMaxDistance(buildInfo->GetFloatParam(Parameter::MaxDistance))
+    , mNumTurtles(buildInfo->GetIntParam(Parameter::NumTurtles))
+    , mShouldMoveRight(buildInfo->GetBoolParam(Parameter::ShouldMoveRight))
+    , m_13D(buildInfo->GetBoolParam(ParameterID::FOURTH))
 {
+    if (mShouldMoveRight) {
+        mPosition.x = 60.0f + mBuildInfoPtr->mPosition.x;
+    }
+
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
+
+    UpdateMatrix();
+
+    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+
+    gfl::ResFileInfo fileInfo = GetResFileInfo();
+
+    mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, (gfl::ResFileInfoPointer&)fileInfo, "sea_turtle_01"));
+
+    for (int i = 0; i < 8; i++) {
+        char path[0x100];
+        snprintf(path, sizeof(path), "%s__%02d", "sea_turtle_01", i);
+        mAnmCtrl->PlayAnimationByNameAndIndex(i, path);
+    }
+
+    mAnmCtrl->SetFullSortSceneModelWrapper(scene, 0);
+
+    mAnmCtrl->GetScnMdlWrapper()->SetMatrix_thunk(&mMatrix);
+
+    mColObjTrans.Create(gfl::HeapID::Work);
+
+    // not finished
+
+    /*
+      if (turtle->mNumTurtles == 3) {
+    ColObjTrans::SetColbin(turtle->mColObjTrans,"gimmick/sea_turtle_01/turtle3stack.colbin");
+  }
+  else {
+    ColObjTrans::SetColbin(turtle->mColObjTrans,"gimmick/sea_turtle_01/turtle.colbin");
+  }
+  uVar7 = (*turtle->mColObjTrans->vtable->GetCollisionData)();
+  FUN_800d01ec(uVar7 >> 0x20,uVar7,0,0x20000000);
+  pCVar5 = turtle->mColObjTrans;
+  pos = nw4r::math::VEC2::operator=(&VStack_120,&(turtle->_)._.mPosition);
+  ColObjTrans::SetPosition(pCVar5,pos);
+  (turtle->mColObjTrans->_).mpOwner = turtle;
+  (*turtle->mColObjTrans->vtable->AddToTree)();
+  rideHitCtrl = __new(0x40,HeapID_Work);
+  if (rideHitCtrl != NULL) {
+    rideHitCtrl = FlfRideHitCtrlTrans::FlfRideHitCtrlTrans(rideHitCtrl,turtle->mColObjTrans,turtle);
+  }
+  if (rideHitCtrl == NULL) {
+    rideHitCtrl = turtle->mRideHitCtrlTrans;
+    if (rideHitCtrl != NULL) {
+      (**((rideHitCtrl->_).vtable + 8))(rideHitCtrl,1);
+    }
+    turtle->mRideHitCtrlTrans = NULL;
+  }
+  else {
+    turtle->mRideHitCtrlTrans = rideHitCtrl;
+  }
+  rideHitCtrl = turtle->mRideHitCtrlTrans;
+  rideHitCtrl->m_34 = 0x20000;
+  rideHitCtrl->m_30 = 0;
+  turtle->mRideHitCtrlTrans->m_38 = 1;
+  if (turtle->m_13D != false) {
+    (turtle->_)._._6E = false;
+  }
+  if (turtle->mNumTurtles == 2) {
+    pSVar4 = turtle->mAnmCtrl->mModelWrapper;
+    (*(pSVar4->vtable->_).SetUpdate)(pSVar4,0);
+    ColObjTrans::SetEnabled(turtle->mColObjTrans,false);
+    turtle->mCurrentState = State_8;
+  }
+  else {
+    turtle->mCurrentState = State_InWater;
+  }
+  if (fileInfo != NULL) {
+    (*fileInfo->funcs->dtor)();
+  }
+    
+    */
 
 }
 
 GmkTurtle::~GmkTurtle() {
-    delete mRideHitCtrlTrans;
-    delete mColObjTrans;
-    delete mAnmCtrl;
+
 }
 
 std::string emtyString;
 
 
 void GmkTurtle::Update() {
-    // incomlete
+    // incomplete
 
     int state = mCurrentState;
 
@@ -131,24 +212,51 @@ void GmkTurtle::vf24() {
 
 // this function is called by `GmkSunriseCurtain::OnTimeSwitch()`
 void GmkTurtle::BecomeActive() {
-    // incomlete
+    switch (mNumTurtles) {
+        case 1:
+        case 3: {
+            mAnmCtrl->GetScnMdlWrapper()->SetUpdate(false);
+            mColObjTrans->SetEnabled(false);
+            mCurrentState = State::State_8;
+            break;
+        }
 
-    int num = mNumTurtles;
-    if (1 == num || 3 == num) {
+        case 2: {
+            mAnmCtrl->GetScnMdlWrapper()->SetUpdate(true);
+            mColObjTrans->SetEnabled(true);
+            mCurrentState = State::InWater;
+        }
+    }
 
+
+    if (State::State_7 == mCurrentState) {
+        if (mShouldMoveRight) {
+            mCurrentState = State::MoveRight;
+        } else {
+            mCurrentState = State::MoveLeft;
+        }
+    } else if (State::InWater == mCurrentState) {
+        Update();
+        if (mShouldMoveRight) {
+            mCurrentState = State::MoveRight;
+        } else {
+            mCurrentState = State::MoveLeft;
+        }
     }
 }
 
 void GmkTurtle::Turn(int turnDir) {
-    if (TurnDirection::Left == turnDir) {
-        mCounter = mCounterDefaultValue;
-        mAnmCtrl->SetCurrentAnimationIndex(4);
-        mCurrentState = State::TurnLeft;
-    } else {
+    if (TurnDirection::Left != turnDir) {
         mCounter = mCounterDefaultValue;
         mAnmCtrl->SetCurrentAnimationIndex(1);
         mCurrentState = State::TurnRight;
+    } else {
+        mCounter = mCounterDefaultValue;
+        mAnmCtrl->SetCurrentAnimationIndex(4);
+        mCurrentState = State::TurnLeft;
     }
 }
 
-int GmkTurtle::vfA4() { return 1; }
+int GmkTurtle::vf98() {
+    return 1;
+}

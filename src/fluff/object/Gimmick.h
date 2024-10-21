@@ -5,6 +5,7 @@
 #include "object/GimmickList.h"
 #include "manager/GimmickManager.h"
 #include "demo/EventDemoGimmickCommand.h"
+#include "gfl/gflResArchivedFileInfo.h"
 #include "gflVec3.h"
 #include "gflVec2.h"
 #include "gflTask.h"
@@ -49,7 +50,7 @@ public:
             mRotation.z = zero;
 
             m_24 = 'A';
-            m_28 = 6;
+            mFullSortSceneIndex = 6;
             m_2C = 4;
             m_30 = 0;
 
@@ -128,7 +129,7 @@ public:
         u8 m_25;
         u8 m_26;
         u8 m_27;
-        uint m_28;
+        uint mFullSortSceneIndex;
         uint m_2C;
         uint m_30;
         int mIntParams[5];
@@ -159,7 +160,7 @@ public:
 
     void InitCommand();
     void fn_8004ED1C();
-
+    gfl::ResFileInfo GetResFileInfo();
 
     // virtual functions
 
@@ -178,7 +179,7 @@ public:
     virtual int     vf8C();
     virtual int     vf90();
     virtual int     vf94();
-    virtual void    vf98();
+    virtual int     vf98();
     virtual int     vf9C();
     virtual void    vfA0();
     virtual int     vfA4();
@@ -192,7 +193,7 @@ public:
 
 public:
     int mGimmickID;
-    uint m_84;
+    GimmickBuildInfo* mBuildInfoPtr;
     GimmickBuildInfo mBuildInfo;
     void* m_124;
     gfl::Task* mTask;

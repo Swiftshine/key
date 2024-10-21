@@ -4,7 +4,7 @@
 Gimmick::Gimmick(int gmkID)
     : FlfGameObj(1)
     , mGimmickID(gmkID)
-    , m_84(0)
+    , mBuildInfoPtr(0)
 
 {
     m_124 = 0;
@@ -18,7 +18,7 @@ Gimmick::Gimmick(int gmkID)
 Gimmick::Gimmick(int gmkID, const char* taskName)
     : FlfGameObj(1)
     , mGimmickID(gmkID)
-    , m_84(0)
+    , mBuildInfoPtr(0)
 {
     m_124 = 0;
     mTask = nullptr;
