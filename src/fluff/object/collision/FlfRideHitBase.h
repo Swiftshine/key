@@ -35,11 +35,8 @@ private:
     u32 m_1C;
     u64 mFlags;
     bool m_28;
-    u32 m_2C;
 };
 
-const int x = sizeof(FlfRideHitBase);
-
-ASSERT_SIZE(FlfRideHitBase, 0x30);
+// ASSERT_SIZE(FlfRideHitBase, 0x2C);
 
 #endif

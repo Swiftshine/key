@@ -35,7 +35,7 @@ void ColObjTrans::SetColbin(const char* path) { }
 
 void ColObjTrans::SetColbin(void* data) { }
 
-void ColObjTrans::SetPosition(gfl::Vec2& pos) {
+void ColObjTrans::SetPosition(nw4r::math::VEC2& pos) {
     bool posNotSame = false;
 
     if (mPosition.x != pos.x || mPosition.y != pos.y) {

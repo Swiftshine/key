@@ -1,20 +1,30 @@
 #include "object/gmk/GmkTurtle.h"
 
+const char GmkTurtle_Name[] = "GmkTurtle";
+const char GmkTurtle_AnimationIndexTemplate[] = "%s__%02d";
+const char GmkTurtle_ResourceName[] = "sea_turtle_01";
+const char GmkTurtle_ColbinSinglePath[] = "gimmick/sea_turtle_01/turtle.colbin";
+const char GmkTurtle_ColbinTriplePath[] = "gimmick/sea_turtle_01/turtle3stack.colbin";
+
+// https://decomp.me/scratch/dEoIS
 GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
-    : Gimmick(buildInfo, "GmkTurtle")
-    , mCounter(0)
-    , mCurrentState(State::MoveLeft)
-    , mWater(nullptr)
-    , mAnmCtrl(nullptr)
-    , mColObjTrans(nullptr)
-    , mRideHitCtrlTrans(nullptr)
-    , mCounterDefaultValue(static_cast<uint>(60.0f * buildInfo->GetFloatParam(Parameter::CounterDefaultValue)))
-    , mSpeed(buildInfo->GetFloatParam(Parameter::Speed) / 60.0f)
-    , mMaxDistance(buildInfo->GetFloatParam(Parameter::MaxDistance))
-    , mNumTurtles(buildInfo->GetIntParam(Parameter::NumTurtles))
-    , mShouldMoveRight(buildInfo->GetBoolParam(Parameter::ShouldMoveRight))
-    , m_13D(buildInfo->GetBoolParam(ParameterID::FOURTH))
+    : Gimmick(buildInfo, GmkTurtle_Name)
 {
+    mCounter = 0;
+    mCurrentState = State::MoveLeft;
+    mWater = nullptr;
+    mAnmCtrl = nullptr;
+    mColObjTrans = nullptr;
+
+    mCounterDefaultValue = static_cast<uint>(60.0f * buildInfo->GetFloatParam(Parameter::CounterDefaultValue));
+    mSpeed = buildInfo->GetFloatParam(Parameter::Speed) / 60.0f;
+    mMaxDistance = buildInfo->GetFloatParam(Parameter::MaxDistance);
+    mNumTurtles = buildInfo->GetIntParam(Parameter::NumTurtles);
+    mShouldMoveRight = buildInfo->GetBoolParam(Parameter::ShouldMoveRight);
+    m_13D = buildInfo->GetBoolParam(ParameterID::FOURTH);
+
+    mRideHitCtrlTrans = nullptr;
+
     if (mShouldMoveRight) {
         mPosition.x = 60.0f + mBuildInfoPtr->mPosition.x;
     }
@@ -24,14 +34,15 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     UpdateMatrix();
 
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+    
+    gfl::ResFileInfoPointer fileInfo;
+    GetResFileInfo(fileInfo);
 
-    gfl::ResFileInfo fileInfo = GetResFileInfo();
-
-    mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, (gfl::ResFileInfoPointer&)fileInfo, "sea_turtle_01"));
+    mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, fileInfo, GmkTurtle_ResourceName));
 
     for (int i = 0; i < 8; i++) {
         char path[0x100];
-        snprintf(path, sizeof(path), "%s__%02d", "sea_turtle_01", i);
+        snprintf(path, sizeof(path), GmkTurtle_AnimationIndexTemplate, GmkTurtle_ResourceName, i);
         mAnmCtrl->PlayAnimationByNameAndIndex(i, path);
     }
 
@@ -41,32 +52,151 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
 
     mColObjTrans.Create(gfl::HeapID::Work);
 
-    // not finished
+    if (3 == mNumTurtles) {
+        mColObjTrans->SetColbin(GmkTurtle_ColbinTriplePath);
+    } else {
+        mColObjTrans->SetColbin(GmkTurtle_ColbinSinglePath);
+    }
+
+    mColObjTrans->GetCollisionData()->fn_800D01EC(0, 0, 0x20000000);
+    nw4r::math::VEC2 colObjPos;
+    colObjPos = (*(nw4r::math::VEC2*)&mPosition);
+    mColObjTrans->SetOwner(this);
+    mColObjTrans->AddToTree();
+
+    mRideHitCtrlTrans.Create(new (gfl::HeapID::Work) FlfRideHitCtrlTrans(mColObjTrans.ptr(), this));
+    mRideHitCtrlTrans->SetUnk34(0x20000);
+    mRideHitCtrlTrans->SetUnk30(0);
+    mRideHitCtrlTrans->SetUnk38(1);
+
+    if (m_13D) {
+        m_6E = false;
+    }
+
+    if (2 == mNumTurtles) {
+        mAnmCtrl->GetScnMdlWrapper()->SetUpdate(false);
+        mColObjTrans->SetEnabled(false);
+        mCurrentState = State::State_8;
+    } else {
+        mCurrentState = State::InWater;
+    }
 
     /*
-      if (turtle->mNumTurtles == 3) {
+    // ghidra out:
+    GmkTurtle * __thiscall GmkTurtle::GmkTurtle(GmkTurtle *this,GimmickBuildInfo *param_1)
+
+{
+  bool bVar1;
+  GmkTurtle *turtle;
+  uint uVar2;
+  FullSortScene *fullSortScene;
+  NwAnmCtrl *pNVar3;
+  ScnMdlWrapper *pSVar4;
+  ColObjTrans *pCVar5;
+  CollisionData *uVar7;
+  nw4r::math::VEC2 *this_00;
+  FlfRideHitCtrlTrans *rideHitCtrl;
+  GmkTurtle *pGVar6;
+  GimmickBuildInfo *buildInfo;
+  u32 animIndex;
+  undefined8 uVar8;
+  gflResFileInfo_2010 *fileInfo;
+  nw4r::math::VEC2 nStack_120;
+  char acStack_118 [280];
+  float sixty;
+  
+  uVar8 = saveContext1();
+  turtle = uVar8 >> 0x20;
+  buildInfo = uVar8;
+  Gimmick::Gimmick(&turtle->_,buildInfo,"GmkTurtle");
+  (turtle->_).vtable = &GmkTurtle::__vt;
+  sixty = f60.0;
+  turtle->mCounter = 0;
+  turtle->mCurrentState = State_MoveLeft;
+  turtle->mWater = 0x0;
+  turtle->mAnmCtrl = 0x0;
+  turtle->mColObjTrans = 0x0;
+  turtle->mRideHitCtrlTrans = 0x0;
+  uVar2 = __double_to_unsigned_int(sixty * buildInfo->mFloatParams[0]);
+  turtle->mCounterDefaultValue = uVar2;
+  turtle->mSpeed = buildInfo->mFloatParams[1] / f60.0;
+  sixty = buildInfo->mFloatParams[2];
+  turtle->mMaxDistance = sixty;
+  turtle->mNumTurtles = buildInfo->mIntParams[1];
+  bVar1 = buildInfo->mIntParams[2] != 0;
+  turtle->mShouldMoveRight = bVar1;
+  turtle->m_13D = buildInfo->mIntParams[3] != 0;
+  if (bVar1) {
+    (turtle->_)._.mPosition.x = sixty + (((turtle->_).mBuildInfoPtr)->mPosition).x;
+  }
+  sixty = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex,buildInfo->_2C);
+  (turtle->_)._.mPosition.z = sixty;
+  FlfGameObj::UpdateMatrix(turtle);
+  fullSortScene =
+       StageManager::GetFullSortSceneByID(StageManager::Instance,buildInfo->mFullSortSceneIndex);
+  Gimmick::GetResFileInfo(&fileInfo,&turtle->_);
+  pNVar3 = __new(0x24,HeapID_Work);
+  if (pNVar3 != 0x0) {
+    pNVar3 = NwAnmCtrl::NwAnmCtrl(pNVar3,8,&fileInfo,"sea_turtle_01");
+  }
+  if (pNVar3 == 0x0) {
+    pNVar3 = turtle->mAnmCtrl;
+    if (pNVar3 != 0x0) {
+      (*pNVar3->vtable->dtor)(pNVar3,OperatorDelete);
+    }
+    turtle->mAnmCtrl = 0x0;
+  }
+  else {
+    turtle->mAnmCtrl = pNVar3;
+  }
+  animIndex = 0;
+  do {
+    snprintf(acStack_118,0x100,"%s__%02d","sea_turtle_01",animIndex);
+    NwAnmCtrl::PlayAnimationByNameAndIndex(turtle->mAnmCtrl,animIndex,acStack_118);
+    animIndex++;
+  } while (animIndex < 8);
+  NwAnmCtrl::SetFullSortSceneModelWrapper(turtle->mAnmCtrl,fullSortScene,0);
+  pSVar4 = turtle->mAnmCtrl->mModelWrapper;
+  (*pSVar4->vtable->SetMatrix_thunk)(pSVar4,(turtle->_)._.mMatrix);
+  pCVar5 = __new(0x24,HeapID_Work);
+  if (pCVar5 != 0x0) {
+    pCVar5 = ColObjTrans::ColObjTrans(pCVar5);
+  }
+  if (pCVar5 == 0x0) {
+    pCVar5 = turtle->mColObjTrans;
+    if (pCVar5 != 0x0) {
+      (*pCVar5->vtable->~ColObj)(pCVar5,1);
+    }
+    turtle->mColObjTrans = 0x0;
+  }
+  else {
+    turtle->mColObjTrans = pCVar5;
+  }
+  if (turtle->mNumTurtles == 3) {
     ColObjTrans::SetColbin(turtle->mColObjTrans,"gimmick/sea_turtle_01/turtle3stack.colbin");
   }
   else {
     ColObjTrans::SetColbin(turtle->mColObjTrans,"gimmick/sea_turtle_01/turtle.colbin");
   }
-  uVar7 = (*turtle->mColObjTrans->vtable->GetCollisionData)();
-  FUN_800d01ec(uVar7 >> 0x20,uVar7,0,0x20000000);
+  uVar8 = (*turtle->mColObjTrans->vtable->GetCollisionData)();
+  uVar7 = uVar8 >> 0x20;
+  CollisionData::FUN_800d01ec(uVar7,uVar8,0,0x20000000);
   pCVar5 = turtle->mColObjTrans;
-  pos = nw4r::math::VEC2::operator=(&VStack_120,&(turtle->_)._.mPosition);
-  ColObjTrans::SetPosition(pCVar5,pos);
+  this_00 = &nStack_120;
+  nw4r::math::VEC2::operator=(this_00,&(turtle->_)._.mPosition);
+  ColObjTrans::SetPosition(pCVar5,this_00);
   (turtle->mColObjTrans->_).mpOwner = turtle;
   (*turtle->mColObjTrans->vtable->AddToTree)();
   rideHitCtrl = __new(0x40,HeapID_Work);
-  if (rideHitCtrl != NULL) {
+  if (rideHitCtrl != 0x0) {
     rideHitCtrl = FlfRideHitCtrlTrans::FlfRideHitCtrlTrans(rideHitCtrl,turtle->mColObjTrans,turtle);
   }
-  if (rideHitCtrl == NULL) {
+  if (rideHitCtrl == 0x0) {
     rideHitCtrl = turtle->mRideHitCtrlTrans;
-    if (rideHitCtrl != NULL) {
+    if (rideHitCtrl != 0x0) {
       (**((rideHitCtrl->_).vtable + 8))(rideHitCtrl,1);
     }
-    turtle->mRideHitCtrlTrans = NULL;
+    turtle->mRideHitCtrlTrans = 0x0;
   }
   else {
     turtle->mRideHitCtrlTrans = rideHitCtrl;
@@ -76,7 +206,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
   rideHitCtrl->m_30 = 0;
   turtle->mRideHitCtrlTrans->m_38 = 1;
   if (turtle->m_13D != false) {
-    (turtle->_)._._6E = false;
+    (turtle->_)._.m_6E = false;
   }
   if (turtle->mNumTurtles == 2) {
     pSVar4 = turtle->mAnmCtrl->mModelWrapper;
@@ -87,10 +217,12 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
   else {
     turtle->mCurrentState = State_InWater;
   }
-  if (fileInfo != NULL) {
-    (*fileInfo->funcs->dtor)();
+  if (fileInfo != 0x0) {
+    (*fileInfo->vtable->Destroy)();
   }
-    
+  pGVar6 = restoreContext1(turtle);
+  return pGVar6;
+}
     */
 
 }

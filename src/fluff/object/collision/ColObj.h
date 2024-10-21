@@ -7,6 +7,7 @@
 #include "object/collision/KdTree.h"
 #include "object/FlfGameObj.h"
 #include "object/collision/CollisionData.h"
+#include <nw4r/math.h>
 
 class ColObj {
 public:
@@ -17,15 +18,24 @@ public:
     { }
 
     virtual ~ColObj();
-    virtual int GetCollisionData();
+    virtual CollisionData* GetCollisionData();
     virtual void AddToTree();
     virtual void RemoveFromTree();
     virtual void vf18();
+
+    inline void SetOwner(FlfGameObj* owner) {
+        mOwner = owner;
+    }
+    
+    inline FlfGameObj* GetOwner() {
+        return mOwner;
+    }
+    
 public:
     uint m_4;
     FlfGameObj* mOwner;
     KdTree* mTree;
-    gfl::Vec3 mPosition;
+    nw4r::math::VEC3 mPosition;
 };
 
 ASSERT_SIZE(ColObj, 0x1C)
@@ -36,7 +46,7 @@ public:
     virtual ~ColObjTrans();
     void SetColbin(const char* path);
     void SetColbin(void* data);
-    void SetPosition(gfl::Vec2& pos);
+    void SetPosition(nw4r::math::VEC2& pos);
     void SetEnabled(bool enabled);
     void Update();
 public:

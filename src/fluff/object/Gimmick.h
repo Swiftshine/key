@@ -5,7 +5,7 @@
 #include "object/GimmickList.h"
 #include "manager/GimmickManager.h"
 #include "demo/EventDemoGimmickCommand.h"
-#include "gfl/gflResArchivedFileInfo.h"
+#include "gfl/gflResFileInfo.h"
 #include "gflVec3.h"
 #include "gflVec2.h"
 #include "gflTask.h"
@@ -160,7 +160,8 @@ public:
 
     void InitCommand();
     void fn_8004ED1C();
-    gfl::ResFileInfo GetResFileInfo();
+    void GetResFileInfo(gfl::ResFileInfoPointer& fileInfo);
+    void GetResFileInfoByGimmickID(gfl::ResFileInfoPointer& fileInfo, int gimmickID);
 
     // virtual functions
 
