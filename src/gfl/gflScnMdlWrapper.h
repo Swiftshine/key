@@ -23,10 +23,10 @@ namespace gfl {
 
         inline nw4r::g3d::ScnMdl* GetScnMdl() { return mScnMdl; }
         
-        void fn_8004DB94(gfl::Vec3&);
+        void fn_8004DB94(nw4r::math::VEC3&);
 
         /* gfl::RenderObj */
-        virtual void vf28(gfl::Vec3&) override;
+        virtual void vf28(nw4r::math::VEC3&) override;
         virtual void vf40() override;
         virtual void ScnMdlProc() override;
         
@@ -37,7 +37,7 @@ namespace gfl {
     private:
         nw4r::g3d::LightObj mLightObj;
         bool m_1C;
-        gfl::Vec3 m_20;
+        nw4r::math::VEC3 m_20;
         nw4r::g3d::ScnMdl* mScnMdl;
         void* m_30;
     };

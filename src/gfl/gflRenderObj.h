@@ -27,7 +27,7 @@ namespace gfl {
         virtual bool vf1C();
         virtual void vf20(bool arg1);
         virtual void vf24();
-        virtual void vf28(gfl::Vec3& arg1) = 0;
+        virtual void vf28(nw4r::math::VEC3& arg1) = 0;
         virtual float vf2C();
         virtual void vf30(float arg1);
         virtual bool vf34(float& arg0, float& arg1, float& arg2, float& arg3);

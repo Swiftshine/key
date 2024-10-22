@@ -18,6 +18,6 @@ public:
 
     static PlayerBase* build(gfl::Task* gameMgrTask, uint flags, uint unk1, uint unk2);
 
-    void SetStartPosition(gfl::Vec3& pos);
+    void SetStartPosition(nw4r::math::VEC3& pos);
 };
 #endif

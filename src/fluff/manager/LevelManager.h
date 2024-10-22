@@ -7,6 +7,7 @@
 #include "manager/GimmickManager.h"
 #include "stage/StageGraphicResources.h"
 #include "gfl/gflScopedPointer.h"
+#include <nw4r/math.h>
 
 class LevelManager {
 public:

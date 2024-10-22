@@ -29,7 +29,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     , mShadowAnimCtrl(nullptr)
     , mColAnimCtrlGmk(nullptr)
     , mZRotationGmk(nullptr)
-    , mModelScale(0.0f)
+    , mModelScale(0.0f, 0.0f, 0.0f)
 {
     StageManager* stageMgr = StageManager::Instance();
     int sceneIndex = mBuildInfo.GetIntParam(Parameter::SortSceneIndex) + 6;

@@ -29,7 +29,7 @@ GmkSimpleMdl::GmkSimpleMdl()
     , mShadowAnim(nullptr)
     , mZRotationGmk(nullptr)
     , mResFileInfo(nullptr)
-    , mModelScale(0.0f)
+    , mModelScale(0.0f, 0.0f, 0.0f)
 { }
 
 // DECL_WEAK gfl::ScopedPointer<gfl::ScnMdlWrapper>::~ScopedPointer() { }
@@ -42,7 +42,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     , mShadowAnim(nullptr)
     , mZRotationGmk(nullptr)
     , mResFileInfo(nullptr)
-    , mModelScale(0.0f)
+    , mModelScale(0.0f, 0.0f, 0.0f)
 {
     int secondVal = mBuildInfo.GetIntParam(ParameterID::SECOND);
     int gmkID = GetGimmickID();

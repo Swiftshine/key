@@ -18,8 +18,6 @@ private:
     GXTexObj mTexObj;
     float mWidth;
     float mHeight;
-    // gfl::ResFileInfo* mResFileInfo;
-    // gfl::ResFileInfo* mResFileInfo;
     gfl::ResFileInfoPointer mResFileInfo;
 };
 

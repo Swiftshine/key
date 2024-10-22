@@ -37,7 +37,7 @@ public:
     f32 GetUpdateRate();
     bool IsAnimationDone();
     bool HasAnim(uint index);
-    gfl::Vec3 GetCurrentAnimationPosition(nw4r::g3d::ResMdl& resmdl);
+    nw4r::math::VEC3 GetCurrentAnimationPosition(nw4r::g3d::ResMdl& resmdl);
 
     inline NwAnm* GetCurrentAnimation() {
         return GetAnimationByIndex(mCurrentAnimIndex);

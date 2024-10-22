@@ -30,7 +30,7 @@ public:
     }
 private:
     uint mLoadPhase;
-    gfl::Vec3 mBGPosition;
+    nw4r::math::VEC3 mBGPosition;
     bool m_10;
     bool m_11;
     Stage mStage;

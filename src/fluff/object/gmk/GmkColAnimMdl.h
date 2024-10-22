@@ -56,7 +56,7 @@ private:
     gfl::ScopedPointer<NwAnmCtrl> mShadowAnimCtrl;
     gfl::ScopedPointer<GmkColAnimCtrl> mColAnimCtrlGmk;
     gfl::ScopedPointer<GmkSimpleMdlRotZ> mZRotationGmk;
-    gfl::Vec3 mModelScale;
+    nw4r::math::VEC3 mModelScale;
 };
 
 

@@ -14,7 +14,7 @@ public:
     /* FlfGameObj */
 
     virtual void vf24() override;
-    virtual gfl::Vec3 GetScreenPos() override;
+    virtual nw4r::math::VEC3 GetScreenPosition() override;
     virtual void vf58() override;
 
     /* SpringBase */

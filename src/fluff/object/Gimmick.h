@@ -147,7 +147,7 @@ public:
     void vf64(bool) override;
 
     virtual void    vf68();
-    virtual gfl::Vec3   vf6C();
+    virtual nw4r::math::VEC3   vf6C();
     virtual u32     GetGimmickID();
     virtual int     vf74();
     virtual int     vf78();

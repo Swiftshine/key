@@ -4,6 +4,7 @@
 #include "types.h"
 #include "gfl/gflVec2.h"
 #include "gfl/gflVec3.h"
+#include <nw4r/math.h>
 
 class BgImage2;
 
@@ -18,7 +19,7 @@ namespace BGST {
         u32 m_4;
         u32 m_8;
         BgImage2* mBgImage;
-        gfl::Vec3 mMatrixTranslation;
+        nw4r::math::VEC3 mMatrixTranslation;
         u32 m_1C;
         float m_20;
         float m_24;

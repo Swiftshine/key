@@ -43,7 +43,7 @@ public:
     gfl::ScopedPointer<NwAnm> mAnim;
     gfl::ScopedPointer<gfl::ScnMdlWrapper> mShadowModelWrapper;
     gfl::ScopedPointer<NwAnm> mShadowAnim;
-    gfl::Vec3 mModelScale;
+    nw4r::math::VEC3 mModelScale;
     gfl::ScopedPointer<GmkSimpleMdlRotZ> mZRotationGmk;
     gfl::ResFileInfoPointer mResFileInfo;
     // gfl::ResFileInfo* mResFileInfo;

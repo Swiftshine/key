@@ -122,7 +122,7 @@ public:
     // Player related.
     static bool fn_80010000();
     // Returns true if the start position is valid. If not, dest is not set.
-    static bool GetPlayerStartPosition(gfl::Vec3& dest);
+    static bool GetPlayerStartPosition(nw4r::math::VEC3& dest);
     static void fn_80011B18();
     static bool IsInMission();
     static int  GetCurrentMissionID();
@@ -195,7 +195,7 @@ private:
     uint mPlayerCount;
     uint mCurrentPlayerID;
     float m_5C;
-    gfl::Vec3 mPlayerStartPosition;
+    nw4r::math::VEC3 mPlayerStartPosition;
     class StageManager* mStageManager;
     class CameraManager* mCameraManager;
     gfl::FixedArray<PlayerBase*, 2> mPlayers;

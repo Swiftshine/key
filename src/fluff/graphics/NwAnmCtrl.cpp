@@ -111,6 +111,6 @@ bool NwAnmCtrl::HasAnim(uint index) {
     return index >= mNumAnims ? false : GetAnimationByIndex(index)->HasAnim();
 }
 
-gfl::Vec3 NwAnmCtrl::GetCurrentAnimationPosition(nw4r::g3d::ResMdl& resmdl) {
+nw4r::math::VEC3 NwAnmCtrl::GetCurrentAnimationPosition(nw4r::g3d::ResMdl& resmdl) {
     return GetCurrentAnimation()->GetPosition(mModelWrapper.Get(), resmdl);
 }

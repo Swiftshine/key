@@ -55,7 +55,7 @@ BgBackImage::BgBackImage()
     PSMTXIdentity(matrix);
 
     float zOrder = FullSortSceneUtil::GetZOrder(0, 1);
-    gfl::Vec3 vec(0.0f);
+    nw4r::math::VEC3 vec(0.0f, 0.0f, 0.0f);
     vec.z = (zOrder - 105.0f) - 100.0f;
     matrix[0][3] = vec.x;
     matrix[1][3] = vec.y;

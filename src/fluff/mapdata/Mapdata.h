@@ -4,6 +4,7 @@
 #include "types.h"
 #include "gfl/gflVec2.h"
 #include "gfl/gflVec3.h"
+#include <nw4r/math.h>
 #include "object/collision/Colbin.h"
 
 
@@ -71,7 +72,7 @@ public:
         struct Gimmick {
             char mName[0x30];
             u8 m_30[0x10];
-            gfl::Vec3 mPosition;
+            nw4r::math::VEC3 mPosition;
             MapdataParams mParams;
         };
         
@@ -86,7 +87,7 @@ public:
 
         struct CommonGimmick {
             u32 mNameIndex;
-            gfl::Vec3 mPosition;
+            nw4r::math::VEC3 mPosition;
             CommonGimmickParams mParams;
         };
 
@@ -112,7 +113,7 @@ public:
             string32 mName;
             string32 m_20;
             MapdataParams mParams;
-            gfl::Vec3 mPosition;
+            nw4r::math::VEC3 mPosition;
         };
 
     };
