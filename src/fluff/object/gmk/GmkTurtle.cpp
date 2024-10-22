@@ -6,7 +6,7 @@ const char GmkTurtle_ResourceName[] = "sea_turtle_01";
 const char GmkTurtle_ColbinSinglePath[] = "gimmick/sea_turtle_01/turtle.colbin";
 const char GmkTurtle_ColbinTriplePath[] = "gimmick/sea_turtle_01/turtle3stack.colbin";
 
-// https://decomp.me/scratch/dEoIS
+// https://decomp.me/scratch/QPVs1
 GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     : Gimmick(buildInfo, GmkTurtle_Name)
 {
@@ -15,15 +15,17 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     mWater = nullptr;
     mAnmCtrl = nullptr;
     mColObjTrans = nullptr;
+    mRideHitCtrlTrans = nullptr;
 
-    mCounterDefaultValue = static_cast<uint>(60.0f * buildInfo->GetFloatParam(Parameter::CounterDefaultValue));
+    f32 f1 = 60.0f;
+    f1 *= buildInfo->GetFloatParam(Parameter::CounterDefaultValue);
+    mCounterDefaultValue = static_cast<uint>(f1);
+    const char* resourceName = GmkTurtle_ResourceName;
     mSpeed = buildInfo->GetFloatParam(Parameter::Speed) / 60.0f;
     mMaxDistance = buildInfo->GetFloatParam(Parameter::MaxDistance);
     mNumTurtles = buildInfo->GetIntParam(Parameter::NumTurtles);
     mShouldMoveRight = buildInfo->GetBoolParam(Parameter::ShouldMoveRight);
     m_13D = buildInfo->GetBoolParam(ParameterID::FOURTH);
-
-    mRideHitCtrlTrans = nullptr;
 
     if (mShouldMoveRight) {
         mPosition.x = 60.0f + mBuildInfoPtr->mPosition.x;
@@ -37,12 +39,12 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     
     gfl::ResFileInfoPointer fileInfo;
     GetResFileInfo(fileInfo);
+    
+    mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, fileInfo, resourceName));
 
-    mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, fileInfo, GmkTurtle_ResourceName));
-
-    for (int i = 0; i < 8; i++) {
+    for (uint i = 0; i < 8; i++) {
         char path[0x100];
-        snprintf(path, sizeof(path), GmkTurtle_AnimationIndexTemplate, GmkTurtle_ResourceName, i);
+        snprintf(path, sizeof(path), GmkTurtle_AnimationIndexTemplate, resourceName, i);
         mAnmCtrl->PlayAnimationByNameAndIndex(i, path);
     }
 
@@ -53,14 +55,14 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     mColObjTrans.Create(gfl::HeapID::Work);
 
     if (3 == mNumTurtles) {
-        mColObjTrans->SetColbin(GmkTurtle_ColbinTriplePath);
-    } else {
         mColObjTrans->SetColbin(GmkTurtle_ColbinSinglePath);
+    } else {
+        mColObjTrans->SetColbin(GmkTurtle_ColbinTriplePath);
     }
 
     mColObjTrans->GetCollisionData()->fn_800D01EC(0, 0, 0x20000000);
-    nw4r::math::VEC2 colObjPos;
-    colObjPos = (*(nw4r::math::VEC2*)&mPosition);
+    // nw4r::math::VEC2 colPos = mPosition;
+    // mColObjTrans->SetPosition(mPosition);
     mColObjTrans->SetOwner(this);
     mColObjTrans->AddToTree();
 
