@@ -19,7 +19,7 @@ struct ResDicNodeData {
 struct ResDicData {
     u32 size;              // at 0x0
     u32 numData;           // at 0x4
-    ResDicNodeData data[]; // at 0x8
+    ResDicNodeData data[1]; // at 0x8
 };
 
 class ResDic : public ResCommon<ResDicData> {

@@ -242,12 +242,11 @@ void GmkTurtle::Update() {
     
     switch (state) {
         case State::InWater: {
-            int result;
-            // int result = mBuildInfo.mStringParams[0].starts_with("");
+            bool empty = mBuildInfo.GetStringParam(0).starts_with("");
 
             Gimmick* w = GimmickManager::Instance()->FindGimmickByName(mBuildInfo.mStringParams[0]);
 
-            if (result != 0 && nullptr != w) {
+            if (empty && nullptr != w) {
                 // the first string in parameter pack is valid
                 // GmkUpdownWater* water = dynamic_cast<GmkUpdownWater*>(w);
                 // mWater = water;
