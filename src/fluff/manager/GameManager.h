@@ -6,8 +6,8 @@
 #include "types.h"
 
 
-#include "gfl/gflVec2.h"
-#include "gfl/gflVec3.h"
+
+
 #include "gfl/gflTask.h"
 #include "gfl/gflArray.h"
 #include "gfl/gflFixedString.h"

@@ -3,7 +3,6 @@
 
 #include <nw4r/g3d/g3d_scnmdl.h>
 #include "gflRenderObj.h"
-#include "gflVec3.h"
 
 namespace nw4r { namespace g3d {
     class LightObjData;

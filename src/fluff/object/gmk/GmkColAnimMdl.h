@@ -5,7 +5,7 @@
 #include "object/Gimmick.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/NwAnmCtrl.h"
-#include "gfl/gflVec3.h"
+
 #include "object/gmk/GmkSimpleMdlRotZ.h"
 #include "object/gmk/GmkColAnimCtrl.h"
 #include "object/gmk/GmkAnimChg.h"

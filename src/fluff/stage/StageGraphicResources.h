@@ -3,7 +3,7 @@
 
 
 #include "types.h"
-#include "gfl/gflVec3.h"
+
 #include "stage/Stage.h"
 #include "object/collision/ColDataSegLabel.h"
 #include "gfl/gflResFileInfo.h"

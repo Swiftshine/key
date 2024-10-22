@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include "gfl/gflResFileInfo.h"
-#include "gfl/gflVec3.h"
+
 #include <nw4r/g3d.h>
 
 namespace gfl { class ScnMdlWrapper; }

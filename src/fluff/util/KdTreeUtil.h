@@ -4,7 +4,7 @@
 
 #include "types.h"
 #include <utility>
-#include "gfl/gflVec2.h"
+
 #include <nw4r/math.h>
 
 typedef std::pair<bool, float> SplitInfo;

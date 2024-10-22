@@ -6,8 +6,6 @@
 #include "manager/GimmickManager.h"
 #include "demo/EventDemoGimmickCommand.h"
 #include "gfl/gflResFileInfo.h"
-#include "gflVec3.h"
-#include "gflVec2.h"
 #include "gflTask.h"
 
 #include <nw4r/math.h>

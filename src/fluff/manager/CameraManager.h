@@ -1,8 +1,7 @@
 #ifndef FLUFF_CAMERAMANAGER_H
 #define FLUFF_CAMERAMANAGER_H
 
-
-#include "gflVec3.h"
+#include <nw4r/math.h>
 
 class CameraManager {
 private:

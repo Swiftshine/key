@@ -2,8 +2,8 @@
 #define FLUFF_BGIMAGE2_H
 
 #include "gfl/gflCustomRenderObj.h"
-#include "gfl/gflVec3.h"
-#include "gfl/gflVec2.h"
+
+
 #include "gfl/gflParam.h"
 
 class BGSTFile;

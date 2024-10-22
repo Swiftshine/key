@@ -2,7 +2,7 @@
 #define FLUFF_INSTAGEWORK_H
 
 #include "types.h"
-#include "gfl/gflVec3.h"
+
 #include "stage/Stage.h"
 
 // size: 0x1E4

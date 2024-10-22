@@ -2,8 +2,8 @@
 #define FLUFF_MAPDATA_H
 
 #include "types.h"
-#include "gfl/gflVec2.h"
-#include "gfl/gflVec3.h"
+
+
 #include <nw4r/math.h>
 #include "object/collision/Colbin.h"
 

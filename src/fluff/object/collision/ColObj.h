@@ -2,8 +2,6 @@
 #define FLUFF_COL_OBJ_H
 
 #include "types.h"
-#include "gflVec2.h"
-#include "gflVec3.h"
 #include "object/collision/KdTree.h"
 #include "object/FlfGameObj.h"
 #include "object/collision/CollisionData.h"

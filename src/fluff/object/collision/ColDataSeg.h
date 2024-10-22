@@ -3,7 +3,7 @@
 
 
 #include "types.h"
-#include "gfl/gflVec2.h"
+
 #include "object/collision/ColData.h"
 #include <utility>
 #include "util/KdTreeUtil.h"

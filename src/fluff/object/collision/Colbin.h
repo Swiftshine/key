@@ -1,7 +1,7 @@
 #ifndef FLUFF_COLBIN_H
 #define FLUFF_COLBIN_H
 
-#include "gfl/gflVec2.h"
+
 #include "types.h"
 #include <nw4r/math.h>
 

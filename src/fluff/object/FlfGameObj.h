@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include "object/FlfHandleObj.h"
-#include "gfl/gflVec3.h"
+
 #include <nw4r/math.h>
 
 #include <PowerPC_EABI_Support/MSL/MSL_C++/string>
