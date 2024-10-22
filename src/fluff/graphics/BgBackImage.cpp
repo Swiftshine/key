@@ -116,11 +116,11 @@ void BgBackImage::Render() {
 
     CameraManager::Instance()->fn_800548AC();
 
-    float height = mHeight / 46.0;
-    float width = mWidth / 46.0;
+    // float height = mHeight / 46.0;
+    // float width = mWidth / 46.0;
 
-    float adjHeight = float1 / height;
-    float adjWidth = float2 / width;
+    // float adjHeight = float1 / height;
+    // float adjWidth = float2 / width;
 
     /* missing stuff */
 

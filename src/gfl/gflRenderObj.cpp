@@ -55,7 +55,7 @@ void RenderObj::vf20(bool arg1) {
 
 // https://decomp.me/scratch/EKLdu
 bool RenderObj::vf34(float& arg0, float& arg1, float& arg2, float& arg3) {
-    bool b;
+    // bool b;
     // float f1;
     // float f2;
     // float f3;
@@ -77,7 +77,7 @@ bool RenderObj::vf34(float& arg0, float& arg1, float& arg2, float& arg3) {
     //     }
     // }
 
-    return b;
+    return 0;
 }
 
 void RenderObj::Update(bool arg1)  {
@@ -98,11 +98,12 @@ int RenderObj::vf10() {
     return 0;
 }
 
-
+// not decompiled
 bool RenderObj::fn_80647DA4(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj) {
-    
+    return 0;
 }
 
+// not decompiled
 bool RenderObj::fn_80647E8C(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj) {
-    
+    return 0;
 }

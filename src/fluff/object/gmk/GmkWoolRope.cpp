@@ -43,104 +43,104 @@ void GmkWoolRope::SetHooks(GmkWoolHook* first, GmkWoolHook* second) {
 
 
 void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* wBuildInfo, const char* path) {
-    int unkint1;
+    // int unkint1;
 
-    if (nullptr == wBuildInfo) {
-        wBuildInfo = &WBuildInfo;
-    }
+    // if (nullptr == wBuildInfo) {
+    //     wBuildInfo = &WBuildInfo;
+    // }
 
-    if (nullptr == path) {
-        path = WoolBridgePath;
-    }
+    // if (nullptr == path) {
+    //     path = WoolBridgePath;
+    // }
 
-    if (wBuildInfo->m_34 < 2) {
-        GmkWoolHook* first = mFirstWoolHook;
-        GmkWoolHook* second = mSecondWoolHook;
+    // if (wBuildInfo->m_34 < 2) {
+    //     GmkWoolHook* first = mFirstWoolHook;
+    //     GmkWoolHook* second = mSecondWoolHook;
 
-        Vec len1;
-        len1.x = first->mPosition.x - second->mPosition.x;
-        len1.y = first->mPosition.y - second->mPosition.y;
-        len1.z = first->mPosition.z - second->mPosition.z;
+    //     Vec len1;
+    //     len1.x = first->mPosition.x - second->mPosition.x;
+    //     len1.y = first->mPosition.y - second->mPosition.y;
+    //     len1.z = first->mPosition.z - second->mPosition.z;
 
-        double mag = PSVECMag((Vec*)&len1);
+    //     double mag = PSVECMag((Vec*)&len1);
 
-        int dist = static_cast<int>(mag / lbl_808E14E0);
+    //     int dist = static_cast<int>(mag / lbl_808E14E0);
 
-        if (5.0f < mag) {
-            float unkfloat1 = static_cast<int>(mag / 5.0f);
-            float unkfloat2;
-            // unkfloat2 = FLOAT_808e14e8 * (CONCAT44(local_30,unkfloat1) - DOUBLE_808e6970);
+    //     if (5.0f < mag) {
+    //         float unkfloat1 = static_cast<int>(mag / 5.0f);
+    //         float unkfloat2;
+    //         // unkfloat2 = FLOAT_808e14e8 * (CONCAT44(local_30,unkfloat1) - DOUBLE_808e6970);
 
-            if (50.0f < unkfloat2) {
-                unkfloat2 = 50.0f;
-            }
+    //         if (50.0f < unkfloat2) {
+    //             unkfloat2 = 50.0f;
+    //         }
 
-            /*
-                uStack_34 = unkint1;
-                unkint1 = __double_to_unsigned_int
-                          ((CONCAT44(0x43300000,unkint1) - 4503599627370496.0) *
-                (1.0f - unkfloat2 / 100.0f));
-            */
-        }
-    } else {
-        GmkWoolHook* first = mFirstWoolHook;
-        GmkWoolHook* second = mSecondWoolHook;
+    //         /*
+    //             uStack_34 = unkint1;
+    //             unkint1 = __double_to_unsigned_int
+    //                       ((CONCAT44(0x43300000,unkint1) - 4503599627370496.0) *
+    //             (1.0f - unkfloat2 / 100.0f));
+    //         */
+    //     }
+    // } else {
+    //     GmkWoolHook* first = mFirstWoolHook;
+    //     GmkWoolHook* second = mSecondWoolHook;
 
-        Vec len2;
-        len2.x = first->mPosition.x - second->mPosition.x;
-        len2.y = first->mPosition.y - second->mPosition.y;
-        len2.z = first->mPosition.z - second->mPosition.z;
+    //     Vec len2;
+    //     len2.x = first->mPosition.x - second->mPosition.x;
+    //     len2.y = first->mPosition.y - second->mPosition.y;
+    //     len2.z = first->mPosition.z - second->mPosition.z;
 
-        double mag = PSVECMag(&len2);
-        unkint1 = wBuildInfo->m_34;
-        /*
-            uStack_34 = unkint1 - 1;
-            lbl_808E14E0 = mag / (CONCAT44(local_38,uStack_34) - 4503599627370496.0);
-        */
-    }
+    //     double mag = PSVECMag(&len2);
+    //     unkint1 = wBuildInfo->m_34;
+    //     /*
+    //         uStack_34 = unkint1 - 1;
+    //         lbl_808E14E0 = mag / (CONCAT44(local_38,uStack_34) - 4503599627370496.0);
+    //     */
+    // }
 
-    if (nullptr != m_158 && 0.0f < *(float*)((u8*)m_158 + 0x24)) {
-        /*
-            unkfloat1 = unkint1;
-            unkint1 = __double_to_unsigned_int((CONCAT44(local_30,unkint1) - 4503599627370496.0) / unkfloat2);
-        */
-    }
+    // if (nullptr != m_158 && 0.0f < *(float*)((u8*)m_158 + 0x24)) {
+    //     /*
+    //         unkfloat1 = unkint1;
+    //         unkint1 = __double_to_unsigned_int((CONCAT44(local_30,unkint1) - 4503599627370496.0) / unkfloat2);
+    //     */
+    // }
 
-    if (unkint1 < 2) {
-        unkint1 = 2;
-    }
+    // if (unkint1 < 2) {
+    //     unkint1 = 2;
+    // }
 
-    wBuildInfo->m_34 = unkint1;
-    wBuildInfo->m_38 = unkint1 - 1;
+    // wBuildInfo->m_34 = unkint1;
+    // wBuildInfo->m_38 = unkint1 - 1;
 
-    gfl::ResFileInfo* resfileinfo;
+    // gfl::ResFileInfo* resfileinfo;
 
-    FlfMdlDraw::GetFileInfoFromArchive(resfileinfo, path);
+    // FlfMdlDraw::GetFileInfoFromArchive(resfileinfo, path);
 
-    nw4r::g3d::ResFile resFile(nullptr != resfileinfo ? resfileinfo->GetGfArch() : nullptr);
+    // nw4r::g3d::ResFile resFile(nullptr != resfileinfo ? resfileinfo->GetGfArch() : nullptr);
 
-    NW4R_G3D_RESFILE_AC_ASSERT(resFile);
+    // NW4R_G3D_RESFILE_AC_ASSERT(resFile);
 
-    char woolColorName[32];
-    snprintf(woolColorName, 32, WoolColorNameTemplate, mWoolColorIndex);
+    // char woolColorName[32];
+    // snprintf(woolColorName, 32, WoolColorNameTemplate, mWoolColorIndex);
 
-    // mWoolLink = new (gfl::HeapID::Work) WoolLinkObjBase(/* params */);
+    // // mWoolLink = new (gfl::HeapID::Work) WoolLinkObjBase(/* params */);
 
-    if (&mResFileInfo != &resfileinfo) {
-        if (nullptr != &mResFileInfo) {
-            mResFileInfo->Destroy();
-        }
+    // if (&mResFileInfo != &resfileinfo) {
+    //     if (nullptr != &mResFileInfo) {
+    //         mResFileInfo->Destroy();
+    //     }
 
-        mResFileInfo = resfileinfo;
+    //     mResFileInfo = resfileinfo;
 
-        if (nullptr != resfileinfo) {
-            resfileinfo->IncrementLevel();
-        }
-    }
+    //     if (nullptr != resfileinfo) {
+    //         resfileinfo->IncrementLevel();
+    //     }
+    // }
 
-    if (nullptr != resfileinfo) {
-        resfileinfo->Destroy();
-    }
+    // if (nullptr != resfileinfo) {
+    //     resfileinfo->Destroy();
+    // }
 }
 
 void GmkWoolRope::Update() {

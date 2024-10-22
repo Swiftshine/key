@@ -26,14 +26,16 @@ void DemoObject::fn_802A4F28() {
 // the construction of these templated functors
 gfl::Task* DemoObject::InitTask(gfl::Task* parent, u8 flags, const char* taskName, uint arg4) {
 
-    gfl::FunctorClassMethod0<void, demo::DemoObject*, void (demo::DemoObject::*)()const>* functor = new gfl::FunctorClassMethod0<void, demo::DemoObject*, void (demo::DemoObject::*)()const>(this, (void(demo::DemoObject::*)()const)fn_802A4F28);
+    // gfl::FunctorClassMethod0<void, demo::DemoObject*, void (demo::DemoObject::*)()const>* functor = new gfl::FunctorClassMethod0<void, demo::DemoObject*, void (demo::DemoObject::*)()const>(this, (void(demo::DemoObject::*)()const)fn_802A4F28);
 
-    gfl::Task* task = new (gfl::HeapID::Work) gfl::Task(this, functor);
+    // gfl::Task* task = new (gfl::HeapID::Work) gfl::Task(this, functor);
 
-    if (nullptr != task) {
-        task->SetFlags(flags);
-        parent->MakeChild(task);
-        task->OrUnk14(arg4);
-    }
-    return task;
+    // if (nullptr != task) {
+    //     task->SetFlags(flags);
+    //     parent->MakeChild(task);
+    //     task->OrUnk14(arg4);
+    // }
+    // return task;
+
+    return 0;
 }
