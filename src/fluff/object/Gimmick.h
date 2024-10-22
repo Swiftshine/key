@@ -36,18 +36,11 @@ public:
     public:
 
         // this constructor was matching a while ago, what happened?
-        inline GimmickBuildInfo() {
-            const float zero = 0.0f;
-
-            mGimmickID = -1;
-
-            mPosition.x = zero;
-            mPosition.y = zero;
-            mPosition.z = zero;
-
-            mRotation.x = zero;
-            mRotation.y = zero;
-            mRotation.z = zero;
+        inline GimmickBuildInfo()
+            : mGimmickID(-1)
+            , mPosition(0.0f, 0.0f, 0.0f)
+            , mRotation(0.0f, 0.0f, 0.0f)
+        {
 
             m_24 = 'A';
             mFullSortSceneIndex = 6;
@@ -59,7 +52,7 @@ public:
 
             for (uint i = 0; i < 5; i++) {
                 mIntParams[i] = 0;
-                mFloatParams[i] = zero;
+                mFloatParams[i] = 0.0f;
                 mStringParams[i] = Blank;
             }
         }
@@ -100,26 +93,11 @@ public:
         inline bool GetBoolParam(int index) {
             return static_cast<bool>(mIntParams[index]);
         }
+
     public:
         int mGimmickID;
-
-        union {
-            struct {
-                float x;
-                float y;
-                float z;
-            };
-        } mPosition;
-
-        union {
-            struct {
-                float x;
-                float y;
-                float z;
-            };
-
-        } mRotation;
-
+        nw4r::math::VEC3 mPosition;
+        nw4r::math::VEC3 mRotation;
         bool m_1C;
         u8 m_1D;
         u8 m_1E;
