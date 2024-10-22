@@ -46,6 +46,6 @@ KdTree::~KdTree() {
 }
 
 // https://decomp.me/scratch/wa8La
-void KdTree::CreateRootNode(gfl::Vec2& min, gfl::Vec2& max) {
+void KdTree::CreateRootNode(nw4r::math::VEC2& min, nw4r::math::VEC2& max) {
     mRootNode = new (gfl::HeapID::Work) KdTreeNode(min, max);
 }

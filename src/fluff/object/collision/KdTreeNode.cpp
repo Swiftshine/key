@@ -182,8 +182,8 @@ void KdTreeNode::CreateChildren() {
         yDiff = -yDiff;
     }
 
-    gfl::Vec2 v0;
-    gfl::Vec2 v1;
+    nw4r::math::VEC2 v0;
+    nw4r::math::VEC2 v1;
     const float* p;
 
     if (xDiff <= yDiff) {

@@ -18,8 +18,8 @@ public:
 private:
     u16 mIndex;
     u16 m_22;
-    std::pair<gfl::Vec2, gfl::Vec2> mPoints;
-    gfl::Vec2 m_34;
+    std::pair<nw4r::math::VEC2, nw4r::math::VEC2> mPoints;
+    nw4r::math::VEC2 m_34;
     uint m_3C;
 };
 

@@ -27,7 +27,7 @@ namespace BGST {
         float m_2C;
         uint mSortSceneID;
         bool m_34;
-        gfl::Vec2 mPosition;
+        nw4r::math::VEC2 mPosition;
     };
 
     ASSERT_SIZE(Entry, 0x40);

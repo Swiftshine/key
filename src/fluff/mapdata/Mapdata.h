@@ -13,8 +13,8 @@ public:
     class Mapbin {
     public:
         struct File {
-            gfl::Vec2 mBoundsMin;
-            gfl::Vec2 mBoundsMax;
+            nw4r::math::VEC2 mBoundsMin;
+            nw4r::math::VEC2 mBoundsMax;
             u32 mNumWalls;
             u32 mWallOffset;
             u32 mNumLabeledWalls;
@@ -36,8 +36,8 @@ public:
 
         struct Header {
             f32 m_0;
-            gfl::Vec2 mBoundsMin;
-            gfl::Vec2 mBoundsMax;
+            nw4r::math::VEC2 mBoundsMin;
+            nw4r::math::VEC2 mBoundsMax;
             u32 mNumWalls;
             u32 mWallOffset;
             u32 mNumLabeledWalls;
@@ -98,15 +98,15 @@ public:
             string32 mType;
             MapdataParams mParams;
             u32 mNumPoints;
-            // gfl::Vec2 mPoints[mNumPoints];
+            // nw4r::math::VEC2 mPoints[mNumPoints];
         };
 
         struct Zone {
             string32 mName;
             string32 m_20;
             MapdataParams mParams;
-            gfl::Vec2 mBoundsMin;
-            gfl::Vec2 mBoundsMax;  
+            nw4r::math::VEC2 mBoundsMin;
+            nw4r::math::VEC2 mBoundsMax;  
         };
 
         struct RaceCourseInfo {

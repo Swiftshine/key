@@ -23,7 +23,7 @@ public:
         SetMaxY(parent->GetMaxY());
     }
 
-    inline KdTreeNode(gfl::Vec2& min, gfl::Vec2& max) {
+    inline KdTreeNode(nw4r::math::VEC2& min, nw4r::math::VEC2& max) {
         mDepth = 0;
         float z = 0.0f;
         SetMinX(z);

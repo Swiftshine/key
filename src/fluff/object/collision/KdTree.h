@@ -36,7 +36,7 @@ public:
     KdTree();
     virtual ~KdTree();
     
-    void CreateRootNode(gfl::Vec2& min, gfl::Vec2& max);
+    void CreateRootNode(nw4r::math::VEC2& min, nw4r::math::VEC2& max);
     void AddItem(void*);
     void RemoveItem(void*);
 private:

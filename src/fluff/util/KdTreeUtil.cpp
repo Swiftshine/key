@@ -1,6 +1,6 @@
 #include "util/KdTreeUtil.h"
 
-int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, gfl::Vec2& point) {
+int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, nw4r::math::VEC2& point) {
     float coordinate;
     if (splitInfo.mSplitY) {
         // the node is split on the Y axis

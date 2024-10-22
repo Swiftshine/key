@@ -23,8 +23,8 @@ private:
     ColObjTrans mColObj;
     bool m_34;
     bool m_35;
-    gfl::Vec2 m_38;
-    gfl::Vec2 m_40;
+    nw4r::math::VEC2 m_38;
+    nw4r::math::VEC2 m_40;
     int m_48;
 };
 

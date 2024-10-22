@@ -5,9 +5,10 @@
 #include "types.h"
 #include <utility>
 #include "gfl/gflVec2.h"
+#include <nw4r/math.h>
 
 typedef std::pair<bool, float> SplitInfo;
-typedef std::pair<gfl::Vec2, gfl::Vec2> PointPair;
+typedef std::pair<nw4r::math::VEC2, nw4r::math::VEC2> PointPair;
 
 struct KdTreeSplitInfo {
     bool mSplitY;
@@ -41,7 +42,7 @@ namespace KdTreeUtil {
      * @note Address: 0x80048354
      * @note Size: 0x64
      */
-    int DetermineNodePlacement(KdTreeSplitInfo& splitInfo, gfl::Vec2& point);
+    int DetermineNodePlacement(KdTreeSplitInfo& splitInfo, nw4r::math::VEC2& point);
 
     /**
      * @note Address: 0x800483b8

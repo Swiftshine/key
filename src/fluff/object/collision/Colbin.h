@@ -3,6 +3,7 @@
 
 #include "gfl/gflVec2.h"
 #include "types.h"
+#include <nw4r/math.h>
 
 namespace Colbin {
     struct Header {
@@ -13,9 +14,9 @@ namespace Colbin {
     };
 
     struct Entry {
-        gfl::Vec2 mStart;
-        gfl::Vec2 mEnd;
-        gfl::Vec2 m_10;
+        nw4r::math::VEC2 mStart;
+        nw4r::math::VEC2 mEnd;
+        nw4r::math::VEC2 m_10;
         u32 mEntryIndex;
         u32 mCollisionTypeIndex;
     };

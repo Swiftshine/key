@@ -10,7 +10,7 @@ class GmkWoolHook : public Gimmick, public IObjHitCB {
 friend class GmkWoolRope;
 public:
     static GmkWoolHook* Build(GimmickBuildInfo* buildInfo);
-    static GmkWoolHook* Build(gfl::Vec2& pos);
+    static GmkWoolHook* Build(nw4r::math::VEC2& pos);
 
     GmkWoolHook(GimmickBuildInfo* buildInfo, const char* taskName);
     GmkWoolHook();

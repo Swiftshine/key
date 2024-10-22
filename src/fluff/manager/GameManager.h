@@ -113,7 +113,7 @@ public:
     // Returns true if loading PHASE is 3 and loading STATE is 5.
     static bool IsStageReady();
     static gfl::ParamBool* fn_8000FC64(uint arg0);
-    static void SetupPlayers(gfl::Vec2& startPos, uint arg1);
+    static void SetupPlayers(nw4r::math::VEC2& startPos, uint arg1);
     // arg0 determines wether *(Instance + 0xB8) is incremented (true) or decremented (false).
     // Sets *(Instance + 0xB4) to true or false when *(Instance + 0xB8) is specifically 1 or 0, respectively.
     static void UpdatePrinceFluff(bool arg0);
