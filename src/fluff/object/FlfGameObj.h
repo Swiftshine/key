@@ -4,8 +4,12 @@
 #include "types.h"
 #include "object/FlfHandleObj.h"
 #include "gfl/gflVec3.h"
+#include <nw4r/math.h>
 
 #include <PowerPC_EABI_Support/MSL/MSL_C++/string>
+
+
+class CameraManager;
 
 class FlfGameObj : public FlfHandleObj {
 public:
@@ -15,18 +19,18 @@ public:
     void UpdateMatrix();
     void    fn_8002C004(bool arg1);
 
-    virtual void    SetPos(gfl::Vec3*);
+    virtual void    SetPosition(nw4r::math::VEC3& position);
     virtual void    vf10(bool val);
     DECL_WEAK virtual bool    vf14();
     virtual void    vf18();
-    virtual gfl::Vec3   GetPos();
-    virtual void    SetPos_thunk(gfl::Vec3*);
+    virtual nw4r::math::VEC3   GetPosition();
+    virtual void    SetPosition_thunk(nw4r::math::VEC3& position);
     virtual void    vf24();
     virtual void    vf28();
-    virtual void    vf2C(gfl::Vec3*, gfl::Vec3*, gfl::Vec3*);
+    virtual void    vf2C(nw4r::math::VEC3& arg1, nw4r::math::VEC3& arg2, nw4r::math::VEC3& arg3);
     virtual void    vf30();
-    virtual bool    ShouldCull(class CameraManager* camMgr);
-    virtual gfl::Vec3   GetScreenPos();
+    virtual bool    ShouldCull(CameraManager* camMgr);
+    virtual nw4r::math::VEC3   GetScreenPosition();
     virtual int     vf3C();
     virtual void    vf40(FlfGameObj*);
     virtual int     vf44();
@@ -41,9 +45,9 @@ public:
     virtual float   GetCullThreshold();
     virtual void    vf64(bool);
 public:
-    gfl::Vec3 mPosition;     
-    gfl::Vec3 mRotation;     
-    gfl::Vec3 mScale;        
+    nw4r::math::VEC3 mPosition;     
+    nw4r::math::VEC3 mRotation;     
+    nw4r::math::VEC3 mScale;        
     MTX34 mMatrix;       
     u32 mFlags;     
     u32 m_64;        

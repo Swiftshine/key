@@ -15,9 +15,9 @@ namespace nw4r {
 }
 
 FlfGameObj::FlfGameObj(uint newActorType)
-    : mPosition(0.0f)
-    , mRotation(0.0f)
-    , mScale(1.0f) 
+    : mPosition(0.0f, 0.0f, 0.0f)
+    , mRotation(0.0f, 0.0f, 0.0f)
+    , mScale(1.0f, 1.0f, 1.0f) 
 {
     mMatrix[0][0] = 0.0f;
     mMatrix[0][1] = 0.0f;
@@ -123,6 +123,6 @@ void FlfGameObj::fn_8002C004(bool arg1) {
 
 
 bool FlfGameObj::ShouldCull(CameraManager* camMgr) {
-    gfl::Vec3 screenPos = GetScreenPos();
+    nw4r::math::VEC3 screenPos = GetScreenPosition();
     return camMgr->CheckCull(screenPos);
 }

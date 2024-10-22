@@ -31,8 +31,8 @@ GmkWoolRope::~GmkWoolRope() {
     mWoolLink = nullptr;
 }
 
-gfl::Vec3 GmkWoolRope::GetScreenPos() {
-    return mWoolLink->GetScreenPos();
+nw4r::math::VEC3 GmkWoolRope::GetScreenPosition() {
+    return mWoolLink->GetScreenPosition();
 }
 
 void GmkWoolRope::SetHooks(GmkWoolHook* first, GmkWoolHook* second) {
