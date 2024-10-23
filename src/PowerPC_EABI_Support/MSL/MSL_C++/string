@@ -289,6 +289,8 @@ namespace std {
         inline CharT operator[](size_t n) const { return get_pointer()[n]; }
 
         size_t rfind(CharT c, size_t pos = npos) const;
+
+        bool starts_with(const char*) const;
     private:
         void do_replace(
             size_t cur_size,
