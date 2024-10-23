@@ -32,9 +32,9 @@ public:
 
     virtual void SetState(FlfGameObj* setter, std::string& stateStr) override;
     virtual void vf64(bool) override;
+    
     /* Gimmick */
-
-    virtual bool vf88(FlfGameObj*, uint) override;
+    virtual int vf88(FlfGameObj*, uint) override;
     virtual bool vfA4(FlfGameObj*, uint) override;
     virtual void Update() override;
 

@@ -156,7 +156,7 @@ void GmkColAnimMdl::SetUpdate(bool state) {
     }
 }
 
-bool GmkColAnimMdl::vf88(FlfGameObj* arg1, uint arg2) {
+int GmkColAnimMdl::vf88(FlfGameObj* arg1, uint arg2) {
     return mColAnimCtrlGmk->vfC(arg1, arg2);
 }
 

@@ -13,7 +13,7 @@ public:
 
     /* FlfGameObj */
 
-    virtual void vf24() override;
+    virtual void vf24(void*) override;
     virtual nw4r::math::VEC3 GetScreenPosition() override;
     virtual void vf58() override;
 

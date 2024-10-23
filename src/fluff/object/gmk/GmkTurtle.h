@@ -11,6 +11,8 @@
 #include "manager/StageManager.h"
 #include <nw4r/math.h>
 
+class GmkUpdownWater;
+
 // size: 0x15C
 class GmkTurtle : public Gimmick {
 public:
@@ -38,6 +40,8 @@ public:
         CounterDefaultValue = 0, // float 0
         Speed = 1, // float 1
         MaxDistance = 2, // float 2
+
+        TargetGimmick = 0, // string 0
     );
 
 public:
@@ -46,10 +50,10 @@ public:
 
     /* FlfGameObj */
 
-    void vf24() override;
+    void vf24(void*) override;
 
     /* Gimmick */
-    virtual bool vf88(FlfGameObj* player, uint arg2) override;
+    virtual int vf88(FlfGameObj* player, uint arg2) override;
     virtual int vf98() override;
     virtual void Update() override;
 
@@ -57,7 +61,7 @@ public:
     
     void BecomeActive();
 
-    void Turn(int turnDir);
+    void Turn(int turnDir) DONT_INLINE_CLASS;
 public:
     uint mCounterDefaultValue;
     float mSpeed;
@@ -68,7 +72,7 @@ public:
     int mCounter;
     int mNumTurtles;
     int mCurrentState;
-    Gimmick* mWater;
+    GmkUpdownWater* mWater;
     gfl::ScopedPointer<NwAnmCtrl> mAnmCtrl;
     gfl::ScopedPointer<ColObjTrans> mColObjTrans;
     gfl::ScopedPointer<FlfRideHitCtrlTrans> mRideHitCtrlTrans;

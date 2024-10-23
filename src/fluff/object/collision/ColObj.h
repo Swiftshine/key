@@ -28,6 +28,10 @@ public:
     inline FlfGameObj* GetOwner() {
         return mOwner;
     }
+
+    inline nw4r::math::VEC3& GetPosition() {
+        return mPosition;
+    }
     
 public:
     uint m_4;

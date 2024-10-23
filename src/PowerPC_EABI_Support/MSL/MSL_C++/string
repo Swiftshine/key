@@ -505,6 +505,11 @@ namespace std {
     static inline bool operator==(const char* cstr, std::basic_string<CharT, Traits, Allocator>& str) {
         return 0 == str.compare(cstr);
     }
+
+    template <class CharT, class Traits, class Allocator>
+    static inline bool operator!=(const char* cstr, std::basic_string<CharT, Traits, Allocator>& str) {
+        return 0 != str.compare(cstr);
+    }
 }
 
 #endif
