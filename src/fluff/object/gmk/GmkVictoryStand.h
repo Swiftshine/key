@@ -17,10 +17,10 @@ public:
         return sInstance;
     }
 
-    static void AddDecolativeBallResources();
+    static void AddDecorativeBallResources();
     static GmkVictoryStand* Build(GimmickBuildInfo* buildInfo);
     static void fn_804F1BDC(nw4r::math::VEC2& arg1, int rank);
-    static void SpawnDecolativeBall(int rank);
+    static void SpawnDecorativeBall(uint rank);
     static void SetRankingInfo(int rank, nw4r::math::VEC2& position);
 
     GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskName);
@@ -41,7 +41,7 @@ private:
     int mTotalAwardedBeads;
     gfl::ScopedPointer<ResourceWrapper> mResources;
     gfl::ScopedPointer<ColObjTrans> mColObj;
-    GimmickBuildInfo mDecolativeBallBuildInfo;
+    GimmickBuildInfo mDecorativeBallBuildInfo;
 };
 
 #endif

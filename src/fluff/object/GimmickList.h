@@ -64,7 +64,10 @@ ENUM_CLASS(GimmickIDs,
     MobileScaffold_Large,            
     Curtains,                       
     HappyGate_Goal,                 
-    TreasureChest,                  
+    TreasureChest,                
+
+    DecorativeBall = 0x102,
+      
     GimmickTypeCount = 0x1B3
 );
 #endif
