@@ -133,6 +133,9 @@ fluff/object/gmk/GmkCamRectCtrl.cpp:
 	.rodata     start:0x8081B258 end:0x8081B268
 	.data       start:0x80893120 end:0x80893200
 
+fluff/object/gmk/GmkVictoryStand.cpp:
+	.text       start:0x804F1B40 end:0x804F2B0C
+
 fluff/stage/mission/MissionClearChecker.cpp:
 	.text       start:0x804F56DC end:0x804F5F34
 

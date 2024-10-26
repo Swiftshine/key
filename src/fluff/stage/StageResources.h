@@ -18,7 +18,7 @@ public:
     }
 
     void AddGimmickName(const char*);
-
+    void AddResourceName(const char*);
 private:
     gfl::LinkedList<std::string*> mGimmickResourceNameList;
     gfl::LinkedList<std::string*> mGimmickNameList;
