@@ -7,6 +7,7 @@
 #include "object/collision/ColObj.h"
 #include "misc/ScopedPointers.h"
 #include "stage/StageResources.h"
+#include "gfl/gflVec3.h"
 
 // size: 0x1FC
 class GmkVictoryStand : public Gimmick {
@@ -21,7 +22,7 @@ public:
     static GmkVictoryStand* Build(GimmickBuildInfo* buildInfo);
     static void fn_804F1BDC(nw4r::math::VEC2& arg1, int rank);
     static void SpawnDecorativeBall(uint rank);
-    static void SetRankingInfo(int rank, nw4r::math::VEC2& position);
+    static void SetRankingInfo(uint rank, nw4r::math::VEC2& position);
 
     GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskName);
     virtual ~GmkVictoryStand();
@@ -36,8 +37,8 @@ private:
     int mBeadAwardState;
     int m_13C;
     int m_140;
-    int mPlayerRanking;
-    nw4r::math::VEC3 mBeadAwardPosition;
+    uint mPlayerRanking;
+    gfl::Vec3 mBeadAwardPosition;
     int mTotalAwardedBeads;
     gfl::ScopedPointer<ResourceWrapper> mResources;
     gfl::ScopedPointer<ColObjTrans> mColObj;

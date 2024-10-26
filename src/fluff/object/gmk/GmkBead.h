@@ -23,6 +23,7 @@ public:
     );
 public:
     int GetBeadValue();
+    void fn_800B0658(float);
 };
 
 #endif

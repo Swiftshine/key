@@ -387,7 +387,7 @@ config.libs = [
             Object(Matching, "gfl/gflMemoryManagement.cpp"),
             Object(Matching, "gfl/gflAlloc.cpp"),
             Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
-            Object(Matching, "gfl/gflVec3.cpp"),
+            Object(NonMatching, "gfl/gflVec3.cpp"),
             Object(Matching, "gfl/gflMemoryBase.cpp"),
             Object(NonMatching,    "gfl/gflFixedString.cpp"),
             Object(Matching,    "gfl/gflChecksum.cpp"),
