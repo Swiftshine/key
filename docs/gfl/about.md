@@ -8,7 +8,7 @@ Here's a (by no means complete) list of what GFLv2 has:
 | GFLv2 | Usage | v1 Equivalent | v2 Relatives |
 | - | - | - | - |
 | `AsyncFileStream` | - | `ASyncFileStream`, `ASyncDecodeReqQue` | None. |
-| `BpeDecoderFile` | Used to decode data from [GF Archives](https://swiftshine.github.io/documentation/gfa.html) that were encoded with [Byte Pair Encoding](https://en.wikipedia.org/wiki/Byte_pair_encoding). | `BpeDecoderFile` | None. |
+| `BpeDecoderFile` | Used to decode data from [GF Archives](https://swiftshine.github.io/doc/gfa.html) that were encoded with [Byte Pair Encoding](https://en.wikipedia.org/wiki/Byte_pair_encoding). | `BpeDecoderFile` | None. |
 | `File` | File management. | `File`, `FileRevo`, `FileSystem` | `File`, `FileSystem`, `FileWii`, `FileSystemWii` |
 | `Functor` | Function pointers, for things such as states or callbacks. | No such module present. | `FunctorBase`, `FunctorClassMethod`, `FunctorFunc`, `FunctorImpl` |
 | `Memory` | Memory management. |`Memory` or `MemoryRevo` | `MemoryBase`, `Memory` |
