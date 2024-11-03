@@ -4,7 +4,8 @@
 class CollisionEntry;
 class IObjHitCB;
 class FlfGameObj;
-struct CollisionTemplate;
+
+#include "object/collision/CollisionTemplate.h"
 #include <nw4r/math.h>
 
 namespace ObjHit {
