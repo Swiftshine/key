@@ -7,7 +7,7 @@
 
 class CollisionInfo {
 public:
-    bool m_0;
+    bool mMatrixInited;
     bool m_1;
     bool m_2;
     bool mBoundsInited;
