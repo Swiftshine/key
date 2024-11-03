@@ -3,11 +3,9 @@
 
 #include "types.h"
 
-// todo: figure out what this class actually looks like
 class IObjHitCB {
 public:
-    int m_4;
-    int m_8;
+    virtual int vf8(/* unknown parameters */);
 };
 
 #endif
