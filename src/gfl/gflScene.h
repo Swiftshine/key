@@ -20,7 +20,7 @@ class Scene {
         virtual ~Scene();
         virtual void vfC();
         virtual void vf10();
-        virtual void vf14();
+        virtual void RemoveScnRoot();
         virtual void vf18();
         virtual void vf1C();
         virtual void vf20();
