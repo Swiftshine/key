@@ -2,6 +2,7 @@
 #define GFL_SCENE_H
 
 #include "types.h"
+#include "gflLinkedList.h"
 
 namespace nw4r { namespace g3d { class ScnRoot; } }
 
@@ -18,22 +19,18 @@ class Scene {
         void AddRenderObj(gfl::RenderObj* renderObj);
         
         virtual ~Scene();
-        virtual void vfC();
+        virtual bool AreListsEmpty();
         virtual void vf10();
         virtual void RemoveScnRoot();
         virtual void vf18();
         virtual void vf1C();
         virtual void vf20();
-    public:
+    protected:
         bool m_4;
         bool m_5;
-        bool m_6;
-        uint m_8;
-        uint m_C;
-        uint m_10;
-        uint m_14;
-        uint m_18;
-        uint m_1C;
+        bool mIsUpdated;
+        gfl::LinkedList<RenderObj> mRenderObjList;
+        gfl::LinkedList<placeholder_t> m_14;
         nw4r::g3d::ScnRoot* mScnRoot;
         uint m_24;
         uint m_28;
