@@ -94,16 +94,16 @@ void RenderObj::SetActive(bool state) {
     mIsActive = state;
 }
 
-int RenderObj::vf10() {
+nw4r::g3d::G3dObj* RenderObj::GetObject() {
+    return nullptr;
+}
+
+// not decompiled
+bool RenderObj::XluSortCheck(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj) {
     return 0;
 }
 
 // not decompiled
-bool RenderObj::fn_80647DA4(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj) {
-    return 0;
-}
-
-// not decompiled
-bool RenderObj::fn_80647E8C(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj) {
+bool RenderObj::OpaSortCheck(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj) {
     return 0;
 }

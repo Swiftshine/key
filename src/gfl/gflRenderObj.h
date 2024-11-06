@@ -4,6 +4,7 @@
 #include "types.h"
 #include <revolution/MEM.h>
 #include <nw4r/g3d/g3d_scnobj.h>
+#include <nw4r/g3d.h>
 #include "gfl_types.h"
 
 namespace gfl {
@@ -20,7 +21,7 @@ namespace gfl {
         static bool fn_80647E8C(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj);
 
         virtual void vf0C();
-        DECL_WEAK virtual int vf10();
+        DECL_WEAK virtual nw4r::g3d::G3dObj* GetObject();
         virtual void SetUpdate(bool shouldUpdate);
         virtual void vf18(bool arg1);
         virtual bool vf1C();
