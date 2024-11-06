@@ -3,9 +3,7 @@
 
 #include "types.h"
 #include "gflLinkedList.h"
-
-namespace nw4r { namespace g3d { class ScnRoot; } }
-
+#include <nw4r/g3d.h>
 
 namespace gfl {
 class RenderObj;
@@ -20,11 +18,11 @@ class Scene {
         
         virtual ~Scene();
         virtual bool AreListsEmpty();
-        virtual void vf10();
-        virtual void RemoveScnRoot();
-        virtual void vf18();
-        virtual void vf1C();
-        virtual void vf20();
+        virtual void Insert(nw4r::g3d::ScnObj* object);
+        virtual void Remove(u32 index);
+        virtual void DrawOpa();
+        virtual void DraXlu();
+        virtual bool IsScnRootSizeValid();
     protected:
         bool m_4;
         bool m_5;
