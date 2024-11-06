@@ -29,6 +29,8 @@ namespace nw4r
 
             u8 GetCurrentCameraID() const { return mCameraId; }
 
+            void CalcAnmScn();
+            void SetGlbSettings();
         private:
             UNKWORD WORD_0xE8;
             UNKWORD WORD_0xEC;
