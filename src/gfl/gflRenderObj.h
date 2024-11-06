@@ -17,8 +17,8 @@ namespace gfl {
 
         void SetActive(bool state);
 
-        static bool fn_80647DA4(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj);
-        static bool fn_80647E8C(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj);
+        static bool XluSortCheck(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj);
+        static bool OpaSortCheck(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj);
 
         virtual void vf0C();
         DECL_WEAK virtual nw4r::g3d::G3dObj* GetObject();
