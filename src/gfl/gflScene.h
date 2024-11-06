@@ -20,7 +20,7 @@ class Scene {
         virtual ~Scene();
         virtual bool AreListsEmpty();
         virtual void Insert(nw4r::g3d::ScnObj* object);
-        virtual void Remove(u32 index);
+        virtual void Remove(nw4r::g3d::ScnObj* object);
         virtual void DrawOpa();
         virtual void DraXlu();
         virtual bool IsScnRootSizeValid();
