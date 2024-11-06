@@ -38,7 +38,7 @@ void RenderObj::vf18(bool arg1) {
         return;
     }
 
-    mScene->fn_80649178(this);
+    mScene->HandleRenderObj(this);
 }
 
 void RenderObj::vf20(bool arg1) {
@@ -49,7 +49,7 @@ void RenderObj::vf20(bool arg1) {
     }
 
     if (nullptr != mScene) {
-        mScene->fn_80649178(this);
+        mScene->HandleRenderObj(this);
     }
 }
 
@@ -87,7 +87,7 @@ void RenderObj::Update(bool arg1)  {
         return;
     }
 
-    mScene->fn_80649178(this);
+    mScene->HandleRenderObj(this);
 }
 
 void RenderObj::SetActive(bool state) {

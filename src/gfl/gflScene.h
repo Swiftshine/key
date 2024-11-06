@@ -13,7 +13,8 @@ class Scene {
         Scene(u8 heapID, uint arg2, uint arg3);
 
         void Destroy(gfl::RenderObj* renderObj);
-        void fn_80649178(gfl::RenderObj* renderObj);
+        // either add to the list or remove it
+        void HandleRenderObj(gfl::RenderObj* renderObj);
         void AddRenderObj(gfl::RenderObj* renderObj);
         
         virtual ~Scene();
