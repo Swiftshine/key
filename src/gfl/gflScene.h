@@ -22,7 +22,7 @@ class Scene {
         virtual void Insert(nw4r::g3d::ScnObj* object);
         virtual void Remove(nw4r::g3d::ScnObj* object);
         virtual void DrawOpa();
-        virtual void DraXlu();
+        virtual void DrawXlu();
         virtual bool IsScnRootSizeValid();
     protected:
         bool m_4;
