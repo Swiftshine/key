@@ -9,7 +9,7 @@
 // size: 0x34
 class FullSortScene : public gfl::Scene {
 public:
-    FullSortScene(u8 heapID, int arg2, int arg3);
+    FullSortScene(u8 heapID, uint maxNumChildren, uint maxNumScnObj);
     virtual ~FullSortScene();
 
     /* gfl::Scene */

@@ -10,7 +10,7 @@ class RenderObj;
 
 class Scene {
     public:
-        Scene(u8 heapID, uint arg2, uint arg3);
+        Scene(u8 heapID, uint maxNumChildren, uint maxNumScnObj);
 
         void Destroy(gfl::RenderObj* renderObj);
         // either add to the list or remove it
