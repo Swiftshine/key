@@ -55,6 +55,10 @@ namespace gfl {
             return mTaskInfo;
         }
 
+        inline void SetUnk14(uint value) {
+            m_14 = value;
+        }
+        
         inline void OrUnk14(int value) {
             m_14 |= value;
         }

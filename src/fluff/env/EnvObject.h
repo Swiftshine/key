@@ -2,6 +2,7 @@
 #define FLUFF_ENVOBJECT_H
 
 #include "gfl/gflTask.h"
+#include "gflScopedPointer.h"
 
 namespace env {
     class EnvObject {
@@ -22,7 +23,7 @@ namespace env {
         void fn_8005E718(uint arg1, uint arg2);
         virtual void Update() = 0;
     private:
-        gfl::Task* mTask;
+        gfl::ScopedPointer<gfl::Task> mTask;
         uint mTaskFlags;
     };
 }

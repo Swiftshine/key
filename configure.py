@@ -454,6 +454,16 @@ config.libs = [
         ],
     },
     {
+        "lib": "fluff/env/",
+        "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_base_no_inline_deferred],
+        "host": False,
+        "progress_category": "fluff",
+        "objects": [
+            Object(NonMatching, "fluff/env/EnvObject.cpp"),
+        ],
+    },
+    {
         "lib" : "fluff/object/gmk/",
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff,],
