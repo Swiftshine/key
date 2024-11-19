@@ -461,6 +461,7 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/env/EnvObject.cpp"),
+            Object(NonMatching, "fluff/env/EnvUnitBase.cpp"),
         ],
     },
     {

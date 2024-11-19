@@ -78,6 +78,9 @@ fluff/object/gmk/GmkSimpleMdl.cpp:
 fluff/env/EnvObject.cpp:
 	.text       start:0x8005E3B0 end:0x8005E8DC
 
+fluff/env/EnvUnitBase.cpp:
+	.text       start:0x80066FF4 end:0x8006728C
+
 fluff/object/gmk/GmkColAnimMdl.cpp:
 	.text       start:0x800D591C end:0x800D62B8
 

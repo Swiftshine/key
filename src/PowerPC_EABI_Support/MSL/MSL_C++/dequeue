@@ -1,0 +1,26 @@
+#ifndef _STD_DEQUE_H
+#define _STD_DEQUE_H
+
+#include <MSL_C++/cstdio>
+#include <MSl_C++/cstdlib>
+
+namespace std {
+    template <typename T>
+    class dequeue {
+    public:
+        inline dequeue() {
+            mPtr = 0;
+            mCount = 0;
+            mCapacity = 0;
+        }
+
+        ~dequeue();
+        void do_clear(size_t count);
+    private:
+        T** mPtr;
+        size_t mCount;
+        size_t mCapacity;
+    };
+}
+
+#endif
