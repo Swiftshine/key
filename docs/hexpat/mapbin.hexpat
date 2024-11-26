@@ -21,6 +21,10 @@ struct string64 {
     char string[64];
 };
 
+struct string80 {
+    char string[80];
+};
+
 struct Header {
         f32 m_0;
         Vec2f mBoundsMin;
@@ -75,11 +79,11 @@ struct Header {
     };
     
     struct CommonGimmickParams {
-        int mIntParams1[3];
-        f32 mFloatParams1[3];
-        int mIntParams2[4];
-        float mFloatParams2[3];
-        float mFloatParams3[3];
+        int mIntParams1[2];
+        f32 mFloatParams1[2];
+        char mStringParams1[8];
+        int mIntParams2[5];
+        float mFloatParams2[5];
         string64 mStringParams[5];
     };
 
