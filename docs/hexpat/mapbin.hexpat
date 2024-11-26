@@ -1,106 +1,128 @@
 #pragma endian big
-
 using f32 = float;
-struct Vec2f { f32 x; f32 y; };
-struct Vec3f { f32 x; f32 y; f32 z;};
-
-struct string64 { char string[64]; };
-
-struct ColType {
-    char string[0x20];
+struct Vec2f {
+    f32 x;
+    f32 y;
 };
 
-struct string32 { char string[32]; };
+struct Vec3f {
+    f32 x;
+    f32 y;
+    f32 z;
+};
 
-struct GimmickParameters {
-    s32 ints[3]; 
-    float floats[3];
-    string64 strings[3];
+using int = s32;
+
+struct string32 {
+    char string[32];
+};
+
+struct string64 {
+    char string[64];
 };
 
 struct Header {
-    f32 _0;
-    Vec2f boundsStart;
-    Vec2f boundsEnd;
-    u32 wallCount;
-    u32 wallOffset;
-    u32 dataSegLabelCount;
-    u32 dataSegLabelOffset;
-    u32 commonGimmickCount;
-    u32 commonGimmickOffset;
-    u32 gimmickCount;
-    u32 gimmicksOffset;
-    u32 pathCount;
-    u32 pathOffset;
-    u32 zoneCount;
-    u32 zoneOffset;
-    u32 courseInfoCount;
-    u32 courseInfoOffset;
-    // GenGmk -> GenericGimmick
-    u32 commonGimmickHeaderOffset;
-    u32 colbinFooterOffset;
-    u32 dataSegLabelHeaderOffset;
-};
+        f32 m_0;
+        Vec2f mBoundsMin;
+        Vec2f mBoundsMax;
+        u32 mNumWalls;
+        u32 mWallOffset;
+        u32 mNumLabeledWalls;
+        u32 mLabeledWallOffset;
+        u32 mNumCommonGimmicks;
+        u32 mCommonGimmickOffset;
+        u32 mNumGimmicks;
+        u32 mGimmickOffset;
+        u32 mNumPaths;
+        u32 mPathOffset;
+        u32 mNumZones;
+        u32 mZoneOffset;
+        u32 mNumCourseInfo;
+        u32 mCourseInfoOffset;
+        u32 mCommonGimmickNameOffset;
+        u32 mColbinTypeOffset;
+        u32 mLabeledWallLabelOffset;
+    };
 
-struct CommonGimmick {
-    u32 nameIndex;
-    Vec3f position;
-    s32 ints1[3];
-    float floats1[3];
-    s32 ints2[4];
-    float floats2[3];
-    float floats3[3];
-    string32 string1;
-    u8 rest[0x120];
-};
+    struct Wall {
+        Vec2f mStart;
+        Vec2f mEnd;
+        Vec2f m_10;
+        u32 mEntryIndex;
+        u32 mCollisionTypeIndex;
+    };
 
-struct ColbinEntry {
-    Vec2f point1;
-    Vec2f point2;
-    Vec2f _10;
-    u32 index;
-    u32 collisionTypeIndex;
-};
+    struct LabeledWall {
+        Vec2f mStart;
+        Vec2f mEnd;
+        Vec2f m_10;
+        u32 mEntryIndex;
+        u32 mCollisionTypeIndex;
+        u32 mLabelIndex;
+    };
 
-struct DataSegLabel {
-    ColbinEntry colbin;
-    u32 nameIndex;
-};
+    struct MapdataParams {
+        int mIntParams[3];
+        f32 mFloatParams[3];
+        string64 mStringParams[3];
+    };
 
-struct Path { // variable length.
-    char name[0x20];
-    char type[0x20];
-    GimmickParameters params;
-    u32 numPoints;
-    Vec2f points[numPoints];
-};
-
-struct CourseInfo {
-    char name[0x20];
-    char _20[0x20];
-    GimmickParameters params;
-    Vec3f position;
-};
-
-
-struct GimmickEntry {
-    char name[0x30];
-    u8 _30[0x10];
-    Vec3f position;  
-    GimmickParameters param;
-    /* padding if applicable*/
-};
-
-
-struct Zone {
-    char name[0x20];
-    char _20[0x20];
-    GimmickParameters params;
-    // a box?
-    Vec2f boundsStart;
-    Vec2f boundsEnd;
+    struct Gimmick {
+        char mName[0x30];
+        u8 m_30[0x10];
+        Vec3f mPosition;
+        MapdataParams mParams;
+    };
     
-};
+    struct CommonGimmickParams {
+        int mIntParams1[3];
+        f32 mFloatParams1[3];
+        int mIntParams2[4];
+        float mFloatParams2[3];
+        float mFloatParams3[3];
+        string64 mStringParams[5];
+    };
+
+    struct CommonGimmick {
+        u32 mNameIndex;
+        Vec3f mPosition;
+        CommonGimmickParams mParams;
+    };
+
+    // variable length structure
+    struct Path {
+        string32 mName;
+        string32 mType;
+        MapdataParams mParams;
+        u32 mNumPoints;
+        Vec2f mPoints[mNumPoints];
+    };
+
+    struct Zone {
+        string32 mName;
+        string32 m_20;
+        MapdataParams mParams;
+        Vec2f mBoundsMin;
+        Vec2f mBoundsMax;  
+    };
+
+    struct CourseInfo {
+        string32 mName;
+        string32 m_20;
+        MapdataParams mParams;
+        Vec3f mPosition;
+    };
+    
+    
+Header header @ 0;
+Wall walls[header.mNumWalls] @ header.mWallOffset;
+LabeledWall labeledWalls[header.mNumLabeledWalls] @ header.mLabeledWallOffset;
+CommonGimmick commonGimmicks[header.mNumCommonGimmicks] @ header.mCommonGimmickOffset;
+Gimmick gimmicks[header.mNumGimmicks] @ header.mGimmickOffset;
+Path paths[header.mNumPaths] @ header.mPathOffset;
+Zone zones[header.mNumZones] @ header.mZoneOffset;
+CourseInfo courseInfos[header.mNumCourseInfo] @ header.mCourseInfoOffset;
+
 struct ColbinFooter {
     u32 numCollisionTypes;
 };
@@ -116,19 +138,8 @@ struct DataSegLabelHeader {
     u32 count;
     string32 strings[count];
 };
-Header header @ 0x00;
 
-ColbinEntry walls[header.wallCount] @ header.wallOffset;
-DataSegLabel dataSegLabels[header.dataSegLabelCount] @ header.dataSegLabelOffset;
-CommonGimmick commonGimmicks[header.commonGimmickCount] @ header.commonGimmickOffset;
 
-Path paths[header.pathCount] @ header.pathOffset;
-GimmickEntry gimmicks[header.gimmickCount] @ header.gimmicksOffset;
-ColbinFooter footer @ header.colbinFooterOffset;
-ColType collisionTypes[footer.numCollisionTypes] @ header.colbinFooterOffset + 4;
-Zone zones[header.zoneCount] @ header.zoneOffset;
 
-CommonGimmickHeader commonGimmickHeader @ header.commonGimmickHeaderOffset;
-DataSegLabelHeader dataSegLabelHeader @ header.dataSegLabelHeaderOffset;
-
-CourseInfo courseInfo[header.courseInfoCount] @ header.courseInfoOffset;
+CommonGimmickHeader commonGimmickHeader @ header.mCommonGimmickNameOffset;
+DataSegLabelHeader dataSegLabelHeader @ header.mColbinTypeOffset;

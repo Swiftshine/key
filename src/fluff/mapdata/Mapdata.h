@@ -82,7 +82,7 @@ public:
             int mIntParams2[4];
             float mFloatParams2[3];
             float mFloatParams3[3];
-            string64 mStringParams[3];
+            string64 mStringParams[5];
         };
 
         struct CommonGimmick {
