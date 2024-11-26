@@ -77,12 +77,12 @@ public:
         };
         
         struct CommonGimmickParams {
-            int mIntParams1[2];
-            f32 mFloatParams1[2];
-            char mStringParam1[8];
-            int mIntParams2[5];
-            float mFloatParams2[5];
-            string64 mStringParams2[5];
+            int mShortIntParams[2];
+            f32 mShortFloatParams[2];
+            char mShortStringParam[8];
+            int mIntParams[5];
+            float mFloatParams[5];
+            string64 mStringParams[5];
         };
 
         struct CommonGimmick {
