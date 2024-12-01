@@ -1,5 +1,5 @@
-#include "object/gmk/GmkSunriseCurtain.h"
-#include "object/gmk/GmkTurtle.h"
+#include "object/gimmick/GmkSunriseCurtain.h"
+#include "object/gimmick/GmkTurtle.h"
 
 GmkSunriseCurtain* GmkSunriseCurtain::Build(GimmickBuildInfo* buildInfo) {
     return new (gfl::HeapID::Work) GmkSunriseCurtain(buildInfo);

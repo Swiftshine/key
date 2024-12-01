@@ -5,8 +5,8 @@
 #include "graphics/NwAnmCtrl.h"
 
 #include "gfl/gflScopedPointer.h"
-#include "object/gmk/GmkSimpleMdlRotZ.h"
-#include "object/gmk/GmkColAnimCtrl.h"
+#include "object/gimmick/GmkSimpleMdlRotZ.h"
+#include "object/gimmick/GmkColAnimCtrl.h"
 
 
 // inherited by GmkColAnimMdl and GmkSimpleNurbs

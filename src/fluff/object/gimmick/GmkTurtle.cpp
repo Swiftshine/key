@@ -1,6 +1,6 @@
 #include "gfl/gflVec3.h"
-#include "object/gmk/GmkTurtle.h"
-#include "object/gmk/GmkUpdownWater.h"
+#include "object/gimmick/GmkTurtle.h"
+#include "object/gimmick/GmkUpdownWater.h"
 #include "manager/GimmickManager.h"
 
 const char GmkTurtle_Name[] = "GmkTurtle";

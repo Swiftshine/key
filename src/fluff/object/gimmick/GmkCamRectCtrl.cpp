@@ -1,6 +1,6 @@
 #include "gfl/gflMemoryUtil.h"
 
-#include "object/gmk/GmkCamRectCtrl.h"
+#include "object/gimmick/GmkCamRectCtrl.h"
 #include "manager/CameraManager.h"
 
 GmkCamRectCtrl* GmkCamRectCtrl::Build(GimmickBuildInfo* buildInfo) {

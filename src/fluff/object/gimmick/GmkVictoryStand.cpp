@@ -1,5 +1,5 @@
-#include "object/gmk/GmkVictoryStand.h"
-#include "object/gmk/GmkDecolativeBall.h"
+#include "object/gimmick/GmkVictoryStand.h"
+#include "object/gimmick/GmkDecolativeBall.h"
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
 #include "manager/StageManager.h"

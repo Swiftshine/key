@@ -2,9 +2,9 @@
 #define FLUFF_SIMPLEMDLCOMMON_H
 
 
-#include "object/gmk/GmkSimpleMdl.h"
-#include "object/gmk/GmkSimpleNurbs.h"
-#include "object/gmk/GmkColAnimMdl.h"
+#include "object/gimmick/GmkSimpleMdl.h"
+#include "object/gimmick/GmkSimpleNurbs.h"
+#include "object/gimmick/GmkColAnimMdl.h"
 #include "stage/StageResources.h"
 
 namespace SimpleMdlCommon {

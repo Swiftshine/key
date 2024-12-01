@@ -72,7 +72,7 @@ fluff/util/SimpleMdlCommon.cpp:
 	.text       start:0x80052B80 end:0x80052DD8
 	.sdata2     start:0x808E6EE0 end:0x808E6EE4
 
-fluff/object/gmk/GmkSimpleMdl.cpp:
+fluff/object/gimmick/GmkSimpleMdl.cpp:
 	.text       start:0x80052DD8 end:0x80053914
 
 fluff/env/EnvObject.cpp:
@@ -81,7 +81,7 @@ fluff/env/EnvObject.cpp:
 fluff/env/EnvUnitBase.cpp:
 	.text       start:0x80066FF4 end:0x8006728C
 
-fluff/object/gmk/GmkColAnimMdl.cpp:
+fluff/object/gimmick/GmkColAnimMdl.cpp:
 	.text       start:0x800D591C end:0x800D62B8
 
 fluff/graphics/NwAnmCtrl.cpp:
@@ -117,7 +117,7 @@ fluff/work/InStageWork.cpp:
 fluff/demo/DemoObject.cpp:
 	.text       start:0x802A4DD8 end:0x802A5038
 
-fluff/object/gmk/GmkWoolRope.cpp:
+fluff/object/gimmick/GmkWoolRope.cpp:
 	.text       start:0x802FC0EC end:0x802FC5F0
 
 fluff/object/FlfGameObjLocator.cpp:
@@ -126,7 +126,7 @@ fluff/object/FlfGameObjLocator.cpp:
 	.data       start:0x8086A9D8 end:0x8086AA58
 	.sdata      start:0x808E1578 end:0x808E1580
 
-fluff/object/gmk/GmkSunriseCurtain.cpp:
+fluff/object/gimmick/GmkSunriseCurtain.cpp:
 	.text       start:0x803C9A84 end:0x803CAA74
 
 fluff/util/SignatureUtil.cpp:
@@ -137,18 +137,18 @@ fluff/util/MissionUtil.cpp:
 	.text       start:0x804C49F4 end:0x804C4E60
 	.sdata2     start:0x808EB2C4 end:0x808EB2E0
 
-fluff/object/gmk/GmkCamRectCtrl.cpp:
+fluff/object/gimmick/GmkCamRectCtrl.cpp:
 	.text       start:0x804F0388 end:0x804F044C
 	.rodata     start:0x8081B258 end:0x8081B268
 	.data       start:0x80893120 end:0x80893200
 
-fluff/object/gmk/GmkVictoryStand.cpp:
+fluff/object/gimmick/GmkVictoryStand.cpp:
 	.text       start:0x804F1B40 end:0x804F2B0C
 
 fluff/stage/mission/MissionClearChecker.cpp:
 	.text       start:0x804F56DC end:0x804F5F34
 
-fluff/object/gmk/GmkTurtle.cpp:
+fluff/object/gimmick/GmkTurtle.cpp:
 	.text       start:0x804FA9E4 end:0x804FB35C
 
 fluff/graphics/BgBackImage.cpp:

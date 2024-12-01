@@ -4,7 +4,7 @@
 #include "types.h"
 #include <string>
 #include "object/collision/ColObj.h"
-#include "object/gmk/GmkAnimChg.h"
+#include "object/gimmick/GmkAnimChg.h"
 
 class GmkColAnimCtrl {
 public:

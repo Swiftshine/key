@@ -1,4 +1,4 @@
-#include "object/gmk/GmkColAnimMdl.h"
+#include "object/gimmick/GmkColAnimMdl.h"
 #include "util/FullSortSceneUtil.h"
 #include "util/GimmickUtil.h"
 #include "util/SimpleMdlCommon.h"

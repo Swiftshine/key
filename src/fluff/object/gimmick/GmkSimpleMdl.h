@@ -9,7 +9,7 @@
 #include "gfl/gflResArchivedFileInfo.h"
 #include "gfl/gflScnMdlWrapper.h"
 #include "gfl/gflScopedPointer.h"
-#include "object/gmk/GmkSimpleMdlRotZ.h"
+#include "object/gimmick/GmkSimpleMdlRotZ.h"
 #include "graphics/NwAnm.h"
 
 class GmkSimpleMdl : public Gimmick {

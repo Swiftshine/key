@@ -6,9 +6,9 @@
 #include "gfl/gflResFileInfo.h"
 #include "graphics/NwAnmCtrl.h"
 
-#include "object/gmk/GmkSimpleMdlRotZ.h"
-#include "object/gmk/GmkColAnimCtrl.h"
-#include "object/gmk/GmkAnimChg.h"
+#include "object/gimmick/GmkSimpleMdlRotZ.h"
+#include "object/gimmick/GmkColAnimCtrl.h"
+#include "object/gimmick/GmkAnimChg.h"
 
 #define GMKCOLANIMMDL_ANIM_COUNT 4
 

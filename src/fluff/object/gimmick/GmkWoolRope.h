@@ -6,7 +6,7 @@
 #include "gfl/gflResFileInfo.h"
 #include "graphics/FlfMdlDraw.h"
 #include "object/Gimmick.h"
-#include "object/gmk/GmkWoolHook.h"
+#include "object/gimmick/GmkWoolHook.h"
 
 class WoolLinkObjBase;
 

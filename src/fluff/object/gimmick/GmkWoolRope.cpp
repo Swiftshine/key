@@ -1,4 +1,4 @@
-#include "object/gmk/GmkWoolRope.h"
+#include "object/gimmick/GmkWoolRope.h"
 #include <nw4r/g3d.h>
 
 Gimmick::GimmickBuildInfo GmkWoolRope::GBuildInfo;

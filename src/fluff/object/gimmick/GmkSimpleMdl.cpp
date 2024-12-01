@@ -2,7 +2,7 @@
 #include <rand.h>
 
 #include "graphics/FullSortScene.h"
-#include "object/gmk/GmkSimpleMdl.h"
+#include "object/gimmick/GmkSimpleMdl.h"
 #include "util/SimpleMdlCommon.h"
 #include "util/FullSortSceneUtil.h"
 #include "manager/StageManager.h"
