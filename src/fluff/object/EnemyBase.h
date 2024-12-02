@@ -10,6 +10,18 @@
 class EnemyBase : public FlfGameObj, public IObjHitCB {
 public:
     virtual ~EnemyBase();
+
+    /* FlfGameObj */
+    virtual void SetPosition(nw4r::math::VEC3& pos);
+    virtual void vf10(bool arg1);
+    virtual nw4r::math::VEC3 GetPosition();
+    virtual void SetSecondaryPosition(nw4r::math::VEC3& pos);
+    virtual void vf28();
+    virtual void vf2C(nw4r::math::VEC3& arg1, nw4r::math::VEC3& arg2, nw4r::math::VEC3& arg3);
+    virtual bool ShouldCull(CameraManager* camMgr);
+    virtual int vf3C();
+    virtual void SetState(FlfGameObj* setter, std::string& state);
+    virtual void vf64(bool);
 protected:
     demo::EventDemoAttachment* mDemoAttachment; // @ 0x84
     int m_98;
