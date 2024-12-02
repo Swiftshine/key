@@ -13,6 +13,8 @@ namespace nw4r
             ResMdl, AnmObjChr *, FuncObjCalcWorld *);
 
         void CalcSkinning(math::MTX34 *, u32 *, ResMdl, const u8 *);
+
+        class ICalcWorldCallback {};
     }
 }
 
