@@ -43,8 +43,6 @@ protected:
     STRUCT_FILL(0x1774 - 464);
 };
 
-const int size = sizeof(EnemyBase);
-
 ASSERT_SIZE(EnemyBase, 0x1774);
 
 #endif
