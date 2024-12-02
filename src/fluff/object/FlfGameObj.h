@@ -24,7 +24,7 @@ public:
     DECL_WEAK virtual bool    vf14();
     virtual void    vf18();
     virtual nw4r::math::VEC3   GetPosition();
-    virtual void    SetPosition_thunk(nw4r::math::VEC3& position);
+    virtual void    SetSecondaryPosition(nw4r::math::VEC3& position);
     virtual void    vf24(void*);
     virtual void    vf28();
     virtual void    vf2C(nw4r::math::VEC3& arg1, nw4r::math::VEC3& arg2, nw4r::math::VEC3& arg3);
