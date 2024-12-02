@@ -10,7 +10,7 @@
 class EnemyBase : public FlfGameObj, public IObjHitCB {
 public:
     virtual ~EnemyBase();
-private:
+protected:
     demo::EventDemoAttachment* mDemoAttachment; // @ 0x84
     int m_98;
     int m_9C;
