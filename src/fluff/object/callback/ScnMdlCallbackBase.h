@@ -3,9 +3,9 @@
 
 #include <nw4r/g3d/g3d_calcworld.h>
 
-class ScnMdlCallbackBae : public nw4r::g3d::ICalcWorldCallback {
+class ScnMdlCallbackBase : public nw4r::g3d::ICalcWorldCallback {
 public:
-    virtual ~ScnMdlCallbackBae();
+    virtual ~ScnMdlCallbackBase();
     virtual void vfC();
     virtual void vf10();
     virtual void vf14();
@@ -17,6 +17,6 @@ protected:
     u32 m_10;
 };
 
-ASSERT_SIZE(ScnMdlCallbackBae, 0x14);
+ASSERT_SIZE(ScnMdlCallbackBase, 0x14);
 
 #endif

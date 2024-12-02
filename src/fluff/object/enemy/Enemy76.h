@@ -4,7 +4,7 @@
 #include "object/EnemyBase.h"
 #include "object/callback/ScnMdlCallbackBase.h"
 
-class Enemy76MatrixCallback : public ScnMdlCallbackBae {
+class Enemy76MatrixCallback : public ScnMdlCallbackBase {
 private:
     u32 m_14;
     u32 m_18;
