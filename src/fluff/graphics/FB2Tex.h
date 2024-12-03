@@ -7,7 +7,7 @@
 // env::EnvUtil_FrameBuffer
 class FB2Tex : public gfl::CustomRenderObj {
 public:
-    FB2Tex(int arg1, u16 arg2, u16 arg3, u16 imageWidth, u16 imageHeight, bool arg6, int arg7, GXTexFmt texFormat, bool arg9);
+    FB2Tex(int arg1, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int arg7, GXTexFmt texFormat, bool refreshTexture);
     virtual ~FB2Tex();
 
     /* gfl::CustomRenderObj */
@@ -17,19 +17,19 @@ public:
     void InitTexObj();
     void DoRender();
     void fn_80029AF0();
-    
+
 private:
     int m_104;
     GXTexObj mTexObj;
     void* mImage;
-    u16 m_12C;
-    u16 m_12E;
-    u16 mImageWidth;
-    u16 mImageHeight;
+    u16 mSourceWidth;
+    u16 mSourceHeight;
+    u16 mDestWidth;
+    u16 mDestHeight;
     bool m_134;
     bool m_135;
     bool mShouldRender;
-    bool m_137;
+    bool mRefreshTexture;
     GXTexFmt mTextureFormat;
 };
 
