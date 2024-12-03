@@ -2,12 +2,14 @@
 #define FLUFF_FB2TEX_H
 
 #include "gfl/gflCustomRenderObj.h"
+#include "gfl/gflScene.h"
+
 
 // presumably "Frame Buffer to Texture", since it's used by
 // env::EnvUtil_FrameBuffer
 class FB2Tex : public gfl::CustomRenderObj {
 public:
-    FB2Tex(int arg1, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture);
+    FB2Tex(gfl::Scene* scene, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture);
     virtual ~FB2Tex();
 
     /* gfl::CustomRenderObj */
@@ -19,7 +21,7 @@ public:
     void fn_80029AF0();
     void SetPriorityDrawTranslucency(int translucency);
 private:
-    int m_104;
+    gfl::Scene* mScene;
     GXTexObj mTexObj;
     void* mImage;
     u16 mSourceWidth;
