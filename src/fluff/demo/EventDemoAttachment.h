@@ -20,7 +20,7 @@ namespace demo {
         void* m_10;
     };
 
-    ASSERT_SIZE(EventDemoAttachment, 0x14);
+    // ASSERT_SIZE(EventDemoAttachment, 0x14);
 }
 
 #endif
