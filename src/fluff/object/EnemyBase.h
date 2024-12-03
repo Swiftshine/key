@@ -12,16 +12,35 @@ public:
     virtual ~EnemyBase();
 
     /* FlfGameObj */
-    virtual void SetPosition(nw4r::math::VEC3& pos);
-    virtual void vf10(bool arg1);
-    virtual nw4r::math::VEC3 GetPosition();
-    virtual void SetSecondaryPosition(nw4r::math::VEC3& pos);
-    virtual void vf28();
-    virtual void vf2C(nw4r::math::VEC3& arg1, nw4r::math::VEC3& arg2, nw4r::math::VEC3& arg3);
-    virtual bool ShouldCull(CameraManager* camMgr);
-    virtual int vf3C();
-    virtual void SetState(FlfGameObj* setter, std::string& state);
-    virtual void vf64(bool);
+    virtual void SetPosition(nw4r::math::VEC3& pos) override;
+    virtual void vf10_FlfGameObj(bool arg1) override;
+    virtual nw4r::math::VEC3 GetPosition() override;
+    virtual void SetSecondaryPosition(nw4r::math::VEC3& pos) override;
+    virtual void vf28_FlfGameObj() override;
+    virtual void vf2C_FlfGameObj(nw4r::math::VEC3& arg1, nw4r::math::VEC3& arg2, nw4r::math::VEC3& arg3) override;
+    virtual bool ShouldCull(CameraManager* camMgr) override;
+    virtual int vf3C_FlfGameObj() override;
+    virtual void SetState(FlfGameObj* setter, std::string& state) override;
+    virtual void vf64_FlfGameObj(bool) override;
+
+    /* IObjHitCB */
+    virtual int vf8_IObjHitCB() override;
+
+    /* demo::EventDemoAttachment */
+    virtual void vfC_EventDemoAttachment() override;
+    virtual void vf10_EventDemoAttachment() override;
+    virtual void vf14_EventDemoAttachment() override;
+    virtual void vf18_EventDemoAttachment() override;
+    virtual void vf1C_EventDemoAttachment() override;
+
+    /* EnemyBase */
+    virtual void vf94();
+    virtual void vf98();
+    virtual void vf9C();
+    virtual void vfA0();
+
+    // ...
+    virtual void vf5A4();
 protected:
     int m_98;
     int m_9C;
