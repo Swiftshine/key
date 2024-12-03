@@ -2,6 +2,7 @@
 #define FLUFF_EVENTDEMOATTACHMENT_H
 
 #include "types.h"
+#include <string>
 
 namespace demo {
     class EventDemoAttachment {
@@ -15,9 +16,7 @@ namespace demo {
         virtual void vf18();
         virtual void vf1C();
     private:
-        void* m_4;
-        void* m_8;
-        void* m_C;
+        std::string m_4;
         void* m_10;
     };
 
