@@ -1,5 +1,5 @@
 Enemy ID, Enemy Name,
-0, (Unused) Green Magmotamus,
+0, Green Magmotamus,
 1, Shelby,
 2, Uniclod, 
 3, Buttonbee,
@@ -21,7 +21,6 @@ Enemy ID, Enemy Name,
 19, Anemonee,
 20, Danglerfish,
 21, Bobber Clod,
-
 23, Magmotamus,
 24, Snip-Snap
 25, Gator,
@@ -43,10 +42,8 @@ Enemy ID, Enemy Name,
 41, Waddle Dee (Duplicate),
 42, UFO,
 43, Bow Waddle Dee,
-
 45, Cyclod,
 46, Buttonfly,
-
 48, Space Jelly,
 49, Truck Monster,
 50, Large Cannon (Battleship Halberd),
@@ -72,27 +69,21 @@ Enemy ID, Enemy Name,
 70, Unidentified Enemy 70,
 71, Unidentified Enemy 71
 72, Unidentified Enemy 72,
-
 74, Unidentified Enemy 74,
 75, Unidentified Enemy 75,
 76, Smiley Face,
-
 78, Unidentified Enemy 78,
-
 80, Unidentified Enemy 80,
 81, Unidentified Enemy 81,
 82, Unidentified Enemy 82,
 83, Unidentified Enemy 83,
 84, Unidentified Enemy 84,
-
 100, Small Sawgill,
 101, Freezo,
 102, Bobber Clod (Duplicate),
 103, Horizontal Battleship Halberd Barrier,
-
 106, Lil' Kracko,
 107, Kracko,
-
 110, Emba,
 111, Whistle Mariner,
 112, Sword Mariner,
