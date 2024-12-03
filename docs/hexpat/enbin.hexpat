@@ -23,6 +23,7 @@ struct EnemyParams {
     s32 mIntParams[3];
     
 };
+
 struct Enemy {
     char name[0x20];
     char behavior[0x20];
@@ -69,4 +70,4 @@ struct FooterEntry {
 
 Header header @ 0;
 EnemyHeader enHeader @ header.enemyHeaderOffset;
-LineHeader lHeader @ header.lineHeaderOffset;
+// LineHeader lHeader @ header.lineHeaderOffset;
