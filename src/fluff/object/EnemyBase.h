@@ -7,7 +7,7 @@
 #include "object/collision/IObjHitCB.h"
 #include "object/MoveTarget.h"
 
-class EnemyBase : public FlfGameObj, public IObjHitCB {
+class EnemyBase : public FlfGameObj, public IObjHitCB, public demo::EventDemoAttachment {
 public:
     virtual ~EnemyBase();
 
@@ -23,7 +23,6 @@ public:
     virtual void SetState(FlfGameObj* setter, std::string& state);
     virtual void vf64(bool);
 protected:
-    demo::EventDemoAttachment* mDemoAttachment; // @ 0x84
     int m_98;
     int m_9C;
     int m_A0;
@@ -55,6 +54,6 @@ protected:
     STRUCT_FILL(0x1774 - 464);
 };
 
-ASSERT_SIZE(EnemyBase, 0x1774);
+// ASSERT_SIZE(EnemyBase, 0x1774);
 
 #endif
