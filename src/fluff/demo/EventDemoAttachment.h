@@ -9,6 +9,11 @@ namespace demo {
         EventDemoAttachment();
         virtual ~EventDemoAttachment();
 
+        virtual void vfC();
+        virtual void vf10();
+        virtual void vf14();
+        virtual void vf18();
+        virtual void vf1C();
     private:
         void* m_4;
         void* m_8;
