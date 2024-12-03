@@ -7,7 +7,7 @@
 // env::EnvUtil_FrameBuffer
 class FB2Tex : public gfl::CustomRenderObj {
 public:
-    FB2Tex(int arg1, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int arg7, GXTexFmt texFormat, bool refreshTexture);
+    FB2Tex(int arg1, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture);
     virtual ~FB2Tex();
 
     /* gfl::CustomRenderObj */
@@ -17,7 +17,7 @@ public:
     void InitTexObj();
     void DoRender();
     void fn_80029AF0();
-
+    void SetPriorityDrawTranslucency(int translucency);
 private:
     int m_104;
     GXTexObj mTexObj;
