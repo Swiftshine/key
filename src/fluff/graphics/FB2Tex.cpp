@@ -25,7 +25,6 @@ FB2Tex::~FB2Tex() {
     mScene->Destroy(this);
 }
 
-// https://decomp.me/scratch/Y4kvQ
 void FB2Tex::Blit(bool setBlendMode) {
     nw4r::g3d::Camera cam = mScene->GetScnRoot()->GetCurrentCamera();
     nw4r::math::MTX34 camMtx;
