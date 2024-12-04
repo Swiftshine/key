@@ -16,10 +16,12 @@ public:
     virtual void Render();
 
     // funcs
+    void Blit(bool setBlendMode);
+    void RefreshTexture();
+
     void InitTexObj();
     void DoRender();
-    void fn_80029AF0();
-    void SetPriorityDrawTranslucency(int translucency);
+    void DisableFrameBuffer();
 private:
     gfl::Scene* mScene;
     GXTexObj mTexObj;
@@ -28,7 +30,7 @@ private:
     u16 mSourceHeight;
     u16 mDestWidth;
     u16 mDestHeight;
-    bool m_134;
+    u8 m_134;
     bool m_135;
     bool mShouldRender;
     bool mRefreshTexture;

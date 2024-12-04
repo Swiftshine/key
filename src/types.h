@@ -61,6 +61,20 @@ typedef uint64_t u64;
 // typedef uint8_t u8;
 // typedef int8_t s8;
 
+inline void ZeroMTX(MTX34 mtx) {
+    mtx[0][0] = 0.0f;
+    mtx[0][1] = 0.0f;
+    mtx[0][2] = 0.0f;
+    mtx[0][3] = 0.0f;
+    mtx[1][0] = 0.0f;
+    mtx[1][1] = 0.0f;
+    mtx[1][2] = 0.0f;
+    mtx[1][3] = 0.0f;
+    mtx[2][0] = 0.0f;
+    mtx[2][1] = 0.0f;
+    mtx[2][2] = 0.0f;
+    mtx[2][3] = 0.0f;
+}
 
 namespace nw4r {
 namespace db {

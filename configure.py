@@ -448,9 +448,10 @@ config.libs = [
         "objects": [
             Object(NonMatching, "fluff/graphics/NwAnmCtrl.cpp"),
             Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
-            Object(Matching, "fluff/graphics/BGSTFile.cpp"),
+            Object(Matching,    "fluff/graphics/BGSTFile.cpp"),
             Object(NonMatching, "fluff/graphics/BGSTList.cpp"),
             Object(NonMatching, "fluff/graphics/FullSortScene.cpp"),
+            Object(NonMatching, "fluff/graphics/FB2Tex.cpp"),
         ],
     },
     {

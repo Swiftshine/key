@@ -4,7 +4,7 @@
 #include "types.h"
 #include "gflLinkedList.h"
 #include <nw4r/g3d.h>
-
+#include <nw4r/g3d/g3d_scnroot.h>
 namespace gfl {
 class RenderObj;
 
@@ -24,6 +24,11 @@ class Scene {
         virtual void DrawOpa();
         virtual void DrawXlu();
         virtual bool IsScnRootSizeValid();
+
+        inline nw4r::g3d::ScnRoot* GetScnRoot() {
+            return mScnRoot;
+        }
+
     protected:
         bool m_4;
         bool m_5;
