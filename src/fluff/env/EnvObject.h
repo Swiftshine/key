@@ -10,7 +10,9 @@ namespace env {
         EnvObject(gfl::Task* parentTask, const char* taskName, uint flagIndex);
         EnvObject(gfl::Task* parentTask, u8 taskFlags, const char* taskName, uint flagIndex);
         virtual ~EnvObject();
+        virtual void vfC() = 0;
 
+        
         // called via functor class method
         void DoUpdate();
         gfl::Task* GetNewTask(gfl::Task* parentTask, u8 taskFlags, const char* taskName, uint arg4);
