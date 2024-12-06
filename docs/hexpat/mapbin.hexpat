@@ -79,9 +79,9 @@ struct Header {
     };
     
     struct CommonGimmickParams {
-        int mIntParams1[2];
-        f32 mFloatParams1[2];
-        char mStringParams1[8];
+        int mCommonIntParams[2];
+        float mCommonFloatParams[2];
+        char mCommonStringParam[8];
         int mIntParams2[5];
         float mFloatParams2[5];
         string64 mStringParams[5];
