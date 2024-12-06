@@ -51,7 +51,7 @@ struct Header {
     struct Wall {
         Vec2f mStart;
         Vec2f mEnd;
-        Vec2f m_10;
+        Vec2f mNormalizedVector; // stored in y, x
         u32 mEntryIndex;
         u32 mCollisionTypeIndex;
     };
@@ -59,7 +59,7 @@ struct Header {
     struct LabeledWall {
         Vec2f mStart;
         Vec2f mEnd;
-        Vec2f m_10;
+        Vec2f mNormalizedVector; // stored in y, x
         u32 mEntryIndex;
         u32 mCollisionTypeIndex;
         u32 mLabelIndex;
