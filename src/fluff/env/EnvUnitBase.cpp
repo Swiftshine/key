@@ -6,5 +6,5 @@ EnvUnitBase::EnvUnitBase(gfl::Task* parent, const char* taskName, uint arg3)
     : EnvObject(parent, 0, taskName, arg3)
 { }
 
-// not complete -- fix std::dequeue dtor
+// not complete -- fix std::deque dtor
 EnvUnitBase::~EnvUnitBase() {}

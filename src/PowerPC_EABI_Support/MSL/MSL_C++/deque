@@ -6,15 +6,15 @@
 
 namespace std {
     template <typename T>
-    class dequeue {
+    class deque {
     public:
-        inline dequeue() {
+        inline deque() {
             mPtr = 0;
             mCount = 0;
             mCapacity = 0;
         }
 
-        ~dequeue();
+        ~deque();
         void do_clear(size_t count);
     private:
         T** mPtr;

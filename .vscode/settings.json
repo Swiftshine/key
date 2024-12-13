@@ -36,7 +36,7 @@
         "memory": "cpp",
         "climits": "cpp",
         "bitset": "cpp",
-        "dequeue": "cpp"
+        "deque": "cpp"
     },
     "C_Cpp.default.compilerPath": ""
 }

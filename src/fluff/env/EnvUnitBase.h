@@ -3,7 +3,7 @@
 
 #include "env/EnvObject.h"
 #include "gfl/gflResFileInfo.h"
-#include <dequeue>
+#include <deque>
 
 namespace env {
     class EnvUnitBase : public EnvObject {
@@ -15,7 +15,7 @@ namespace env {
         void ClearAll();
         bool CheckResources();
     private:
-        std::dequeue<gfl::ResFileInfo> mResources;
+        std::deque<gfl::ResFileInfo> mResources;
     };
     
 }
