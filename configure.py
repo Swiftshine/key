@@ -144,8 +144,8 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20240706"
-config.dtk_tag = "v1.1.0"
-config.objdiff_tag = "v2.2.1"
+config.dtk_tag = "v1.3.0"
+config.objdiff_tag = "v2.5.0"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.11"
 
@@ -157,7 +157,8 @@ config.asflags = [
     "--strip-local-absolute",
     "-I include",
     f"-I build/{config.version}/include",
-    f"--defsym version={version_num}",
+    f"--defsym BUILD_VERSION={version_num}",
+    f"--defsym VERSION_{config.version}",
 ]
 config.ldflags = [
     "-fp hardware",
@@ -216,6 +217,7 @@ cflags_base = [
     "-i src/revolution",
     f"-i build/{config.version}/src/",
     f"-DBUILD_VERSION={version_num}",
+    f"-DVERSION_{config.version}",
 ]
 
 
