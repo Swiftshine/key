@@ -398,6 +398,7 @@ config.libs = [
             Object(NonMatching, "gfl/gflParam.cpp"),
             Object(NonMatching, "gfl/gflRenderObj.cpp"),
             Object(NonMatching, "gfl/gflCustomRenderObj.cpp"),
+            Object(NonMatching, "gfl/gflSoundHandleInner.cpp"),
         ],
     },
     {
