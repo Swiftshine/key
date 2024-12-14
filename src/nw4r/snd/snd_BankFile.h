@@ -79,7 +79,7 @@ inline u8 ReadByte(const void* pAddr) {
 class BankFileReader {
 public:
     static const u32 SIGNATURE = 'RBNK';
-    static const int VERSION_ = NW4R_VERSION(1, 1);
+    static const int VERSION = NW4R_VERSION(1, 1);
 
 public:
     explicit BankFileReader(const void* pBankBin);

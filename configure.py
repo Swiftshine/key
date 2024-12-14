@@ -215,7 +215,7 @@ cflags_base = [
     "-i src/PowerPC_EABI_Support/Runtime/",
     "-i src/revolution",
     f"-i build/{config.version}/src/",
-    f"-DVERSION={version_num}",
+    f"-DBUILD_VERSION={version_num}",
 ]
 
 
