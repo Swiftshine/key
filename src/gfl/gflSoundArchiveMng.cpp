@@ -58,11 +58,10 @@ void SoundArchiveMng::OpenArchive(const char* brsarPath) {
     mSound3DListener.SetInteriorSize(ONE);
 }
 
-// https://decomp.me/scratch/5x4bc
-void SoundArchiveMng::ConfigureSound3DListener(float src[3]) {
-    mSound3DListener.SetMaxVolumeDistance(src[0]);
-    mSound3DListener.SetUnitDistance(src[1]);
-    mSound3DListener.SetInteriorSize(src[2]);
+void SoundArchiveMng::ConfigureSound3DListener(const SoundListenerSettings& src) {
+    mSound3DListener.SetMaxVolumeDistance(src.mMaxVolumeDistance);
+    mSound3DListener.SetUnitDistance(src.mUnitDistance);
+    mSound3DListener.SetInteriorSize(src.mInteriorSize);
 }
 
 void SoundArchiveMng::GetSound3DListenerConfiguration(float dst[3]) {

@@ -6,10 +6,17 @@
 namespace gfl {
     class SoundArchiveMng {
     public:
+        struct SoundListenerSettings {
+            float mMaxVolumeDistance;
+            float mUnitDistance;
+            float mInteriorSize;
+        };
+
+    public:
         inline SoundArchiveMng() { }
         ~SoundArchiveMng();
 
-        virtual void ConfigureSound3DListener(float src[3]);
+        virtual void ConfigureSound3DListener(const SoundListenerSettings&);
         virtual void GetSound3DListenerConfiguration(float dst[3]);
         
         void OpenArchive(const char* path);
