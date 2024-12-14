@@ -401,6 +401,7 @@ config.libs = [
             Object(NonMatching, "gfl/gflRenderObj.cpp"),
             Object(NonMatching, "gfl/gflCustomRenderObj.cpp"),
             Object(NonMatching, "gfl/gflSoundHandleInner.cpp"),
+            Object(NonMatching, "gfl/gflSoundArchiveMng.cpp"),
         ],
     },
     {

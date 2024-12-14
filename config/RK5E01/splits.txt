@@ -201,6 +201,9 @@ gfl/gflRenderObj.cpp:
 gfl/gflSoundHandleInner.cpp:
 	.text       start:0x8064BC78 end:0x8064BCF8
 
+gfl/gflSoundArchiveMng.cpp:
+	.text       start:0x8064BCF8 end:0x8064BFA4
+
 gfl/gflFixedMemoryStream.cpp:
 	.text       start:0x806506A0 end:0x80650838
 	.rodata     start:0x8082C940 end:0x8082C964
