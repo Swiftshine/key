@@ -93,7 +93,7 @@ struct StrmInfo {
 class StrmFileReader {
 public:
     static const u32 SIGNATURE = 'RSTM';
-    static const int VERSION = NW4R_VERSION(1, 0);
+    static const int VERSION_ = NW4R_VERSION(1, 0);
 
 public:
     StrmFileReader();
