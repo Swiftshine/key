@@ -12,10 +12,10 @@ class Scene {
     public:
         Scene(u8 heapID, uint maxNumChildren, uint maxNumScnObj);
 
-        void Destroy(gfl::RenderObj* renderObj);
         // either add to the list or remove it
         void HandleRenderObj(gfl::RenderObj* renderObj);
         void AddRenderObj(gfl::RenderObj* renderObj);
+        void RemoveRenderObj(gfl::RenderObj* renderObj);
         
         virtual ~Scene();
         virtual bool AreListsEmpty();

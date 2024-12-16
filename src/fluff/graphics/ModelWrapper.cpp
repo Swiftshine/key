@@ -91,13 +91,13 @@ void ModelWrapper::fn_802374D4() {
 }
 
 void ModelWrapper::ReplaceScene(gfl::Scene* scene) {
-    mPrimaryModel->GetScene()->Destroy(mPrimaryModel);
+    mPrimaryModel->GetScene()->RemoveRenderObj(mPrimaryModel);
     scene->AddRenderObj(mPrimaryModel);
 
     if (mShadowModel == nullptr) {
         return;
     }
 
-    mShadowModel->GetScene()->Destroy(mShadowModel);
+    mShadowModel->GetScene()->RemoveRenderObj(mShadowModel);
     scene->AddRenderObj(mShadowModel);
 }

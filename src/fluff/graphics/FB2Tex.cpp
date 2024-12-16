@@ -22,7 +22,7 @@ FB2Tex::FB2Tex(gfl::Scene* scene, u16 sourceW, u16 sourceH, u16 destW, u16 destH
 
 FB2Tex::~FB2Tex() {
     DisableFrameBuffer();
-    mScene->Destroy(this);
+    mScene->RemoveRenderObj(this);
 }
 
 void FB2Tex::Blit(bool setBlendMode) {

@@ -21,7 +21,7 @@ RenderObj::RenderObj() {
 
 RenderObj::~RenderObj() {
     if (nullptr != mScene) {
-        mScene->Destroy(this);
+        mScene->RemoveRenderObj(this);
         mScene = nullptr;
     }
 }
