@@ -48,7 +48,7 @@ public:
     nw4r::math::VEC3 mPosition;     
     nw4r::math::VEC3 mRotation;     
     nw4r::math::VEC3 mScale;        
-    MTX34 mMatrix;       
+    nw4r::math::MTX34 mMatrix;       
     u32 mFlags;     
     u32 m_64;        
     u32 mType;           

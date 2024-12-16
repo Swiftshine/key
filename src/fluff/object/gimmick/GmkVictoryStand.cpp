@@ -101,7 +101,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
 
     mModel.Create(gfl::HeapID::Work);
     mModel->RegisterResources(fileInfo, victoryStand, 0, scene, 0);
-    mModel->SetMatrix(lbl_808E697C, mMatrix);
+    mModel->SetMatrix(lbl_808E697C, mMatrix, true);
     mModel->SetUpdate(false);
 
     mColObj.Create(gfl::HeapID::Work);

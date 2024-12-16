@@ -141,14 +141,14 @@ void GmkSimpleMdl::SetModel(const char* brresPath, const char* modelName, bool p
 
 void GmkSimpleMdl::UpdateModel() {
     FlfGameObj::UpdateMatrix();
-    mModelWrapper->SetMatrix(&mMatrix);
+    mModelWrapper->SetMatrix(mMatrix);
 
     if (!mShadowModelWrapper.IsValid()) {
         return;
     }
 
-    MTX34 mtx1;
-    MTX34 mtx2;
+    nw4r::math::MTX34 mtx1;
+    nw4r::math::MTX34 mtx2;
 
     mtx1[0][0] = 0.0f;
     mtx1[0][1] = 0.0f;
@@ -181,9 +181,9 @@ void GmkSimpleMdl::UpdateModel() {
     mtx2[2][3] = 0.0f;
 
     PSMTXIdentity(mtx2);
-    nw4r::math::MTX34Trans((nw4r::math::MTX34*)mtx2, (nw4r::math::MTX34*)mtx2, reinterpret_cast<nw4r::math::VEC3*>(&mModelScale));
+    nw4r::math::MTX34Trans(&mtx2, &mtx2, reinterpret_cast<nw4r::math::VEC3*>(&mModelScale));
     PSMTXConcat(mMatrix, mtx2, mtx1);
-    mShadowModelWrapper->SetMatrix(&mtx1);
+    mShadowModelWrapper->SetMatrix(mtx1);
 }
 
 

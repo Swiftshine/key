@@ -3,20 +3,14 @@
 
 #include <nw4r/g3d/g3d_scnmdl.h>
 #include "gflRenderObj.h"
-
-namespace nw4r { namespace g3d {
-    class LightObjData;
-    class LightObj {
-        LightObjData* data;
-    };
-} }
-
+#include "gflAlloc.h"
 
 namespace gfl {
     class ScnMdlWrapper : public RenderObj {
     public:
         ScnMdlWrapper();
         ScnMdlWrapper(nw4r::g3d::ResMdl& resMdl, uint flags);
+        ScnMdlWrapper(nw4r::g3d::ResMdl& resMdl, uint flags, const char* name);
         
         virtual ~ScnMdlWrapper();
 
@@ -30,11 +24,13 @@ namespace gfl {
         virtual void ScnMdlProc() override;
         
         /* gfl::ScnMdlWrapper */
-        virtual bool SetMatrix(MTX34* mtx);
-        virtual bool SetMatrix_thunk(MTX34* mtx);
-        virtual bool GetMatrix(MTX34* mtx);
+        virtual bool SetMatrix(nw4r::math::MTX34& mtx);
+        virtual bool SetMatrix_thunk(nw4r::math::MTX34& mtx);
+        virtual bool GetMatrix(nw4r::math::MTX34& dest);
+
+        void GetShadowOffset(nw4r::math::VEC2& dst, const char*);
     private:
-        nw4r::g3d::LightObj mLightObj;
+        void* m_18;
         bool m_1C;
         nw4r::math::VEC3 m_20;
         nw4r::g3d::ScnMdl* mScnMdl;

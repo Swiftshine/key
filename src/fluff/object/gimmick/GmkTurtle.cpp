@@ -54,7 +54,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
 
     mAnmCtrl->SetFullSortSceneModelWrapper(scene, 0);
 
-    mAnmCtrl->GetScnMdlWrapper()->SetMatrix_thunk(&mMatrix);
+    mAnmCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
 
     mColObjTrans.Create(gfl::HeapID::Work);
 
@@ -184,7 +184,7 @@ void GmkTurtle::Update() {
         }
 
         UpdateMatrix();
-        mAnmCtrl->GetScnMdlWrapper()->SetMatrix_thunk(&mMatrix);
+        mAnmCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
         nw4r::math::VEC3 difference;
         gfl::Vec3 colObj = mColObjTrans->GetPosition();
         difference.x = mPosition.x - colObj.x;

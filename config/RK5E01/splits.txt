@@ -117,6 +117,9 @@ fluff/object/collision/FlfRideHitBase.cpp:
 fluff/work/InStageWork.cpp:
 	.text       start:0x801FED48 end:0x801FFAC0
 
+fluff/graphics/ModelWrapper.cpp:
+	.text       start:0x802370E4 end:0x802375C0
+
 fluff/demo/DemoObject.cpp:
 	.text       start:0x802A4DD8 end:0x802A5038
 

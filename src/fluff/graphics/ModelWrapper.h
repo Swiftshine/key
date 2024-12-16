@@ -11,13 +11,16 @@ public:
     ModelWrapper();
     ~ModelWrapper();
 
-    void SetMatrix(float& yOffset, MTX34& mtx);
-    void RegisterResources(gfl::ResFileInfoPointer&, const char*, int, FullSortScene* scene, int);
-    void SetUpdate(bool shouldUpdate);    
+    void SetMatrix(const float zOffset, nw4r::math::MTX34& mtx, bool arg3);
+    bool GetPrimaryMatrix(nw4r::math::MTX34& dest);
+    void RegisterResources(gfl::ResFileInfoPointer& fileInfo, const char* modelName, const char* shadowName, FullSortScene* scene, uint flags);
+    void SetUpdate(bool shouldUpdate);
+    void fn_802374D4();
+    void ReplaceScene(gfl::Scene* scene);
 private:
-    gfl::ScnMdlWrapper* mModelWrapper1;
-    gfl::ScnMdlWrapper* mModelWrapper2;
-    nw4r::math::VEC2 mOffset;
+    gfl::ScnMdlWrapper* mPrimaryModel;
+    gfl::ScnMdlWrapper* mShadowModel;
+    nw4r::math::VEC2 mShadowOffset;
 };
 
 #endif

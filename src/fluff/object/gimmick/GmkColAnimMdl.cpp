@@ -186,14 +186,14 @@ void GmkColAnimMdl::Update() {
 
 void GmkColAnimMdl::UpdateModel() {
     FlfGameObj::UpdateMatrix();
-    mAnimCtrl->GetScnMdlWrapper()->SetMatrix_thunk(&mMatrix);
+    mAnimCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
 
     if (!mShadowAnimCtrl.IsValid()) {
         return;
     }
 
-    MTX34 mtx1;
-    MTX34 mtx2;
+    nw4r::math::MTX34 mtx1;
+    nw4r::math::MTX34 mtx2;
 
     mtx1[0][0] = 0.0f;
     mtx1[0][1] = 0.0f;
@@ -226,7 +226,7 @@ void GmkColAnimMdl::UpdateModel() {
     mtx2[2][3] = 0.0f;
 
     PSMTXIdentity(mtx2);
-    nw4r::math::MTX34Trans((nw4r::math::MTX34*)mtx2, (nw4r::math::MTX34*)mtx2, reinterpret_cast<nw4r::math::VEC3*>(&mModelScale));
+    nw4r::math::MTX34Trans(&mtx2, &mtx2, reinterpret_cast<nw4r::math::VEC3*>(&mModelScale));
     PSMTXConcat(mMatrix, mtx2, mtx1);
-    mShadowAnimCtrl->GetScnMdlWrapper()->SetMatrix(&mtx1);
+    mShadowAnimCtrl->GetScnMdlWrapper()->SetMatrix(mtx1);
 }
