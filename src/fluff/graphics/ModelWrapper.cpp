@@ -86,8 +86,12 @@ void ModelWrapper::SetUpdate(bool update) {
     }
 }
 
-void ModelWrapper::fn_802374D4() {
-    // not decompiled
+void ModelWrapper::fn_802374D4(float arg1) {
+    mPrimaryModel->fn_8065DCDC(arg1);
+
+    if (mShadowModel != nullptr) {
+        mShadowModel->fn_8065DCDC(arg1);
+    }
 }
 
 void ModelWrapper::ReplaceScene(gfl::Scene* scene) {
