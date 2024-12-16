@@ -3,7 +3,7 @@
 
 #include "object/Gimmick.h"
 #include "util/BeadUtil.h"
-#include "object/resource/ResourceWrapper.h"
+#include "graphics/ModelWrapper.h"
 #include "object/collision/ColObj.h"
 #include "misc/ScopedPointers.h"
 #include "stage/StageResources.h"
@@ -40,7 +40,7 @@ private:
     uint mPlayerRanking;
     gfl::Vec3 mBeadAwardPosition;
     int mTotalAwardedBeads;
-    gfl::ScopedPointer<ResourceWrapper> mResources;
+    gfl::ScopedPointer<ModelWrapper> mModel;
     gfl::ScopedPointer<ColObjTrans> mColObj;
     GimmickBuildInfo mDecorativeBallBuildInfo;
 };

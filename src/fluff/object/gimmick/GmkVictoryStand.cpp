@@ -85,7 +85,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
     mBeadAwardPosition.y = gfl::Vec3::Zero.y;
     mBeadAwardPosition.z = gfl::Vec3::Zero.z;
     mTotalAwardedBeads = 0;
-    mResources = nullptr;
+    mModel = nullptr;
     mColObj = nullptr;
 
     sInstance = this;
@@ -99,10 +99,10 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
     gfl::ResFileInfoPointer fileInfo;
     GetResFileInfo(fileInfo);
 
-    mResources.Create(gfl::HeapID::Work);
-    mResources->RegisterResources(fileInfo, victoryStand, 0, scene, 0);
-    mResources->SetMatrix(lbl_808E697C, mMatrix);
-    mResources->SetUpdate(false);
+    mModel.Create(gfl::HeapID::Work);
+    mModel->RegisterResources(fileInfo, victoryStand, 0, scene, 0);
+    mModel->SetMatrix(lbl_808E697C, mMatrix);
+    mModel->SetUpdate(false);
 
     mColObj.Create(gfl::HeapID::Work);
 
