@@ -77,7 +77,7 @@ namespace std {
     };
 
     template <typename T, typename Allocator, int I /* we will never know what this is */>
-    class __vec_constructor : protected __vec_deleter<T, Allocator> {
+    class __vec_constructor : public __vec_deleter<T, Allocator> {
         typedef __vec_deleter<T, Allocator> _Base;
 
     public:
@@ -153,7 +153,7 @@ namespace std {
     };
 
     template <typename T, typename Allocator = allocator<T> >
-    class vector : private __vec_constructor<T, Allocator, 1> {
+    class vector : public __vec_constructor<T, Allocator, 1> {
         typedef __vec_constructor<T, Allocator, 1> _Base;
 
     public:
