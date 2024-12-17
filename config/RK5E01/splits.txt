@@ -139,6 +139,9 @@ fluff/util/SignatureUtil.cpp:
 	.text       start:0x803D8098 end:0x803D820C
 	.sdata2     start:0x808EA3D8 end:0x808EA3DC
 
+fluff/object/gimmick/GmkArrowSign.cpp:
+	.text       start:0x804C3244 end:0x804C3CB0
+
 fluff/util/MissionUtil.cpp:
 	.text       start:0x804C49F4 end:0x804C4E60
 	.sdata2     start:0x808EB2C4 end:0x808EB2E0
