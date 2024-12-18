@@ -5,33 +5,32 @@
 #include "gflMisc.h"
 
 FlfHandleList* FlfHandleList::sInstance;
-// FlfHandleList::~FlfHandleList() { }
 
 void FlfHandleList::Set(uint index, FlfHandleObj* object) {
-    mHandles[index] = object;
-    object->SetID(mLastHandleID);
-    object->SetHandle(&mHandles[index]);
+    mObjects[index] = object;
+    object->SetHandleID(mLastHandleID);
+    object->SetHandleObject(&mObjects[index]);
     mHandleCount = index + 1;
     mLastHandleID++;
 }
 
 void FlfHandleList::Remove(FlfHandleObj* object) {
-    object->ClearHandle();
+    object->ClearHandleObject();
 }
 
 void FlfHandleList::Add(FlfHandleObj* object) {
     uint curCount = mHandleCount;
-    FlfHandle* lastHandle = &mHandles[mHandleCount];
+    FlfHandleObj** lastHandleObj = &mObjects[mHandleCount];
 
     // check if there are any empty slots
 
     while (curCount < FLF_HANDLE_LIST_MAX_HANDLES) {
-        if (nullptr == *lastHandle) {
+        if (nullptr == *lastHandleObj) {
             Set(curCount, object);
             return;
         }
 
-        lastHandle++;
+        lastHandleObj++;
         curCount++;
     }
 
@@ -39,15 +38,15 @@ void FlfHandleList::Add(FlfHandleObj* object) {
 
     uint curIndex = 0;
     uint remainingSlots = FLF_HANDLE_LIST_MAX_HANDLES;
-    FlfHandle* handle = mHandles;
+    FlfHandleObj** handleObj = mObjects;
 
-    while (0 != remainingSlots) {
-        if (nullptr == *handle) {
+    while (remainingSlots != 0) {
+        if (nullptr == *handleObj) {
             Set(curIndex, object);
             return;
         }
 
-        handle++;
+        handleObj++;
         curIndex++;
         remainingSlots--;
     }
@@ -63,7 +62,7 @@ FlfHandleList::FlfHandleList()
     : mHandleCount(0)
     , mLastHandleID(1)
 {
-    memset(mHandles, 0, sizeof(mHandles));
+    memset(mObjects, 0, sizeof(mObjects));
 }
 
 FlfHandleList::~FlfHandleList() { }

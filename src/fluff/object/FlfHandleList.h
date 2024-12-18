@@ -23,7 +23,7 @@ public:
     void Remove(FlfHandleObj* object);
     void Set(uint index, FlfHandleObj* object) DONT_INLINE_CLASS;
 private:
-    FlfHandle mHandles[FLF_HANDLE_LIST_MAX_HANDLES];
+    FlfHandleObj* mObjects[FLF_HANDLE_LIST_MAX_HANDLES];
     uint mHandleCount;
     uint mLastHandleID;
 };

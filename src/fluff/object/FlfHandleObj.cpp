@@ -5,9 +5,6 @@ FlfHandleObj::~FlfHandleObj() {
     FlfHandleList::Instance()->Remove(this);
 }
 
-FlfHandleObj::FlfHandleObj() 
-    : mHandle(nullptr)
-    , mHandleID(0)
-{
+FlfHandleObj::FlfHandleObj() {
     FlfHandleList::Instance()->Add(this);
 }
