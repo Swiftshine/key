@@ -9,7 +9,8 @@
 #include <MSL_C++/Metrowerks/compressed_pair.h>
 
 namespace std {
-
+    // void throw_length_error();
+    
     template <typename T, typename Allocator>
     class __vec_deleter_helper;
 
@@ -37,7 +38,7 @@ namespace std {
         explicit __vec_deleter(allocator_param alloc)
             : m_Ptr(nullptr), m_Count(0), m_Capacity(0, alloc) {}
 
-        ~__vec_deleter() {
+        ~__vec_deleter() DONT_INLINE_CLASS {
             if (m_Ptr) {
                 clear();
                 m_Capacity.second().deallocate(m_Ptr, m_Capacity.first());
@@ -201,9 +202,9 @@ namespace std {
         size_type size() const { return m_Count; }
         size_type capacity() const { return m_Capacity.first(); }
 
-        void push_back(const_reference value) {
-            _Base::push_back(value);
-        }
+        // void push_back(const_reference value) {
+        //     _Base::push_back(value);
+        // }
 
         iterator insert(iterator pos, const_reference value) {
             if (m_Count >= m_Capacity.first()) {
@@ -214,6 +215,25 @@ namespace std {
             }
 
             return reallocate_insert(pos, value);
+        }
+
+        iterator insert(const_reference value);
+
+        inline T& operator[](size_t index) {
+            return m_Ptr[index];
+        }
+
+        inline void push_back(const T& value) {
+            if (m_Count < m_Capacity.first()) {
+                T* item = &m_Ptr[m_Count];
+                if (item != nullptr) {
+                    *item = value;
+                }
+
+                m_Count++;
+            } else {
+                insert(value);
+            }
         }
     };
 

@@ -112,7 +112,7 @@ fluff/object/FlfHandleList.cpp:
 	.sbss       start:0x808E4FF8 end:0x808E4FFC
 
 fluff/object/collision/FlfRideHitBase.cpp:
-	.text       start:0x80183CD8 end:0x80183DB8
+	.text       start:0x80183CD8 end:0x80184080
 
 fluff/work/InStageWork.cpp:
 	.text       start:0x801FED48 end:0x801FFAC0

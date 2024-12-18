@@ -44,6 +44,10 @@ public:
     virtual void    SetCullThreshold(float newVal);
     virtual float   GetCullThreshold();
     virtual void    vf64(bool);
+
+    inline int GetType() {
+        return mType;
+    }
 public:
     nw4r::math::VEC3 mPosition;     
     nw4r::math::VEC3 mRotation;     
@@ -51,7 +55,7 @@ public:
     nw4r::math::MTX34 mMatrix;       
     u32 mFlags;     
     u32 m_64;        
-    u32 mType;           
+    int mType;           
     bool m_6C;           
     bool m_6D;           
     bool m_6E;           

@@ -32,6 +32,11 @@ public:
         *mObject = nullptr;
     }
 
+    inline void operator=(const FlfHandle& other) {
+        mObject = other.mObject;
+        mHandleID = other.mHandleID;
+    }
+
 private:
     FlfHandleObj** mObject;
     uint mHandleID;
