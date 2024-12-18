@@ -44,24 +44,19 @@ void FlfRideHitBase::AddBead(FlfGameObj* object) {
 
             // the rest of the mismatches belong to this call here
             mHandles.push_back(handle);
-            mNumHandles++;
         }
+        mNumHandles++;
     }    
 }
 
-// r7/r8 regswap https://decomp.me/scratch/CpsLg
 bool FlfRideHitBase::HasObject(FlfHandleObj* object) {
+    FlfHandleObj** obj;
+    FlfHandleObj* toCompare;
     for (uint i = 0; i < mNumHandles; i++) {
-        FlfHandle& handle = mHandles[i];
-        FlfHandleObj** obj = handle.GetObject();
-        FlfHandleObj* toCompare;
+        obj = mHandles[i].GetObject();
         
-        if (
-            obj != nullptr &&
-            *obj != nullptr &&
-            handle.GetID() == (*obj)->GetHandleID()
-        ) {
-            toCompare = (FlfHandleObj*)obj;
+        if (mHandles[i].GetObject() != nullptr && *obj != nullptr && mHandles[i].GetID() == (*obj)->GetHandleID()) {
+            toCompare = (FlfHandleObj*)*obj;
         } else {
             toCompare = nullptr;
         }
