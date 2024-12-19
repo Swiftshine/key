@@ -16,7 +16,7 @@ public:
         ~RenderUser();
         
         bool mShouldUpdate;
-        nw4r::math::VEC3 m_4;
+        nw4r::math::VEC3 mPosition;
     };
 public:
     inline static GmkMoleHoleRender* Instance() {
