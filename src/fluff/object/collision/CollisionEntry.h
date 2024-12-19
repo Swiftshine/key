@@ -3,6 +3,7 @@
 
 #include "object/collision/CollisionInfo.h"
 #include "object/collision/ObjHit.h"
+#include "misc/ScopedPointers.h"
 
 struct CollisionBounds2D {
     nw4r::math::VEC2 mBoundsStart;

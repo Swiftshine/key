@@ -478,6 +478,7 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/object/gimmick/GmkArrowSign.cpp"),
+            Object(NonMatching, "fluff/object/gimmick/GmkBeadPopItem.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkCamRectCtrl.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkColAnimMdl.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkSimpleMdl.cpp"),

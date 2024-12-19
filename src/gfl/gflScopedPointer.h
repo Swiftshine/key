@@ -169,7 +169,25 @@ namespace gfl {
         }
     };
 
+    // temporary name
+    template <typename T, void (*ReleaseFunc)(T*)>
+    class CustomFreedScopedPointer : public PointerBase<T> {
+    public:
+        inline CustomFreedScopedPointer(T* ptr) {
+            mPointer = ptr;
+        }
 
+        inline ~CustomFreedScopedPointer() {
+            if (mPointer != nullptr) {
+                Destroy();
+            }
+        }
+
+        inline void Destroy() {
+            ReleaseFunc(mPointer);
+            mPointer = nullptr;
+        }
+    };
 }
 
 #endif

@@ -53,6 +53,15 @@ struct Vec3f {
 typedef int placeholder_t;
 
 typedef struct dummy_t { } dummy_t;
+struct dummy_virtual_dtor8 {
+    virtual ~dummy_virtual_dtor8();
+    virtual void DummyC();
+};
+
+struct dummy_virtual_dtorC {
+    virtual void Dummy8();
+    virtual ~dummy_virtual_dtorC();
+};
 
 typedef uint64_t u64;
 // typedef uint16_t u16;

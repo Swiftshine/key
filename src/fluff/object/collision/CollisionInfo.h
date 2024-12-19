@@ -7,18 +7,23 @@
 
 class CollisionInfo {
 public:
+    // are these flags or hard-set values?
+    ENUM_CLASS(CollisionType,
+         
+    );
+public:
     bool mMatrixInited;
     bool m_1;
     bool m_2;
     bool mBoundsInited;
     int m_4;
     int mBoundsType;
-    int m_C;
+    int mCollisionType;
     int m_10;
     nw4r::math::VEC3 mPosition;
     nw4r::math::VEC2 mDimensions;
     IObjHitCB* mCallbacks;
-    FlfGameObj* mOwner;
+    const char* mOwnerName;
     nw4r::math::MTX34* mOwnerMatrix;
     nw4r::math::VEC2 mRectStart;
     int m_3C; // rect end?
@@ -26,8 +31,8 @@ public:
     int m_44;
     int m_48;
     int m_4C;
-    int m_50;
-    FlfGameObj* mReactor;
+    float m_50;
+    FlfGameObj* mOwner;
     nw4r::math::MTX34 mMatrix;
 };
 

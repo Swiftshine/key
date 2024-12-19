@@ -137,18 +137,25 @@ namespace std {
         }
 
         void zero() {
-            rep_s *buf = &m.first();
-            __static_assert(
-                sizeof(*buf) % sizeof(size_t) == 0,
-                "string buffer size must be word-aligned"
-            );
-            for (size_t i = sizeof(*buf) / sizeof(size_t); i != 0; i--) {
-                ((size_t *)&buf)[i] = 0;
-            }
+            // rep_s *buf = &m.first();
+            // __static_assert(
+            //     sizeof(*buf) % sizeof(size_t) == 0,
+            //     "string buffer size must be word-aligned"
+            // );
+            // for (size_t i = sizeof(*buf) / sizeof(size_t); i != 0; i--) {
+            //     ((size_t *)&buf)[i] = 0;
+            // }
+
+            rep_s& rep = m.first();
+            rep.longBuf.capacity = 0;
+            rep.longBuf.length = 0;
+            rep.longBuf.buffer = 0;
         }
 
     public:
-        basic_string() { }
+        basic_string() {
+            zero();
+        }
         basic_string(const Allocator &alloc) : m(alloc) { zero(); }
 
         basic_string(const basic_string &other) DONT_INLINE_CLASS : m(other.m.second()) {
