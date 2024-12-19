@@ -15,7 +15,7 @@ public:
         RenderUser();
         ~RenderUser();
         
-        bool mIsActive;
+        bool mShouldUpdate;
         nw4r::math::VEC3 m_4;
     };
 public:
