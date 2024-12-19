@@ -11,6 +11,14 @@ class GmkMoleHoleRender : public gfl::CustomRenderObj {
 private:
     static GmkMoleHoleRender* sInstance;
 public:
+    struct RenderUser {
+        RenderUser();
+        ~RenderUser();
+        
+        bool mIsActive;
+        nw4r::math::VEC3 m_4;
+    };
+public:
     inline static GmkMoleHoleRender* Instance() {
         return sInstance;
     }
@@ -30,7 +38,7 @@ private:
     gfl::ResFileInfo* mFileInfo; // @ 0x154
     float m_158;
     float m_15C;
-    gfl::LinkedList<placeholder_t> mUsers; // @ 0x160, size: 0xC
+    gfl::LinkedList<RenderUser*> mUsers; // @ 0x160, size: 0xC
     gfl::LinkedList<placeholder_t> mList; // @ 0x16C
 };
 
