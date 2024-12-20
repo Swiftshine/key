@@ -136,8 +136,8 @@ public:
 
     void InitCommand();
     void fn_8004ED1C();
-    static void GetResFileInfo(gfl::ResFileInfoPointer& fileInfo, Gimmick* gimmick);
-    static void GetResFileInfo(gfl::ResFileInfoPointer& fileInfo, Gimmick* gimmick, int gimmickID);
+    static void GetResFileInfo(gfl::ResFileObject& fileInfo, Gimmick* gimmick);
+    static void GetResFileInfo(gfl::ResFileObject& fileInfo, Gimmick* gimmick, int gimmickID);
 
     // virtual functions
 

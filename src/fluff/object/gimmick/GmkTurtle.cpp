@@ -41,7 +41,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
 
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
     
-    gfl::ResFileInfoPointer fileInfo;
+    gfl::ResFileObject fileInfo;
     GetResFileInfo(fileInfo, this);
     
     mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, fileInfo, resourceName));

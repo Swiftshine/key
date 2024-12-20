@@ -29,7 +29,7 @@ public:
     float GetUpdateRate();
     bool IsAnimationDone();
     bool HasAnim();
-    void Play(gfl::ResFileInfoPointer&, const char* resMdlName, const char* animName, void* resName /* ?*/ );
+    void Play(gfl::ResFileObject&, const char* resMdlName, const char* animName, void* resName /* ?*/ );
     bool Init(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName, nw4r::g3d::ResName* resName /* ? */);
     nw4r::math::VEC3 GetPosition(gfl::ScnMdlWrapper*, nw4r::g3d::ResMdl& resMdl);
 

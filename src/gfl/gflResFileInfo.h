@@ -184,15 +184,15 @@ namespace gfl {
     ASSERT_SIZE(ResFileInfo, 0x18);
 
 
-    class ResFileInfoPointer {
+    class ResFileObject {
     public:
-        inline ResFileInfoPointer() { }
+        inline ResFileObject() { }
 
-        ResFileInfoPointer(ResFileInfo* info)
+        ResFileObject(ResFileInfo* info)
             : mPointer(info)
         { }
 
-        inline ~ResFileInfoPointer() {
+        inline ~ResFileObject() {
             if (IsValid()) {
                 mPointer->Destroy();
             }
@@ -211,8 +211,9 @@ namespace gfl {
         }
 
         inline ResFileInfo& operator*() {
-        return *mPointer;
-    }
+            return *mPointer;
+        }
+
         inline ResFileInfo* operator->() const {
             return mPointer;
         }
@@ -230,7 +231,7 @@ namespace gfl {
         }
 
         inline bool IsValid() const {
-            return nullptr != mPointer;
+            return mPointer != nullptr;
         }
     private:
         ResFileInfo* mPointer;

@@ -1,7 +1,7 @@
 #include "graphics/NwAnmCtrl.h"
 #include "manager/StageManager.h"
 
-NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName)
+NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& fileInfo, const char* animName)
     : mResFileInfo(fileInfo)
 {
     if (mResFileInfo.IsValid()) {

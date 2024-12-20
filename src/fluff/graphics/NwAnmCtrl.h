@@ -21,7 +21,7 @@ class ResArchivedFileInfo;
 
 class NwAnmCtrl {
 public:
-    NwAnmCtrl(uint animCount, gfl::ResFileInfoPointer& fileInfo, const char* animName);
+    NwAnmCtrl(uint animCount, gfl::ResFileObject& fileInfo, const char* animName);
     virtual ~NwAnmCtrl();
     void PlayAnimationByNameAndIndex(uint animIndex, const char* animName);
     gfl::ScnMdlWrapper* SetupModelWrapper(uint flags) DONT_INLINE_CLASS;
@@ -56,7 +56,7 @@ public:
     }
 
 private:
-    gfl::ResFileInfoPointer mResFileInfo;
+    gfl::ResFileObject mResFileInfo;
     gfl::Pointer<gfl::ScnMdlWrapper> mModelWrapper;
     std::string mResMdlName;
     uint mCurrentAnimIndex;

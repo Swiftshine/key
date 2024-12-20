@@ -18,7 +18,7 @@ private:
     GXTexObj mTexObj;
     float mWidth;
     float mHeight;
-    gfl::ResFileInfoPointer mResFileInfo;
+    gfl::ResFileObject mResFileInfo;
 };
 
 ASSERT_SIZE(BgBackImage, 0x130);

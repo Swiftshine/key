@@ -97,7 +97,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
 
     if (!m_8) {
-        gfl::ResFileInfoPointer resFileInfo;
+        gfl::ResFileObject resFileInfo;
         GetResFileInfo(resFileInfo, this);
 
         NwAnmCtrl* anmCtrl = new (gfl::HeapID::Work) NwAnmCtrl(1, resFileInfo, "todo: make this string correct");

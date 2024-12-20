@@ -51,7 +51,7 @@ bool ModelWrapper::GetPrimaryMatrix(nw4r::math::MTX34& dest) {
 }
 
 // https://decomp.me/scratch/OQnDu
-void ModelWrapper::RegisterResources(gfl::ResFileInfoPointer& fileInfo, const char* modelName, const char* shadowName, FullSortScene* scene, uint flags) {
+void ModelWrapper::RegisterResources(gfl::ResFileObject& fileInfo, const char* modelName, const char* shadowName, FullSortScene* scene, uint flags) {
     nw4r::g3d::ResFile resFile(fileInfo.IsValid() ? fileInfo->GetGfArch() : nullptr);
     NW4R_G3D_RESFILE_AC_ASSERT(resFile);
     

@@ -69,7 +69,7 @@ private:
     GmkWoolHook* mFirstWoolHook;
     GmkWoolHook* mSecondWoolHook;
     void* m_158;
-    gfl::ResFileInfoPointer mResFileInfo;
+    gfl::ResFileObject mResFileInfo;
 };
 
 // ASSERT_SIZE(GmkWoolRope, 0x160);
