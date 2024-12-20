@@ -256,8 +256,8 @@ Excluding the base folder, use the full file path when including headers.
 #include "GmkTurtle.h"                  // bad
 #include "object/gimmick/GmkTurtle.h"   // good
 
-#include "gflScopedPointer.h"           // bad
-#include "gfl/gflScopedPointer.h"       // good
+#include "gflPointer.h"           // bad
+#include "gfl/gflPointer.h"       // good
 
 ...
 

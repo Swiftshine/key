@@ -40,8 +40,8 @@ private:
     uint mPlayerRanking;
     gfl::Vec3 mBeadAwardPosition;
     int mTotalAwardedBeads;
-    gfl::ScopedPointer<ModelWrapper> mModel;
-    gfl::ScopedPointer<ColObjTrans> mColObj;
+    gfl::Pointer<ModelWrapper> mModel;
+    gfl::Pointer<ColObjTrans> mColObj;
     GimmickBuildInfo mDecorativeBallBuildInfo;
 };
 

@@ -2,7 +2,7 @@
 #define FLUFF_GMKWOOLROPE_H
 
 #include "object/wool/WoolLinkObj.h"
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/FlfMdlDraw.h"
 #include "object/Gimmick.h"

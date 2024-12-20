@@ -3,7 +3,7 @@
 
 #include "gfl/gflResFileInfo.h"
 #include "gfl/gflResArchivedFileInfo.h"
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include "gfl/gflArray.h"
 #include "types.h"
 
@@ -78,7 +78,7 @@ private:
         }
     }
 private:
-    gfl::ScopedPointer<StageResources> mStageResources;
+    gfl::Pointer<StageResources> mStageResources;
     gfl::ResFileInfo* mBGResFileInfo;
     BGData* mBGData;
     gfl::ResFileInfo* mCommonResFileInfo;

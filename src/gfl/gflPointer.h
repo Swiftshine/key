@@ -1,5 +1,5 @@
-#ifndef GFL_SCOPEDPOINTER_H
-#define GFL_SCOPEDPOINTER_H
+#ifndef GFL_POINTER_H
+#define GFL_POINTER_H
 
 #include "types.h"
 #include "gflMemoryUtil.h"
@@ -83,14 +83,14 @@ namespace gfl {
 
 
     template <typename T>
-    class ScopedPointer : public PointerBase<T> {
+    class Pointer : public PointerBase<T> {
     public:
-        inline ScopedPointer() { }
-        inline ScopedPointer(T* ptr) {
+        inline Pointer() { }
+        inline Pointer(T* ptr) {
             mPointer = ptr;
         }
 
-        inline ~ScopedPointer() {
+        inline ~Pointer() {
             delete mPointer;
             mPointer = nullptr;
         }
@@ -125,14 +125,14 @@ namespace gfl {
 
 
     template <typename T>
-    class FreedScopedPointer : public PointerBase<T> {
+    class FreedPointer : public PointerBase<T> {
     public:
-        inline FreedScopedPointer() { }
-        inline FreedScopedPointer(T* ptr) {
+        inline FreedPointer() { }
+        inline FreedPointer(T* ptr) {
             mPointer = ptr;
         }
 
-        inline ~FreedScopedPointer() {
+        inline ~FreedPointer() {
             if (nullptr != mPointer) {
                 gfl::Free(mPointer);
                 mPointer = nullptr;
@@ -168,12 +168,11 @@ namespace gfl {
             }
         }
     };
-
-    // temporary name
+    
     template <typename T, void (*ReleaseFunc)(T*)>
-    class CustomFreedScopedPointer : public PointerBase<T> {
+    class ReleasedPointer : public PointerBase<T> {
     public:
-        inline CustomFreedScopedPointer(T* ptr) {
+        inline ReleasedPointer(T* ptr) {
             mPointer = ptr;
         }
 
@@ -185,7 +184,7 @@ namespace gfl {
             }
         }
 
-        inline ~CustomFreedScopedPointer() {
+        inline ~ReleasedPointer() {
             if (mPointer != nullptr) {
                 ReleaseFunc(mPointer);
                 mPointer = nullptr;

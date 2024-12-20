@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include <bitset>
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include "gfl/gflLinkedList.h"
 #include "gfl/gflMemory.h"
 #include "gfl/gflMemoryUtil.h"
@@ -36,7 +36,7 @@ namespace BGST {
         void RemoveColumn(BGST::Column* column);
         void ResetBit(size_t index);
     private:
-        gfl::FreedScopedPointer<BGST::Image> mImages;
+        gfl::FreedPointer<BGST::Image> mImages;
         size_t mCount; // signed instead?
         std::bitset<200> mBitset;
         gfl::LinkedList<BGST::Entry> mEntryList;

@@ -4,7 +4,7 @@
 #include "gfl/gflResFileInfo.h"
 #include "graphics/NwAnmCtrl.h"
 
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include "object/gimmick/GmkSimpleMdlRotZ.h"
 #include "object/gimmick/GmkColAnimCtrl.h"
 

@@ -5,7 +5,7 @@
 #include <nw4r/g3d.h>
 #include <nw4r/g3d/g3d_obj.h>
 
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 
 template <typename T>
 class G3dObjPointer : public gfl::PointerBase<T> {

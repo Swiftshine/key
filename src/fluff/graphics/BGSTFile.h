@@ -9,7 +9,7 @@
 #include "graphics/BGSTList.h"
 
 #include "gfl/gflFile.h"
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 
 namespace BGST {
     class File {
@@ -48,8 +48,8 @@ namespace BGST {
         void LoadGrid() DONT_INLINE_CLASS;
     private:
         int mLoadState;
-        gfl::FreedScopedPointer<BGST::Header> mHeader;
-        gfl::FreedScopedPointer<BGST::Image> mOutputImage;
+        gfl::FreedPointer<BGST::Header> mHeader;
+        gfl::FreedPointer<BGST::Image> mOutputImage;
         size_t mImageFilesize;
         int mGridCount;
         BGST::Column* mColumns[12];

@@ -6,7 +6,7 @@
 #include "object/collision/ColObjTree.h"
 #include "manager/GimmickManager.h"
 #include "stage/StageGraphicResources.h"
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include <nw4r/math.h>
 
 class LevelManager {
@@ -32,8 +32,8 @@ public:
 private:
     int mLoadPhase;
     Stage mStage;
-    gfl::ScopedPointer<ColObjTree> mColObjTree;
-    gfl::ScopedPointer<GimmickManager> mGimmickManager;
+    gfl::Pointer<ColObjTree> mColObjTree;
+    gfl::Pointer<GimmickManager> mGimmickManager;
     StageGraphicResources mGraphicResources;
 };
 

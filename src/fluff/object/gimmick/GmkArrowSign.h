@@ -38,11 +38,11 @@ public:
     const char* GetOrientationAnimationName();
     static std::string GetResourceName(GimmickBuildInfo* buildInfo);
 private:
-    gfl::ScopedPointer<ModelWrapper> mArrowModel; // @ 0x130
-    gfl::ScopedPointer<ModelWrapper> mBaseModel; // @ 0x134
+    gfl::Pointer<ModelWrapper> mArrowModel; // @ 0x130
+    gfl::Pointer<ModelWrapper> mBaseModel; // @ 0x134
     std::vector<ModelWrapper> mPoleUnitModels; // @ 0x138, size: 0xC
-    gfl::ScopedPointer<NwAnm> mAnimations[2]; // @ 0x144
-    gfl::ScopedPointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x14C, for NURBS rendering
+    gfl::Pointer<NwAnm> mAnimations[2]; // @ 0x144
+    gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x14C, for NURBS rendering
     BOOL mIsMysteriousUFO;  // @ 0x150
 };
 

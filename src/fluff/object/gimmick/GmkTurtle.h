@@ -73,9 +73,9 @@ public:
     int mNumTurtles;
     int mCurrentState;
     GmkUpdownWater* mWater;
-    gfl::ScopedPointer<NwAnmCtrl> mAnmCtrl;
-    gfl::ScopedPointer<ColObjTrans> mColObjTrans;
-    gfl::ScopedPointer<FlfRideHitCtrlTrans> mRideHitCtrlTrans;
+    gfl::Pointer<NwAnmCtrl> mAnmCtrl;
+    gfl::Pointer<ColObjTrans> mColObjTrans;
+    gfl::Pointer<FlfRideHitCtrlTrans> mRideHitCtrlTrans;
 };
 
 // ASSERT_SIZE(GmkTurtle, 0x15C)

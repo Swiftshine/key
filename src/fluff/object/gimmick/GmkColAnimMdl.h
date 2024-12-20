@@ -52,10 +52,10 @@ public:
 
 private:
     gfl::ResFileInfoPointer mResFileInfo;
-    gfl::ScopedPointer<NwAnmCtrl> mAnimCtrl;
-    gfl::ScopedPointer<NwAnmCtrl> mShadowAnimCtrl;
-    gfl::ScopedPointer<GmkColAnimCtrl> mColAnimCtrlGmk;
-    gfl::ScopedPointer<GmkSimpleMdlRotZ> mZRotationGmk;
+    gfl::Pointer<NwAnmCtrl> mAnimCtrl;
+    gfl::Pointer<NwAnmCtrl> mShadowAnimCtrl;
+    gfl::Pointer<GmkColAnimCtrl> mColAnimCtrlGmk;
+    gfl::Pointer<GmkSimpleMdlRotZ> mZRotationGmk;
     nw4r::math::VEC3 mModelScale;
 };
 

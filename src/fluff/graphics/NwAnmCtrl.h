@@ -5,7 +5,7 @@
 #include "types.h"
 #include "graphics/NwAnm.h"
 #include "gfl/gflScnMdlWrapper.h"
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include "gfl/gflArray.h"
 
 #include "gfl/gflResFileInfo.h"
@@ -57,7 +57,7 @@ public:
 
 private:
     gfl::ResFileInfoPointer mResFileInfo;
-    gfl::ScopedPointer<gfl::ScnMdlWrapper> mModelWrapper;
+    gfl::Pointer<gfl::ScnMdlWrapper> mModelWrapper;
     std::string mResMdlName;
     uint mCurrentAnimIndex;
     gfl::Array<NwAnm> mAnimations;

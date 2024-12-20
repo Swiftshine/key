@@ -3,7 +3,7 @@
 
 #include "gfl/gflCustomRenderObj.h"
 #include "gfl/gflResFileInfo.h"
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include <revolution/GX.h>
 
 // used as the "missing texture" image when

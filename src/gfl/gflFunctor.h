@@ -1,7 +1,7 @@
 #ifndef GFL_FUNCTOR_H
 #define GFL_FUNCTOR_H
 
-#include "gflScopedPointer.h"
+#include "gflPointer.h"
 
 namespace gfl {
 

@@ -65,9 +65,9 @@ private:
     bool m_149;
     std::string m_14C; // size: 0xC
     Dummy m_158;
-    gfl::ScopedPointer<NwAnmCtrl> mAnimCtrl; // @ 0x15C
-    gfl::CustomFreedScopedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry; // @ 0x160
-    gfl::ScopedPointer<GmkBeadPopItem_Info> mPopItemInfo; // @ 0x164
+    gfl::Pointer<NwAnmCtrl> mAnimCtrl; // @ 0x15C
+    gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry; // @ 0x160
+    gfl::Pointer<GmkBeadPopItem_Info> mPopItemInfo; // @ 0x164
 };
 
 #endif

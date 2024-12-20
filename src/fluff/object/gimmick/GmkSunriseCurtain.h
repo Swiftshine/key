@@ -63,8 +63,8 @@ private:
     SD3DActor mSD3DActor;
     int m_19C;
     int m_1A0;
-    gfl::ScopedPointer<FlfMdlDraw> mFlfMdl1;
-    gfl::ScopedPointer<FlfMdlDraw> mFlfMdl2;
+    gfl::Pointer<FlfMdlDraw> mFlfMdl1;
+    gfl::Pointer<FlfMdlDraw> mFlfMdl2;
     G3dObjPointer<FbAlpha> mFbAlpha;
     // FbAlpha* mFbAlpha;
 };

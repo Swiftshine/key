@@ -8,7 +8,7 @@
 #include "gfl/gflResFileInfo.h"
 #include "gfl/gflResArchivedFileInfo.h"
 #include "gfl/gflScnMdlWrapper.h"
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include "object/gimmick/GmkSimpleMdlRotZ.h"
 #include "graphics/NwAnm.h"
 
@@ -39,12 +39,12 @@ public:
     void SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim) DONT_INLINE_CLASS;
 
 public:
-    gfl::ScopedPointer<gfl::ScnMdlWrapper> mModelWrapper;
-    gfl::ScopedPointer<NwAnm> mAnim;
-    gfl::ScopedPointer<gfl::ScnMdlWrapper> mShadowModelWrapper;
-    gfl::ScopedPointer<NwAnm> mShadowAnim;
+    gfl::Pointer<gfl::ScnMdlWrapper> mModelWrapper;
+    gfl::Pointer<NwAnm> mAnim;
+    gfl::Pointer<gfl::ScnMdlWrapper> mShadowModelWrapper;
+    gfl::Pointer<NwAnm> mShadowAnim;
     nw4r::math::VEC3 mModelScale;
-    gfl::ScopedPointer<GmkSimpleMdlRotZ> mZRotationGmk;
+    gfl::Pointer<GmkSimpleMdlRotZ> mZRotationGmk;
     gfl::ResFileInfoPointer mResFileInfo;
     // gfl::ResFileInfo* mResFileInfo;
     uint m_154;

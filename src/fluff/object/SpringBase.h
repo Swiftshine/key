@@ -6,7 +6,7 @@
 #include "graphics/KeyFrame.h"
 #include "gfl/gflArray.h"
 #include "gfl/gflResArchivedFileInfo.h"
-#include "gfl/gflScopedPointer.h"
+#include "gfl/gflPointer.h"
 #include <nw4r/g3d/g3d_obj.h>
 
 // size: 0x150
@@ -123,7 +123,7 @@ public:
     void fn_8000BBD4();
 private:
     gfl::Task mTask;
-    gfl::ScopedPointer<gfl::ResArchivedFileInfo> mResArchivedFileInfo;
+    gfl::Pointer<gfl::ResArchivedFileInfo> mResArchivedFileInfo;
     int m_9C;
     gfl::Array<Particle> mMainParticleArray;
     gfl::Array<Particle> mSubParticleArrays[4];
