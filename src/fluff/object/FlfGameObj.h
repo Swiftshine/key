@@ -11,6 +11,7 @@
 
 class CameraManager;
 
+// size: 0x80
 class FlfGameObj : public FlfHandleObj {
 public:
     FlfGameObj(uint);
@@ -69,4 +70,7 @@ public:
     bool m_7D;           
     u16  m_7E;           
 };
+
+ASSERT_SIZE(FlfGameObj, 0x80);
+
 #endif
