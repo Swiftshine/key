@@ -33,7 +33,10 @@ public:
     CollisionBounds2D* Get2DBounds();
     void ValidateBounds(int arg1, nw4r::math::VEC2& arg2);
 
-public:
+    inline CollisionInfo& GetInfo() {
+        return mInfo;
+    }
+private:
     CollisionInfo mInfo;
     CollisionBounds2D m2DBounds;
     CollisionBounds3D m3DBounds;

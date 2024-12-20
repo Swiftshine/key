@@ -5,13 +5,12 @@
 #include "object/collision/IObjHitCB.h"
 #include "object/FlfGameObj.h"
 
-class CollisionInfo {
-public:
+struct CollisionInfo {
     // are these flags or hard-set values?
     ENUM_CLASS(CollisionType,
          
     );
-public:
+
     bool mMatrixInited;
     bool m_1;
     bool m_2;

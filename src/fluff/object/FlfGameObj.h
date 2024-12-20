@@ -48,6 +48,8 @@ public:
     inline int GetType() {
         return mType;
     }
+
+    static void Destroy(FlfGameObj* target);
 public:
     nw4r::math::VEC3 mPosition;     
     nw4r::math::VEC3 mRotation;     

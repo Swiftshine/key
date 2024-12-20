@@ -12,6 +12,7 @@ public:
     void Init(float arg0);
     void SetPosition(nw4r::math::VEC3& position);
     void fn_805C46D0(bool);
+    void fn_805C46FC(bool);
     void fn_805C4760();
 private:
     bool m_0;

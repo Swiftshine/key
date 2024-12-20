@@ -177,7 +177,7 @@ void GmkBeadPopItem::Update() {
     }
 
     if (mState == State::DeleteSelf) {
-        DestroySelf();
+        Destroy(this);
     }
 }
 
@@ -243,17 +243,26 @@ void GmkBeadPopItem::SetCollisionEnabled(bool enabled) {
 
 // https://decomp.me/scratch/qK0M3
 bool GmkBeadPopItem::Enable() {
+    uint i = 0;
+
     for (uint i = 0; i < 5; i++) {
         const std::string& string = GetStringParam(i).c_str();
-        const char* str = string.c_str();
 
-        if (str != nullptr) {
-            if (m_4 == 1) {
-                vf48("POP_BEAD", string.c_str());
-            } else if (m_4 == 2) {
-                vf48("ON", string.c_str());
-            } else {
-                GmkBeadManager::GetInstance()->EnableBeadPopSwitch(this, string.c_str(), m_149);
+        if (string.c_str() != nullptr) {
+            switch (m_4) {
+                case 1: {
+                    vf48("POP_BEAD", string.c_str());
+                    break;
+                }
+
+                case 2: {
+                    vf48("ON", string.c_str());
+                    break;
+                }
+
+                default: {
+                    GmkBeadManager::GetInstance()->EnableBeadPopSwitch(this, string.c_str(), m_149);
+                }
             }
         }
     }
@@ -264,4 +273,49 @@ bool GmkBeadPopItem::Enable() {
     }
 
     return true;
+}
+
+void GmkBeadPopItem::SetupCollisionMatrix() {
+    bool enabled = mCollisionEnabled;
+    if (mState >= 2) {
+        enabled = false;
+    }
+
+    CollisionEntry* entry = mCollisionEntry.Get();
+    entry->GetInfo().mMatrixInited = enabled;
+
+    if (enabled) {
+        nw4r::math::MTX34* mtx = entry->GetInfo().mOwnerMatrix;
+        if (mtx != nullptr) {
+            entry->GetInfo().mMatrix = *mtx;
+        } else {
+            PSMTXIdentity(entry->GetInfo().mMatrix);
+        }
+        entry->GetInfo().mBoundsInited = false;
+    }
+
+    GmkBeadPopItem_Info* info = mPopItemInfo.Get();
+
+    if (info == nullptr) {
+        return;
+    }
+
+    enabled = mCollisionEnabled;
+    if (mState >= 4) {
+        enabled = false;
+    }
+
+    if (mState == State::Idle) {
+        enabled = false;
+    }
+
+    if (enabled) {
+        info->fn_805C46FC(false);
+    } else {
+        info->fn_805C46D0(false);
+    }
+}
+
+std::string& GmkBeadPopItem::GetStringParam(uint index) {
+    return mBuildInfoPtr->GetStringParam(index);
 }

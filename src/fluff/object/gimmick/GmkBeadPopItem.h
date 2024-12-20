@@ -56,8 +56,7 @@ public:
     void SetState(int state) DONT_INLINE_CLASS;
     void SetCollisionEnabled(bool enabled) DONT_INLINE_CLASS;
     void SetupCollisionMatrix();
-    std::string& GetStringParam(int index);
-    void DestroySelf();
+    std::string& GetStringParam(uint index);
 private:
     int mState; // @ 0x13C
     float mCompletionPercentage; // @ 0x140, on a scale of 0.0 to 1.0
