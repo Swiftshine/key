@@ -20,6 +20,8 @@ struct GimmickVec {
     float z;
 };
 
+class StatedGimmick;
+
 class Gimmick : public FlfGameObj {
 public:
     ENUM_CLASS(ParameterID,
@@ -168,6 +170,9 @@ public:
     virtual void    Update();
     virtual void    vfC0();
 
+    inline StatedGimmick* ToStated() {
+        return reinterpret_cast<StatedGimmick*>(this);
+    }
 public:
     int mGimmickID;
     GimmickBuildInfo* mBuildInfoPtr;
@@ -175,6 +180,14 @@ public:
     void* m_124;
     gfl::Task* mTask;
     demo::EventDemoGimmickCommand* mCommand;
+};
+
+class StatedGimmick : public Gimmick {
+public:
+    void SetState(int value);
+public:
+    int mState;
+    int mCounter;
 };
 
 

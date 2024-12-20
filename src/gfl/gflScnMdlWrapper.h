@@ -18,10 +18,11 @@ namespace gfl {
         
         void fn_8004DB94(nw4r::math::VEC3&);
         void fn_8065DCDC(float);
+        nw4r::g3d::ResMdl GetResMdl(const char* modelName);
 
         /* gfl::RenderObj */
         virtual void vf28(nw4r::math::VEC3&) override;
-        virtual void vf40() override;
+        virtual void UpdateFrame() override;
         virtual void ScnMdlProc() override;
         
         /* gfl::ScnMdlWrapper */

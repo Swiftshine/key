@@ -20,7 +20,7 @@ namespace gfl {
         virtual void vf20(float& arg1) override;
         virtual void vf28(nw4r::math::VEC3&) override;
         virtual void Update(bool arg1) override;
-        virtual void vf40() override;
+        virtual void UpdateFrame() override;
         virtual void ScnMdlProc() override;
 
         /* gfl::CustomRenderObj */

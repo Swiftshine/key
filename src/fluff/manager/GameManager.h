@@ -132,7 +132,7 @@ public:
     static bool HasCurrentMissionIndicator(std::string& str);
     static class MissionGameCtrl* GetMissionGameCtrl();
     // Mission related.
-    static void fn_800123D8();
+    static void fn_800123D8(int, int, int, int);
     /* Virtual functions */
 
     virtual void ProcessLoadingTasks();

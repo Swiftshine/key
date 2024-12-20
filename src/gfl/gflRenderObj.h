@@ -33,7 +33,7 @@ namespace gfl {
         virtual bool vf34(float& arg0, float& arg1, float& arg2, float& arg3);
         virtual void Update(bool shouldUpdate);
         virtual void vf3C();
-        virtual void vf40() = 0;
+        virtual void UpdateFrame() = 0;
         virtual void ScnMdlProc() = 0;
         DECL_WEAK virtual void SetScene(gfl::Scene* scene);
         virtual gfl::Scene* GetScene();
