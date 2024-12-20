@@ -91,7 +91,7 @@ int GimmickUtil::fn_80050764(int arg0, int arg1) {
     return temp;
 }
 
-bool GimmickUtil::fn_800507A8(int id) {
+bool GimmickUtil::IsClothTurnGimmick(int id) {
     return 0x43 <= id && id <= 0x46;
 }
 

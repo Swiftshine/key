@@ -97,7 +97,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(sceneID);
 
     gfl::ResFileInfoPointer fileInfo;
-    GetResFileInfo(fileInfo);
+    GetResFileInfo(fileInfo, this);
 
     mModel.Create(gfl::HeapID::Work);
     mModel->RegisterResources(fileInfo, victoryStand, 0, scene, 0);

@@ -8,6 +8,11 @@ class GmkBeadPopItem_Info {
 public:
     GmkBeadPopItem_Info();
     ~GmkBeadPopItem_Info();
+
+    void Init(float arg0);
+    void SetPosition(nw4r::math::VEC3& position);
+    void fn_805C46D0(bool);
+    void fn_805C4760();
 private:
     bool m_0;
     float m_4;

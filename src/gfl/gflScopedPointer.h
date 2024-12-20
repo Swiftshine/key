@@ -177,15 +177,26 @@ namespace gfl {
             mPointer = ptr;
         }
 
+        inline void Create(T* ptr) {
+            if (ptr == nullptr) {
+                Destroy();
+            } else {
+                mPointer = ptr;
+            }
+        }
+
         inline ~CustomFreedScopedPointer() {
             if (mPointer != nullptr) {
-                Destroy();
+                ReleaseFunc(mPointer);
+                mPointer = nullptr;
             }
         }
 
         inline void Destroy() {
-            ReleaseFunc(mPointer);
-            mPointer = nullptr;
+            if (mPointer != nullptr) {
+                ReleaseFunc(mPointer);   
+                mPointer = nullptr;
+            }
         }
     };
 }

@@ -30,6 +30,7 @@ private:
     };
 public:
     ENUM_CLASS(State,
+        Init = 0,
         Idle = 1,
         BeginSpawn = 2,
         State_3 = 3,  
@@ -51,11 +52,12 @@ public:
     virtual bool Enable();
 
 
-    void Init(GimmickBuildInfo* buildInfo);
-    void SetState(int state);
-    void SetCollisionEnabled(bool enabled);
+    void Init(GimmickBuildInfo* buildInfo) DONT_INLINE_CLASS;
+    void SetState(int state) DONT_INLINE_CLASS;
+    void SetCollisionEnabled(bool enabled) DONT_INLINE_CLASS;
     void SetupCollisionMatrix();
     std::string& GetStringParam(int index);
+    void DestroySelf();
 private:
     int mState; // @ 0x13C
     float mCompletionPercentage; // @ 0x140, on a scale of 0.0 to 1.0
