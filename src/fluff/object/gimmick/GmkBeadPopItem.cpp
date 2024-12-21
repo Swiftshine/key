@@ -267,8 +267,7 @@ bool GmkBeadPopItem::Enable() {
     }
 
     if (!m_8) {
-        Game::Sound::SoundHandle handle;
-        handle.PlaySound(mPosition, 0xE7, 0, 0);
+        sound::SoundHandle::CreateAndPlaySound(mPosition, 0xE7, 0, 0);
     }
 
     return true;
