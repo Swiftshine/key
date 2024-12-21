@@ -24,7 +24,7 @@ void GmkSunriseCurtain::SetBGSTEntriesBasedOnMission() {
 
 void GmkSunriseCurtain::SwitchStates() {
     mFlfMdl1->fn_800234AC(true, true);
-    Game::Sound::PlaySoundEffect(0xB4, 0);
+    sound::PlaySoundEffect(0xB4, 0);
     mState = State::State_2;
 }
 
