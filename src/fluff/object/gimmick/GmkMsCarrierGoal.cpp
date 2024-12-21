@@ -4,6 +4,9 @@
 #include "manager/StageManager.h"
 #include "manager/FlfFriendManager.h"
 #include "manager/GameManager.h"
+#include "object/friend/Friend03.h"
+#include "object/effect/EffectObj.h"
+#include "sound/GameSound.h"
 
 GmkMsCarrierGoal* GmkMsCarrierGoal::Build(GimmickBuildInfo* buildInfo) {
     return new (gfl::HeapID::Work) GmkMsCarrierGoal(buildInfo, "GmkMsCarrierGoal");
@@ -24,6 +27,8 @@ GmkMsCarrierGoal::~GmkMsCarrierGoal() { }
 extern "C" {
     static bool lbl_808E5A00;
     static float lbl_808FB1E8[4];
+
+    float ZeroFloat;
 }
 
 
@@ -119,9 +124,65 @@ void GmkMsCarrierGoal::vf24() {
     return;
 }
 
-nw4r::math::VEC3 GmkMsCarrierGoal::GetEffectPosition() {
-    // not decompiled
-    nw4r::math::VEC3 result = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
-    // result = mAnimationPosition + mPosition;
-    return result;
+asm nw4r::math::VEC3 GmkMsCarrierGoal::GetEffectPosition() {
+    nofralloc
+    psq_l f3, 0x138(r4), 0, 0
+    lfs f0, ZeroFloat(r0)
+    psq_l f2, 0xc(r4), 0, 0
+    stfs f0, 0x0(r3)
+    ps_add f1, f3, f2
+    psq_l f3, 0x140(r4), 1, 0
+    stfs f0, 0x4(r3)
+    psq_l f2, 0x14(r4), 1, 0
+    psq_st f1, 0x0(r3), 0, 0
+    ps_add f1, f3, f2
+    stfs f0, 0x8(r3)
+    psq_st f1, 0x8(r3), 1, 0
+    blr
+}
+
+bool FlfFriendManager::fn_804FA7D8() {
+    Friend03* friend03 = nullptr;
+
+    FlfFriendManager* inst = FlfFriendManager::GetInstance();
+
+    if (inst != nullptr) {
+        friend03 = dynamic_cast<Friend03*>(inst->fn_8039DAF8(0));
+    }
+
+    if (friend03 == nullptr) {
+        return false;
+    }
+
+    return friend03->fn_804F6F7C();
+}
+
+void GmkMsCarrierGoal::PlayEffect() {
+    nw4r::math::VEC3 pos = GetEffectPosition();
+    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneIDs::Game);
+    EffectObj* effectObj = scene->CreateEffectObject("ef_gk_09a", 0, 0);
+
+    if (effectObj != nullptr) {
+        pos.z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::SceneIDs::Game, 5);
+        effectObj->SetPosition(pos);
+    }
+
+    Game::Sound::SoundHandle handle;
+    handle.PlaySound(pos, 0xE9, 0, 0);
+}
+
+NwAnmCtrl* GmkMsCarrierGoal::CreateAnimCtrl(const char* animName, gfl::ResFileObject& resFileObject) {
+    NwAnmCtrl* animCtrl = new (gfl::HeapID::Work) NwAnmCtrl(3, resFileObject, animName);
+
+    for (int i = 0; i < 3; i++) {
+        char animNameBuf[64];
+        snprintf(animNameBuf, sizeof(animNameBuf), "%s__%03d", animName, i);
+        animNameBuf[0x3F] = 0;
+        animCtrl->PlayAnimationByNameAndIndex(i, animNameBuf);
+    }
+
+    animCtrl->SetupModelWrapper(0);
+    animCtrl->GetScnMdlWrapper()->SetUpdate(true);
+
+    return animCtrl;
 }

@@ -10,6 +10,9 @@ const char GmkTurtle_ResourceName[] = "sea_turtle_01";
 const char GmkTurtle_ColbinSinglePath[] = "gimmick/sea_turtle_01/turtle.colbin";
 const char GmkTurtle_ColbinTriplePath[] = "gimmick/sea_turtle_01/turtle3stack.colbin";
 
+GmkTurtle* GmkTurtle::Build(GimmickBuildInfo* buildInfo) {
+    return new (gfl::HeapID::Work) GmkTurtle(buildInfo);
+}
 // https://decomp.me/scratch/QPVs1
 GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     : Gimmick(buildInfo, GmkTurtle_Name)

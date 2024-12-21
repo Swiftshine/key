@@ -5,6 +5,7 @@
 #include "gfl/gflScene.h"
 #include "gfl/gflScnMdlWrapper.h"
 #include "graphics/FullSortGroup.h"
+#include "object/effect/EffectObj.h"
 
 // size: 0x34
 class FullSortScene : public gfl::Scene {
@@ -18,6 +19,8 @@ public:
     virtual void DrawOpa();
     virtual void DrawXlu();
     virtual bool IsScnRootSizeValid();
+
+    EffectObj* CreateEffectObject(const char* effectName, int, int);
 private:
     FullSortGroup* mFullSortGroup;
 };

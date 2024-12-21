@@ -104,8 +104,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         char animNameBuf[0x40];
         snprintf(animNameBuf, sizeof(animNameBuf), "%s__%02d", "make this correct as well", 1);
         animNameBuf[0x3F] = 0;
-
-        // why is r6 being assigned 1 here? it's not used in this function
+        
         anmCtrl->PlayAnimationByNameAndIndex(0, animNameBuf);
         anmCtrl->SetupModelWrapper(8);
         anmCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);

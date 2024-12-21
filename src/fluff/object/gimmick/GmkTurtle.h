@@ -45,6 +45,7 @@ public:
     );
 
 public:
+    static GmkTurtle* Build(GimmickBuildInfo* buildInfo);
     GmkTurtle(GimmickBuildInfo* buildInfo);
     virtual ~GmkTurtle();
 

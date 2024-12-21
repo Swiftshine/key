@@ -19,7 +19,7 @@ NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& fileInfo, const char* a
 
 NwAnmCtrl::~NwAnmCtrl() { }
 
-void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* animName) {
+void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* animName, int) {
     NwAnm* anim = GetAnimationByIndex(animIndex);
     anim->Play(mResFileInfo, mResMdlName.c_str(), animName, nullptr);
 }

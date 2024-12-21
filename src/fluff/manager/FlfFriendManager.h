@@ -10,7 +10,7 @@ public:
     static FlfFriendManager* GetInstance();
     static bool fn_804FA7D8();
 
-    int fn_8039DAF8(int);
+    FlfFriend* fn_8039DAF8(int);
 };
 
 #endif

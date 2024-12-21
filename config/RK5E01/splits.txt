@@ -164,7 +164,7 @@ fluff/object/gimmick/GmkMsCarrierGoal.cpp:
 	.text       start:0x804FA380 end:0x804FA9A0
 
 fluff/object/gimmick/GmkTurtle.cpp:
-	.text       start:0x804FA9E4 end:0x804FB35C
+	.text       start:0x804FA9A0 end:0x804FB35C
 
 fluff/graphics/BgBackImage.cpp:
 	.text       start:0x80638AD0 end:0x8063914C
