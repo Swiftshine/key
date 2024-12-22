@@ -4,6 +4,8 @@
 #include "gflSoundFadeCtrl.h"
 
 namespace gfl {
+    class SoundHandleInner;
+
     class Sound {
     private:
         static Sound* sInstance;
@@ -13,6 +15,10 @@ namespace gfl {
         }
 
         SoundFadeCtrl* GetSoundFadeCtrl();
+
+        // add to the queue if add is true
+        // remove if false
+        void ManagerSoundHandle(SoundHandleInner* handle, int arg2, bool add);
     };
 }
 

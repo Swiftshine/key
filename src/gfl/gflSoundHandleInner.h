@@ -10,6 +10,10 @@ namespace gfl {
     public:
         SoundHandleInner();
         virtual ~SoundHandleInner();
+
+        inline nw4r::math::VEC3* GetPosition() {
+            return mPosition;
+        }
     private:
         nw4r::math::VEC3* mPosition;
         bool m_8;
