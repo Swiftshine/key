@@ -98,7 +98,7 @@ public:
         int mGimmickID;
         nw4r::math::VEC3 mPosition;
         nw4r::math::VEC3 mRotation;
-        bool m_1C;
+        char m_1C;
         u8 m_1D;
         u8 m_1E;
         u8 m_1F;
@@ -137,6 +137,7 @@ public:
     void fn_8004E650(const char*);
 
     void InitCommand();
+    void ProcessCommand();
     void fn_8004ED1C();
     static void GetResFileInfo(gfl::ResFileObject& fileInfo, Gimmick* gimmick);
     static void GetResFileInfo(gfl::ResFileObject& fileInfo, Gimmick* gimmick, int gimmickID);
@@ -168,7 +169,7 @@ public:
     virtual void    vfB4();
     virtual nw4r::math::VEC2   vfB8();
     virtual void    Update();
-    virtual void    vfC0();
+    virtual bool    vfC0(const char*);
 
     inline StatedGimmick* ToStated() {
         return reinterpret_cast<StatedGimmick*>(this);

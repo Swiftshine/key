@@ -42,6 +42,11 @@ namespace gfl {
         std::string* mArray;
         uint mCount;
     };
+
+    class ParamGroup : public Param {
+    public:
+        static bool GetGlobalBool(const char* param);
+    };
 }
 
 
