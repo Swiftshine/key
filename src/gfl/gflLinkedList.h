@@ -47,61 +47,59 @@ namespace gfl {
 
         class Iterator {
         public:
-            Iterator* Erase(LinkedList* list, Iterator* start, Iterator* end);
+            Iterator(Node* start, Node** end) {
+                mStart = start;
+                mEnd = end;
+            }
             
+            // signature not concrete yet
+            // but i think it's (LinkedList*, Node*, Node*)
 
-            inline Node* GetNode() {
-                return mNode;
+            Iterator() { }
+
+            Iterator* Erase(LinkedList* list, Node** start, Node*** end);
+
+            void Insert(LinkedList* list, Node* after, const T& data);
+            
+            inline void Erase(LinkedList* list) {
+                Erase(list, &mStart, &mEnd);
             }
+        
 
-            inline void SetNode(Node* node) {
-                mNode = node;
-            } 
-
-            inline Iterator* GetNext() {
-                return mNext;
-            }
-
-            inline void SetNext(Iterator* it) {
-                mNext = it;
-            }
-
-            inline void SetPrev(Iterator* it) {
-                mPrev = it;
-            }
-
-            inline Iterator* GetPrev() {
-                return mPrev;
-            }
-        private:
+        public:
             Node* mNode;
-            Iterator* mNext;
-            Iterator* mPrev;
+            Node* mStart;
+            Node** mEnd;
         };
     public:
-        inline LinkedList() {
-            mCount = 0; 
-            mFirst = (Node*)&mLast;
+        // but why?
+        inline LinkedList()
+            : mCount(0)
+        {
+            mFirst = reinterpret_cast<Node*>(&mLast);
+            Node** l = reinterpret_cast<Node**>(
+                reinterpret_cast<Node**>(&mLast) + 1
+            );
+            *l = reinterpret_cast<Node*>(&mLast);
             mLast = mFirst;
         }
         
-        inline LinkedList(void* owner) {
-            mCount = 0; 
-            mFirst = (Node*)&mLast;
-            mLast = (Node*)owner;
-        }
-        
         inline ~LinkedList() {
-            ClearAll();
+            Clear();
         }
 
-        inline void ClearAll() {
-            if (nullptr != this && nullptr != this) {
+        inline void Clear() {
+            if (this != nullptr && this != nullptr) {
                 Iterator it;
-                it.SetPrev(reinterpret_cast<Iterator*>(&mLast));
-                it.SetNext(reinterpret_cast<Iterator*>(mFirst));
-                it.Erase(this, it.GetNext(), it.GetPrev());
+                it.mEnd = &mLast;
+                it.mStart = mFirst;
+                it.Erase(this, &it.mStart, &it.mEnd);
             }
+        }
+
+        inline void Insert(const T& data) {
+            Iterator it;
+            it.Insert(this, mLast, data);
         }
 
         inline void IncrementCount() {
