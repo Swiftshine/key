@@ -7,8 +7,10 @@ GimmickResource::GimmickResource(const char* resName)
     , m_C(true)
 { }
 
-// https://decomp.me/scratch/BexWk
-GimmickResource::~GimmickResource() { }
+// https://decomp.me/scratch/I6rGn
+GimmickResource::~GimmickResource() {
+
+}
 
 // https://decomp.me/scratch/4SCDU
 void GimmickResource::RegisterGimmick(Gimmick* gimmick) {

@@ -6,26 +6,40 @@
 namespace gfl {
     template <typename T>
     class LinkedList {
-    private:
-        class Node {
+    public:
+        class NodeBase {
         public:
-            void Insert(LinkedList<T>& list, Node& next, T& data);
-
-            inline void SetPrev(Node* prev) {
+            inline void SetPrev(NodeBase* prev) {
                 mPrev = prev;
             }
 
-            inline Node* GetPrev() {
+            inline NodeBase* GetPrev() {
                 return mPrev;
             }
 
-            inline void SetNext(Node* next) {
+            inline void SetNext(NodeBase* next) {
                 mNext = next;
             }
 
-            inline Node* GetNext() {
+            inline NodeBase* GetNext() {
                 return mNext;
             }
+
+            inline void SetSelf() {
+                NodeBase* node = this;
+                node->mNext = node;
+                node->mPrev = node;
+            }
+        private:
+            friend class LinkedList;
+            
+            NodeBase* mPrev;
+            NodeBase* mNext;
+        };
+
+        class Node : public NodeBase {
+        public:
+            void Insert(LinkedList<T>& list, Node& next, T& data);
 
             inline void SetData(T& data) {
                 mData = data;
@@ -40,16 +54,14 @@ namespace gfl {
             }
 
         private:
-            Node* mPrev;
-            Node* mNext;
             T mData;
         };
 
         class Iterator {
         public:
-            Iterator(Node* start, Node** end) {
-                mStart = start;
-                mEnd = end;
+            Iterator(NodeBase* start, NodeBase* end) {
+                m_8 = end;
+                m_4 = start;
             }
             
             // signature not concrete yet
@@ -57,31 +69,27 @@ namespace gfl {
 
             Iterator() { }
 
-            Iterator* Erase(LinkedList* list, Node** start, Node*** end);
+            Iterator* Erase(LinkedList* list, NodeBase** start, NodeBase** end);
 
-            void Insert(LinkedList* list, Node* after, const T& data);
+            void Insert(LinkedList* list, NodeBase* after, const T& data);
             
             inline void Erase(LinkedList* list) {
-                Erase(list, &mStart, &mEnd);
+                if (list != nullptr) {
+                    Erase(list, &m_4, &m_8);
+                }
             }
         
 
         public:
-            Node* mNode;
-            Node* mStart;
-            Node** mEnd;
+            NodeBase* mNode;
+            NodeBase* m_4;
+            NodeBase* m_8;
         };
     public:
-        // but why?
         inline LinkedList()
             : mCount(0)
         {
-            mFirst = reinterpret_cast<Node*>(&mLast);
-            Node** l = reinterpret_cast<Node**>(
-                reinterpret_cast<Node**>(&mLast) + 1
-            );
-            *l = reinterpret_cast<Node*>(&mLast);
-            mLast = mFirst;
+            mNode.SetSelf();
         }
         
         inline ~LinkedList() {
@@ -90,16 +98,19 @@ namespace gfl {
 
         inline void Clear() {
             if (this != nullptr && this != nullptr) {
+                NodeBase* node = &mNode;
+
                 Iterator it;
-                it.mEnd = &mLast;
-                it.mStart = mFirst;
-                it.Erase(this, &it.mStart, &it.mEnd);
+                it.m_8 = node;
+                it.m_4 = node->mNext;
+
+                it.Erase(this, &it.m_4, &it.m_8);
             }
         }
 
         inline void Insert(const T& data) {
             Iterator it;
-            it.Insert(this, mLast, data);
+            // it.Insert(this, mLast, data);
         }
 
         inline void IncrementCount() {
@@ -109,10 +120,13 @@ namespace gfl {
         inline void DecrementCount() {
             mCount--;
         }
+
+        inline NodeBase& GetNode() {
+            return mNode;
+        }
     private:
         uint mCount;
-        Node* mLast;
-        Node* mFirst;
+        NodeBase mNode;
     };
 
 }
