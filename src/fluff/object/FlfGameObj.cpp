@@ -36,7 +36,7 @@ FlfGameObj::FlfGameObj(uint newActorType)
     m_64 = 0;
     mType = newActorType;
     m_6C = false;
-    m_6D = false;
+    mIsCulled = false;
     m_6E = true;
     m_6F = false;
     mCullThreshold = 18.666666f;
@@ -109,15 +109,15 @@ bool FlfGameObj::vf14() {
     return m_6C;
 }
 
-void FlfGameObj::fn_8002C004(bool arg1) {
+void FlfGameObj::SetCulled(bool arg1) {
     if (m_6E) {
-        if (m_6D != arg1) {
+        if (mIsCulled != arg1) {
             vf64(arg1);
-            m_6D = arg1;
+            mIsCulled = arg1;
         }
-    } else if (m_6D) {
+    } else if (mIsCulled) {
         vf64(false);
-        m_6D = false;
+        mIsCulled = false;
     }
 }
 

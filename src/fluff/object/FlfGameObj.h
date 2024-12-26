@@ -18,7 +18,7 @@ public:
     ~FlfGameObj();
 
     void UpdateMatrix();
-    void    fn_8002C004(bool arg1);
+    void SetCulled(bool culled);
 
     virtual void    SetPosition(nw4r::math::VEC3& position);
     virtual void    vf10(bool val);
@@ -60,7 +60,7 @@ public:
     u32 m_64;        
     int mType;           
     bool m_6C;           
-    bool m_6D;           
+    bool mIsCulled;           
     bool m_6E;           
     bool m_6F;           
     float mCullThreshold;
