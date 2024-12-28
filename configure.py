@@ -164,7 +164,6 @@ config.ldflags = [
     "-fp hardware",
     "-nodefaults",
     "-code_merging all",
-    "-code_merging aggressive",
 ]
 if args.debug:
     config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
@@ -409,7 +408,7 @@ config.libs = [
             Object(Matching,    "gfl/gflMemoryBase.cpp"),
             Object(NonMatching, "gfl/gflFixedString.cpp"),
             Object(Matching,    "gfl/gflChecksum.cpp"),
-            Object(NonMatching, "gfl/gflTaskInfo.cpp"),
+            Object(Matching,    "gfl/gflTaskInfo.cpp"),
             Object(NonMatching, "gfl/gflTask.cpp"),
             Object(Matching,    "gfl/gflResInfo.cpp"),
             Object(NonMatching, "gfl/gflResArchivedFileInfo.cpp"),

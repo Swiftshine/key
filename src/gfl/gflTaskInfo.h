@@ -13,8 +13,8 @@ namespace gfl {
     private:
         static Task* sCurrentTask;
     public:
-        DECL_WEAK ~TaskInfo();
         TaskInfo();
+        DECL_WEAK ~TaskInfo();
 
         static inline Task* GetCurrentTask() {
             return sCurrentTask;

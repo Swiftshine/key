@@ -20,6 +20,7 @@ TaskInfo::TaskInfo()
     memset(mName, 0, sizeof(mName));
 }
 
+
 TaskInfo::~TaskInfo() { }
 
 void TaskList::DestroyInstance() {
