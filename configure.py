@@ -197,7 +197,7 @@ cflags_base = [
     # "-pool on",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-enc SJIS",
-    "-func_align 4",
+    # "-func_align 4",
     "-i src/",
     "-i src/gfl/",
     "-i src/fluff/",
@@ -215,6 +215,12 @@ cflags_base = [
     "-i src/PowerPC_EABI_Support/MetroTRK/",
     "-i src/PowerPC_EABI_Support/Runtime/",
     "-i src/revolution",
+    "-i src/hbm/",
+    "-i src/hbm/homebutton/",
+    "-i src/hbm/nw4hbm/",
+    "-i src/hbm/nw4hbm/lyt/",
+    "-i src/hbm/nw4hbm/math/",
+    "-i src/hbm/nw4hbm/ut/",
     f"-i build/{config.version}/src/",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
@@ -231,6 +237,7 @@ cflags_gfl = [
     *cflags_base,
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
+    "-func_align 4",
     # "-common off",
     # "-inline auto,deferred",
 ]
@@ -240,6 +247,7 @@ cflags_fluff_base = [
     "-RTTI on",
     "-inline auto,deferred",
     "-use_lmw_stmw on",
+    "-func_align 4",
 ]
 
 cflags_fluff_util = [
@@ -247,6 +255,7 @@ cflags_fluff_util = [
     "-RTTI on",
     "-inline auto",
     "-use_lmw_stmw on",
+    "-func_align 4",
 ]
 
 cflags_fluff = [
@@ -258,6 +267,7 @@ cflags_fluff_base_no_inline_deferred = [
     *cflags_base,
     "-RTTI on",
     "-use_lmw_stmw on",
+    "-func_align 4",
 ]
 
 cflags_fluff_manager = [
@@ -275,6 +285,7 @@ cflags_msl = [
 
 cflags_MSL_C = [
     *cflags_base,
+    "-func_align 4",
 ]
 # Metrowerks library flags
 cflags_runtime = [
@@ -359,7 +370,7 @@ config.libs = [
         "mw_version" : config.linker_version,
         "clags" : [
             *cflags_base,
-            # "-func_align 4",
+            "-func_align 16",
         ],
         "host" : False,
         "objects" : [
@@ -370,10 +381,14 @@ config.libs = [
         "mw_version" : config.linker_version,
         "cflags" : [
             *cflags_base,
+            "-sdata 0",
+            "-sdata2 0",
+            # "-func_align 16",
         ],
         "host" : False,
         "objects" : [
-            # Object(NonMatching, "homebutton/GroupAnmController.cpp"),
+            Object(Matching, "hbm/homebutton/HBMAnmController.cpp"),
+            Object(Matching, "hbm/homebutton/HBMFrameController.cpp"),
         ],
     },
     {

@@ -36,7 +36,10 @@
         "memory": "cpp",
         "climits": "cpp",
         "bitset": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "scapi_prdinfo.h": "c",
+        "scsystem.h": "c",
+        "scapi.h": "c"
     },
     "C_Cpp.default.compilerPath": ""
 }

@@ -49,4 +49,18 @@
 
 #define STRUCT_FILL(size) u8 unk_contents##__LINE__[size];
 
+// Sort of like C++11's range for, except now it's a macro for NW4R iterators
+# define NW4R_RANGE_FOR(it_, list_)	\
+	for (__decltype__((list_).GetBeginIter()) (it_) = (list_).GetBeginIter(); (it_) != (list_).GetEndIter(); ++(it_))
+
+/* This macro specifically is for the for loops which declare an
+ * Iterator currIt = it++; in the body, so that it does not get incremented
+ * twice.
+ */
+# define NW4R_RANGE_FOR_NO_AUTO_INC(it_, list_)	\
+	for (__decltype((list_).GetBeginIter()) (it_) = (list_).GetBeginIter(); (it_) != (list_).GetEndIter();)
+
+# define NW4HBM_RANGE_FOR				NW4R_RANGE_FOR
+# define NW4HBM_RANGE_FOR_NO_AUTO_INC	NW4R_RANGE_FOR_NO_AUTO_INC
+
 #endif
