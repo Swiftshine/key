@@ -163,6 +163,8 @@ config.asflags = [
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
+    "-code_merging all",
+    "-code_merging aggressive",
 ]
 if args.debug:
     config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
@@ -192,7 +194,6 @@ cflags_base = [
     "-nosyspath",
     "-RTTI on",
     "-fp_contract on",
-
     # "-ipa file",
     # "-pool on",
     #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
@@ -272,7 +273,7 @@ cflags_fluff_base_no_inline_deferred = [
 
 cflags_fluff_manager = [
     *cflags_fluff_base_no_inline_deferred,
-    "-str reuse"
+    "-str reuse",
 ]
 
 cflags_msl = [
@@ -442,7 +443,6 @@ config.libs = [
             Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
             Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching, "fluff/object/Gimmick.cpp"),
-            Object(NonMatching, "fluff/object/FlfHandleList.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
             Object(NonMatching, "fluff/object/SpringBase.cpp"),
         ],
@@ -523,10 +523,14 @@ config.libs = [
     {
         "lib" : "fluff/util",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_util, "-pragma \"merge_float_consts on\""],
+        "cflags": [
+            *cflags_fluff_util, 
+            "-pragma \"merge_float_consts on\"",
+        ],
         "host": False,
         "progress_category": "fluff",
         "objects" : [
+            Object(Matching, "fluff/object/FlfHandleList.cpp"),
             # fluff/util/
             Object(Matching,    "fluff/util/CollisionFlagUtil.cpp"),
             Object(NonMatching, "fluff/util/FullSortSceneUtil.cpp"),

@@ -6,17 +6,24 @@
 
 FlfHandleList* FlfHandleList::sInstance;
 
-void FlfHandleList::Set(uint index, FlfHandleObj* object) {
-    mObjects[index] = object;
-    object->SetHandleID(mLastHandleID);
-    object->SetHandleObject(&mObjects[index]);
-    mHandleCount = index + 1;
-    mLastHandleID++;
+void FlfHandleList::InitInstance() {
+    sInstance = new (gfl::HeapID::LIB1) FlfHandleList;
 }
 
-void FlfHandleList::Remove(FlfHandleObj* object) {
-    object->ClearHandleObject();
+void FlfHandleList::DestroyInstance() {
+    delete sInstance;
+    sInstance = nullptr;
 }
+
+
+FlfHandleList::FlfHandleList()
+    : mHandleCount(0)
+    , mLastHandleID(1)
+{
+    memset(mObjects, 0, sizeof(mObjects));
+}
+
+DECL_WEAK FlfHandleList::~FlfHandleList() { }
 
 void FlfHandleList::Add(FlfHandleObj* object) {
     uint curCount = mHandleCount;
@@ -57,22 +64,16 @@ void FlfHandleList::Add(FlfHandleObj* object) {
 }
 
 
-
-FlfHandleList::FlfHandleList()
-    : mHandleCount(0)
-    , mLastHandleID(1)
-{
-    memset(mObjects, 0, sizeof(mObjects));
+void FlfHandleList::Remove(FlfHandleObj* object) {
+    object->ClearHandleObject();
 }
 
-FlfHandleList::~FlfHandleList() { }
 
-
-void FlfHandleList::DestroyInstance() {
-    delete sInstance;
-    sInstance = nullptr;
+void FlfHandleList::Set(uint index, FlfHandleObj* object) {
+    mObjects[index] = object;
+    object->SetHandleID(mLastHandleID);
+    object->SetHandleObject(&mObjects[index]);
+    mHandleCount = index + 1;
+    mLastHandleID++;
 }
 
-void FlfHandleList::InitInstance() {
-    sInstance = new (gfl::HeapID::LIB1) FlfHandleList;
-}
