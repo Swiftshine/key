@@ -172,6 +172,9 @@ fluff/object/gimmick/GmkTurtle.cpp:
 fluff/util/GimmickResource.cpp:
 	.text       start:0x8059540C end:0x80595724
 
+fluff/object/gimmick/GmkAllGetSwitch.cpp:
+	.text       start:0x8059BF34 end:0x8059C278
+
 fluff/object/gimmick/GmkUnderseaSound.cpp:
 	.text       start:0x806329A8 end:0x80632C58
 
