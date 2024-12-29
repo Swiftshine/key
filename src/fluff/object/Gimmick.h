@@ -11,6 +11,7 @@
 #include <nw4r/math.h>
 #include <utility>
 #include <string>
+#include <vector>
 
 extern "C" const char Blank[];
 
@@ -143,7 +144,7 @@ public:
     void fn_8004ED1C();
     static void GetResFileInfo(gfl::ResFileObject& fileInfo, Gimmick* gimmick);
     static void GetResFileInfo(gfl::ResFileObject& fileInfo, Gimmick* gimmick, int gimmickID);
-
+    static void SplitCommonTags(const char* tagList, std::vector<std::string>& dst);
     // virtual functions
 
     void vf40(FlfGameObj*) override;
