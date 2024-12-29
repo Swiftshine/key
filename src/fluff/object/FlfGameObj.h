@@ -35,7 +35,11 @@ public:
     virtual int     vf3C();
     virtual void    vf40(FlfGameObj*);
     virtual int     vf44();
-    virtual void    vf48(const char* arg1, const char* arg2);
+    // looks for gimmicks or enemies with a specific tag and sets their
+    // state to the specified one if found. the tag list consists of
+    // four-character tags, delimited by a semicolon.
+    // i.e. tag1;tag2;tag3;
+    virtual void    SetStateForTaggedObjects(const char* state, const char* tagList);
     // the "setter" field is a pointer to the FlfGameObj that induced the call.
     // this field is in most cases, not used. a usecase is to be seen.
     virtual void    SetState(FlfGameObj* setter, std::string& state); 

@@ -11,7 +11,7 @@ private:
     static GmkBeadManager* sInstance;
 public:
     static GmkBeadManager* GetInstance();
-    void EnableBeadPopSwitch(GmkBeadPopItem*, const char*, bool);
+    void EnableBeadPopSwitch(GmkBeadPopItem*, const char* tags, bool);
 };
 
 #endif

@@ -48,7 +48,7 @@ public:
             m_30 = 0;
 
             mExtension = nullptr;
-            m_1C = false;
+            mCommonTag.mParts[0] = 0;
 
             for (uint i = 0; i < 5; i++) {
                 mIntParams[i] = 0;
@@ -63,7 +63,7 @@ public:
             mGimmickID = other.mGimmickID;
             // mPosition = other.mPosition;
             // mRotation = other.mRotation;
-            m_1C = other.m_1C;
+            mCommonTag = other.mCommonTag;
         }
 
         inline int GetGimmickID() {
@@ -98,10 +98,12 @@ public:
         int mGimmickID;
         nw4r::math::VEC3 mPosition;
         nw4r::math::VEC3 mRotation;
-        char m_1C;
-        u8 m_1D;
-        u8 m_1E;
-        u8 m_1F;
+
+        union {
+            char mParts[4];
+            uint mWhole;
+        } mCommonTag;
+
         uint m_20;
         u8 m_24;
         u8 m_25;

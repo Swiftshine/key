@@ -245,22 +245,22 @@ bool GmkBeadPopItem::Enable() {
     uint i = 0;
 
     for (uint i = 0; i < 5; i++) {
-        const std::string& string = GetStringParam(i).c_str();
+        const std::string& tagList = GetStringParam(i).c_str();
 
-        if (string.c_str() != nullptr) {
+        if (tagList.c_str() != nullptr) {
             switch (m_4) {
                 case 1: {
-                    vf48("POP_BEAD", string.c_str());
+                    SetStateForTaggedObjects("POP_BEAD", tagList.c_str());
                     break;
                 }
 
                 case 2: {
-                    vf48("ON", string.c_str());
+                    SetStateForTaggedObjects("ON", tagList.c_str());
                     break;
                 }
 
                 default: {
-                    GmkBeadManager::GetInstance()->EnableBeadPopSwitch(this, string.c_str(), m_149);
+                    GmkBeadManager::GetInstance()->EnableBeadPopSwitch(this, tagList.c_str(), m_149);
                 }
             }
         }
