@@ -406,7 +406,7 @@ config.libs = [
             Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
             Object(NonMatching, "gfl/gflVec3.cpp"),
             Object(Matching,    "gfl/gflMemoryBase.cpp"),
-            Object(NonMatching, "gfl/gflFixedString.cpp"),
+            Object(Matching, "gfl/gflFixedString.cpp"),
             Object(Matching,    "gfl/gflChecksum.cpp"),
             Object(Matching,    "gfl/gflTaskInfo.cpp"),
             Object(NonMatching, "gfl/gflTask.cpp"),
