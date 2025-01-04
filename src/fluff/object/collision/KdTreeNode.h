@@ -1,7 +1,7 @@
 #ifndef FLUFF_KDTREENODE_H
 #define FLUFF_KDTREENODE_H
 
-#include "object/collision/ColDataSeg.h"
+#include "object/collision/ColData.h"
 #include "util/KdTreeUtil.h"
 
 #define KDTREE_COUNT_THRESHOLD 5

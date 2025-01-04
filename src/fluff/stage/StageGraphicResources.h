@@ -5,7 +5,7 @@
 #include "types.h"
 
 #include "stage/Stage.h"
-#include "object/collision/ColDataSegLabel.h"
+#include "object/collision/ColData.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/BGSTFile.h"
 #include "graphics/BgBackImage.h"

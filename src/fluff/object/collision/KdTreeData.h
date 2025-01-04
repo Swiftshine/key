@@ -4,10 +4,11 @@
 
 #include "types.h"
 #include "util/KdTreeUtil.h"
+#include "object/collision/IHitSide.h"
 
 class KdTreeNode;
 
-class KdTreeData {
+class KdTreeData : public IHitSide {
 public:
     inline KdTreeNode* GetTreeNode() {
         return mTreeNode;
