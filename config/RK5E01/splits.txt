@@ -216,6 +216,9 @@ gfl/gflTask.cpp:
 	.sdata      start:0x808E43F8 end:0x808E440C
 	.bss        start:0x808FDC8C end:0x808FDC98
 
+gfl/gflTimer.cpp:
+	.text       start:0x80646E78 end:0x80646FE8
+
 fluff/main.cpp:
 	.text       start:0x80647640 end:0x80647690
 
