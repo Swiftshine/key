@@ -17,6 +17,7 @@ namespace nw4r
             public:
                 CopiedMatAccess(ScnMdl *, u32);
                 ResTexSrt GetResTexSrtEx();
+                ResTexSrt GetResTexSrt(bool);
 
             private:
                 char UNK_0x0[0x2C];
