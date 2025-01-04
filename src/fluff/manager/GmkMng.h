@@ -1,5 +1,5 @@
-#ifndef FLUFF_GIMMICKMANAGER_H
-#define FLUFF_GIMMICKMANAGER_H
+#ifndef FLUFF_GMKMNG_H
+#define FLUFF_GMKMNG_H
 
 
 #include "types.h"
@@ -11,14 +11,14 @@
 class Gimmick;
 
 
-class GimmickManager {
+class GmkMng {
 private:
-    static GimmickManager* sInstance;
+    static GmkMng* sInstance;
 public:
-    static GimmickManager* Instance() { return sInstance; }
+    static GmkMng* Instance() { return sInstance; }
 
-    GimmickManager();
-    ~GimmickManager();
+    GmkMng();
+    ~GmkMng();
 
     void SetupGimmicks();
     void SetMapbin(Mapdata::Mapbin::Header* header);

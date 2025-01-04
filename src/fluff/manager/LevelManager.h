@@ -4,7 +4,7 @@
 #include "types.h"
 #include "stage/Stage.h"
 #include "object/collision/ColObjTree.h"
-#include "manager/GimmickManager.h"
+#include "manager/GmkMng.h"
 #include "stage/StageGraphicResources.h"
 #include "gfl/gflPointer.h"
 #include <nw4r/math.h>
@@ -33,7 +33,7 @@ private:
     int mLoadPhase;
     Stage mStage;
     gfl::Pointer<ColObjTree> mColObjTree;
-    gfl::Pointer<GimmickManager> mGimmickManager;
+    gfl::Pointer<GmkMng> mGimmickManager;
     StageGraphicResources mGraphicResources;
 };
 

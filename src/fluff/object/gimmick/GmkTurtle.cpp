@@ -1,7 +1,7 @@
 #include "gfl/gflVec3.h"
 #include "object/gimmick/GmkTurtle.h"
 #include "object/gimmick/GmkUpdownWater.h"
-#include "manager/GimmickManager.h"
+#include "manager/GmkMng.h"
 
 const char GmkTurtle_Name[] = "GmkTurtle";
 const char GmkTurtle_Empty[] = "";
@@ -101,7 +101,7 @@ void GmkTurtle::Update() {
 
         case State::InWater: {
             if (GmkTurtle_Empty != mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick)) {
-                Gimmick* gimmick = GimmickManager::Instance()->FindGimmickByName(mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick));
+                Gimmick* gimmick = GmkMng::Instance()->FindGimmickByName(mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick));
                 if (nullptr != gimmick) {
                     mWater = dynamic_cast<GmkUpdownWater*>(gimmick);
                 }

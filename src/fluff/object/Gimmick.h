@@ -3,7 +3,7 @@
 
 #include "object/FlfGameObj.h"
 #include "object/GimmickList.h"
-#include "manager/GimmickManager.h"
+#include "manager/GmkMng.h"
 #include "demo/EventDemoGimmickCommand.h"
 #include "gfl/gflResFileInfo.h"
 #include "gflTask.h"

@@ -1,5 +1,5 @@
 #include "object/Gimmick.h"
-#include "manager/GimmickManager.h"
+#include "manager/GmkMng.h"
 
 Gimmick::Gimmick(int gmkID)
     : FlfGameObj(1)
@@ -11,7 +11,7 @@ Gimmick::Gimmick(int gmkID)
     mTask = nullptr;
     mCommand = nullptr;
 
-    GimmickManager::Instance()->AddGimmick(this);
+    GmkMng::Instance()->AddGimmick(this);
     InitCommand();
 }
 
@@ -40,7 +40,7 @@ Gimmick::Gimmick(int gmkID, const char* taskName)
         mTask = nullptr;
     }
 
-    GimmickManager::Instance()->AddGimmick(this);
+    GmkMng::Instance()->AddGimmick(this);
 }
 
 void Gimmick::vfB0() { /*(this->*state1)();*/ return; }
