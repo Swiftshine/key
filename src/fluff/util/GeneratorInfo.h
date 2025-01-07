@@ -1,5 +1,5 @@
-#ifndef FLUFF_CONTROLCAMERAINFO_H
-#define FLUFF_CONTROLCAMERAINFO_H
+#ifndef FLUFF_GENERATORINFO_H
+#define FLUFF_GENERATORINFO_H
 
 #include <string>
 
@@ -12,10 +12,10 @@ extern "C" {
 }
 
 // size: 0x1C
-class ControlCameraInfo {
+class GeneratorInfo {
 public:
-    ControlCameraInfo();
-    ~ControlCameraInfo();
+    GeneratorInfo();
+    ~GeneratorInfo();
 
     void SetState(FlfGameObj* object, std::string& state);
 

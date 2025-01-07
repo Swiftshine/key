@@ -2,7 +2,7 @@
 #define FLUFF_GMKCAMERACONTROL_H
 
 #include "object/Gimmick.h"
-#include "util/ControlCameraInfo.h"
+#include "util/GeneratorInfo.h"
 
 // size: 0x168
 class GmkCameraControl : public Gimmick {
@@ -41,7 +41,7 @@ private:
     float m_140;
     float mCameraMaxX; // @ 0x144
     float mCameraMaxY; // @ 0x148
-    ControlCameraInfo mCameraInfo; // @ 0x14C
+    GeneratorInfo mCameraInfo; // @ 0x14C
 };
 
 #endif
