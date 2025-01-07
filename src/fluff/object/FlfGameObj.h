@@ -55,6 +55,11 @@ public:
     }
 
     static void Destroy(FlfGameObj* target);
+    
+    inline void DestroySelf() {
+        Destroy(this);
+    }
+
 public:
     nw4r::math::VEC3 mPosition;     
     nw4r::math::VEC3 mRotation;     
