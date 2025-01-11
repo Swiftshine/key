@@ -51,7 +51,7 @@ public:
 
     /* FlfGameObj */
 
-    void vf24(void*) override;
+    void Interact(FlfGameObj*) override;
 
     /* Gimmick */
     virtual int vf88(FlfGameObj* player, uint arg2) override;

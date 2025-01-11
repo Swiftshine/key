@@ -1,8 +1,8 @@
 #include "gfl/gflVec3.h"
+#include "object/gimmick/GmkBead.h"
 #include "object/gimmick/GmkTurtle.h"
 #include "object/gimmick/GmkUpdownWater.h"
 #include "manager/GmkMng.h"
-
 const char GmkTurtle_Name[] = "GmkTurtle";
 const char GmkTurtle_Empty[] = "";
 const char GmkTurtle_AnimationIndexTemplate[] = "%s__%02d";
@@ -227,8 +227,8 @@ int GmkTurtle::vf88(FlfGameObj* player, uint arg2) {
     return 1;
 }
 
-void GmkTurtle::vf24(void* arg1) {
-    mRideHitCtrlTrans->fn_80183DB8(arg1);
+void GmkTurtle::Interact(FlfGameObj* other) {
+    mRideHitCtrlTrans->AddBead(static_cast<GmkBead*>(other));
 }
 
 // this function is called by `GmkSunriseCurtain::OnTimeSwitch()`

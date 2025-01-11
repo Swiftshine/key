@@ -4,13 +4,15 @@
 #include "object/collision/FlfRideHitBase.h"
 #include "object/collision/ColObj.h"
 
+class GmkBead;
+
 class FlfRideHitCtrlTrans : public FlfRideHitBase {
 public:
     FlfRideHitCtrlTrans(ColObj* colObj, FlfGameObj* owner);
     virtual ~FlfRideHitCtrlTrans();
     
     void fn_80185DB8();
-    void fn_80183DB8(void* arg1);
+    void AddBead(GmkBead*);
 
     inline void SetUnk30(uint value) {
         m_30 = value;

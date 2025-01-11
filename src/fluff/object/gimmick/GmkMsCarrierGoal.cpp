@@ -120,7 +120,7 @@ void GmkMsCarrierGoal::Update() {
     }
 }
 
-void GmkMsCarrierGoal::vf24() {
+void GmkMsCarrierGoal::Interact(FlfGameObj* other) {
     return;
 }
 

@@ -16,7 +16,7 @@ public:
     void Init(GimmickBuildInfo* buildInfo);
 
     /* FlfGameObj */
-    virtual void vf24() override;
+    virtual void Interact(FlfGameObj*) override;
 
     /* Gimmick */
     virtual void Update() override;

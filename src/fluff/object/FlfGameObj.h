@@ -26,7 +26,7 @@ public:
     virtual void    vf18();
     virtual nw4r::math::VEC3   GetPosition();
     virtual void    SetSecondaryPosition(nw4r::math::VEC3& position);
-    virtual void    vf24(void*);
+    virtual void    Interact(FlfGameObj* other);
     virtual void    vf28();
     virtual void    vf2C(nw4r::math::VEC3& arg1, nw4r::math::VEC3& arg2, nw4r::math::VEC3& arg3);
     virtual void    vf30();
