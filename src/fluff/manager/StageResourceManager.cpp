@@ -13,12 +13,6 @@
 #include "object/Gimmick.h"
 #include "graphics/FlfMdlDraw.h"
 
-
-const char StageResourceManager::lbl_808E6BE0[] = "%s%s";
-const char StageResourceManager::lbl_808E6BE8[] = "";
-const char StageResourceManager::lbl_807E4EF8[] = "mapdata/stage%03d/%s%d.mapbin";
-const char StageResourceManager::lbl_807E4E98[] = "stage/stage%03d/bg.dat";
-
 extern "C" void DestroyMapdata(Mapdata::Mapbin::File* mapdata);
 
 StageResourceManager::StageResourceManager()
@@ -42,18 +36,6 @@ StageResourceManager::~StageResourceManager() {
         if (mCurrentSections[i]) {
             DestroyMapdata(mCurrentSections[i]);
         }
-    }
-
-    if (&mMapdataResFileInfo && mMapdataResFileInfo) {
-        mMapdataResFileInfo->Destroy();
-    }
-
-    if (&mCommonResFileInfo && mCommonResFileInfo) {
-        mCommonResFileInfo->Destroy();
-    }
-
-    if (&mBGResFileInfo && mBGResFileInfo) {
-        mBGResFileInfo->Destroy();
     }
 }
 
@@ -107,7 +89,9 @@ bool StageResourceManager::LoadResources() {
             LoadCommonFromArchive(mArchiveStage.GetResourceID());
             BGData* bgData;
 
-            if (nullptr != mBGResFileInfo) {
+            
+
+            if (mBGResFileInfo.IsValid()) {
                 bgData = (BGData*)mBGResFileInfo->GetGfArch();
             } else {
                 bgData = nullptr;
@@ -128,9 +112,9 @@ bool StageResourceManager::LoadResources() {
         }
 
         if (!mLevelProcessed) {
-            void* archive = nullptr != mBGResFileInfo ? mBGResFileInfo->GetGfArch() : nullptr;
+            void* archive = mBGResFileInfo.IsValid() ? mBGResFileInfo->GetGfArch() : nullptr;
             if (nullptr != archive) {
-                BGData* data = nullptr != mBGResFileInfo ? (BGData*)mBGResFileInfo->GetGfArch() : nullptr;
+                BGData* data = mBGResFileInfo.IsValid() ? (BGData*)mBGResFileInfo->GetGfArch() : nullptr;
                 CopyBGData(data);
             }
             ProcessLevelData();
@@ -152,15 +136,16 @@ bool StageResourceManager::LoadBGFromArchive(int resourceID) {
     char path[0x200];
 
     
-    snprintf(path, 0x200, lbl_807E4E98, resourceID);
+    snprintf(path, 0x200, "stage/stage%03d/bg.dat", resourceID);
 
     FlfMdlDraw::FromArchive(mBGResFileInfo, path);
 
-    if (nullptr != mBGResFileInfo) {
+    if (mBGResFileInfo.IsValid()) {
         bgdata = (BGData*)mBGResFileInfo->GetGfArch();
     } else {
         bgdata = nullptr;
     }
+
 
     CopyBGData(bgdata);
     return true;
@@ -260,7 +245,7 @@ void StageResourceManager::ProcessLevelData() {
 
         for (uint i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
             if (i < fStr->GetLength()) {
-                snprintf(unkPath, sizeof(unkPath), lbl_808E6BE0, fStr->GetString(), unk);
+                snprintf(unkPath, sizeof(unkPath), "%s%s", fStr->GetString(), unk);
                 ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = Mapdata::Parse(unkPath, inMission);
             } else {
                 ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = nullptr;
@@ -271,7 +256,7 @@ void StageResourceManager::ProcessLevelData() {
         }
     } else {
         char mapbinPath[0x100];
-        const char* mapbinType = lbl_808E6BE8;
+        const char* mapbinType = "";
 
         if (GameManager::IsInMission()) {
             mapbinType = GameManager::GetCurrentMissionString();
@@ -279,7 +264,7 @@ void StageResourceManager::ProcessLevelData() {
 
         unkStruct = (unk_struct*)this;
         for (uint i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
-            snprintf(mapbinPath, sizeof(mapbinPath), lbl_807E4EF8, mFolderStageID, mapbinType, i);
+            snprintf(mapbinPath, sizeof(mapbinPath), "mapdata/stage%03d/%s%d.mapbin", mFolderStageID, mapbinType, i);
             if (gfl::ResFileInfo::FileExists(mapbinPath)) {
                 ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = Mapdata::Parse(mapbinPath, inMission);
             } else {
@@ -293,20 +278,5 @@ void StageResourceManager::ProcessLevelData() {
 }
 
 void StageResourceManager::ClearMapdata() {
-    gfl::ResFileInfo* fileInfo = nullptr;
-    if (&mMapdataResFileInfo != &fileInfo) {
-        if (nullptr != mMapdataResFileInfo) {
-            mMapdataResFileInfo->Destroy();
-        }
-
-        mMapdataResFileInfo = fileInfo;
-
-        if (nullptr != mMapdataResFileInfo) {
-            mMapdataResFileInfo->IncrementLevel();
-        }
-    }
-
-    if (nullptr != fileInfo) {
-        fileInfo->Destroy();
-    }
+    mMapdataResFileInfo = gfl::ResFileObject(nullptr);
 }

@@ -109,7 +109,7 @@ void GmkSimpleMdl::SetModelWrapperByFullSortSceneIndex(int index) {
 void GmkSimpleMdl::SetModel(const char* brresPath, const char* modelName, bool playAnim) {
     gfl::ResFileInfo* fileInfo;
 
-    FlfMdlDraw::FromArchive((gfl::ResFileInfo*&)mResFileInfo, brresPath);
+    FlfMdlDraw::FromArchive(mResFileInfo, brresPath);
 
     nw4r::g3d::ResFile resfile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
 

@@ -46,7 +46,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     snprintf(brresPath, sizeof(brresPath), BRRESPathTemplate, name, name);
     gfl::ResFileInfo* fileInfo;
 
-    FlfMdlDraw::FromArchive((gfl::ResFileInfo*&)mResFileInfo, brresPath);
+    FlfMdlDraw::FromArchive(mResFileInfo, brresPath);
 
     mAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileInfo, animName));
 

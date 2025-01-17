@@ -43,8 +43,8 @@ private:
     void ProcessLevelData() DONT_INLINE_CLASS;
 
     inline bool CheckBGResFileInfo() {
-        if (nullptr != mBGResFileInfo) {
-            if (0 != (256 & mBGResFileInfo->GetFlags())) {
+        if (mBGResFileInfo.IsValid()) {
+            if ((256 & mBGResFileInfo->GetFlags()) != 0) {
                 return true;
             } else {
                 return false;
@@ -55,8 +55,8 @@ private:
     }
 
     inline bool CheckMapdataResFileInfo() {
-        if (nullptr != mMapdataResFileInfo) {
-            if (0 != (256 & mMapdataResFileInfo->GetFlags())) {
+        if (mMapdataResFileInfo.IsValid()) {
+            if ((256 & mMapdataResFileInfo->GetFlags()) != 0) {
                 return true;
             } else {
                 return false;
@@ -67,8 +67,8 @@ private:
     }
 
     inline bool CheckCommonResFileInfo() {
-        if (nullptr != mCommonResFileInfo) {
-            if (0 != (256 & mCommonResFileInfo->GetFlags())) {
+        if (mCommonResFileInfo.IsValid()) {
+            if ((256 & mCommonResFileInfo->GetFlags()) != 0) {
                 return true;
             } else {
                 return false;
@@ -79,15 +79,16 @@ private:
     }
 private:
     gfl::Pointer<StageResources> mStageResources;
-    gfl::ResFileInfo* mBGResFileInfo;
+    
+    gfl::ResFileObject mBGResFileInfo;
     BGData* mBGData;
-    gfl::ResFileInfo* mCommonResFileInfo;
+    gfl::ResFileObject mCommonResFileInfo;
     bool mCommonValid;
     bool mLevelProcessed;
     int mFolderStageID;
     bool mLoadFromArchive;
     Stage mArchiveStage;
-    gfl::ResFileInfo* mMapdataResFileInfo;
+    gfl::ResFileObject mMapdataResFileInfo;
     Mapdata::Mapbin::File* mCurrentSections[STAGE_RESOURCE_MANAGER_STAGE_COUNT];
 };
 #endif

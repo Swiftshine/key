@@ -186,6 +186,9 @@ namespace gfl {
 
     class ResFileObject {
     public:
+        static void FromArchive(ResFileObject& dst, const char* path);
+        static void FromFolder(ResFileObject& dst, const char* path);
+
         inline ResFileObject() { }
 
         ResFileObject(ResFileInfo* info)
@@ -210,6 +213,17 @@ namespace gfl {
             mPointer = other;
         }
 
+        inline void operator=(const ResFileObject& other) {
+            // make sure the objects aren't the same
+            if (this != &other) {
+                TryDestroy();
+                mPointer = other.mPointer;
+                if (IsValid()) {
+                    mPointer->IncrementLevel();
+                }
+            }
+        }
+
         inline ResFileInfo& operator*() {
             return *mPointer;
         }
@@ -228,6 +242,12 @@ namespace gfl {
 
         inline void Destroy() {
             mPointer->Destroy();
+        }
+
+        inline void TryDestroy() {
+            if (IsValid()) {
+                Destroy();
+            }
         }
 
         inline bool IsValid() const {

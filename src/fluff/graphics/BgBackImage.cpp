@@ -15,7 +15,7 @@ BgBackImage::BgBackImage()
 {
     mResFileInfo = nullptr;
     gfl::ResFileInfo* fileInfo;
-    FlfMdlDraw::FromArchive((gfl::ResFileInfo*&)mResFileInfo, BRTEX_path);
+    FlfMdlDraw::FromArchive(mResFileInfo, BRTEX_path);
 
     nw4r::g3d::ResFile resfile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
 
