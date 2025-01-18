@@ -13,8 +13,6 @@
 #include "object/Gimmick.h"
 #include "graphics/FlfMdlDraw.h"
 
-extern "C" void DestroyMapdata(Mapdata::Mapbin::File* mapdata);
-
 StageResourceManager::StageResourceManager()
     : mStageResources(nullptr)
     , mBGResFileInfo(nullptr)
@@ -22,8 +20,8 @@ StageResourceManager::StageResourceManager()
     , mCommonResFileInfo(nullptr)
     , mCommonValid(false)
     , mLevelProcessed(false)
-    , mLoadFromArchive(false)
-    , mArchiveStage(-1, -1, 1)
+    , mPreviewBgLoad(false)
+    , mPreviewBgLoadStage(-1, -1, 1)
     , mMapdataResFileInfo(nullptr)
 {
     mStageResources.Create(gfl::HeapID::Work);
@@ -34,7 +32,7 @@ StageResourceManager::StageResourceManager()
 StageResourceManager::~StageResourceManager() {
     for (uint i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
         if (mCurrentSections[i]) {
-            DestroyMapdata(mCurrentSections[i]);
+            Mapdata::Delete(mCurrentSections[i]);
         }
     }
 }
@@ -62,34 +60,25 @@ bool StageResourceManager::LoadResources() {
     if (preview) {
         ProcessLevelData();
 
-        struct CGMK {
-            int m_0;
-            u8 m_4[0x2C];
-            Stage mStage;
-            u8 m_2C[0x9C - 0x3C];
-        };
+        Mapdata* mapdata = GetLevelSectionByIndex(0);
 
-        Mapdata::Mapbin::File* mapbin = GetLevelSectionByIndex(0);
-
-        for (int i = 0; i < mapbin->mNumCommonGimmicks; i++) {
-            CGMK* cgmk = ((CGMK*)mapbin->mCommonGimmickOffset + i);
-
-            if (0x13 == cgmk->m_0) {
-                mArchiveStage = Stage(-1, -1, 1);
-                mArchiveStage.SetResourceID(cgmk->mStage.GetResourceID());
-                mArchiveStage.SetSectionID(cgmk->mStage.GetSectionID());
-                mMapdataResFileInfo;
-                mLoadFromArchive = true;
+        for (int i = 0; i < mapdata->GetNumCommonGimmicks(); i++) {
+            Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
+            
+            // "PreviewBgLoad"
+            if (buildInfo->mGimmickID == 0x13) {
+                mPreviewBgLoadStage = Stage(-1, -1, 1);
+                mPreviewBgLoadStage.SetResourceID(buildInfo->GetIntParam(0));
+                mPreviewBgLoadStage.SetSectionID(buildInfo->GetIntParam(1));
+                mPreviewBgLoad = true;
                 break;
             }
         }
 
-        if (mLoadFromArchive) {
-            LoadBGFromArchive(mArchiveStage.GetResourceID());
-            LoadCommonFromArchive(mArchiveStage.GetResourceID());
+        if (mPreviewBgLoad) {
+            LoadBGFromArchive(mPreviewBgLoadStage.GetResourceID());
+            LoadCommonFromArchive(mPreviewBgLoadStage.GetResourceID());
             BGData* bgData;
-
-            
 
             if (mBGResFileInfo.IsValid()) {
                 bgData = (BGData*)mBGResFileInfo->GetGfArch();
@@ -126,7 +115,7 @@ bool StageResourceManager::LoadResources() {
 }
 
 
-Mapdata::Mapbin::File* StageResourceManager::GetLevelSectionByIndex(int sectionID) {
+Mapdata* StageResourceManager::GetLevelSectionByIndex(int sectionID) {
     return mCurrentSections[sectionID];
 }
 
@@ -228,7 +217,8 @@ void StageResourceManager::LoadMapdataFromFolder(int resourceID) {
 
 struct unk_struct {
     u8 m_0[0x2C];
-    Mapdata::Mapbin::Header* mHeader;
+    // Mapdata::Mapbin::Header* mHeader;
+    void* mHeader;
 };
 
 

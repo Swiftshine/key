@@ -27,11 +27,11 @@ public:
 
     void LoadStage(int stageID);
     bool LoadResources();
-    Mapdata::Mapbin::File* GetLevelSectionByIndex(int sectionID) DONT_INLINE_CLASS;
+    Mapdata* GetLevelSectionByIndex(int sectionID) DONT_INLINE_CLASS;
     void ClearMapdata();
 
     inline Stage* GetArchiveStage() {
-        return &mArchiveStage;
+        return &mPreviewBgLoadStage;
     }
 private:
     bool LoadBGFromArchive(int resourceID) DONT_INLINE_CLASS;
@@ -79,16 +79,15 @@ private:
     }
 private:
     gfl::Pointer<StageResources> mStageResources;
-    
     gfl::ResFileObject mBGResFileInfo;
     BGData* mBGData;
     gfl::ResFileObject mCommonResFileInfo;
     bool mCommonValid;
     bool mLevelProcessed;
     int mFolderStageID;
-    bool mLoadFromArchive;
-    Stage mArchiveStage;
+    bool mPreviewBgLoad;
+    Stage mPreviewBgLoadStage;
     gfl::ResFileObject mMapdataResFileInfo;
-    Mapdata::Mapbin::File* mCurrentSections[STAGE_RESOURCE_MANAGER_STAGE_COUNT];
+    Mapdata* mCurrentSections[STAGE_RESOURCE_MANAGER_STAGE_COUNT];
 };
 #endif

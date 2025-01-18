@@ -44,11 +44,11 @@ void LevelManager::ResetPhase() {
 }
 
 void LevelManager::InitColObjTree() {
-    Mapdata::Mapbin::Header* mapbin = StageManager::Instance()->GetLevelSection(StageManager::Instance()->GetStage()->GetSectionID());
+    Mapdata* mapdata = StageManager::Instance()->GetLevelSection(StageManager::Instance()->GetStage()->GetSectionID());
 
     mColObjTree.Create(gfl::HeapID::Work);
 
-    mColObjTree->SetSection(mapbin);
+    mColObjTree->SetSection(mapdata);
     mColObjTree->fn_800CBCF4();
 }
 
@@ -73,8 +73,8 @@ void LevelManager::fn_800444D8() {
     switch (mLoadPhase) {
         case 1: {
             StageManager::Instance()->fn_8024F630();
-            Mapdata::Mapbin::Header* mapbin = StageManager::Instance()->GetLevelSection(StageManager::Instance()->GetStage()->GetSectionID());
-            mGimmickManager->SetMapbin(mapbin);
+            Mapdata* mapdata = StageManager::Instance()->GetLevelSection(StageManager::Instance()->GetStage()->GetSectionID());
+            mGimmickManager->SetMapdata(mapdata);
             mLoadPhase = 2;
             break;
         }

@@ -25,7 +25,7 @@ public:
         return &mStage;
     }
 
-    Mapdata::Mapbin::Header* GetLevelSection(int section);
+    Mapdata* GetLevelSection(int section);
 
     void fn_8024F630();
 

@@ -11,7 +11,7 @@ public:
     ColObjTree();
     ~ColObjTree();
 
-    void SetSection(Mapdata::Mapbin::Header* mapbin);
+    void SetSection(Mapdata* mapdata);
     void fn_800CBCF4();
 private:
     KdTree mTree;

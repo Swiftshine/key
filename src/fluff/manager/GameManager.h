@@ -163,7 +163,7 @@ private:
     void    LoadPlayerStartPosition();
     void    fn_80011C30();
     void    fn_80011F5C();
-    void*   GetStartGimmick(Mapdata::Mapbin::Header* mapdata);
+    void*   GetStartGimmick(Mapdata* mapdata);
     void    StartLoadPhase9();
     void    StartLoadPhase7();
     void    StartLoadPhase13();

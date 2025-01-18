@@ -5,10 +5,11 @@
 #include "types.h"
 #include "gfl/gflTask.h"
 #include "gfl/gflLinkedList.h"
-#include "mapdata/Mapdata.h"
+
 #include <string>
 
 class Gimmick;
+class Mapdata;
 
 
 class GmkMng {
@@ -21,7 +22,7 @@ public:
     ~GmkMng();
 
     void SetupGimmicks();
-    void SetMapbin(Mapdata::Mapbin::Header* header);
+    void SetMapdata(Mapdata* mapdata);
     void AddGimmick(Gimmick* gmk);
     void RemoveGimmick(Gimmick* gmk);
     void ClearAll(bool clearMapdata);
@@ -36,7 +37,7 @@ private:
     gfl::LinkedList<Gimmick*> mGimmicks;
     gfl::LinkedList<placeholder_t> m_14;
     gfl::LinkedList<placeholder_t> m_20;
-    Mapdata::Mapbin::Header* mMapbin;
+    Mapdata* mMapbin;
     gfl::Task* mCurrentTask;
 };
 #endif
