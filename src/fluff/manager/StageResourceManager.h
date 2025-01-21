@@ -30,7 +30,7 @@ public:
     Mapdata* GetLevelSectionByIndex(int sectionID) DONT_INLINE_CLASS;
     void ClearMapdata();
 
-    inline Stage* GetArchiveStage() {
+    inline Stage* GetPreviewBgLoadStage() {
         return &mPreviewBgLoadStage;
     }
 private:

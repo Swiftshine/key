@@ -27,7 +27,7 @@ void LevelManager::SetGraphicsStage() {
     }
 
     if (manualBGLoad) {
-        Stage stage = StageManager::Instance()->GetStageResourceManager().GetArchiveStage();
+        Stage stage = StageManager::Instance()->GetStageResourceManager().GetPreviewBgLoadStage();
         mGraphicResources.SetStage(stage);
     } else {
         Stage stage = mStage;
