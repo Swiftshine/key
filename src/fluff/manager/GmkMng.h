@@ -37,8 +37,8 @@ public:
     void CreateGimmicksFromMapdata();
     void fn_8005174C();
     void AddEffect(GimmickBuildInfo* buildInfo);
-    bool IsInSpawnRadius(nw4r::math::VEC2& offset, GimmickBuildInfo* buildInfo);
-    bool IsOnGimmickOnScreen(nw4r::math::VEC2& offset, Gimmick* gimmick);
+    bool IsGimmickInSpawnRadius(nw4r::math::VEC2& offset, GimmickBuildInfo* buildInfo);
+    bool IsGimmickOnScreen(nw4r::math::VEC2& offset, Gimmick* gimmick);
     // calls vf68 on every gimmick
     void fn_80051B3C();
     
