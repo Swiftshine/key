@@ -101,7 +101,7 @@ void GmkTurtle::Update() {
 
         case State::InWater: {
             if (GmkTurtle_Empty != mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick)) {
-                Gimmick* gimmick = GmkMng::Instance()->FindGimmickByName(mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick));
+                Gimmick* gimmick = GmkMng::Instance()->GetGimmickByCommonTag(mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick));
                 if (nullptr != gimmick) {
                     mWater = dynamic_cast<GmkUpdownWater*>(gimmick);
                 }
