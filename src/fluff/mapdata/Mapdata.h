@@ -20,6 +20,8 @@ public:
     };
 
     struct MapdataCommonGimmick {
+        static void fn_8004f604(GimmickBuildInfo* buildInfo);
+
         bool m_0;
         bool m_1;
         uint m_4;
@@ -27,12 +29,21 @@ public:
     };
 
     struct MapdataGimmick {
+        void BuildFriend01();
+
         std::string mName; // @ 0x0
         nw4r::math::VEC3 mPosition; // @ 0xC
         MapdataParams mParams; // @ 0x18
     };
 
     struct MapdataPath {
+        void SetupWoolBridges(Mapdata* owner);
+        bool IsMsKeepOutLine();
+        bool BuildReleaseHenshin2();
+        bool BuildNeedle();
+        bool BuildPathDraw();
+        bool BuildMsKeepOutLine();
+
         std::string mName; // @ 0x0
         MapdataParams mParams; // @ 0xC
         uint mNumPoints; // @ 0x48
@@ -40,6 +51,20 @@ public:
     };
 
     struct MapdataZone {
+        bool BuildLadder();
+        bool BuildMokoMoko();
+        bool BuildWater();
+        bool BuildPlayerAreaSwitch();
+        bool BuildBackDoorWindow();
+        bool BuildBackDoorCancel();
+        bool BuildSideBackDoor();
+        bool BuildBlizzard();
+        bool BuildChangeWind();
+        bool BuildChangeWind2();
+        bool BuildPlStateChg();
+        bool BuildBallRelease();
+        bool BuildBackDoorZMask();
+
         std::string mName; // @ 0x0
         MapdataParams mParams; // @ 0xC
         nw4r::math::VEC2 mBoundsMin; // @ 0x48
@@ -54,6 +79,10 @@ public:
 public:
     static Mapdata* Parse(const char* path, bool isInMission);
     static void Delete(Mapdata* mapdata);
+
+    void RegisterStageResources();
+    void ConstructObjects();
+
 
     inline uint GetNumCommonGimmicks() {
         return mNumCommonGimmicks;
