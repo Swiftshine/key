@@ -18,6 +18,14 @@ class GmkMng {
 private:
     static GmkMng* sInstance;
 public:
+    ENUM_CLASS(State,
+        None = 0,
+        CreateCommonGimmicks = 1,
+        CutAction2 = 2, // this action doesnt do anything
+        ConstructMapdataObjects = 3,
+        CutAction4
+    );
+    
     static GmkMng* Instance() { return sInstance; }
 
     GmkMng();
@@ -45,7 +53,7 @@ public:
     bool fn_801C1A60();
 private:
     int mState;
-    uint m_4;
+    uint mNumCommonGimmicks;
     gfl::LinkedList<Gimmick*> mGimmicks;
     gfl::LinkedList<FlfHandle> mEffects;
     gfl::LinkedList<GimmickResource> mGimmickResources;
