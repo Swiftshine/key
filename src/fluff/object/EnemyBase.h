@@ -6,9 +6,11 @@
 #include "demo/EventDemoAttachment.h"
 #include "object/collision/IObjHitCB.h"
 #include "object/MoveTarget.h"
+#include "gfl/gflTask.h"
 
 class EnemyBase : public FlfGameObj, public IObjHitCB, public demo::EventDemoAttachment {
 public:
+    EnemyBase(gfl::Task* parentTask, uint arg2, uint arg3, const char* arg4);
     virtual ~EnemyBase();
 
     /* FlfGameObj */
