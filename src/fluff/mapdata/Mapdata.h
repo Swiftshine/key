@@ -82,7 +82,7 @@ public:
 
     void RegisterStageResources();
     void ConstructObjects();
-    void fn_804C6E04();
+    void ConstructMoleBlocks();
 
     inline uint GetNumCommonGimmicks() {
         return mNumCommonGimmicks;
