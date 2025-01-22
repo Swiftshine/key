@@ -7,10 +7,17 @@ class FlfGameObj;
 
 #include "object/collision/CollisionTemplate.h"
 #include <nw4r/math.h>
+#include "gfl/gflTask.h"
 
-namespace ObjHit {
+class ObjHit {
+private:
+    static gfl::Task* sInstance;
+public:
+    inline gfl::Task* Instance() {
+        return sInstance;
+    }
 
-    CollisionEntry* GetEntry(CollisionTemplate* collisionTemplate, IObjHitCB* callbacks, FlfGameObj* owner, nw4r::math::MTX34* matrix, const char* name);
-}
+    static CollisionEntry* GetCollisionEntry(CollisionTemplate& colTemplate, IObjHitCB* callbacks, FlfGameObj* owner, nw4r::math::MTX34& matrix, const char* name);
+};
 
 #endif

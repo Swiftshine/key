@@ -4,6 +4,11 @@
 #include <nw4r/math.h>
 
 struct CollisionTemplate {
+    ENUM_CLASS(CollisionType,
+        
+    );
+
+
     int mCollisionType;
     int m_4;
     int m_8;
