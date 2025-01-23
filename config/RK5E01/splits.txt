@@ -68,6 +68,9 @@ fluff/object/Gimmick.cpp:
 fluff/util/GimmickUtil.cpp:
 	.text       start:0x800505C8 end:0x800507F4
 
+fluff/manager/GmkMng.cpp:
+	.text       start:0x80050C3C end:0x80051B94
+
 fluff/stage/StageResources.cpp:
 	.text       start:0x80051DE8 end:0x80052828
 

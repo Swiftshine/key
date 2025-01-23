@@ -7,6 +7,8 @@ namespace gfl {
     template <typename T>
     class LinkedList {
     public:
+        class Node;
+        
         class NodeBase {
         public:
             inline void SetPrev(NodeBase* prev) {
@@ -29,6 +31,10 @@ namespace gfl {
                 NodeBase* node = this;
                 node->mNext = node;
                 node->mPrev = node;
+            }
+
+            inline Node* ToNode() {
+                return reinterpret_cast<Node*>(this);
             }
         private:
             friend class LinkedList;
@@ -110,7 +116,8 @@ namespace gfl {
 
         inline void Insert(const T& data) {
             Iterator it;
-            // it.Insert(this, mLast, data);
+            const T& ptr = data;
+            it.Insert(this, &mNode, ptr);
         }
 
         inline void IncrementCount() {
@@ -121,9 +128,11 @@ namespace gfl {
             mCount--;
         }
 
-        inline NodeBase& GetNode() {
-            return mNode;
+        inline NodeBase* GetNode() {
+            return &mNode;
         }
+
+        void Remove(const T& data);
     private:
         uint mCount;
         NodeBase mNode;

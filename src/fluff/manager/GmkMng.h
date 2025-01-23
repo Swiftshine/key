@@ -3,14 +3,17 @@
 
 
 #include "types.h"
-#include "gfl/gflTask.h"
-#include "gfl/gflLinkedList.h"
 
+#include <nw4r/math.h>
 #include <string>
 #include <vector>
 
-class Gimmick;
-class GimmickBuildInfo;
+#include "gfl/gflTask.h"
+#include "gfl/gflLinkedList.h"
+#include "object/FlfHandleObj.h"
+#include "manager/CameraManager.h"
+#include "object/Gimmick.h"
+
 class GimmickResource;
 class Mapdata;
 
@@ -40,13 +43,13 @@ public:
     void GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& dest);
     void GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick*>& dest);
     Gimmick* GetGimmickByCommonTag(std::string& query);
-    GimmickBuildInfo* GetCommonGimmickBuildInfoByCommonTag(const char* query);
+    Gimmick::GimmickBuildInfo* GetCommonGimmickBuildInfoByCommonTag(const char* query);
     void RegisterResources(const char* name, Gimmick* gimmick);
-    void CreateGimmick(GimmickBuildInfo* buildInfo);
+    void CreateGimmick(Gimmick::GimmickBuildInfo* buildInfo);
     void CreateGimmicksFromMapdata();
     void fn_8005174C();
-    void AddEffect(GimmickBuildInfo* buildInfo);
-    bool IsGimmickInSpawnRadius(nw4r::math::VEC2& offset, GimmickBuildInfo* buildInfo);
+    void AddEffect(Gimmick::GimmickBuildInfo* buildInfo);
+    bool IsGimmickInSpawnRadius(nw4r::math::VEC2& offset, Gimmick::GimmickBuildInfo* buildInfo);
     bool IsGimmickOnScreen(nw4r::math::VEC2& offset, Gimmick* gimmick);
     // calls vf68 on every gimmick
     void fn_80051B3C();
@@ -59,6 +62,6 @@ private:
     gfl::LinkedList<FlfHandle> mEffects;
     gfl::LinkedList<GimmickResource> mGimmickResources;
     Mapdata* mMapdata;
-    gfl::Task* mCurrentTask;
+    gfl::Pointer<gfl::Task> mTask;
 };
 #endif

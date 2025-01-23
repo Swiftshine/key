@@ -454,8 +454,9 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects": [
-            Object(Equivalent, "fluff/manager/StageResourceManager.cpp"),
-            Object(Matching,   "fluff/manager/LevelManager.cpp"),
+            Object(NonMatching, "fluff/manager/GmkMng.cpp"),
+            Object(Matching,    "fluff/manager/LevelManager.cpp"),
+            Object(Equivalent,  "fluff/manager/StageResourceManager.cpp"),
         ],
     },
     {

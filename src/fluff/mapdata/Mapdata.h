@@ -20,7 +20,7 @@ public:
     };
 
     struct MapdataCommonGimmick {
-        static void fn_8004f604(GimmickBuildInfo* buildInfo);
+        static bool fn_8004f604(Gimmick::GimmickBuildInfo* buildInfo);
 
         bool m_0;
         bool m_1;

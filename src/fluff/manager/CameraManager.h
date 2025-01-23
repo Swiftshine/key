@@ -17,6 +17,7 @@ public:
     void fn_800544B4(void*, float);
     void fn_800548AC();
     bool CheckCull(nw4r::math::VEC3& position);
+    nw4r::math::VEC2& GetCurrentPosition();
 
 };
 

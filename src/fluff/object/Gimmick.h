@@ -3,7 +3,6 @@
 
 #include "object/FlfGameObj.h"
 #include "object/GimmickList.h"
-#include "manager/GmkMng.h"
 #include "demo/EventDemoGimmickCommand.h"
 #include "gfl/gflResFileInfo.h"
 #include "gflTask.h"
@@ -152,7 +151,7 @@ public:
 
     virtual void    vf68();
     virtual nw4r::math::VEC3   vf6C();
-    virtual u32     GetGimmickID();
+    virtual int     GetGimmickID();
     virtual int     vf74();
     virtual int     vf78();
     virtual int     vf7C();
@@ -176,6 +175,14 @@ public:
 
     inline StatedGimmick* ToStated() {
         return reinterpret_cast<StatedGimmick*>(this);
+    }
+
+    inline GimmickBuildInfo& GetGimmickBuildInfo() {
+        return mBuildInfo;
+    }
+
+    inline GimmickBuildInfo* GetGimmickBuildInfoPtr() {
+        return mBuildInfoPtr;
     }
 public:
     int mGimmickID;
