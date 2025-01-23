@@ -23,7 +23,8 @@ public:
         CreateCommonGimmicks = 1,
         CutAction2 = 2, // this action doesnt do anything
         ConstructMapdataObjects = 3,
-        CutAction4
+        CutAction4 = 4,
+        ManageGimmickCulling = 5, // spawn or despawn gimmicks based on culling
     );
     
     static GmkMng* Instance() { return sInstance; }
@@ -36,8 +37,8 @@ public:
     void AddGimmick(Gimmick* gmk);
     void RemoveGimmick(Gimmick* gmk);
     void ClearAll(bool arg1);
-    void GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick>& dest);
-    void GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick>& dest);
+    void GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& dest);
+    void GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick*>& dest);
     Gimmick* GetGimmickByCommonTag(std::string& query);
     GimmickBuildInfo* GetCommonGimmickBuildInfoByCommonTag(const char* query);
     void RegisterResources(const char* name, Gimmick* gimmick);
