@@ -94,6 +94,14 @@ public:
             return static_cast<bool>(mIntParams[index]);
         }
 
+        inline const char* GetCommonTag() {
+            return mCommonTag.mParts;
+        }
+
+        inline uint GetCommonTagValue() {
+            return mCommonTag.mWhole;
+        }
+
     public:
         int mGimmickID;
         nw4r::math::VEC3 mPosition;

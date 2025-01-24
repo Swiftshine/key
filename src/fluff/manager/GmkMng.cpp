@@ -2,6 +2,7 @@
 #include "object/Gimmick.h"
 #include "mapdata/Mapdata.h"
 #include "util/GimmickUtil.h"
+#include "manager/StageManager.h"
 
 GmkMng::GmkMng()
     : mState(State::None)
@@ -16,8 +17,9 @@ GmkMng::~GmkMng() {
     // not decompiled
 }
 
-// https://decomp.me/scratch/dIugv - regswap
+// https://decomp.me/scratch/73YRG - regswaps
 void GmkMng::SetupGimmicks(Mapdata* mapdata) {
+    // this will not work if you put the declaration and assignment in the same line
     nw4r::math::VEC2 pos;
     pos = CameraManager::Instance()->GetCurrentPosition();
 
@@ -64,16 +66,73 @@ void GmkMng::ClearAll(bool arg1) {
     // not decompiled
 }
 
-// https://decomp.me/scratch/g7Bxu
-void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& dst) {
-    for (gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode(); node != mGimmicks.GetNode(); node = node->GetNext()) {
+// https://decomp.me/scratch/g7Bxu - regswaps
+void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& dest) {
+    gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
+    gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
+    
+    while (node != end) {
         Gimmick* gimmick = node->ToNode()->GetData();
         int id = gimmick->GetGimmickID();
 
-        // nonmatching due to vector::push_back
         if (gimmickID == id) {
-            dst.push_back(gimmick);
+            dest.push_back(gimmick);
+        }
+        
+        node = node->GetNext();
+    }
+}
+
+void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& dest) {
+    Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
+
+    for (uint i = 0; i < mapdata->GetNumCommonGimmicks(); i++) {
+        Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
+        int id = buildInfo->GetGimmickID();
+        if (id == gimmickID) {
+            dest.push_back(buildInfo);
         }
     }
 }
 
+Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& tag) {
+    // this is most likely an iterator class of some sort
+    // but i'll leave it like this until i figure out how to
+    // implement it properly
+
+    gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
+    gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
+    Gimmick* result = nullptr;
+
+    while (node != end) {
+        Gimmick* gimmick = node->ToNode()->GetData();
+
+        if (gimmick->GetGimmickBuildInfoPtr() != nullptr &&
+            tag.compare(gimmick->GetGimmickBuildInfoPtr()->GetCommonTag()) == 0
+        ) {
+            result = gimmick;
+            break;
+        } 
+
+        node = node->GetNext();
+    }
+
+    return result;
+}
+
+// https://decomp.me/scratch/VH6w7 - regswaps
+Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const char* tag) {
+    Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
+    uint i = 0;
+    uint count = mapdata->GetNumCommonGimmicks();
+    
+    while (i < count) {
+        Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
+        if (strcmp(buildInfo->GetCommonTag(), tag) == 0) {
+            return buildInfo;
+        }
+        i++;
+    }
+    
+    return nullptr;
+}

@@ -27,6 +27,10 @@ public:
 
     Mapdata* GetLevelSection(int section);
 
+    inline Mapdata* GetCurrentLevelSection() {
+        return GetLevelSection(mStage.GetSectionID());
+    }
+    
     void fn_8024F630();
 
     inline StageResourceManager& GetStageResourceManager() {

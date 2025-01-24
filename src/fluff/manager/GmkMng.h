@@ -41,8 +41,8 @@ public:
     void RemoveGimmick(Gimmick* gmk);
     void ClearAll(bool arg1);
     void GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& dest);
-    void GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick*>& dest);
-    Gimmick* GetGimmickByCommonTag(std::string& query);
+    void GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& dest);
+    Gimmick* GetGimmickByCommonTag(const std::string& query);
     Gimmick::GimmickBuildInfo* GetCommonGimmickBuildInfoByCommonTag(const char* query);
     void RegisterResources(const char* name, Gimmick* gimmick);
     void CreateGimmick(Gimmick::GimmickBuildInfo* buildInfo);

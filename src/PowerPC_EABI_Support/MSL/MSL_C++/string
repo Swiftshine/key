@@ -238,7 +238,7 @@ namespace std {
             }
         }
 
-        int compare(const char* str);
+        int compare(const char* str) const;
 
         inline bool operator==(const char* str) {
             return 0 == compare(str);
