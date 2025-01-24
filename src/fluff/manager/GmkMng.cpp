@@ -64,14 +64,16 @@ void GmkMng::ClearAll(bool arg1) {
     // not decompiled
 }
 
+// https://decomp.me/scratch/g7Bxu
 void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& dst) {
     for (gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode(); node != mGimmicks.GetNode(); node = node->GetNext()) {
         Gimmick* gimmick = node->ToNode()->GetData();
         int id = gimmick->GetGimmickID();
 
-        // nonmatching due to vector
+        // nonmatching due to vector::push_back
         if (gimmickID == id) {
             dst.push_back(gimmick);
         }
     }
 }
+

@@ -217,22 +217,23 @@ namespace std {
             return reallocate_insert(pos, value);
         }
 
-        iterator insert(const_reference value);
+        iterator insert(const_reference value, bool&);
 
         inline T& operator[](size_t index) {
             return m_Ptr[index];
         }
 
-        inline void push_back(const T& value) {
-            if (m_Count < m_Capacity.first()) {
-                T* item = &m_Ptr[m_Count];
-                if (item != nullptr) {
-                    *item = value;
-                }
+        inline void set_back(const_reference value) {
+            m_Ptr[m_Count - 1] = value;
+        }
 
+        inline void push_back(const_reference value) {
+            if (m_Count < m_Capacity.first()) {
                 m_Count++;
+                set_back(value);
             } else {
-                insert(value);
+                bool unk = false;
+                insert(value, unk);
             }
         }
     };
