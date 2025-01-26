@@ -3,25 +3,25 @@
 
 using namespace gfl;
 
-template <typename T>
-void LinkedList<T>::Node::Insert(LinkedList<T>& list, Node& next, T& data) {
-    Node node = new Node;
-    Node* behind;
-    if (nullptr == node) {
-        gfl::error::AllocError();
-    }
+// template <typename T>
+// void LinkedList<T>::Node::Insert(LinkedList<T>* list, Node* next, const T& data) {
+//     Node node = new Node;
+//     Node* behind;
+//     if (nullptr == node) {
+//         gfl::error::AllocError();
+//     }
 
-    if (nullptr != &node.mData) {
-        node.mData = data;
-    }
+//     if (nullptr != &node.mData) {
+//         node.mData = data;
+//     }
 
-    behind = next->GetPrev();
-    behind->GetPrev()->SetNext(node);
-    node->SetPrev(behind->GetPrev());
-    behind->SetPrev(node);
-    list->IncrementCount();
-    mPrev = node;
-}
+//     behind = next->GetPrev();
+//     behind->GetPrev()->SetNext(node);
+//     node->SetPrev(behind->GetPrev());
+//     behind->SetPrev(node);
+//     list->IncrementCount();
+//     mPrev = node;
+// }
 
 // template <typename T>
 // LinkedList<T>::Iterator* LinkedList<T>::Iterator::Erase(LinkedList<T>* list, Iterator* start, Iterator* end) {

@@ -60,7 +60,7 @@ private:
     uint mNumCommonGimmicks;
     gfl::LinkedList<Gimmick*> mGimmicks;
     gfl::LinkedList<FlfHandle> mEffects;
-    gfl::LinkedList<GimmickResource> mGimmickResources;
+    gfl::LinkedList<GimmickResource*> mGimmickResources;
     Mapdata* mMapdata;
     gfl::Pointer<gfl::Task> mTask;
 };

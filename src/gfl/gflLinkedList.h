@@ -45,9 +45,10 @@ namespace gfl {
 
         class Node : public NodeBase {
         public:
-            void Insert(LinkedList<T>& list, Node& next, T& data);
+            void Insert(LinkedList* list, Node* after, const T& data);
+            static void Insert(NodeBase**, LinkedList*, NodeBase**, const T&);
 
-            inline void SetData(T& data) {
+            inline void SetData(const T& data) {
                 mData = data;
             }
 
@@ -60,8 +61,12 @@ namespace gfl {
             }
 
         private:
+            friend class LinkedList;
+
             T mData;
         };
+
+
 
         class Iterator {
         public:
@@ -91,7 +96,63 @@ namespace gfl {
             NodeBase* m_4;
             NodeBase* m_8;
         };
+        
+        class Modifier {
+        public:
+            inline void SetAfter(NodeBase* after) {
+                mNode1 = after;
+            }
+
+            inline NodeBase* GetAfter() {
+                return mNode1;
+            }
+
+            inline void SetOutputNode(NodeBase* out) {
+                mNode2 = out;
+            }
+            
+            inline NodeBase* GetOutputNode() {
+                return mNode2;
+            }
+
+            inline void SetData(const T& data) {
+                mData = data;
+            }
+
+            inline T& GetData() {
+                return mData;
+            }
+
+            inline void AddToListAfterNode1(LinkedList& list) {
+                LinkedList::Insert(&mNode2, &list, &mNode1, mData);
+            }
+
+            inline void AddToListAfterNode1(LinkedList& list, const T& data) {
+                LinkedList::Insert(&mNode2, &list, &mNode1, data);
+            }
+
+            inline void AddToListAfterNode2(LinkedList& list) {
+                LinkedList::Insert(&mNode1, &list, &mNode2, mData);
+            }
+
+            inline void AddToListAfterNode2(LinkedList& list, const T& data) {
+                LinkedList::Insert(&mNode1, &list, &mNode2, data);
+            }
+
+            
+        private:
+            // node 1 or node 2 are used in the following ways:
+            // - as the node to insert after
+            // - as the node that was acted upon
+
+            // the order of which to be used doesn't seem to be clear.
+
+            NodeBase* mNode1;
+            NodeBase* mNode2;
+            T mData;
+        };
     public:
+        static void Insert(NodeBase** output, LinkedList* list, NodeBase** after, const T& data);
         inline LinkedList()
             : mCount(0)
         {
@@ -112,12 +173,6 @@ namespace gfl {
 
                 it.Erase(this, &it.m_4, &it.m_8);
             }
-        }
-
-        inline void Insert(const T& data) {
-            Iterator it;
-            const T& ptr = data;
-            it.Insert(this, &mNode, ptr);
         }
 
         inline void IncrementCount() {

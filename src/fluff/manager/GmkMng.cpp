@@ -2,6 +2,7 @@
 #include "object/Gimmick.h"
 #include "mapdata/Mapdata.h"
 #include "util/GimmickUtil.h"
+#include "util/GimmickResource.h"
 #include "manager/StageManager.h"
 
 GmkMng::GmkMng()
@@ -53,8 +54,9 @@ void GmkMng::SetMapdata(Mapdata* mapdata) {
 }
 
 void GmkMng::AddGimmick(Gimmick* gimmick) {
-    // not matched due to gfl::LinkedList
-    mGimmicks.Insert(gimmick);
+    gfl::LinkedList<Gimmick*>::Modifier mod;
+    mod.SetAfter(mGimmicks.GetNode());
+    mod.AddToListAfterNode2(mGimmicks, gimmick);
 }
 
 void GmkMng::RemoveGimmick(Gimmick* gimmick) {
@@ -96,10 +98,6 @@ void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBu
 }
 
 Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& tag) {
-    // this is most likely an iterator class of some sort
-    // but i'll leave it like this until i figure out how to
-    // implement it properly
-
     gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
     gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
     Gimmick* result = nullptr;
@@ -123,8 +121,9 @@ Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& tag) {
 // https://decomp.me/scratch/VH6w7 - regswaps
 Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const char* tag) {
     Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
+
     uint i = 0;
-    uint count = mapdata->GetNumCommonGimmicks();
+    const uint count = mapdata->GetNumCommonGimmicks();
     
     while (i < count) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
@@ -135,4 +134,27 @@ Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const ch
     }
     
     return nullptr;
+}
+
+void GmkMng::RegisterResources(const char* gimmickName, Gimmick* gimmick) {
+    gfl::LinkedList<GimmickResource*>::NodeBase* node = mGimmickResources.GetNode()->GetNext();
+    gfl::LinkedList<GimmickResource*>::NodeBase* end = mGimmickResources.GetNode();
+
+    while (node != end) {
+        GimmickResource* resource = node->ToNode()->GetData();
+        const char* resourceName = resource->GetResourceName().c_str();
+
+        if (strcmp(gimmickName, resourceName) == 0) {
+            resource->RegisterGimmick(gimmick);
+            return;
+        }
+
+        node = node->GetNext();
+    }
+
+    gfl::LinkedList<GimmickResource*>::Modifier mod;
+    mod.SetData(new (gfl::HeapID::Work) GimmickResource(gimmickName));
+    mod.GetData()->RegisterGimmick(gimmick);
+    mod.SetAfter(mGimmickResources.GetNode());
+    mod.AddToListAfterNode1(mGimmickResources);
 }

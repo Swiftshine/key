@@ -1550,7 +1550,7 @@ GetGimmicksByGimmickID__6GmkMngFiRQ23std46vector<P7Gimmick,Q23std20allocator<P7G
 GetCommonGimmicksByID__6GmkMngFiRQ23std86vector<PQ27Gimmick16GimmickBuildInfo,Q23std40allocator<PQ27Gimmick16GimmickBuildInfo>> = .text:0x800512F4; // type:function size:0xBC
 GetGimmickByCommonTag__6GmkMngFRCQ23std59basic_string<c,Q23std14char_traits<c>,Q23std12allocator<c>> = .text:0x800513B0; // type:function size:0x74
 GetCommonGimmickBuildInfoByCommonTag__6GmkMngFPCc = .text:0x80051424; // type:function size:0x80
-fn_800514A4 = .text:0x800514A4; // type:function size:0xC8
+RegisterResources__6GmkMngFPCcP7Gimmick = .text:0x800514A4; // type:function size:0xC8
 fn_8005156C = .text:0x8005156C; // type:function size:0x48
 fn_800515B4 = .text:0x800515B4; // type:function size:0x198
 fn_8005174C = .text:0x8005174C; // type:function size:0x1DC
