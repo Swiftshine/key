@@ -40,6 +40,8 @@ public:
     inline LevelManager* GetLevelManager() {
         return mLevelManager;
     }
+
+    bool fn_80044C6C();
     
 public:
     gfl::Task m_0;

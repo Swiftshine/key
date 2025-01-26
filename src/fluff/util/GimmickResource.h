@@ -17,6 +17,10 @@ public:
     inline std::string& GetResourceName() {
         return mResourceName;
     }
+
+    inline uint GetNumGimmickHandles() {
+        return mGimmickHandles.GetCount();
+    }
 private:
     std::string mResourceName; // @ 0x0, size: 0xC
     bool m_C;

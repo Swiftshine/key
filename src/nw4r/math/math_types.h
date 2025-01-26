@@ -26,6 +26,7 @@ struct VEC2 : _VEC2 {
         x = fx;
         y = fy;
     }
+    VEC2(const VEC3& rRhs);
 
     operator f32*() {
         return reinterpret_cast<f32*>(this);
@@ -33,13 +34,13 @@ struct VEC2 : _VEC2 {
     operator const f32*() const {
         return reinterpret_cast<const f32*>(this);
     }
-
     VEC2 operator+(const VEC2& rRhs) const {
         return VEC2(x + rRhs.x, y + rRhs.y);
     }
     VEC2 operator-(const VEC2& rRhs) const {
         return VEC2(x - rRhs.x, y - rRhs.y);
     }
+
 
     VEC2& operator+=(const VEC2& rRhs) {
         x += rRhs.x;

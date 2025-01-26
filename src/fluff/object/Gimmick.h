@@ -32,6 +32,15 @@ public:
         FIFTH = 4
     );
 
+
+    struct GimmickInfo {
+        bool mIsCommon;
+        bool mIsDeleted;
+        bool m_2;
+        bool m_3;
+        Gimmick* mGimmick;
+    };
+
     class GimmickBuildInfo {
     public:
 
@@ -47,7 +56,7 @@ public:
             m_2C = 4;
             m_30 = 0;
 
-            mExtension = nullptr;
+            mGimmickInfo = nullptr;
             mCommonTag.mParts[0] = 0;
 
             for (uint i = 0; i < 5; i++) {
@@ -71,11 +80,11 @@ public:
         }
 
         inline bool IsCommon() {
-            return mExtension->first;
+            return mGimmickInfo->mIsCommon;
         }
 
         inline Gimmick* GetOwner() {
-            return mExtension->second;
+            return mGimmickInfo->mGimmick;
         }
 
         inline int GetIntParam(int index) {
@@ -123,11 +132,8 @@ public:
         int mIntParams[5];
         float mFloatParams[5];
         std::string mStringParams[5];
-        // bool - indicates whether or not this is a common gimmick
-        // Gimmick* - owner
-        std::pair<bool, Gimmick*>* mExtension;
+        GimmickInfo* mGimmickInfo;
     };
-
     // ASSERT_SIZE(GimmickBuildInfo, 0x9C);
 public:
     // For the most basic gimmicks

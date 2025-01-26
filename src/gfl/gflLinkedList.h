@@ -138,7 +138,14 @@ namespace gfl {
             inline void AddToListAfterNode2(LinkedList& list, const T& data) {
                 LinkedList::Insert(&mNode1, &list, &mNode2, data);
             }
+            
+            inline void RemoveNode1FromList(LinkedList& list) {
+                LinkedList::Remove(&mNode2, &list, &mNode1);
+            }
 
+            inline void RemoveNode2FromList(LinkedList& list) {
+                LinkedList::Remove(&mNode1, &list, &mNode2);
+            }
             
         private:
             // node 1 or node 2 are used in the following ways:
@@ -153,6 +160,8 @@ namespace gfl {
         };
     public:
         static void Insert(NodeBase** output, LinkedList* list, NodeBase** after, const T& data);
+        static void Remove(NodeBase** output, LinkedList* list, NodeBase** toRemove);
+
         inline LinkedList()
             : mCount(0)
         {
@@ -188,6 +197,10 @@ namespace gfl {
         }
 
         void Remove(const T& data);
+
+        inline uint GetCount() const {
+            return mCount;
+        }
     private:
         uint mCount;
         NodeBase mNode;

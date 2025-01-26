@@ -35,7 +35,7 @@ public:
     GmkMng();
     ~GmkMng();
 
-    void SetupGimmicks(Mapdata* mapdata);
+    void CreateGimmicksFromMapdata(Mapdata* mapdata);
     void SetMapdata(Mapdata* mapdata);
     void AddGimmick(Gimmick* gmk);
     void RemoveGimmick(Gimmick* gmk);
@@ -45,16 +45,18 @@ public:
     Gimmick* GetGimmickByCommonTag(const std::string& query);
     Gimmick::GimmickBuildInfo* GetCommonGimmickBuildInfoByCommonTag(const char* query);
     void RegisterResources(const char* name, Gimmick* gimmick);
-    void CreateGimmick(Gimmick::GimmickBuildInfo* buildInfo);
+    void CreateGimmick(Gimmick::GimmickBuildInfo* buildInfo) DONT_INLINE_CLASS;
     void CreateGimmicksFromMapdata();
-    void fn_8005174C();
+    void ManageOnScreenGimmicks();
     void AddEffect(Gimmick::GimmickBuildInfo* buildInfo);
-    bool IsGimmickInSpawnRadius(nw4r::math::VEC2& offset, Gimmick::GimmickBuildInfo* buildInfo);
-    bool IsGimmickOnScreen(nw4r::math::VEC2& offset, Gimmick* gimmick);
+    bool IsGimmickInSpawnRadius(const nw4r::math::VEC2& offset, Gimmick::GimmickBuildInfo* buildInfo);
+    bool IsGimmickOnScreen(const nw4r::math::VEC2& offset, Gimmick* gimmick);
     // calls vf68 on every gimmick
     void fn_80051B3C();
     
     bool fn_801C1A60();
+
+    inline void CreateGimmickConditionally(const nw4r::math::VEC2& pos, Gimmick::GimmickBuildInfo* buildInfo);
 private:
     int mState;
     uint mNumCommonGimmicks;
