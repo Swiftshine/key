@@ -24,7 +24,7 @@ void GimmickResource::RegisterGimmick(Gimmick* gimmick) {
     }
 
 
-    mod.SetOutputNode(mGimmickHandles.GetNode());
+    mod.SetNode2(mGimmickHandles.GetNode());
     mod.AddToListAfterNode2(mGimmickHandles);
 }
 

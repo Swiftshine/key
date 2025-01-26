@@ -55,7 +55,7 @@ void GmkMng::SetMapdata(Mapdata* mapdata) {
 
 void GmkMng::AddGimmick(Gimmick* gimmick) {
     gfl::LinkedList<Gimmick*>::Modifier mod;
-    mod.SetAfter(mGimmicks.GetNode());
+    mod.SetNode1(mGimmicks.GetNode());
     mod.AddToListAfterNode2(mGimmicks, gimmick);
 }
 
@@ -155,6 +155,6 @@ void GmkMng::RegisterResources(const char* gimmickName, Gimmick* gimmick) {
     gfl::LinkedList<GimmickResource*>::Modifier mod;
     mod.SetData(new (gfl::HeapID::Work) GimmickResource(gimmickName));
     mod.GetData()->RegisterGimmick(gimmick);
-    mod.SetAfter(mGimmickResources.GetNode());
+    mod.SetNode1(mGimmickResources.GetNode());
     mod.AddToListAfterNode1(mGimmickResources);
 }

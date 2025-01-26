@@ -99,19 +99,19 @@ namespace gfl {
         
         class Modifier {
         public:
-            inline void SetAfter(NodeBase* after) {
-                mNode1 = after;
+            inline void SetNode1(NodeBase* node) {
+                mNode1 = node;
             }
 
-            inline NodeBase* GetAfter() {
+            inline NodeBase* GetNode1() {
                 return mNode1;
             }
 
-            inline void SetOutputNode(NodeBase* out) {
-                mNode2 = out;
+            inline void SetNode2(NodeBase* node) {
+                mNode2 = node;
             }
             
-            inline NodeBase* GetOutputNode() {
+            inline NodeBase* GetNode2() {
                 return mNode2;
             }
 
