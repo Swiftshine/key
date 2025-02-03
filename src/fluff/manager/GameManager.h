@@ -96,7 +96,7 @@ public:
     static void fn_8000F5E8();
     // Returns Instance->currentLoadPhase == 6
     static bool fn_8000F7A4();
-    static void fn_8000F7CC();
+    static void fn_8000F7CC(int);
     // Returns Instance->currentLoadPhase == 5
     static bool fn_8000F930();
     static bool fn_8000F958();

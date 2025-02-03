@@ -84,7 +84,7 @@ public:
     void ConstructObjects();
     void ConstructMoleBlocks();
 
-    inline uint GetNumCommonGimmicks() {
+    inline uint GetNumCommonGimmicks() const {
         return mNumCommonGimmicks;
     }
 

@@ -12,19 +12,20 @@ GimmickResource::~GimmickResource() {
 
 }
 
-// https://decomp.me/scratch/4SCDU
 void GimmickResource::RegisterGimmick(Gimmick* gimmick) {
-    FlfHandle handle;
+    gfl::LinkedList<FlfHandle>::Modifier mod;
 
     if (gimmick != nullptr) {
-        handle.SetObject(gimmick->GetHandleObject());
-        handle.SetID(gimmick->GetHandleID());
+        mod.GetData().SetObject(gimmick->GetHandleObject());
+        mod.GetData().SetID(gimmick->GetHandleID());
     } else {
-        handle.SetObject(nullptr);
-        handle.SetID(0);
+        mod.GetData().SetObject(nullptr);
+        mod.GetData().SetID(0);
     }
 
-    mGimmickHandles.Insert(handle);
+
+    mod.SetNode2(mGimmickHandles.GetNode());
+    mod.AddToListAfterNode2(mGimmickHandles);
 }
 
 void GimmickResource::Clear() {
