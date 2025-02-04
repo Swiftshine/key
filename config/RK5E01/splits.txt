@@ -172,6 +172,9 @@ fluff/object/gimmick/GmkMsCarrierGoal.cpp:
 fluff/object/gimmick/GmkTurtle.cpp:
 	.text       start:0x804FA9A0 end:0x804FB35C
 
+fluff/manager/GmkBeadManager.cpp:
+	.text       start:0x8051D524 end:0x8051D968
+
 fluff/util/GimmickResource.cpp:
 	.text       start:0x8059540C end:0x80595724
 

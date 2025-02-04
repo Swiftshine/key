@@ -1,0 +1,1 @@
+#include "manager/GmkBeadManager.h"
