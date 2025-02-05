@@ -53,14 +53,14 @@ GmkBeadManager::GmkBeadManager_Info* GmkBeadManager::GetInfoIfHandlePresent(FlfH
     return nullptr;
 }
 
-extern "C" void TRKUARTInterruptHandler(void*);
+extern "C" void TRKUARTInterruptHandler();
 
-inline void CutFunction(void* a) {
+inline void CutFunction() {
     // a temporary workaround for code merging
-    TRKUARTInterruptHandler(a);
+    TRKUARTInterruptHandler();
 }
 
-// nonmatching
+// https://decomp.me/scratch/wZpkl
 void GmkBeadManager::fn_8051D854(bool arg1) {
     if (GmkMng::Instance() == nullptr) {
         return;
@@ -75,7 +75,7 @@ void GmkBeadManager::fn_8051D854(bool arg1) {
         Gimmick* gmk = node->ToNode()->GetData();
 
         if (GimmickUtil::IsBead(gmk->GetGimmickID())) {
-            CutFunction(gmk);
+            CutFunction();
             gmk->vf50(arg1);
         }
 
