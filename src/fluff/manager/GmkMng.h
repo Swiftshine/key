@@ -57,6 +57,11 @@ public:
     bool fn_801C1A60();
 
     inline void CreateGimmickConditionally(const nw4r::math::VEC2& pos, Gimmick::GimmickBuildInfo* buildInfo);
+
+    inline gfl::LinkedList<Gimmick*>& GetGimmickList() {
+        return mGimmicks;
+    }
+    
 private:
     int mState;
     uint mNumCommonGimmicks;
