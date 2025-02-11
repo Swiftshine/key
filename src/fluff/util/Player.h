@@ -1,5 +1,5 @@
 #ifndef FLUFF_PLAYER_H
-#define FLUFF_PLAYEF_H
+#define FLUFF_PLAYER_H
 
 #include "object/PlayerBase.h"
 #include "graphics/FullSortScene.h"
