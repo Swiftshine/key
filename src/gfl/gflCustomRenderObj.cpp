@@ -9,5 +9,5 @@ CustomRenderObj::CustomRenderObj(bool arg1, bool arg2)
 {
     m_100 = arg1;
     m_101 = arg2;
-    m_102 = true;
+    mOptionsSet = true;
 } 
