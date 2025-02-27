@@ -44,7 +44,7 @@ namespace gfl {
     private:
         bool m_100;
         bool m_101;
-        bool m_102;
+        bool mOptionsSet;
     };
 }
 
