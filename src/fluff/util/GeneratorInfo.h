@@ -33,7 +33,7 @@ public:
 private:
     int m_0;
     int m_4;
-    std::string mString; // @ 0x8
+    std::string mAssociatedTag; // @ 0x8
     int m_14;
     int mCounter;
 };
