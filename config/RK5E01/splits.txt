@@ -126,6 +126,9 @@ fluff/graphics/ModelWrapper.cpp:
 fluff/demo/DemoObject.cpp:
 	.text       start:0x802A4DD8 end:0x802A5038
 
+fluff/object/gimmick/GmkBeadDrop.cpp:
+	.text       start:0x802E1348 end:0x802E1D08
+
 fluff/object/gimmick/GmkWoolRope.cpp:
 	.text       start:0x802FC0EC end:0x802FC5F0
 

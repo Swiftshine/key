@@ -29,7 +29,7 @@ public:
 
     bool fn_803CB5E8(const char*);
     void fn_803CB458(int, const char*, int);
-
+    uint fn_803CB4B4();
 private:
     int m_0;
     int m_4;

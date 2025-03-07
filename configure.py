@@ -496,6 +496,7 @@ config.libs = [
         "objects": [
             Object(NonMatching, "fluff/object/gimmick/GmkArrowSign.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkAllGetSwitch.cpp"),
+            Object(NonMatching, "fluff/object/gimmick/GmkBeadDrop.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkBeadPopItem.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkCameraControl.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkCamRectCtrl.cpp"),

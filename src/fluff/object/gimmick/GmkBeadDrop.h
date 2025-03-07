@@ -34,17 +34,17 @@ public:
     /* Gimmick */
     virtual void Update();
     
-    void SetState(int stateValue);
+    void SetState(int stateValue) DONT_INLINE_CLASS;
     void SpawnBeads();
-    bool fn_802E1938();
-    void fn_802E1A64();
+    bool CanSpawnBeads();
+    void UpdateFlfMdl();
     float fn_802E1AEC(float&, float&, nw4r::math::VEC3&);
-    void fn_802E1CE8();
+    void SetSpawnState() DONT_INLINE_CLASS;
 private:
     int mState;         // @ 0x130
     int mCounter;       // @ 0x134
     gfl::Vec3 m_138;
-    float m_144;
+    float mCompletionPercentage; // @ 0x144; on a scale of 0.0 to 1.0
     std::string m_148;  // size: 0xC
     BeadDropperInfo mBeadDropperInfo; // @ 0x154, size: 0x1C
     gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x170

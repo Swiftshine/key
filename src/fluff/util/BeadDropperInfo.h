@@ -2,13 +2,15 @@
 #define FLUFF_BEADDROPPERINFO_H
 
 #include "types.h"
+#include <nw4r/math.h>
 
 // size: 0x1C
 class BeadDropperInfo {
 public:
     BeadDropperInfo();
     DECL_WEAK ~BeadDropperInfo();
-
+    void Configure(int type, int color, int limit);
+    void SpawnBeads(nw4r::math::VEC3& pos, nw4r::math::VEC3& offset);
 private:
     int m_0;
     int m_4;
