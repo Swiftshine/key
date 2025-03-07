@@ -3,6 +3,7 @@
 
 #include "types.h"
 
+// size: 0x1C
 class BeadDropperInfo {
 public:
     BeadDropperInfo();
@@ -17,5 +18,7 @@ private:
     int mTotalBeadFunds;        // @ 0x14
     int mNumSpawnedBeads;       // @ 0x18
 };
+
+ASSERT_SIZE(BeadDropperInfo, 0x1C);
 
 #endif
