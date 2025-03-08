@@ -38,12 +38,12 @@ public:
     void SpawnBeads();
     bool CanSpawnBeads();
     void UpdateFlfMdl();
-    float fn_802E1AEC(float&, float&, nw4r::math::VEC3&);
+    float fn_802E1AEC(float, float, nw4r::math::VEC3&) DONT_INLINE_CLASS;
     void SetSpawnState() DONT_INLINE_CLASS;
 private:
     int mState;         // @ 0x130
     int mCounter;       // @ 0x134
-    gfl::Vec3 m_138;
+    gfl::Vec3 mOffset;  // @ 0x138
     float mCompletionPercentage; // @ 0x144; on a scale of 0.0 to 1.0
     std::string m_148;  // size: 0xC
     BeadDropperInfo mBeadDropperInfo; // @ 0x154, size: 0x1C

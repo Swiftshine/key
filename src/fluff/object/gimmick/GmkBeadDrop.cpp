@@ -17,7 +17,7 @@ GmkBeadDrop::GmkBeadDrop(GimmickBuildInfo* buildInfo, const char* taskName)
     : Gimmick(buildInfo, taskName)
     , mState(0)
     , mCounter(0)
-    , m_138(gfl::Vec3::Zero)
+    , mOffset(gfl::Vec3::Zero)
     , mCompletionPercentage(0.0f)
     , m_148()
     , mBeadDropperInfo()
@@ -73,7 +73,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
 
     mState = 0;
     mCounter = 0;
-    m_138 = gfl::Vec3::Zero;
+    mOffset = gfl::Vec3::Zero;
     mCompletionPercentage = 0.0f;
 
     mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
@@ -113,7 +113,7 @@ void GmkBeadDrop::Update() {
                 mFlfMdlDraw->fn_800234AC(0, true);
                 mCounter++;
             } else if (mFlfMdlDraw->GetUnk20() == 0) {
-                mCompletionPercentage -= 0.016666668f;
+                mCompletionPercentage -= (1.0f / 60.0f);
                 if (mCompletionPercentage <= 0.0f) {
                     mFlfMdlDraw->fn_800234AC(1, true);
                     mCompletionPercentage = fn_802C1EA4(this);
@@ -159,9 +159,32 @@ void GmkBeadDrop::SpawnBeads() {
     mBeadDropperInfo.SpawnBeads(beadPos, offs);
 }
 
+// https://decomp.me/scratch/fVbAz
 bool GmkBeadDrop::CanSpawnBeads() {
-    // not decompiled
-    return false;
+    const float unk1 = -0.18f;
+    nw4r::math::VEC3 vec1;
+    vec1 = mPosition;
+
+    const float xOffs = mOffset.x;
+    const float xPos = mPosition.x;
+    mOffset.y += unk1;
+    float finalY = mPosition.y + mOffset.y * (1.0f / 60.0f);
+    const float zOffs = mOffset.z;
+    const float zPos = mPosition.z;
+
+    const float unk2 = fn_802E1AEC(0.1f, 1.0f + -(finalY - vec1.y), vec1);
+    const float unk3 = finalY;
+
+    if (unk3 <= unk2) {
+        finalY = unk2;
+        mOffset = gfl::Vec3::Zero;
+    }
+
+    mPosition.x = xPos + xOffs * (1.0f / 60.0f);
+    mPosition.y = finalY;
+    mPosition.z = zPos + zOffs * (1.0f / 60.0f);
+
+    return unk3 <= unk2;
 }
 
 void GmkBeadDrop::UpdateFlfMdl() {
@@ -171,7 +194,6 @@ void GmkBeadDrop::UpdateFlfMdl() {
         case 2: {
             if (flfMdl->fn_800239CC()) {
                 mFlfMdlDraw->fn_800234AC(3, true);
-            
             }
             break;
         }
@@ -185,7 +207,7 @@ void GmkBeadDrop::UpdateFlfMdl() {
     }
 }
 
-float GmkBeadDrop::fn_802E1AEC(float&, float&, nw4r::math::VEC3&) {
+float GmkBeadDrop::fn_802E1AEC(float, float, nw4r::math::VEC3&) {
     // not decompiled
     return 0.0f;
 }
