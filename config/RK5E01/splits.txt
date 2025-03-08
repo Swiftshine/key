@@ -117,6 +117,9 @@ fluff/object/FlfHandleList.cpp:
 fluff/object/collision/FlfRideHitBase.cpp:
 	.text       start:0x80183CD8 end:0x80184080
 
+fluff/object/gimmick/GmkWarpExit.cpp:
+	.text       start:0x801B5164 end:0x801B5480
+
 fluff/work/InStageWork.cpp:
 	.text       start:0x801FED48 end:0x801FFAC0
 

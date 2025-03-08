@@ -507,6 +507,7 @@ config.libs = [
             Object(NonMatching, "fluff/object/gimmick/GmkTurtle.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkUnderseaSound.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkVictoryStand.cpp"),
+            Object(NonMatching, "fluff/object/gimmick/GmkWarpExit.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkWoolRope.cpp"),
         ],
     },
