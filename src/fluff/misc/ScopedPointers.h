@@ -15,6 +15,13 @@ public:
         mPointer = ptr;
     }
 
+    inline void Create(T* ptr) {
+        if (ptr == nullptr) {
+            Destroy();
+        } else {
+            mPointer = ptr;
+        }
+    }
     inline ~G3dObjPointer() {
         if (nullptr != mPointer) {
             reinterpret_cast<nw4r::g3d::G3dObj*>(mPointer)->Destroy();

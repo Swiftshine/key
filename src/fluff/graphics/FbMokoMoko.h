@@ -7,7 +7,7 @@
 // size: 0x154
 class FbMokoMoko : public gfl::CustomRenderObj {
 public:
-    FbMokoMoko(float, float, float, const char*, gfl::ScnMdlWrapper*, uint, const char**, const char**);
+    FbMokoMoko(float, float, float, const char*, gfl::ScnMdlWrapper*, uint, const char*, const char*);
     virtual ~FbMokoMoko();
     void UpdateMatrix(nw4r::math::VEC2&);
     

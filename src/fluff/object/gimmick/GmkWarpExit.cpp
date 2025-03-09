@@ -12,17 +12,17 @@ GmkWarpExit* GmkWarpExit::Build(GimmickBuildInfo* buildInfo) {
     return new (gfl::HeapID::Work) GmkWarpExit(buildInfo);
 }
 
-// https://decomp.me/scratch/Vutit
+// https://decomp.me/scratch/zxrCd
 GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo) 
     : Gimmick(buildInfo, "GmkWarpExit")
     , mAnimCtrl(nullptr)
     , mFbMokoMoko(nullptr)
 {
     uint index = buildInfo->mFullSortSceneIndex + 5;
+    mFullSortSceneIndex = index;
     mZOrder3 = FullSortSceneUtil::GetZOrder(index, 3);
-    float zOrder = FullSortSceneUtil::GetZOrder(index, 4);
-    mZOrder4 = zOrder;
-    mPosition.z = zOrder;
+    mZOrder4 = FullSortSceneUtil::GetZOrder(index, 4);
+    mPosition.z = mZOrder4;
 
     UpdateMatrix();
     gfl::ResFileObject resFileObject;
@@ -31,26 +31,24 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     NwAnmCtrl* animCtrl = new (gfl::HeapID::Work) NwAnmCtrl(0, resFileObject, "warpExit_01");
     mAnimCtrl.Create(animCtrl);
 
+    animCtrl = mAnimCtrl.Get();
+
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(mFullSortSceneIndex);
     animCtrl->SetFullSortSceneModelWrapper(scene, 0x204);
-    animCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
+    mAnimCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
     mAnimCtrl->GetScnMdlWrapper()->vf30(5.0f);
 
     gfl::ScnMdlWrapper* modelWrapper = mAnimCtrl->GetScnMdlWrapper();
 
-    FbMokoMoko* fbMokoMoko = nullptr;
-
-    // im supposed to use the operator new to specify a heap ID
-    // but am i also supposed to use the G3dObj operator new somehow?
-
-    // fbMokoMoko = new (gfl::HeapID::Work) FbMokoMoko(mZOrder3, 10.0f, 10.0f, "GmkWarpExit", modelWrapper, mFullSortSceneIndex, &Names[0], &Names[1]);
-    fbMokoMoko = new (fbMokoMoko) FbMokoMoko(mZOrder3, 10.0f, 10.0f, "GmkWarpExit", modelWrapper, mFullSortSceneIndex, &Names[0], &Names[1]);
+    // note to self; this calls a thunk to the version of operator new seen above
+    FbMokoMoko* fbMokoMoko = (FbMokoMoko*) new (::new (gfl::HeapID::Work) FbMokoMoko(mZOrder3, 10.0f, 10.0f, "GmkWarpExit", modelWrapper, mFullSortSceneIndex, Names[0], Names[1]));
     mFbMokoMoko.Create(fbMokoMoko);
 
-    nw4r::math::VEC2 vec(mPosition);
+    fbMokoMoko = mFbMokoMoko.Get();
+    nw4r::math::VEC2 vec = mPosition;
     fbMokoMoko->UpdateMatrix(vec);
-    fbMokoMoko->SetUnk150(true);
-    fbMokoMoko->vf30(5.0f);
+    mFbMokoMoko->SetUnk150(true);
+    mFbMokoMoko->vf30(5.0f);
 }
 
 GmkWarpExit::~GmkWarpExit() { }
