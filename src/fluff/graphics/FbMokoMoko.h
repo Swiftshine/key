@@ -9,7 +9,7 @@ class FbMokoMoko : public gfl::CustomRenderObj {
 public:
     FbMokoMoko(float, float, float, const char*, gfl::ScnMdlWrapper*, uint, const char*, const char*);
     virtual ~FbMokoMoko();
-    void UpdateMatrix(nw4r::math::VEC2&);
+    void UpdateMatrix(nw4r::math::VEC2 const &);
     
     inline void SetUnk150(bool value) {
         *(reinterpret_cast<bool*>(this) + 0x150) = value;
