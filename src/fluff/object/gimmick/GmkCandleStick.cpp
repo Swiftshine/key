@@ -69,7 +69,6 @@ void GmkCandleStick::SetState(FlfGameObj* setter, std::string& state) {
     }
 }
 
-// https://decomp.me/scratch/mOoTb
 void GmkCandleStick::UpdateGraphics(bool createEffect) {
     CollisionEntry* entry = mCollisionEntry.Get();
     entry->GetInfo().mMatrixInited = createEffect;
@@ -94,10 +93,14 @@ void GmkCandleStick::UpdateGraphics(bool createEffect) {
         EffectObj* effect = scene->CreateEffectObject("ef_gk_07a", 0, 0);
         UpdateMatrix();
         nw4r::math::MTX34 effectMtx = mMatrix;
-
-        effectMtx[2][3] += 10.0f; 
-
-
+        nw4r::math::VEC3 effectVec;
+        effectVec.x = effectMtx[0][3];
+        effectVec.y = effectMtx[1][3];
+        effectVec.z = effectMtx[2][3];
+        effectVec.z += 10.0f;
+        effectMtx[0][3] = effectVec.x;
+        effectMtx[1][3] = effectVec.y;
+        effectMtx[2][3] = effectVec.z;
         effect->SetMatrix(effectMtx);
     } else {
         mFlfMdlDraw->ResetNURBSAnimation(1, true);
