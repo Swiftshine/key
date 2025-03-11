@@ -10,6 +10,18 @@
 
 // size: 0x148
 class GmkCandleStick : public Gimmick, public IObjHitCB {
+private:
+    static inline void GetMTXTranslation(nw4r::math::MTX34& mtx, nw4r::math::VEC3& dst) {
+        dst.x = mtx[0][3];
+        dst.y = mtx[1][3];
+        dst.z = mtx[2][3];
+    }
+
+    static inline void SetMTXTranslation(nw4r::math::MTX34& mtx, nw4r::math::VEC3& src) {
+        mtx[0][3] = src.x;
+        mtx[1][3] = src.y;
+        mtx[2][3] = src.z;
+    }
 public:
     static GmkCandleStick* Build(GimmickBuildInfo* buildInfo);
     GmkCandleStick(GimmickBuildInfo* buildInfo) DONT_INLINE_CLASS;
@@ -20,6 +32,8 @@ public:
 
     /* FlfGameObj */
     void SetState(FlfGameObj* setter, std::string& state);
+
+    
 
 private:
     gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry; // @ 0x13C

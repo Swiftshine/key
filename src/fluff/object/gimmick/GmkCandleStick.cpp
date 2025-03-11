@@ -94,13 +94,9 @@ void GmkCandleStick::UpdateGraphics(bool createEffect) {
         UpdateMatrix();
         nw4r::math::MTX34 effectMtx = mMatrix;
         nw4r::math::VEC3 effectVec;
-        effectVec.x = effectMtx[0][3];
-        effectVec.y = effectMtx[1][3];
-        effectVec.z = effectMtx[2][3];
+        GetMTXTranslation(effectMtx, effectVec);
         effectVec.z += 10.0f;
-        effectMtx[0][3] = effectVec.x;
-        effectMtx[1][3] = effectVec.y;
-        effectMtx[2][3] = effectVec.z;
+        SetMTXTranslation(effectMtx, effectVec);
         effect->SetMatrix(effectMtx);
     } else {
         mFlfMdlDraw->ResetNURBSAnimation(1, true);
