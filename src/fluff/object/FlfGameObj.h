@@ -15,7 +15,7 @@ class CameraManager;
 class FlfGameObj : public FlfHandleObj {
 public:
     FlfGameObj(uint);
-    ~FlfGameObj();
+    virtual ~FlfGameObj();
 
     void UpdateMatrix();
     void SetCulled(bool culled);
@@ -41,7 +41,7 @@ public:
     // i.e. tag1;tag2;tag3;
     virtual void    SetStateForTaggedObjects(const char* state, const char* tagList);
     // the "setter" field is a pointer to the FlfGameObj that induced the call.
-    // this field is in most cases, not used. a usecase is to be seen.
+    // for an example of a usecase, see `GmkCandleStick::SetState`.
     virtual void    SetState(FlfGameObj* setter, std::string& state); 
     virtual void    vf50(bool arg1);
     virtual bool    vf54();

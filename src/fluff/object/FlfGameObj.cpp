@@ -50,61 +50,66 @@ FlfGameObj::FlfGameObj(uint newActorType)
 
 FlfGameObj::~FlfGameObj() { }
 
-// https://decomp.me/scratch/p7el5
 void FlfGameObj::UpdateMatrix() {
-    f32 cosRotZ;
-    f32 temp_f4;
-    f32 temp_f9;
-    f32 temp_f10;
-    f32 temp_f11;
-    f32 sinRotY;
-    f32 cosRotY;
-    f32 sinRotZ;
-    f32 scaleX;
-    f32 scaleY;
-    f32 scaleZ;
-    f32 sinRotX;
-    f32 cosRotX;
+    float scaleZ;
+    float scaleY;
+    float scaleX;
+    float sx;
+    float cx;
+    float sy;
+    float cy;
+    float cz;
+    float sz;
+    f32 posZ;
+    f32 posY;
+    f32 posX;
+    float cx_cz;
+    float sx_sz;
+    float sx_cz;
+    float cx_sz;
+    
+    scaleX = mScale.x;
+    scaleY = mScale.y;
+    scaleZ = mScale.z;
+    
+    sx = nw4r::math::SinF(mRotation.x);
+    cx = nw4r::math::CosF(mRotation.x);
+    sy = nw4r::math::SinF(mRotation.y);
+    cy = nw4r::math::CosF(mRotation.y);
+    sz = nw4r::math::SinF(mRotation.z);
+    cz = nw4r::math::CosF(mRotation.z);
 
-    scaleX = this->mScale.x;
-    scaleY = this->mScale.y;
-    scaleZ = this->mScale.z;
+    posX = mPosition.x;
+    posY = mPosition.y;
+    posZ = mPosition.z;
     
-    sinRotX = nw4r::math::SinF(this->mRotation.x);
-    cosRotX = nw4r::math::CosF(this->mRotation.x);
-    sinRotY = nw4r::math::SinF(this->mRotation.y);
-    cosRotY = nw4r::math::CosF(this->mRotation.y);
-    sinRotZ = nw4r::math::SinF(this->mRotation.z);
-    cosRotZ = nw4r::math::CosF(this->mRotation.z);
+    cx_sz = cx * sz;
+    sx_sz = sx * sz;
+    sx_cz = sx * cz;
+    cx_cz = cx * cz;
 
     
-    temp_f11 = cosRotX * sinRotZ;
-    temp_f9 = sinRotX * sinRotZ;
-    temp_f10 = sinRotX * cosRotZ;
-    temp_f4 = cosRotX * cosRotZ;
-
-    mMatrix[0][3] = mPosition.x;
-    mMatrix[1][3] = mPosition.y;
-    mMatrix[2][3] = mPosition.z;
-
+    mMatrix[0][0] = cz * cy * scaleX;
+    mMatrix[0][1] = (sx_cz * sy - cx_sz) * scaleY;
+    mMatrix[0][2] = (cx_cz * sy + sx_sz) * scaleZ;
+    mMatrix[0][3] = posX;
     
-    mMatrix[0][0] = scaleX * (cosRotZ * cosRotY);
-    mMatrix[0][1] = scaleY * ((temp_f10 * sinRotY) - temp_f11);
-    mMatrix[0][2] = scaleZ * ((temp_f4 * sinRotY) + temp_f9);
+    mMatrix[1][0] = (sz * cy) * scaleX;
+    mMatrix[1][1] = ((sx_sz * sy) + cx_cz) * scaleY;
+    mMatrix[1][2] = ((cx_sz * sy) - sx_cz) * scaleZ;
+    mMatrix[1][3] = posY;
     
-    mMatrix[1][0] = scaleX * (sinRotZ * cosRotY);
-    mMatrix[1][1]= scaleY * ((temp_f9 * sinRotY) + temp_f4);
-    mMatrix[1][2] = scaleZ * ((temp_f11 * sinRotY) - temp_f10);
-    
-    mMatrix[2][0] = scaleX * -sinRotY;
-    mMatrix[2][1]= scaleY * (cosRotY * sinRotX);
-    mMatrix[2][2] = scaleZ * (cosRotY * cosRotX);
+    mMatrix[2][0] = scaleX * -sy;
+    mMatrix[2][1] = cy * sx * scaleY;
+    mMatrix[2][2] = cy * cx * scaleZ;
+    mMatrix[2][3] = posZ;
 }
 
 void FlfGameObj::vf10(bool val) {
     m_6C = val;
 }
 
+// this function is code-merged
 bool FlfGameObj::vf14() {
     return m_6C;
 }

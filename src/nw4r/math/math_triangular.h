@@ -6,7 +6,7 @@
 
 #include <cmath>
 
-#define NW4R_MATH_PI M_PI
+#define NW4R_MATH_PI (float)M_PI
 #define NW4R_MATH_LN_2 0.69314718056f
 
 // [0, 65535] -> [0.0, 256.0f]
