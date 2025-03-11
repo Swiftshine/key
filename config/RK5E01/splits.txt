@@ -154,6 +154,9 @@ fluff/object/gimmick/GmkBeadPopItem.cpp:
 fluff/object/gimmick/GmkCameraControl.cpp:
 	.text       start:0x803F2504 end:0x803F28D0
 
+fluff/object/gimmick/GmkCandleStick.cpp:
+	.text       start:0x804A87B0 end:0x804A930C
+
 fluff/object/gimmick/GmkArrowSign.cpp:
 	.text       start:0x804C3244 end:0x804C3CB0
 

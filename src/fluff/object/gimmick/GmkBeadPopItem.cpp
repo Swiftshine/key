@@ -57,16 +57,16 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     m_149 = buildInfo->GetBoolParam(ParameterID::FIFTH);
 
-    m_4 = 0;
+    IObjHitCB::m_4.i = 0;
     int gmkID = GetGimmickID();
     if (gmkID == 0x14B) {
         // ShootingBeadPopItem
-        m_4 = 1;
+        IObjHitCB::m_4.i = 1;
     } else {
         gmkID = GetGimmickID();
         if (gmkID == 0x14C) {
             // BeadPopSwitch
-            m_4 = 2;
+            IObjHitCB::m_4.i = 2;
         } 
     }
 
@@ -248,7 +248,7 @@ bool GmkBeadPopItem::Enable() {
         const std::string& tagList = GetStringParam(i).c_str();
 
         if (tagList.c_str() != nullptr) {
-            switch (m_4) {
+            switch (IObjHitCB::m_4.i) {
                 case 1: {
                     SetStateForTaggedObjects("POP_BEAD", tagList.c_str());
                     break;

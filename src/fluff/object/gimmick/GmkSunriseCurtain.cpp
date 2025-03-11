@@ -23,7 +23,7 @@ void GmkSunriseCurtain::SetBGSTEntriesBasedOnMission() {
 }
 
 void GmkSunriseCurtain::SwitchStates() {
-    mFlfMdl1->fn_800234AC(1, true);
+    mFlfMdl1->ResetNURBSAnimation(1, true);
     sound::PlaySoundEffect(0xB4, 0);
     mState = State::State_2;
 }

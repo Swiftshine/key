@@ -89,7 +89,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
         FlfMdlDraw* mdlDraw = new (gfl::HeapID::Work) FlfMdlDraw(scene, resourceName.c_str(), 0, 0);
         mdlDraw->LoadNURBSFromFileList();
         mdlDraw->fn_80023A40(1);
-        mdlDraw->fn_800234AC(0, true);
+        mdlDraw->ResetNURBSAnimation(0, true);
         mdlDraw->SetWoolDrawMatrix(mMatrix);
         mFlfMdlDraw.Create(mdlDraw);
     }
@@ -110,12 +110,12 @@ void GmkBeadDrop::Update() {
     switch (mState) {
         case State::Idle: {
             if (mCounter == 0) {
-                mFlfMdlDraw->fn_800234AC(0, true);
+                mFlfMdlDraw->ResetNURBSAnimation(0, true);
                 mCounter++;
             } else if (mFlfMdlDraw->GetUnk20() == 0) {
                 mCompletionPercentage -= (1.0f / 60.0f);
                 if (mCompletionPercentage <= 0.0f) {
-                    mFlfMdlDraw->fn_800234AC(1, true);
+                    mFlfMdlDraw->ResetNURBSAnimation(1, true);
                     mCompletionPercentage = fn_802C1EA4(this);
                 }
             }
@@ -124,12 +124,12 @@ void GmkBeadDrop::Update() {
 
         case State::Spawn: {
             if (mCounter == 0) {
-                mFlfMdlDraw->fn_800234AC(2, true);
+                mFlfMdlDraw->ResetNURBSAnimation(2, true);
                 mCounter++;
             } else if (mCounter == 1) {
                 if (CanSpawnBeads()) {
                     SpawnBeads();
-                    mFlfMdlDraw->fn_800234AC(4, true);
+                    mFlfMdlDraw->ResetNURBSAnimation(4, true);
                     mCounter++;
                 }
             } else {
@@ -193,14 +193,14 @@ void GmkBeadDrop::UpdateFlfMdl() {
     switch (flfMdl->GetUnk20()) {
         case 2: {
             if (flfMdl->fn_800239CC()) {
-                mFlfMdlDraw->fn_800234AC(3, true);
+                mFlfMdlDraw->ResetNURBSAnimation(3, true);
             }
             break;
         }
 
         case 1: {
             if (flfMdl->fn_800239CC()) {
-                mFlfMdlDraw->fn_800234AC(0, true);
+                mFlfMdlDraw->ResetNURBSAnimation(0, true);
             }
             break;
         }

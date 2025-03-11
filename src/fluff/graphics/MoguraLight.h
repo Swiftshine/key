@@ -12,6 +12,8 @@ public:
 
     void SetUpdate(bool doUpdate);
     void UpdateMatrix();
+    void SetZPosition(float pos);
+    void SetPosition(nw4r::math::VEC2&);
 private:
     float mZPosition; // @ 0x0
     nw4r::math::VEC2 mPosition; // @ 0x4

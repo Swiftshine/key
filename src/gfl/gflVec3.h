@@ -9,6 +9,7 @@ namespace gfl {
         static Vec3 Zero;
         static Vec3 One;
     public:
+        Vec3(float, nw4r::math::VEC2&);
         Vec3(nw4r::math::VEC2&);
         Vec3(nw4r::math::VEC3&);
         

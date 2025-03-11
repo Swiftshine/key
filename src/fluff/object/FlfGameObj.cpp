@@ -50,7 +50,7 @@ FlfGameObj::FlfGameObj(uint newActorType)
 
 FlfGameObj::~FlfGameObj() { }
 
-// https://decomp.me/scratch/ZwbYU
+// https://decomp.me/scratch/p7el5
 void FlfGameObj::UpdateMatrix() {
     f32 cosRotZ;
     f32 temp_f4;

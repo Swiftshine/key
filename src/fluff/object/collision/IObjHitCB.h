@@ -13,7 +13,10 @@ public:
     // but in most cases, this function returns whether or not something meaningful occurred.
     virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther);
 protected:
-    int m_4;
+    union {
+        int i;
+        float f;
+    } m_4;
     bool m_8;
     bool m_9;
     bool m_A;

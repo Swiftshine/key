@@ -29,12 +29,13 @@ public:
 
     void LoadNURBSFromFileList();
     void fn_80023A40(int);
-    void fn_800234AC(int, bool);
+    void ResetNURBSAnimation(int, bool);
     void SetWoolDrawMatrix(nw4r::math::MTX34&);
     bool fn_800239CC();
     inline uint GetUnk20() {
         return m_20;
     }
+    
     
 private:
     std::string mResourcePath;
