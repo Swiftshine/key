@@ -13,7 +13,7 @@
 
 #ifndef RVL_SDK_GX_HARDWARE_H
 #define RVL_SDK_GX_HARDWARE_H
-#include <types.h>
+#include <revolution/types.h>
 
 #include <revolution/GX/GXTypes.h>
 #ifdef __cplusplus

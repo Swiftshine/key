@@ -1,29 +1,13 @@
-#ifndef RVL_SDK_WPAD_MEMORY_H
-#define RVL_SDK_WPAD_MEMORY_H
+#ifndef RVL_SDK_WPAD_INTERNAL_MEMORY_H
+#define RVL_SDK_WPAD_INTERNAL_MEMORY_H
+
+#include <revolution/WPAD/WPADMem.h>
 
 /*******************************************************************************
  * headers
  */
 
-#include <types.h>
-
-#include "WPAD.h"
-
-#if 0
-#include <revolution/OS/OSTime.h>
-#endif
-
-#include <revolution/OS.h>
-#include <revolution/NAND.h>
-#include <revolution/SC.h>
-
-/*******************************************************************************
- * macros
- */
-
-#define WM_MEM_ADDR(addr_)	((addr_) & 0xffff)
-#define WM_EXT_REG_ADDR(type_, addr_)	\
-	(((addr_) & 0xffff) | ((WPAD_EXT_REG_ ## type_) << 16) | (1 << 26))
+#include <revolution/WPAD/WPAD.h> // WPADChannel
 
 /*******************************************************************************
  * types
@@ -33,40 +17,24 @@
 	extern "C" {
 #endif
 
-typedef u8 WPADExtRegType;
-enum WPADExtRegType_et
+struct WPADMemBlock
 {
-	WPAD_EXT_REG_SPEAKER		= 0xa2,
-	WPAD_EXT_REG_EXTENSION		= 0xa4,
-	WPAD_EXT_REG_MOTION_PLUS	= 0xa6,
-	WPAD_EXT_REG_DPD			= 0xb0,
-};
-
-// https://wiibrew.org/wiki/Wiimote#EEPROM_Memory
-typedef struct WPADGameInfo
-{
-	OSTime	timestamp;		// size 0x08, offset 0x00
-	u16		gameName[17];	// size 0x22, offset 0x08
-	char	gameID[4];		// size 0x04, offset 0x2a
-	u8		gameType;		// size 0x01, offset 0x2e
-	u8		checksum;		// size 0x01, offset 0x2f
-
-	/* wiibrew says this exists in the header on the Wiimote but goes unused,
-	 * which matches up with the code I see here
-	 */
-	u8	unknown[8];
-} WPADGameInfo; // size 0x38
+	int signed		at_0x00;	// size 0x04, offset 0x00
+	int signed		at_0x04;	// size 0x04, offset 0x04
+	short signed	at_0x08;	// size 0x02, offset 0x08
+	// 2 bytes padding (probably alignment, see WPADiClearMemBlock)
+	int signed		at_0x0c;	// size 0x04, offset 0x0c
+	WPADCallback	*at_0x10;	// size 0x04, offset 0x10
+}; // size 0x14
 
 /*******************************************************************************
  * functions
  */
 
-WPADResult WPADWriteExtReg(WPADChannel chan, const void *data, u16 length,
-                           WPADExtRegType extReg, u16 address,
-                           WPADCallback *cb);
+void WPADiClearMemBlock(WPADChannel chan);
 
 #ifdef __cplusplus
 	}
 #endif
 
-#endif // RVL_SDK_WPAD_MEMORY_H
+#endif // RVL_SDK_WPAD_INTERNAL_MEMORY_H

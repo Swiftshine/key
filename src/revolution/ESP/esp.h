@@ -2,7 +2,7 @@
 #define RVL_SDK_ESP_H
 #include <revolution/ARC.h>
 #include <revolution/IPC.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

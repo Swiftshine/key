@@ -1,7 +1,7 @@
 #ifndef RVL_SDK_EXI_HARDWARE_H
 #define RVL_SDK_EXI_HARDWARE_H
 #include <revolution/EXI/EXICommon.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

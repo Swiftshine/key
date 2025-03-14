@@ -1,6 +1,6 @@
 #ifndef RVL_SDK_VF_D_VF_H
 #define RVL_SDK_VF_D_VF_H
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

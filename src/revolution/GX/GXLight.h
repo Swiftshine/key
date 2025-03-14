@@ -2,7 +2,7 @@
 #define RVL_SDK_GX_LIGHT_H
 #include <revolution/GX/GXInternal.h>
 #include <revolution/GX/GXTypes.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

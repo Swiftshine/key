@@ -1,6 +1,6 @@
 #ifndef RVL_SDK_GX_PIXEL_H
 #define RVL_SDK_GX_PIXEL_H
-#include <types.h>
+#include <revolution/types.h>
 
 #include <revolution/GX/GXTypes.h>
 

@@ -2,7 +2,7 @@
 #define RVL_SDK_NDEV_EXI2_AD_DEBUGGER_DRIVER_H
 #include <revolution/NdevExi2AD/exi2.h>
 #include <revolution/OS.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

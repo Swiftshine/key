@@ -5,7 +5,7 @@
 #include <revolution/NWC24/NWC24FriendList.h>
 #include <revolution/NWC24/NWC24SecretFList.h>
 #include <revolution/NWC24/NWC24Types.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

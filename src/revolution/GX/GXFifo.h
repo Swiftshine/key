@@ -1,7 +1,7 @@
 #ifndef RVL_SDK_GX_FIFO_H
 #define RVL_SDK_GX_FIFO_H
 #include <revolution/GX/GXInternal.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

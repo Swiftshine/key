@@ -1,7 +1,7 @@
 #ifndef RVL_SDK_GX_VERT_H
 #define RVL_SDK_GX_VERT_H
 #include <revolution/GX/GXHardware.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

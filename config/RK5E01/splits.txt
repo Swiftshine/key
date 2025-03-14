@@ -270,6 +270,9 @@ PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/rand.c:
 	.text       start:0x806945D4 end:0x806945FC
 	.sdata      start:0x808E46E8 end:0x808E46EC
 
+revolution/WPAD/WPAD.c:
+	.text       start:0x806B1E40 end:0x806BC7C0
+
 hbm/homebutton/HBMFrameController.cpp:
 	.text       start:0x806FF810 end:0x806FF9C0
 	.rodata     start:0x8082EA88 end:0x8082EA90

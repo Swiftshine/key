@@ -5,9 +5,9 @@
  * headers
  */
 
-#include <types.h>
+#include <revolution/types.h>
 
-#include <revolution/WUD.h>
+#include <revolution/WPAD/WUD.h>
 
 // #if 0
 #include <revolution/SC/scsystem.h>
@@ -16,6 +16,7 @@
 #include <revolution/OS.h>
 #include <revolution/NAND.h>
 #include <revolution/SC.h>
+#include <revolution/VI.h>
 
 /*******************************************************************************
  * macros
@@ -546,8 +547,8 @@ typedef struct WPADBKStatus
 	u8			dev;						// size 0x01, offset 0x28
 	s8			err;						// size 0x01, offset 0x29
 
-	u8		bulk[21];	// size 0x15, offset 0x2a
-	u8		padding[1];	// size 0x01, offset 0x3f
+	byte_t		bulk[21];	// size 0x15, offset 0x2a
+	byte_t		padding[1];	// size 0x01, offset 0x3f
 } WPADBKStatus; // size 0x40
 
 typedef struct WPADVSStatus
@@ -659,7 +660,7 @@ WPADResult WPADControlBLC(WPADChannel chan, WPADBLCCommand command,
                           WPADCallback *cb);
 
 void WPADRecalibrate(WPADChannel chan);
-BOOL WPADIsUsedCallbackByKPAD(void);
+inline BOOL WPADIsUsedCallbackByKPAD(void);
 void WPADSetCallbackByKPAD(BOOL isKPAD);
 
 #ifdef __cplusplus

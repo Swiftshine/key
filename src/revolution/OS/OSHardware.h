@@ -10,7 +10,7 @@
 #include <revolution/DVD/dvd.h>
 #include <revolution/OS/OSAddress.h>
 #include <revolution/OS/OSThread.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

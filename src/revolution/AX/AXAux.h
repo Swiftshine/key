@@ -1,6 +1,6 @@
 #ifndef RVL_SDK_AX_AUX_H
 #define RVL_SDK_AX_AUX_H
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -2,7 +2,7 @@
 #define RVL_SDK_NWC24_IPC_H
 #include <revolution/IPC.h>
 #include <revolution/NWC24/NWC24Types.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -3,7 +3,7 @@
 #include <revolution/MEM/mem_list.h>
 #include <revolution/OS.h>
 #include <string.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -3,6 +3,11 @@
 
 #include "compiler_macros.h"
 
+#define STR_(x)					#x
+#define STR(x)					STR_(x)
+#define IS_ALIGNED(x, align)	(((u32)(x) & ((align) - 1)) == 0)
+
+
 // Useful macros
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
 #define MAXEQ(x, y) ((x) >= (y) ? (x) : y)

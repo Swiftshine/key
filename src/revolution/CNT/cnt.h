@@ -1,7 +1,7 @@
 #ifndef RVL_SDK_CNT_H
 #define RVL_SDK_CNT_H
 #include <revolution/ARC.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

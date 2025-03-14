@@ -24,5 +24,7 @@
 	OSAssertMessage_FileLine(__FILE__, line_, exp_, __VA_ARGS__)
 #define OSAssert_Line(line_, exp_)	\
 	OSAssertMessage_FileLine(__FILE__, line_, exp_, "Failed assertion " #exp_)
-    
+
+typedef s64 OSTime;
+
 #endif

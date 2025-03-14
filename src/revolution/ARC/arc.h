@@ -4,7 +4,7 @@
 
 #ifndef RVL_SDK_ARC_H
 #define RVL_SDK_ARC_H
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

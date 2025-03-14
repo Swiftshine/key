@@ -199,6 +199,7 @@ cflags_base = [
     "-enc SJIS",
     # "-func_align 4",
     "-i src/",
+    "-i src/revolution/",
     "-i src/gfl/",
     "-i src/fluff/",
     "-i src/nw4r/g3d/",
@@ -214,7 +215,6 @@ cflags_base = [
     "-i src/PowerPC_EABI_Support/MSL/MSL_C++/",
     "-i src/PowerPC_EABI_Support/MetroTRK/",
     "-i src/PowerPC_EABI_Support/Runtime/",
-    "-i src/revolution",
     "-i src/hbm/",
     "-i src/hbm/homebutton/",
     "-i src/hbm/nw4hbm/",
@@ -359,16 +359,16 @@ config.libs = [
     {
         "lib" : "revolution",
         "mw_version" : config.linker_version,
-        "clags" : cflags_base,
+        "cflags" : [*cflags_base, "-lang=c99", "-inline auto", "-O4"],
         "host" : False,
         "objects" : [
-
+            Object(NonMatching, "revolution/WPAD/WPAD.c"),
         ],
     },
     {
         "lib" : "nw4r",
         "mw_version" : config.linker_version,
-        "clags" : [
+        "cflags" : [
             *cflags_base,
             "-func_align 16",
         ],

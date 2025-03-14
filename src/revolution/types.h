@@ -7,6 +7,7 @@
 #else
 #include <stdarg.h>
 #include <stddef.h>
+#include <wchar_def.h>
 #endif
 
 #include "macros.h"
@@ -23,10 +24,15 @@ typedef signed short s16;
 typedef unsigned char u8;
 typedef signed char s8;
 
+typedef unsigned char byte_t;
+typedef unsigned int register_t;
 typedef float f32;
 typedef double f64;
 
 enum { FALSE, TRUE };
 typedef int BOOL;
+
+typedef unsigned int UNKWORD;
+typedef void UNKTYPE;
 
 #endif

@@ -7,7 +7,7 @@
 
 #include <revolution/HBM/HBMConfig.h>
 
-#include <types.h>
+#include <revolution/types.h>
 
 #if 0
 #include <revolution/MEM/mem_allocator.h>

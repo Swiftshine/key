@@ -1,7 +1,7 @@
 #ifndef RVL_SDK_NAND_H
 #define RVL_SDK_NAND_H
 #include <revolution/FS.h>
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

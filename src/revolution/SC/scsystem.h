@@ -1,6 +1,6 @@
 #ifndef RVL_SDK_SC_SCSYSTEM_H
 #define RVL_SDK_SC_SCSYSTEM_H
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,6 +1,6 @@
 #ifndef RVL_SDK_SC_SCAPI_H
 #define RVL_SDK_SC_SCAPI_H
-#include <types.h>
+#include <revolution/types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
