@@ -48,7 +48,22 @@
 	"<< RVL_SDK - WPAD \tdebug build: Dec 11 2009 15:55:10 (" STR(__CWCC__) "_" STR(__CWBUILD__) ") >>"
 #endif
 
-#define OSAssert_Line(line_, exp_) { }
+// #define OSAssert_Line(line_, exp_) { }
+
+#if !defined(NDEBUG)
+# define OSAssertMessage_FileLine(file_, line_, exp_, ...)	\
+	(void)((exp_) || (OSPanic(file_, line_, __VA_ARGS__), 0))
+#else
+# define OSAssertMessage_FileLine(file_, line_, exp_, ...)	\
+	((void)0)
+#endif
+
+// defined in terms of OSAssertMessage_FileLine
+#define OSAssertMessage_Line(line_, exp_, ...)	\
+	OSAssertMessage_FileLine(__FILE__, line_, exp_, __VA_ARGS__)
+#define OSAssert_Line(line_, exp_)	\
+	OSAssertMessage_FileLine(__FILE__, line_, exp_, "Failed assertion " #exp_)
+
 
 /*******************************************************************************
  * local function declarations
@@ -82,9 +97,9 @@ static void __wpadClearControlBlock(WPADChannel chan);
 static void __wpadInitSub(void);
 
 static void __wpadShutdown(BOOL saveSimpleDevs);
-static void __wpadCleanup(void);
+static inline void __wpadCleanup(void);
 static void __wpadResetModule(BOOL saveSimpleDevs);
-static void __wpadReconnectStart(BOOL saveSimpleDevs);
+static inline void __wpadReconnectStart(BOOL saveSimpleDevs);
 
 static void __wpadSetupConnectionCallback(WPADChannel chan, WPADResult result);
 static void __wpadAbortConnectionCallback(WPADChannel chan, WPADResult result);
@@ -94,7 +109,7 @@ static void __wpadConnectionCallback(WUDDevInfo *devInfo, u8 success);
 static void __wpadReceiveCallback(UINT8 dev_handle, UINT8 *p_rpt, UINT16 len);
 static WPADResult __wpadGetConnectionStatus(WPADChannel chan);
 static void __wpadDisconnectCallback(WPADChannel chan, WPADResult result);
-static inline void __wpadDisconnect(WPADChannel chan, BOOL afkDisconnect);
+static void __wpadDisconnect(WPADChannel chan, BOOL afkDisconnect);
 
 static void __wpadInfoCallback(WPADChannel chan, WPADResult result);
 
@@ -1418,7 +1433,7 @@ static void __wpadShutdown(BOOL saveSimpleDevs)
 	WUDShutdown(saveSimpleDevs);
 }
 
-static void __wpadCleanup(void)
+static inline void __wpadCleanup(void)
 {
 	BOOL intrStatus = OSDisableInterrupts();
 
@@ -1446,7 +1461,7 @@ static inline void __wpadResetModule(BOOL saveSimpleDevs)
 	__wpadShutdown(saveSimpleDevs);
 }
 
-static void __wpadReconnectStart(BOOL saveSimpleDevs)
+static inline void __wpadReconnectStart(BOOL saveSimpleDevs)
 {
 	BOOL intrStatus = OSDisableInterrupts();
 
@@ -3287,7 +3302,7 @@ inline BOOL WPADiSendSetPort(struct WPADCmdQueue *cmdQueue, u8 port, WPADCallbac
 	return success;
 }
 
-inline BOOL WPADiSendSetReportType(struct WPADCmdQueue *cmdQueue, s32 format,
+BOOL WPADiSendSetReportType(struct WPADCmdQueue *cmdQueue, s32 format,
                             BOOL notContinuous, WPADCallback *cb)
 {
 	BOOL success;
@@ -3413,7 +3428,7 @@ BOOL WPADiSendEnableSpeaker(struct WPADCmdQueue *cmdQueue, BOOL enabled,
 
 // SendGetContinuousStatus?
 // this is just the request status report report; what is Cont
-inline BOOL WPADiSendGetContStat(struct WPADCmdQueue *cmdQueue, WPADInfo *wpInfoOut,
+BOOL WPADiSendGetContStat(struct WPADCmdQueue *cmdQueue, WPADInfo *wpInfoOut,
                           WPADCallback *cb)
 {
 	BOOL success;
@@ -3429,7 +3444,7 @@ inline BOOL WPADiSendGetContStat(struct WPADCmdQueue *cmdQueue, WPADInfo *wpInfo
 	return success;
 }
 
-BOOL WPADiSendWriteDataCmd(struct WPADCmdQueue *cmdQueue, u8 cmd, u32 address,
+inline BOOL WPADiSendWriteDataCmd(struct WPADCmdQueue *cmdQueue, u8 cmd, u32 address,
                            WPADCallback *cb)
 {
 	return WPADiSendWriteData(cmdQueue, &cmd, sizeof cmd, address, cb);
@@ -3496,7 +3511,7 @@ BOOL WPADiSendStreamData(struct WPADCmdQueue *cmdQueue, const void *p_buf,
 	return success;
 }
 
-BOOL WPADiSendMuteSpeaker(struct WPADCmdQueue *cmdQueue, BOOL muted,
+inline BOOL WPADiSendMuteSpeaker(struct WPADCmdQueue *cmdQueue, BOOL muted,
                           WPADCallback *cb)
 {
 	BOOL success;
@@ -3550,7 +3565,7 @@ static s8 __wpadGetQueueSize(struct WPADCmdQueue *cmdQueue)
 	return queueRemaining;
 }
 
-inline void WPADiClearQueue(struct WPADCmdQueue *cmdQueue)
+void WPADiClearQueue(struct WPADCmdQueue *cmdQueue)
 {
 	BOOL intrStatus = OSDisableInterrupts();
 
@@ -3752,7 +3767,7 @@ BOOL WPADiIsDummyExtension(WPADChannel chan)
 }
 #endif
 
-BOOL WPADIsUsedCallbackByKPAD(void)
+DONT_INLINE BOOL WPADIsUsedCallbackByKPAD(void)
 {
 	return _wpadUsedCallback;
 }

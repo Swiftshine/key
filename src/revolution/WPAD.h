@@ -457,13 +457,13 @@ WPADResult WPADiControlMpls(WPADChannel chan, WPADMplsCommand command,
 void WPADiGetMplsCalibration(WPADChannel chan, struct WPADMplsCalibration *high,
                              struct WPADMplsCalibration *low);
 inline BOOL WPADiSendSetPort(struct WPADCmdQueue *cmdQueue, u8 port, WPADCallback *cb);
-inline BOOL WPADiSendSetReportType(struct WPADCmdQueue *cmdQueue, s32 format,
+BOOL WPADiSendSetReportType(struct WPADCmdQueue *cmdQueue, s32 format,
                             BOOL notContinuous, WPADCallback *cb);
 BOOL WPADiSendEnableDPD(struct WPADCmdQueue *cmdQueue, BOOL enabled,
                           WPADCallback *cb);
 BOOL WPADiSendEnableSpeaker(struct WPADCmdQueue *cmdQueue, BOOL enabled,
                             WPADCallback *cb);
-inline BOOL WPADiSendGetContStat(struct WPADCmdQueue *cmdQueue, WPADInfo *wpInfoOut,
+BOOL WPADiSendGetContStat(struct WPADCmdQueue *cmdQueue, WPADInfo *wpInfoOut,
                           WPADCallback *cb);
 BOOL WPADiSendWriteDataCmd(struct WPADCmdQueue *cmdQueue, u8 cmd, u32 address,
                            WPADCallback *cb);

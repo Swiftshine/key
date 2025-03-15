@@ -233,6 +233,15 @@ if args.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
+cflags_rvl = [
+    *cflags_base,
+    "-lang=c99",
+    "-O4,p",
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ipa file",
+]
+
 cflags_gfl = [
     *cflags_base,
     "-use_lmw_stmw on",
@@ -359,7 +368,7 @@ config.libs = [
     {
         "lib" : "revolution",
         "mw_version" : config.linker_version,
-        "cflags" : [*cflags_base, "-lang=c99", "-inline auto", "-O4"],
+        "cflags" : cflags_rvl,
         "host" : False,
         "objects" : [
             Object(NonMatching, "revolution/WPAD/WPAD.c"),
