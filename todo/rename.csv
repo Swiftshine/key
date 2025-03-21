@@ -2,4 +2,4 @@
 "Stage","StageInfo","Stage is an existing class name",
 "StageManager","Stage","see above",
 "BGST::Column","BGST::EntryInfo","'column' does not make sense",
-"ModelWrapper","GmkPartsMdlSet","Implied by string "GmkPartsMdlSet " in RegisterResources(); is also used as *parts*",
+"ModelWrapper","GmkPartsMdlSet","Implied by string 'GmkPartsMdlSet ' in `RegisterResources()`; is also used as *parts*",
