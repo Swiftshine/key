@@ -236,7 +236,6 @@ else:
 cflags_rvl = [
     *cflags_base,
     "-lang=c99",
-    "-O4,p",
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
@@ -370,6 +369,7 @@ config.libs = [
         "mw_version" : "Wii/1.0",
         "cflags" : cflags_rvl,
         "host" : False,
+        "progress_category": "sdk",
         "objects" : [
             Object(NonMatching, "revolution/WPAD/WPAD.c"),
         ],
@@ -395,6 +395,7 @@ config.libs = [
             # "-func_align 16",
         ],
         "host" : False,
+        "progress_category": "sdk",
         "objects" : [
             Object(Matching, "hbm/homebutton/HBMAnmController.cpp"),
             Object(Matching, "hbm/homebutton/HBMFrameController.cpp"),

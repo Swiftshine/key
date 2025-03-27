@@ -3767,7 +3767,7 @@ BOOL WPADiIsDummyExtension(WPADChannel chan)
 }
 #endif
 
-DONT_INLINE BOOL WPADIsUsedCallbackByKPAD(void)
+BOOL WPADIsUsedCallbackByKPAD(void)
 {
 	return _wpadUsedCallback;
 }
