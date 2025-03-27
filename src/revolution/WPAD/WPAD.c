@@ -3444,13 +3444,13 @@ BOOL WPADiSendGetContStat(struct WPADCmdQueue *cmdQueue, WPADInfo *wpInfoOut,
 	return success;
 }
 
-inline BOOL WPADiSendWriteDataCmd(struct WPADCmdQueue *cmdQueue, u8 cmd, u32 address,
+BOOL WPADiSendWriteDataCmd(struct WPADCmdQueue *cmdQueue, u8 cmd, u32 address,
                            WPADCallback *cb)
 {
 	return WPADiSendWriteData(cmdQueue, &cmd, sizeof cmd, address, cb);
 }
 
-inline BOOL WPADiSendWriteData(struct WPADCmdQueue *cmdQueue, const void *p_buf,
+BOOL WPADiSendWriteData(struct WPADCmdQueue *cmdQueue, const void *p_buf,
                         u16 len, u32 address, WPADCallback *cb)
 {
 	BOOL success;

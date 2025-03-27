@@ -469,7 +469,7 @@ BOOL WPADiSendWriteDataCmd(struct WPADCmdQueue *cmdQueue, u8 cmd, u32 address,
                            WPADCallback *cb);
 BOOL WPADiSendWriteData(struct WPADCmdQueue *cmdQueue, const void *p_buf,
                         u16 len, u32 address, WPADCallback *cb);
-inline BOOL WPADiSendReadData(struct WPADCmdQueue *cmdQueue, void *p_buf, u16 len,
+BOOL WPADiSendReadData(struct WPADCmdQueue *cmdQueue, void *p_buf, u16 len,
                        u32 address, WPADCallback *cb);
 BOOL WPADiSendStreamData(struct WPADCmdQueue *cmdQueue, const void *p_buf,
                          u16 len);

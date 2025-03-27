@@ -367,7 +367,7 @@ config.libs = [
     },
     {
         "lib" : "revolution",
-        "mw_version" : config.linker_version,
+        "mw_version" : "Wii/1.0",
         "cflags" : cflags_rvl,
         "host" : False,
         "objects" : [
