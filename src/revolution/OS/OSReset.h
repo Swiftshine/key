@@ -12,7 +12,9 @@ typedef enum {
     OS_SD_EVENT_RESTART = 4,
     OS_SD_EVENT_RETURN_TO_MENU = 5,
     OS_SD_EVENT_LAUNCH_APP = 6,
-} OSShutdownEvent;
+} OSShutdownEvent_e;
+
+typedef u32 OSShutdownEvent;
 
 typedef struct OSShutdownFunctionInfo {
     OSShutdownFunction func;             // at 0x0

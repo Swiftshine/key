@@ -1,5 +1,4 @@
 #include <revolution/WPAD.h>
-
 /*******************************************************************************
  * headers
  */
@@ -1845,7 +1844,7 @@ static void __wpadDisconnectCallback(WPADChannel chan, WPADResult result)
 	BTA_HhClose(p_wpd->devHandle);
 }
 
-static inline void __wpadDisconnect(WPADChannel chan, BOOL afkDisconnect)
+static void inline __wpadDisconnect(WPADChannel chan, BOOL afkDisconnect)
 {
 	wpad_cb_st *p_wpd = __rvl_p_wpadcb[chan];
 
@@ -2229,10 +2228,10 @@ end:
 	return status;
 }
 
-extern u8 SCSetWpadSpeakerVolume_(u8);
-extern u8 SCSetWpadMotorMode_(u8);
+extern BOOL SCSetWpadSpeakerVolume_(u8);
+extern BOOL SCSetWpadMotorMode_(u8);
 
-BOOL WPADSaveConfig(SCFlushCallback *cb)
+BOOL WPADSaveConfig(SCFlushCallback cb)
 {
 	BOOL success = TRUE;
 
