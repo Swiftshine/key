@@ -196,8 +196,9 @@ static OSShutdownFunctionInfo ShutdownFunctionInfo;
 
 // .bss
 static OSAlarm _wpadManageAlarm;
-wpad_cb_st __rvl_wpadcb[WPAD_MAX_CONTROLLERS] __attribute__((aligned(0x20)));
-static WUDDevHandle _wpadHandle2PortTable[WUD_MAX_DEV_ENTRY];
+wpad_cb_st __rvl_wpadcb[WPAD_MAX_CONTROLLERS];
+// static WUDDevHandle _wpadHandle2PortTable[WUD_MAX_DEV_ENTRY];
+static WUDDevHandle _wpadHandle2PortTable[32];
 static byte_t __wpadManageHandlerStack[0x1000] __attribute__((aligned(0x20)));
 wpad_cb_st *__rvl_p_wpadcb[WPAD_MAX_CONTROLLERS];
 
@@ -207,7 +208,8 @@ static u16 _wpad_diff_count_threshold[WPAD_MAX_NZFILTERS] = {6, 4, 6, 12};
 static u16 _wpad_hyst_count_threshold[WPAD_MAX_NZFILTERS] = {30, 30, 30, 30};
 
 // .sbss
-static OSAppType _wpadGameType;
+// static OSAppType _wpadGameType;
+static u8 _wpadGameType;
 static const char *_wpadGameCode;
 
 #if !defined(NDEBUG)
@@ -1346,13 +1348,11 @@ static void __wpadClearControlBlock(WPADChannel chan)
 static void __wpadInitSub(void)
 {
 	__wpadSetSensorBarPower(TRUE);
-
-	WPADChannel chan;
-	int i;
-	for (i = 0; i < WUD_MAX_DEV_ENTRY; i++)
+	
+	for (int i = 0; i < WUD_MAX_DEV_ENTRY; i++)
 		_wpadHandle2PortTable[i] = WUD_DEV_HANDLE_INVALID;
 
-	for (chan = 0; chan < WPAD_MAX_CONTROLLERS; chan++)
+	for (WPADChannel chan = 0; chan < WPAD_MAX_CONTROLLERS; chan++)
 	{
 		__rvl_p_wpadcb[chan] = &__rvl_wpadcb[chan];
 
@@ -3654,7 +3654,8 @@ static BOOL __wpadSetSensorBarPower(BOOL enabled)
 		newStatus = reg & ~(1 << 8);
 
 	ACRWriteReg(0xc0, newStatus);
-	BOOL oldStatus = reg & (1 << 8) ? 1 : 0;
+	// BOOL oldStatus = reg & (1 << 8) ? 1 : 0;
+	BOOL oldStatus = reg;
 
 	OSRestoreInterrupts(intrStatus);
 
@@ -3682,9 +3683,10 @@ static u8 __wpadGetDpdSensitivity(void)
 
 static u8 __wpadGetSensorBarPosition(void)
 {
-	return SCGetWpadSensorBarPosition() == SC_SENSOR_BAR_TOP
-	         ? SC_SENSOR_BAR_TOP
-	         : SC_SENSOR_BAR_BOTTOM;
+	// return SCGetWpadSensorBarPosition() == SC_SENSOR_BAR_TOP
+	//          ? SC_SENSOR_BAR_TOP
+	//          : SC_SENSOR_BAR_BOTTOM;
+	return SCGetWpadSensorBarPosition() == SC_SENSOR_BAR_TOP;
 }
 
 static u32 __wpadGetMotorMode(void)

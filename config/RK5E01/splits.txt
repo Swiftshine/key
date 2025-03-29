@@ -272,6 +272,7 @@ PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/rand.c:
 
 revolution/WPAD/WPAD.c:
 	.text       start:0x806B1E40 end:0x806BC7C0
+	.bss        start:0x80928EA0 end:0x8092CE80
 
 hbm/homebutton/HBMFrameController.cpp:
 	.text       start:0x806FF810 end:0x806FF9C0
