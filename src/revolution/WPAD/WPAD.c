@@ -68,7 +68,7 @@
  * local function declarations
  */
 
-static void *__wpadNoAlloc(size_t size);
+static DECL_WEAK void *__wpadNoAlloc(size_t size);
 static int __wpadNoFree(void *ptr);
 
 static BOOL OnShutdown(OSShutdownPass pass, OSShutdownEvent event);
@@ -197,8 +197,8 @@ static OSShutdownFunctionInfo ShutdownFunctionInfo;
 // .bss
 static OSAlarm _wpadManageAlarm;
 wpad_cb_st __rvl_wpadcb[WPAD_MAX_CONTROLLERS];
-// static WUDDevHandle _wpadHandle2PortTable[WUD_MAX_DEV_ENTRY];
-static WUDDevHandle _wpadHandle2PortTable[32];
+static WUDDevHandle _wpadHandle2PortTable[WUD_MAX_DEV_ENTRY];
+// static WUDDevHandle _wpadHandle2PortTable[32];
 static byte_t __wpadManageHandlerStack[0x1000] __attribute__((aligned(0x20)));
 wpad_cb_st *__rvl_p_wpadcb[WPAD_MAX_CONTROLLERS];
 
@@ -1344,7 +1344,6 @@ static void __wpadClearControlBlock(WPADChannel chan)
 #endif // !defined(NDEBUG)
 }
 
-// TODO on release
 static void __wpadInitSub(void)
 {
 	__wpadSetSensorBarPower(TRUE);
