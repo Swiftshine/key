@@ -235,6 +235,7 @@ else:
 
 cflags_rvl = [
     *cflags_base,
+    "-func_align 16",
     "-lang=c99",
     "-enc SJIS",
     "-fp_contract off",
@@ -367,11 +368,14 @@ config.libs = [
     {
         "lib" : "revolution",
         "mw_version" : "Wii/1.0",
-        "cflags" : cflags_rvl,
+        "cflags" : [
+            *cflags_rvl,
+            "-DNDEBUG",
+        ],
         "host" : False,
         "progress_category": "sdk",
         "objects" : [
-            Object(NonMatching, "revolution/WPAD/WPAD.c"),
+            Object(Matching, "revolution/WPAD/WPAD.c"),
         ],
     },
     {
