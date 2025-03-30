@@ -290,3 +290,5 @@ hbm/homebutton/HBMAnmController.cpp:
 
 hbm/homebutton/HBMGUIManager.cpp:
 	.text       start:0x806FFAD0 end:0x807011C4
+	.data       start:0x808D7BF8 end:0x808D7E68
+	.bss        start:0x809656D8 end:0x809656E0
