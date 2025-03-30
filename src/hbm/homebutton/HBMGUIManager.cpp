@@ -79,12 +79,13 @@ static void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 uWidth,
 
 	GXSetNumTexGens(0);
 	GXSetNumTevStages(1);
-	GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+	// GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+	GXSetTevOp(GX_TEVSTAGE0, GX_BLEND);
 	GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
 	GXSetBlendMode(GX_BM_NONE, GX_BL_ZERO, GX_BL_ZERO, GX_LO_NOOP);
 
 	Mtx modelMtx;
-	MTXTrans(modelMtx, 0.0f, 0.0f, 0.0f);
+	PSMTXTrans(modelMtx, 0.0f, 0.0f, 0.0f);
 	GXLoadPosMtxImm(modelMtx, 0);
 
 	GXSetLineWidth(uWidth, 0);
@@ -460,10 +461,10 @@ bool PaneComponent::contain(f32 x_, f32 y_)
 		return false;
 
 	nw4hbm::math::MTX34 invGlbMtx;
-	MTXInverse(mpPane->GetGlobalMtx(), invGlbMtx);
+	PSMTXInverse(mpPane->GetGlobalMtx(), invGlbMtx);
 
 	nw4hbm::math::VEC3 lclPos;
-	MTXMultVec(invGlbMtx, nw4hbm::math::VEC3(x_, y_, 0.0f), lclPos);
+	PSMTXMultVec(invGlbMtx, nw4hbm::math::VEC3(x_, y_, 0.0f), lclPos);
 
 	nw4hbm::ut::Rect rect = mpPane->GetPaneRect(*pDrawInfo);
 

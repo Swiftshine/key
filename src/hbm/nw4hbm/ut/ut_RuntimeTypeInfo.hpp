@@ -44,14 +44,14 @@ namespace nw4hbm { namespace ut
 		}; // size 0x04
 
 		template <class T>
-		const RuntimeTypeInfo *GetTypeInfoFromPtr_(T *)
+		inline const RuntimeTypeInfo *GetTypeInfoFromPtr_(T *)
 		{
 			return &T::typeInfo;
 		}
 	} // namespace detail
 
 	template <typename U, class T>
-	U DynamicCast(T *obj)
+	inline U DynamicCast(T *obj)
 	{
 		const detail::RuntimeTypeInfo *typeInfoU =
 			detail::GetTypeInfoFromPtr_(static_cast<U>(nullptr));

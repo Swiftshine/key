@@ -93,7 +93,7 @@ namespace nw4hbm { namespace lyt
 		}
 
 		// Layout::Build
-		ATTR_NOINLINE static Pane *BuildPaneObj(s32 kind, const void *dataPtr,
+		__attribute((never_inline)) static Pane *BuildPaneObj(s32 kind, const void *dataPtr,
 		                                        const ResBlockSet &resBlockSet);
 
 	// members

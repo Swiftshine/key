@@ -31,7 +31,7 @@ namespace nw4hbm { namespace lyt { namespace detail
 	}
 
 	template <typename T>
-	bool TestBit(T test, int pos)
+	inline bool TestBit(T test, int pos)
 	{
 		T mask = static_cast<T>(1 << pos);
 

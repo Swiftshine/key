@@ -114,6 +114,12 @@ namespace nw4hbm { namespace math
 		// operators
 		// operator VecPtr() { return reinterpret_cast<VecPtr>(this); }
 
+		operator Vec*() {
+			return reinterpret_cast<Vec*>(this);
+		}
+		operator const Vec*() const {
+			return reinterpret_cast<const Vec*>(this);
+		}
 	// members
 	public:
 		/* base _VEC3 */	// size 0x0c, offset 0x00

@@ -19,4 +19,7 @@
 #define DECL_SECTION(x) __declspec(section x)
 #define DECL_WEAK __declspec(weak)
 
+#define ATTR_UNUSED __attribute__((unused))
+#define ATTR_WEAK __attribute__((weak))
+
 #endif

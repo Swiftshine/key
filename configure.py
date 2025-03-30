@@ -396,13 +396,17 @@ config.libs = [
             *cflags_base,
             "-sdata 0",
             "-sdata2 0",
-            # "-func_align 16",
+            "-func_align 16",
+            "-DNDEBUG",
+            "-enc UTF-8",
+            "-fp hardware",
         ],
         "host" : False,
         "progress_category": "sdk",
         "objects" : [
             Object(Matching, "hbm/homebutton/HBMAnmController.cpp"),
             Object(Matching, "hbm/homebutton/HBMFrameController.cpp"),
+            Object(NonMatching, "hbm/homebutton/HBMGUIManager.cpp"),
         ],
     },
     {
