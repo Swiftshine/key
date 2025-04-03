@@ -26,7 +26,7 @@ public:
         mOption2.mInt = 0;
     }
 
-    // Returns whether or not something meaningul happens. What constitutes
+    // Returns whether or not something meaningful happens. What constitutes
     // "meaningful" is on a case-by-case basis.
     virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther);
 protected:
