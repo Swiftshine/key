@@ -6,21 +6,32 @@
 class CollisionInfo;
 
 class IObjHitCB {
-public:
-    inline IObjHitCB() { }
+private:
+    // These fields are used in too many different ways
+    // to be considered "standard".
+    struct IObjHitCBOption {
+        union {
+            int     mInt;
+            uint    mUint;
+            float   mFloat;
+            bool    mBoolArray[4];
+            void*   mPointer;
+        };
+    };
 
-    // the meaning of values that any particular derived class returns is arbitrary,
-    // but in most cases, this function returns whether or not something meaningful occurred.
+    ASSERT_SIZE(IObjHitCBOption, 4);
+public:
+    inline IObjHitCB() {
+        mOption1.mInt = 0;
+        mOption2.mInt = 0;
+    }
+
+    // Returns whether or not something meaningul happens. What constitutes
+    // "meaningful" is on a case-by-case basis.
     virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther);
 protected:
-    union {
-        int i;
-        float f;
-    } m_4;
-    bool m_8;
-    bool m_9;
-    bool m_A;
-    bool m_B;
+    IObjHitCBOption mOption1;
+    IObjHitCBOption mOption2;
 };
 
 #endif

@@ -43,9 +43,11 @@ StringFloatPair Pairs[3];
 // https://decomp.me/scratch/g4QKw
 void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     int _24 = buildInfo->m_24;
-    m_8 = false;
+
+    mOption2.mBoolArray[0] = false;
+
     if (_24 == 66) {
-        m_8 = true;
+        mOption2.mBoolArray[0] = true;
     }
 
     bool param0 = buildInfo->GetBoolParam(ParameterID::FIRST);
@@ -57,16 +59,16 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     m_149 = buildInfo->GetBoolParam(ParameterID::FIFTH);
 
-    IObjHitCB::m_4.i = 0;
+    mOption1.mInt = 0;
     int gmkID = GetGimmickID();
     if (gmkID == 0x14B) {
         // ShootingBeadPopItem
-        IObjHitCB::m_4.i = 1;
+        mOption1.mInt = 1;
     } else {
         gmkID = GetGimmickID();
         if (gmkID == 0x14C) {
             // BeadPopSwitch
-            IObjHitCB::m_4.i = 2;
+            mOption1.mInt = 2;
         } 
     }
 
@@ -96,7 +98,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
 
-    if (!m_8) {
+    if (!mOption2.mBoolArray[0]) {
         gfl::ResFileObject resFileInfo;
         GetResFileInfo(resFileInfo, this);
 
@@ -115,7 +117,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         mAnimCtrl.Create(anmCtrl);
     }
 
-    if (param0 && !m_8) {
+    if (param0 && !mOption2.mBoolArray[0]) {
         mPopItemInfo.Create(gfl::HeapID::Work);
         mPopItemInfo->Init(1.5f);
         mPopItemInfo->SetPosition(mPosition);
@@ -242,13 +244,11 @@ void GmkBeadPopItem::SetCollisionEnabled(bool enabled) {
 
 // https://decomp.me/scratch/qK0M3
 bool GmkBeadPopItem::Enable() {
-    uint i = 0;
-
-    for (uint i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++) {
         const std::string& tagList = GetStringParam(i).c_str();
 
         if (tagList.c_str() != nullptr) {
-            switch (IObjHitCB::m_4.i) {
+            switch (mOption1.mInt) {
                 case 1: {
                     SetStateForTaggedObjects("POP_BEAD", tagList.c_str());
                     break;
@@ -266,7 +266,7 @@ bool GmkBeadPopItem::Enable() {
         }
     }
 
-    if (!m_8) {
+    if (!mOption2.mBoolArray[0]) {
         sound::SoundHandle::CreateAndPlaySound(mPosition, 0xE7, 0, 0);
     }
 

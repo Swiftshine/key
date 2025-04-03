@@ -122,7 +122,7 @@ void GmkCandleStick::SetState(FlfGameObj* setter, std::string& state) {
 
         if (lamp != nullptr) {
             float pos = lamp->fn_805B6DB4();
-            mMoleLight->SetZPosition(IObjHitCB::m_4.f * pos);
+            mMoleLight->SetZPosition(IObjHitCB::mOption1.mFloat * pos);
         }
     }
 }
@@ -160,5 +160,5 @@ void GmkCandleStick::UpdateGraphics(bool createEffect) {
         mFlfMdlDraw->ResetNURBSAnimation(1, true);
     }
 
-    IObjHitCB::m_8 = createEffect;
+    mOption2.mBoolArray[0] = createEffect;
 }
