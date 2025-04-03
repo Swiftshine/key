@@ -21,10 +21,7 @@ private:
 
     ASSERT_SIZE(IObjHitCBOption, 4);
 public:
-    inline IObjHitCB() {
-        mOption1.mInt = 0;
-        mOption2.mInt = 0;
-    }
+    inline IObjHitCB() { }
 
     // Returns whether or not something meaningful happens. What constitutes
     // "meaningful" is on a case-by-case basis.

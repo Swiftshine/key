@@ -18,6 +18,10 @@ namespace gfl {
 
         inline void Destroy() { }
 
+        inline void Set(T* ptr) {
+            mPointer = ptr;
+        }
+
         inline void operator=(T* ptr) {
             mPointer = ptr;
         }
@@ -172,6 +176,8 @@ namespace gfl {
     template <typename T, void (*ReleaseFunc)(T*)>
     class ReleasedPointer : public PointerBase<T> {
     public:
+        inline ReleasedPointer() { }
+        
         inline ReleasedPointer(T* ptr) {
             mPointer = ptr;
         }

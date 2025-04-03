@@ -517,6 +517,7 @@ config.libs = [
             Object(NonMatching, "fluff/object/gimmick/GmkCameraControl.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkCamRectCtrl.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkCandleStick.cpp"),
+            Object(NonMatching, "fluff/object/gimmick/GmkCartBtn.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkColAnimMdl.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkMsCarrierGoal.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkSimpleMdl.cpp"),
