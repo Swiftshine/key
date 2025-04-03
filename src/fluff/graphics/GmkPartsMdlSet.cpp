@@ -1,7 +1,7 @@
-#include "graphics/ModelWrapper.h"
+#include "graphics/GmkPartsMdlSet.h"
 #include <string>
 
-ModelWrapper::ModelWrapper()
+GmkPartsMdlSet::GmkPartsMdlSet()
     : mPrimaryModel(nullptr)
     , mShadowModel(nullptr)
 {
@@ -9,7 +9,7 @@ ModelWrapper::ModelWrapper()
     mShadowOffset.y = 0.0f;
 }
 
-ModelWrapper::~ModelWrapper() {
+GmkPartsMdlSet::~GmkPartsMdlSet() {
     if (mPrimaryModel != nullptr) {
         delete mPrimaryModel;
     }
@@ -23,7 +23,7 @@ ModelWrapper::~ModelWrapper() {
     mShadowModel = nullptr;
 }
 
-void ModelWrapper::SetMatrix(const float zOffset, nw4r::math::MTX34& src, bool arg3) {
+void GmkPartsMdlSet::SetMatrix(const float zOffset, nw4r::math::MTX34& src, bool arg3) {
     nw4r::math::MTX34 mtx = src;
     mPrimaryModel->SetMatrix_thunk(mtx);
 
@@ -46,12 +46,12 @@ void ModelWrapper::SetMatrix(const float zOffset, nw4r::math::MTX34& src, bool a
 }
 
 
-bool ModelWrapper::GetPrimaryMatrix(nw4r::math::MTX34& dest) {
+bool GmkPartsMdlSet::GetPrimaryMatrix(nw4r::math::MTX34& dest) {
     return mPrimaryModel->GetMatrix(dest);
 }
 
-// https://decomp.me/scratch/OQnDu
-void ModelWrapper::RegisterResources(gfl::ResFileObject& fileInfo, const char* modelName, const char* shadowName, FullSortScene* scene, uint flags) {
+// https://decomp.me/scratch/EZvuo
+void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& fileInfo, const char* modelName, const char* shadowName, FullSortScene* scene, uint flags) {
     nw4r::g3d::ResFile resFile(fileInfo.IsValid() ? fileInfo->GetGfArch() : nullptr);
     NW4R_G3D_RESFILE_AC_ASSERT(resFile);
     
@@ -78,7 +78,7 @@ void ModelWrapper::RegisterResources(gfl::ResFileObject& fileInfo, const char* m
     mShadowModel->GetShadowOffset(mShadowOffset, partsStr.c_str());
 }
 
-void ModelWrapper::SetUpdate(bool update) {
+void GmkPartsMdlSet::SetUpdate(bool update) {
     mPrimaryModel->SetUpdate(update);
 
     if (mShadowModel != nullptr) {
@@ -86,7 +86,7 @@ void ModelWrapper::SetUpdate(bool update) {
     }
 }
 
-void ModelWrapper::fn_802374D4(float arg1) {
+void GmkPartsMdlSet::fn_802374D4(float arg1) {
     mPrimaryModel->fn_8065DCDC(arg1);
 
     if (mShadowModel != nullptr) {
@@ -94,7 +94,7 @@ void ModelWrapper::fn_802374D4(float arg1) {
     }
 }
 
-void ModelWrapper::ReplaceScene(gfl::Scene* scene) {
+void GmkPartsMdlSet::ReplaceScene(gfl::Scene* scene) {
     mPrimaryModel->GetScene()->RemoveRenderObj(mPrimaryModel);
     scene->AddRenderObj(mPrimaryModel);
 

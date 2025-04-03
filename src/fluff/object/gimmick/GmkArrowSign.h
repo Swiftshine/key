@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "object/Gimmick.h"
-#include "graphics/ModelWrapper.h"
+#include "graphics/GmkPartsMdlSet.h"
 #include "graphics/NwAnm.h"
 #include "misc/ScopedPointers.h"
 #include "graphics/FlfMdlDraw.h"
@@ -38,9 +38,9 @@ public:
     const char* GetOrientationAnimationName();
     static std::string GetResourceName(GimmickBuildInfo* buildInfo);
 private:
-    gfl::Pointer<ModelWrapper> mArrowModel; // @ 0x130
-    gfl::Pointer<ModelWrapper> mBaseModel; // @ 0x134
-    std::vector<ModelWrapper> mPoleUnitModels; // @ 0x138, size: 0xC
+    gfl::Pointer<GmkPartsMdlSet> mArrowModel; // @ 0x130
+    gfl::Pointer<GmkPartsMdlSet> mBaseModel; // @ 0x134
+    std::vector<GmkPartsMdlSet> mPoleUnitModels; // @ 0x138, size: 0xC
     gfl::Pointer<NwAnm> mAnimations[2]; // @ 0x144
     gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x14C, for NURBS rendering
     BOOL mIsMysteriousUFO;  // @ 0x150

@@ -1,15 +1,15 @@
-#ifndef FLUFF_MODELWRAPPER_H
-#define FLUFF_MODELWRAPPER_H
+#ifndef FLUFF_GMKPARTSMDLSET_H
+#define FLUFF_GMKPARTSMDLSET_H
 
 #include "gfl/gflScnMdlWrapper.h"
 #include "graphics/FullSortScene.h"
 #include "gfl/gflResFileInfo.h"
 #include <nw4r/math.h>
 
-class ModelWrapper {
+class GmkPartsMdlSet {
 public:
-    ModelWrapper();
-    ~ModelWrapper();
+    GmkPartsMdlSet();
+    ~GmkPartsMdlSet();
 
     void SetMatrix(const float zOffset, nw4r::math::MTX34& mtx, bool arg3);
     bool GetPrimaryMatrix(nw4r::math::MTX34& dest);

@@ -489,7 +489,7 @@ config.libs = [
             Object(NonMatching, "fluff/graphics/BGSTList.cpp"),
             Object(NonMatching, "fluff/graphics/FullSortScene.cpp"),
             Object(NonMatching, "fluff/graphics/FB2Tex.cpp"),
-            Object(NonMatching, "fluff/graphics/ModelWrapper.cpp"),
+            Object(NonMatching, "fluff/graphics/GmkPartsMdlSet.cpp"),
         ],
     },
     {
