@@ -48,7 +48,7 @@ public:
     virtual void Update() override;
 
     /* GmkBeadPopItem */
-    virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther) override;
+    virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gfl::Vec3& pos) override;
     virtual bool Enable();
 
 

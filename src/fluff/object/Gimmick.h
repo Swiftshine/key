@@ -21,6 +21,7 @@ struct GimmickVec {
 };
 
 class StatedGimmick;
+class IObjHitCB;
 
 class Gimmick : public FlfGameObj {
 public:
@@ -166,13 +167,13 @@ public:
     virtual void    vf68();
     virtual nw4r::math::VEC3   vf6C();
     virtual int     GetGimmickID();
-    virtual int     vf74();
-    virtual int     vf78();
-    virtual int     vf7C();
+    virtual int     vf74(IObjHitCB* other);
+    virtual int     vf78(IObjHitCB* other);
+    virtual int     vf7C(IObjHitCB* other, int);
     virtual int     vf80();
     virtual int     vf84();
     virtual int     vf88(FlfGameObj*, uint arg2);     
-    virtual int     vf8C();
+    virtual int     vf8C(IObjHitCB* other, int);
     virtual int     vf90();
     virtual int     vf94();
     virtual int     vf98();

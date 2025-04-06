@@ -7,28 +7,29 @@
 #include "graphics/GmkPartsMdlSet.h"
 #include "misc/ScopedPointers.h"
 #include "gfl/gflResFileInfo.h"
+#include "util/ButtonUtil.h"
 
 class GmkCart;
 
 class GmkCartBtn : public Gimmick, public IObjHitCB {
 private:
-
+    
 public:
     GmkCartBtn();
     virtual ~GmkCartBtn();
 
-    void fn_802513F0(int* arg1);
+    void Init(ButtonBuildInfo* buildInfo);
     GmkCart* GetCart();
 
     /* Gimmick */
     virtual void Update() override;
-    virtual int  vf74()   override;
-    virtual int  vf78()   override;
-    virtual int  vf7C()   override;
-    virtual int  vf8C()   override;
+    virtual int  vf74(IObjHitCB* other)   override;
+    virtual int  vf78(IObjHitCB* other)   override;
+    virtual int  vf7C(IObjHitCB* other, int arg2)   override;
+    virtual int  vf8C(IObjHitCB* other, int arg2)   override;
     
     /* IObjHitCB */
-    virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther) override;
+    virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gfl::Vec3& pos) override;
 private:
     bool m_134;
     gfl::ResFileObject mResFileObject;

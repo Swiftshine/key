@@ -129,19 +129,8 @@ void GmkCandleStick::SetState(FlfGameObj* setter, std::string& state) {
 
 void GmkCandleStick::UpdateGraphics(bool createEffect) {
     CollisionEntry* entry = mCollisionEntry.Get();
-    entry->GetInfo().mMatrixInited = createEffect;
-
-    if (createEffect) {
-        nw4r::math::MTX34* ownerMtx = entry->GetInfo().mOwnerMatrix;
-
-        if (ownerMtx != nullptr) {
-            entry->GetInfo().mMatrix = *ownerMtx;
-        } else {
-            PSMTXIdentity(entry->GetInfo().mMatrix);
-        }
-
-        entry->GetInfo().mBoundsInited = false;
-    }
+    
+    entry->ResetMatrixIf(createEffect);
 
     mMoleLight->SetUpdate(createEffect);
 

@@ -36,6 +36,36 @@ public:
     inline CollisionInfo& GetInfo() {
         return mInfo;
     }
+
+    inline void ResetMatrix(bool arg0) {
+        mInfo.mMatrixInited = arg0;
+
+        nw4r::math::MTX34* ownerMtx = mInfo.mOwnerMatrix;
+        
+        if (ownerMtx != nullptr) {
+            mInfo.mMatrix = *ownerMtx;
+        } else {
+            PSMTXIdentity(mInfo.mMatrix);
+        }
+
+        mInfo.mBoundsInited = false;
+    }
+
+    inline void ResetMatrixIf(bool arg0) {
+        mInfo.mMatrixInited = arg0;
+
+        if (arg0) {
+            nw4r::math::MTX34* ownerMtx = mInfo.mOwnerMatrix;
+            
+            if (ownerMtx != nullptr) {
+                mInfo.mMatrix = *ownerMtx;
+            } else {
+                PSMTXIdentity(mInfo.mMatrix);
+            }
+
+            mInfo.mBoundsInited = false;
+        }
+    }
 private:
     CollisionInfo mInfo;
     CollisionBounds2D m2DBounds;

@@ -99,6 +99,6 @@ bool GimmickUtil::fn_800507C8(int id) {
     return 0x130 <= id && id <= 0x138;
 }
 
-void GimmickUtil::GetButtonBRRES(gfl::ResInfo** dest) {
-    FlfMdlDraw::GetFileInfoFromArchive((gfl::ResFileInfo*&)dest, "gimmick/button/button.brres");
+void GimmickUtil::GetButtonBRRES(gfl::ResFileObject& dest) {
+    FlfMdlDraw::GetFileInfoFromArchive(dest, "gimmick/button/button.brres");
 }

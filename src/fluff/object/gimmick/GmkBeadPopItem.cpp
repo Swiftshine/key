@@ -193,7 +193,7 @@ void GmkBeadPopItem::SetState(int state) {
     SetupCollisionMatrix();
 }
 
-bool GmkBeadPopItem::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther) {
+bool GmkBeadPopItem::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gfl::Vec3& pos) {
     if (colSelf->mCollisionType == 0x19 && colOther->mCollisionType == 0x1B && mState < 2) {
         SetState(State::BeginSpawn);
         return true;
@@ -280,17 +280,8 @@ void GmkBeadPopItem::SetupCollisionMatrix() {
     }
 
     CollisionEntry* entry = mCollisionEntry.Get();
-    entry->GetInfo().mMatrixInited = enabled;
-
-    if (enabled) {
-        nw4r::math::MTX34* mtx = entry->GetInfo().mOwnerMatrix;
-        if (mtx != nullptr) {
-            entry->GetInfo().mMatrix = *mtx;
-        } else {
-            PSMTXIdentity(entry->GetInfo().mMatrix);
-        }
-        entry->GetInfo().mBoundsInited = false;
-    }
+    
+    entry->ResetMatrixIf(enabled);
 
     GmkBeadPopItem_Info* info = mPopItemInfo.Get();
 
