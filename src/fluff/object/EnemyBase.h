@@ -44,6 +44,8 @@ public:
     // ...
     virtual void vf5A4();
 protected:
+    int m_90;
+    int m_94;
     int m_98;
     int m_9C;
     int m_A0;

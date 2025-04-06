@@ -58,6 +58,8 @@ public:
     void SetupCollisionMatrix();
     std::string& GetStringParam(uint index);
 private:
+    int m_134;
+    bool m_138;
     int mState; // @ 0x13C
     float mCompletionPercentage; // @ 0x140, on a scale of 0.0 to 1.0
     float m_144;

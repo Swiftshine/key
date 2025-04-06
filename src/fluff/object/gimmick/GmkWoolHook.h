@@ -17,6 +17,8 @@ public:
 
     virtual ~GmkWoolHook();
 private:
+    int m_134;
+    int m_138;
     int m_13C;
     int m_140;
     int m_144;

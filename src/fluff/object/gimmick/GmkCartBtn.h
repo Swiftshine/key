@@ -6,6 +6,7 @@
 #include "object/collision/CollisionEntry.h"
 #include "graphics/GmkPartsMdlSet.h"
 #include "misc/ScopedPointers.h"
+#include "gfl/gflResFileInfo.h"
 
 class GmkCart;
 
@@ -29,6 +30,8 @@ public:
     /* IObjHitCB */
     virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther) override;
 private:
+    bool m_134;
+    gfl::ResFileObject mResFileObject;
     gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry;
     gfl::Pointer<GmkPartsMdlSet> mPartsModelSet;
     Gimmick* mCart;

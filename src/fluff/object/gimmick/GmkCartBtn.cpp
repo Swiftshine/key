@@ -4,8 +4,8 @@
 GmkCartBtn::GmkCartBtn()
     : Gimmick(0x115)
 {
-    mOption1.mBoolArray[0] = false;
-    mOption2.mPointer = 0;
+    m_134 = false;
+    mResFileObject = nullptr;
     mCollisionEntry.Set(nullptr);
     mPartsModelSet.Set(nullptr);
     mCart = nullptr;
@@ -32,26 +32,26 @@ GmkCart* GmkCartBtn::GetCart() {
 bool GmkCartBtn::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther) {
     bool ret = true;
 
-    mOption1.mBool = true;
+    m_134 = true;
     
     if (mCartCollision != nullptr) {
         ret = mCartCollision->OnCollision(colSelf, colOther);
     }
     
-    mOption1.mBool = false;
+    m_134 = false;
     return ret;   
 }
 
 int GmkCartBtn::vf74() {
     int ret = 1;
 
-    mOption1.mBool = true;
+    m_134 = true;
 
     if (mCart != nullptr) {
         ret = mCart->vf74();
     }
     
-    mOption1.mBool = false;
+    m_134 = false;
     return ret;
 }
 
@@ -59,13 +59,13 @@ int GmkCartBtn::vf74() {
 int GmkCartBtn::vf78() {
     int ret = 1;
 
-    mOption1.mBool = true;
+    m_134 = true;
 
     if (mCart != nullptr) {
         ret = mCart->vf78();
     }
     
-    mOption1.mBool = false;
+    m_134 = false;
     return ret;
 }
 
@@ -73,13 +73,13 @@ int GmkCartBtn::vf78() {
 int GmkCartBtn::vf7C() {
     int ret = 1;
 
-    mOption1.mBool = true;
+    m_134 = true;
 
     if (mCart != nullptr) {
         ret = mCart->vf7C();
     }
     
-    mOption1.mBool = false;
+    m_134 = false;
     return ret;
 }
 
@@ -87,12 +87,12 @@ int GmkCartBtn::vf7C() {
 int GmkCartBtn::vf8C() {
     int ret = 1;
 
-    mOption1.mBool = true;
+    m_134 = true;
 
     if (mCart != nullptr) {
         ret = mCart->vf8C();
     }
     
-    mOption1.mBool = false;
+    m_134 = false;
     return ret;
 }

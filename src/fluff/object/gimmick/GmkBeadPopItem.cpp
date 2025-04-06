@@ -44,10 +44,10 @@ StringFloatPair Pairs[3];
 void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     int _24 = buildInfo->m_24;
 
-    mOption2.mBoolArray[0] = false;
+    m_138 = false;
 
     if (_24 == 66) {
-        mOption2.mBoolArray[0] = true;
+        m_138 = true;
     }
 
     bool param0 = buildInfo->GetBoolParam(ParameterID::FIRST);
@@ -59,16 +59,16 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     m_149 = buildInfo->GetBoolParam(ParameterID::FIFTH);
 
-    mOption1.mInt = 0;
+    m_134 = 0;
     int gmkID = GetGimmickID();
     if (gmkID == 0x14B) {
         // ShootingBeadPopItem
-        mOption1.mInt = 1;
+        m_134 = 1;
     } else {
         gmkID = GetGimmickID();
         if (gmkID == 0x14C) {
             // BeadPopSwitch
-            mOption1.mInt = 2;
+            m_134 = 2;
         } 
     }
 
@@ -98,7 +98,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
 
-    if (!mOption2.mBoolArray[0]) {
+    if (!m_138) {
         gfl::ResFileObject resFileInfo;
         GetResFileInfo(resFileInfo, this);
 
@@ -117,7 +117,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         mAnimCtrl.Create(anmCtrl);
     }
 
-    if (param0 && !mOption2.mBoolArray[0]) {
+    if (param0 && !m_138) {
         mPopItemInfo.Create(gfl::HeapID::Work);
         mPopItemInfo->Init(1.5f);
         mPopItemInfo->SetPosition(mPosition);
@@ -248,7 +248,7 @@ bool GmkBeadPopItem::Enable() {
         const std::string& tagList = GetStringParam(i).c_str();
 
         if (tagList.c_str() != nullptr) {
-            switch (mOption1.mInt) {
+            switch (m_134) {
                 case 1: {
                     SetStateForTaggedObjects("POP_BEAD", tagList.c_str());
                     break;
@@ -266,7 +266,7 @@ bool GmkBeadPopItem::Enable() {
         }
     }
 
-    if (!mOption2.mBoolArray[0]) {
+    if (!m_138) {
         sound::SoundHandle::CreateAndPlaySound(mPosition, 0xE7, 0, 0);
     }
 
