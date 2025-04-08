@@ -108,13 +108,13 @@ private:
     int m_3C;
     int m_40;
     int m_44;
-    int mNumZekeFound;
-    int mMaxZekeFound;
+    int mNumZekeFound; // @ 0x48
+    int mMaxZekeFound; // @ 0x4C
     float m_50;
     float m_54;
     float m_58;
     int m_5C;
-    int m_60[4];
+    int mBeadThresholds[4]; // @ 0x60; the number of beads needed to get a wood, bronze, silver, or gold medal
     int m_70;
     int m_74;
     u8 m_78[0x18];
