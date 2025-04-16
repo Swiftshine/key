@@ -573,6 +573,7 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/demo/DemoObject.cpp"),
+            Object(NonMatching, "fluff/demo/FlfDemoCtrl.cpp"),
         ],
     },
 
