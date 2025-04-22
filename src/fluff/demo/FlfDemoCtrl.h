@@ -11,6 +11,7 @@
 #include "gfl/gflScnMdlWrapper.h"
 #include "gfl/gflTask.h"
 #include "object/PlayerBase.h"
+#include "misc/StringCounter.h"
 
 // size: 0x24
 class FlfDemoNodeCtrl {
@@ -97,6 +98,8 @@ class FlfDemoCtrl {
 public:
     FlfDemoCtrl();
     virtual ~FlfDemoCtrl();
+
+    static void GetName(gfl::Pointer<StringCounter>& str, const char* name);
 private:
     int mState; // @ 0x4
     std::string mResourcePath; // @ 0x8
