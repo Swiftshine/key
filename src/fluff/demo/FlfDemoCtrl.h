@@ -4,14 +4,14 @@
 #include "types.h"
 #include <string>
 #include <nw4r/g3d.h>
+#include "gfl/gflArray.h"
 #include "gfl/gflLinkedList.h"
 #include "gfl/gflResFileInfo.h"
-#include "graphics/FlfMdlDraw.h"
-#include "misc/ScopedPointers.h"
 #include "gfl/gflScnMdlWrapper.h"
 #include "gfl/gflTask.h"
+#include "graphics/FlfMdlDraw.h"
+#include "misc/ScopedPointers.h"
 #include "object/PlayerBase.h"
-#include "misc/StringCounter.h"
 
 // size: 0x24
 class FlfDemoNodeCtrl {
@@ -34,12 +34,12 @@ public:
 private:
     int m_4;
     uint mFullSortSceneID;          // @ 0x8
-    nw4r::g3d::ResNode mResNode;    // @ 0xC
-    nw4r::g3d::ResName mAnimNo;     // @ 0x10
-    nw4r::g3d::ResName mBlendFrame; // @ 0x14
-    nw4r::g3d::ResName mUpdateRate; // @ 0x18
-    nw4r::g3d::ResName mLayer;      // @ 0x1C
-    nw4r::g3d::ResName mVisibility; // @ 0x20
+    gfl::CountedArray<u16> mResNode;        // @ 0xC
+    gfl::CountedArray<u16> mAnimNo;         // @ 0x10
+    gfl::CountedArray<u16> mBlendFrame;     // @ 0x14
+    gfl::CountedArray<u16> mUpdateRate;     // @ 0x18
+    gfl::CountedArray<u16> mLayer;          // @ 0x1C
+    gfl::CountedArray<u16> mVisibility;     // @ 0x20
 };
 
 // size: 0x34
@@ -99,7 +99,7 @@ public:
     FlfDemoCtrl();
     virtual ~FlfDemoCtrl();
 
-    static void GetName(gfl::Pointer<StringCounter>& str, const char* name);
+    static void GetCount(gfl::CountedArray<u16>* dst, const char* name);
 private:
     int mState; // @ 0x4
     std::string mResourcePath; // @ 0x8
