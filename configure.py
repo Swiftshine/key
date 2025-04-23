@@ -585,7 +585,7 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/language/Language.cpp"),
-            Object(NonMatching, "fluff/util/NURBSCounter.cpp"),
+            Object(NonMatching, "fluff/util/NURBSOption.cpp"),
         ],
     },
 

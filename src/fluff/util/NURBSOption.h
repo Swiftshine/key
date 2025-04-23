@@ -1,15 +1,15 @@
-#ifndef FLUFF_NURBSCOUNTER_H
-#define FLUFF_NURBSCOUNTER_H
+#ifndef FLUFF_NURBSOption_H
+#define FLUFF_NURBSOption_H
 
 #include "types.h"
 #include "gfl/gflArray.h"
 
-class NURBSCounter {
+class NURBSOption {
 public:
-    NURBSCounter(const char* name);
-    ~NURBSCounter();
+    NURBSOption(const char* name);
+    ~NURBSOption();
 
-    int fn_802B9908(float arg0);
+    s16 GetOption(float arg0);
     
     inline void SetCount(size_t count) {
         mCount = count;

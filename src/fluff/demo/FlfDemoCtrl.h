@@ -10,36 +10,39 @@
 #include "gfl/gflTask.h"
 #include "graphics/FlfMdlDraw.h"
 #include "misc/ScopedPointers.h"
-#include "util/NURBSCounter.h"
+#include "util/NURBSOption.h"
 #include "object/PlayerBase.h"
+#include "util/NURBSStructures.h"
 
 // size: 0x24
 class FlfDemoNodeCtrl {
 public:
     FlfDemoNodeCtrl(nw4r::g3d::ResNode* resNode);
     virtual ~FlfDemoNodeCtrl();
-    
+    nw4r::g3d::ResName GetResName();
+    void ResetOptions(NURBSStruct2* arg1);
+
     virtual void vfC();
     virtual void vf10();
     virtual void vf14();
-    virtual void vf18();
+    virtual void vf18(float);
     virtual void vf1C();
-    virtual void vf20();
-    virtual void vf24();
-    virtual void vf28();
-    virtual void vf2C(float);
-    virtual void vf30();
-    virtual void vf34();
+    virtual uint vf20();
+    virtual void vf24(s16);
+    virtual void SetBlendFrame(int);
+    virtual void SetUpdateRate(float);
+    virtual void vf30(uint);
+    virtual void SetVisibility(bool);
     virtual void SetMatrix(nw4r::math::MTX34& matrix);
 private:
     int m_4;
-    uint mFullSortSceneID;          // @ 0x8
-    NURBSCounter* mResNode;        // @ 0xC
-    NURBSCounter* mAnimNo;         // @ 0x10
-    NURBSCounter* mBlendFrame;     // @ 0x14
-    NURBSCounter* mUpdateRate;     // @ 0x18
-    NURBSCounter* mLayer;          // @ 0x1C
-    NURBSCounter* mVisibility;     // @ 0x20
+    int mFullSortSceneID;                      // @ 0x8
+    nw4r::g3d::ResNode mResNode;                // @ 0xC
+    gfl::Pointer<NURBSOption> mAnimNo;         // @ 0x10
+    gfl::Pointer<NURBSOption> mBlendFrame;     // @ 0x14
+    gfl::Pointer<NURBSOption> mUpdateRate;     // @ 0x18
+    gfl::Pointer<NURBSOption> mLayer;          // @ 0x1C
+    gfl::Pointer<NURBSOption> mVisibility;     // @ 0x20
 };
 
 // size: 0x34
@@ -99,7 +102,7 @@ public:
     FlfDemoCtrl();
     virtual ~FlfDemoCtrl();
 
-    static void GetCount(NURBSCounter* dst, const char* name);
+    static void GetCount(NURBSOption* dst, const char* name);
 private:
     int mState; // @ 0x4
     std::string mResourcePath; // @ 0x8

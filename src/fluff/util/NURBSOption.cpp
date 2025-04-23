@@ -1,8 +1,8 @@
-#include "util/NURBSCounter.h"
+#include "util/NURBSOption.h"
 #include <string>
 
 // https://decomp.me/scratch/8ylQ9
-NURBSCounter::NURBSCounter(const char* name)
+NURBSOption::NURBSOption(const char* name)
     : mArray(nullptr)
 {
     size_t count = 0;
@@ -36,11 +36,11 @@ NURBSCounter::NURBSCounter(const char* name)
     }
 }
 
-NURBSCounter::~NURBSCounter() { }
+NURBSOption::~NURBSOption() { }
 
 // https://decomp.me/scratch/WL2Uc
-int NURBSCounter::fn_802B9908(float arg0) {
-    int result;
+s16 NURBSOption::GetOption(float arg0) {
+    s16 result;
 
     if (mCount == 0) {
         result = 0;
