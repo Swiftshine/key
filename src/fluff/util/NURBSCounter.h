@@ -9,6 +9,8 @@ public:
     NURBSCounter(const char* name);
     ~NURBSCounter();
 
+    int fn_802B9908(float arg0);
+    
     inline void SetCount(size_t count) {
         mCount = count;
     }

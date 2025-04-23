@@ -37,3 +37,37 @@ NURBSCounter::NURBSCounter(const char* name)
 }
 
 NURBSCounter::~NURBSCounter() { }
+
+// https://decomp.me/scratch/WL2Uc
+int NURBSCounter::fn_802B9908(float arg0) {
+    int result;
+
+    if (mCount == 0) {
+        result = 0;
+    } else {
+        u16* arr = mArray;
+        if (static_cast<float>(*arr) <= arg0) {
+            int i = mCount;
+            result = 0;
+            
+            while (i != 0) {
+                if (
+                    static_cast<float>(*arr) <= arg0 &&
+                    arg0 < static_cast<float>(arr[(result + 1) * 2])
+                ) {
+                    return arr[result * 2 + 1];
+                }
+
+                arr += 2;
+                result++;
+                i--;    
+            }
+
+            result = arr[(mCount - 1) * 2 + 1];
+        } else {
+            result = arr[1];
+        }
+    }
+
+    return result;
+}
