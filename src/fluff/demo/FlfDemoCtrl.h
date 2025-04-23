@@ -4,13 +4,13 @@
 #include "types.h"
 #include <string>
 #include <nw4r/g3d.h>
-#include "gfl/gflArray.h"
 #include "gfl/gflLinkedList.h"
 #include "gfl/gflResFileInfo.h"
 #include "gfl/gflScnMdlWrapper.h"
 #include "gfl/gflTask.h"
 #include "graphics/FlfMdlDraw.h"
 #include "misc/ScopedPointers.h"
+#include "util/NURBSCounter.h"
 #include "object/PlayerBase.h"
 
 // size: 0x24
@@ -34,12 +34,12 @@ public:
 private:
     int m_4;
     uint mFullSortSceneID;          // @ 0x8
-    gfl::CountedArray<u16> mResNode;        // @ 0xC
-    gfl::CountedArray<u16> mAnimNo;         // @ 0x10
-    gfl::CountedArray<u16> mBlendFrame;     // @ 0x14
-    gfl::CountedArray<u16> mUpdateRate;     // @ 0x18
-    gfl::CountedArray<u16> mLayer;          // @ 0x1C
-    gfl::CountedArray<u16> mVisibility;     // @ 0x20
+    NURBSCounter* mResNode;        // @ 0xC
+    NURBSCounter* mAnimNo;         // @ 0x10
+    NURBSCounter* mBlendFrame;     // @ 0x14
+    NURBSCounter* mUpdateRate;     // @ 0x18
+    NURBSCounter* mLayer;          // @ 0x1C
+    NURBSCounter* mVisibility;     // @ 0x20
 };
 
 // size: 0x34
@@ -99,7 +99,7 @@ public:
     FlfDemoCtrl();
     virtual ~FlfDemoCtrl();
 
-    static void GetCount(gfl::CountedArray<u16>* dst, const char* name);
+    static void GetCount(NURBSCounter* dst, const char* name);
 private:
     int mState; // @ 0x4
     std::string mResourcePath; // @ 0x8

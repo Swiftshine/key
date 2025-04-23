@@ -10,6 +10,10 @@ namespace gfl {
     public:
         inline Array() { }
         
+        inline Array(T* ptr)
+            : mArray(ptr)
+        { }
+        
         inline ~Array() {
             delete[] mArray;
             mArray = nullptr;
@@ -18,7 +22,7 @@ namespace gfl {
         inline void Create(size_t len) {
             T* temp = new (gfl::HeapID::Work) T[len];
 
-            if (!temp) {
+            if (temp == nullptr) {
                 Destroy();
             } else {
                 mArray = temp;
@@ -67,45 +71,6 @@ namespace gfl {
         inline T* get() { return mArray; }
     private:
         T mArray[N];
-    };
-
-    template <typename T>
-    class CountedArray {
-    public:
-        inline CountedArray() { }
-        inline ~CountedArray() { }
-
-        inline T& operator[](size_t index) {
-            return mArray[index];
-        }
-
-        inline void Create(T* ptr) {
-            if (ptr == nullptr) {
-                Destroy();
-            } else {
-                mArray = ptr;
-            }
-        }
-
-        inline void Destroy() {
-            delete mArray;
-            mArray = nullptr;
-        }
-
-        inline void SetCount(size_t count) {
-            mCount = count;
-        }
-
-        inline void Set(T* ptr) {
-            mArray = ptr;
-        }
-
-        inline T* Get() {
-            return mArray;
-        }
-    private:
-        size_t mCount;
-        T* mArray;
     };
 }
 
