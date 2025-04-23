@@ -1,4 +1,5 @@
 #include "demo/FlfDemoCtrl.h"
+#include "util/FullSortSceneUtil.h"
 
 FlfDemoNodeCtrl::FlfDemoNodeCtrl(nw4r::g3d::ResNode* resNode)
     : m_4(0)
@@ -13,11 +14,9 @@ FlfDemoNodeCtrl::FlfDemoNodeCtrl(nw4r::g3d::ResNode* resNode)
 
 FlfDemoNodeCtrl::~FlfDemoNodeCtrl() { }
 
-// https://decomp.me/scratch/DzN4G
-nw4r::g3d::ResName FlfDemoNodeCtrl::GetResName() {
+const char* FlfDemoNodeCtrl::GetResName() {
     NW4R_RESNODE_ASSERT(mResNode);
-
-    return mResNode.GetResName();
+    return mResNode.GetName();
 }
 
 // https://decomp.me/scratch/eCUhG
@@ -85,4 +84,80 @@ void FlfDemoNodeCtrl::vf18(float arg0) {
             vf24(opt);
         }
     }
+}
+
+void FlfDemoNodeCtrl::SetBlendFrame(int frame) {
+    return;
+}
+
+void FlfDemoNodeCtrl::SetUpdateRate(float rate) {
+    return;
+}
+
+void FlfDemoNodeCtrl::vf30(uint arg0) {
+    return;
+}
+
+void FlfDemoNodeCtrl::SetVisibility(bool visibility) {
+    return;
+}
+
+void FlfDemoNodeCtrl::vf24(s16 arg0) {
+    return;
+}
+
+uint FlfDemoNodeCtrl::vf20() {
+    return 0;
+}
+
+void FlfDemoNodeCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
+    NW4R_RESNODE_ASSERT_VALID(mResNode);
+
+    u32 mtxID = mResNode.GetMtxID();
+
+    nw4r::math::MTX34 mtx;
+    mtx[0][0] = 0.0f;
+    mtx[0][1] = 0.0f;
+    mtx[0][2] = 0.0f;
+    mtx[0][3] = 0.0f;
+    mtx[1][0] = 0.0f;
+    mtx[1][1] = 0.0f;
+    mtx[1][2] = 0.0f;
+    mtx[1][3] = 0.0f;
+    mtx[2][0] = 0.0f;
+    mtx[2][1] = 0.0f;
+    mtx[2][2] = 0.0f;
+    mtx[2][3] = 0.0f;
+
+    nw4r::math::MTX34 mtx2;
+    memcpy(mtx2, matrices + mtxID, sizeof(nw4r::math::MTX34));
+    mtx = mtx2;
+    
+    f32 tmp = FullSortSceneUtil::GetZOrder(mFullSortSceneID, 4);
+    nw4r::math::VEC3 vec = GetMTXTranslation(mtx);
+    vec.z += tmp;
+    SetMTXTranslation(mtx, vec);
+    SetMatrix(mtx);
+}
+
+void FlfDemoNodeCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+    return;
+}
+
+void FlfDemoNodeCtrl::GetCharaResFileObject(gfl::ResFileObject& resFileObject, nw4r::g3d::ResNode* resNode, std::string& name) {
+    gfl::ResFileObject::FromArchive(resFileObject, GetCharaResourceName(name).c_str());
+}
+
+// https://decomp.me/scratch/GIRBt
+std::string FlfDemoNodeCtrl::GetCharaResourceName(std::string& name) {
+    std::string temp(name, 3, std::string::npos);
+
+    for (int i = 0; i < temp.length(); i++) {
+        if (temp[i] == '_') {
+            char* c = (char*)temp.c_str();
+            c[i] = '/';
+        }
+    }
+    
+    return "chara/" + temp;
 }

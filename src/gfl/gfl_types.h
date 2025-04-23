@@ -5,6 +5,7 @@
 
 const char g3d_resfile_ac_h[] = "g3d_resfile_ac.h";
 const char NW4R_Failed_assertion_p_and_0x1f[] = "NW4R:Failed assertion !((u32)p & 0x1f)";
+const char NW4R_Failed_assertion_IsValid[] = "NW4R:Failed assertion IsValid()";
 const char LinkList_h[] = "LinkList.h";
 const char NW4R_Pointer_must_not_be_NULL[] = "NW4R:Pointer must not be NULL (p)";
 const char ObjectNotValid[] = "%s::%s: Object not valid.";
@@ -29,6 +30,13 @@ const char ResNode[] = "ResNode";
     do { \
         if (resnode.ptr() == nullptr) { \
             nw4r::db::Panic(g3d_resfile_ac_h, 0x2C, ObjectNotValid, ResNode, ref); \
+        } \
+    } while(0); \
+
+#define NW4R_RESNODE_ASSERT_VALID(resnode) \
+    do { \
+        if (resnode.ptr() == nullptr) { \
+            nw4r::db::Panic(g3d_resfile_ac_h, 0x53, NW4R_Failed_assertion_IsValid); \
         } \
     } while(0); \
 

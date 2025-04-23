@@ -80,6 +80,11 @@ public:
         return ResName(NULL);
     }
 
+    const char* GetName() const {
+        const ResNodeData &r = ref();
+        return ofs_to_ptr<const char>(r.name);
+    }
+
     u32 GetID() const {
         if (IsValid()) {
             return ptr()->id;

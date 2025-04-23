@@ -19,25 +19,38 @@ class FlfDemoNodeCtrl {
 public:
     FlfDemoNodeCtrl(nw4r::g3d::ResNode* resNode);
     virtual ~FlfDemoNodeCtrl();
-    nw4r::g3d::ResName GetResName();
+    const char* GetResName();
     void ResetOptions(NURBSStruct2* arg1);
 
     virtual void vfC();
     virtual void vf10();
-    virtual void vf14();
+    virtual void SetMatrix(nw4r::math::MTX34* matrices);
     virtual void vf18(float);
     virtual void vf1C();
-    virtual uint vf20();
+    DECL_WEAK virtual uint vf20();
     virtual void vf24(s16);
-    virtual void SetBlendFrame(int);
-    virtual void SetUpdateRate(float);
+    virtual void SetBlendFrame(int frame);
+    virtual void SetUpdateRate(float rate);
     virtual void vf30(uint);
-    virtual void SetVisibility(bool);
+    virtual void SetVisibility(bool visibility);
     virtual void SetMatrix(nw4r::math::MTX34& matrix);
+
+    static void GetCharaResFileObject(gfl::ResFileObject& resFileObject, nw4r::g3d::ResNode* resNode, std::string& name);
+    static std::string GetCharaResourceName(std::string& name);
+
+    static inline void SetMTXTranslation(nw4r::math::MTX34& mtx, nw4r::math::VEC3& src) {
+        mtx[0][3] = src.x;
+        mtx[1][3] = src.y;
+        mtx[2][3] = src.z;
+    }
+    
+    static inline nw4r::math::VEC3 GetMTXTranslation(nw4r::math::MTX34& mtx) {
+        return nw4r::math::VEC3(mtx[0][3], mtx[1][3], mtx[2][3]);
+    }
 private:
     int m_4;
     int mFullSortSceneID;                      // @ 0x8
-    nw4r::g3d::ResNode mResNode;                // @ 0xC
+    nw4r::g3d::ResNode mResNode;               // @ 0xC
     gfl::Pointer<NURBSOption> mAnimNo;         // @ 0x10
     gfl::Pointer<NURBSOption> mBlendFrame;     // @ 0x14
     gfl::Pointer<NURBSOption> mUpdateRate;     // @ 0x18
