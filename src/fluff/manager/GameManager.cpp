@@ -28,7 +28,7 @@ PlayerBase* GameManager::GetPlayerByID(uint playerID) {
     }
     
     // we're trying to get Prince Fluff, but he doesn't exist
-    if (PlayerBase::PlayerIDs::PrinceFluff == playerID && GameManager::GetPlayerCount() == 1) {
+    if (PlayerBase::PlayerID::PrinceFluff == playerID && GameManager::GetPlayerCount() == 1) {
         return nullptr;
     }
 
@@ -37,7 +37,7 @@ PlayerBase* GameManager::GetPlayerByID(uint playerID) {
 
 PlayerBase* GameManager::GetPrinceFluff() {
     if (GameManager::sInstance) {
-        return GameManager::sInstance->mPlayers[PlayerBase::PlayerIDs::PrinceFluff];
+        return GameManager::sInstance->mPlayers[PlayerBase::PlayerID::PrinceFluff];
     }
 
     return nullptr;

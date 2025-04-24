@@ -1,6 +1,9 @@
 #include "demo/FlfDemoCtrl.h"
 #include "util/FullSortSceneUtil.h"
 #include "manager/StageManager.h"
+#include "manager/GameManager.h"
+
+/* FlfDemoNodeCtrl */
 
 FlfDemoNodeCtrl::FlfDemoNodeCtrl(nw4r::g3d::ResNode resNode)
     : m_4(0)
@@ -163,7 +166,8 @@ std::string FlfDemoNodeCtrl::GetCharaResourceName(std::string& name) {
     return "chara/" + temp;
 }
 
-// https://decomp.me/scratch/vOY9K
+/* FlfDemoCharCtrl */
+
 FlfDemoCharCtrl::FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name)
     : FlfDemoNodeCtrl(resNode) 
     , mResourcePath()
@@ -215,4 +219,107 @@ void FlfDemoCharCtrl::SetVisibility(bool visibility) {
 
 void FlfDemoCharCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
     mFlfMdlDraw->SetWoolDrawMatrix(mtx);
+}
+
+
+/* FlfDemoPlayerCtrl */
+
+
+// https://decomp.me/scratch/Ef5pK
+FlfDemoPlayerCtrl::FlfDemoPlayerCtrl(nw4r::g3d::ResNode resNode, std::string& name)
+    : FlfDemoNodeCtrl(resNode)
+    , mIsPlayerStateDefault(false)
+    , m_25(false)
+    , m_26(false)
+    , m_28(5)
+{
+    bool princeFluff = false;
+    if (name.length() != 0) {
+        if (name[0] == '1') {
+            princeFluff = true;
+        }
+    }
+
+    if (!princeFluff) {
+        mPlayer = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+    } else {
+        mPlayer = GameManager::GetPrinceFluff();
+        GameManager::UpdatePrinceFluff(true);
+    }
+
+    if (mPlayer != nullptr) {
+        mIsPlayerStateDefault = mPlayer->IsStateDefault();
+        mPlayer->fn_8009C464(true);
+        mPlayer->Reset(1, PlayerBase::PlayerState::TouchGround, 0, 10);
+        mPlayer->SetIsControlled(true);
+    }
+}
+
+FlfDemoPlayerCtrl::~FlfDemoPlayerCtrl() {
+    if (mPlayer != nullptr) {
+        if (!mIsPlayerStateDefault) {
+            mPlayer->Reset(0, PlayerBase::PlayerState::TouchGround, 0, 10);
+        }
+
+        FlfMdlCollision* flfMdlCollision = mPlayer->GetFlfMdlCollision();
+
+        if (flfMdlCollision != nullptr && m_25) {
+            flfMdlCollision->fn_800F0B48(m_26);
+        }
+
+        if (mPlayer->GetPlayerID() == PlayerBase::PlayerID::PrinceFluff) {
+            GameManager::UpdatePrinceFluff(false);
+        }
+
+        mPlayer->SetIsControlled(false);
+        mPlayer = nullptr;
+    }
+}
+
+void FlfDemoPlayerCtrl::vf1C() {
+    if (mPlayer != nullptr) {
+        mPlayer->GetPlayerMdlMng()->fn_800A0A84();
+    }
+}
+
+void FlfDemoPlayerCtrl::vf18(float arg0) {
+    FlfDemoNodeCtrl::vf18(arg0);
+
+    if (mPlayer != nullptr && mPlayer->GetFlfMdlCollision() != nullptr) {
+        if (!m_25) {
+            m_26 = mPlayer->GetFlfMdlCollision()->fn_800F0BC0(0);
+            m_25 = true;
+        }
+
+        mPlayer->GetFlfMdlCollision()->fn_800F0B48(false);
+        mPlayer->SetUnk78C(0);
+    }
+}
+
+uint FlfDemoPlayerCtrl::vf20() {
+    if (mPlayer != nullptr) {
+        return mPlayer->GetPlayerMdlMng()->GetFlfMdlDraw()->GetUnk20();
+    }
+
+    return 0;
+}
+
+// nonmatching
+void FlfDemoPlayerCtrl::vf24(int arg0) {
+    if (mPlayer == nullptr) {
+        return;
+    }
+    
+    size_t offs = 0;
+
+    int animationID = 0;
+
+    for (int i = 0; i < 101; i++) {
+        if (arg0 == PlayerMdlMng::PlayerAnimationIDs[i]) {
+            animationID = arg0;
+            break;
+        }
+    }   
+
+    mPlayer->PlayAnimation(animationID);
 }

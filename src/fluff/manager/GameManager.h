@@ -114,9 +114,9 @@ public:
     static bool IsStageReady();
     static gfl::ParamBool* fn_8000FC64(uint arg0);
     static void SetupPlayers(nw4r::math::VEC2& startPos, uint arg1);
-    // arg0 determines wether *(Instance + 0xB8) is incremented (true) or decremented (false).
+    // arg0 determines whether *(Instance + 0xB8) is incremented (true) or decremented (false).
     // Sets *(Instance + 0xB4) to true or false when *(Instance + 0xB8) is specifically 1 or 0, respectively.
-    static void UpdatePrinceFluff(bool arg0);
+    static void UpdatePrinceFluff(bool update);
     // Returns *(Instance + 0xB4)
     static bool fn_8000FFF4();
     // Player related.

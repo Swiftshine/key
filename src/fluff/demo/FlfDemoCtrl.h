@@ -47,11 +47,6 @@ public:
     static inline nw4r::math::VEC3 GetMTXTranslation(nw4r::math::MTX34& mtx) {
         return nw4r::math::VEC3(mtx[0][3], mtx[1][3], mtx[2][3]);
     }
-
-    inline nw4r::g3d::ResNode* SomeResNodeInline(nw4r::g3d::ResNode* node) {
-        nw4r::g3d::ResNode temp = *node;
-        return &temp;
-    }
 protected:
     int m_4;
     int mFullSortSceneID;                      // @ 0x8
@@ -73,11 +68,11 @@ public:
     virtual void vf1C() override;
     virtual uint vf20() override;
     virtual void vf24(int) override;
-    virtual void SetCurrentFrame(int frame);
-    virtual void SetUpdateRate(float rate);
-    virtual void SetFullSortScene(uint sceneID);
-    virtual void SetVisibility(bool visibility);
-    virtual void SetMatrix(nw4r::math::MTX34& mtx);
+    virtual void SetCurrentFrame(int frame) override;
+    virtual void SetUpdateRate(float rate) override;
+    virtual void SetFullSortScene(uint sceneID) override;
+    virtual void SetVisibility(bool visibility) override;
+    virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
 private:
     std::string mResourcePath; // @ 0x24
     gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x30
@@ -85,6 +80,15 @@ private:
 
 // size: 0x30
 class FlfDemoPlayerCtrl : public FlfDemoNodeCtrl {
+public:
+    FlfDemoPlayerCtrl(nw4r::g3d::ResNode resNode, std::string& name);
+    virtual ~FlfDemoPlayerCtrl();
+
+    /* FlfDemoNodeCtrl */
+    virtual void vf18(float) override;
+    virtual void vf1C() override;
+    virtual uint vf20() override;
+    virtual void vf24(int) override;
 private:
     bool mIsPlayerStateDefault; // @ 0x24
     bool m_25;
