@@ -28,15 +28,26 @@ public:
     virtual ~FlfMdlDraw();
 
     void LoadNURBSFromFileList();
-    void fn_80023A40(int);
+    void SetVisibility(bool visible);
     void ResetNURBSAnimation(int, bool);
     void SetWoolDrawMatrix(nw4r::math::MTX34&);
     bool fn_800239CC();
+    void fn_80023D38();
+    void SetUpdateRate(float rate);
+    int SetFullSortScene(FullSortScene* scene);
+    
     inline uint GetUnk20() {
         return m_20;
     }
     
-    
+    inline void SetCurrentFrameInt(int value) {
+        *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;
+    }
+
+    inline int GetCurrentFrameInt() {
+        return *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60);
+    }
+
 private:
     std::string mResourcePath;
     std::string mRawFilepath;

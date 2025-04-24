@@ -17,8 +17,8 @@
 // size: 0x24
 class FlfDemoNodeCtrl {
 public:
-    FlfDemoNodeCtrl(nw4r::g3d::ResNode* resNode);
-    virtual ~FlfDemoNodeCtrl();
+    FlfDemoNodeCtrl(nw4r::g3d::ResNode resNode) DONT_INLINE_CLASS;
+    virtual ~FlfDemoNodeCtrl() DONT_INLINE_CLASS;
     const char* GetResName();
     void ResetOptions(NURBSStruct2* arg1);
 
@@ -28,10 +28,10 @@ public:
     virtual void vf18(float);
     virtual void vf1C();
     DECL_WEAK virtual uint vf20();
-    virtual void vf24(s16);
-    virtual void SetBlendFrame(int frame);
+    virtual void vf24(int);
+    virtual void SetCurrentFrame(int frame);
     virtual void SetUpdateRate(float rate);
-    virtual void vf30(uint);
+    virtual void SetFullSortScene(uint sceneID);
     virtual void SetVisibility(bool visibility);
     virtual void SetMatrix(nw4r::math::MTX34& matrix);
 
@@ -47,7 +47,12 @@ public:
     static inline nw4r::math::VEC3 GetMTXTranslation(nw4r::math::MTX34& mtx) {
         return nw4r::math::VEC3(mtx[0][3], mtx[1][3], mtx[2][3]);
     }
-private:
+
+    inline nw4r::g3d::ResNode* SomeResNodeInline(nw4r::g3d::ResNode* node) {
+        nw4r::g3d::ResNode temp = *node;
+        return &temp;
+    }
+protected:
     int m_4;
     int mFullSortSceneID;                      // @ 0x8
     nw4r::g3d::ResNode mResNode;               // @ 0xC
@@ -60,6 +65,19 @@ private:
 
 // size: 0x34
 class FlfDemoCharCtrl : public FlfDemoNodeCtrl {
+public:
+    FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name);
+    virtual ~FlfDemoCharCtrl();
+
+    /* FlfDemoNodeCtrl */
+    virtual void vf1C() override;
+    virtual uint vf20() override;
+    virtual void vf24(int) override;
+    virtual void SetCurrentFrame(int frame);
+    virtual void SetUpdateRate(float rate);
+    virtual void SetFullSortScene(uint sceneID);
+    virtual void SetVisibility(bool visibility);
+    virtual void SetMatrix(nw4r::math::MTX34& mtx);
 private:
     std::string mResourcePath; // @ 0x24
     gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x30

@@ -88,7 +88,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
 
         FlfMdlDraw* mdlDraw = new (gfl::HeapID::Work) FlfMdlDraw(scene, resourceName.c_str(), 0, 0);
         mdlDraw->LoadNURBSFromFileList();
-        mdlDraw->fn_80023A40(1);
+        mdlDraw->SetVisibility(true);
         mdlDraw->ResetNURBSAnimation(0, true);
         mdlDraw->SetWoolDrawMatrix(mMatrix);
         mFlfMdlDraw.Create(mdlDraw);

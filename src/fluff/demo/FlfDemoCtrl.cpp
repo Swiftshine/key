@@ -1,10 +1,11 @@
 #include "demo/FlfDemoCtrl.h"
 #include "util/FullSortSceneUtil.h"
+#include "manager/StageManager.h"
 
-FlfDemoNodeCtrl::FlfDemoNodeCtrl(nw4r::g3d::ResNode* resNode)
+FlfDemoNodeCtrl::FlfDemoNodeCtrl(nw4r::g3d::ResNode resNode)
     : m_4(0)
     , mFullSortSceneID(6)
-    , mResNode(*resNode)
+    , mResNode(resNode)
     , mAnimNo(nullptr)
     , mBlendFrame(nullptr)
     , mUpdateRate(nullptr)
@@ -54,7 +55,7 @@ void FlfDemoNodeCtrl::ResetOptions(NURBSStruct2* arg1) {
 void FlfDemoNodeCtrl::vf18(float arg0) {
     if (mBlendFrame.IsValid()) {
         s16 opt = mBlendFrame->GetOption(arg0);
-        SetBlendFrame(static_cast<int>(opt));
+        SetCurrentFrame(static_cast<int>(opt));
     }
 
     if (mUpdateRate.IsValid()) {
@@ -66,7 +67,7 @@ void FlfDemoNodeCtrl::vf18(float arg0) {
         int sceneID = layer + 6;
 
         if (sceneID != mFullSortSceneID) {
-            vf30(sceneID);
+            SetFullSortScene(sceneID);
             mFullSortSceneID = sceneID;
         }
     }
@@ -86,7 +87,7 @@ void FlfDemoNodeCtrl::vf18(float arg0) {
     }
 }
 
-void FlfDemoNodeCtrl::SetBlendFrame(int frame) {
+void FlfDemoNodeCtrl::SetCurrentFrame(int frame) {
     return;
 }
 
@@ -94,7 +95,7 @@ void FlfDemoNodeCtrl::SetUpdateRate(float rate) {
     return;
 }
 
-void FlfDemoNodeCtrl::vf30(uint arg0) {
+void FlfDemoNodeCtrl::SetFullSortScene(uint sceneID) {
     return;
 }
 
@@ -102,7 +103,7 @@ void FlfDemoNodeCtrl::SetVisibility(bool visibility) {
     return;
 }
 
-void FlfDemoNodeCtrl::vf24(s16 arg0) {
+void FlfDemoNodeCtrl::vf24(int arg0) {
     return;
 }
 
@@ -160,4 +161,58 @@ std::string FlfDemoNodeCtrl::GetCharaResourceName(std::string& name) {
     }
     
     return "chara/" + temp;
+}
+
+// https://decomp.me/scratch/vOY9K
+FlfDemoCharCtrl::FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name)
+    : FlfDemoNodeCtrl(resNode) 
+    , mResourcePath()
+    , mFlfMdlDraw(nullptr)
+{
+    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(mFullSortSceneID);
+    {
+        std::string n = GetCharaResourceName(name);
+        mResourcePath += n;
+    }
+
+    mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
+
+    mFlfMdlDraw->LoadNURBSFromFileList();
+    mFlfMdlDraw->SetCurrentFrameInt(0);
+}
+
+FlfDemoCharCtrl::~FlfDemoCharCtrl() { }
+
+void FlfDemoCharCtrl::vf1C() {
+    if (mFlfMdlDraw.IsValid()) {
+        mFlfMdlDraw->fn_80023D38();
+    }
+}
+
+uint FlfDemoCharCtrl::vf20() {
+    return mFlfMdlDraw->GetUnk20();
+}
+
+void FlfDemoCharCtrl::SetUpdateRate(float rate) {
+    mFlfMdlDraw->SetUpdateRate(rate);
+}
+
+void FlfDemoCharCtrl::SetCurrentFrame(int frame) {
+    mFlfMdlDraw->SetCurrentFrameInt(frame);
+}
+
+void FlfDemoCharCtrl::vf24(int arg1) {
+    mFlfMdlDraw->ResetNURBSAnimation((int)arg1, mFlfMdlDraw->GetCurrentFrameInt() != 0);
+}
+
+void FlfDemoCharCtrl::SetFullSortScene(uint sceneID) {
+    mFlfMdlDraw->SetFullSortScene(StageManager::Instance()->GetFullSortSceneByID(sceneID));
+}
+
+void FlfDemoCharCtrl::SetVisibility(bool visibility) {
+    mFlfMdlDraw->SetVisibility(visibility);
+}
+
+void FlfDemoCharCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+    mFlfMdlDraw->SetWoolDrawMatrix(mtx);
 }
