@@ -52,6 +52,7 @@ public:
     void Reset(uint arg1, int playerState, int arg3, int arg4);
     uint GetPlayerID();
     void PlayAnimation(int id);
+    void SetFullSortScene(FullSortScene* scene, int arg2);
     
     inline void SetIsControlled(bool value) {
         *(reinterpret_cast<u8*>(this) + 0xF39) = value;

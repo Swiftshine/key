@@ -74,8 +74,8 @@ public:
     virtual void SetVisibility(bool visibility) override;
     virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
 private:
-    std::string mResourcePath; // @ 0x24
-    gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x30
+    std::string mResourcePath;              // @ 0x24
+    gfl::Pointer<FlfMdlDraw> mFlfMdlDraw;   // @ 0x30
 };
 
 // size: 0x30
@@ -89,22 +89,34 @@ public:
     virtual void vf1C() override;
     virtual uint vf20() override;
     virtual void vf24(int) override;
+    virtual void SetCurrentFrame(int frame) override;
+    virtual void SetUpdateRate(float rate) override;
+    virtual void SetFullSortScene(uint sceneID) override;
+    virtual void SetVisibility(bool visibility) override;
+    virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
 private:
     bool mIsPlayerStateDefault; // @ 0x24
     bool m_25;
     bool m_26;
-    int m_28;
-    PlayerBase* mPlayer; // @ 0x2C
+    uint mCurrentFrame;
+    PlayerBase* mPlayer;        // @ 0x2C
 };
 
 // size: 0x44
 class FlfDemoBeadCtrl : public FlfDemoNodeCtrl {
+public:
+    FlfDemoBeadCtrl(nw4r::g3d::ResNode resNode, std::string& beadInfo);
+    virtual ~FlfDemoBeadCtrl();
+
+    /* FlfDemoNodeCtrl */
+    virtual void SetVisibility(bool visibility);
+    virtual void SetMatrix(nw4r::math::MTX34& mtx);
 private:
-    int mBeadType;  // @ 0x24
-    int mBeadColor; // @ 0x28
-    FlfHandle mBeadHandle; // @ 0x2C
+    int mBeadType;                  // @ 0x24
+    int mBeadColor;                 // @ 0x28
+    FlfHandle mBeadHandle;          // @ 0x2C
     nw4r::math::VEC3 mBeadPosition; // @ 0x34
-    bool mBeadCreated; // @ 0x40
+    bool mBeadCreated;              // @ 0x40
 };
 
 // size: 0x2C

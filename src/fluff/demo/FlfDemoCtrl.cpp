@@ -2,6 +2,8 @@
 #include "util/FullSortSceneUtil.h"
 #include "manager/StageManager.h"
 #include "manager/GameManager.h"
+#include "util/BeadUtil.h"
+#include "gfl/gflVec2.h"
 
 /* FlfDemoNodeCtrl */
 
@@ -231,7 +233,7 @@ FlfDemoPlayerCtrl::FlfDemoPlayerCtrl(nw4r::g3d::ResNode resNode, std::string& na
     , mIsPlayerStateDefault(false)
     , m_25(false)
     , m_26(false)
-    , m_28(5)
+    , mCurrentFrame(5)
 {
     bool princeFluff = false;
     if (name.length() != 0) {
@@ -322,4 +324,69 @@ void FlfDemoPlayerCtrl::vf24(int arg0) {
     }   
 
     mPlayer->PlayAnimation(animationID);
+}
+
+void FlfDemoPlayerCtrl::SetCurrentFrame(int frame) {
+    mCurrentFrame = frame;
+    
+    if (mPlayer != nullptr) {
+        mPlayer->GetPlayerMdlMng()->GetFlfMdlDraw()->SetCurrentFrameInt(frame);
+    }
+}
+
+void FlfDemoPlayerCtrl::SetUpdateRate(float rate) {
+    if (mPlayer != nullptr) {
+        mPlayer->GetPlayerMdlMng()->SetUpdateRate(rate);
+    }
+}
+
+void FlfDemoPlayerCtrl::SetFullSortScene(uint sceneID) {
+    if (mPlayer != nullptr) {
+        mPlayer->SetFullSortScene(StageManager::Instance()->GetFullSortSceneByID(sceneID), 0);
+    }
+}
+
+void FlfDemoPlayerCtrl::SetVisibility(bool visibility) {
+    if (mPlayer != nullptr) {
+        mPlayer->GetPlayerMdlMng()->SetVisibility(visibility);
+    }
+}
+
+void FlfDemoPlayerCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+    // not decompiled
+}
+
+
+/* FlfDemoBeadCtrl */
+
+FlfDemoBeadCtrl::FlfDemoBeadCtrl(nw4r::g3d::ResNode resNode, std::string& beadInfo)
+    : FlfDemoNodeCtrl(resNode)
+    , mBeadPosition(0.0f, 0.0f, 0.0f)
+    , mBeadCreated(false)
+{
+    std::string tempStr(beadInfo, 3, std::string::npos);
+
+    uint beadInt = atoi(tempStr.c_str());
+    mBeadType = beadInt / 10;   // leftmost digit
+    mBeadColor = beadInt % 10;  // rightmost digit
+
+    GmkBead* bead = BeadUtil::CreateBead(beadInt / 10, beadInt % 10, (nw4r::math::VEC2&)gfl::Vec2::Zero);
+
+    if (bead != nullptr) {
+        mBeadHandle.SetObject(bead->GetHandleObject());
+        mBeadHandle.SetID(bead->GetHandleID());
+    } else {
+        mBeadHandle.SetObject(nullptr);
+        mBeadHandle.SetID(0);
+    }
+}
+
+FlfDemoBeadCtrl::~FlfDemoBeadCtrl() { }
+
+void FlfDemoBeadCtrl::SetVisibility(bool visibility) {
+    // not decompiled
+}
+
+void FlfDemoBeadCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+    // not decompiled
 }
