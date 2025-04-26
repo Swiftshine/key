@@ -8,7 +8,7 @@ namespace FullSortSceneUtil {
     const char* GetNearSceneLabelByIndex(uint index);
     float GetZOrder(uint sceneIndex, uint arg1);
 
-    ENUM_CLASS(SceneIDs,
+    ENUM_CLASS(SceneID,
         Far_05 = 0,
         Far_04 = 1,
         Far_03 = 2,

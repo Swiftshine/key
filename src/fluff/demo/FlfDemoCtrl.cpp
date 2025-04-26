@@ -2,6 +2,9 @@
 #include "util/FullSortSceneUtil.h"
 #include "manager/StageManager.h"
 #include "manager/GameManager.h"
+#include "manager/GmkMng.h"
+#include "manager/DemoManager.h"
+#include "manager/CameraManager.h"
 #include "util/BeadUtil.h"
 #include "gfl/gflVec2.h"
 
@@ -384,9 +387,241 @@ FlfDemoBeadCtrl::FlfDemoBeadCtrl(nw4r::g3d::ResNode resNode, std::string& beadIn
 FlfDemoBeadCtrl::~FlfDemoBeadCtrl() { }
 
 void FlfDemoBeadCtrl::SetVisibility(bool visibility) {
+    if (!mBeadCreated && visibility) {
+        bool create = false;
+
+        if (mBeadPosition.x != gfl::Vec3::Zero.x ||
+            mBeadPosition.y != gfl::Vec3::Zero.y ||
+            mBeadPosition.z != gfl::Vec3::Zero.z)
+        {
+            create = true;
+        }
+
+        if (create) {
+            GmkBead* bead = BeadUtil::CreateBead(mBeadType, mBeadColor, mBeadPosition);
+
+            if (bead != nullptr) {
+                mBeadHandle.SetObject(bead->GetHandleObject());
+                mBeadHandle.SetID(bead->GetHandleID());
+            } else {
+                mBeadHandle.SetObject(nullptr);
+                mBeadHandle.SetID(0);
+            }
+
+            mBeadCreated = true;
+        }
+    }
+}
+
+// https://decomp.me/scratch/nV63b
+void FlfDemoBeadCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+    mBeadPosition = GetMTXTranslation(mtx);
+
+    FlfHandleObj** ptr;
+
+    FLFHANDLEOBJ_DO_IF_VALID(mBeadHandle, ptr) {
+        static_cast<GmkBead*>(*ptr)->SetPosition(mBeadPosition);
+    }
+}
+
+
+/* FlfDemoGmkCtrl */
+
+// https://decomp.me/scratch/kB5Gg
+FlfDemoGmkCtrl::FlfDemoGmkCtrl(nw4r::g3d::ResNode resNode, std::string& tag)
+    : FlfDemoNodeCtrl(resNode)
+{
+    gfl::LinkedList<Gimmick*>::NodeBase* node = GmkMng::Instance()->GetGimmickList().GetNode()->GetNext();
+    gfl::LinkedList<Gimmick*>::NodeBase* end = GmkMng::Instance()->GetGimmickList().GetNode();
+
+    Gimmick* gmk = GmkMng::Instance()->GetGimmickByTag(tag);
+
+    if (gmk == nullptr) {
+        mGimmickHandle.SetObject(gmk->GetHandleObject());
+        mGimmickHandle.SetID(gmk->GetHandleID());
+    } else {
+        mGimmickHandle.SetObject(nullptr);
+        mGimmickHandle.SetID(0);
+    }
+}
+
+
+FlfDemoGmkCtrl::~FlfDemoGmkCtrl() { }
+
+// https://decomp.me/scratch/fMiQu
+void FlfDemoGmkCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+    FlfHandleObj** ptr;
+
+    FLFHANDLEOBJ_DO_IF_VALID(mGimmickHandle, ptr) {
+        static_cast<Gimmick*>(*ptr)->mMatrix = mtx;
+    }
+}
+
+void FlfDemoGmkCtrl::vf24(int arg0) {
+    FlfHandleObj** ptr;
+
+    FLFHANDLEOBJ_DO_IF_VALID(mGimmickHandle, ptr) {
+        static_cast<Gimmick*>(*ptr)->vfB0(arg0);
+    }
+}
+
+void FlfDemoGmkCtrl::SetVisibility(bool visibility) {
+    FlfHandleObj** ptr;
+
+    FLFHANDLEOBJ_DO_IF_VALID(mGimmickHandle, ptr) {
+        static_cast<Gimmick*>(*ptr)->vfAC(visibility);
+    }
+}
+
+
+/* FlfDemoFlgCtrl */
+
+FlfDemoFlgCtrl::FlfDemoFlgCtrl(nw4r::g3d::ResNode resNode, std::string& indexStr)
+    : FlfDemoNodeCtrl(resNode)
+{
+    mFlagIndex = atoi(indexStr.c_str());
+    mFlagValue = false;
+    DemoManager::SetDemoFlag(&mFlagIndex, false);
+}
+
+FlfDemoFlgCtrl::~FlfDemoFlgCtrl() { }
+
+void FlfDemoFlgCtrl::SetVisibility(bool flag) {
+    if (mFlagValue != flag) {
+        DemoManager::SetDemoFlag(&mFlagIndex, flag);
+        mFlagValue = flag;
+    }
+}
+
+
+/* FlfDemoLoopCtrl */
+
+FlfDemoLoopCtrl::FlfDemoLoopCtrl(nw4r::g3d::ResNode resNode)
+    : FlfDemoNodeCtrl(resNode)
+    , m_24(0)
+{ }
+
+FlfDemoLoopCtrl::~FlfDemoLoopCtrl() { }
+
+void FlfDemoLoopCtrl::vf24(int arg1) {
+    m_24 = arg1;
+}
+
+
+/* FlfDemoCamCtrl */
+FlfDemoCamCtrl::FlfDemoCamCtrl(nw4r::g3d::ResNode resNode)
+    : mResNode(nullptr)
+{
+    mResNode = resNode;
+
+    CameraManager::Instance()->fn_800545B4(4, 0);
+}
+
+FlfDemoCamCtrl::~FlfDemoCamCtrl() {
+    CameraManager::Instance()->fn_800545D8(0);
+}
+
+void FlfDemoCamCtrl::vfC() {
+    return;
+}
+
+void FlfDemoCamCtrl::vf10() {
+    return;
+}
+
+// https://decomp.me/scratch/kEqwc
+void FlfDemoCamCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
+    NW4R_RESNODE_ASSERT_VALID(mResNode);
+
+    u32 mtxID = mResNode.GetMtxID();
+
+    nw4r::math::MTX34 mtx;
+    mtx[0][0] = 0.0f;
+    mtx[0][1] = 0.0f;
+    mtx[0][2] = 0.0f;
+    mtx[0][3] = 0.0f;
+    mtx[1][0] = 0.0f;
+    mtx[1][1] = 0.0f;
+    mtx[1][2] = 0.0f;
+    mtx[1][3] = 0.0f;
+    mtx[2][0] = 0.0f;
+    mtx[2][1] = 0.0f;
+    mtx[2][2] = 0.0f;
+    mtx[2][3] = 0.0f;
+
+    nw4r::math::MTX34 mtx2;
+    memcpy(mtx2, matrices + mtxID, sizeof(nw4r::math::MTX34));
+    mtx = mtx2;
+    CameraManager* camMgr = CameraManager::Instance();
+    camMgr->SetAllPositions(GetMTXTranslation(mtx));
+    camMgr->SetZoom(mtx[0][0]);
+}
+
+
+/* FlfDemoCtrl */
+
+FlfDemoCtrl::FlfDemoCtrl()
+    : mState(0)
+    , mResourcePath()
+    , m_14(false)
+    , mResFileObjects()
+    , mFlfMdlDraw(nullptr)
+    , mScnMdlWrapper(nullptr)
+    , mCamCtrl(nullptr)
+    , m_34(nullptr)
+{
     // not decompiled
 }
 
-void FlfDemoBeadCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
-    // not decompiled
+// https://decomp.me/scratch/LnpwP
+FlfDemoCtrl::~FlfDemoCtrl() {
+    DestroyResources();
+}
+
+
+void FlfDemoCtrl::ResetFlfMdlDraw(const char* resourcePath) {
+    DestroyResources();
+
+    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+
+    mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, resourcePath, 0, 0));
+    mFlfMdlDraw->LoadNURBSFromFileList();
+    mFlfMdlDraw->SetCurrentFrameInt(0);
+    mFlfMdlDraw->SetUpdateRate(0.0f);
+    mFlfMdlDraw->fn_80023B24(0.0f);
+    mState = 3;
+}
+
+
+bool FlfDemoCtrl::CheckState() {
+    return mState == 3 || mState == 4;
+}
+
+// https://decomp.me/scratch/3F7dB
+void FlfDemoCtrl::DestroyResources() {
+    ClearNodeControls();
+
+    mFlfMdlDraw.Destroy();
+    mScnMdlWrapper = nullptr;
+    mResFileObject = gfl::ResFileObject(nullptr);
+
+    mResFileObjects.Clear();
+
+    mState = 0;
+}
+
+// nonmatching due to gfl::LinkedList::Clear()
+void FlfDemoCtrl::ClearNodeControls() {
+    gfl::LinkedList<FlfDemoNodeCtrl*>::NodeBase* node;
+
+    GFL_LINK_LIST_WHILE(mNodeCtrls, FlfDemoNodeCtrl*, node, {
+        FlfDemoNodeCtrl* ctrl = node->ToNode()->GetData();
+        delete ctrl;
+    });
+
+    m_34 = nullptr;
+
+    mNodeCtrls.Clear();
+
+    mCamCtrl.Destroy();
 }

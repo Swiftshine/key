@@ -22,8 +22,8 @@ public:
     const char* GetResName();
     void ResetOptions(NURBSStruct2* arg1);
 
-    virtual void vfC();
-    virtual void vf10();
+    DECL_WEAK virtual void vfC();
+    DECL_WEAK virtual void vf10();
     virtual void SetMatrix(nw4r::math::MTX34* matrices);
     virtual void vf18(float);
     virtual void vf1C();
@@ -109,8 +109,8 @@ public:
     virtual ~FlfDemoBeadCtrl();
 
     /* FlfDemoNodeCtrl */
-    virtual void SetVisibility(bool visibility);
-    virtual void SetMatrix(nw4r::math::MTX34& mtx);
+    virtual void SetVisibility(bool visibility) override;
+    virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
 private:
     int mBeadType;                  // @ 0x24
     int mBeadColor;                 // @ 0x28
@@ -121,26 +121,61 @@ private:
 
 // size: 0x2C
 class FlfDemoGmkCtrl : public FlfDemoNodeCtrl {
-private:
-    FlfDemoGmkCtrl(nw4r::g3d::ResNode* resNode, std::string&);
+public:
+    FlfDemoGmkCtrl(nw4r::g3d::ResNode resNode, std::string& tag);
+    DECL_WEAK virtual ~FlfDemoGmkCtrl();
+
+    /* FlfDemoNodeCtrl */
+
+    virtual void vf24(int) override;
+    virtual void SetVisibility(bool visibility) override;
+    virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
 private:
     FlfHandle mGimmickHandle; // @ 0x24
 };
 
 // size: 0x2C
-// does "Flg" stand for "flag"?
 class FlfDemoFlgCtrl : public FlfDemoNodeCtrl {
+public:
+    FlfDemoFlgCtrl(nw4r::g3d::ResNode resNode, std::string& indexStr);
+    DECL_WEAK virtual ~FlfDemoFlgCtrl();
+
+    /* FlfDemoNodeCtrl */
+
+    virtual void SetVisibility(bool visibility) override;
 private:
-    FlfDemoFlgCtrl(nw4r::g3d::ResNode* resNode, std::string&);
-private:
-    bool m_24;
-    uint m_28;
+    bool mFlagValue;    // @ 0x24
+    size_t mFlagIndex;  // @ 0x28
 };
 
 // size: 0x28
 class FlfDemoLoopCtrl : public FlfDemoNodeCtrl {
+public:
+    FlfDemoLoopCtrl(nw4r::g3d::ResNode resNode);
+    DECL_WEAK virtual ~FlfDemoLoopCtrl();
+
+    /* FlfDemoNodeCtrl */
+
+    DECL_WEAK virtual void vf24(int) override;
 private:
     int m_24;
+};
+
+// size: 0x8
+class FlfDemoCamCtrl {
+public:
+    FlfDemoCamCtrl(nw4r::g3d::ResNode resNode);
+    virtual ~FlfDemoCamCtrl();
+
+    DECL_WEAK virtual void vfC();
+    DECL_WEAK virtual void vf10();
+    virtual void SetMatrix(nw4r::math::MTX34* matrices);
+
+    static inline nw4r::math::VEC3 GetMTXTranslation(nw4r::math::MTX34& mtx) {
+        return nw4r::math::VEC3(mtx[0][3], mtx[1][3], mtx[2][3]);
+    }
+private:
+    nw4r::g3d::ResNode mResNode; // @ 0x4
 };
 
 // size: 0x5C
@@ -149,18 +184,27 @@ public:
     FlfDemoCtrl();
     virtual ~FlfDemoCtrl();
 
+    void ResetFlfMdlDraw(const char* resourcePath);
+    bool CheckState();
+    void DestroyResources();
+
+
+    void ClearNodeControls();
     static void GetCount(NURBSOption* dst, const char* name);
+
+    void Update();
 private:
-    int mState; // @ 0x4
-    std::string mResourcePath; // @ 0x8
-    int m_14;
-    gfl::ResFileObject mResFileObject; // @ 0x18
-    gfl::LinkedList<gfl::ResFileObject> mResFileObjects; // @ 0x1C
-    gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x28
-    gfl::ScnMdlWrapper* mModelWrapper; // @ 0x2C
+    int mState;                                             // @ 0x4
+    std::string mResourcePath;                              // @ 0x8
+    bool m_14;
+    gfl::ResFileObject mResFileObject;                      // @ 0x18
+    gfl::LinkedList<gfl::ResFileObject> mResFileObjects;    // @ 0x1C
+    gfl::Pointer<FlfMdlDraw> mFlfMdlDraw;                   // @ 0x28
+    gfl::ScnMdlWrapper* mScnMdlWrapper;                      // @ 0x2C
+    gfl::Pointer<FlfDemoCamCtrl> mCamCtrl;                  // @ 0x30
     void* m_34;
-    gfl::Task mTask; // @ 0x38
-    gfl::LinkedList<FlfDemoNodeCtrl> mNodeCtrls; // @ 0x50
+    gfl::Task mTask;                                        // @ 0x38
+    gfl::LinkedList<FlfDemoNodeCtrl*> mNodeCtrls;            // @ 0x50
 };
 
 

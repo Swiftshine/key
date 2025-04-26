@@ -107,9 +107,10 @@ void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBu
 Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& tag) {
     gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
     gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
+
     Gimmick* result = nullptr;
 
-    while (node != end) {
+    GFL_LINK_LIST_WHILE_2(mGimmicks, Gimmick*, node, end, {
         Gimmick* gimmick = node->ToNode()->GetData();
 
         if (gimmick->GetGimmickBuildInfoPtr() != nullptr &&
@@ -117,10 +118,8 @@ Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& tag) {
         ) {
             result = gimmick;
             break;
-        } 
-
-        node = node->GetNext();
-    }
+        }
+    })
 
     return result;
 }
@@ -144,10 +143,10 @@ Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const ch
 }
 
 void GmkMng::RegisterResources(const char* gimmickName, Gimmick* gimmick) {
-    gfl::LinkedList<GimmickResource*>::NodeBase* node = mGimmickResources.GetNode()->GetNext();
-    gfl::LinkedList<GimmickResource*>::NodeBase* end = mGimmickResources.GetNode();
-
-    while (node != end) {
+    
+    gfl::LinkedList<GimmickResource*>::NodeBase* node;
+    
+    GFL_LINK_LIST_WHILE(mGimmickResources, GimmickResource*, node, {
         GimmickResource* resource = node->ToNode()->GetData();
         const char* resourceName = resource->GetResourceName().c_str();
 
@@ -155,9 +154,7 @@ void GmkMng::RegisterResources(const char* gimmickName, Gimmick* gimmick) {
             resource->RegisterGimmick(gimmick);
             return;
         }
-
-        node = node->GetNext();
-    }
+    })
 
     gfl::LinkedList<GimmickResource*>::Modifier mod;
     mod.SetData(new (gfl::HeapID::Work) GimmickResource(gimmickName));

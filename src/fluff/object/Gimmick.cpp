@@ -43,4 +43,4 @@ Gimmick::Gimmick(int gmkID, const char* taskName)
     GmkMng::Instance()->AddGimmick(this);
 }
 
-void Gimmick::vfB0() { /*(this->*state1)();*/ return; }
+void Gimmick::vfB0(int arg0) { /*(this->*state1)();*/ return; }

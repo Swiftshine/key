@@ -35,7 +35,8 @@ public:
     void fn_80023D38();
     void SetUpdateRate(float rate);
     int SetFullSortScene(FullSortScene* scene);
-    
+    void fn_80023B24(float);
+
     inline uint GetUnk20() {
         return m_20;
     }

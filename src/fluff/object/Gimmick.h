@@ -181,8 +181,8 @@ public:
     virtual void    vfA0();
     virtual int     vfA4();
     virtual void    vfA8();
-    virtual nw4r::math::VEC2   vfAC();
-    virtual void    vfB0();
+    virtual void    vfAC(bool);
+    virtual void    vfB0(int);
     virtual void    vfB4();
     virtual nw4r::math::VEC2   vfB8();
     virtual void    Update();

@@ -434,7 +434,9 @@ namespace std {
     ) throw();
 
     template <class CharT, class Traits, class Allocator>
-    bool operator==(const basic_string<CharT, Traits, Allocator> &lhs, const CharT *rhs);
+    inline bool operator==(const basic_string<CharT, Traits, Allocator> &lhs, const CharT *rhs) {
+        return lhs.compare(rhs) == 0;
+    }
 
     template <class CharT, class Traits, class Allocator>
     bool operator!=(

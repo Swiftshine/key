@@ -61,6 +61,27 @@ public:
     inline gfl::LinkedList<Gimmick*>& GetGimmickList() {
         return mGimmicks;
     }
+
+    inline Gimmick* GetGimmickByTag(const std::string& tag) {
+        gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
+        gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
+
+        Gimmick* gimmick = nullptr;
+
+        while (node != end) {
+            gimmick = node->ToNode()->GetData();
+    
+            if (gimmick->GetGimmickBuildInfoPtr() != nullptr &&
+                tag == gimmick->GetGimmickBuildInfoPtr()->GetCommonTag()
+            ) {
+                break;
+            } 
+    
+            node = node->GetNext();
+        }
+    
+        return gimmick;
+    }
     
 private:
     int mState;

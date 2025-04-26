@@ -161,6 +161,7 @@ namespace gfl {
     public:
         static void Insert(NodeBase** output, LinkedList* list, NodeBase** after, const T& data);
         static void Remove(NodeBase** output, LinkedList* list, NodeBase** toRemove);
+        static void Erase(NodeBase**, LinkedList* list, NodeBase**, NodeBase**);
 
         inline LinkedList()
             : mCount(0)
@@ -173,15 +174,15 @@ namespace gfl {
         }
 
         inline void Clear() {
-            if (this != nullptr && this != nullptr) {
-                NodeBase* node = &mNode;
+            // still not matching but very close
+            
+            NodeBase base;
+            NodeBase* node;
 
-                Iterator it;
-                it.m_8 = node;
-                it.m_4 = node->mNext;
-
-                it.Erase(this, &it.m_4, &it.m_8);
-            }
+            base.SetPrev(GetNode());
+            base.SetNext(GetNode()->GetNext());
+    
+            Erase((NodeBase**)(&node), this, &base.mNext, &base.mPrev);
         }
 
         inline void IncrementCount() {
@@ -207,6 +208,30 @@ namespace gfl {
     };
 
 }
+
+#define GFL_LINK_LIST_WHILE(list, T, node, code) \
+    node = list.GetNode()->GetNext(); \
+    gfl::LinkedList<T>::NodeBase* end = list.GetNode(); \
+    \
+    while (node != end) { \
+        code \
+        node = node->GetNext(); \
+    } \
+
+#define GFL_LINK_LIST_WHILE_2(list, T, node, end, code) \
+    while (node != end) { \
+        code \
+        node = node->GetNext(); \
+    } \
+
+    
+
+// #define GFL_LINK_LIST_FOR(list, T, node) \
+//     node = list.GetNode()->GetNext(); \
+//     gfl::LinkedList<T>::NodeBase* end = list.GetNode(); \
+//     \
+//     for (node; node != end; node = node->GetNext())
+
 
 
 #endif
