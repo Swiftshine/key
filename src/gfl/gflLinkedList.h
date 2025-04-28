@@ -38,7 +38,7 @@ namespace gfl {
             }
         private:
             friend class LinkedList;
-            
+
             NodeBase* mPrev;
             NodeBase* mNext;
         };
@@ -161,7 +161,7 @@ namespace gfl {
     public:
         static void Insert(NodeBase** output, LinkedList* list, NodeBase** after, const T& data);
         static void Remove(NodeBase** output, LinkedList* list, NodeBase** toRemove);
-        static void Erase(NodeBase**, LinkedList* list, NodeBase**, NodeBase**);
+        static void Erase(NodeBase**, LinkedList* list, NodeBase*, NodeBase**);
 
         inline LinkedList()
             : mCount(0)
@@ -170,19 +170,23 @@ namespace gfl {
         }
         
         inline ~LinkedList() {
-            Clear();
+            if (this != nullptr && this != nullptr) {
+                Clear();
+            }
         }
 
         inline void Clear() {
-            // still not matching but very close
-            
-            NodeBase base;
-            NodeBase* node;
+            struct dummy {
+                NodeBase* ptr;
+                NodeBase node;
+            };
 
-            base.SetPrev(GetNode());
-            base.SetNext(GetNode()->GetNext());
+            dummy dum;
+
+            dum.node.mNext = GetNode();
+            dum.node.mPrev = GetNode()->GetNext();
     
-            Erase((NodeBase**)(&node), this, &base.mNext, &base.mPrev);
+            Erase(&dum.ptr, this, &dum.node, &dum.node.mNext);
         }
 
         inline void IncrementCount() {

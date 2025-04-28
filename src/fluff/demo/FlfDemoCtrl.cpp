@@ -606,6 +606,7 @@ void FlfDemoCtrl::DestroyResources() {
     mResFileObject = gfl::ResFileObject(nullptr);
 
     mResFileObjects.Clear();
+    // mNodeCtrls.Clear();
 
     mState = 0;
 }
@@ -624,4 +625,70 @@ void FlfDemoCtrl::ClearNodeControls() {
     mNodeCtrls.Clear();
 
     mCamCtrl.Destroy();
+}
+
+// nonmatching
+void FlfDemoCtrl::Update() {
+    switch (mState) {
+        case 1: {
+            gfl::ResFileInfo* info = mResFileObject.Get();
+            
+            bool create;
+
+            if (info == nullptr) {
+                create = true;
+            } else if ((info->GetFlags() & gfl::ResFileInfo::Flags::UseGfArch) == 0) {
+                create = false;
+            } else {
+                create = true;
+            }
+
+            if (create) {
+                FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+
+                mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
+            }
+
+            mFlfMdlDraw->LoadNURBSFromFileList();
+            mFlfMdlDraw->SetCurrentFrameInt(0);
+            mFlfMdlDraw->SetUpdateRate(0.0f);
+            mFlfMdlDraw->fn_80023B24(0.0f);
+            AddNwBlendAnmWrapperResFileObjects();
+
+            mState = 2;
+            break;
+        }
+
+        case 2: {
+            gfl::LinkedList<gfl::ResFileObject>::NodeBase* node;
+            
+            bool loop;
+
+            do {
+                if (node == mResFileObjects.GetNode()) {
+                    mState = 3;
+                    return;
+                }
+
+                gfl::ResFileInfo* info = mResFileObject.Get();
+
+                if (info == nullptr) {
+                    loop = true;
+                } else if (info->GetFlags() & gfl::ResFileInfo::Flags::UseGfArch == 0) {
+                    loop = false;
+                } else {
+                    loop = true;
+                }
+
+            } while (loop);
+
+
+            break;
+        }
+
+        case 4: {
+            fn_802BB920();
+            break;
+        }
+    }   
 }

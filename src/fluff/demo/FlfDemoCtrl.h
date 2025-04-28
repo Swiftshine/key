@@ -187,12 +187,14 @@ public:
     void ResetFlfMdlDraw(const char* resourcePath);
     bool CheckState();
     void DestroyResources();
-
-
     void ClearNodeControls();
+    void Update();
+
+
+    void AddNwBlendAnmWrapperResFileObjects();
+    void fn_802BB920();
     static void GetCount(NURBSOption* dst, const char* name);
 
-    void Update();
 private:
     int mState;                                             // @ 0x4
     std::string mResourcePath;                              // @ 0x8
