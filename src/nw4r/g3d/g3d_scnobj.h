@@ -120,6 +120,7 @@ namespace nw4r
             void SetPriorityDrawXlu(int);
             void EnableScnObjCallbackTiming(Timing);
             void EnableScnObjCallbackExecOp(ExecOp);
+            void DisableScnObjCallbackTiming(Timing);
             bool SetBoundingVolume(ScnObjBoundingVolumeType, const math::AABB *);
             bool GetBoundingVolume(ScnObjBoundingVolumeType, math::AABB *) const;
 

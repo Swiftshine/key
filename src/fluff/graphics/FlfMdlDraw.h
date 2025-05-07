@@ -3,6 +3,7 @@
 
 #include "gfl/gflResFileInfo.h"
 #include "graphics/FullSortScene.h"
+#include "graphics/NURBSSet.h"
 #include <string>
 
 // size: 0x1C8
@@ -36,7 +37,13 @@ public:
     void SetUpdateRate(float rate);
     int SetFullSortScene(FullSortScene* scene);
     void fn_80023B24(float);
-
+    bool IsAnimationDone();
+    float GetCurrentFrame();
+    float GetEndFrame();
+    void SetCurrentNURBSFrame(float);
+    gfl::ScnMdlWrapper* GetNURBSAnimWrapperModelWrapper();
+    NURBSSet* GetNURBSAnimWrapperNURBSSet();
+    
     inline uint GetUnk20() {
         return m_20;
     }

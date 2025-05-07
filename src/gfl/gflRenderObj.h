@@ -34,7 +34,7 @@ namespace gfl {
         virtual void Update(bool shouldUpdate);
         virtual void vf3C();
         virtual void UpdateFrame() = 0;
-        virtual void ScnMdlProc() = 0;
+        virtual void ScnMdlProc(int) = 0;
         DECL_WEAK virtual void SetScene(gfl::Scene* scene);
         virtual gfl::Scene* GetScene();
     public:

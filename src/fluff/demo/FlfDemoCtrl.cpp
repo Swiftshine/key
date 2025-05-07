@@ -660,7 +660,7 @@ void FlfDemoCtrl::Update() {
         }
 
         case 2: {
-            gfl::LinkedList<gfl::ResFileObject>::NodeBase* node;
+            gfl::LinkedList<gfl::ResFileObject>::NodeBase* node = 0;
             
             bool loop;
 
@@ -691,4 +691,95 @@ void FlfDemoCtrl::Update() {
             break;
         }
     }   
+}
+
+void FlfDemoCtrl::fn_802BB920() {
+    if (mFlfMdlDraw->IsAnimationDone() && m_34 != nullptr) {
+        int someFrame = m_34->GetUnk24();
+
+        if (someFrame != 0) {
+            float end = mFlfMdlDraw->GetEndFrame();
+            mFlfMdlDraw->SetCurrentNURBSFrame(end - static_cast<float>(someFrame));
+        }
+    }
+
+    float current = mFlfMdlDraw->GetCurrentFrame();
+
+    FlfDemoNodeCtrl* nodeCtrl;
+
+    GFL_LINK_LIST_WHILE_3(mNodeCtrls, FlfDemoNodeCtrl*, nodeCtrl, {
+        nodeCtrl->vf18(current);
+    });
+
+    if (mScnMdlWrapper != nullptr) {
+        *reinterpret_cast<void**>(reinterpret_cast<u8*>(mScnMdlWrapper->GetScnMdl()) + 0x11C) = this;
+
+        mScnMdlWrapper->GetScnMdl()->EnableScnObjCallbackTiming(nw4r::g3d::ScnObj::TIMING_4);
+        mScnMdlWrapper->ScnMdlProc(0);
+        mScnMdlWrapper->GetScnMdl()->DisableScnObjCallbackTiming(nw4r::g3d::ScnObj::TIMING_4);
+    }
+}
+
+// fake match
+void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
+    mFlfMdlDraw->ResetNURBSAnimation(arg1, false);
+    mFlfMdlDraw->SetUpdateRate(1.0f);
+    
+    gfl::ScnMdlWrapper* modelWrapper = mFlfMdlDraw->GetNURBSAnimWrapperModelWrapper();
+
+    if (modelWrapper != mScnMdlWrapper) {
+        SetScnMdlWrapper();
+    }
+
+    NURBSSet* set = mFlfMdlDraw->GetNURBSAnimWrapperNURBSSet();
+
+    if (set != nullptr) {
+        NURBSStruct1* s1 = set->GetUnk14();
+
+        if (s1 != nullptr) {
+            NURBSStruct1* s = s1;
+
+            for (uint i = 0; i < s1->m_8; i++) {
+                fn_802BBE08(s->m_C);
+                s = reinterpret_cast<NURBSStruct1*>(&s->m_4);
+            }
+        }   
+    }
+    
+    mState = 4;
+    
+    if (vec != nullptr) {
+        SetMatrix(vec);
+    }
+
+    mFlfMdlDraw->fn_80023D38();
+    Update();
+}
+
+uint FlfDemoCtrl::fn_802BBB28() {
+    return mFlfMdlDraw->GetUnk20();
+}
+
+float FlfDemoCtrl::GetCurrentFrame() {
+    return mFlfMdlDraw->GetCurrentFrame();
+}
+
+float FlfDemoCtrl::GetEndFrame() {
+    return mFlfMdlDraw->GetEndFrame();
+}
+
+bool FlfDemoCtrl::IsAnimationDone() {
+    return mFlfMdlDraw->IsAnimationDone();
+}
+
+void FlfDemoCtrl::vfC() {
+    return;
+}
+
+void FlfDemoCtrl::vf10() {
+    return;
+}
+
+void FlfDemoCtrl::SetMatrices(nw4r::math::MTX34*) {
+    // not decompiled
 }

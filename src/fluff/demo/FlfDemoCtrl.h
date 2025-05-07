@@ -178,23 +178,42 @@ private:
     nw4r::g3d::ResNode mResNode; // @ 0x4
 };
 
+// size unk
+struct FlfDemoCtrlStruct {
+    STRUCT_FILL(0x28);
+
+    DECL_WEAK int GetUnk24();
+};
+
 // size: 0x5C
 class FlfDemoCtrl {
 public:
     FlfDemoCtrl();
     virtual ~FlfDemoCtrl();
 
+
+    // vfC and vf10 have different signatures
+    // but it's not clear what they are
+    DECL_WEAK virtual void vfC();
+    DECL_WEAK virtual void vf10();
+    DECL_WEAK virtual void SetMatrices(nw4r::math::MTX34* matrices);
+
     void ResetFlfMdlDraw(const char* resourcePath);
     bool CheckState();
     void DestroyResources();
     void ClearNodeControls();
     void Update();
-
-
-    void AddNwBlendAnmWrapperResFileObjects();
     void fn_802BB920();
+    void fn_802BBA4C(int, nw4r::math::VEC2* vec);
+    uint fn_802BBB28() DONT_INLINE_CLASS;
+    float GetCurrentFrame();
+    float GetEndFrame();
+    bool IsAnimationDone();
+    void SetMatrix(nw4r::math::VEC2*);
+    void SetScnMdlWrapper();
+    void AddNwBlendAnmWrapperResFileObjects();
     static void GetCount(NURBSOption* dst, const char* name);
-
+    void fn_802BBE08(NURBSStruct2*);
 private:
     int mState;                                             // @ 0x4
     std::string mResourcePath;                              // @ 0x8
@@ -202,11 +221,11 @@ private:
     gfl::ResFileObject mResFileObject;                      // @ 0x18
     gfl::LinkedList<gfl::ResFileObject> mResFileObjects;    // @ 0x1C
     gfl::Pointer<FlfMdlDraw> mFlfMdlDraw;                   // @ 0x28
-    gfl::ScnMdlWrapper* mScnMdlWrapper;                      // @ 0x2C
+    gfl::ScnMdlWrapper* mScnMdlWrapper;                     // @ 0x2C
     gfl::Pointer<FlfDemoCamCtrl> mCamCtrl;                  // @ 0x30
-    void* m_34;
+    FlfDemoCtrlStruct* m_34;
     gfl::Task mTask;                                        // @ 0x38
-    gfl::LinkedList<FlfDemoNodeCtrl*> mNodeCtrls;            // @ 0x50
+    gfl::LinkedList<FlfDemoNodeCtrl*> mNodeCtrls;           // @ 0x50
 };
 
 

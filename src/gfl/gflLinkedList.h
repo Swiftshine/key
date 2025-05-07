@@ -228,7 +228,15 @@ namespace gfl {
         node = node->GetNext(); \
     } \
 
-    
+#define GFL_LINK_LIST_WHILE_3(list, T, data, code) \
+    gfl::LinkedList<T>::NodeBase* node = list.GetNode()->GetNext(); \
+    gfl::LinkedList<T>::NodeBase* end = list.GetNode(); \
+    \
+    while (node != end) { \
+        data = node->ToNode()->GetData(); \
+        code \
+        node = node->GetNext(); \
+    } \
 
 // #define GFL_LINK_LIST_FOR(list, T, node) \
 //     node = list.GetNode()->GetNext(); \

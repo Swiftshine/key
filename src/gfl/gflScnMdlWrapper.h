@@ -23,7 +23,7 @@ namespace gfl {
         /* gfl::RenderObj */
         virtual void vf28(nw4r::math::VEC3&) override;
         virtual void UpdateFrame() override;
-        virtual void ScnMdlProc() override;
+        virtual void ScnMdlProc(int) override;
         
         /* gfl::ScnMdlWrapper */
         virtual bool SetMatrix(nw4r::math::MTX34& mtx);

@@ -3,6 +3,16 @@
 
 #include "types.h"
 
+struct NURBSStruct2;
+
+// unk size
+struct NURBSStruct1 {
+    int m_0;
+    int m_4;
+    uint m_8;
+    NURBSStruct2* m_C;
+};
+
 struct NURBSStruct3;
 
 struct NURBSStruct2 {
