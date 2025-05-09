@@ -2,5 +2,14 @@
 #define _MSL_UTILITY_H
 
 #include "MSL_C++/Metrowerks/type_traits.h"
+#include <cstdio>
+
+
+#define STD_VALIDATE_ALLOC(ptr) \
+    if (ptr == nullptr) { \
+        fprintf(stderr, "Memory allocation failure"); \
+        abort(); \
+    } \
+
 
 #endif

@@ -1,0 +1,35 @@
+#ifndef _STD_TREE
+#define _STD_TREE
+
+#include <MSL_C++/memory>
+
+namespace std {
+
+    template <typename T>
+    class tree {
+    private:
+
+        // size: 0xC + sizeof(T)
+        struct node_base {
+            node_base* m_Child1;
+            node_base* m_Child2;
+            node_base* m_Owner;
+            T mData;
+        };
+    public:
+        inline tree();
+        ~tree();
+
+        void clear();
+        void destroy();
+    private:
+        void insert_node_at(/* args unk */);
+    private:
+        size_t m_Count;     // @ 0x0
+        node_base* m_Node;  // @ 0x4
+        node_base* m_Root;  // @ 0x8
+    };
+
+}
+
+#endif
