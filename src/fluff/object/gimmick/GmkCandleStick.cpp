@@ -42,18 +42,7 @@ gfl::Vec3 vec3(mPosition.z, vec);
     mMoleLight->SetPosition(vec2);
 
     nw4r::math::MTX34 mtx;
-    mtx[0][0] = 0.0f;
-    mtx[0][1] = 0.0f;
-    mtx[0][2] = 0.0f;
-    mtx[0][3] = 0.0f;
-    mtx[1][0] = 0.0f;
-    mtx[1][1] = 0.0f;
-    mtx[1][2] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][0] = 0.0f;
-    mtx[2][1] = 0.0f;
-    mtx[2][2] = 0.0f;
-    mtx[2][3] = 0.0f;
+    ZERO_MTX_34(mtx);
 
     nw4r::math::VEC3 pos(mPosition.x, mPosition.y + 0.5f, mPosition.z);
 

@@ -35,7 +35,7 @@ void FB2Tex::Blit(bool setBlendMode) {
     GXCullMode cullMode;
     GXGetCullMode(&cullMode);
     nw4r::math::MTX34 mtx1;
-    ZeroMTX(mtx1);
+    ZERO_MTX_34(mtx1);
 
     PSMTXIdentity(mtx1);
     mtx1[2][3] = -1000.0f;

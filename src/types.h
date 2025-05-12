@@ -74,36 +74,20 @@ typedef uint64_t u64;
 // typedef uint8_t u8;
 // typedef int8_t s8;
 
-inline void ZeroMTX(MTX34 mtx) {
-    mtx[0][0] = 0.0f;
-    mtx[0][1] = 0.0f;
-    mtx[0][2] = 0.0f;
-    mtx[0][3] = 0.0f;
-    mtx[1][0] = 0.0f;
-    mtx[1][1] = 0.0f;
-    mtx[1][2] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][0] = 0.0f;
-    mtx[2][1] = 0.0f;
-    mtx[2][2] = 0.0f;
-    mtx[2][3] = 0.0f;
+#define ZERO_MTX_34(mtx) { \
+    mtx[0][0] = 0.0f; \
+    mtx[0][1] = 0.0f; \
+    mtx[0][2] = 0.0f; \
+    mtx[0][3] = 0.0f; \
+    mtx[1][0] = 0.0f; \
+    mtx[1][1] = 0.0f; \
+    mtx[1][2] = 0.0f; \
+    mtx[1][3] = 0.0f; \
+    mtx[2][0] = 0.0f; \
+    mtx[2][1] = 0.0f; \
+    mtx[2][2] = 0.0f; \
+    mtx[2][3] = 0.0f; \
 }
-
-// inline void ZeroMTX(nw4r::math::MTX34& mtx) {
-//     mtx[0][0] = 0.0f;
-//     mtx[0][1] = 0.0f;
-//     mtx[0][2] = 0.0f;
-//     mtx[0][3] = 0.0f;
-//     mtx[1][0] = 0.0f;
-//     mtx[1][1] = 0.0f;
-//     mtx[1][2] = 0.0f;
-//     mtx[1][3] = 0.0f;
-//     mtx[2][0] = 0.0f;
-//     mtx[2][1] = 0.0f;
-//     mtx[2][2] = 0.0f;
-//     mtx[2][3] = 0.0f;
-// }
-
 
 #ifdef __cplusplus
 namespace nw4r {

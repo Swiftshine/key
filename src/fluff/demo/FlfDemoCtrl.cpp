@@ -125,18 +125,7 @@ void FlfDemoNodeCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
     u32 mtxID = mResNode.GetMtxID();
 
     nw4r::math::MTX34 mtx;
-    mtx[0][0] = 0.0f;
-    mtx[0][1] = 0.0f;
-    mtx[0][2] = 0.0f;
-    mtx[0][3] = 0.0f;
-    mtx[1][0] = 0.0f;
-    mtx[1][1] = 0.0f;
-    mtx[1][2] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][0] = 0.0f;
-    mtx[2][1] = 0.0f;
-    mtx[2][2] = 0.0f;
-    mtx[2][3] = 0.0f;
+    ZERO_MTX_34(mtx);
 
     nw4r::math::MTX34 mtx2;
     memcpy(mtx2, matrices + mtxID, sizeof(nw4r::math::MTX34));
@@ -536,19 +525,8 @@ void FlfDemoCamCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
     u32 mtxID = mResNode.GetMtxID();
 
     nw4r::math::MTX34 mtx;
-    mtx[0][0] = 0.0f;
-    mtx[0][1] = 0.0f;
-    mtx[0][2] = 0.0f;
-    mtx[0][3] = 0.0f;
-    mtx[1][0] = 0.0f;
-    mtx[1][1] = 0.0f;
-    mtx[1][2] = 0.0f;
-    mtx[1][3] = 0.0f;
-    mtx[2][0] = 0.0f;
-    mtx[2][1] = 0.0f;
-    mtx[2][2] = 0.0f;
-    mtx[2][3] = 0.0f;
-
+    ZERO_MTX_34(mtx);
+    
     nw4r::math::MTX34 mtx2;
     memcpy(mtx2, matrices + mtxID, sizeof(nw4r::math::MTX34));
     mtx = mtx2;

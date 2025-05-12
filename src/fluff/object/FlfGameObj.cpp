@@ -19,18 +19,7 @@ FlfGameObj::FlfGameObj(uint newActorType)
     , mRotation(0.0f, 0.0f, 0.0f)
     , mScale(1.0f, 1.0f, 1.0f) 
 {
-    mMatrix[0][0] = 0.0f;
-    mMatrix[0][1] = 0.0f;
-    mMatrix[0][2] = 0.0f;
-    mMatrix[0][3] = 0.0f;
-    mMatrix[1][0] = 0.0f;
-    mMatrix[1][1] = 0.0f;
-    mMatrix[1][2] = 0.0f;
-    mMatrix[1][3] = 0.0f;
-    mMatrix[2][0] = 0.0f;
-    mMatrix[2][1] = 0.0f;
-    mMatrix[2][2] = 0.0f;
-    mMatrix[2][3] = 0.0f;
+    ZERO_MTX_34(mMatrix);
 
     mFlags = 0;
     m_64 = 0;
