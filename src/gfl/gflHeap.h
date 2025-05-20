@@ -9,10 +9,12 @@ namespace gfl {
     public:
         static const char DefaultName[];
         static MEMAllocatorFuncs AllocFuncs;
-        static MEMAllocatorAllocFunc HeapAlloc;
-        static MEMAllocatorFreeFunc  HeapFree;
+        static void* HeapAlloc(MEMAllocator* allocator, size_t size);
+        static void HeapFree(MEMAllocator* allocator, void* data);
     public:
-        inline Heap() { CreateHeap(this); }
+        inline Heap() {
+            CreateHeap(this);
+        }
         void SetName(const char* name) DONT_INLINE_CLASS;
         static Heap* CreateHeap(Heap*);
         ~Heap();
@@ -23,21 +25,27 @@ namespace gfl {
         bool WithinRange(void* address);
 
         inline MEMAllocator& GetAllocator() {
-            return mAllocator;
+            return mAllocator1;
+        }
+
+        inline void InitMEMAllocators() {
+
         }
         
+        static inline void* GetArena(int type, size_t* size);
+        static inline void* GetArenaLo(int type);
+        static inline void* GetArenaHi(int type);
+        static inline void SetArenaLo(void* arena, int type);
+        static inline void SetAllocFuncs();
+        inline void SetMEMAllocatorParameters(MEMAllocator* allocator, size_t alignment, MEMiHeapHead* heap);
     public:
         u8 mHeapID;
         char mHeapName[25];
         bool m_1A;
-        u8 m_1B; // padding?
         MEMiHeapHead* mExpHeap;
-        MEMAllocator mAllocator;
-        MEMAllocatorFuncs* mAllocFuncs;
-        MEMiHeapHead* m_34;
-        u32 mFlags;
-        gfl::Heap* mSelf;
-        u32 mHeapType;
+        MEMAllocator mAllocator1;
+        MEMAllocator mAllocator2;
+        int mHeapType;
     };
 
     ASSERT_SIZE(Heap, 0x44)

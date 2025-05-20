@@ -7,6 +7,94 @@ MEMAllocatorFuncs Heap::AllocFuncs;
 // yes it's "NOT INITALIZED" and not "INITIALIZED", very cool good-feel
 const char Heap::DefaultName[] = "NOT INITALIZED";
 
+inline void Heap::SetMEMAllocatorParameters(MEMAllocator* allocator, size_t alignment, MEMiHeapHead* heap) {
+    AllocFuncs.allocFunc = &HeapAlloc;
+    AllocFuncs.freeFunc = &HeapFree;
+
+    allocator->funcs = &AllocFuncs;
+    allocator->heap = heap;
+    allocator->heapParam1 = alignment;
+    allocator->heapParam2 = (u32)(this);
+}
+
+inline void* Heap::GetArenaHi(int type) {
+    void* arena;
+
+    switch (type) {
+        case 1: {
+            arena = OSGetArenaHi();
+            break;
+        }
+
+        case 2: {
+            arena = OSGetMEM2ArenaHi();
+            break;
+        }
+
+        default: {
+            arena = nullptr;
+            break;
+        }
+    }
+
+    return arena;
+}
+
+inline void* Heap::GetArenaLo(int type) {
+    void* arena;
+
+    switch (type) {
+        case 1: {
+            arena = OSGetMEM1ArenaLo();
+            break;
+        }
+
+        case 2: {
+            arena = OSGetMEM2ArenaLo();
+            break;
+        }
+
+        default: {
+            arena = nullptr;
+            break;
+        }
+    }
+
+    return arena;
+}
+
+inline void* Heap::GetArena(int type, size_t* size) {
+    void* arenaLo = GetArenaLo(type);
+    void* arenaHi = GetArenaHi(type);
+    void* start;
+
+    if (*size == 0xFFFFFFFF) { 
+        *size = (u32)arenaHi - (u32)arenaLo;
+        start = arenaHi;
+    } else {
+        arenaHi = (void*)((u32)arenaLo + *size);
+        start = arenaHi;
+    }
+
+    SetArenaLo(start, type);
+
+    return arenaLo;
+}
+
+inline void Heap::SetArenaLo(void* arena, int type) {
+    switch (type) {
+        case 1: {
+            OSSetMEM1ArenaLo(arena);
+            break;
+        }
+
+        case 2: {
+            OSSetMEM2ArenaLo(arena);
+            break;
+        }
+    }
+}
+
 void Heap::SetName(const char* newName) {
     gfl::Strcpy(mHeapName, sizeof(mHeapName), newName);
 }
@@ -96,80 +184,16 @@ Heap::~Heap() {
     this->mHeapType = 0;
 }
 
-void Heap::Init(size_t range, u16 optFlag, int hType) {
-    s32 len;
-    s32 arenaLo;
-    s32 arenaHi;
-    s32 heapHead;
-
-    len = range;
-    this->mHeapType = hType;
-
-    switch (hType) {
-        case 1: {
-            arenaLo = (s32)OSGetMEM1ArenaLo();
-            break;
-        }
-        case 2: {
-            arenaLo = (s32)OSGetMEM2ArenaLo();
-            break;
-        }
-        default: {
-            arenaLo = nullptr;
-            break;
-        }
-    }
+void Heap::Init(size_t range, u16 optFlag, int heapType) {
+    mHeapType = heapType;
+    mExpHeap = MEMCreateExpHeapEx(GetArena(mHeapType, &range), range, optFlag);
     
-    switch (hType) {
-        case 1: {
-            arenaHi = (s32)OSGetArenaHi();
-            break;
-        }
-        case 2: {
-            arenaHi = (s32)OSGetMEM2ArenaHi();
-            break;
-        }
-        default: {
-            arenaHi = nullptr;
-            break;
-        }
-    }
-
-    
-    if (len == -1U) {
-        len = arenaHi - arenaLo;
-    } else {
-        arenaHi = arenaLo + len;
-    }
-    
-
-    switch (hType) {
-        case 1: {
-            OSSetMEM1ArenaLo((void*)arenaHi);
-            break;
-        }
-        case 2: {
-            OSSetMEM2ArenaLo((void*)arenaHi);
-            break;
-        }
-    }
-
-    heapHead = (s32)MEMCreateExpHeapEx((void*)arenaLo, range, optFlag);
     this->m_1A = false;
 
-    Heap::AllocFuncs.freeFunc = HeapFree;
-    
-    this->mExpHeap = (MEMiHeapHead*)heapHead;
-    this->mAllocator.funcs = &Heap::AllocFuncs;
-    this->mAllocator.heap = (MEMiHeapHead*)heapHead;
-    this->mAllocator.heapParam1 = 0x20; // alignment?
-    this->mAllocator.heapParam2 = (u32)this;
-    Heap::AllocFuncs.allocFunc = HeapAlloc;
-    this->mAllocFuncs = &Heap::AllocFuncs;
-    this->m_34 = (MEMiHeapHead*)heapHead;
-    this->mFlags = 0x10;
-    this->mSelf = this;
+    SetMEMAllocatorParameters(&mAllocator1, 0x20, mExpHeap);
+    SetMEMAllocatorParameters(&mAllocator2, 0x10, mExpHeap);
 }
+
 
 void* Heap::Alloc(size_t size, uint alignment) {
     return MEMAllocFromExpHeapEx(this->mExpHeap, size, alignment);
