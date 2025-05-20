@@ -215,7 +215,7 @@ gfl/gflMemoryManagement.cpp:
 	.text       start:0x80644060 end:0x80644264
 
 gfl/gflHeap.cpp:
-	.text       start:0x80644264 end:0x8064456C
+	.text       start:0x80644264 end:0x80644610
 	.rodata     start:0x8082C4C0 end:0x8082C4D0
 
 gfl/gflMemoryBase.cpp:

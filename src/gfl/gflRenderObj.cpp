@@ -16,7 +16,7 @@ RenderObj::RenderObj() {
     m_14 = 0;
 
     gfl::Memory::InitIfNotInited();
-    mAllocator = &gfl::Memory::Instance()->GetHeapByAddress(this)->GetAllocator();
+    mAllocator = &gfl::Memory::Instance()->GetHeapByAddress(this)->GetAllocator1();
 }
 
 RenderObj::~RenderObj() {

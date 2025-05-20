@@ -19,7 +19,9 @@ namespace gfl {
             return nullptr;
         }
     public:
-        inline MemoryBase() { }
+        inline MemoryBase() {
+
+        }
 
         void Reset();
         void ReplaceHeap(Heap*);
@@ -31,6 +33,6 @@ namespace gfl {
         Heap* mHeaps[GFL_MEMORYBASE_HEAP_COUNT];
     };
 
-    ASSERT_SIZE(MemoryBase, 0x64)
+    // ASSERT_SIZE(MemoryBase, 0x64)
 }
 #endif

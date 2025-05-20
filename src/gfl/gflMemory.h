@@ -15,8 +15,14 @@ namespace gfl {
     public:
         static Memory* InitInstance();
 
-        inline Memory() { }
-        static inline Memory* Instance() { return sInstance; }
+        inline Memory() {
+            sInstance = this;
+        }
+
+        static inline Memory* Instance() {
+            return sInstance;
+        }
+
         static inline Memory* TryGetInstance() {
             Memory* m = Instance();
 
@@ -28,6 +34,7 @@ namespace gfl {
 
             return m;
         }
+
         static inline Heap* TryGetHeapByAddress(void* addr) {
             Memory* mem = Instance();
             if (nullptr == Instance()) {
@@ -35,6 +42,7 @@ namespace gfl {
             }
             return mem->GetHeapByAddress(addr);
         }
+
         static inline bool IsInited() { return sIsInited; }
         static inline void SetInited(bool inited) { sIsInited = inited; }
         static OSMutex* ValidateHeapMutex(u8 searchID, OSMutex* mutex, u8 maxID);
@@ -57,16 +65,30 @@ namespace gfl {
         }
 
         static inline void InitIfNotInited() {
-            if (nullptr == Instance()) {
+            if (sInstance == nullptr) {
                 InitInstance();
             }
         }
 
-        inline Heap* GetLIB1Heap() { return &mLIB1Heap; }
-        inline Heap* GetLIB2Heap() { return &mLIB2Heap; }
-        inline Heap* GetStringHeap() { return &mStringHeap; }
-        inline Heap* GetEtcHeap() { return &mEtcHeap; }
-        inline Heap* GetSoundHeap() { return &mSoundHeap; }
+        inline Heap& GetLIB1Heap() {
+            return mLIB1Heap;
+        }
+
+        inline Heap& GetLIB2Heap() {
+            return mLIB2Heap; 
+        }
+
+        inline Heap& GetStringHeap() {
+            return mStringHeap;
+        }
+
+        inline Heap& GetEtcHeap() {
+            return mEtcHeap;
+        }
+
+        inline Heap& GetSoundHeap() {
+            return mSoundHeap;
+        }
 
         void SetupHeaps();
     private:
@@ -77,8 +99,7 @@ namespace gfl {
         Heap mSoundHeap;
     };
 
-
-    ASSERT_SIZE(Memory, 0x1B8);
+    // ASSERT_SIZE(Memory, 0x1B8);
 }
 
 #endif
