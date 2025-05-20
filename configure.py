@@ -420,7 +420,7 @@ config.libs = [
             Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
             Object(Matching,    "gfl/gflFixedString.cpp"),
             Object(Matching,    "gfl/gflGfCompression.cpp"),
-            Object(NonMatching, "gfl/gflHeap.cpp"),
+            Object(Matching,    "gfl/gflHeap.cpp"),
             Object(NonMatching, "gfl/gflMemory.cpp"),
             Object(Matching,    "gfl/gflMemoryBase.cpp"),
             Object(Matching,    "gfl/gflMemoryManagement.cpp"),

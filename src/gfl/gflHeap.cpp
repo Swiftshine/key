@@ -2,9 +2,8 @@
 #include "gflMemoryUtil.h"
 
 using namespace gfl;
-MEMAllocatorFuncs Heap::AllocFuncs;
 
-// mind the typo
+// typo on the developers' part
 const char Heap::DefaultName[] = "NOT INITALIZED";
 
 inline void Heap::SetMEMAllocatorParameters(MEMAllocator* allocator, size_t alignment, MEMiHeapHead* heap) {
