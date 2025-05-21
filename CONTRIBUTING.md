@@ -1,5 +1,5 @@
 # Contributing
-If you have questions or are interested in contributing, consider asking in the [GC/Wii Decompilation Discord](https://discord.gg/hKx3FJJgrV) in the `#key` channel.
+If you have questions or are interested in contributing, consider asking in the [GC/Wii Decompilation Discord](https://discord.gg/hKx3FJJgrV) in the `#kirbys-epic-yarn` channel.
 
 Sections:
 - [Resources](#resources)
