@@ -253,22 +253,14 @@ void CamOrtho::GetScreenDimensions(int* arg1, int* arg2, int* pDestW, int* pDest
     }
 }
 
-// https://decomp.me/scratch/xEVd6
 void CamOrtho::fn_8001A470() {
-    float four;
-    float one;
-    float two;
-    float three;
+    float left = BASE_LEFT * mMultiplier;
+    float top = BASE_TOP_WIDE * mMultiplier;
 
-    one = -2.0f;
-    two = 2.0f;
-    three = mMultiplier * BASE_LEFT;
-    four = mMultiplier * BASE_TOP_WIDE;
-
-    m_48 = three;
-    m_4C = four;
-    m_50 = three * one;
-    m_54 = two * four;
+    m_48 = left;
+    m_4C = top;
+    m_50 = -2.0f * left;
+    m_54 = 2.0f * top; 
 }
 
 CamOrtho::~CamOrtho() { }
