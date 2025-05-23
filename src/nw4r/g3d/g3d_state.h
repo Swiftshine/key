@@ -13,12 +13,15 @@ namespace nw4r
             {
             };
 
+            
             void SetViewPosNrmMtxArray(const math::MTX34 *, const math::MTX33 *,
                 const math::MTX34 *);
 
             void SetRenderModeObj(const GXRenderModeObj&);
             GXRenderModeObj* GetRenderModeObj();
             void Invalidate(u32);
+            void SetCameraProjMtx(int, bool);
+            void SetLightSetting(LightSetting&);
         }
     }
 }

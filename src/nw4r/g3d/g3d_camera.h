@@ -91,6 +91,8 @@ public:
     void GXSetScissor() const;
     void GXSetScissorBoxOffset() const;
 
+    void SetCameraProjMtx(int cameraID, bool changeG3DState);
+
     GXProjectionType GetProjectionType() const {
         return ref().projType;
     }

@@ -24,7 +24,23 @@ void FullSortScene::Remove(nw4r::g3d::ScnObj* object) {
 }
 
 void FullSortScene::DrawOpa() {
-    // not decompiled
+    nw4r::g3d::Camera camera = mScnRoot->GetCurrentCamera();
+    u8 cameraID = mScnRoot->GetCurrentCameraID();
+    camera.GXSetViewport();
+    camera.GXSetProjection();
+    camera.GXSetScissor();
+    camera.GXSetScissorBoxOffset();
+    camera.SetCameraProjMtx(cameraID, true);
+    nw4r::g3d::G3DState::Invalidate(0x100);
+    nw4r::g3d::G3DState::SetLightSetting(mScnRoot->GetLightSetting());
+
+    nw4r::g3d::ScnObjGather* gather = mFullSortGroup->GetScnObjGather();
+
+    if (gather != nullptr) {
+        gather->DrawOpa(nullptr);
+    }
+
+    nw4r::g3d::G3DState::Invalidate(4);
 }
 
 void FullSortScene::DrawXlu() {
@@ -32,5 +48,5 @@ void FullSortScene::DrawXlu() {
 }
 
 bool FullSortScene::IsScnRootSizeValid() {
-    return 0 != mFullSortGroup->GetSize();
+    return mFullSortGroup->GetSize() != 0;
 }

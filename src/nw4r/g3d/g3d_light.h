@@ -22,9 +22,9 @@ namespace nw4r
             u8 r, g, b, a;
         };
 
-        struct AmbLightAnmResult
-        {
-        };
+        // struct AmbLightAnmResult
+        // {
+        // };
 
         class LightObj
         {
@@ -77,9 +77,9 @@ namespace nw4r
             GXLightObj mLightObj; // at 0x4
         };
 
-        struct LightAnmResult
-        {
-        };
+        // struct LightAnmResult
+        // {
+        // };
 
         struct LightSet
         {

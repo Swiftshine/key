@@ -9,7 +9,7 @@ namespace nw4r {
 namespace g3d {
 
 // Forward declarations
-struct AmbLightAnmResult;
+// struct AmbLightAnmResult;
 
 struct ResAnmAmbLightData {
     u32 size;              // at 0x0

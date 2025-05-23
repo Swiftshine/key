@@ -16,8 +16,22 @@ namespace nw4r
 
         struct IScnObjGather
         {
-            virtual ~IScnObjGather();
-            virtual UNKWORD Add(ScnObj *, bool, bool) = 0;
+            virtual ~IScnObjGather(); // @ 0x8
+            virtual UNKWORD Add(ScnObj *, bool, bool) = 0; // @ 0xC
+            
+        };
+
+        struct ScnObjGather : IScnObjGather {
+            virtual void Clear(); // @ 0x10
+            virtual void ZSort(); // @ 0x14
+            virtual void Sort(); // @ 0x18
+            virtual void Sort(
+                bool(*)(const ScnObj*, const ScnObj*),
+                bool(*)(const ScnObj*, const ScnObj*)
+            ); // @ 0x1C
+            virtual void DrawOpa(struct ResMdlDrawMode*); // @ 0x20
+            virtual void DrawXlu(struct ResMdlDrawMode*); // @ 0x24
+            virtual int CheckScnObj(ScnObj*); // @ 0x28
         };
 
         class ScnObj : public G3dObj

@@ -13,9 +13,13 @@ public:
     inline u32 GetSize() {
         return mSize;
     }
+
+    inline nw4r::g3d::ScnObjGather* GetScnObjGather() {
+        return mScnObjGather;
+    }
 private:
     FullSortGather* mFullSortGather;
-    void* m_EC;
+    nw4r::g3d::ScnObjGather* mScnObjGather;
 };
 
 ASSERT_SIZE(FullSortGroup, 0xF0);
