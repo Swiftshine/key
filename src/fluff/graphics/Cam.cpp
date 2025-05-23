@@ -9,8 +9,11 @@
 #define BASE_RIGHT          -BASE_LEFT
 #define NEAR                0.0099999998f
 #define FAR                 6000.0f
-
 #define BASE_Z              3000.0f
+#define SCREEN_WIDTH        640
+#define SCREEN_HEIGHT       360
+#define SCREEN_HEIGHT_WIDESCREEN 480
+
 // #define
 extern "C" {
     // nw4r?
@@ -237,19 +240,19 @@ void CamOrtho::fn_8001A35C(float arg1, float* arg2, float* arg3, float* arg4, fl
     *arg3 = fn_8059F64C(this)[1] + *arg3;
 }
 
-
-// nonmatching due to some inline
-void CamOrtho::GetScreenDimensions(int* arg1, int* arg2, int* pDestW, int* pDestH) {
+// https://decomp.me/scratch/dmM4n
+void CamOrtho::GetScreenDimensions(int* arg0, int* arg1, int* pDestW, int* pDestH) {
     if (IsWidescreen(CurrentRenderModeObj)) {
+        *arg0 = 0;
         *arg1 = 0;
-        *arg2 = 0;
-        *pDestW = 640;
-        *pDestH = 480;
+        *pDestW = SCREEN_WIDTH;
+        *pDestH = SCREEN_HEIGHT_WIDESCREEN;
+        return;
     } else {
-        *arg1 = 0;
-        *pDestW = 640;
-        *pDestH = 360;
-        *arg2 = 0;
+        *arg0 = 0;
+        *pDestW = SCREEN_WIDTH;
+        *pDestH = SCREEN_HEIGHT;
+        *arg1 = (SCREEN_HEIGHT_WIDESCREEN - SCREEN_HEIGHT) / 2;
     }
 }
 
