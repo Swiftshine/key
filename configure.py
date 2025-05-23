@@ -479,17 +479,27 @@ config.libs = [
     {
         "lib": "fluff/graphics/",
         "mw_version": config.linker_version,
+        "cflags": [*cflags_fluff_base_no_inline_deferred],
+        "host": False,
+        "progress_category": "fluff",
+        "objects": [
+            Object(NonMatching, "fluff/graphics/Cam.cpp"),
+        ]
+    },
+    {
+        "lib": "fluff/graphics/",
+        "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_base_no_inline_deferred, "-pragma \"merge_float_consts on\""],
         "host": False,
         "progress_category": "fluff",
         "objects": [
-            Object(NonMatching, "fluff/graphics/NwAnmCtrl.cpp"),
             Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
             Object(Matching,    "fluff/graphics/BGSTFile.cpp"),
             Object(NonMatching, "fluff/graphics/BGSTList.cpp"),
-            Object(NonMatching, "fluff/graphics/FullSortScene.cpp"),
             Object(NonMatching, "fluff/graphics/FB2Tex.cpp"),
+            Object(NonMatching, "fluff/graphics/FullSortScene.cpp"),
             Object(NonMatching, "fluff/graphics/GmkPartsMdlSet.cpp"),
+            Object(NonMatching, "fluff/graphics/NwAnmCtrl.cpp"),
         ],
     },
     {

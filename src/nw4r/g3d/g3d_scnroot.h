@@ -28,9 +28,10 @@ namespace nw4r
             void DrawXlu();
 
             u8 GetCurrentCameraID() const { return mCameraId; }
-
             void CalcAnmScn();
             void SetGlbSettings();
+            
+            void SetCameraID(u8 id);
         private:
             UNKWORD WORD_0xE8;
             UNKWORD WORD_0xEC;

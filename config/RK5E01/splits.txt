@@ -23,6 +23,10 @@ fluff/language/Language.cpp:
 gfl/gflVec3.cpp:
 	.text       start:0x800127CC end:0x80012858
 
+fluff/graphics/Cam.cpp:
+	.text       start:0x80019C1C end:0x8001A530
+	.ctors      start:0x807E3430 end:0x807E3434
+
 gfl/gflResInfo.cpp:
 	.text       start:0x80026494 end:0x800264A4
 
