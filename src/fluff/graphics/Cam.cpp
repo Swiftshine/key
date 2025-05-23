@@ -240,7 +240,6 @@ void CamOrtho::fn_8001A35C(float arg1, float* arg2, float* arg3, float* arg4, fl
     *arg3 = fn_8059F64C(this)[1] + *arg3;
 }
 
-// https://decomp.me/scratch/dmM4n
 void CamOrtho::GetScreenDimensions(int* arg0, int* arg1, int* pDestW, int* pDestH) {
     if (IsWidescreen(CurrentRenderModeObj)) {
         *arg0 = 0;
@@ -252,7 +251,7 @@ void CamOrtho::GetScreenDimensions(int* arg0, int* arg1, int* pDestW, int* pDest
         *arg0 = 0;
         *pDestW = SCREEN_WIDTH;
         *pDestH = SCREEN_HEIGHT;
-        *arg1 = (SCREEN_HEIGHT_WIDESCREEN - SCREEN_HEIGHT) / 2;
+        *arg1 = (SCREEN_HEIGHT_WIDESCREEN - static_cast<uint>(*pDestH)) / 2;
     }
 }
 
