@@ -213,6 +213,7 @@ void CamOrtho::Set(float multiplier) {
     fn_8001A470();
 }
 
+// nonmatching
 void CamOrtho::fn_8001A318(float multiplier, float* pLeft, float* pTop, float* arg4, float* arg5) {
     float top;
     float ntwo;
