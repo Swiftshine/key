@@ -5,10 +5,18 @@
 
 
 namespace gfl {
-namespace GfCompression {
-    size_t GetDecompressedSize(GfArch::CompressionHeader** header);
-    size_t GetCompressedSize(GfArch::CompressionHeader** header);  
-}
+
+class GfCompressionWrapper {
+public:
+    DECL_WEAK GfCompressionWrapper(void* pData);
+    DECL_WEAK ~GfCompressionWrapper();
+
+    size_t GetDecompressedSize();
+    size_t GetCompressedSize();
+private:
+    GfArch::CompressionHeader* mHeader;
+};
+
 }
 
 

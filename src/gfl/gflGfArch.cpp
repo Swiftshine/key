@@ -79,11 +79,11 @@ uint GfArch::GetEntrySize(const char* filename) {
 
 bool GfArch::Validate() {
     File* f = mFile;
-    GfArch::FileHeader* header;
+    GfArch::CompressionHeader* header;
     bool valid;
-    header = (GfArch::FileHeader*)gfl::Alloc(gfl::HeapID::LIB1, sizeof(GfArch::FileHeader), 0x20);
+    header = (GfArch::CompressionHeader*)gfl::Alloc(gfl::HeapID::LIB1, sizeof(GfArch::CompressionHeader), 0x20);
 
-    f->Read((void*)header, sizeof(GfArch::FileHeader), 0);
+    f->Read((void*)header, sizeof(GfArch::CompressionHeader), 0);
     
     valid = SetHeader(header);
 
@@ -113,7 +113,7 @@ void GfArch::DeleteDirEntryGfArch(DirEntryGfArch* dirEntry) {
 
 
 
-bool GfArch::SetHeader(GfArch::FileHeader* header) {
+bool GfArch::SetHeader(GfArch::CompressionHeader* header) {
     if (!(header->mMagic[0] == lbl_808E4350[0] && 
           header->mMagic[1] == lbl_808E4350[1] && 
           header->mMagic[2] == lbl_808E4350[2] && 

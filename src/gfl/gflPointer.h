@@ -125,6 +125,10 @@ namespace gfl {
             delete mPointer;
             mPointer = nullptr;
         }
+
+        inline operator T*() {
+            return mPointer;
+        }
     };
 
 

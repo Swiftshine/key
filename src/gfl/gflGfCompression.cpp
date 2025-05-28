@@ -13,11 +13,11 @@ inline size_t SwapEndianness32(size_t value) {
     return dst;
 }
 
-size_t GfCompression::GetDecompressedSize(GfArch::CompressionHeader** header) {
-    return SwapEndianness32((*header)->mDecompressedDataSize);
+size_t GfCompressionWrapper::GetDecompressedSize() {
+    return SwapEndianness32(mHeader->mDecompressedDataSize);
 }
 
-size_t GfCompression::GetCompressedSize(GfArch::CompressionHeader** header) {
-    return SwapEndianness32((*header)->mCompressedDataSize);
+size_t GfCompressionWrapper::GetCompressedSize() {
+    return SwapEndianness32(mHeader->mCompressedDataSize);
 }
 

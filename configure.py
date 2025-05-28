@@ -415,11 +415,12 @@ config.libs = [
         "progress_category": "gfl",
         "objects": [
             Object(Matching,    "gfl/gflAlloc.cpp"),
+            Object(NonMatching, "gfl/gflBpeDecoderFile.cpp"),
             Object(Matching,    "gfl/gflChecksum.cpp"),
             Object(NonMatching, "gfl/gflCustomRenderObj.cpp"),
             Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
             Object(Matching,    "gfl/gflFixedString.cpp"),
-            Object(Matching,    "gfl/gflGfCompression.cpp"),
+            Object(NonMatching, "gfl/gflGfCompression.cpp"),
             Object(Matching,    "gfl/gflHeap.cpp"),
             Object(NonMatching, "gfl/gflMemory.cpp"),
             Object(Matching,    "gfl/gflMemoryBase.cpp"),

@@ -7,6 +7,10 @@
 
 // The GfArch format is in Little-Endian.
 
+#define GFARCH_ARCHIVE_HEADER_SIZE 0x20
+#define GFARCH_COMPRESSION_HEADER_SIZE 0x14
+#define GFARCH_FILE_ENTRY_SIZE 0x10
+
 namespace gfl {
     class File;
     class DirEntryGfArch;
@@ -32,19 +36,19 @@ namespace gfl {
             Compressed data
         */
 
-        struct FileHeader {
-            char mMagic[4];      // "GFAC" - GoodFeel ArChive?
+        struct ArchiveHeader {
+            char  mMagic[4];      // "GFAC" - GoodFeel ArChive?
             uint  mVersion;       // 0x0300 in this game - version 3.0
-            bool mIsCompressed;    // always true
+            bool  mIsCompressed;    // always true
             uint  mFileInfoOffset;
             uint  mFileInfoSize;
             uint  mCompressionHeaderOffset; // the compression header is padded to an offset of 0x20
             uint  mCompressedBlockSize; // the size of the compressed block, including the compression header
-            u8 pad2[4]; // explicit padding -- this is part of the structure
+            u8    pad[4]; // explicit padding -- this is part of the structure
         };
 
         
-        // ASSERT_SIZE(FileHeader, 0x20);
+        // ASSERT_SIZE(ArchiveHeader, 0x20);
 
         struct FileEntry {
             uint mChecksum;
@@ -61,17 +65,17 @@ namespace gfl {
             uint mFlags;
         };
 
-        // ASSERT_SIZE(FileEntryEx, 0x14)
+        // ASSERT_SIZE(FileEntryEx, 0x14);
 
         struct CompressionHeader {
             char mMagic[4];      // "GFCP" - GoodFeel ComPression?
-            uint m_4;
-            int mCompressionType;
+            uint mVersion;
+            int  mCompressionType;
             uint mDecompressedDataSize;
             uint mCompressedDataSize;
         };
 
-        ASSERT_SIZE(CompressionHeader, 0x14)
+        // ASSERT_SIZE(CompressionHeader, 0x14);
     public:
         static const char InitialFilename[];
     public:
@@ -87,7 +91,7 @@ namespace gfl {
         void GetDataAndSize(const char* filename, void* addr, uint* size);
         virtual DirEntryGfArch* GetDirEntryGfArch(const char* filename);
         virtual void DeleteDirEntryGfArch(DirEntryGfArch* dirEntry);
-        bool SetHeader(GfArch::FileHeader* header);
+        bool SetHeader(GfArch::CompressionHeader* header);
         bool CheckEntryName(const char* filename, GfArch::FileEntryEx* entry) DONT_INLINE_CLASS;
     
     public:
