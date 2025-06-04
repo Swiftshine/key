@@ -114,6 +114,13 @@ parser.add_argument(
     help="builds equivalent (but non-matching) or modded objects",
 )
 parser.add_argument(
+    "--warn",
+    dest="warn",
+    type=str,
+    choices=["all", "off", "error"],
+    help="how to handle warnings",
+)
+parser.add_argument(
     "--no-progress",
     dest="progress",
     action="store_false",
@@ -143,11 +150,11 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20240706"
-config.dtk_tag = "v1.4.1"
+config.compilers_tag = "20250520"
+config.dtk_tag = "v1.6.0"
 config.objdiff_tag = "v2.5.0"
-config.sjiswrap_tag = "v1.1.1"
-config.wibo_tag = "0.6.11"
+config.sjiswrap_tag = "v1.2.1"
+config.wibo_tag = "0.6.16"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -636,6 +643,22 @@ config.libs = [
         ],
     },
 ]
+
+# Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
+# This is called once per module, with the module ID and the current link order.
+#
+# For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
+# "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
+def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
+    # Don't modify the link order for matching builds
+    if not config.non_matching:
+        return objects
+    if module_id == 0:  # DOL
+        return objects + ["dummy.c"]
+    return objects
+
+# Uncomment to enable the link order callback.
+# config.link_order_callback = link_order_callback
 
 config.progress_categories = [
     ProgressCategory("fluff", "Game Code"),
