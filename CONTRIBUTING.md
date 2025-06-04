@@ -22,11 +22,11 @@ Sections:
 
 ## Code style
 ### General
-- Lines should not exceed `100` characters. These can be split into multiple lines.
+Lines should not exceed `100` characters. These can be split into multiple lines.
 
-- Use `nullptr` instead of `0` when assigning or comparing a pointer in C++.
+Use `nullptr` instead of `0` when assigning or comparing a pointer in C++.
 Likewise, use `NULL` in C.
-    - Be explicit when comparing pointers.
+- Be explicit when comparing pointers.
     ```cpp
     // bad
     if (ptr) { }
@@ -37,14 +37,15 @@ Likewise, use `NULL` in C.
     ```
 
 ### Headers
-- Use forward declared types when possible.
-- Use proper header guards.
-    ```cpp
-    #ifndef FLUFF_MYHEADER_H
-    #define FLUFF_MYHEADER_H
-    // ...
-    #endif
-    ```
+Use forward declared types when possible.
+
+Use proper header guards.
+```cpp
+#ifndef FLUFF_MYHEADER_H
+#define FLUFF_MYHEADER_H
+// ...
+#endif
+```
 
 ### Files and includes
 For SDK or STL includes, use angled brackets. For game or GFL includes, use quotation marks.
