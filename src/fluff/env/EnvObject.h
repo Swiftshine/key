@@ -7,15 +7,15 @@
 namespace env {
     class EnvObject {
     public:
-        EnvObject(gfl::Task* parentTask, const char* taskName, uint flagIndex);
-        EnvObject(gfl::Task* parentTask, u8 taskFlags, const char* taskName, uint flagIndex);
+        EnvObject(gfl::Task* pParentTask, const char* pTaskName, uint flagIndex);
+        EnvObject(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, uint flagIndex);
         virtual ~EnvObject();
         virtual void vfC() = 0;
 
         
         // called via functor class method
         void DoUpdate();
-        gfl::Task* GetNewTask(gfl::Task* parentTask, u8 taskFlags, const char* taskName, uint arg4);
+        gfl::Task* GetNewTask(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, uint arg4);
         // resets the flags and applies the given flags
         void SetTaskFlags(uint flags);
         // applies the given flags
