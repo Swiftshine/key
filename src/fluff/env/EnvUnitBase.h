@@ -8,10 +8,10 @@
 namespace env {
     class EnvUnitBase : public EnvObject {
     public:
-        EnvUnitBase(gfl::Task* parentTask, const char* taskName, uint arg3);
+        EnvUnitBase(gfl::Task* pParentTask, const char* pTaskName, uint arg3);
         virtual ~EnvUnitBase();
 
-        void RegisterResource(const char* resources, uint count);
+        void RegisterResource(const char* pResourceName, uint count);
         void ClearAll();
         bool CheckResources();
     private:
