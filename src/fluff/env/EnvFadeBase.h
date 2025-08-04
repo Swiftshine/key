@@ -12,7 +12,7 @@ namespace env {
             int mStateValue;
         };
     public:
-        EnvFadeBase(gfl::Task* parentTask, int arg2, int arg3, const char* taskName, uint flagIndex);
+        EnvFadeBase(gfl::Task* pParentTask, int arg2, int arg3, const char* pTaskName, uint flagIndex);
         virtual ~EnvFadeBase();
 
         virtual void vf1C();
