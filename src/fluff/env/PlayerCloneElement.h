@@ -14,12 +14,12 @@ namespace env {
 
         virtual ~PlayerCloneElement();
 
-        inline void SetPlayer(PlayerBase* player) {
-            mPlayer = player;
+        inline void SetPlayer(PlayerBase* pPlayer) {
+            mPlayer = pPlayer;
         }
 
-        inline void SetTransMdl(PlTransMdl* mdl) {
-            mTransMdl = mdl;
+        inline void SetTransMdl(PlTransMdl* pModel) {
+            mTransMdl = pModel;
         }
     };
 }
