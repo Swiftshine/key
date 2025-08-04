@@ -15,7 +15,7 @@ namespace demo {
         virtual void vf14();
         virtual void vf18();
         virtual void vf1C();
-    private:
+
         std::string m_4;
         void* m_10;
     };

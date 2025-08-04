@@ -47,7 +47,7 @@ public:
     static inline nw4r::math::VEC3 GetMTXTranslation(nw4r::math::MTX34& mtx) {
         return nw4r::math::VEC3(mtx[0][3], mtx[1][3], mtx[2][3]);
     }
-protected:
+
     int m_4;
     int mFullSortSceneID;                      // @ 0x8
     nw4r::g3d::ResNode mResNode;               // @ 0xC
@@ -65,6 +65,7 @@ public:
     virtual ~FlfDemoCharCtrl();
 
     /* FlfDemoNodeCtrl */
+
     virtual void vf1C() override;
     virtual uint vf20() override;
     virtual void vf24(int) override;
@@ -73,7 +74,7 @@ public:
     virtual void SetFullSortScene(uint sceneID) override;
     virtual void SetVisibility(bool visibility) override;
     virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
-private:
+
     std::string mResourcePath;              // @ 0x24
     gfl::Pointer<FlfMdlDraw> mFlfMdlDraw;   // @ 0x30
 };
@@ -94,7 +95,7 @@ public:
     virtual void SetFullSortScene(uint sceneID) override;
     virtual void SetVisibility(bool visibility) override;
     virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
-private:
+
     bool mIsPlayerStateDefault; // @ 0x24
     bool m_25;
     bool m_26;
@@ -109,9 +110,10 @@ public:
     virtual ~FlfDemoBeadCtrl();
 
     /* FlfDemoNodeCtrl */
+
     virtual void SetVisibility(bool visibility) override;
     virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
-private:
+
     int mBeadType;                  // @ 0x24
     int mBeadColor;                 // @ 0x28
     FlfHandle mBeadHandle;          // @ 0x2C
@@ -130,7 +132,7 @@ public:
     virtual void vf24(int) override;
     virtual void SetVisibility(bool visibility) override;
     virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
-private:
+
     FlfHandle mGimmickHandle; // @ 0x24
 };
 
@@ -143,7 +145,7 @@ public:
     /* FlfDemoNodeCtrl */
 
     virtual void SetVisibility(bool visibility) override;
-private:
+
     bool mFlagValue;    // @ 0x24
     size_t mFlagIndex;  // @ 0x28
 };
@@ -157,7 +159,7 @@ public:
     /* FlfDemoNodeCtrl */
 
     DECL_WEAK virtual void vf24(int) override;
-private:
+
     int m_24;
 };
 
@@ -174,7 +176,7 @@ public:
     static inline nw4r::math::VEC3 GetMTXTranslation(nw4r::math::MTX34& mtx) {
         return nw4r::math::VEC3(mtx[0][3], mtx[1][3], mtx[2][3]);
     }
-private:
+
     nw4r::g3d::ResNode mResNode; // @ 0x4
 };
 
@@ -190,7 +192,6 @@ class FlfDemoCtrl {
 public:
     FlfDemoCtrl();
     virtual ~FlfDemoCtrl();
-
 
     // vfC and vf10 have different signatures
     // but it's not clear what they are
@@ -214,7 +215,7 @@ public:
     void AddNwBlendAnmWrapperResFileObjects();
     static void GetCount(NURBSOption* dst, const char* name);
     void fn_802BBE08(NURBSStruct2*);
-private:
+
     int mState;                                             // @ 0x4
     std::string mResourcePath;                              // @ 0x8
     bool m_14;
