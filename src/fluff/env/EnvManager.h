@@ -27,7 +27,6 @@ namespace env {
             State_3 = 3
         );
 
-    public:
         void InitInstance(gfl::Task* parentTask);
         void DestroyInstance();
         EnvManager* fn_80057074();
@@ -43,7 +42,6 @@ namespace env {
         virtual void vf24(); // called for state 2
         virtual void vf28(); // called for state 3
 
-    private:
         std::string mSaveDataTexPath;
         void* m_18;
         std::deque<gfl::ResFileInfo> mSaveDataTex;

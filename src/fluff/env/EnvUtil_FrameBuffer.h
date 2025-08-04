@@ -12,7 +12,7 @@ namespace env {
         EnvUtil_FrameBuffer(gfl::Scene* pScene, int translucency, GXTexFmt texFormat, bool refreshTexture);
 
         virtual ~EnvUtil_FrameBuffer();
-    private:
+
         gfl::Scene* mScene;
         FB2Tex* mFB2Tex;
         bool mIsActive;

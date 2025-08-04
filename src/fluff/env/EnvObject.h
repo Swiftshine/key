@@ -24,7 +24,7 @@ namespace env {
         
         void fn_8005E718(uint arg1, uint arg2);
         virtual void Update() = 0;
-    protected:
+
         gfl::Pointer<gfl::Task> mTask;
         uint mTaskFlags;
     };

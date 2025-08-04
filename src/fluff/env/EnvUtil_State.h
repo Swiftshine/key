@@ -9,7 +9,7 @@ namespace env {
     public:
         inline EnvUtil_State() { }
         DECL_WEAK virtual ~EnvUtil_State();
-    private:
+
         StateT mStateValue;
     };
 }

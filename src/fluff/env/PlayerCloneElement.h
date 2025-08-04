@@ -9,7 +9,7 @@ namespace env {
     private:
         PlayerBase* mPlayer;
         PlTransMdl* mTransMdl;
-    public:
+
         inline PlayerCloneElement() { }
 
         virtual ~PlayerCloneElement();
