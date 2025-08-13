@@ -129,13 +129,13 @@ Data entered into a class definition must be placed in the following order:
 - `static` variables
 - constructor
 - destructor*
-- operators
 - virtual functions
+- operators
 - member functions
 - static functions
 - member variables
 
-\* If the destructor is `virtual`, place it according to its position in the vtable.
+\* If the destructor is `virtual`, place it with the other virtual functions according to its position in the vtable.
 E.g. if the destructor is the last function in the vtable, place it last in the
 virtual function section.
 
