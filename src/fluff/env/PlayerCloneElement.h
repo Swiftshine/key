@@ -6,21 +6,19 @@
 
 namespace env {
     class PlayerCloneElement {
-    private:
-        PlayerBase* mPlayer;
-        PlTransMdl* mTransMdl;
+    public:
+        /* Class Members (the vtable comes after the class members) */
+
+        /* 0x00 */ PlayerBase* mPlayer;
+        /* 0x04 */ PlTransMdl* mTransMdl;
+
+        /* Constructor */
 
         inline PlayerCloneElement() { }
 
-        virtual ~PlayerCloneElement();
+        /* Virtual Methods */
 
-        inline void SetPlayer(PlayerBase* pPlayer) {
-            mPlayer = pPlayer;
-        }
-
-        inline void SetTransMdl(PlTransMdl* pModel) {
-            mTransMdl = pModel;
-        }
+        /* 0x08 */ virtual ~PlayerCloneElement();
     };
 }
 

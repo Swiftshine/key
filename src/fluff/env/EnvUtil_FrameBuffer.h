@@ -8,15 +8,24 @@
 namespace env {
     class EnvUtil_FrameBuffer : public gfl::CustomRenderObj {
     public:
-        static EnvUtil_FrameBuffer* Build(gfl::Scene* pScene, int tranlucency, GXTexFmt texFormat, bool refreshTexture);
+        /* Constructor */
+
         EnvUtil_FrameBuffer(gfl::Scene* pScene, int translucency, GXTexFmt texFormat, bool refreshTexture);
 
-        virtual ~EnvUtil_FrameBuffer();
+        /* Virtual Methods */
 
-        gfl::Scene* mScene;
-        FB2Tex* mFB2Tex;
-        bool mIsActive;
-        bool mShouldBlit;
+        /* 0x08 */ virtual ~EnvUtil_FrameBuffer();
+
+        /* Static Methods */
+
+        static EnvUtil_FrameBuffer* Build(gfl::Scene* pScene, int tranlucency, GXTexFmt texFormat, bool refreshTexture);
+
+        /* Class Members */
+
+        /* 0x104 */ gfl::Scene* mScene;
+        /* 0x108 */ FB2Tex* mFB2Tex;
+        /* 0x10C */ bool mIsActive;
+        /* 0x10D */ bool mShouldBlit;
     };
 
     ASSERT_SIZE(EnvUtil_FrameBuffer, 0x110);

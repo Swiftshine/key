@@ -8,14 +8,23 @@
 namespace env {
     class EnvUnitBase : public EnvObject {
     public:
+        /* Constructor */
+
         EnvUnitBase(gfl::Task* pParentTask, const char* pTaskName, uint arg3);
-        virtual ~EnvUnitBase();
+
+        /* Virtual Methods */
+
+        /* 0x08 */ virtual ~EnvUnitBase();
+
+        /* Class Methods */
 
         void RegisterResource(const char* pResourceName, uint count);
         void ClearAll();
         bool CheckResources();
-    private:
-        std::deque<gfl::ResFileInfo> mResources;
+
+        /* Class Members */
+        
+        /* 0x04 */ std::deque<gfl::ResFileInfo> mResources;
     };
     
 }
