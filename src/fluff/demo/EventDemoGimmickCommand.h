@@ -3,9 +3,7 @@
 
 namespace demo {
 
-    class EventDemoGimmickCommand {
-    
-    };
+    class EventDemoGimmickCommand { };
     
 }
 
