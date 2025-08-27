@@ -16,7 +16,7 @@ FullSortScene::~FullSortScene() {
 }
 
 void FullSortScene::Insert(nw4r::g3d::ScnObj* object) {
-    mFullSortGroup->Insert(mFullSortGroup->GetSize(), object);
+    mFullSortGroup->Insert(mFullSortGroup->mSize, object);
 }
 
 void FullSortScene::Remove(nw4r::g3d::ScnObj* object) {
@@ -34,7 +34,7 @@ void FullSortScene::DrawOpa() {
     nw4r::g3d::G3DState::Invalidate(0x100);
     nw4r::g3d::G3DState::SetLightSetting(mScnRoot->GetLightSetting());
 
-    nw4r::g3d::ScnObjGather* gather = mFullSortGroup->GetScnObjGather();
+    nw4r::g3d::ScnObjGather* gather = mFullSortGroup->mScnObjGather;
 
     if (gather != nullptr) {
         gather->DrawOpa(nullptr);
@@ -48,5 +48,5 @@ void FullSortScene::DrawXlu() {
 }
 
 bool FullSortScene::IsScnRootSizeValid() {
-    return mFullSortGroup->GetSize() != 0;
+    return mFullSortGroup->mSize != 0;
 }

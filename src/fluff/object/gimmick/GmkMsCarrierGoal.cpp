@@ -68,14 +68,14 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
 
         mAnimCtrl.Create(CreateAnimCtrl("pedestal_00", resFileInfo));
 
-        scene->AddRenderObj(mAnimCtrl->GetScnMdlWrapper());
+        scene->AddRenderObj(mAnimCtrl->mScnMdlWrapper);
         mAnimCtrl->SetCurrentAnimationIndex(0);
-        mAnimCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
+        mAnimCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
     }
 
-    nw4r::g3d::ResMdl resMdl = mAnimCtrl->GetScnMdlWrapper()->GetResMdl("loc_01");
+    nw4r::g3d::ResMdl resMdl = mAnimCtrl->mScnMdlWrapper->GetResMdl("loc_01");
     mAnimCtrl->SetUpdateRate(0.0f);
-    mAnimCtrl->GetScnMdlWrapper()->UpdateFrame();
+    mAnimCtrl->mScnMdlWrapper->UpdateFrame();
     nw4r::math::VEC3 animPos = mAnimCtrl->GetCurrentAnimationPosition(resMdl);
     mAnimationPosition = animPos;
 
@@ -181,7 +181,7 @@ NwAnmCtrl* GmkMsCarrierGoal::CreateAnimCtrl(const char* animName, gfl::ResFileOb
     }
 
     animCtrl->SetupModelWrapper(0);
-    animCtrl->GetScnMdlWrapper()->SetUpdate(true);
+    animCtrl->mScnMdlWrapper->SetUpdate(true);
 
     return animCtrl;
 }

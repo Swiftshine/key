@@ -109,10 +109,10 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         
         anmCtrl->PlayAnimationByNameAndIndex(0, animNameBuf);
         anmCtrl->SetupModelWrapper(8);
-        anmCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
-        anmCtrl->GetScnMdlWrapper()->SetUpdate(true);
+        anmCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
+        anmCtrl->mScnMdlWrapper->SetUpdate(true);
         anmCtrl->SetCurrentAnimationIndex(0);
-        scene->AddRenderObj(anmCtrl->GetScnMdlWrapper());
+        scene->AddRenderObj(anmCtrl->mScnMdlWrapper);
 
         mAnimCtrl.Create(anmCtrl);
     }
@@ -157,7 +157,7 @@ void GmkBeadPopItem::Update() {
 
         case State::State_3: {
             if (mAnimCtrl.IsValid()) {
-                mAnimCtrl->GetScnMdlWrapper()->SetUpdate(false);
+                mAnimCtrl->mScnMdlWrapper->SetUpdate(false);
             }
 
             SetState(State::DeleteSelf);
@@ -168,8 +168,8 @@ void GmkBeadPopItem::Update() {
     UpdateMatrix();
 
     if (mAnimCtrl.IsValid()) {
-        mAnimCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
-        mAnimCtrl->GetScnMdlWrapper()->fn_8065DCDC(m_144);
+        mAnimCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
+        mAnimCtrl->mScnMdlWrapper->fn_8065DCDC(m_144);
     }
 
     if (mPopItemInfo.IsValid()) {

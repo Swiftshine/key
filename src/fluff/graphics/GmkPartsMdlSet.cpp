@@ -23,8 +23,8 @@ GmkPartsMdlSet::~GmkPartsMdlSet() {
     mShadowModel = nullptr;
 }
 
-void GmkPartsMdlSet::SetMatrix(const float zOffset, nw4r::math::MTX34& src, bool arg3) {
-    nw4r::math::MTX34 mtx = src;
+void GmkPartsMdlSet::SetMatrix(const float zOffset, nw4r::math::MTX34& rSrcMatrix, bool arg3) {
+    nw4r::math::MTX34 mtx = rSrcMatrix;
     mPrimaryModel->SetMatrix_thunk(mtx);
 
     if (mShadowModel == nullptr) {
@@ -46,34 +46,34 @@ void GmkPartsMdlSet::SetMatrix(const float zOffset, nw4r::math::MTX34& src, bool
 }
 
 
-bool GmkPartsMdlSet::GetPrimaryMatrix(nw4r::math::MTX34& dest) {
-    return mPrimaryModel->GetMatrix(dest);
+bool GmkPartsMdlSet::GetPrimaryMatrix(nw4r::math::MTX34& rDstMatrix) {
+    return mPrimaryModel->GetMatrix(rDstMatrix);
 }
 
 // https://decomp.me/scratch/EZvuo
-void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& fileInfo, const char* modelName, const char* shadowName, FullSortScene* scene, uint flags) {
-    nw4r::g3d::ResFile resFile(fileInfo.IsValid() ? fileInfo->GetGfArch() : nullptr);
+void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& rFileInfo, const char* pModelName, const char* pShadowName, FullSortScene* pScene, uint flags) {
+    nw4r::g3d::ResFile resFile(rFileInfo.IsValid() ? rFileInfo->GetGfArch() : nullptr);
     NW4R_G3D_RESFILE_AC_ASSERT(resFile);
     
     resFile.Release();
     resFile.Bind();
 
-    nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(modelName);
+    nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(pModelName);
 
-    mPrimaryModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags, modelName);
-    scene->AddRenderObj(mPrimaryModel);
+    mPrimaryModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags, pModelName);
+    pScene->AddRenderObj(mPrimaryModel);
 
-    nw4r::g3d::ResMdl shadowResMdl = resFile.GetResMdl(shadowName);
+    nw4r::g3d::ResMdl shadowResMdl = resFile.GetResMdl(pShadowName);
 
     if (!shadowResMdl.IsValid()) {
         return;
     }
 
-    mShadowModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(shadowResMdl, flags, shadowName);
-    scene->AddRenderObj(mShadowModel);
+    mShadowModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(shadowResMdl, flags, pShadowName);
+    pScene->AddRenderObj(mShadowModel);
 
     std::string partsStr = "GmkPartsMdlSet ";
-    partsStr += shadowName;
+    partsStr += pShadowName;
 
     mShadowModel->GetShadowOffset(mShadowOffset, partsStr.c_str());
 }

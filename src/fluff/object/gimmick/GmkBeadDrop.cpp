@@ -112,7 +112,7 @@ void GmkBeadDrop::Update() {
             if (mCounter == 0) {
                 mFlfMdlDraw->ResetNURBSAnimation(0, true);
                 mCounter++;
-            } else if (mFlfMdlDraw->GetUnk20() == 0) {
+            } else if (mFlfMdlDraw->m_20 == 0) {
                 mCompletionPercentage -= (1.0f / 60.0f);
                 if (mCompletionPercentage <= 0.0f) {
                     mFlfMdlDraw->ResetNURBSAnimation(1, true);
@@ -190,7 +190,7 @@ bool GmkBeadDrop::CanSpawnBeads() {
 void GmkBeadDrop::UpdateFlfMdl() {
     FlfMdlDraw* flfMdl = mFlfMdlDraw.Get();
 
-    switch (flfMdl->GetUnk20()) {
+    switch (flfMdl->m_20) {
         case 2: {
             if (flfMdl->fn_800239CC()) {
                 mFlfMdlDraw->ResetNURBSAnimation(3, true);

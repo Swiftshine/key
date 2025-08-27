@@ -37,7 +37,7 @@ void* BGST::File::GetByGrid(int sceneID, int xGridIndex, int yGridIndex) {
     return this->mColumns[sceneID] + xGridIndex + yGridIndex * this->mHeader->mGridWidth;
 }
 
-BGST::Column* BGST::File::GetColumnByIndex(int index) {
+BGST::EntryInfo* BGST::File::GetEntryInfoByIndex(int index) {
     return mColumns[index];
 }
 
@@ -45,8 +45,8 @@ void* BGST::File::GetByIndex(int index) {
     return (void*)(index * 0x20000 + mHeader->mSomeOffset3);
 }
 
-bool BGST::File::TrySetHeader(const char* path) {
-    if (SetHeader(path)) {
+bool BGST::File::TrySetHeader(const char* pFilepath) {
+    if (SetHeader(pFilepath)) {
         mLoadState = BGST::LoadState::BGST_LOADING_IMAGE;
         return true;
     }
@@ -87,29 +87,29 @@ bool BGST::File::ProcessLoadState() {
 }
 
 
-void BGST::File::CopyImageData(void** cmprImage, void** i4Image, int id, int xGridIndex, int yGridIndex) {
-    BGST::Column* column = (BGST::Column*)GetByGrid(id, xGridIndex, yGridIndex);
+void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, int id, int xGridIndex, int yGridIndex) {
+    BGST::EntryInfo* column = (BGST::EntryInfo*)GetByGrid(id, xGridIndex, yGridIndex);
     BGST::List* list = BGST::List::Instance();
     
     if (1 >= (unsigned short)(column->m_0 + 0xFFF9)) {
-        *cmprImage = list->GetImageByIndex(column->mImageIndex);
+        *pCMPRImage = list->GetImageByIndex(column->mImageIndex);
 
         if ((u16)0xFFFE == column->mType) {
-            *i4Image = (void*)-1U;
+            *pI4Image = (void*)-1U;
         } else {
-            *i4Image = list->GetImageByIndex(column->mShadowImageIndex);
+            *pI4Image = list->GetImageByIndex(column->mShadowImageIndex);
         }
         
     } else {
-        *cmprImage = nullptr;
-        *i4Image = nullptr;
+        *pCMPRImage = nullptr;
+        *pI4Image = nullptr;
     }
 }
 
-bool BGST::File::SetHeader(const char* path) {    
+bool BGST::File::SetHeader(const char* pFilepath) {    
     mHeader.Create((BGST::Header*)gfl::Alloc((gfl::Heap*)lbl_808E4D00, 0x40, 0x20));
 
-    mFile = gfl::File::Open(path, 1);
+    mFile = gfl::File::Open(pFilepath, 1);
     
     if (nullptr == mFile) {
         return false;
@@ -134,7 +134,7 @@ void BGST::File::SetupImage() {
     int gridCount = 0;
 
     for (int i = 0; i < 12; i++) {
-        if (header->mColumnEnabled[i]) {
+        if (header->mLayerEnabled[i]) {
             gridCount++;
         }
     }
@@ -161,8 +161,8 @@ void BGST::File::LoadGrid() {
     uint totalGridArea = 0;
 
     for (size_t i = 0; i < 12; i++) {
-        if (mHeader->mColumnEnabled[i]) {
-            mColumns[i] = &((BGST::Column*)(mOutputImage.Get()))[gridArea * totalGridArea];
+        if (mHeader->mLayerEnabled[i]) {
+            mColumns[i] = &((BGST::EntryInfo*)(mOutputImage.Get()))[gridArea * totalGridArea];
             totalGridArea++;
         } else {
             mColumns[i] = nullptr;

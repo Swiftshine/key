@@ -1,15 +1,15 @@
 #include "graphics/NwAnmCtrl.h"
 #include "manager/StageManager.h"
 
-NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& fileInfo, const char* animName)
-    : mResFileInfo(fileInfo)
+NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& rFileInfo, const char* pAnimName)
+    : mResFileInfo(rFileInfo)
 {
     if (mResFileInfo.IsValid()) {
         mResFileInfo->IncrementLevel();
     }
 
-    mModelWrapper = nullptr;
-    mResMdlName = animName;
+    mScnMdlWrapper = nullptr;
+    mResMdlName = pAnimName;
     mCurrentAnimIndex = 0;
     mAnimations = nullptr;
     mNumAnims = animCount;
@@ -19,9 +19,9 @@ NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& fileInfo, const char* a
 
 NwAnmCtrl::~NwAnmCtrl() { }
 
-void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* animName, int) {
+void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* pAnimName, int) {
     NwAnm* anim = GetAnimationByIndex(animIndex);
-    anim->Play(mResFileInfo, mResMdlName.c_str(), animName, nullptr);
+    anim->Play(mResFileInfo, mResMdlName.c_str(), pAnimName, nullptr);
 }
 
 gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint flags) {
@@ -39,15 +39,15 @@ gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint flags) {
     wrapper->SetUpdate(true);
 
     if (nullptr == wrapper) {
-        gfl::ScnMdlWrapper* ptr = mModelWrapper.Get();
+        gfl::ScnMdlWrapper* ptr = mScnMdlWrapper.Get();
 
         if (nullptr != ptr) {
             delete ptr;
         }
 
-        mModelWrapper = ptr;
+        mScnMdlWrapper = ptr;
     } else {
-        mModelWrapper = wrapper;
+        mScnMdlWrapper = wrapper;
     }
 
     if (0 != mNumAnims) {
@@ -57,8 +57,8 @@ gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint flags) {
     return wrapper;
 }
 
-void NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* scene, uint flags) {
-    scene->AddRenderObj(SetupModelWrapper(flags));
+void NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* pScene, uint flags) {
+    pScene->AddRenderObj(SetupModelWrapper(flags));
 }
 
 void NwAnmCtrl::SetStageFullSortSceneModelWrapper(uint flags) {
@@ -75,7 +75,7 @@ NwAnm* NwAnmCtrl::GetAnimationByIndex(uint index) {
 }
 
 void NwAnmCtrl::SetCurrentAnimationIndex(uint index) {
-    GetAnimationByIndex(index)->SetModelWrapper(mModelWrapper.Get(), true);
+    GetAnimationByIndex(index)->SetModelWrapper(mScnMdlWrapper.Get(), true);
     mCurrentAnimIndex = index;
 }
 
@@ -111,6 +111,6 @@ bool NwAnmCtrl::HasAnim(uint index) {
     return index >= mNumAnims ? false : GetAnimationByIndex(index)->HasAnim();
 }
 
-nw4r::math::VEC3 NwAnmCtrl::GetCurrentAnimationPosition(nw4r::g3d::ResMdl& resmdl) {
-    return GetCurrentAnimation()->GetPosition(mModelWrapper.Get(), resmdl);
+nw4r::math::VEC3 NwAnmCtrl::GetCurrentAnimationPosition(nw4r::g3d::ResMdl& rResMdl) {
+    return GetCurrentAnimation()->GetPosition(mScnMdlWrapper.Get(), rResMdl);
 }

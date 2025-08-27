@@ -75,11 +75,11 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
         }
 
         mShadowAnimCtrl->SetFullSortSceneModelWrapper(scene, nullptr);
-        mShadowAnimCtrl->GetScnMdlWrapper()->fn_8004DB94(mModelScale);
+        mShadowAnimCtrl->mScnMdlWrapper->fn_8004DB94(mModelScale);
     }
 
     if (0.0f != mBuildInfo.GetFloatParam(Parameter::ZRotation)) {
-        mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mAnimCtrl->GetScnMdlWrapper()->GetScnMdl()));
+        mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mAnimCtrl->mScnMdlWrapper->GetScnMdl()));
         mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::ZRotation));
     }
 
@@ -101,10 +101,10 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     float floatUnk = mBuildInfo.GetFloatParam(ParameterID::THIRD);
 
     if (0.0f != floatUnk) {
-        mAnimCtrl->GetScnMdlWrapper()->vf30(floatUnk);
+        mAnimCtrl->mScnMdlWrapper->vf30(floatUnk);
 
         if (mShadowAnimCtrl.IsValid()) {
-            mShadowAnimCtrl->GetScnMdlWrapper()->vf30(floatUnk);
+            mShadowAnimCtrl->mScnMdlWrapper->vf30(floatUnk);
         }
     }
 
@@ -135,7 +135,7 @@ bool GmkColAnimMdl::HasAnimation(uint index) {
 }
 
 uint GmkColAnimMdl::GetCurrentAnimationIndex() {
-    return mAnimCtrl->GetCurrentAnimationIndex();
+    return mAnimCtrl->mCurrentAnimIndex;
 }
 
 bool GmkColAnimMdl::CheckAnimationProgress() {
@@ -148,11 +148,11 @@ bool GmkColAnimMdl::IsAnimationDone() {
 
 void GmkColAnimMdl::SetUpdate(bool state) {
     if (mAnimCtrl.IsValid()) {
-        mAnimCtrl->GetScnMdlWrapper()->SetUpdate(state);
+        mAnimCtrl->mScnMdlWrapper->SetUpdate(state);
     }
 
     if (mShadowAnimCtrl.IsValid()) {
-        mShadowAnimCtrl->GetScnMdlWrapper()->SetUpdate(state);
+        mShadowAnimCtrl->mScnMdlWrapper->SetUpdate(state);
     }
 }
 
@@ -172,11 +172,11 @@ void GmkColAnimMdl::vf64(bool arg1) {
     Gimmick::vf64(arg1);
 
     if (mAnimCtrl.IsValid()) {
-        mAnimCtrl->GetScnMdlWrapper()->Update(!arg1);
+        mAnimCtrl->mScnMdlWrapper->Update(!arg1);
     }
 
     if (mShadowAnimCtrl.IsValid()) {
-        mShadowAnimCtrl->GetScnMdlWrapper()->Update(!arg1);
+        mShadowAnimCtrl->mScnMdlWrapper->Update(!arg1);
     }
 }
 
@@ -186,7 +186,7 @@ void GmkColAnimMdl::Update() {
 
 void GmkColAnimMdl::UpdateModel() {
     FlfGameObj::UpdateMatrix();
-    mAnimCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
+    mAnimCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
 
     if (!mShadowAnimCtrl.IsValid()) {
         return;
@@ -228,5 +228,5 @@ void GmkColAnimMdl::UpdateModel() {
     PSMTXIdentity(mtx2);
     nw4r::math::MTX34Trans(&mtx2, &mtx2, reinterpret_cast<nw4r::math::VEC3*>(&mModelScale));
     PSMTXConcat(mMatrix, mtx2, mtx1);
-    mShadowAnimCtrl->GetScnMdlWrapper()->SetMatrix(mtx1);
+    mShadowAnimCtrl->mScnMdlWrapper->SetMatrix(mtx1);
 }

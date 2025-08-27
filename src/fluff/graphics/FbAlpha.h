@@ -5,12 +5,17 @@
 
 class FbAlpha : public gfl::CustomRenderObj {
 public:
+    /* Constructor */
+
     FbAlpha();
-    virtual ~FbAlpha();
 
+    /* Virtual Methods */
 
-private:
-    GXColor mColor;
+    /* 0x08 */ virtual ~FbAlpha();
+
+    /* Class Members */
+
+    /* 0x104 */ GXColor mColor;
 };
 
 ASSERT_SIZE(FbAlpha, 0x108);

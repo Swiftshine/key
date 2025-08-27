@@ -188,7 +188,7 @@ void FlfDemoCharCtrl::vf1C() {
 }
 
 uint FlfDemoCharCtrl::vf20() {
-    return mFlfMdlDraw->GetUnk20();
+    return mFlfMdlDraw->m_20;
 }
 
 void FlfDemoCharCtrl::SetUpdateRate(float rate) {
@@ -292,7 +292,7 @@ void FlfDemoPlayerCtrl::vf18(float arg0) {
 
 uint FlfDemoPlayerCtrl::vf20() {
     if (mPlayer != nullptr) {
-        return mPlayer->GetPlayerMdlMng()->GetFlfMdlDraw()->GetUnk20();
+        return mPlayer->GetPlayerMdlMng()->GetFlfMdlDraw()->m_20;
     }
 
     return 0;
@@ -712,7 +712,7 @@ void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
     NURBSSet* set = mFlfMdlDraw->GetNURBSAnimWrapperNURBSSet();
 
     if (set != nullptr) {
-        NURBSStruct1* s1 = set->GetUnk14();
+        NURBSStruct1* s1 = set->m_14;
 
         if (s1 != nullptr) {
             NURBSStruct1* s = s1;
@@ -735,7 +735,7 @@ void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
 }
 
 uint FlfDemoCtrl::fn_802BBB28() {
-    return mFlfMdlDraw->GetUnk20();
+    return mFlfMdlDraw->m_20;
 }
 
 float FlfDemoCtrl::GetCurrentFrame() {
