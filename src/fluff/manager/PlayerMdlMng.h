@@ -5,8 +5,12 @@
 
 class PlayerMdlMng {
 public:
+    /* Static Variables */
+
     static const int PlayerAnimationIDs[1]; // not sure how many there are
-public:
+
+    /* Class Methods */
+    
     void fn_800A0A84();
     void SetUpdateRate(float rate);
     void SetVisibility(bool visibility);

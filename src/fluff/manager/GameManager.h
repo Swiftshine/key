@@ -1,37 +1,41 @@
 #ifndef FLUFF_GAMEMANAGER_H
 #define FLUFF_GAMEMANAGER_H
 
-
 #include <string>
 #include "types.h"
-
-
-
 
 #include "gfl/gflTask.h"
 #include "gfl/gflArray.h"
 #include "gfl/gflFixedString.h"
+#include "gfl/gflParam.h"
 
+#include "manager/CameraManager.h"
 #include "manager/PointerManager.h"
+#include "manager/StageManager.h"
+
+#include "demo/FlfDemoCtrl.h"
+
 #include "object/PlayerBase.h"
 #include "stage/Stage.h"
 #include "mapdata/Mapdata.h"
 
-namespace gfl { class ParamBool; }
-
 class PointerManagerWrapper {
 public:
+    /* Constructor + Destructor */
+
     PointerManagerWrapper();
     ~PointerManagerWrapper();
 
-    PointerManager* GetPointerManager() { return mManager; }
-private:
-    PointerManager* mManager;
+    /* Class Members */
+
+    /* 0x0 */ PointerManager* mManager;
 };
 
 
 class GameManager {
 public:
+    /* Structures */
+
     ENUM_CLASS(LoadPhase,
         StageResource = 1,
         StageSections = 2,
@@ -52,27 +56,58 @@ public:
     // In order of execution:
     // 1, 2, 4, 3, 5, 6, 7
     ENUM_CLASS(LoadStatus,
-        BeginLoad = 0,
-        ProcessLoad = 1,
-        GameCreate = 2,
-
-        GameInit = 3,
-        PrepareInit = 4,
-        GameStart = 5,
-
-        PlayerRelatedA = 6,
-        PlayerRelatedB = 7,
+        BeginLoad       = 0,
+        ProcessLoad     = 1,
+        GameCreate      = 2,
+        GameInit        = 3,
+        PrepareInit     = 4,
+        GameStart       = 5,
+        PlayerRelatedA  = 6,
+        PlayerRelatedB  = 7,
     );
 
-private:
+    /* Static Variables */
+
     static GameManager* sInstance;
-public:
-    static inline GameManager* Instance() { return sInstance; }
+
+    static inline GameManager* Instance() {
+        return sInstance;
+    }
+
+    /* Constructor */
     
     GameManager();
 
-    virtual ~GameManager();
+    /* Virtual Methods */
 
+    /* 0x8 */ virtual ~GameManager();
+    /* 0xC */ virtual void ProcessLoadingTasks();
+
+    /* Class Methods  */
+
+    void    LoadStageResources();
+    void    LoadStageSections();
+    void    LoadStageContents();
+    void    LoadPhase4();
+    void    LoadPhase5();
+    void    LoadPhase6(); // this phase is empty
+    void    LoadPhase7();
+    void    LoadPhase8();
+    void    LoadPhase9(); // phase 10 does not exist
+    void    LoadPhase11();
+    void    LoadPhase12();
+    void    LoadPhase13(); // this phase is empty
+    int     SetupPrinceFluff(uint arg0);
+    void    RemovePlayerByID(uint playerID);
+    void    LoadPlayerStartPosition();
+    void    fn_80011C30();
+    void    fn_80011F5C();
+    void*   GetStartGimmick(Mapdata* pMapdata);
+    void    StartLoadPhase9();
+    void    StartLoadPhase7();
+    void    StartLoadPhase13();
+
+    /* Static Methods */
     static uint  GetPlayerCount();
     static PlayerBase*  GetPlayerByID(uint playerID);
     static PlayerBase*  GetPrinceFluff();
@@ -113,7 +148,7 @@ public:
     // Returns true if loading PHASE is 3 and loading STATE is 5.
     static bool IsStageReady();
     static gfl::ParamBool* fn_8000FC64(uint arg0);
-    static void SetupPlayers(nw4r::math::VEC2& startPos, uint arg1);
+    static void SetupPlayers(nw4r::math::VEC2& rStartPos, uint arg1);
     // arg0 determines whether *(Instance + 0xB8) is incremented (true) or decremented (false).
     // Sets *(Instance + 0xB4) to true or false when *(Instance + 0xB8) is specifically 1 or 0, respectively.
     static void UpdatePrinceFluff(bool update);
@@ -122,7 +157,7 @@ public:
     // Player related.
     static bool fn_80010000();
     // Returns true if the start position is valid. If not, dest is not set.
-    static bool GetPlayerStartPosition(nw4r::math::VEC3& dest);
+    static bool GetPlayerStartPosition(nw4r::math::VEC3& rDest);
     static void fn_80011B18();
     static bool IsInMission();
     static int  GetCurrentMissionID();
@@ -133,83 +168,54 @@ public:
     static class MissionGameCtrl* GetMissionGameCtrl();
     // Mission related.
     static void fn_800123D8(int, int, int, int);
-    /* Virtual functions */
 
-    virtual void ProcessLoadingTasks();
-public:
-    // utility inlines
-    inline bool IsBGLoadedManually() { return mManualBGLoad; }
     inline gfl::FixedString* GetUnk8() { return m_8; }
-private:
-    /* Member functions */
 
-    void    LoadStageResources();
-    void    LoadStageSections();
-    void    LoadStageContents();
-    void    LoadPhase4();
-    void    LoadPhase5();
-    // This phase is empty.
-    void    LoadPhase6();
-    void    LoadPhase7();
-    void    LoadPhase8();
-    void    LoadPhase9(); // phase 10 does not exist
-    void    LoadPhase11();
-    void    LoadPhase12();
-    // This phase is empty.
-    void    LoadPhase13();
+    /* Class Members */
+    
+    /* 0x04 */ bool m_4;
+    /* 0x08 */ gfl::FixedString* m_8;
+    /* 0x0C */ uint m_C;
+    /* 0x10 */ bool m_10;
+    /* 0x14 */ int m_14;
+    /* 0x18 */ int m_18;
+    /* 0x1C */ int m_1C;
+    /* 0x14 */ int mCurrentMissionID;
+    /* 0x18 */ Stage mStage;
+    /* 0x30 */ uint m_30;
+    /* 0x34 */ uint mCurrentLoadPhase;
+    /* 0x38 */ uint mPreviousLoadPhase;
+    /* 0x3C */ uint mCurrrentLoadState;
+    /* 0x40 */ uint m_40;
+    /* 0x44 */ uint m_44;
+    /* 0x48 */ u16 m_48;
 
-    int     SetupPrinceFluff(uint arg0);
-    void    RemovePlayerByID(uint playerID);
-    void    LoadPlayerStartPosition();
-    void    fn_80011C30();
-    void    fn_80011F5C();
-    void*   GetStartGimmick(Mapdata* mapdata);
-    void    StartLoadPhase9();
-    void    StartLoadPhase7();
-    void    StartLoadPhase13();
-private:
-    bool m_4;
-    gfl::FixedString* m_8;
-    uint m_C;
-    bool m_10;
-    int m_14;
-    int m_18;
-    int m_1C;
-    int mCurrentMissionID;
-    Stage mStage;
-    uint m_30;
-    uint mCurrentLoadPhase;
-    uint mPreviousLoadPhase;
-    uint mCurrrentLoadState;
-    uint m_40;
-    uint m_44;
-    u16 m_48;
-    // it's not quite clear what this does, but setting this to true
+    // It's not quite clear what this does, but setting this to true
     // causes graphics to be loaded with a Y position significantly
     // higher than it would otherwise; this value is typically set to false
     // as a result. probably debug related.
-    bool mManualBGLoad; 
-    bool mIsInWorldMap;
-    uint m_4C;
-    uint m_50;
-    uint mPlayerCount;
-    uint mCurrentPlayerID;
-    float m_5C;
-    nw4r::math::VEC3 mPlayerStartPosition;
-    class StageManager* mStageManager;
-    class CameraManager* mCameraManager;
-    gfl::FixedArray<PlayerBase*, 2> mPlayers;
-    gfl::FixedArray<PointerManagerWrapper, 2> mPlayerPointerManagers;
-    gfl::Task mTask;
-    uint m_9C;
-    void* m_A0;
-    class FlfDemoCtrl* mDemoCtrl;
-    class MissionGameCtrl* mMissionGameCtrl;
-    uint m_AC;
-    uint m_B0;
-    bool m_B4;
-    int m_B8;
-    uint m_BC;
+    /* 0x4A */ bool mManualBGLoad;
+    /* 0x4B */ bool mIsInWorldMap;
+    /* 0x4C */ uint m_4C;
+    /* 0x50 */ uint m_50;
+    /* 0x54 */ uint mPlayerCount;
+    /* 0x58 */ uint mCurrentPlayerID;
+    /* 0x5C */ float m_5C;
+    /* 0x60 */ nw4r::math::VEC3 mPlayerStartPosition;
+    /* 0x6C */ StageManager* mStageManager;
+    /* 0x70 */ CameraManager* mCameraManager;
+    /* 0x74 */ gfl::FixedArray<PlayerBase*, 2> mPlayers;
+    /* 0x7C */ gfl::FixedArray<PointerManagerWrapper, 2> mPlayerPointerManagers;
+    /* 0x84 */ gfl::Task mTask;
+    /* 0x9C */ class PlPathMng* mPlPathMng;
+    /* 0xA0 */ void* m_A0;
+    /* 0xA4 */ FlfDemoCtrl* mDemoCtrl;
+    /* 0xA8 */ class MissionGameCtrl* mMissionGameCtrl;
+    /* 0xAC */ uint m_AC;
+    /* 0xB0 */ uint m_B0;
+    /* 0xB4 */ bool m_B4;
+    /* 0xB8 */ int m_B8;
+    /* 0xBC */ uint m_BC;
 };
 
 ASSERT_SIZE(GameManager, 0xC0)

@@ -10,20 +10,23 @@
 #include "mapdata/Mapdata.h"
 
 class StageManager {
-private:
-    StageManager();
-    ~StageManager();
-    static StageManager* sInstance;
 public:
+    /* Static Variables */
+
+    static StageManager* sInstance;
+
     static inline StageManager* Instance() {
         return sInstance;
     }
     
-    FullSortScene* GetFullSortSceneByID(uint sceneID);
+    /* Constructor + Destructor */
 
-    inline Stage* GetStage() {
-        return &mStage;
-    }
+    StageManager();
+    ~StageManager();
+    
+    /* Class Methods */
+
+    FullSortScene* GetFullSortSceneByID(uint sceneID);
 
     Mapdata* GetLevelSection(int section);
 
@@ -43,19 +46,20 @@ public:
 
     bool fn_80044C6C();
     
-public:
-    gfl::Task m_0;
-    gfl::Task mStageTask;
-    Stage mStage;
-    gfl::Task mSceneGameTop;
-    gfl::Task mSceneWorldMtxTop;
-    gfl::Task mSceneDrawTop;
-    FullSortScene* mFullSortScenes[12];
-    StageResourceManager mStageResourceManager;
-    LevelManager* mLevelManager;
-    u32 m_15C;
-    FbDof* mFbDof;
-    u32 m_164;
+    /* Class Members */
+    
+    /* 0x000 */ gfl::Task m_0;
+    /* 0x018 */ gfl::Task mStageTask;
+    /* 0x030 */ Stage mStage;
+    /* 0x03C */ gfl::Task mSceneGameTop;
+    /* 0x054 */ gfl::Task mSceneWorldMtxTop;
+    /* 0x06C */ gfl::Task mSceneDrawTop;
+    /* 0x084 */ FullSortScene* mFullSortScenes[12];
+    /* 0x0B4 */ StageResourceManager mStageResourceManager;
+    /* 0x158 */ LevelManager* mLevelManager;
+    /* 0x15C */ u32 m_15C;
+    /* 0x160 */ FbDof* mFbDof;
+    /* 0x164 */ u32 m_164;
 };
 
 #endif

@@ -5,14 +5,16 @@
 #include "work/InStageWork.h"
 
 class WorkManager {
-private:
+public:
+    /* Static Variables */
     static WorkManager* sInstance;
 
     static inline WorkManager* Instance() {
         return sInstance;
     }
-public:
 
+    /* Static Methods */
+    
     static InStageWork* GetInStageWork();
 };
 

@@ -4,14 +4,18 @@
 #include "types.h"
 
 class DemoManager {
-private:
-    static DemoManager* sInstance;
 public:
+    /* Static Variables */
+    
+    static DemoManager* sInstance;
+
     static inline DemoManager* Instance() {
         return sInstance;
     }
 
-    static void SetDemoFlag(size_t* index, bool value);
+    /* Static Methods */
+
+    static void SetDemoFlag(size_t* pIndex, bool value);
 };
 
 #endif

@@ -21,54 +21,58 @@ GmkMng::~GmkMng() {
     // not decompiled
 }
 
-inline void GmkMng::CreateGimmickConditionally(const nw4r::math::VEC2& pos, Gimmick::GimmickBuildInfo* buildInfo) {
-    if (Mapdata::MapdataCommonGimmick::fn_8004f604(buildInfo)) {
-        if (GimmickUtil::CheckCommonByGimmickID(buildInfo->GetGimmickID()) && buildInfo->mGimmickInfo != nullptr) {
-            buildInfo->mGimmickInfo->mIsCommon = true;
+inline void GmkMng::CreateGimmickConditionally(
+    const nw4r::math::VEC2& rPos,
+    Gimmick::GimmickBuildInfo* pBuildInfo
+) {
+    if (Mapdata::MapdataCommonGimmick::fn_8004f604(pBuildInfo)) {
+        if (GimmickUtil::CheckCommonByGimmickID(pBuildInfo->GetGimmickID())
+            && pBuildInfo->mGimmickInfo != nullptr) {
+            pBuildInfo->mGimmickInfo->mIsCommon = true;
         }
     } else {
-        if (GimmickUtil::CheckCommonByGimmickID(buildInfo->GetGimmickID())) {
-            if (IsGimmickInSpawnRadius(pos, buildInfo)) {
-                CreateGimmick(buildInfo);
+        if (GimmickUtil::CheckCommonByGimmickID(pBuildInfo->GetGimmickID())) {
+            if (IsGimmickInSpawnRadius(rPos, pBuildInfo)) {
+                CreateGimmick(pBuildInfo);
             }
         } else {
-            CreateGimmick(buildInfo);
+            CreateGimmick(pBuildInfo);
         }
     }
 }
 
 
 // https://decomp.me/scratch/KVSCV - regswaps
-void GmkMng::CreateGimmicksFromMapdata(Mapdata* mapdata) {
+void GmkMng::CreateGimmicksFromMapdata(Mapdata* pMapdata) {
     // this will not work if you put the declaration and assignment in the same line
     nw4r::math::VEC2 pos;
     pos = CameraManager::Instance()->GetCurrentPosition();
 
-    for (uint i = 0; i < mapdata->GetNumCommonGimmicks(); i++) {
-        Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
+    for (uint i = 0; i < pMapdata->GetNumCommonGimmicks(); i++) {
+        Gimmick::GimmickBuildInfo* buildInfo = pMapdata->GetCommonGimmickBuildInfo(i);
         CreateGimmickConditionally(pos, buildInfo);
     }
     
-    mapdata->ConstructObjects();
-    mMapdata = mapdata;
+    pMapdata->ConstructObjects();
+    mMapdata = pMapdata;
     fn_80051B3C();
 }
 
-void GmkMng::SetMapdata(Mapdata* mapdata) {
-    mMapdata = mapdata;
+void GmkMng::SetMapdata(Mapdata* pMapdata) {
+    mMapdata = pMapdata;
     mNumCommonGimmicks = 0;
     mState = State::CreateCommonGimmicks;
 }
 
-void GmkMng::AddGimmick(Gimmick* gimmick) {
+void GmkMng::AddGimmick(Gimmick* pGimmick) {
     gfl::LinkedList<Gimmick*>::Modifier mod;
     mod.SetNode1(mGimmicks.GetNode());
-    mod.AddToListAfterNode2(mGimmicks, gimmick);
+    mod.AddToListAfterNode2(mGimmicks, pGimmick);
 }
 
-void GmkMng::RemoveGimmick(Gimmick* gimmick) {
+void GmkMng::RemoveGimmick(Gimmick* pGimmick) {
     // not matched due to gfl::LinkedList
-    mGimmicks.Remove(gimmick);
+    mGimmicks.Remove(pGimmick);
 }
 
 void GmkMng::ClearAll(bool arg1) {
@@ -76,7 +80,7 @@ void GmkMng::ClearAll(bool arg1) {
 }
 
 // https://decomp.me/scratch/g7Bxu - regswaps
-void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& dest) {
+void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& rDest) {
     gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
     gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
     
@@ -85,26 +89,26 @@ void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& dest) 
         int id = gimmick->GetGimmickID();
 
         if (gimmickID == id) {
-            dest.push_back(gimmick);
+            rDest.push_back(gimmick);
         }
         
         node = node->GetNext();
     }
 }
 
-void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& dest) {
+void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest) {
     Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
 
     for (uint i = 0; i < mapdata->GetNumCommonGimmicks(); i++) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
         int id = buildInfo->GetGimmickID();
         if (id == gimmickID) {
-            dest.push_back(buildInfo);
+            rDest.push_back(buildInfo);
         }
     }
 }
 
-Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& tag) {
+Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& rTag) {
     gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
     gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
 
@@ -114,7 +118,7 @@ Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& tag) {
         Gimmick* gimmick = node->ToNode()->GetData();
 
         if (gimmick->GetGimmickBuildInfoPtr() != nullptr &&
-            tag.compare(gimmick->GetGimmickBuildInfoPtr()->GetCommonTag()) == 0
+            rTag.compare(gimmick->GetGimmickBuildInfoPtr()->GetCommonTag()) == 0
         ) {
             result = gimmick;
             break;
@@ -125,7 +129,7 @@ Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& tag) {
 }
 
 // https://decomp.me/scratch/VH6w7 - regswaps
-Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const char* tag) {
+Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const char* pTag) {
     Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
 
     uint i = 0;
@@ -133,7 +137,7 @@ Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const ch
     
     while (i < count) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
-        if (strcmp(buildInfo->GetCommonTag(), tag) == 0) {
+        if (strcmp(buildInfo->GetCommonTag(), pTag) == 0) {
             return buildInfo;
         }
         i++;
@@ -142,7 +146,7 @@ Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const ch
     return nullptr;
 }
 
-void GmkMng::RegisterResources(const char* gimmickName, Gimmick* gimmick) {
+void GmkMng::RegisterResources(const char* pGimmickName, Gimmick* pGimmick) {
     
     gfl::LinkedList<GimmickResource*>::NodeBase* node;
     
@@ -150,24 +154,26 @@ void GmkMng::RegisterResources(const char* gimmickName, Gimmick* gimmick) {
         GimmickResource* resource = node->ToNode()->GetData();
         const char* resourceName = resource->GetResourceName().c_str();
 
-        if (strcmp(gimmickName, resourceName) == 0) {
-            resource->RegisterGimmick(gimmick);
+        if (strcmp(pGimmickName, resourceName) == 0) {
+            resource->RegisterGimmick(pGimmick);
             return;
         }
     })
 
     gfl::LinkedList<GimmickResource*>::Modifier mod;
-    mod.SetData(new (gfl::HeapID::Work) GimmickResource(gimmickName));
-    mod.GetData()->RegisterGimmick(gimmick);
+    mod.SetData(new (gfl::HeapID::Work) GimmickResource(pGimmickName));
+    mod.GetData()->RegisterGimmick(pGimmick);
     mod.SetNode1(mGimmickResources.GetNode());
     mod.AddToListAfterNode1(mGimmickResources);
 }
 
-void GmkMng::CreateGimmick(Gimmick::GimmickBuildInfo* buildInfo) {
-    GimmickBuildFunction func = GimmickUtil::GetBuildFunctionByGimmickID(buildInfo->GetGimmickID());
+void GmkMng::CreateGimmick(Gimmick::GimmickBuildInfo* pBuildInfo) {
+    GimmickBuildFunction func = GimmickUtil::GetBuildFunctionByGimmickID(
+        pBuildInfo->GetGimmickID()
+    );
 
     if (func != nullptr) {
-        func(buildInfo);
+        func(pBuildInfo);
     }
 }
 
@@ -298,21 +304,23 @@ void GmkMng::ManageOnScreenGimmicks() {
 }
 
 
-void GmkMng::AddEffect(Gimmick::GimmickBuildInfo* buildInfo) {
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+void GmkMng::AddEffect(Gimmick::GimmickBuildInfo* pBuildInfo) {
+    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(
+        pBuildInfo->mFullSortSceneIndex
+    );
 
-    const char* effectName = buildInfo->GetStringParam(0).c_str();
+    const char* effectName = pBuildInfo->GetStringParam(0).c_str();
 
     EffectObj* effect = scene->CreateEffectObject(effectName, 0, 0);
     nw4r::math::VEC3 pos;
-    pos.x = buildInfo->mPosition.x;
-    pos.y = buildInfo->mPosition.y;
-    pos.z = buildInfo->mPosition.z;
-    pos.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
+    pos.x = pBuildInfo->mPosition.x;
+    pos.y = pBuildInfo->mPosition.y;
+    pos.z = pBuildInfo->mPosition.z;
+    pos.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mFullSortSceneIndex, pBuildInfo->m_2C);
     effect->SetPosition(pos);
 
     nw4r::math::VEC3 unk(0.0f, 0.0f, 0.0f);
-    unk.z = (buildInfo->GetFloatParam(0) / 180.0f);
+    unk.z = (pBuildInfo->GetFloatParam(0) / 180.0f);
     unk.z *= 3.1415927f;
     effect->fn_800a8268(unk);
 
@@ -334,19 +342,22 @@ void GmkMng::AddEffect(Gimmick::GimmickBuildInfo* buildInfo) {
 // a small subset of enemies. it's not clear why it's here.
 
 // https://decomp.me/scratch/oFMdl
-bool GmkMng::IsGimmickInSpawnRadius(const nw4r::math::VEC2& offs, Gimmick::GimmickBuildInfo* buildInfo) {
-    nw4r::math::VEC2 pos = buildInfo->mPosition;
-    pos.x -= offs.x;
-    pos.y -= offs.y;
+bool GmkMng::IsGimmickInSpawnRadius(
+    const nw4r::math::VEC2& rOffs,
+    Gimmick::GimmickBuildInfo* pBuildInfo
+) {
+    nw4r::math::VEC2 pos = pBuildInfo->mPosition;
+    pos.x -= rOffs.x;
+    pos.y -= rOffs.y;
     return (pos.x * pos.x) + (pos.y * pos.y) < 1393.7777f;
 }
 
 // https://decomp.me/scratch/flFmV
-bool GmkMng::IsGimmickOnScreen(const nw4r::math::VEC2& offs, Gimmick* gimmick) {
+bool GmkMng::IsGimmickOnScreen(const nw4r::math::VEC2& rOffs, Gimmick* pGimmick) {
     nw4r::math::VEC3 pos;
-    pos = gimmick->GetScreenPosition();
-    const float x = pos.x - offs.x;
-    const float y = pos.y - offs.y;
+    pos = pGimmick->GetScreenPosition();
+    const float x = pos.x - rOffs.x;
+    const float y = pos.y - rOffs.y;
 
     return 5575.1108f < (x * x) + (y * y);
 }

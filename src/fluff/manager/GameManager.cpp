@@ -15,7 +15,7 @@ PointerManagerWrapper::~PointerManagerWrapper() {
 GameManager::~GameManager() { }
 
 uint GameManager::GetPlayerCount() {
-    if (sInstance) {
+    if (sInstance != nullptr) {
         return sInstance->mPlayerCount;
     }
 
@@ -23,7 +23,7 @@ uint GameManager::GetPlayerCount() {
 }
 
 PlayerBase* GameManager::GetPlayerByID(uint playerID) {
-    if (!GameManager::sInstance) {
+    if (GameManager::sInstance == nullptr) {
         return nullptr;
     }
     
@@ -36,7 +36,7 @@ PlayerBase* GameManager::GetPlayerByID(uint playerID) {
 } 
 
 PlayerBase* GameManager::GetPrinceFluff() {
-    if (GameManager::sInstance) {
+    if (GameManager::sInstance != nullptr) {
         return GameManager::sInstance->mPlayers[PlayerBase::PlayerID::PrinceFluff];
     }
 

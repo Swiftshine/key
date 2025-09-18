@@ -420,8 +420,8 @@ void FlfDemoBeadCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
 FlfDemoGmkCtrl::FlfDemoGmkCtrl(nw4r::g3d::ResNode resNode, std::string& tag)
     : FlfDemoNodeCtrl(resNode)
 {
-    gfl::LinkedList<Gimmick*>::NodeBase* node = GmkMng::Instance()->GetGimmickList().GetNode()->GetNext();
-    gfl::LinkedList<Gimmick*>::NodeBase* end = GmkMng::Instance()->GetGimmickList().GetNode();
+    gfl::LinkedList<Gimmick*>::NodeBase* node = GmkMng::Instance()->mGimmicks.GetNode()->GetNext();
+    gfl::LinkedList<Gimmick*>::NodeBase* end = GmkMng::Instance()->mGimmicks.GetNode();
 
     Gimmick* gmk = GmkMng::Instance()->GetGimmickByTag(tag);
 

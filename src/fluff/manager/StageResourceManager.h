@@ -16,35 +16,37 @@
 
 // size unk
 class StageResourceManager {
-private:
+public:
+
+    /* Static Variables */
+
     static const char lbl_808E6BE0[];
     static const char lbl_808E6BE8[];
     static const char lbl_807E4EF8[];
     static const char lbl_807E4E98[];
-public:
+
+    /* Constructor + Destructor */
+
     StageResourceManager();
     ~StageResourceManager();
+
+    /* Class Methods */
 
     void LoadStage(int stageID);
     bool LoadResources();
     Mapdata* GetLevelSectionByIndex(int sectionID) DONT_INLINE_CLASS;
     void ClearMapdata();
-
-    inline Stage* GetPreviewBgLoadStage() {
-        return &mPreviewBgLoadStage;
-    }
-private:
     bool LoadBGFromArchive(int resourceID) DONT_INLINE_CLASS;
     void LoadBGFromFolder(int resourceID) DONT_INLINE_CLASS;
     void LoadCommonFromArchive(int stageID) DONT_INLINE_CLASS;
     void LoadCommonFromFolder(int stageID) DONT_INLINE_CLASS;
-    void CopyBGData(BGData* data) DONT_INLINE_CLASS;
+    void CopyBGData(BGData* pData) DONT_INLINE_CLASS;
     void LoadMapdataFromFolder(int stageID) DONT_INLINE_CLASS;
     void ProcessLevelData() DONT_INLINE_CLASS;
 
     inline bool CheckBGResFileInfo() {
         if (mBGResFileInfo.IsValid()) {
-            if ((256 & mBGResFileInfo->GetFlags()) != 0) {
+            if ((mBGResFileInfo->GetFlags() & 256) != 0) {
                 return true;
             } else {
                 return false;
@@ -56,7 +58,7 @@ private:
 
     inline bool CheckMapdataResFileInfo() {
         if (mMapdataResFileInfo.IsValid()) {
-            if ((256 & mMapdataResFileInfo->GetFlags()) != 0) {
+            if ((mMapdataResFileInfo->GetFlags() & 256) != 0) {
                 return true;
             } else {
                 return false;
@@ -68,7 +70,7 @@ private:
 
     inline bool CheckCommonResFileInfo() {
         if (mCommonResFileInfo.IsValid()) {
-            if ((256 & mCommonResFileInfo->GetFlags()) != 0) {
+            if ((mCommonResFileInfo->GetFlags() & 256) != 0) {
                 return true;
             } else {
                 return false;
@@ -77,17 +79,19 @@ private:
             return true;
         }
     }
-private:
-    gfl::Pointer<StageResources> mStageResources;
-    gfl::ResFileObject mBGResFileInfo;
-    BGData* mBGData;
-    gfl::ResFileObject mCommonResFileInfo;
-    bool mCommonValid;
-    bool mLevelProcessed;
-    int mFolderStageID;
-    bool mPreviewBgLoad;
-    Stage mPreviewBgLoadStage;
-    gfl::ResFileObject mMapdataResFileInfo;
-    Mapdata* mCurrentSections[STAGE_RESOURCE_MANAGER_STAGE_COUNT];
+
+    /* Class Members */
+
+    /* 0x00 */ gfl::Pointer<StageResources> mStageResources;
+    /* 0x04 */ gfl::ResFileObject mBGResFileInfo;
+    /* 0x08 */ BGData* mBGData;
+    /* 0x0C */ gfl::ResFileObject mCommonResFileInfo;
+    /* 0x10 */ bool mCommonValid;
+    /* 0x11 */ bool mLevelProcessed;
+    /* 0x14 */ int mFolderStageID;
+    /* 0x18 */ bool mPreviewBgLoad;
+    /* 0x1C */ Stage mPreviewBgLoadStage;
+    /* 0x28 */ gfl::ResFileObject mMapdataResFileInfo;
+    /* 0x2C */ Mapdata* mCurrentSections[STAGE_RESOURCE_MANAGER_STAGE_COUNT];
 };
 #endif
