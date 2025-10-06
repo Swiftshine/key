@@ -10,19 +10,20 @@
 #include "gfl/gflArray.h"
 
 /// @brief A representation of stage entity data used in game for parsing and processing.
+/// @note Size: `0x4C`
 class Mapdata {
 public:
 
     /* Structures */
 
-    // Size: 0x3C
+    /// @note Size: `0x3C`
     struct MapdataParams {
         /* 0x00 */ int mIntParams[3];
         /* 0x0C */ float mFloatParams[3];
         /* 0x18 */ std::string mStringParams[3];
     };
 
-    // Size: 0x28
+    /// @note Size: 0x28
     struct MapdataCommonGimmick {
         static bool fn_8004f604(Gimmick::GimmickBuildInfo* pBuildInfo);
 
@@ -32,7 +33,7 @@ public:
         /* 0x8 */ char m_8[32];
     };
 
-    // Size: 0x54
+    /// @note Size: `0x54`
     struct MapdataGimmick {
         void BuildFriend01();
 
@@ -41,7 +42,7 @@ public:
         /* 0x18 */ MapdataParams mParams;
     };
 
-    // Size: 0x50
+    /// @note Size: `0x50`
     struct MapdataPath {
         void SetupWoolBridges(Mapdata* pMapdata);
         bool IsMsKeepOutLine();
@@ -56,7 +57,7 @@ public:
         /* 0x4C */ gfl::Array<nw4r::math::VEC2> mPoints;
     };
 
-    // Size: 0x58
+    /// @note Size: `0x58`
     struct MapdataZone {
         bool BuildLadder();
         bool BuildMokoMoko();
@@ -78,7 +79,7 @@ public:
         /* 0x50 */ nw4r::math::VEC2 mBoundsMax;
     };
 
-    // Size: 0x54
+    /// @note Size: `0x54`
     struct MapdataCourseInfo {
         /* 0x00 */ std::string mName;
         /* 0x0C */ MapdataParams mParams;
@@ -124,6 +125,7 @@ public:
 ASSERT_SIZE(Mapdata, 0x4C);
 
 /// @brief A representation of stage entity data stored on disk.
+/// @note Size: `0x58`
 struct Mapbin {
     /* 0x00 */ float m_0;
     /* 0x04 */ nw4r::math::VEC2 mBoundsMin;
@@ -146,6 +148,8 @@ struct Mapbin {
     /* 0x50 */ u32 mColbinTypeOffset;
     /* 0x54 */ u32 mLabeledWallLabels;
 };
+
+ASSERT_SIZE(Mapbin, 0x58);
 
 // TODO: place the rest of the Mapbin documentation here
 
