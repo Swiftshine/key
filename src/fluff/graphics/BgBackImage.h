@@ -6,7 +6,7 @@
 #include "gfl/gflPointer.h"
 #include <revolution/GX.h>
 
-///@brief This class is used as the "missing texture" image when BGST data is not loaded.
+/// @brief This class is used as the "missing texture" image when BGST data is not loaded.
 class BgBackImage : public gfl::CustomRenderObj {
 public:
     /* Constructor */

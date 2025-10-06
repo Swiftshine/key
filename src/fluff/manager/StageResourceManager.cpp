@@ -63,7 +63,7 @@ bool StageResourceManager::LoadResources() {
 
         Mapdata* mapdata = GetLevelSectionByIndex(0);
 
-        for (int i = 0; i < mapdata->GetNumCommonGimmicks(); i++) {
+        for (int i = 0; i < mapdata->mNumCommonGimmicks; i++) {
             Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
             
             // "PreviewBgLoad"
