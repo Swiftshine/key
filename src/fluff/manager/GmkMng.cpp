@@ -48,7 +48,7 @@ void GmkMng::CreateGimmicksFromMapdata(Mapdata* pMapdata) {
     nw4r::math::VEC2 pos;
     pos = CameraManager::Instance()->GetCurrentPosition();
 
-    for (uint i = 0; i < pMapdata->GetNumCommonGimmicks(); i++) {
+    for (uint i = 0; i < pMapdata->mNumCommonGimmicks; i++) {
         Gimmick::GimmickBuildInfo* buildInfo = pMapdata->GetCommonGimmickBuildInfo(i);
         CreateGimmickConditionally(pos, buildInfo);
     }
@@ -99,7 +99,7 @@ void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& rDest)
 void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest) {
     Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
 
-    for (uint i = 0; i < mapdata->GetNumCommonGimmicks(); i++) {
+    for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
         int id = buildInfo->GetGimmickID();
         if (id == gimmickID) {
@@ -133,7 +133,7 @@ Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const ch
     Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
 
     uint i = 0;
-    const uint count = mapdata->GetNumCommonGimmicks();
+    const uint count = mapdata->mNumCommonGimmicks;
     
     while (i < count) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
@@ -185,7 +185,7 @@ void GmkMng::CreateGimmicksFromMapdata() {
             pos = CameraManager::Instance()->GetCurrentPosition();
 
             uint a = mNumCommonGimmicks;
-            uint b = mMapdata->GetNumCommonGimmicks();
+            uint b = mMapdata->mNumCommonGimmicks;
 
             uint limit;
             limit = a + 30;
@@ -199,7 +199,7 @@ void GmkMng::CreateGimmicksFromMapdata() {
                 CreateGimmickConditionally(pos, buildInfo);
             }
 
-            if (limit >= mMapdata->GetNumCommonGimmicks()) {
+            if (limit >= mMapdata->mNumCommonGimmicks) {
                 mState = 2;
             } else {
                 mNumCommonGimmicks = limit;
@@ -243,7 +243,7 @@ void GmkMng::ManageOnScreenGimmicks() {
         
         CameraManager* camMgr = CameraManager::Instance();
 
-        for (uint i = 0; i < mapdata->GetNumCommonGimmicks(); i++) {
+        for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
             Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
             Gimmick::GimmickInfo* gimmickInfo = buildInfo->mGimmickInfo;
 
