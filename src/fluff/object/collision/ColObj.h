@@ -9,51 +9,54 @@
 
 class ColObj {
 public:
+
+    /* Constructor */
+
     inline ColObj()
         : m_4(0)
         , mOwner(nullptr)
         , mTree(nullptr)
     { }
 
-    virtual ~ColObj();
-    virtual CollisionData* GetCollisionData();
-    virtual void AddToTree();
-    virtual void RemoveFromTree();
-    virtual void vf18();
+    /* Virtual Methods */
 
-    inline void SetOwner(FlfGameObj* owner) {
-        mOwner = owner;
-    }
-    
-    inline FlfGameObj* GetOwner() {
-        return mOwner;
-    }
+    /* 0x08 */ virtual ~ColObj();
+    /* 0x0C */ virtual CollisionData* GetCollisionData();
+    /* 0x10 */ virtual void AddToTree();
+    /* 0x14 */ virtual void RemoveFromTree();
+    /* 0x18 */ virtual void vf18();
 
-    inline nw4r::math::VEC3& GetPosition() {
-        return mPosition;
-    }
-    
-public:
-    uint m_4;
-    FlfGameObj* mOwner;
-    KdTree* mTree;
-    nw4r::math::VEC3 mPosition;
+    /* Class Members */
+
+    /* 0x04 */ uint m_4;
+    /* 0x08 */ FlfGameObj* mOwner;
+    /* 0x0C */ KdTree* mTree;
+    /* 0x10 */ nw4r::math::VEC3 mPosition;
 };
 
 ASSERT_SIZE(ColObj, 0x1C)
 
 class ColObjTrans : public ColObj {
 public:
+    /* Constructor */
+
     ColObjTrans();
-    virtual ~ColObjTrans();
-    void SetColbin(const char* path);
-    void SetColbin(void* data);
-    void SetPosition(nw4r::math::VEC2& pos);
+
+    /* Virtual Methods */
+
+    /* 0x08 */ virtual ~ColObjTrans();
+
+    /* Class Methods */
+    void SetColbin(const char* pFilepath);
+    void SetColbin(void* pData);
+    void SetPosition(nw4r::math::VEC2& rPos);
     void SetEnabled(bool enabled);
     void Update();
-public:
-    CollisionData* mCollisionData1;
-    CollisionData* mCollisionData2;
+
+    /* Class Members */
+
+    /* 0x1C */ CollisionData* mCollisionData1;
+    /* 0x20 */ CollisionData* mCollisionData2;
 };
 
 ASSERT_SIZE(ColObjTrans, 0x24)

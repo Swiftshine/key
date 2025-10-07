@@ -113,7 +113,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
     nw4r::math::VEC2 position(mMatrix[0][3], mMatrix[1][3]);
     nw4r::math::VEC2 colbinPos = position;
     mColObj->SetPosition(colbinPos);
-    mColObj->SetOwner(this);
+    mColObj->mOwner = this;
     mColObj->SetEnabled(true);
     mColObj->GetCollisionData()->fn_800D0128(0x20000000, 0, 0x20000010);
 }

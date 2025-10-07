@@ -10,19 +10,20 @@ class KdTreeNode;
 
 class KdTreeData : public IHitSide {
 public:
-    inline KdTreeNode* GetTreeNode() {
-        return mTreeNode;
-    }
 
     inline void SetTreeNode(KdTreeNode* node) {
         mTreeNode = node;
     }
 
-    virtual int GetNodePlacement(KdTreeSplitInfo&);
-    virtual bool ArePointsInRect(KdTreeBounds&);
-    
-protected:
-    KdTreeNode* mTreeNode;
+    /* Virtual Methods */
+
+    /* 0x08 */ virtual int GetNodePlacement(KdTreeSplitInfo&);
+    /* 0x0C */ virtual bool ArePointsInRect(KdTreeBounds&);
+    /* 0x10 */ virtual ~KdTreeData();
+
+    /* CLass Members */
+
+    /* 0x4 */ KdTreeNode* mTreeNode;
 };
 
 #endif

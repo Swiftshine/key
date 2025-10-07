@@ -70,13 +70,13 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     mColObjTrans->GetCollisionData()->fn_800D01EC(0, 0, 0x20000000);
     // nw4r::math::VEC2 colPos = mPosition;
     // mColObjTrans->SetPosition(mPosition);
-    mColObjTrans->SetOwner(this);
+    mColObjTrans->mOwner = this;
     mColObjTrans->AddToTree();
 
     mRideHitCtrlTrans.Create(new (gfl::HeapID::Work) FlfRideHitCtrlTrans(mColObjTrans.ptr(), this));
-    mRideHitCtrlTrans->SetUnk34(0x20000);
-    mRideHitCtrlTrans->SetUnk30(0);
-    mRideHitCtrlTrans->SetUnk38(1);
+    mRideHitCtrlTrans->m_34 = 0x20000;
+    mRideHitCtrlTrans->m_30 = 0;
+    mRideHitCtrlTrans->m_38 = 1;
 
     if (m_13D) {
         m_6E = false;
@@ -189,7 +189,7 @@ void GmkTurtle::Update() {
         UpdateMatrix();
         mAnmCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
         nw4r::math::VEC3 difference;
-        gfl::Vec3 colObj = mColObjTrans->GetPosition();
+        gfl::Vec3 colObj = mColObjTrans->mPosition;
         difference.x = mPosition.x - colObj.x;
         difference.y = mPosition.y - colObj.y;
         difference.z = mPosition.z - colObj.z;

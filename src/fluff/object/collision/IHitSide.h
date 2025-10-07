@@ -2,9 +2,6 @@
 #define FLUFF_IHITSIDE_H
 
 
-class IHitSide {
-public:
-    virtual ~IHitSide();
-};
+class IHitSide { };
 
 #endif

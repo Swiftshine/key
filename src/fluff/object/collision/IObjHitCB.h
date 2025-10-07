@@ -7,9 +7,12 @@ class CollisionInfo;
 
 class IObjHitCB {
 public:
+
+    /* Virtual Methods */
+    
     // Returns whether or not something meaningful happens. What constitutes
     // "meaningful" is on a case-by-case basis.
-    virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gfl::Vec3& position);
+    virtual bool OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther, gfl::Vec3& pPosition);
 };
 
 #endif

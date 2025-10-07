@@ -10,14 +10,26 @@ class FlfGameObj;
 #include "gfl/gflTask.h"
 
 class ObjHit {
-private:
-    static gfl::Task* sInstance;
 public:
+    /* Static Variables */
+
+    static gfl::Task* sInstance;
+
     inline gfl::Task* Instance() {
         return sInstance;
     }
 
-    static CollisionEntry* GetCollisionEntry(CollisionTemplate& colTemplate, IObjHitCB* callbacks, FlfGameObj* owner, nw4r::math::MTX34& matrix, const char* name);
+    /* Static Methods */
+
+    static CollisionEntry* GetCollisionEntry(
+        CollisionTemplate& rColTemplate,
+        IObjHitCB* pCallbacks,
+        FlfGameObj* pOwner,
+        nw4r::math::MTX34& rMatrix,
+        const char* pName
+    );
+
+    
 };
 
 #endif

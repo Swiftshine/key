@@ -86,7 +86,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     CollisionTemplate cTemplate;
     // cTemplate.m_14 = Pairs[m_4].mFloat; // todo - replace this with a float from the array
     cTemplate.m_14 = -1.0f;
-    cTemplate.mCollisionType = 1;
+    cTemplate.mCollisionFlags = 1;
     cTemplate.m_4 = 0x19;
     cTemplate.m_8 = 2;
     cTemplate.mDimensions.x = zero;

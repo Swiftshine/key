@@ -6,28 +6,29 @@
 #include <nw4r/math.h>
 
 namespace Colbin {
-    struct Header {
-        float m_0;
-        u32 mNumEntries;
-        u32 mEntryOffset;
-        u32 mFooterOffset;
-    };
 
-    struct Entry {
-        nw4r::math::VEC2 mStart;
-        nw4r::math::VEC2 mEnd;
-        nw4r::math::VEC2 m_10;
-        u32 mEntryIndex;
-        u32 mCollisionTypeIndex;
-    };
+struct Header {
+    /* 0x0 */ float m_0;
+    /* 0x4 */ u32 mNumEntries;
+    /* 0x8 */ u32 mEntryOffset;
+    /* 0xC */ u32 mFooterOffset;
+};
 
-    // variable length structure
-    struct Footer {
-        u32 mNumCollisionTypes;
-        /* string32[mNumCollisionTypes] */
-    };
+struct Entry {
+    /* 0x0 */ nw4r::math::VEC2 mStart;
+    /* 0x8 */ nw4r::math::VEC2 mEnd;
+    /* 0x10 */ nw4r::math::VEC2 m_10;
+    /* 0x18 */ u32 mEntryIndex;
+    /* 0x1C */ u32 mCollisionTypeIndex;
+};
 
-    // file is padded to next offset of 0x20
+// variable length structure
+struct Footer {
+    u32 mNumCollisionTypes;
+    /* string32[mNumCollisionTypes] */
+};
+
+// file is padded to next offset of 0x20
 }
 
 #endif

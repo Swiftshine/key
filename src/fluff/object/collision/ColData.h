@@ -7,7 +7,7 @@
 #include "object/collision/Colbin.h"
 #include "object/collision/KdTreeData.h"
 
-// size: 0x20?
+/// @note Size: `0x20`
 class ColData : public KdTreeData {
 public:
     inline ColData* GetNext() {
@@ -18,13 +18,14 @@ public:
         mNext = next;
     }
 
-protected:
-    ColData* mNext; // @ 0x8
-    uint m_C;
-    uint m_10;
-    uint mNumEntries; // @ 0x14
-    uint m_18;
-    uint m_1C;
+    /* Class Members */
+
+    /* 0x08 */ ColData* mNext;
+    /* 0x0C */ uint m_C;
+    /* 0x10 */ uint m_10;
+    /* 0x14 */ uint mNumEntries;
+    /* 0x18 */ uint m_18;
+    /* 0x1C */ uint m_1C;
 };
 
 // size: 0x40
