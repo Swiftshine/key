@@ -17,11 +17,22 @@ class FlfGameObj : public FlfHandleObj {
 public:
     /* Structures */
 
-    ENUM_CLASS(ObjectType,
-        Type1 = 1,
-        Type2 = 2,
-        Type3 = 3,
-        Type4 = 4,
+    ENUM_CLASS(ObjectCategory,
+        Player      = 0,
+        Cat1       = 1,
+        Cat2       = 2,
+        Cat3       = 3,
+        Cat4       = 4,
+        Cat5       = 5,
+        Cat6       = 6,
+        Spring      = 7,
+        Cat8       = 8,
+        Cat9       = 9,
+        Friend      = 10,
+        Cat11      = 11,
+        Cat12      = 12,
+        Misc        = 13, // for anything that doesn't fit in the prior categories
+
     );
 
     /* Constructor */
@@ -97,7 +108,7 @@ public:
     /* 0x30 */ nw4r::math::MTX34 mMatrix;       
     /* 0x60 */ u32 mFlags;     
     /* 0x64 */ u32 m_64;        
-    /* 0x68 */ int mType;           
+    /* 0x68 */ int mCategory;           
     /* 0x6C */ bool m_6C;           
     /* 0x6D */ bool mIsCulled;           
     /* 0x6E */ bool m_6E;           

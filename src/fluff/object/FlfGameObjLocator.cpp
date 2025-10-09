@@ -3,6 +3,6 @@
 FlfGameObjLocator::~FlfGameObjLocator() { }
 
 FlfGameObjLocator::FlfGameObjLocator()
-    : FlfGameObj(ObjectType::Type4)
+    : FlfGameObj(ObjectCategory::Cat4)
 { }
 

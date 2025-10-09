@@ -225,7 +225,7 @@ void GmkBeadPopItem::SetState(FlfGameObj* setter, std::string& state) {
         !enabled &&
         mCollisionEnabled &&
         setter != nullptr && 
-        setter->mType == 1
+        setter->mCategory == 1
     ) {
         CutFunction();
         int gimmickID = static_cast<Gimmick*>(setter)->GetGimmickID();

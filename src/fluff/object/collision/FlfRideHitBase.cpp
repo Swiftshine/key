@@ -17,7 +17,7 @@ FlfRideHitBase::~FlfRideHitBase() { }
 void FlfRideHitBase::AddBead(FlfGameObj* pObject) {
     if (
         m_18 ||
-        pObject->mType != FlfGameObj::ObjectType::Type1 ||
+        pObject->mCategory != FlfGameObj::ObjectCategory::Cat1 ||
         dynamic_cast<GmkBead*>(pObject) == nullptr &&
         !HasObject(pObject)
     ) {
