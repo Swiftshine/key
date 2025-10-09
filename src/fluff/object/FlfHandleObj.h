@@ -5,19 +5,23 @@
 
 class FlfHandleObj;
 
+/// @brief Used to simplify management of `FlfHandleObj` instances.
+/// @note Size: `0x8`
 class FlfHandle {
 public:
+    /* Constructor */
     inline FlfHandle()
         : mObject(nullptr)
         , mHandleID(0)
     { }
 
+    /* Helpful Inlines */
     inline void SetID(uint id) {
         mHandleID = id;
     }
 
-    inline void SetObject(FlfHandleObj** obj) {
-        mObject = obj;
+    inline void SetObject(FlfHandleObj** pObject) {
+        mObject = pObject;
     }
 
     inline uint GetID() {
@@ -32,23 +36,33 @@ public:
         *mObject = nullptr;
     }
 
-    inline void operator=(const FlfHandle& other) {
-        mObject = other.mObject;
-        mHandleID = other.mHandleID;
+    inline void operator=(const FlfHandle& rOther) {
+        mObject = rOther.mObject;
+        mHandleID = rOther.mHandleID;
     }
 
-private:
-    FlfHandleObj** mObject;
-    uint mHandleID;
+    /* Class Members */
+    
+    /* 0x0 */ FlfHandleObj** mObject;
+    /* 0x4 */ uint mHandleID;
 };
 
 ASSERT_SIZE(FlfHandle, 0x8);
 
+/// @brief The most basic entity.
+/// @note Size: `0xC`
 class FlfHandleObj {
 public:
-    FlfHandleObj();
-    virtual ~FlfHandleObj();
+    
+    /* Constructor */
 
+    FlfHandleObj();
+
+    /* Virtual Methods */
+
+    /* 0x8 */ virtual ~FlfHandleObj();
+
+    /* Helpful Inlines */
     inline void SetHandleID(uint id) {
         mHandle.SetID(id);
     }
@@ -69,8 +83,9 @@ public:
         mHandle.ClearObject();
     }
     
-private:
-    FlfHandle mHandle;
+    /* Class Members */
+
+    /* 0x4 */ FlfHandle mHandle;
 };
 
 ASSERT_SIZE(FlfHandleObj, 0xC);

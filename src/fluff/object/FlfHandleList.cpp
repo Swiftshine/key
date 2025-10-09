@@ -25,7 +25,7 @@ FlfHandleList::FlfHandleList()
 
 DECL_WEAK FlfHandleList::~FlfHandleList() { }
 
-void FlfHandleList::Add(FlfHandleObj* object) {
+void FlfHandleList::Add(FlfHandleObj* pObject) {
     uint curCount = mHandleCount;
     FlfHandleObj** lastHandleObj = &mObjects[mHandleCount];
 
@@ -33,7 +33,7 @@ void FlfHandleList::Add(FlfHandleObj* object) {
 
     while (curCount < FLF_HANDLE_LIST_MAX_HANDLES) {
         if (nullptr == *lastHandleObj) {
-            Set(curCount, object);
+            Set(curCount, pObject);
             return;
         }
 
@@ -49,7 +49,7 @@ void FlfHandleList::Add(FlfHandleObj* object) {
 
     while (remainingSlots != 0) {
         if (nullptr == *handleObj) {
-            Set(curIndex, object);
+            Set(curIndex, pObject);
             return;
         }
 
@@ -64,15 +64,15 @@ void FlfHandleList::Add(FlfHandleObj* object) {
 }
 
 
-void FlfHandleList::Remove(FlfHandleObj* object) {
-    object->ClearHandleObject();
+void FlfHandleList::Remove(FlfHandleObj* pObject) {
+    pObject->ClearHandleObject();
 }
 
 
-void FlfHandleList::Set(uint index, FlfHandleObj* object) {
-    mObjects[index] = object;
-    object->SetHandleID(mLastHandleID);
-    object->SetHandleObject(&mObjects[index]);
+void FlfHandleList::Set(uint index, FlfHandleObj* pObject) {
+    mObjects[index] = pObject;
+    pObject->SetHandleID(mLastHandleID);
+    pObject->SetHandleObject(&mObjects[index]);
     mHandleCount = index + 1;
     mLastHandleID++;
 }

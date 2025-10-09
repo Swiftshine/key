@@ -11,73 +11,103 @@
 
 class CameraManager;
 
-// size: 0x80
+/// @brief The base class for many entites.
+/// @note Size: `0x80`
 class FlfGameObj : public FlfHandleObj {
 public:
+    /* Structures */
+
+    ENUM_CLASS(ObjectType,
+        Type1 = 1,
+        Type2 = 2,
+        Type3 = 3,
+        Type4 = 4,
+    );
+
+    /* Constructor */
+
     FlfGameObj(uint);
-    virtual ~FlfGameObj();
 
-    void UpdateMatrix();
-    void SetCulled(bool culled);
+    /* Virtual Methods */
+    
+    /* 0x08 */ virtual ~FlfGameObj();
+    /* 0x0C */ virtual void SetPosition(nw4r::math::VEC3& rPosition);
+    /* 0x10 */ virtual void vf10(bool val);
+    /* 0x14 */ DECL_WEAK virtual bool vf14();
+    /* 0x18 */ virtual void vf18();
+    /* 0x1C */ virtual nw4r::math::VEC3 GetPosition();
+    /* 0x20 */ virtual void SetSecondaryPosition(nw4r::math::VEC3& rPosition);
+    /* 0x24 */ virtual void Interact(FlfGameObj* pOther);
+    /* 0x28 */ virtual void vf28();
+    /* 0x2C */ virtual void vf2C(
+        nw4r::math::VEC3& rArg1,
+        nw4r::math::VEC3& rArg2,
+        nw4r::math::VEC3& rArg3
+    );
+    /* 0x30 */ virtual void vf30();
+    /* 0x34 */ virtual bool ShouldCull(CameraManager* pCamMgr);
+    /* 0x38 */ virtual nw4r::math::VEC3 GetScreenPosition();
+    /* 0x3C */ virtual int  vf3C();
+    /* 0x40 */ virtual void vf40(FlfGameObj*);
+    /* 0x44 */ virtual int  vf44();
 
-    virtual void    SetPosition(nw4r::math::VEC3& position);
-    virtual void    vf10(bool val);
-    DECL_WEAK virtual bool    vf14();
-    virtual void    vf18();
-    virtual nw4r::math::VEC3   GetPosition();
-    virtual void    SetSecondaryPosition(nw4r::math::VEC3& position);
-    virtual void    Interact(FlfGameObj* other);
-    virtual void    vf28();
-    virtual void    vf2C(nw4r::math::VEC3& arg1, nw4r::math::VEC3& arg2, nw4r::math::VEC3& arg3);
-    virtual void    vf30();
-    virtual bool    ShouldCull(CameraManager* camMgr);
-    virtual nw4r::math::VEC3   GetScreenPosition();
-    virtual int     vf3C();
-    virtual void    vf40(FlfGameObj*);
-    virtual int     vf44();
     // looks for gimmicks or enemies with a specific tag and sets their
     // state to the specified one if found. the tag list consists of
     // four-character tags, delimited by a semicolon.
     // i.e. tag1;tag2;tag3;
-    virtual void    SetStateForTaggedObjects(const char* state, const char* tagList);
-    // the "setter" field is a pointer to the FlfGameObj that induced the call.
-    // for an example of a usecase, see `GmkCandleStick::SetState`.
-    virtual void    SetState(FlfGameObj* setter, std::string& state); 
-    virtual void    vf50(bool arg1);
-    virtual bool    vf54();
-    virtual void    vf58();
-    virtual void    SetCullThreshold(float newVal);
-    virtual float   GetCullThreshold();
-    virtual void    vf64(bool);
+    
+    /// @brief Looks for gimmicks or enemies with any tag within the tag list
+    /// and sets their state to the one provided.
+    /// @param pState The target state.
+    /// @param pTagList A string of four-character tags, delimited by a semicolon.
+    /// e.g. "tag1;tag2;tag3;"
+    /* 0x48 */ virtual void SetStateForTaggedObjects(const char* pState, const char* pTagList);
 
-    inline int GetType() {
-        return mType;
-    }
 
-    static void Destroy(FlfGameObj* target);
+    /// @brief Sets the object state.
+    /// @param pSetter A pointer to the object that induced the call..
+    /// @param rState The target state.
+    /// @note The setter object is usually unused.
+    /// To see an example of a usecase, see `GmkCandleStick::SetState`.
+    /* 0x4C */ virtual void SetState(FlfGameObj* pSetter, std::string& rState); 
+    /* 0x50 */ virtual void vf50(bool arg1);
+    /* 0x54 */ virtual bool vf54();
+    /* 0x58 */ virtual void vf58();
+    /* 0x5C */ virtual void SetCullThreshold(float threshold);
+    /* 0x60 */ virtual float GetCullThreshold();
+    /* 0x64 */ virtual void vf64(bool);
+
+    /* Class Methods */
+
+    void UpdateMatrix();
+    void SetCulled(bool culled);
+
+    /* Static Methods */
+
+    static void Destroy(FlfGameObj* pTarget);
     
     inline void DestroySelf() {
         Destroy(this);
     }
 
 public:
-    nw4r::math::VEC3 mPosition;     
-    nw4r::math::VEC3 mRotation;     
-    nw4r::math::VEC3 mScale;        
-    nw4r::math::MTX34 mMatrix;       
-    u32 mFlags;     
-    u32 m_64;        
-    int mType;           
-    bool m_6C;           
-    bool mIsCulled;           
-    bool m_6E;           
-    bool m_6F;           
-    float mCullThreshold;
-    u32 m_74;            
-    u32 m_78;            
-    bool m_7C;           
-    bool m_7D;           
-    u16  m_7E;           
+    /* 0x0C */ nw4r::math::VEC3 mPosition;     
+    /* 0x18 */ nw4r::math::VEC3 mRotation;     
+    /* 0x24 */ nw4r::math::VEC3 mScale;        
+    /* 0x30 */ nw4r::math::MTX34 mMatrix;       
+    /* 0x60 */ u32 mFlags;     
+    /* 0x64 */ u32 m_64;        
+    /* 0x68 */ int mType;           
+    /* 0x6C */ bool m_6C;           
+    /* 0x6D */ bool mIsCulled;           
+    /* 0x6E */ bool m_6E;           
+    /* 0x6F */ bool m_6F;           
+    /* 0x70 */ float mCullThreshold;
+    /* 0x74 */ u32 m_74;            
+    /* 0x78 */ u32 m_78;            
+    /* 0x7C */ bool m_7C;           
+    /* 0x7D */ bool m_7D;           
+    /* 0x7E */ u16  m_7E;           
 };
 
 ASSERT_SIZE(FlfGameObj, 0x80);
