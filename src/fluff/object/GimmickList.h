@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+// todo - fill this out later
+
 // [ID label] = [ID number] // [is common]
 
 // A large portion of these Gimmick names are written in Japanese.

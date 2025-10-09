@@ -84,7 +84,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
 
     {
         std::string resourceName = "gimmick/";
-        resourceName += GimmickUtil::GetResourceNameByGimmickID(buildInfo->GetGimmickID());
+        resourceName += GimmickUtil::GetResourceNameByGimmickID(buildInfo->mGimmickID);
 
         FlfMdlDraw* mdlDraw = new (gfl::HeapID::Work) FlfMdlDraw(scene, resourceName.c_str(), 0, 0);
         mdlDraw->LoadNURBSFromFileList();

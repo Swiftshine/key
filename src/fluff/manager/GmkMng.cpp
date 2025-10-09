@@ -26,12 +26,12 @@ inline void GmkMng::CreateGimmickConditionally(
     Gimmick::GimmickBuildInfo* pBuildInfo
 ) {
     if (Mapdata::MapdataCommonGimmick::fn_8004f604(pBuildInfo)) {
-        if (GimmickUtil::CheckCommonByGimmickID(pBuildInfo->GetGimmickID())
+        if (GimmickUtil::CheckCommonByGimmickID(pBuildInfo->mGimmickID)
             && pBuildInfo->mGimmickInfo != nullptr) {
             pBuildInfo->mGimmickInfo->mIsCommon = true;
         }
     } else {
-        if (GimmickUtil::CheckCommonByGimmickID(pBuildInfo->GetGimmickID())) {
+        if (GimmickUtil::CheckCommonByGimmickID(pBuildInfo->mGimmickID)) {
             if (IsGimmickInSpawnRadius(rPos, pBuildInfo)) {
                 CreateGimmick(pBuildInfo);
             }
@@ -101,8 +101,7 @@ void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBu
 
     for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
-        int id = buildInfo->GetGimmickID();
-        if (id == gimmickID) {
+        if (buildInfo->mGimmickID == gimmickID) {
             rDest.push_back(buildInfo);
         }
     }
@@ -117,8 +116,8 @@ Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& rTag) {
     GFL_LINK_LIST_WHILE_2(mGimmicks, Gimmick*, node, end, {
         Gimmick* gimmick = node->ToNode()->GetData();
 
-        if (gimmick->GetGimmickBuildInfoPtr() != nullptr &&
-            rTag.compare(gimmick->GetGimmickBuildInfoPtr()->GetCommonTag()) == 0
+        if (gimmick->mBuildInfoPtr != nullptr &&
+            rTag.compare(gimmick->mBuildInfoPtr->GetCommonTag()) == 0
         ) {
             result = gimmick;
             break;
@@ -168,9 +167,7 @@ void GmkMng::RegisterResources(const char* pGimmickName, Gimmick* pGimmick) {
 }
 
 void GmkMng::CreateGimmick(Gimmick::GimmickBuildInfo* pBuildInfo) {
-    GimmickBuildFunction func = GimmickUtil::GetBuildFunctionByGimmickID(
-        pBuildInfo->GetGimmickID()
-    );
+    GimmickBuildFunction func = GimmickUtil::GetBuildFunctionByGimmickID(pBuildInfo->mGimmickID);
 
     if (func != nullptr) {
         func(pBuildInfo);
@@ -247,7 +244,7 @@ void GmkMng::ManageOnScreenGimmicks() {
             Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
             Gimmick::GimmickInfo* gimmickInfo = buildInfo->mGimmickInfo;
 
-            if (GimmickUtil::CheckCommonByGimmickID(buildInfo->GetGimmickID())) {
+            if (GimmickUtil::CheckCommonByGimmickID(buildInfo->mGimmickID)) {
                 Gimmick* gimmick = gimmickInfo->mGimmick;
                 if (gimmick != nullptr || gimmickInfo->mIsCommon) {
                     // either there are multiple redundancies

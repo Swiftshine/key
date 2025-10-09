@@ -2,7 +2,7 @@
 #include "manager/GmkMng.h"
 
 Gimmick::Gimmick(int gmkID)
-    : FlfGameObj(1)
+    : FlfGameObj(ObjectType::Type1)
     , mGimmickID(gmkID)
     , mBuildInfoPtr(0)
 
@@ -16,7 +16,7 @@ Gimmick::Gimmick(int gmkID)
 }
 
 Gimmick::Gimmick(int gmkID, const char* taskName)
-    : FlfGameObj(1)
+    : FlfGameObj(ObjectType::Type1)
     , mGimmickID(gmkID)
     , mBuildInfoPtr(0)
 {

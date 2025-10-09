@@ -78,8 +78,8 @@ public:
         while (node != end) {
             gimmick = node->ToNode()->GetData();
     
-            if (gimmick->GetGimmickBuildInfoPtr() != nullptr &&
-                rTag == gimmick->GetGimmickBuildInfoPtr()->GetCommonTag()
+            if (gimmick->mBuildInfoPtr != nullptr &&
+                rTag == gimmick->mBuildInfoPtr->GetCommonTag()
             ) {
                 break;
             } 
