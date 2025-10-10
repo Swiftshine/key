@@ -144,7 +144,7 @@ void GmkBeadDrop::Update() {
     UpdateMatrix();
     mFlfMdlDraw->SetWoolDrawMatrix(mMatrix);
     if (mState == State::Complete) {
-        DestroySelf();
+        FlfGameObj::Destroy(this);
     }
 }
 

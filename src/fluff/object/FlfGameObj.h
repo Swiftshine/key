@@ -96,12 +96,9 @@ public:
     /* Static Methods */
 
     static void Destroy(FlfGameObj* pTarget);
-    
-    inline void DestroySelf() {
-        Destroy(this);
-    }
 
-public:
+    /* Class Members */
+    
     /* 0x0C */ nw4r::math::VEC3 mPosition;     
     /* 0x18 */ nw4r::math::VEC3 mRotation;     
     /* 0x24 */ nw4r::math::VEC3 mScale;        
