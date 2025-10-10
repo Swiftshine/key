@@ -18,20 +18,20 @@ public:
     /* Structures */
 
     ENUM_CLASS(ObjectCategory,
-        Player      = 0,
-        Cat1       = 1,
-        Cat2       = 2,
-        Cat3       = 3,
-        Cat4       = 4,
-        Cat5       = 5,
-        Cat6       = 6,
-        Spring      = 7,
-        Cat8       = 8,
-        Cat9       = 9,
-        Friend      = 10,
-        Cat11      = 11,
-        Cat12      = 12,
-        Misc        = 13, // for anything that doesn't fit in the prior categories
+        Player          = 0,
+        Gimmick         = 1,
+        Cat2            = 2,
+        Cat3            = 3,
+        Cat4            = 4,
+        Cat5            = 5,
+        Cat6            = 6,
+        Spring          = 7,
+        Cat8            = 8,
+        Cat9            = 9,
+        Friend          = 10,
+        Cat11           = 11,
+        PlayerBullet    = 12,
+        Misc            = 13, // for anything that doesn't fit in the prior categories
 
     );
 
