@@ -35,7 +35,7 @@ void MissionClearCheckerBase::EndMission(int status, int reason) {
 }
 
 bool MissionClearCheckerBase::TimeRanOut(InStageWork* pStageWork) {
-    int remain = pStageWork->GetTimeRemaining();
+    int remain = pStageWork->mTimeRemaining;
 
     bool ret = false;
     
@@ -80,7 +80,7 @@ void MissionClearCheckerBase::InitChecker(
 int MissionBeadClearChecker::Process() {
     InStageWork* work = WorkManager::GetInStageWork();
 
-    if (work->GetNumBeadsCollected() + work->GetUnk24() >= mBeadThreshold) {
+    if (work->mNumBeadsCollected + work->m_24 >= mBeadThreshold) {
         // we have succeeded
         EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
     } else {
