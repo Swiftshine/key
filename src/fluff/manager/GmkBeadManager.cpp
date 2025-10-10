@@ -5,8 +5,8 @@
 
 // #pragma inline off
 
-void GmkBeadManager::InitInstance(gfl::Task* parentTask) {
-    sInstance = new (gfl::HeapID::Work) GmkBeadManager(parentTask);
+void GmkBeadManager::InitInstance(gfl::Task* pParentTask) {
+    sInstance = new (gfl::HeapID::Work) GmkBeadManager(pParentTask);
 }
 
 void GmkBeadManager::DestroyInstance() {
@@ -18,7 +18,7 @@ GmkBeadManager* GmkBeadManager::GetInstance() {
     return sInstance;
 }
 
-GmkBeadManager::GmkBeadManager(gfl::Task* parentTask) {
+GmkBeadManager::GmkBeadManager(gfl::Task* pParentTask) {
     // not decompiled
 }
 
@@ -33,20 +33,26 @@ void GmkBeadManager::vfC() {
     // mList.SomeFunction();
 }
 
-void GmkBeadManager::EnableBeadPopSwitch(GmkBeadPopItem* popItem, const char* tags, bool assignHandle) {
+void GmkBeadManager::EnableBeadPopSwitch(
+    GmkBeadPopItem* pBeadPopItem,
+    const char* pTags,
+    bool assignHandle
+) {
     if (assignHandle) {
         if (mInfo.IsEmpty()) {
-            mInfo.ResetUserHandles(popItem);
+            mInfo.ResetUserHandles(pBeadPopItem);
         } else {
-            mInfo.SetUserHandle(popItem);
+            mInfo.SetUserHandle(pBeadPopItem);
         }
     }
 
-    popItem->SetStateForTaggedObjects("ON", tags);
+    pBeadPopItem->SetStateForTaggedObjects("ON", pTags);
 }
 
-GmkBeadManager::GmkBeadManager_Info* GmkBeadManager::GetInfoIfHandlePresent(FlfHandleObj* object) {
-    if (mInfo.HasHandle(object)) {
+GmkBeadManager::GmkBeadManager_Info* GmkBeadManager::GetInfoIfHandlePresent(
+    FlfHandleObj* pHandleObj
+) {
+    if (mInfo.HasHandle(pHandleObj)) {
         return &mInfo;
     }
 
@@ -66,9 +72,9 @@ void GmkBeadManager::fn_8051D854(bool arg1) {
         return;
     }
 
-    gfl::LinkedList<Gimmick*>& gimmickList = GmkMng::Instance()->GetGimmickList();
+    gfl::LinkedList<Gimmick*>& gimmickList = GmkMng::Instance()->mGimmicks;
 
-    gfl::LinkedList<Gimmick*>::NodeBase* node = GmkMng::Instance()->GetGimmickList().GetNode()->GetNext();
+    gfl::LinkedList<Gimmick*>::NodeBase* node = GmkMng::Instance()->mGimmicks.GetNode()->GetNext();
     gfl::LinkedList<Gimmick*>::NodeBase* end = gimmickList.GetNode();
 
     while (node != end) {

@@ -11,9 +11,12 @@
 
 class LevelManager {
 public:
-    LevelManager(Stage& stage);
+    /* Constructor + Destructor */
+    LevelManager(Stage& rStage);
     ~LevelManager();
     
+    /* Class Methods */
+
     void SetGraphicsStage() DONT_INLINE_CLASS;
     bool IsLoadedFromFolder() DONT_INLINE_CLASS;
     void ResetPhase() DONT_INLINE_CLASS;
@@ -28,13 +31,14 @@ public:
     void fn_8004456C() DONT_INLINE_CLASS;
     void fn_80044574(bool val) DONT_INLINE_CLASS;
 
+    
+    /* Class Members */
 
-private:
-    int mLoadPhase;
-    Stage mStage;
-    gfl::Pointer<ColObjTree> mColObjTree;
-    gfl::Pointer<GmkMng> mGimmickManager;
-    StageGraphicResources mGraphicResources;
+    /* 0x00 */ int mLoadPhase;
+    /* 0x04 */ Stage mStage;
+    /* 0x10 */ gfl::Pointer<ColObjTree> mColObjTree;
+    /* 0x14 */ gfl::Pointer<GmkMng> mGimmickManager;
+    /* 0x18 */ StageGraphicResources mGraphicResources;
 };
 
 #endif

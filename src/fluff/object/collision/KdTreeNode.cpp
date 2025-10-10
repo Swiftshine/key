@@ -5,7 +5,7 @@
 void ColDataSeg::AddSelf() {
     KdTreeNode* node = mTreeNode;
 
-    if (nullptr == node) {
+    if (node == nullptr) {
         return;
     }
 
@@ -16,12 +16,12 @@ void ColDataSeg::RemoveSelf() {
     bool b;
     KdTreeNode* node = mTreeNode;
     
-    if (nullptr == node) {
+    if (node == nullptr) {
         return;
     }
 
     ColDataSeg* nodeData = node->GetColDataSeg();
-    if (nullptr == nodeData) {
+    if (nodeData == nullptr) {
         b = false;
     } else if (nodeData == this) {
         node->SetColDataSeg(static_cast<ColDataSeg*>(GetNext()));
@@ -31,7 +31,11 @@ void ColDataSeg::RemoveSelf() {
     } else {
         ColDataSeg* next = static_cast<ColDataSeg*>(nodeData->GetNext());
 
-        for (ColDataSeg* cur = next; nullptr != cur; nodeData = cur, cur = static_cast<ColDataSeg*>(cur->GetNext())) {
+        for (
+            ColDataSeg* cur = next;
+            cur != nullptr;
+            nodeData = cur, cur = static_cast<ColDataSeg*>(cur->GetNext())
+        ) {
             if (cur == this) {
                 nodeData->SetNext(GetNext());
                 b = true;
@@ -51,61 +55,61 @@ end:
     node->ConsolidateNodes();
 }
 
-void KdTreeNode::Propagate(ColDataSeg* coldataseg) {
+void KdTreeNode::Propagate(ColDataSeg* pColDataSeg) {
     ColDataSeg* temp;
 
-    if (nullptr == mChild1) {
+    if (mChild1 == nullptr) {
         if (mColDataSegCount >= KDTREE_COUNT_THRESHOLD && mDepth <= KDTREE_DEPTH_THRESHOLD) {
             CreateChildren();
         } else {
             temp = mColDataSeg;
-            mColDataSeg = coldataseg;
-            coldataseg->SetNext(temp);
+            mColDataSeg = pColDataSeg;
+            pColDataSeg->SetNext(temp);
             mColDataSegCount++;
-            coldataseg->SetTreeNode(this);
+            pColDataSeg->SetTreeNode(this);
             return;
         }
     }
 
-    switch (coldataseg->GetNodePlacement(mSplitInfo)) {
+    switch (pColDataSeg->GetNodePlacement(mSplitInfo)) {
         case KdTreeUtil::NodePlacement::Child1:
-            mChild1->Propagate(coldataseg);
+            mChild1->Propagate(pColDataSeg);
             break;
         case KdTreeUtil::NodePlacement::Child2:
-            mChild2->Propagate(coldataseg);
+            mChild2->Propagate(pColDataSeg);
             break;
         case KdTreeUtil::NodePlacement::Self:
             temp = mColDataSeg;
-            mColDataSeg = coldataseg;
-            coldataseg->SetNext(temp);
+            mColDataSeg = pColDataSeg;
+            pColDataSeg->SetNext(temp);
             mColDataSegCount++;
-            coldataseg->SetTreeNode(this);
+            pColDataSeg->SetTreeNode(this);
     }
 
 }
 
-void KdTreeNode::Add(ColDataSeg* coldataseg) {
-    if (nullptr == mChild1 && coldataseg->ArePointsInRect(mBounds)) {
+void KdTreeNode::Add(ColDataSeg* pColDataSeg) {
+    if (mChild1 == nullptr && pColDataSeg->ArePointsInRect(mBounds)) {
         return;
     }
     bool shouldAdd;
     ColDataSeg* seg = mColDataSeg;
-    if (nullptr == seg) {
+    if (seg == nullptr) {
         shouldAdd = false;
-    } else if (seg == coldataseg) {
-        mColDataSeg = static_cast<ColDataSeg*>(coldataseg->GetNext());
+    } else if (seg == pColDataSeg) {
+        mColDataSeg = static_cast<ColDataSeg*>(pColDataSeg->GetNext());
         shouldAdd = true;
-        coldataseg->SetNext(nullptr);
+        pColDataSeg->SetNext(nullptr);
         mColDataSegCount--;
     } else {
         ColDataSeg* cur = static_cast<ColDataSeg*>(seg->GetNext());
         ColDataSeg* segnext = static_cast<ColDataSeg*>(seg->GetNext());
         
-        while (nullptr != cur) {
-            if (cur == coldataseg) {
-                seg->SetNext(coldataseg->GetNext());
+        while (cur != nullptr) {
+            if (cur == pColDataSeg) {
+                seg->SetNext(pColDataSeg->GetNext());
                 shouldAdd = true;
-                coldataseg->SetNext(nullptr);
+                pColDataSeg->SetNext(nullptr);
                 mColDataSegCount--;
                 goto end;
             }
@@ -116,14 +120,14 @@ void KdTreeNode::Add(ColDataSeg* coldataseg) {
     }
     end:
     if (shouldAdd) {
-        coldataseg->SetTreeNode(nullptr);
+        pColDataSeg->SetTreeNode(nullptr);
     }
-    TryPropagate(coldataseg);
+    TryPropagate(pColDataSeg);
     ConsolidateNodes();
 }
 
 void KdTreeNode::ConsolidateNodes() {
-    if (nullptr != mChild1) {
+    if (mChild1 != nullptr) {
         return;
     }
 
@@ -133,36 +137,40 @@ void KdTreeNode::ConsolidateNodes() {
 
     KdTreeNode* parent = mParent;
 
-    if (nullptr == parent) {
+    if (parent == nullptr) {
         return;
     }
 
     KdTreeNode* parentChild1 = parent->GetChild1();
     KdTreeNode* parentChild2 = parent->GetChild2();
     
-    if (nullptr != parentChild1->GetChild1()) {
+    if (parentChild1->GetChild1() != nullptr) {
         return;
     }
 
-    if (nullptr != parentChild2->GetChild1()) {
+    if (parentChild2->GetChild1() != nullptr) {
         return;
     }
 
-    if (5 < parent->GetColDataSegCount() + parentChild1->GetColDataSegCount() + parentChild2->GetColDataSegCount()) {
+    if (5 <
+        parent->GetColDataSegCount()
+        + parentChild1->GetColDataSegCount()
+        + parentChild2->GetColDataSegCount()
+    ) {
         return;
     }
 
     parent->ClearAll();
 }
 
-void KdTreeNode::TryPropagate(ColDataSeg* coldataseg) {
-    if (coldataseg->ArePointsInRect(mBounds)) {
-        Propagate(coldataseg);
+void KdTreeNode::TryPropagate(ColDataSeg* pColDataSeg) {
+    if (pColDataSeg->ArePointsInRect(mBounds)) {
+        Propagate(pColDataSeg);
     } else {
-        if (nullptr != mParent) {
-            mParent->TryPropagate(coldataseg);
+        if (mParent != nullptr) {
+            mParent->TryPropagate(pColDataSeg);
         } else {
-            Propagate(coldataseg);
+            Propagate(pColDataSeg);
         }
     }
 }
@@ -223,7 +231,7 @@ void KdTreeNode::CreateChildren() {
     ColDataSeg* coldataseg = mColDataSeg;
     ColDataSeg* cur;
 
-    while (nullptr != coldataseg) {
+    while (coldataseg != nullptr) {
         cur = static_cast<ColDataSeg*>(coldataseg->GetNext());
         coldataseg->SetNext(nullptr);
         coldataseg->SetTreeNode(nullptr);
@@ -240,11 +248,18 @@ void KdTreeNode::ClearAll() {
     KdTreeNode* child;
     uint childsegcount;
     
-    for (ColDataSeg* seg = mChild1->GetColDataSeg(); nullptr != seg; seg = static_cast<ColDataSeg*>(seg->GetNext())) {
+    for (
+        ColDataSeg* seg = mChild1->GetColDataSeg();
+        seg != nullptr;
+        seg = static_cast<ColDataSeg*>(seg->GetNext())
+    ) {
         seg->SetTreeNode(this);
     }
 
-    for (ColDataSeg* seg = mChild2->GetColDataSeg(); nullptr != seg; seg = static_cast<ColDataSeg*>(seg->GetNext())) {
+    for (
+        ColDataSeg* seg = mChild2->GetColDataSeg();
+        seg != nullptr;
+        seg = static_cast<ColDataSeg*>(seg->GetNext())) {
         seg->SetTreeNode(this);
     }
 
@@ -256,10 +271,10 @@ void KdTreeNode::ClearAll() {
     child->SetColDataSegCount(0);
     seg = mColDataSeg;
 
-    if (nullptr != seg) {
+    if (seg != nullptr) {
         ColDataSeg* segnext = static_cast<ColDataSeg*>(seg->GetNext());
         ColDataSeg* cur;
-        while (cur = segnext, nullptr != cur) {
+        while (cur = segnext, cur != nullptr) {
             seg = cur;
             segnext = static_cast<ColDataSeg*>(cur->GetNext());
         }
@@ -267,7 +282,7 @@ void KdTreeNode::ClearAll() {
         seg = nullptr;
     }
 
-    if (nullptr != seg) {
+    if (seg != nullptr) {
         seg->SetNext(childseg);
         mColDataSegCount += childsegcount;
     } else {
@@ -284,10 +299,10 @@ void KdTreeNode::ClearAll() {
     child->SetColDataSegCount(0);
     seg = mColDataSeg;
 
-    if (nullptr != seg) {
+    if (seg != nullptr) {
         ColDataSeg* cur;
         ColDataSeg* segnext = static_cast<ColDataSeg*>(seg->GetNext());
-        while (cur = segnext, nullptr != cur) {
+        while (cur = segnext, cur != nullptr) {
             seg = cur;
             segnext = static_cast<ColDataSeg*>(cur->GetNext());
         }
@@ -295,7 +310,7 @@ void KdTreeNode::ClearAll() {
         seg = nullptr;
     }
 
-    if (nullptr != seg) {
+    if (seg != nullptr) {
         seg->SetNext(childseg);
         mColDataSegCount += childsegcount;
     } else {
@@ -312,7 +327,7 @@ void KdTreeNode::ClearAll() {
 
 
 KdTreeNode::~KdTreeNode() {
-    for (ColDataSeg* c = mColDataSeg; nullptr != c; ) {
+    for (ColDataSeg* c = mColDataSeg; c != nullptr; ) {
         ColDataSeg* temp = static_cast<ColDataSeg*>(c->GetNext());
         c->SetNext(nullptr);
         c = temp;

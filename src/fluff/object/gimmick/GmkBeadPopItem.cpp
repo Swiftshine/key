@@ -86,7 +86,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     CollisionTemplate cTemplate;
     // cTemplate.m_14 = Pairs[m_4].mFloat; // todo - replace this with a float from the array
     cTemplate.m_14 = -1.0f;
-    cTemplate.mCollisionType = 1;
+    cTemplate.mCollisionFlags = 1;
     cTemplate.m_4 = 0x19;
     cTemplate.m_8 = 2;
     cTemplate.mDimensions.x = zero;
@@ -109,10 +109,10 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         
         anmCtrl->PlayAnimationByNameAndIndex(0, animNameBuf);
         anmCtrl->SetupModelWrapper(8);
-        anmCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
-        anmCtrl->GetScnMdlWrapper()->SetUpdate(true);
+        anmCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
+        anmCtrl->mScnMdlWrapper->SetUpdate(true);
         anmCtrl->SetCurrentAnimationIndex(0);
-        scene->AddRenderObj(anmCtrl->GetScnMdlWrapper());
+        scene->AddRenderObj(anmCtrl->mScnMdlWrapper);
 
         mAnimCtrl.Create(anmCtrl);
     }
@@ -157,7 +157,7 @@ void GmkBeadPopItem::Update() {
 
         case State::State_3: {
             if (mAnimCtrl.IsValid()) {
-                mAnimCtrl->GetScnMdlWrapper()->SetUpdate(false);
+                mAnimCtrl->mScnMdlWrapper->SetUpdate(false);
             }
 
             SetState(State::DeleteSelf);
@@ -168,8 +168,8 @@ void GmkBeadPopItem::Update() {
     UpdateMatrix();
 
     if (mAnimCtrl.IsValid()) {
-        mAnimCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
-        mAnimCtrl->GetScnMdlWrapper()->fn_8065DCDC(m_144);
+        mAnimCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
+        mAnimCtrl->mScnMdlWrapper->fn_8065DCDC(m_144);
     }
 
     if (mPopItemInfo.IsValid()) {
@@ -225,7 +225,7 @@ void GmkBeadPopItem::SetState(FlfGameObj* setter, std::string& state) {
         !enabled &&
         mCollisionEnabled &&
         setter != nullptr && 
-        setter->mType == 1
+        setter->mCategory == 1
     ) {
         CutFunction();
         int gimmickID = static_cast<Gimmick*>(setter)->GetGimmickID();

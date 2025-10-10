@@ -9,12 +9,12 @@
 
 namespace SimpleMdlCommon {
     ENUM_CLASS(Parameter,
-        Name = 0, // string 0
+        Name    = 0, // string 0
 
         UnkInt1 = 1, // int 1
     );
-    Gimmick* Build(Gimmick::GimmickBuildInfo* info);
-    void AddGimmickName(Gimmick::GimmickBuildInfo* info);
+    Gimmick* Build(Gimmick::GimmickBuildInfo* pBuildInfo);
+    void AddGimmickName(Gimmick::GimmickBuildInfo* pBuildInfo);
     float GetInitialAnimFrame(int frameIndex);
 }
 

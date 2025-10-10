@@ -11,9 +11,12 @@
 
 class KdTree {
 public:
+    /* Structures */
+
+    /// @note Size: `0x650`
     class HitResult {
     public:
-        ColDataSeg* GetCurrentColDataSeg();
+        /* Constructor */
         
         inline HitResult() {
             mNumNodes = 0;
@@ -24,24 +27,41 @@ public:
             }
         }
 
-        DECL_WEAK virtual ~HitResult();
+        /* Virtual Methdods */
+        /* 0x08 */ DECL_WEAK virtual ~HitResult();
 
-    private:
-        uint mNumNodes;
-        KdTreeNode* mNodes[KDTREE_HITRESULT_NODE_COUNT];
-        ColDataSeg* mCurrentColDataSeg;
-        uint mNumOverflow;
+        /* Class Methods */
+
+        ColDataSeg* GetCurrentColDataSeg();
+
+        /* Class Methods */
+
+        /* 0x004 */ uint mNumNodes;
+        /* 0x008 */ KdTreeNode* mNodes[KDTREE_HITRESULT_NODE_COUNT];
+        /* 0x648 */ ColDataSeg* mCurrentColDataSeg;
+        /* 0x64C */ uint mNumOverflow;
     };
-public:
+
+    /* Constructor */
+
     KdTree();
-    virtual ~KdTree();
+
+    /* Virtual Methods */
+
+    /* 0x08 */ virtual ~KdTree();
     
-    void CreateRootNode(nw4r::math::VEC2& min, nw4r::math::VEC2& max);
+    /* Class Methods */
+
+    void CreateRootNode(nw4r::math::VEC2& rMin, nw4r::math::VEC2& rMax);
     void AddItem(void*);
     void RemoveItem(void*);
-private:
-    KdTreeNode* mRootNode;
-    HitResult mHitResult;
+
+    /* Class Members */
+
+    /* 0x4 */ KdTreeNode* mRootNode;
+    /* 0x8 */ HitResult mHitResult;
 };
+
+ASSERT_SIZE(KdTree, 0x658);
 
 #endif

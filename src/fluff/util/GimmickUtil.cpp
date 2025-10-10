@@ -1,12 +1,12 @@
 #include "util/GimmickUtil.h"
 #include "graphics/FlfMdlDraw.h"
 
-int GimmickUtil::GetGimmickIDByDescription(const char* description) {
+int GimmickUtil::GetGimmickIDByDescription(const char* pDescription) {
     GimmickEntry* entry = GimmickTable;
     uint id = 0;
 
     while (id < GimmickIDs::GimmickTypeCount) {
-        if (nullptr != entry->GetDescription() && 0 == strcmp(entry->GetDescription(), description)) {
+        if (entry->mDescription != nullptr && strcmp(entry->mDescription, pDescription) == 0) {
             return id;
         }
         id++;
@@ -17,7 +17,7 @@ int GimmickUtil::GetGimmickIDByDescription(const char* description) {
 }
 
 const char* GimmickUtil::GetResourceNameByGimmickID(int id) {
-    return GimmickTable[id].GetResourceName();
+    return GimmickTable[id].mResourceName;
 }
 
 std::string GimmickUtil::GetResourcePathByGimmickID(int id) {
@@ -27,11 +27,11 @@ std::string GimmickUtil::GetResourcePathByGimmickID(int id) {
 }
 
 GimmickBuildFunction GimmickUtil::GetBuildFunctionByGimmickID(int id) {
-    return GimmickTable[id].GetBuildFunction();
+    return GimmickTable[id].mBuildFunction;
 }
 
 bool GimmickUtil::CheckCommonByGimmickID(int id) {
-    return GimmickTable[id].IsCommon();
+    return GimmickTable[id].mIsCommon;
 }
 
 bool GimmickUtil::IsBead(int id) {
@@ -99,6 +99,6 @@ bool GimmickUtil::fn_800507C8(int id) {
     return 0x130 <= id && id <= 0x138;
 }
 
-void GimmickUtil::GetButtonBRRES(gfl::ResFileObject& dest) {
-    FlfMdlDraw::GetFileInfoFromArchive(dest, "gimmick/button/button.brres");
+void GimmickUtil::GetButtonBRRES(gfl::ResFileObject& rDest) {
+    FlfMdlDraw::GetFileInfoFromArchive(rDest, "gimmick/button/button.brres");
 }

@@ -9,47 +9,55 @@
 #include "object/Gimmick.h"
 #include "gfl/gflArray.h"
 
-// the representation of stage entity data
-// used by the game for parsing and processing
+/// @brief A representation of stage entity data used in game for parsing and processing.
+/// @note Size: `0x4C`
 class Mapdata {
 public:
+
+    /* Structures */
+
+    /// @note Size: `0x3C`
     struct MapdataParams {
-        int mIntParams[3]; // @ 0x0
-        float mFloatParams[3]; // @ 0xC
-        std::string mStringParams[3]; // @ 0x18
+        /* 0x00 */ int mIntParams[3];
+        /* 0x0C */ float mFloatParams[3];
+        /* 0x18 */ std::string mStringParams[3];
     };
 
+    /// @note Size: 0x28
     struct MapdataCommonGimmick {
-        static bool fn_8004f604(Gimmick::GimmickBuildInfo* buildInfo);
+        static bool fn_8004f604(Gimmick::GimmickBuildInfo* pBuildInfo);
 
-        bool m_0;
-        bool m_1;
-        uint m_4;
-        char m_8[32];
+        /* 0x0 */ bool m_0;
+        /* 0x1 */ bool m_1;
+        /* 0x4 */ uint m_4;
+        /* 0x8 */ char m_8[32];
     };
 
+    /// @note Size: `0x54`
     struct MapdataGimmick {
         void BuildFriend01();
 
-        std::string mName; // @ 0x0
-        nw4r::math::VEC3 mPosition; // @ 0xC
-        MapdataParams mParams; // @ 0x18
+        /* 0x00 */ std::string mName;
+        /* 0x0C */ nw4r::math::VEC3 mPosition;
+        /* 0x18 */ MapdataParams mParams;
     };
 
+    /// @note Size: `0x50`
     struct MapdataPath {
-        void SetupWoolBridges(Mapdata* owner);
+        void SetupWoolBridges(Mapdata* pMapdata);
         bool IsMsKeepOutLine();
         bool BuildReleaseHenshin2();
         bool BuildNeedle();
         bool BuildPathDraw();
         bool BuildMsKeepOutLine();
 
-        std::string mName; // @ 0x0
-        MapdataParams mParams; // @ 0xC
-        uint mNumPoints; // @ 0x48
-        gfl::Array<nw4r::math::VEC2> mPoints; // @ 0x4C
+        /* 0x00 */ std::string mName;
+        /* 0x0C */ MapdataParams mParams;
+        /* 0x48 */ uint mNumPoints;
+        /* 0x4C */ gfl::Array<nw4r::math::VEC2> mPoints;
     };
 
+    /// @note Size: `0x58`
     struct MapdataZone {
         bool BuildLadder();
         bool BuildMokoMoko();
@@ -65,203 +73,84 @@ public:
         bool BuildBallRelease();
         bool BuildBackDoorZMask();
 
-        std::string mName; // @ 0x0
-        MapdataParams mParams; // @ 0xC
-        nw4r::math::VEC2 mBoundsMin; // @ 0x48
-        nw4r::math::VEC2 mBoundsMax; // @ 0x50
+        /* 0x00 */ std::string mName;
+        /* 0x0C */ MapdataParams mParams;
+        /* 0x48 */ nw4r::math::VEC2 mBoundsMin;
+        /* 0x50 */ nw4r::math::VEC2 mBoundsMax;
     };
 
+    /// @note Size: `0x54`
     struct MapdataCourseInfo {
-        std::string mName; // @ 0x0
-        MapdataParams mParams; // @ 0xC
-        nw4r::math::VEC3 mPosition; // @ 0x48
+        /* 0x00 */ std::string mName;
+        /* 0x0C */ MapdataParams mParams;
+        /* 0x48 */ nw4r::math::VEC3 mPosition;
     };
-public:
-    static Mapdata* Parse(const char* path, bool isInMission);
-    static void Delete(Mapdata* mapdata);
+
+    /* Class Methods */
 
     void RegisterStageResources();
     void ConstructObjects();
     void ConstructMoleBlocks();
 
-    inline uint GetNumCommonGimmicks() const {
-        return mNumCommonGimmicks;
-    }
-
     inline Gimmick::GimmickBuildInfo* GetCommonGimmickBuildInfo(uint index) {
         return &mCommonGimmickBuildInfos[index];
     }
-private:
-    nw4r::math::VEC2 mBoundsMin;
-    nw4r::math::VEC2 mBoundsMax;
-    uint mNumWalls;
-    ColDataSeg* mWalls;
-    uint mNumLabeledWalls;
-    ColDataSegLabel* mLabeledWalls;
-    uint mNumCommonGimmicks;
-    gfl::Array<Gimmick::GimmickBuildInfo> mCommonGimmickBuildInfos;
-    MapdataCommonGimmick* mCommonGimmicks;
-    uint mNumGimmicks;
-    MapdataGimmick* mGimmicks;
-    uint mNumPaths;
-    MapdataPath* mPaths;
-    uint mNumZones;
-    MapdataZone* mZones;
-    uint mNumCourseInfo;
-    MapdataCourseInfo* mCourseInfos;
+
+    /* Static Methods */
+
+    static Mapdata* Parse(const char* pFilepath, bool isInMission);
+    static void Delete(Mapdata* pMapdata);
+
+    /* Class Members */
+
+    /* 0x00 */ nw4r::math::VEC2 mBoundsMin;
+    /* 0x08 */ nw4r::math::VEC2 mBoundsMax;
+    /* 0x10 */ uint mNumWalls;
+    /* 0x14 */ ColDataSeg* mWalls;
+    /* 0x18 */ uint mNumLabeledWalls;
+    /* 0x1C */ ColDataSegLabel* mLabeledWalls;
+    /* 0x20 */ uint mNumCommonGimmicks;
+    /* 0x24 */ gfl::Array<Gimmick::GimmickBuildInfo> mCommonGimmickBuildInfos;
+    /* 0x28 */ MapdataCommonGimmick* mCommonGimmicks;
+    /* 0x2C */ uint mNumGimmicks;
+    /* 0x30 */ MapdataGimmick* mGimmicks;
+    /* 0x34 */ uint mNumPaths;
+    /* 0x38 */ MapdataPath* mPaths;
+    /* 0x3C */ uint mNumZones;
+    /* 0x40 */ MapdataZone* mZones;
+    /* 0x44 */ uint mNumCourseInfo;
+    /* 0x48 */ MapdataCourseInfo* mCourseInfos;
 };
 
 ASSERT_SIZE(Mapdata, 0x4C);
 
-// the representation of stage entity data
-// stored on disk
+/// @brief A representation of stage entity data stored on disk.
+/// @note Size: `0x58`
 struct Mapbin {
-    float m_0;
-    nw4r::math::VEC2 mBoundsMin;
-    nw4r::math::VEC2 mBoundsMax;
-    u32 mNumWalls;
-    u32 mWallOffset;
-    u32 mNumLabeledWalls;
-    u32 mLabeledWallOffset;
-    u32 mNumCommonGimmicks;
-    u32 mCommonGimmickOffset;
-    u32 mNumGimmicks;
-    u32 mGimmickOffset;
-    u32 mNumPaths;
-    u32 mPathOffset;
-    u32 mNumZones;
-    u32 mZoneOffset;
-    u32 mNumCourseInfo;
-    u32 mCourseInfoOffset;
-    u32 mCommonGimmickNameOffset;
-    u32 mColbinTypeOffset;
-    u32 mLabeledWallLabels;
+    /* 0x00 */ float m_0;
+    /* 0x04 */ nw4r::math::VEC2 mBoundsMin;
+    /* 0x0C */ nw4r::math::VEC2 mBoundsMax;
+    /* 0x14 */ u32 mNumWalls;
+    /* 0x18 */ u32 mWallOffset;
+    /* 0x1C */ u32 mNumLabeledWalls;
+    /* 0x20 */ u32 mLabeledWallOffset;
+    /* 0x24 */ u32 mNumCommonGimmicks;
+    /* 0x28 */ u32 mCommonGimmickOffset;
+    /* 0x2C */ u32 mNumGimmicks;
+    /* 0x30 */ u32 mGimmickOffset;
+    /* 0x34 */ u32 mNumPaths;
+    /* 0x38 */ u32 mPathOffset;
+    /* 0x3C */ u32 mNumZones;
+    /* 0x40 */ u32 mZoneOffset;
+    /* 0x44 */ u32 mNumCourseInfo;
+    /* 0x48 */ u32 mCourseInfoOffset;
+    /* 0x4C */ u32 mCommonGimmickNameOffset;
+    /* 0x50 */ u32 mColbinTypeOffset;
+    /* 0x54 */ u32 mLabeledWallLabels;
 };
 
+ASSERT_SIZE(Mapbin, 0x58);
 
-// class Mapdata {
-// public:
-//     class Mapbin {
-//     public:
-//         struct File {
-//             nw4r::math::VEC2 mBoundsMin;
-//             nw4r::math::VEC2 mBoundsMax;
-//             u32 mNumWalls;
-//             u32 mWallOffset;
-//             u32 mNumLabeledWalls;
-//             u32 mLabeledWallOffset;
-//             u32 mNumCommonGimmicks;
-//             u32 mCommonGimmickOffset;
-//             u32 mNumGimmicks;
-//             u32 mGimmickOffset;
-//             u32 mNumPaths;
-//             u32 mPathOffset;
-//             u32 mNumZones;
-//             u32 mZoneOffset;
-//             u32 mNumCourseInfo;
-//             u32 mCourseInfoOffset;
-//             u32 mCommonGimmickNameOffset;
-//             u32 mColbinTypeOffset;
-//             u32 mLabeledWallLabels;
-//         };
-
-//         struct Header {
-//             f32 m_0;
-//             nw4r::math::VEC2 mBoundsMin;
-//             nw4r::math::VEC2 mBoundsMax;
-//             u32 mNumWalls;
-//             u32 mWallOffset;
-//             u32 mNumLabeledWalls;
-//             u32 mLabeledWallOffset;
-//             u32 mNumCommonGimmicks;
-//             u32 mCommonGimmickOffset;
-//             u32 mNumGimmicks;
-//             u32 mGimmickOffset;
-//             u32 mNumPaths;
-//             u32 mPathOffset;
-//             u32 mNumZones;
-//             u32 mZoneOffset;
-//             u32 mNumCourseInfo;
-//             u32 mCourseInfoOffset;
-//             u32 mCommonGimmickNameOffset;
-//             u32 mColbinTypeOffset;
-//             u32 mLabeledWallLabels;
-//         };
-
-//         typedef Colbin::Entry Wall;
-
-//         struct LabeledWall : public Colbin::Entry {
-//             u32 mLabelIndex;
-//         };
-
-//         struct MapdataParams {
-//             int mIntParams[3];
-//             f32 mFloatParams[3];
-//             string64 mStringParams[3];
-//         };
-
-//         struct Gimmick {
-//             char mName[0x30];
-//             u8 m_30[0x10];
-//             nw4r::math::VEC3 mPosition;
-//             MapdataParams mParams;
-//         };
-        
-//         struct CommonGimmickParams {
-//             int mShortIntParams[2];
-//             f32 mShortFloatParams[2];
-//             char mShortStringParam[8];
-//             int mIntParams[5];
-//             float mFloatParams[5];
-//             string64 mStringParams[5];
-//         };
-
-//         struct CommonGimmick {
-//             u32 mNameIndex;
-//             nw4r::math::VEC3 mPosition;
-//             CommonGimmickParams mParams;
-//         };
-
-
-//         // variable length structure
-//         struct Path {
-//             string32 mName;
-//             string32 mType;
-//             MapdataParams mParams;
-//             u32 mNumPoints;
-//             // nw4r::math::VEC2 mPoints[mNumPoints];
-//         };
-
-//         struct Zone {
-//             string32 mName;
-//             string32 m_20;
-//             MapdataParams mParams;
-//             nw4r::math::VEC2 mBoundsMin;
-//             nw4r::math::VEC2 mBoundsMax;  
-//         };
-
-//         struct RaceCourseInfo {
-//             string32 mName;
-//             string32 m_20;
-//             MapdataParams mParams;
-//             nw4r::math::VEC3 mPosition;
-//         };
-
-//     };
-
-//     static Mapdata::Mapbin::File* Parse(const char* mapbinPath, bool isMission);
-
-//     struct StageInfo {
-
-//     };
-
-// public:
-//     STRUCT_FILL(0x1C);
-//     int mStageCount;
-//     StageInfo* mStageInfo;
-
-//     // size unk
-// };
-
+// TODO: place the rest of the Mapbin documentation here
 
 #endif

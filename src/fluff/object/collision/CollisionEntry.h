@@ -6,36 +6,37 @@
 #include "misc/ScopedPointers.h"
 
 struct CollisionBounds2D {
-    nw4r::math::VEC2 mBoundsStart;
-    nw4r::math::VEC2 mBoundsEnd;
-    nw4r::math::VEC2 mMatrixDifference;
+    /* 0x00 */ nw4r::math::VEC2 mBoundsStart;
+    /* 0x08 */ nw4r::math::VEC2 mBoundsEnd;
+    /* 0x10 */ nw4r::math::VEC2 mMatrixDifference;
 };
 
+ASSERT_SIZE(CollisionBounds2D, 0x18);
+
 struct CollisionBounds3D {
-    nw4r::math::VEC3 mBoundsStart;
-    nw4r::math::VEC2 mMatrixDifference;
+    /* 0x0 */ nw4r::math::VEC3 mBoundsStart;
+    /* 0xC */ nw4r::math::VEC2 mMatrixDifference;
 };
+
+ASSERT_SIZE(CollisionBounds3D, 0x14);
 
 class CollisionEntry {
 public:
+    /* Constructor + Destructor  */
+    
     CollisionEntry();
     DECL_WEAK ~CollisionEntry();
     
-    static CollisionEntry* Get(CollisionTemplate* collisionTemplate, IObjHitCB* callbacks, FlfGameObj* owner, nw4r::math::MTX34& matrix, const char* name);
-    static void Remove(CollisionEntry* entry);
-    void Copy(CollisionTemplate* collisionTemplate, IObjHitCB* callbacks, FlfGameObj* owner, nw4r::math::MTX34& matrix);
+    /* Class Methods */
+
+    void Copy(CollisionTemplate* pCollisionTemplate, IObjHitCB* pCallbacks, FlfGameObj* pOwner, nw4r::math::MTX34& rMatrix);
     void Reset();
-    static void CopyDimensions(nw4r::math::VEC2& dest, CollisionEntry* entry);
-    void SetDimensions(float& x, float& y);
-    static void GetMatrixDifference(nw4r::math::VEC2& dest, CollisionEntry* entry);
+    void SetDimensions(float& rX, float& rY);
     int UpdateOwner();
+    void ValidateBounds(int arg1, nw4r::math::VEC2& rArg2);
     CollisionBounds3D* Get3DBounds();
     CollisionBounds2D* Get2DBounds();
-    void ValidateBounds(int arg1, nw4r::math::VEC2& arg2);
 
-    inline CollisionInfo& GetInfo() {
-        return mInfo;
-    }
 
     inline void ResetMatrix(bool arg0) {
         mInfo.mMatrixInited = arg0;
@@ -66,10 +67,19 @@ public:
             mInfo.mBoundsInited = false;
         }
     }
-private:
-    CollisionInfo mInfo;
-    CollisionBounds2D m2DBounds;
-    CollisionBounds3D m3DBounds;
+
+    /* Static Methods */
+
+    static CollisionEntry* Get(CollisionTemplate* pCollisionTemplate, IObjHitCB* pCallbacks, FlfGameObj* pOwner, nw4r::math::MTX34& rMatrix, const char* pName);
+    static void Remove(CollisionEntry* pEntry);
+    static void CopyDimensions(nw4r::math::VEC2& pDest, CollisionEntry* pEntry);
+    static void GetMatrixDifference(nw4r::math::VEC2& pDest, CollisionEntry* pEntry);
+
+    /* Class Members */
+
+    /* 0x00 */ CollisionInfo mInfo;
+    /* 0x88 */ CollisionBounds2D m2DBounds;
+    /* 0xA0 */ CollisionBounds3D m3DBounds;
 };
 
 ASSERT_SIZE(CollisionEntry, 0xB4);

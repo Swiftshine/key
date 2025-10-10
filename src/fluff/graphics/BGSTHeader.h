@@ -11,21 +11,21 @@ namespace BGST {
         }
 
         inline bool CheckColumns(int index) {
-            return mColumnEnabled[index];
+            return mLayerEnabled[index];
         }
 
-        char mMagic; // "BGST"
-        uint m_4;
-        uint mImageWidth; // pixels
-        uint mImageHeight;
-        uint mGridWidth;
-        uint mGridHeight;
-        u32 mSomeOffset1;
-        bool mColumnEnabled[12];
-        u32 mImageDataOffset;
-        u32 mSomeOffset3;
-        float mYOffset;
-        char padding[0xC];
+        /* 0x00 */ char mMagic[4]; // "BGST"
+        /* 0x04 */ uint m_4;
+        /* 0x08 */ uint mImageWidth;  // in pixels; this value is usually 512
+        /* 0x0C */ uint mImageHeight; // same as above
+        /* 0x10 */ uint mGridWidth;
+        /* 0x14 */ uint mGridHeight;
+        /* 0x18 */ u32 mEntryCount;
+        /* 0x1C */ bool mLayerEnabled[12];
+        /* 0x28 */ u32 mImageDataOffset;
+        /* 0x2C */ u32 mSomeOffset3;
+        /* 0x30 */ float mYOffset;
+        /* 0x34 */ char padding[0xC];
     };
 
 }

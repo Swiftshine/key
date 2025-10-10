@@ -2,8 +2,8 @@
 
 using namespace env;
 
-EnvUnitBase::EnvUnitBase(gfl::Task* parent, const char* taskName, uint arg3) 
-    : EnvObject(parent, 0, taskName, arg3)
+EnvUnitBase::EnvUnitBase(gfl::Task* pParentTask, const char* pTaskName, uint arg3) 
+    : EnvObject(pParentTask, 0, pTaskName, arg3)
 { }
 
 // not complete -- fix std::deque dtor

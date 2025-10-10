@@ -31,7 +31,7 @@ void GmkCartBtn::Init(ButtonBuildInfo* buildInfo) {
     UpdateMatrix();
     CollisionTemplate colTemplate;
     colTemplate.m_14 = buildInfo->m_C;
-    colTemplate.mCollisionType = 1;
+    colTemplate.mCollisionFlags = 1;
     colTemplate.m_4 = 0x19;
     colTemplate.m_8 = 2;
     colTemplate.m_C.x = gfl::Vec2::Zero.x;

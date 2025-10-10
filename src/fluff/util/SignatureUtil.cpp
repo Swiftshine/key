@@ -2,8 +2,8 @@
 
 // last remaining nonmatching function in this TU
 // https://decomp.me/scratch/yfkZ1
-uint SignatureUtil::GetSignature(const std::string& str) {
-    u32 len = str.length();
+uint SignatureUtil::GetSignature(const std::string& rStr) {
+    u32 len = rStr.length();
 
     if (len == 0) {
         return 'NONE';
@@ -16,10 +16,10 @@ uint SignatureUtil::GetSignature(const std::string& str) {
     uint signature = 0;
 
     // signature = (c & 0xFF) | (c << 8 & 0xFF00) | (c << 16 & 0xFF0000) | (c << 24 & 0xFF000000);
-    signature += str[3] << 0 & 0xFF;
-    signature += str[2] << 8 & 0xFF00;
-    signature += str[1] << 16 & 0xFF0000;
-    signature += str[0] << 24 & 0xFF000000;
+    signature += rStr[3] << 0 & 0xFF;
+    signature += rStr[2] << 8 & 0xFF00;
+    signature += rStr[1] << 16 & 0xFF0000;
+    signature += rStr[0] << 24 & 0xFF000000;
 
     if (signature == 0) {
         signature = 'NONE';

@@ -1,3 +1,3 @@
 #include "manager/CameraManager.h"
 
-const float CameraManager::CullingThreshold = 0x41955555;
+const float CameraManager::CullingThreshold = 18.666666f;

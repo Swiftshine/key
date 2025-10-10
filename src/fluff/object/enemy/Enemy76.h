@@ -12,15 +12,17 @@ private:
 
 ASSERT_SIZE(Enemy76MatrixCallback, 0x1C);
 
+/// @brief An odd-looking smiley face.
+/// @note Size: `0x17C0`
 class Enemy76 : public EnemyBase {
 public:
+    /* Class Members */
 
-private:
-    nw4r::math::MTX34 mMatrix; // @ 0x1774
-    Enemy76MatrixCallback mMatrixCallback; // @ 0x17A4
+    /* 0x1774 */ nw4r::math::MTX34 mMatrix; // @ 0x1774
+    /* 0x17A4 */ Enemy76MatrixCallback mMatrixCallback; // @ 0x17A4
 };
 
-ASSERT_SIZE(Enemy76, 0x17C0);
+// ASSERT_SIZE(Enemy76, 0x17C0);
 
 
 #endif

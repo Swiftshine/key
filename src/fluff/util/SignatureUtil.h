@@ -5,9 +5,9 @@
 #include <string>
 
 namespace SignatureUtil {
-    uint GetSignature(const std::string& str);
+    uint GetSignature(const std::string& rStr);
     std::string GetSignature(uint src);
-    void GetSignature(uint src, char* dst1, char* dst2, char* dst3, char* dst4);
+    void GetSignature(uint src, char* pDst1, char* pDst2, char* pDst3, char* pDst4);
 }
 
 // listed are the different signature types seen in structures related to game work

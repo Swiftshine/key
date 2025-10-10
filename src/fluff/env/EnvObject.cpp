@@ -14,18 +14,18 @@ const int TaskFlags[] = {
 };
 
 
-EnvObject::EnvObject(gfl::Task* parentTask, const char* taskName, uint flagIndex)
+EnvObject::EnvObject(gfl::Task* ppParentTask, const char* pTaskName, uint flagIndex)
     : mTask(nullptr)
     , mTaskFlags(TaskFlags[flagIndex])
 {
-    mTask.Create(GetNewTask(parentTask, 0xF1, taskName, mTaskFlags));
+    mTask.Create(GetNewTask(ppParentTask, 0xF1, pTaskName, mTaskFlags));
 }
 
-EnvObject::EnvObject(gfl::Task* parentTask, u8 taskFlags, const char* taskName, uint flagIndex)
+EnvObject::EnvObject(gfl::Task* pParentTask, u8 taskFlags, const char* taskName, uint flagIndex)
     : mTask(nullptr)
     , mTaskFlags(TaskFlags[flagIndex])
 {
-    mTask.Create(GetNewTask(parentTask, taskFlags, taskName, mTaskFlags));
+    mTask.Create(GetNewTask(pParentTask, taskFlags, taskName, mTaskFlags));
 }
 
 EnvObject::~EnvObject() {
@@ -36,7 +36,7 @@ void EnvObject::DoUpdate() {
     Update();
 }
 
-gfl::Task* EnvObject::GetNewTask(gfl::Task* parent, u8 flags, const char* names, uint arg2) {
+gfl::Task* EnvObject::GetNewTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, uint arg2) {
     // not decompiled
     return nullptr;
 }

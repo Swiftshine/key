@@ -50,6 +50,14 @@ namespace gfl {
             return mPointer;
         }
 
+        operator T*() {
+            return mPointer;
+        }
+
+        operator const T*() const {
+            return mPointer;
+        }
+        
         inline T* Get() const {
             return mPointer;
         }

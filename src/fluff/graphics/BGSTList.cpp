@@ -20,7 +20,7 @@ BGST::List::~List() {
 }
 
 BGST::Image* BGST::List::GetImageByIndex(u16 index) {
-    return mImages.ptr() + index;
+    return mImages + index;
 }
 
 void BGST::List::SetBit(size_t index) {
@@ -34,38 +34,38 @@ void BGST::List::CutFunction() {
     TRKUARTInterruptHandler(this);
 }
 
-bool BGST::List::AssignImageIndices(BGST::Column* column) {
+bool BGST::List::AssignImageIndices(BGST::EntryInfo* pEntryInfo) {
     u16 mainIndex = Instance()->GetNextImageIndex();
 
-    if ((u16)-1 == mainIndex) {
+    if (mainIndex != (u16)-1u) {
         return false;
     }
 
-    if (0xFFFE != column->mType) {
+    if (pEntryInfo->mType != (u16)-2u) {
         u16 shadowIndex = Instance()->GetNextImageIndex();
 
-        if ((u16)-1 == shadowIndex) {
+        if (shadowIndex == (u16)-1u) {
             ResetBit(mainIndex);
             return false;
         }
 
-        column->mShadowImageIndex = shadowIndex;
+        pEntryInfo->mShadowImageIndex = shadowIndex;
     }
 
-    column->mImageIndex = mainIndex;
+    pEntryInfo->mImageIndex = mainIndex;
     Instance()->CutFunction();
     return true;
 }
 
-void BGST::List::AddEntry(BGST::Entry* entry) { }
+void BGST::List::AddEntry(BGST::Entry* pEntry) { }
 
-void BGST::List::RemoveEntry(BGST::Entry* entry) { }
+void BGST::List::RemoveEntry(BGST::Entry* pEntry) { }
 
-void BGST::List::RemoveColumn(BGST::Column* column) {
+void BGST::List::RemoveEntryInfo(BGST::EntryInfo* pEntryInfo) {
     // mEntryList.remove something or other
-    ResetBit(column->mImageIndex);
-    ResetBit(column->mShadowImageIndex);
-    column->m_0 = 1;
+    ResetBit(pEntryInfo->mImageIndex);
+    ResetBit(pEntryInfo->mShadowImageIndex);
+    pEntryInfo->m_0 = 1;
 }
 
 void BGST::List::ResetBit(size_t index) {

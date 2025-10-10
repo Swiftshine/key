@@ -7,8 +7,11 @@
 #include "object/collision/FlfMdlCollision.h"
 #include "manager/PlayerMdlMng.h"
 
+/// @brief The player class.
 class PlayerBase : public FlfGameObj, public IObjHitCB {
 public:
+    /* Structures */
+
     ENUM_CLASS(PlayerID,
         Kirby           = 0,
         PrinceFluff     = 1,
@@ -39,21 +42,25 @@ public:
         DropItem        = 22,
     );
 
-public:
-    PlayerBase(gfl::Task* gameMgrTask, uint flags, uint unk3, uint unk4, uint unk5);
-    virtual ~PlayerBase();
+    /* Constructor */
 
-    static PlayerBase* build(gfl::Task* gameMgrTask, uint flags, uint unk1, uint unk2);
-
-    void SetStartPosition(nw4r::math::VEC3& pos);
+    PlayerBase(gfl::Task* pGameMgrTask, uint flags, uint unk3, uint unk4, uint unk5);
     
+    /* Virtual Methods */
+
+    /* 0x008 */ virtual ~PlayerBase();
+
+    /* Class Methods */
+
+    void SetStartPosition(nw4r::math::VEC3& rPos);
     bool IsStateDefault();
     void fn_8009C464(bool);
     void Reset(uint arg1, int playerState, int arg3, int arg4);
     uint GetPlayerID();
     void PlayAnimation(int id);
-    void SetFullSortScene(FullSortScene* scene, int arg2);
-    
+    void SetFullSortScene(FullSortScene* pScene, int arg2);
+
+    /* Temporary Inlines */
     inline void SetIsControlled(bool value) {
         *(reinterpret_cast<u8*>(this) + 0xF39) = value;
     }
@@ -69,5 +76,9 @@ public:
     inline PlayerMdlMng* GetPlayerMdlMng() {
         return *(reinterpret_cast<PlayerMdlMng**>(reinterpret_cast<u8*>(this) + 0x50C));
     }
+
+    /* Static Methods */
+    static PlayerBase* Build(gfl::Task* pGameMgrTask, uint flags, uint unk1, uint unk2);
+    
 };
 #endif

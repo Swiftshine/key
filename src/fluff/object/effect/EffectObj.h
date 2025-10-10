@@ -6,7 +6,11 @@
 // size: 0xEC
 class EffectObj : public FlfHandleObj {
 public:
+    /* Constructor */
+
     EffectObj(int arg1, int arg2, int arg3, int arg4);
+
+    /* Class Methods */
     void SetPosition(const nw4r::math::VEC3&);
     void fn_800a8268(const nw4r::math::VEC3&);
     void SetMatrix(const nw4r::math::MTX34&);

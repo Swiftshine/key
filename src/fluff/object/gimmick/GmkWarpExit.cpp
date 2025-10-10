@@ -31,10 +31,10 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
 
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(mFullSortSceneIndex);
     animCtrl->SetFullSortSceneModelWrapper(scene, 0x204);
-    mAnimCtrl->GetScnMdlWrapper()->SetMatrix_thunk(mMatrix);
-    mAnimCtrl->GetScnMdlWrapper()->vf30(5.0f);
+    mAnimCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
+    mAnimCtrl->mScnMdlWrapper->vf30(5.0f);
 
-    gfl::ScnMdlWrapper* modelWrapper = mAnimCtrl->GetScnMdlWrapper();
+    gfl::ScnMdlWrapper* modelWrapper = mAnimCtrl->mScnMdlWrapper;
 
     // note to self; this calls a thunk to the version of operator new seen above
     FbMokoMoko* fbMokoMoko = ::new (gfl::HeapID::Work) FbMokoMoko(mZOrder3, 10.0f, 10.0f, "GmkWarpExit", modelWrapper, mFullSortSceneIndex, exit_B_MT, exit_F_MT);

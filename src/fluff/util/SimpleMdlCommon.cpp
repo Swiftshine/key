@@ -6,31 +6,31 @@
 
 const char NurbsPrefix[] = "N_";
 
-Gimmick* SimpleMdlCommon::Build(Gimmick::GimmickBuildInfo* buildInfo) {
-    std::string prefix(buildInfo->GetStringParam(Parameter::Name), 0, 2);
+Gimmick* SimpleMdlCommon::Build(Gimmick::GimmickBuildInfo* pBuildInfo) {
+    std::string prefix(pBuildInfo->GetStringParam(Parameter::Name), 0, 2);
 
     bool cmp = prefix.compare(NurbsPrefix) == 0;
     if (cmp) {
-        return new (gfl::HeapID::Work) GmkSimpleNurbs(buildInfo);
-    } else if (buildInfo->GetIntParam(Parameter::UnkInt1) < 10) {
-        return new (gfl::HeapID::Work) GmkSimpleMdl(buildInfo);
+        return new (gfl::HeapID::Work) GmkSimpleNurbs(pBuildInfo);
+    } else if (pBuildInfo->GetIntParam(Parameter::UnkInt1) < 10) {
+        return new (gfl::HeapID::Work) GmkSimpleMdl(pBuildInfo);
     }
     
-    return new (gfl::HeapID::Work) GmkColAnimMdl(buildInfo);
+    return new (gfl::HeapID::Work) GmkColAnimMdl(pBuildInfo);
 }
 
-void SimpleMdlCommon::AddGimmickName(Gimmick::GimmickBuildInfo* buildInfo) {
+void SimpleMdlCommon::AddGimmickName(Gimmick::GimmickBuildInfo* pBuildInfo) {
     StageResources* resources = StageResources::Instance();
     
-    std::string prefix(buildInfo->GetStringParam(Parameter::Name), 0, 2);
+    std::string prefix(pBuildInfo->GetStringParam(Parameter::Name), 0, 2);
 
     if (NurbsPrefix == prefix) {
-        GimmickUtil::AddGimmickName(buildInfo);
+        GimmickUtil::AddGimmickName(pBuildInfo);
         return;
-    } else if (buildInfo->GetIntParam(Parameter::UnkInt1) < 10) {
-        resources->AddGimmickName(buildInfo->GetStringParam(Parameter::Name).c_str());
+    } else if (pBuildInfo->GetIntParam(Parameter::UnkInt1) < 10) {
+        resources->AddGimmickName(pBuildInfo->GetStringParam(Parameter::Name).c_str());
     } else {
-        GimmickUtil::AddGimmickName(buildInfo);
+        GimmickUtil::AddGimmickName(pBuildInfo);
         return;
     }
 }

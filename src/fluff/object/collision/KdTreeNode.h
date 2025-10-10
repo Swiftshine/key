@@ -10,20 +10,22 @@
 // size: 0x34
 class KdTreeNode {
 public:
-    inline KdTreeNode(KdTreeNode* parent, float minX, float minY) {
-        mDepth = parent->GetDepth() + 1;
-        mParent = parent;
+    /* Constructors */
+
+    inline KdTreeNode(KdTreeNode* pParent, float minX, float minY) {
+        mDepth = pParent->GetDepth() + 1;
+        mParent = pParent;
         mChild1 = nullptr;
         mChild2 = nullptr;
         mColDataSeg = nullptr;
         mColDataSegCount = 0;
         SetMinX(minX);
         SetMinY(minY);
-        SetMaxX(parent->GetMaxX());
-        SetMaxY(parent->GetMaxY());
+        SetMaxX(pParent->GetMaxX());
+        SetMaxY(pParent->GetMaxY());
     }
 
-    inline KdTreeNode(nw4r::math::VEC2& min, nw4r::math::VEC2& max) {
+    inline KdTreeNode(nw4r::math::VEC2& rMin, nw4r::math::VEC2& rMax) {
         mDepth = 0;
         float z = 0.0f;
         SetMinX(z);
@@ -37,16 +39,24 @@ public:
         mColDataSeg = nullptr;
         mColDataSegCount = 0;
 
-        SetMinX(min.x);
-        SetMinY(min.y);
-        SetMaxX(max.x);
-        SetMaxY(max.y);
+        SetMinX(rMin.x);
+        SetMinY(rMin.y);
+        SetMaxX(rMax.x);
+        SetMaxY(rMax.y);
     }
-    // inline KdTreeNode(KdTreeNode* parent, float maxX, float maxY) {
 
-    // }
+    /* Virtual Methods */
 
-    virtual ~KdTreeNode() DONT_INLINE_CLASS;
+    /* 0x08 */ virtual ~KdTreeNode() DONT_INLINE_CLASS;
+
+    /* Class Methods */
+
+    void Propagate(ColDataSeg* pColDataSeg) DONT_INLINE_CLASS;
+    void Add(ColDataSeg* pColDataSeg);
+    void ConsolidateNodes() DONT_INLINE_CLASS;
+    void TryPropagate(ColDataSeg* pColDataSeg) DONT_INLINE_CLASS;
+    void CreateChildren() DONT_INLINE_CLASS;
+    void ClearAll() DONT_INLINE_CLASS;
 
     inline uint GetDepth() {
         return mDepth;
@@ -100,8 +110,8 @@ public:
         return mColDataSeg;
     }
 
-    inline void SetColDataSeg(ColDataSeg* coldata) {
-        mColDataSeg = coldata;
+    inline void SetColDataSeg(ColDataSeg* pColData) {
+        mColDataSeg = pColData;
     }
 
     inline uint GetColDataSegCount() {
@@ -111,22 +121,17 @@ public:
     inline void SetColDataSegCount(uint val) {
         mColDataSegCount = val;
     }
+    
+    /* Class Members */
 
-    void Propagate(ColDataSeg* coldataseg) DONT_INLINE_CLASS;
-    void Add(ColDataSeg* coldataseg);
-    void ConsolidateNodes() DONT_INLINE_CLASS;
-    void TryPropagate(ColDataSeg* coldataseg) DONT_INLINE_CLASS;
-    void CreateChildren() DONT_INLINE_CLASS;
-    void ClearAll() DONT_INLINE_CLASS;
-private:
-    KdTreeSplitInfo mSplitInfo;
-    uint mDepth;
-    KdTreeBounds mBounds;
-    KdTreeNode* mParent;
-    KdTreeNode* mChild1;
-    KdTreeNode* mChild2;
-    ColDataSeg* mColDataSeg;
-    uint mColDataSegCount;
+    /* 0x04 */ KdTreeSplitInfo mSplitInfo;
+    /* 0x0C */ uint mDepth;
+    /* 0x10 */ KdTreeBounds mBounds;
+    /* 0x20 */ KdTreeNode* mParent;
+    /* 0x24 */ KdTreeNode* mChild1;
+    /* 0x28 */ KdTreeNode* mChild2;
+    /* 0x2C */ ColDataSeg* mColDataSeg;
+    /* 0x30 */ uint mColDataSegCount;
 };
 
 #endif

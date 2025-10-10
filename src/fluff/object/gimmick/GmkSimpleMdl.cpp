@@ -124,7 +124,7 @@ void GmkSimpleMdl::SetModel(const char* brresPath, const char* modelName, bool p
         mAnim.Create(CreateAnim(resfile, modelName, modelName));
 
         if (mAnim.IsValid()) {
-            flags = mAnim->GetFlags();
+            flags = mAnim->mFlags;
         }
     }
 
@@ -249,7 +249,7 @@ void GmkSimpleMdl::SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool
         mShadowAnim.Create(CreateAnim(resFile, shadowName, shadowName));
 
         if (mShadowAnim.IsValid()) {
-            flags = mShadowAnim->GetFlags();
+            flags = mShadowAnim->mFlags;
         }
     }
 

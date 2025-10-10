@@ -11,17 +11,23 @@ extern "C" {
     int fn_807A43D0(void*);
 }
 
-// size: 0x1C
+/// @note Size: `0x1C`
 class GeneratorInfo {
 public:
+    /* Constructor + Destructor */
+
     GeneratorInfo();
     ~GeneratorInfo();
 
+    /* Class Methods */
+
     void SetState(FlfGameObj* object, std::string& state);
 
-    inline void ResetCounter() {
-        fn_80788320(this);
-    }
+    DECL_WEAK void ResetCounter();
+
+    // inline void ResetCounter() {
+    //     fn_80788320(this);
+    // }
 
     inline int GetUnk14() {
         return fn_807A43D0(this);
@@ -30,12 +36,14 @@ public:
     bool fn_803CB5E8(const char*);
     void fn_803CB458(int, const char*, int);
     uint fn_803CB4B4();
-private:
-    int m_0;
-    int m_4;
-    std::string mAssociatedTag; // @ 0x8
-    int m_14;
-    int mCounter;
+
+    /* Class Members */
+
+    /* 0x00 */ int m_0;
+    /* 0x04 */ int m_4;
+    /* 0x08 */ std::string mAssociatedTag;
+    /* 0x14 */ int m_14;
+    /* 0x18 */ int mCounter;
 };
 
 #endif

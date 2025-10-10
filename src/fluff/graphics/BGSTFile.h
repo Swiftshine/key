@@ -5,7 +5,7 @@
 #include "graphics/BGSTEntry.h"
 #include "graphics/BGSTLoadState.h"
 #include "graphics/BGSTImage.h"
-#include "graphics/BGSTColumn.h"
+#include "graphics/BGSTEntryInfo.h"
 #include "graphics/BGSTList.h"
 
 #include "gfl/gflFile.h"
@@ -14,46 +14,38 @@
 namespace BGST {
     class File {
     public:
+        /* Constructor + Destructor */
+
         File();
         ~File();
 
+        /* Class Methods */
+
         bool IsColumnValid(int index);
-
-        // what exactly is being returned here has not been determined yet
         void* GetByGrid(int sceneID, int xGridIndex, int yGridIndex) DONT_INLINE_CLASS;
-
-        BGST::Column* GetColumnByIndex(int index);
-
-        // the kind of data being returned has not been determined yet
+        BGST::EntryInfo* GetEntryInfoByIndex(int index);
         void* GetByIndex(int index);
-
         void* fn_80165B3C(int index);
-
         // returns if SetHeader() was successful, and updates loading state
         bool TrySetHeader(const char* path);
-
         // returns if load state indicates that processing should stop
         bool ProcessLoadState();
-
-        void CopyImageData(void** cmprImage, void** i4Image, int id, int xGridIndex, int yGridIndex);
-
-
-    private:
-
+        void CopyImageData(void** pCMPRImage, void** pI4Image, int id, int xGridIndex, int yGridIndex);
         // returns if file reading and header setting was sucessful
-        bool SetHeader(const char* path);
-
+        bool SetHeader(const char* pFilepath);
         void ReadImage() DONT_INLINE_CLASS;
         void SetupImage() DONT_INLINE_CLASS;
         void LoadGrid() DONT_INLINE_CLASS;
-    private:
-        int mLoadState;
-        gfl::FreedPointer<BGST::Header> mHeader;
-        gfl::FreedPointer<BGST::Image> mOutputImage;
-        size_t mImageFilesize;
-        int mGridCount;
-        BGST::Column* mColumns[12];
-        gfl::File* mFile;
+
+        /* Class Members */
+
+        /* 0x00 */ int mLoadState;
+        /* 0x04 */ gfl::FreedPointer<BGST::Header> mHeader;
+        /* 0x08 */ gfl::FreedPointer<BGST::Image> mOutputImage;
+        /* 0x0C */ size_t mImageFilesize;
+        /* 0x10 */ int mGridCount;
+        /* 0x14 */ BGST::EntryInfo* mColumns[12];
+        /* 0x44 */ gfl::File* mFile;
     };
 
     ASSERT_SIZE(File, 0x48);

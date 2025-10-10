@@ -23,7 +23,7 @@ FlfGameObj::FlfGameObj(uint newActorType)
 
     mFlags = 0;
     m_64 = 0;
-    mType = newActorType;
+    mCategory = newActorType;
     m_6C = false;
     mIsCulled = false;
     m_6E = true;

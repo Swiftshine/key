@@ -10,9 +10,10 @@
 typedef std::pair<bool, float> SplitInfo;
 typedef std::pair<nw4r::math::VEC2, nw4r::math::VEC2> PointPair;
 
+/// @note Size: `0x8`
 struct KdTreeSplitInfo {
-    bool mSplitY;
-    float mMidpoint;
+    /* 0x0 */ bool mSplitY;
+    /* 0x4 */ float mMidpoint;
 };
 
 struct KdTreeBounds {
@@ -23,45 +24,43 @@ struct KdTreeBounds {
         mMaxY = 0.0f;
     }
     
-    float mMinX;
-    float mMinY;
-    float mMaxX;
-    float mMaxY;
+    /* 0x0 */ float mMinX;
+    /* 0x4 */ float mMinY;
+    /* 0x8 */ float mMaxX;
+    /* 0xC */ float mMaxY;
 };
-
-// todo: find better names for these functions
 
 namespace KdTreeUtil {
     ENUM_CLASS(NodePlacement,
-        Child1 = 0,
-        Child2 = 1,
-        Self = 2
+        Child1  = 0,
+        Child2  = 1,
+        Self    = 2
     );
 
     /**
      * @note Address: 0x80048354
      * @note Size: 0x64
      */
-    int DetermineNodePlacement(KdTreeSplitInfo& splitInfo, nw4r::math::VEC2& point);
+    int DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, nw4r::math::VEC2& rPoint);
 
     /**
      * @note Address: 0x800483b8
      * @note Size: 0x64
      */
 
-    int DetermineNodePlacementStrictly(KdTreeSplitInfo& splitInfo, PointPair& points);
+    int DetermineNodePlacementStrictly(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints);
 
     /**
      * @note Address: 0x80048464
      * @note Size: 0x84
      */
-    int DetermineNodePlacementByProximity(KdTreeSplitInfo& splitInfo, PointPair& points);
+    int DetermineNodePlacementByProximity(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints);
 
     /**
      * @note Address: 0x800484e8
      * @note Size: 0x74
      */
-    int DetermineNodePlacement(KdTreeSplitInfo& splitInfo, PointPair& points);
+    int DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints);
 }
 
 

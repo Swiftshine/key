@@ -6,7 +6,7 @@
 class PlTransMdl {
 public:
     PlTransMdl(int, int);
-private:
+
     STRUCT_FILL(0x30);
 };
 

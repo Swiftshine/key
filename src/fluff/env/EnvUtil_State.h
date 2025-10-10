@@ -7,10 +7,17 @@ namespace env {
     template <typename StateT>
     class EnvUtil_State {
     public:
+        /* Constructor */
+
         inline EnvUtil_State() { }
-        DECL_WEAK virtual ~EnvUtil_State();
-    private:
-        StateT mStateValue;
+
+        /* Virtual Methods */
+
+        /* 0x08 */ DECL_WEAK virtual ~EnvUtil_State();
+
+        /* Class Members */
+
+        /* 0x04 */ StateT mStateValue;
     };
 }
 

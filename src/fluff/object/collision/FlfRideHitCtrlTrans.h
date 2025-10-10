@@ -8,32 +8,30 @@ class GmkBead;
 
 class FlfRideHitCtrlTrans : public FlfRideHitBase {
 public:
-    FlfRideHitCtrlTrans(ColObj* colObj, FlfGameObj* owner);
-    virtual ~FlfRideHitCtrlTrans();
-    
-    void fn_80185DB8();
-    void AddBead(GmkBead*);
+    /* Constructor */
 
-    inline void SetUnk30(uint value) {
-        m_30 = value;
-    }
+    FlfRideHitCtrlTrans(ColObj* pColObj, FlfGameObj* pOwner);
+
+    /* Virtual Methods */
+
+    /* 0x08 */ virtual ~FlfRideHitCtrlTrans();
+
+    /* Class Methods */
+    void fn_80185DB8();
+    void AddBead(GmkBead* pBead);
+
 
     inline void SetUnk34(uint value) {
         m_34 = value;
     }
 
-    inline void SetUnk38(uint value) {
-        m_38 = value;
-    }
+    /* Class Members */
 
-
-
-private:
-    ColObj* mColObj;
-    uint m_30;
-    uint m_34;
-    uint m_38;
-    uint m_3C;
+    /* 0x2C */ ColObj* mColObj;
+    /* 0x30 */ uint m_30;
+    /* 0x34 */ uint m_34;
+    /* 0x38 */ uint m_38;
+    /* 0x3C */ uint m_3C;
 };
 
 // ASSERT_SIZE(FlfRideHitCtrlTrans, 0x40);

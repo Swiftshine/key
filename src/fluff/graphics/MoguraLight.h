@@ -4,22 +4,28 @@
 #include "graphics/GmkMoleHoleRender.h"
 #include "graphics/NwAnmCtrl.h"
 
-// "mole light"
+/// @brief "Mole Light"
 class MoguraLight {
 public:
+    /* Constructor + Destructor */
+
     MoguraLight();
     ~MoguraLight();
+
+    /* Class Methods */
 
     void SetUpdate(bool doUpdate);
     void UpdateMatrix();
     void SetZPosition(float pos);
-    void SetPosition(nw4r::math::VEC2&);
-private:
-    float mZPosition; // @ 0x0
-    nw4r::math::VEC2 mPosition; // @ 0x4
-    gfl::ResFileInfo* mFileInfo; // @ 0xC
-    GmkMoleHoleRender::RenderUser* mRenderUser; // @ 0x10
-    NwAnmCtrl* mAnimCtrl; // @ 0x14
+    void SetPosition(nw4r::math::VEC2& rPosition);
+
+    /* Class Members */
+
+    /* 0x00 */ float mZPosition;
+    /* 0x04 */ nw4r::math::VEC2 mPosition;
+    /* 0x0C */ gfl::ResFileInfo* mFileInfo;
+    /* 0x10 */ GmkMoleHoleRender::RenderUser* mRenderUser;
+    /* 0x14 */ NwAnmCtrl* mAnimCtrl;
 };
 
 ASSERT_SIZE(MoguraLight, 0x18);

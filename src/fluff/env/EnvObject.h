@@ -7,26 +7,29 @@
 namespace env {
     class EnvObject {
     public:
-        EnvObject(gfl::Task* parentTask, const char* taskName, uint flagIndex);
-        EnvObject(gfl::Task* parentTask, u8 taskFlags, const char* taskName, uint flagIndex);
-        virtual ~EnvObject();
-        virtual void vfC() = 0;
+        /* Constructors */
 
-        
-        // called via functor class method
-        void DoUpdate();
-        gfl::Task* GetNewTask(gfl::Task* parentTask, u8 taskFlags, const char* taskName, uint arg4);
-        // resets the flags and applies the given flags
-        void SetTaskFlags(uint flags);
-        // applies the given flags
-        void ApplyTaskFlags(uint flags);
+        EnvObject(gfl::Task* pParentTask, const char* pTaskName, uint flagIndex);
+        EnvObject(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, uint flagIndex);
+
+        /* Virtual Methods */
+
+        /* 0x08 */ virtual ~EnvObject();
+        /* 0x0C */ virtual void Update() = 0;
+
+        /* Class Methods */
+
+        void DoUpdate(); // called via functor class method
+        gfl::Task* GetNewTask(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, uint arg4);
+        void SetTaskFlags(uint flags); // resets the flags and applies the given flags
+        void ApplyTaskFlags(uint flags); // applies the given flags
         void SetTaskFlagsByFlagIndex(uint index);
-        
         void fn_8005E718(uint arg1, uint arg2);
-        virtual void Update() = 0;
-    protected:
-        gfl::Pointer<gfl::Task> mTask;
-        uint mTaskFlags;
+
+        /* Class Members */
+
+        /* 0x04 */ gfl::Pointer<gfl::Task> mTask;
+        /* 0x08 */ uint mTaskFlags;
     };
 }
 

@@ -3,12 +3,11 @@
 
 #include "types.h"
 
-class BGData {
-public:
-    char mMagic[4];
-    uint m_4;
-    uint m_8;
-    uint m_10;
+struct BGData {
+    /* 0x00 */ char mMagic[4];
+    /* 0x04 */ uint m_4;
+    /* 0x08 */ uint m_8;
+    /* 0x10 */ uint m_10;
 };
 
 #endif

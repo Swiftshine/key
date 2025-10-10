@@ -39,10 +39,10 @@ void InStageWork::Init() {
     m_93 = false;
     m_3C = 0;
     m_40 = 0;
-    m_44 = 0;
+    mNumEnemiesDefeated = 0;
     mNumZekeFound = 0;
     mMaxZekeFound = 0;
-    m_5C = -1;
+    mTimeAttackStatus = -1;
     m_30 = false;
     m_31 = false;
     m_32 = false;
@@ -50,7 +50,7 @@ void InStageWork::Init() {
     m_54 = zero;
     m_58 = zero;
     
-    fn_801FF4DC();
+    SetDefaultBeadThresholds();
     fn_801FF600();
 
     m_74 = -1;

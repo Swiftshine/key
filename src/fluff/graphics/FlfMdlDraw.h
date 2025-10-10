@@ -9,25 +9,15 @@
 // size: 0x1C8
 class FlfMdlDraw {
 public:
-    static void GetFileInfoFromArchive(gfl::ResFileObject& object, const char* path);
-    static void GetFileInfoFromFolder(gfl::ResFileObject& object, const char* path);
+    /* Constructor */
 
-    static inline void FromArchive(gfl::ResFileObject& dst, const char* path) {
-        gfl::ResFileObject object;
-        gfl::ResFileObject::FromArchive(object, path);
-        dst = object;
-    }
-
-    static inline void FromFolder(gfl::ResFileObject& dst, const char* path) {
-        gfl::ResFileObject object;
-        gfl::ResFileObject::FromFolder(object, path);
-        dst = object;
-    }
-    
-public:
     FlfMdlDraw(FullSortScene*, const char*, int, int);
-    virtual ~FlfMdlDraw();
 
+    /* Virtual Methods */
+
+    /* 0x08 */ virtual ~FlfMdlDraw();
+
+    /* Class Methods */
     void LoadNURBSFromFileList();
     void SetVisibility(bool visible);
     void ResetNURBSAnimation(int, bool);
@@ -35,7 +25,7 @@ public:
     bool fn_800239CC();
     void fn_80023D38();
     void SetUpdateRate(float rate);
-    int SetFullSortScene(FullSortScene* scene);
+    int SetFullSortScene(FullSortScene* pFullSortScene);
     void fn_80023B24(float);
     bool IsAnimationDone();
     float GetCurrentFrame();
@@ -43,11 +33,7 @@ public:
     void SetCurrentNURBSFrame(float);
     gfl::ScnMdlWrapper* GetNURBSAnimWrapperModelWrapper();
     NURBSSet* GetNURBSAnimWrapperNURBSSet();
-    
-    inline uint GetUnk20() {
-        return m_20;
-    }
-    
+
     inline void SetCurrentFrameInt(int value) {
         *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;
     }
@@ -56,12 +42,31 @@ public:
         return *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60);
     }
 
-private:
-    std::string mResourcePath;
-    std::string mRawFilepath;
-    FullSortScene* mFullSortScene;
-    uint m_20;
-    STRUCT_FILL(0x1A4);
+    /* Static Methods */
+
+    static void GetFileInfoFromArchive(gfl::ResFileObject& rObject, const char* pFilepath);
+    static void GetFileInfoFromFolder(gfl::ResFileObject& rObject, const char* pFilepath);
+
+    static inline void FromArchive(gfl::ResFileObject& rObject, const char* pFilepath) {
+        gfl::ResFileObject object;
+        gfl::ResFileObject::FromArchive(object, pFilepath);
+        rObject = object;
+    }
+
+    static inline void FromFolder(gfl::ResFileObject& rObject, const char* rFilepath) {
+        gfl::ResFileObject object;
+        gfl::ResFileObject::FromFolder(object, rFilepath);
+        rObject = object;
+    }
+
+    
+    /* Class Members */
+
+    /* 0x04 */ std::string mResourcePath;
+    /* 0x10 */ std::string mRawFilepath;
+    /* 0x1C */ FullSortScene* mFullSortScene;
+    /* 0x20 */ uint m_20;
+    /* 0x24 */ STRUCT_FILL(0x1A4);
 };
 
 #endif

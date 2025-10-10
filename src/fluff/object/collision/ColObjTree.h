@@ -8,16 +8,22 @@
 // size: 0xA88
 class ColObjTree {
 public:
+    /* Constructor + Destructor */
+    
     ColObjTree();
     ~ColObjTree();
 
-    void SetSection(Mapdata* mapdata);
-    void fn_800CBCF4();
-private:
-    KdTree mTree;
+    /* Class Methods */
 
-    u8 rest[0xA88 - sizeof(KdTree)];
+    void SetSection(Mapdata* pMapdata);
+    void fn_800CBCF4();
+
+    /* Class Members */
+
+    /* 0x000 */ KdTree mTree;
+    /* 0x658 */ u8 rest[0xA88 - sizeof(KdTree)];
 };
 
+ASSERT_SIZE(ColObjTree, 0xA88);
 
 #endif

@@ -7,12 +7,23 @@ struct Header {
     u32 _8;
 };
 
-struct FFLT {
-    char magic[4]; // FFLT
-    u32 _4;
-    char archiveName[0x10];
+
+struct FFLTEntry {
+    u32 firstNum;
+    u32 secondNum;
 };
 
+
+struct FFLT {
+    char magic[4]; // FFLT
+    u32 blockSize;
+    char archiveName[0x10];
+    u32 entryCount;
+    u32 _1C;
+    u32 _20; 
+    FFLTEntry entries1[entryCount];
+    FFLTEntry entries2[entryCount];
+};
 
 //struct Entry {
 //    char name[0x10];

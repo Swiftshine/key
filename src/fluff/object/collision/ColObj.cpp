@@ -31,14 +31,14 @@ ColObjTrans::~ColObjTrans() {
     RemoveFromTree();
 }
 
-void ColObjTrans::SetColbin(const char* path) { }
+void ColObjTrans::SetColbin(const char* pFilepath) { }
 
-void ColObjTrans::SetColbin(void* data) { }
+void ColObjTrans::SetColbin(void* pData) { }
 
-void ColObjTrans::SetPosition(nw4r::math::VEC2& pos) {
+void ColObjTrans::SetPosition(nw4r::math::VEC2& rPos) {
     bool posNotSame = false;
 
-    if (mPosition.x != pos.x || mPosition.y != pos.y) {
+    if (mPosition.x != rPos.x || mPosition.y != rPos.y) {
         posNotSame = true;
     }
 
@@ -46,7 +46,7 @@ void ColObjTrans::SetPosition(nw4r::math::VEC2& pos) {
         return;
     }
 
-    mPosition.x = pos.x;
-    mPosition.y = pos.y;
+    mPosition.x = rPos.x;
+    mPosition.y = rPos.y;
     Update();
 }
