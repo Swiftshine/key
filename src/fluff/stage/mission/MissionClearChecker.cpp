@@ -6,10 +6,10 @@ MissionClearCheckerBase::MissionClearCheckerBase() { }
 
 MissionClearCheckerBase::~MissionClearCheckerBase() { }
 
-void MissionClearCheckerBase::SetMissionGameCtrl(MissionGameCtrl* missionGameCtrl) {
+void MissionClearCheckerBase::SetMissionGameCtrl(MissionGameCtrl* pMissionGameCtrl) {
     mMissionStatus = MissionStatus::Playing;
     mMissionEndReason = 0;
-    mMissionGameCtrl = missionGameCtrl;
+    mMissionGameCtrl = pMissionGameCtrl;
 }
 
 void MissionClearCheckerBase::ResetMissionStatus() {
@@ -17,11 +17,11 @@ void MissionClearCheckerBase::ResetMissionStatus() {
     mMissionEndReason = 0;
 }
 
-void MissionClearCheckerBase::InitMissionRequirements() {
+void MissionClearCheckerBase::CauseMissionSuccess() {
     EndMission(1, 0);
 }
 
-void MissionClearCheckerBase::InitMissionTimer() {
+void MissionClearCheckerBase::CauseMissionFailure() {
     EndMission(2, 2);
 }
 
@@ -34,8 +34,8 @@ void MissionClearCheckerBase::EndMission(int status, int reason) {
     mMissionEndReason = reason;
 }
 
-bool MissionClearCheckerBase::TimeRanOut(InStageWork* work) {
-    int remain = work->GetTimeRemaining();
+bool MissionClearCheckerBase::TimeRanOut(InStageWork* pStageWork) {
+    int remain = pStageWork->GetTimeRemaining();
 
     bool ret = false;
     
@@ -49,9 +49,9 @@ bool MissionClearCheckerBase::TimeRanOut(InStageWork* work) {
 
 /* Bead */
 
-MissionBeadClearChecker* MissionBeadClearChecker::Build(MissionGameCtrl* missionGameCtrl) {
+MissionBeadClearChecker* MissionBeadClearChecker::Build(MissionGameCtrl* pMissionGameCtrl) {
     MissionBeadClearChecker* checker = new (gfl::HeapID::Work) MissionBeadClearChecker;
-    InitChecker(checker, missionGameCtrl);
+    InitChecker(checker, pMissionGameCtrl);
     return checker;
 }
 
@@ -67,8 +67,11 @@ extern "C" void* fn_80013654(void*);
 extern "C" int fn_80723480(void*);
 
 // it's more likely that this is just a triplet function that got code merged into one
-void MissionClearCheckerBase::InitChecker(MissionClearCheckerBase* checker, MissionGameCtrl* missionGameCtrl) {
-    checker->SetMissionGameCtrl(missionGameCtrl);
+void MissionClearCheckerBase::InitChecker(
+    MissionClearCheckerBase* pChecker,
+    MissionGameCtrl* pMissionGameCtrl
+) {
+    pChecker->SetMissionGameCtrl(pMissionGameCtrl);
     
     // we'll just use MissionBeadClearChecker as an example
     // ((MissionBeadClearChecker*)(checker))->SetBeadThreshold(fn_80723480(fn_80013654(missionGameCtrl)));
@@ -92,10 +95,10 @@ int MissionBeadClearChecker::Process() {
     return fn_80723480(this);
 }
 
-void MissionBeadClearChecker::InitMissionRequirements() {
+void MissionBeadClearChecker::CauseMissionSuccess() {
     WorkManager::GetInStageWork()->SetBeadCount(0, mBeadThreshold);
 }
 
-void MissionBeadClearChecker::InitMissionTimer() {
+void MissionBeadClearChecker::CauseMissionFailure() {
     WorkManager::GetInStageWork()->SetTimeRemaining(0);
 }

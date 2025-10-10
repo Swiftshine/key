@@ -8,86 +8,110 @@
 
 class MissionGameCtrl;
 
-
+/// @brief Base for classes that check the completion status of the current mission.
+/// @note Size: `0x10`
 class MissionClearCheckerBase {
-protected:
+public:
+    /* Enums */
+
     ENUM_CLASS(MissionStatus,
-        Playing = 0,
-        Succeeded = 1,
-        Failed = 2,
+        Playing     = 0,
+        Succeeded   = 1,
+        Failed      = 2,
     );
 
     ENUM_CLASS(MissionEndReason,
-        Succeeded = 0,
+        Succeeded           = 0,
 
-        TimeUp = 2,
+        TimeUp              = 2,
+        TimeAttackFailed    = 3,
     );
 
-public:
-    MissionClearCheckerBase();
-    DECL_WEAK virtual ~MissionClearCheckerBase();
+    /* Constructor */
 
-    DECL_WEAK virtual void ResetMissionStatus();
-    // returns the current mission status
-    virtual int Process() = 0;
-    virtual void InitMissionRequirements();
-    virtual void InitMissionTimer();
+    MissionClearCheckerBase();
+
+    /* Virtual Methods */
+
+    /* 0x08 */ DECL_WEAK virtual ~MissionClearCheckerBase();
+    /* 0x0C */ DECL_WEAK virtual void ResetMissionStatus();
+    /// @return The completion threshold.
+    /* 0x10 */ virtual int Process() = 0;
+    /// @brief Causes the mission to succeed.
+    /* 0x14 */ virtual void CauseMissionSuccess();
+    /// @brief Causes the mission to fail.
+    /* 0x18 */ virtual void CauseMissionFailure();
+
+    /* Class Methods */
 
     void EndMission(int status, int reason);
-    bool TimeRanOut(InStageWork* stageWork);
+    bool TimeRanOut(InStageWork* pStageWork);
     void SetMissionGameCtrl(MissionGameCtrl* missionGameCtrl);
 
-    static void InitChecker(MissionClearCheckerBase* checker, MissionGameCtrl* missionGameCtrl);
-protected:
-    int mMissionStatus;
-    int mMissionEndReason;
-    MissionGameCtrl* mMissionGameCtrl;
+    /* Static Methods */
+
+    static void InitChecker(MissionClearCheckerBase* pChecker, MissionGameCtrl* pMissionGameCtrl);
+
+    /* Class Members */
+
+    /* 0x4 */ int mMissionStatus;
+    /* 0x8 */ int mMissionEndReason;
+    /* 0xC */ MissionGameCtrl* mMissionGameCtrl;
 };
 
-
+/// @brief Checks the status of the "hide-and-seek" mission.
 class MissionHideAndSeekClearChecker : public MissionClearCheckerBase {
 public:
-    static MissionHideAndSeekClearChecker* Build(MissionGameCtrl* missionGameCtrl);
+    /* Constructor */
 
     MissionHideAndSeekClearChecker();
-    virtual ~MissionHideAndSeekClearChecker();
 
-    virtual int Process() override;
-    virtual void InitMissionRequirements() override;
-    virtual void InitMissionTimer() override;
+    /* Virtual Methods */
 
-    inline void SetThreshold(int newThreshold) {
-        mZekeFoundThreshold = newThreshold;
-    }
+    /* 0x08 */ virtual ~MissionHideAndSeekClearChecker();
 
-    inline int GetThreshold() {
-        return mZekeFoundThreshold;
-    }
-private:
-    int mZekeFoundThreshold;
+    /* 0x10 */ virtual int Process() override;
+    /* 0x14 */ virtual void CauseMissionSuccess() override;
+    /* 0x18 */ virtual void CauseMissionFailure() override;
+
+    /* Static Methods */
+
+    static MissionHideAndSeekClearChecker* Build(MissionGameCtrl* pMissionGameCtrl);
+
+    /* Class Members */
+    
+    /// @brief The number of times the player needs to find Zeke.
+    /// @note This value is usually set to 5.
+    /* 0x10 */ int mZekeFoundThreshold;
 };
 
-
+/// @brief Checks the status of the bead collection mission.
 class MissionBeadClearChecker : public MissionClearCheckerBase {
 public:
-    static MissionBeadClearChecker* Build(MissionGameCtrl* missionGameCtrl);
+    /* Constructor */
 
     MissionBeadClearChecker();
-    virtual ~MissionBeadClearChecker();
 
-    virtual int Process() override;
-    virtual void InitMissionRequirements() override;
-    virtual void InitMissionTimer() override;
+    /* Virtual Methods */
 
-    inline void SetThreshold(int newThreshold) {
-        mBeadThreshold = newThreshold;
-    }
+    /* 0x08 */ virtual ~MissionBeadClearChecker();
+    /* 0x10 */ virtual int Process() override;
+    /* 0x14 */ virtual void CauseMissionSuccess() override;
+    /* 0x18 */ virtual void CauseMissionFailure() override;
 
-    inline int GetThreshold() {
-        return mBeadThreshold;
-    }
-private:
-    int mBeadThreshold;
+    /* Static Methods */
+    static MissionBeadClearChecker* Build(MissionGameCtrl* pMissionGameCtrl);
+
+    /* Class Members */
+
+    /// @brief The number of beads the player needs to collect.
+    /* 0x10 */ int mBeadThreshold;
 };
+
+// todo: fill these out
+
+class MissionTimeAttackClearChecker;
+class MissionDefeatEnemyClearChecker;
+class MissionCarrierClearChecker;
 
 #endif

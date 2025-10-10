@@ -2,8 +2,9 @@
 #define FLUFF_MISSIONINFO_H
 
 struct MissionInfo {
-    int m_0;
-    int mCompletionThreshold; // the amount of "things" that need to be done in order to succeed
+    /* 0x0 */ int m_0;
+    /// @brief The number of actions needed to be done in order for the mission to be successful.
+    /* 0x4 */ int mCompletionThreshold;
 };
 
 #endif
