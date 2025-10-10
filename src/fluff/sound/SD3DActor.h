@@ -5,10 +5,14 @@
 
 class SD3DActor {
 public:
+    /* Constructor + Destructor */
+
     SD3DActor();
     ~SD3DActor();
 
-    STRUCT_FILL(0x38);
+    /* Class Members */
+
+    /* 0x0 */ STRUCT_FILL(0x38);
 };
 
 ASSERT_SIZE(SD3DActor, 0x38);
