@@ -58,6 +58,7 @@ public:
     int GetNumEnemiesDefeated();
     void AddNumZekeFound(int num);
     void SetMaxZekeFound(int max);
+    DECL_WEAK int GetNumZekeFound();
     int GetMaxZekeFound();
     void fn_801FF428(float& rArg1, int arg2);
     float fn_801FF448(int arg1);
