@@ -21,12 +21,12 @@ namespace sound {
 
         void PlaySound(nw4r::math::VEC3& rPos, uint soundID, int arg3, int arg4);
 
-        inline void SetPosition(nw4r::math::VEC3* pos) {
-            mPosition = pos;
+        inline void SetPosition(nw4r::math::VEC3* pPos) {
+            mPosition = pPos;
         }
 
-        inline void SetInnerSoundHandle(gfl::SoundHandleInner* handle) {
-            mSoundHandleInner = handle;
+        inline void SetInnerSoundHandle(gfl::SoundHandleInner* pHandle) {
+            mSoundHandleInner = pHandle;
         }
 
         inline nw4r::math::VEC3* GetPosition() {
