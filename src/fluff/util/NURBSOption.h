@@ -6,9 +6,13 @@
 
 class NURBSOption {
 public:
-    NURBSOption(const char* name);
+    /* Constructor + Destructor */
+
+    NURBSOption(const char* pName);
     ~NURBSOption();
 
+    /* Class Methods */
+    
     s16 GetOption(float arg0);
     
     inline void SetCount(size_t count) {

@@ -2,12 +2,12 @@
 #include <string>
 
 // https://decomp.me/scratch/8ylQ9
-NURBSOption::NURBSOption(const char* name)
+NURBSOption::NURBSOption(const char* pName)
     : mArray(nullptr)
 {
     size_t count = 0;
 
-    for (const char* c = name; *c != 0; c++) {
+    for (const char* c = pName; *c != 0; c++) {
         if (*c == '_') {
             count++;
         }
@@ -16,7 +16,7 @@ NURBSOption::NURBSOption(const char* name)
     mCount = count;
     mArray.Create(count * 2);
 
-    std::string nameString = name;
+    std::string nameString = pName;
 
     size_t nameLen = nameString.length();
     size_t pos = 0;

@@ -4,7 +4,7 @@
 #include "gfl/gflResFileInfo.h"
 
 namespace ModelUtil {
-    void GetFileInfoFromArchive(gfl::ResFileObject& resFileObject, const char* path);
+    void GetFileInfoFromArchive(gfl::ResFileObject& rResFileObject, const char* pFilepath);
 }
 
 

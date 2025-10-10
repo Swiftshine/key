@@ -151,7 +151,7 @@ void GmkMng::RegisterResources(const char* pGimmickName, Gimmick* pGimmick) {
     
     GFL_LINK_LIST_WHILE(mGimmickResources, GimmickResource*, node, {
         GimmickResource* resource = node->ToNode()->GetData();
-        const char* resourceName = resource->GetResourceName().c_str();
+        const char* resourceName = resource->mResourceName.c_str();
 
         if (strcmp(pGimmickName, resourceName) == 0) {
             resource->RegisterGimmick(pGimmick);
@@ -285,7 +285,7 @@ void GmkMng::ManageOnScreenGimmicks() {
         while (node != mGimmickResources.GetNode()) {
             GimmickResource* resource = node->ToNode()->GetData();
 
-            if (resource->GetNumGimmickHandles() == 0) {
+            if (resource->mGimmickHandles.GetCount() == 0) {
                 gfl::LinkedList<GimmickResource*>::Modifier mod;
                 mod.SetNode2(node);
                 mod.RemoveNode2FromList(mGimmickResources);

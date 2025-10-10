@@ -6,27 +6,20 @@
 #include "gfl/gflResInfo.h"
 #include <string>
 
-typedef Gimmick*(* GimmickBuildFunction)(Gimmick::GimmickBuildInfo* info);
-
+typedef Gimmick*(* GimmickBuildFunction)(Gimmick::GimmickBuildInfo* pBuildInfo);
 
 namespace GimmickUtil {
-    class GimmickEntry {
-    public:
-        const char* GetDescription() { return mDescription; }
-        const char* GetResourceName() { return mResourceName; }
-        GimmickBuildFunction GetBuildFunction() { return mBuildFunction; }
-        bool IsCommon() { return mIsCommon; }
-    private:
-        const char* mDescription; // in japanese, ShiftJIS
-        const char* mResourceName;
-        GimmickBuildFunction mBuildFunction;
-        bool mIsCommon;
+    struct GimmickEntry {
+        /// @note In Japanese with ShiftJIS encoding
+        /* 0x0 */ const char* mDescription;
+        /* 0x4 */ const char* mResourceName;
+        /* 0x8 */ GimmickBuildFunction mBuildFunction;
+        /* 0xC */ bool mIsCommon;
     };
 
     ASSERT_SIZE(GimmickEntry, 0x10);
 
-
-    int GetGimmickIDByDescription(const char* description);
+    int GetGimmickIDByDescription(const char* pDescription);
     const char* GetResourceNameByGimmickID(int id) DONT_INLINE_CLASS;
     std::string GetResourcePathByGimmickID(int id) DONT_INLINE_CLASS;
     GimmickBuildFunction GetBuildFunctionByGimmickID(int id) DONT_INLINE_CLASS;
@@ -36,7 +29,7 @@ namespace GimmickUtil {
     int fn_80050764(int arg0, int arg1) DONT_INLINE_CLASS;
     bool IsClothTurnGimmick(int id) DONT_INLINE_CLASS;
     bool fn_800507C8(int id) DONT_INLINE_CLASS;
-    void GetButtonBRRES(gfl::ResFileObject& dest) DONT_INLINE_CLASS;
+    void GetButtonBRRES(gfl::ResFileObject& rDest) DONT_INLINE_CLASS;
 
     // not in this TU, likely doesnt belong to this namespace
 

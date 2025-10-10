@@ -1,14 +1,14 @@
 #include "util/KdTreeUtil.h"
 
-int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, nw4r::math::VEC2& point) {
+int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, nw4r::math::VEC2& point) {
     float coordinate;
-    if (splitInfo.mSplitY) {
+    if (rSplitInfo.mSplitY) {
         // the node is split on the Y axis
         coordinate = point.y;
 
-        if (coordinate > splitInfo.mMidpoint) {
+        if (coordinate > rSplitInfo.mMidpoint) {
             return NodePlacement::Child1;
-        } else if (coordinate < splitInfo.mMidpoint) {
+        } else if (coordinate < rSplitInfo.mMidpoint) {
             return NodePlacement::Child2;
         }
         
@@ -17,46 +17,52 @@ int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, nw4r::math::V
 
     // the node is split on the X axis
     coordinate = point.x;
-    if (coordinate > splitInfo.mMidpoint) {
+    if (coordinate > rSplitInfo.mMidpoint) {
         return NodePlacement::Child1;
-    } else if (coordinate < splitInfo.mMidpoint) {
+    } else if (coordinate < rSplitInfo.mMidpoint) {
         return NodePlacement::Child2;
     }
 
     return NodePlacement::Self;
 }
-int KdTreeUtil::DetermineNodePlacementStrictly(KdTreeSplitInfo& splitInfo, PointPair& points) {
-    if (splitInfo.mSplitY) {
+int KdTreeUtil::DetermineNodePlacementStrictly(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints) {
+    if (rSplitInfo.mSplitY) {
         // y axis
-        if (points.first.y > splitInfo.mMidpoint && points.second.y > splitInfo.mMidpoint) {
+        if (rPoints.first.y > rSplitInfo.mMidpoint && rPoints.second.y > rSplitInfo.mMidpoint) {
             return NodePlacement::Child1;
-        } else if (points.first.y < splitInfo.mMidpoint && points.second.y < splitInfo.mMidpoint) {
+        } else if (
+            rPoints.first.y < rSplitInfo.mMidpoint
+            && rPoints.second.y < rSplitInfo.mMidpoint
+        ) {
             return NodePlacement::Child2;
         }
 
         return NodePlacement::Self;
     }
     // x axis
-    if (points.first.x > splitInfo.mMidpoint && points.second.x > splitInfo.mMidpoint) {
+    if (rPoints.first.x > rSplitInfo.mMidpoint && rPoints.second.x > rSplitInfo.mMidpoint) {
         return NodePlacement::Child1;
-    } else if (points.first.x < splitInfo.mMidpoint && points.second.x < splitInfo.mMidpoint) {
+    } else if (rPoints.first.x < rSplitInfo.mMidpoint && rPoints.second.x < rSplitInfo.mMidpoint) {
         return NodePlacement::Child2;
     }
     return NodePlacement::Self;
 }
 
-int KdTreeUtil::DetermineNodePlacementByProximity(KdTreeSplitInfo& splitInfo, PointPair& points) {
+int KdTreeUtil::DetermineNodePlacementByProximity(
+    KdTreeSplitInfo& rSplitInfo,
+    PointPair& rPoints
+) {
     float two;
     float one;
 
-    if (splitInfo.mSplitY) {
+    if (rSplitInfo.mSplitY) {
         // y axis
-        one = points.first.y;
-        two = points.second.x;
+        one = rPoints.first.y;
+        two = rPoints.second.x;
 
-        if (one - two > splitInfo.mMidpoint) {
+        if (one - two > rSplitInfo.mMidpoint) {
             return NodePlacement::Child1;
-        } else if (one + two < splitInfo.mMidpoint) {
+        } else if (one + two < rSplitInfo.mMidpoint) {
             return NodePlacement::Child2;
         }
 
@@ -64,25 +70,25 @@ int KdTreeUtil::DetermineNodePlacementByProximity(KdTreeSplitInfo& splitInfo, Po
     }
 
     // x axis
-    two = points.first.x;
-    one = points.second.x;
+    two = rPoints.first.x;
+    one = rPoints.second.x;
 
-    if (two - one > splitInfo.mMidpoint) {
+    if (two - one > rSplitInfo.mMidpoint) {
         return NodePlacement::Child1;
-    } else if (two + one < splitInfo.mMidpoint) {
+    } else if (two + one < rSplitInfo.mMidpoint) {
         return NodePlacement::Child2;
     }
 
     return NodePlacement::Self;
 }
 
-int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, PointPair& points) {
-    if (splitInfo.mSplitY) {
+int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints) {
+    if (rSplitInfo.mSplitY) {
         // y axis
 
-        if (points.first.y > splitInfo.mMidpoint) {
+        if (rPoints.first.y > rSplitInfo.mMidpoint) {
             return NodePlacement::Child1;
-        } else if (points.second.y < splitInfo.mMidpoint) {
+        } else if (rPoints.second.y < rSplitInfo.mMidpoint) {
             return NodePlacement::Child2;
         }
     
@@ -91,9 +97,9 @@ int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& splitInfo, PointPair& po
 
     // x axis
     
-    if (points.first.x > splitInfo.mMidpoint) {
+    if (rPoints.first.x > rSplitInfo.mMidpoint) {
         return NodePlacement::Child1;
-    } else if (points.second.x < splitInfo.mMidpoint) {
+    } else if (rPoints.second.x < rSplitInfo.mMidpoint) {
         return NodePlacement::Child2;
     }
 

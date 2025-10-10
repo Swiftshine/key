@@ -5,26 +5,25 @@
 #include "gfl/gflLinkedList.h"
 #include <string>
 
-// a structure for keeping track of gimmicks that use a particular resource
-// size: 0x1C
+/// @brief Used for keeping track of gimmicks that use a particular resource.
+/// @note Size: `0x1C`
 class GimmickResource {
 public:
-    GimmickResource(const char* resName);
+    /* Constructor + Destructor */
+
+    GimmickResource(const char* pResName);
     ~GimmickResource();
-    void RegisterGimmick(Gimmick* gimmick);
+
+    /* Class Methods */
+
+    void RegisterGimmick(Gimmick* pGmk);
     void Clear();
 
-    inline std::string& GetResourceName() {
-        return mResourceName;
-    }
-
-    inline uint GetNumGimmickHandles() {
-        return mGimmickHandles.GetCount();
-    }
-private:
-    std::string mResourceName; // @ 0x0, size: 0xC
-    bool m_C;
-    gfl::LinkedList<FlfHandle> mGimmickHandles; // @ 0x10, size: 0x1C
+    /* Class Members */
+    
+    /* 0x00 */ std::string mResourceName;
+    /* 0x0C */ bool m_C;
+    /* 0x10 */ gfl::LinkedList<FlfHandle> mGimmickHandles;
 };
 
 #endif

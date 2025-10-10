@@ -1,4 +1,0 @@
-#ifndef FLUFF_STAGEUTIL_H
-#define FLUFF_STAGEUTIL_H
-
-#endif
