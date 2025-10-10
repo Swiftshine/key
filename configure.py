@@ -578,7 +578,7 @@ config.libs = [
             Object(NonMatching, "fluff/util/GimmickResource.cpp"),
             Object(NonMatching, "fluff/util/GimmickUtil.cpp"),
             Object(Matching,    "fluff/util/KdTreeUtil.cpp"),
-            Object(NonMatching, "fluff/util/MissionUtil.cpp"),
+            Object(NonMatching, "fluff/stage/mission/MissionUtil.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
             Object(Matching,    "fluff/util/SimpleMdlCommon.cpp"),
         ],
