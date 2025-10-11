@@ -133,7 +133,7 @@ public:
 };
 
 
-/// @brief Checks the status of the time attack mission.
+/// @brief Checks the status of the carrier mission.
 class MissionCarrierClearChecker : public MissionClearCheckerBase {
 public:
     /* Constructor */
