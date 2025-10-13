@@ -44,10 +44,10 @@ namespace homebutton { namespace gui
 
 		// virtual function ordering
 		// vtable Interface
-		virtual void create() {}
+		virtual void create() DONT_INLINE_CLASS {}
 		virtual void init() {}
 		virtual void calc() {}
-		virtual void draw(Mtx &) {}
+		virtual void draw(Mtx &) DONT_INLINE_CLASS {}
 		virtual void draw() {}
 		virtual ~Interface() {}
 
