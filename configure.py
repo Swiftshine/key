@@ -306,7 +306,7 @@ cflags_MSL_C = [
 
 cflags_NW4R = [
     *cflags_base,
-    "-func_align 16"
+    "-func_align 16",
 ]
 
 # Metrowerks library flags
@@ -392,15 +392,6 @@ config.libs = [
         ],
     },
     {
-        "lib" : "nw4r",
-        "mw_version" : config.linker_version,
-        "cflags" : cflags_NW4R,
-        "host" : False,
-        "objects" : [
-            Object(NonMatching, "nw4r/ut/ut_DvdFileStream.cpp"),
-        ],
-    },
-    {
         "lib" : "homebutton",
         "mw_version" : config.linker_version,
         "cflags" : [
@@ -416,6 +407,17 @@ config.libs = [
             Object(Matching, "hbm/homebutton/HBMAnmController.cpp"),
             Object(Matching, "hbm/homebutton/HBMFrameController.cpp"),
             Object(NonMatching, "hbm/homebutton/HBMGUIManager.cpp"),
+        ],
+    },
+    {
+        "lib" : "nw4r",
+        "mw_version" : config.linker_version,
+        "cflags" : cflags_NW4R,
+        "host" : False,
+        "objects" : [
+            Object(Matching, "nw4r/ut/ut_IOStream.cpp"),
+            Object(NonMatching, "nw4r/ut/ut_FileStream.cpp"),
+            Object(NonMatching, "nw4r/ut/ut_DvdFileStream.cpp"),
         ],
     },
     {

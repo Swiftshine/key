@@ -310,6 +310,15 @@ hbm/homebutton/HBMGUIManager.cpp:
 	.data       start:0x808D7BF8 end:0x808D7E68
 	.bss        start:0x809656D8 end:0x809656E0
 
+nw4r/ut/ut_IOStream.cpp:
+	.text       start:0x807A3C90 end:0x807A3CC0
+	.ctors      start:0x807E376C end:0x807E3770
+	.sbss       start:0x808E67D0 end:0x808E67D8
+
+nw4r/ut/ut_FileStream.cpp:
+	.text       start:0x807A3CC0 end:0x807A3DD0 align:16
+	.ctors      start:0x807E3770 end:0x807E3774
+
 nw4r/ut/ut_DvdFileStream.cpp:
 	.text       start:0x807A3DD0 end:0x807A4410
 	.ctors      start:0x807E3774 end:0x807E3778
