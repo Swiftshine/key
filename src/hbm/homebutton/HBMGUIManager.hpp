@@ -134,7 +134,7 @@ namespace homebutton { namespace gui
 		virtual void setTriggerTarget(bool bTriggerTarget)
 			{ mbTriggerTarger = bTriggerTarget; }
 		virtual void setManager(Manager *pManager) { mpManager = pManager; }
-		virtual bool isVisible() { return true; }
+		virtual bool isVisible() DONT_INLINE_CLASS { return true; }
 		virtual bool contain(f32 x_, f32 y_) = 0;
 
 	// members

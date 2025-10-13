@@ -303,6 +303,12 @@ cflags_MSL_C = [
     *cflags_base,
     "-func_align 4",
 ]
+
+cflags_NW4R = [
+    *cflags_base,
+    "-func_align 16"
+]
+
 # Metrowerks library flags
 cflags_runtime = [
     *cflags_base,
@@ -388,12 +394,10 @@ config.libs = [
     {
         "lib" : "nw4r",
         "mw_version" : config.linker_version,
-        "cflags" : [
-            *cflags_base,
-            "-func_align 16",
-        ],
+        "cflags" : cflags_NW4R,
         "host" : False,
         "objects" : [
+            Object(NonMatching, "nw4r/ut/ut_DvdFileStream.cpp"),
         ],
     },
     {

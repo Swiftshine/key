@@ -64,7 +64,7 @@ public:
     virtual bool CanWrite() const {
         return false;
     } // at 0x30
-    virtual bool CanCancel() const {
+    DECL_WEAK virtual bool CanCancel() const {
         return true;
     } // at 0x54
 
