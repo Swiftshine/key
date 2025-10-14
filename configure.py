@@ -428,6 +428,7 @@ config.libs = [
             Object(Matching, "nw4r/ut/ut_FileStream.cpp"),
             Object(Matching, "nw4r/ut/ut_DvdFileStream.cpp"),
             Object(NonMatching, "nw4r/ut/ut_DvdLockedFileStream.cpp"),
+            Object(NonMatching, "nw4r/ut/ut_LockedCache.cpp"),
         ],
     },
     {
