@@ -14,9 +14,10 @@ bool IOStream::ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
     return false;
 }
 
-void IOStream::Write(const void* pSrc, u32 size) {
+bool IOStream::Write(const void* pSrc, u32 size) {
 #pragma unused(pSrc)
 #pragma unused(size)
+return false;
 }
 
 bool IOStream::WriteAsync(const void* pSrc, u32 size, StreamCallback pCallback,

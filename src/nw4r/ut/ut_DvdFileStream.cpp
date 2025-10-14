@@ -36,7 +36,7 @@ void DvdFileStream::Initialize_() {
 
     mCallback = NULL;
     mArg = NULL;
-    mAsyncResult = DVD_RESULT_GOOD;
+    mAsyncResult = DVD_RESULT_OK;
 
     mCancelCallback = NULL;
     mIsCanceling = false;

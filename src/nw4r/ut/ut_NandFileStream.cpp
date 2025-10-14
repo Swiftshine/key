@@ -151,12 +151,14 @@ bool NandFileStream::ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
     return success;
 }
 
-void NandFileStream::Write(const void* pSrc, u32 size) {
+bool NandFileStream::Write(const void* pSrc, u32 size) {
     NANDSeek(&mFileInfo.nandInfo, mFilePosition.Tell(), NAND_SEEK_BEG);
     s32 result = NANDWrite(&mFileInfo.nandInfo, pSrc, size);
 
     // @bug Error code will be interpreted as a negative size
     mFilePosition.Append(result);
+
+    return result == NAND_RESULT_OK; // ?
 }
 
 bool NandFileStream::WriteAsync(const void* pSrc, u32 size,

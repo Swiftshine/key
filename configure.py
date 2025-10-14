@@ -307,6 +307,12 @@ cflags_MSL_C = [
 cflags_NW4R = [
     *cflags_base,
     "-func_align 16",
+    "-fp_contract off",
+]
+
+cflags_NW4R_ut = [
+    *cflags_NW4R,
+    "-ipa file"
 ]
 
 # Metrowerks library flags
@@ -410,9 +416,9 @@ config.libs = [
         ],
     },
     {
-        "lib" : "nw4r",
+        "lib" : "nw4r/ut",
         "mw_version" : config.linker_version,
-        "cflags" : cflags_NW4R,
+        "cflags" : cflags_NW4R_ut,
         "host" : False,
         "objects" : [
             Object(Matching, "nw4r/ut/ut_IOStream.cpp"),
