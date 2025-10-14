@@ -14,7 +14,7 @@ namespace nw4r {
     }
 }
 
-FlfGameObj::FlfGameObj(uint newActorType)
+FlfGameObj::FlfGameObj(uint category)
     : mPosition(0.0f, 0.0f, 0.0f)
     , mRotation(0.0f, 0.0f, 0.0f)
     , mScale(1.0f, 1.0f, 1.0f) 
@@ -23,7 +23,7 @@ FlfGameObj::FlfGameObj(uint newActorType)
 
     mFlags = 0;
     m_64 = 0;
-    mCategory = newActorType;
+    mCategory = category;
     m_6C = false;
     mIsCulled = false;
     m_6E = true;
@@ -98,7 +98,6 @@ void FlfGameObj::vf10(bool val) {
     m_6C = val;
 }
 
-// this function is code-merged
 bool FlfGameObj::vf14() {
     return m_6C;
 }
@@ -114,7 +113,6 @@ void FlfGameObj::SetCulled(bool arg1) {
         mIsCulled = false;
     }
 }
-
 
 bool FlfGameObj::ShouldCull(CameraManager* camMgr) {
     nw4r::math::VEC3 screenPos = GetScreenPosition();

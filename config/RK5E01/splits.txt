@@ -13,6 +13,10 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
+fluff/game/Game.cpp:
+	.text       start:0x80006B78 end:0x800074EC
+	.sdata2     start:0x808E6908 end:0x808E6940
+
 fluff/object/SpringBase.cpp:
 	.text       start:0x8000818C end:0x8000BC4C
 
@@ -39,7 +43,6 @@ fluff/util/CollisionFlagUtil.cpp:
 fluff/object/FlfGameObj.cpp:
 	.text       start:0x8002BCF8 end:0x8002C0DC
 	.data       start:0x80839D90 end:0x80839DF8
-	.sdata2     start:0x808E6908 end:0x808E6918
 
 fluff/graphics/FullSortScene.cpp:
 	.text       start:0x8002F9B4 end:0x8002FBF4

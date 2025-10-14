@@ -274,16 +274,18 @@ cflags_fluff_util = [
     "-func_align 4",
 ]
 
-cflags_fluff = [
-    *cflags_fluff_base,
-    "-str reuse,readonly",
-]
 
 cflags_fluff_base_no_inline_deferred = [
     *cflags_base,
     "-RTTI on",
     "-use_lmw_stmw on",
     "-func_align 4",
+    "-inline auto",
+]
+
+cflags_fluff = [
+    *cflags_fluff_base_no_inline_deferred,
+    "-str reuse,readonly",
 ]
 
 cflags_fluff_manager = [
@@ -487,6 +489,16 @@ config.libs = [
         ],
     },
     {
+        "lib": "fluff/game/",
+        "mw_version": config.linker_version,
+        "cflags": cflags_fluff,
+        "host": False,
+        "progress_category": "fluff",
+        "objects": [
+            Object(NonMatching, "fluff/game/Game.cpp"),
+        ],
+    },
+    {
         "lib" : "fluff/object/",
         "mw_version": config.linker_version,
         "cflags": cflags_fluff,
@@ -497,7 +509,7 @@ config.libs = [
             # fluff/object/
 
             Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
-            Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
+            Object(NonMatching,    "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching, "fluff/object/Gimmick.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
             Object(NonMatching, "fluff/object/SpringBase.cpp"),
