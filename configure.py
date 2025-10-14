@@ -406,13 +406,15 @@ config.libs = [
             "-sdata 0",
             "-sdata2 0",
             "-enc UTF-8",
+            "-DHBM_APP_TYPE=1"
         ],
         "host" : False,
         "progress_category": "sdk",
         "objects" : [
             Object(Matching, "hbm/homebutton/HBMAnmController.cpp"),
             Object(Matching, "hbm/homebutton/HBMFrameController.cpp"),
-            Object(NonMatching, "hbm/homebutton/HBMGUIManager.cpp"),
+            Object(Matching, "hbm/homebutton/HBMGUIManager.cpp"),
+            Object(NonMatching, "hbm/homebutton/HBMController.cpp"),
         ],
     },
     {

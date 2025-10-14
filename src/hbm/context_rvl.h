@@ -11,6 +11,12 @@
 #include <revolution/WPAD.h>
 #include <revolution/OS.h>
 
+#define OSGetAlarmUserDataAny(type_, alarm_)	\
+	((type_)(OSGetAlarmUserData(alarm_)))
+
+#define OSSetAlarmUserDataAny(alarm_, data_)	\
+	OSSetAlarmUserData(alarm_, (void *)(data_))
+
 #if !defined(NDEBUG)
 # define OSAssertMessage_FileLine(file_, line_, exp_, ...)	\
 	(void)((exp_) || (OSPanic(file_, line_, __VA_ARGS__), 0))

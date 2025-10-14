@@ -7,12 +7,12 @@
 
 #include <types.h>
 
-#if 0
+// #if 0
 #include <revolution/OS/OSAlarm.h>
 #include <revolution/ARC/arc.h> // ARCHandle
 #include <revolution/WENC/wenc.h> // WENCInfo
 #include <revolution/WPAD/WPAD.h>
-#endif
+// #endif
 
 #include <hbm/context_rvl.h>
 
