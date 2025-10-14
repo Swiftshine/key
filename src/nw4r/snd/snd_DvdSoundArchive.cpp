@@ -10,8 +10,8 @@ namespace snd {
 
 class DvdSoundArchive::DvdFileStream : public ut::DvdLockedFileStream {
 public:
-    DvdFileStream(const DVDFileInfo* pFileInfo, u32 offset, u32 size);
-    DvdFileStream(s32 entrynum, u32 offset, u32 size);
+    inline DvdFileStream(const DVDFileInfo* pFileInfo, u32 offset, u32 size);
+    inline DvdFileStream(s32 entrynum, u32 offset, u32 size);
 
     virtual s32 Read(void* pDst, u32 size);    // at 0x14
     virtual void Seek(s32 offset, u32 origin); // at 0x44
@@ -32,7 +32,9 @@ private:
 DvdSoundArchive::DvdSoundArchive() : mOpen(false) {}
 
 DvdSoundArchive::~DvdSoundArchive() {
-    Close();
+    if (mOpen) {
+        Close();
+    }
 }
 
 bool DvdSoundArchive::Open(s32 entrynum) {

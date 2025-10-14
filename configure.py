@@ -316,6 +316,11 @@ cflags_NW4R_ut = [
     "-ipa file"
 ]
 
+cflags_NW4R_snd = [
+    *cflags_NW4R,
+    "-ipa file"
+]
+
 # Metrowerks library flags
 cflags_runtime = [
     *cflags_base,
@@ -417,6 +422,15 @@ config.libs = [
             Object(Matching, "hbm/homebutton/HBMGUIManager.cpp"),
             Object(NonMatching, "hbm/homebutton/HBMController.cpp"),
         ],
+    },
+    {
+        "lib" : "nw4r/snd",
+        "mw_version" : config.linker_version,
+        "cflags" : cflags_NW4R_snd,
+        "host" : "False",
+        "objects" : [
+            Object(NonMatching, "nw4r/snd/snd_DvdSoundArchive.cpp"),
+        ]
     },
     {
         "lib" : "nw4r/ut",
