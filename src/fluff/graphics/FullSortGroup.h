@@ -1,7 +1,7 @@
 #ifndef FLUFF_FULLSORTGROUP_H
 #define FLUFF_FULLSORTGROUP_H
 
-#include <nw4r/g3d.h>
+#include <nw4r/g3d/g3d_scnobj.h>
 
 class FullSortGather;
 
@@ -10,7 +10,7 @@ class FullSortGroup : public nw4r::g3d::ScnGroup {
 public:
     /* Static Methods */
 
-    static FullSortGroup* Build(MEMAllocator* allocator, size_t* arg1, uint maxNumChildren, uint maxNumScnObj);
+    static FullSortGroup* Build(MEMAllocator* pAllocator, size_t* pArg1, uint maxNumChildren, uint maxNumScnObj);
 
     /* Class Members */
 

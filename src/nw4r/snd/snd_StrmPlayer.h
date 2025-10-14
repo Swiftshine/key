@@ -42,7 +42,7 @@ public:
     StrmPlayer();
     virtual ~StrmPlayer(); // at 0x8
 
-    virtual bool Start();          // at 0xc
+    virtual bool Start();          // at 0xC
     virtual void Stop();           // at 0x10
     virtual void Pause(bool flag); // at 0x14
 
@@ -51,14 +51,14 @@ public:
     } // at 0x18
     virtual bool IsStarted() const {
         return mStartedFlag;
-    } // at 0x1c
+    } // at 0x1C
     virtual bool IsPause() const {
         return mPauseFlag;
     }; // at 0x20
 
     virtual void OnUpdateFrameSoundThread() {
         Update();
-    } // at 0xc
+    } // at 0xC
     virtual void OnUpdateVoiceSoundThread() {
         UpdateBuffer();
     } // at 0x10
@@ -87,6 +87,9 @@ public:
     void Update();
 
 private:
+    /******************************************************************************
+     * StrmHeaderLoadTask
+     ******************************************************************************/
     struct StrmHeaderLoadTask : public Task {
         StrmHeaderLoadTask();
 
@@ -100,6 +103,9 @@ private:
         s32 startOffset;                 // at 0x1C
     };
 
+    /******************************************************************************
+     * StrmDataLoadTask
+     ******************************************************************************/
     struct StrmDataLoadTask : public Task {
         StrmDataLoadTask();
 
@@ -115,10 +121,10 @@ private:
         s32 bufferBlockIndex;       // at 0x24
         bool needUpdateAdpcmLoop;   // at 0x28
 
-        NW4R_UT_LIST_NODE_DECL(); // at 0x2C
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x2C
     };
 
-    NW4R_UT_LIST_TYPEDEF_DECL(StrmDataLoadTask);
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(StrmDataLoadTask);
 
     static const int DATA_BLOCK_COUNT_MIN = 4;
     static const int DATA_BLOCK_COUNT_MAX = 32;

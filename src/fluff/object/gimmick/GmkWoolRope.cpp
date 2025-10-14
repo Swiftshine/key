@@ -1,5 +1,5 @@
 #include "object/gimmick/GmkWoolRope.h"
-#include <nw4r/g3d.h>
+#include <nw4r/g3d/res/g3d_resfile.h>
 
 Gimmick::GimmickBuildInfo GmkWoolRope::GBuildInfo;
 WoolBaseTask::WoolBuildInfo GmkWoolRope::WBuildInfo;

@@ -1,5 +1,3 @@
-#pragma ipa file // TODO: REMOVE AFTER REFACTOR
-
 #include <nw4r/ut.h>
 
 namespace nw4r {
@@ -59,8 +57,8 @@ void FileStream::FilePosition::Seek(s32 offset, u32 origin) {
 }
 
 // clang-format off
-// DECOMP_FORCEACTIVE(ut_FileStream_cpp,
-//                    FileStream::GetRuntimeTypeInfo);
+DECOMP_FORCEACTIVE(ut_FileStream_cpp,
+                   FileStream::GetRuntimeTypeInfo);
 // clang-format on
 
 } // namespace ut

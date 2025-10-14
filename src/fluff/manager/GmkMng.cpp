@@ -343,7 +343,10 @@ bool GmkMng::IsGimmickInSpawnRadius(
     const nw4r::math::VEC2& rOffs,
     Gimmick::GimmickBuildInfo* pBuildInfo
 ) {
-    nw4r::math::VEC2 pos = pBuildInfo->mPosition;
+    nw4r::math::VEC2 pos;
+    pos.x = pBuildInfo->mPosition.x;
+    pos.y = pBuildInfo->mPosition.y;
+    
     pos.x -= rOffs.x;
     pos.y -= rOffs.y;
     return (pos.x * pos.x) + (pos.y * pos.y) < 1393.7777f;

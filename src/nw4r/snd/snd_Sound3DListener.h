@@ -11,27 +11,33 @@ class Sound3DListener {
 public:
     Sound3DListener();
 
-    void SetMatrix(const math::MTX34& mtx);
-    
     const math::MTX34& GetMatrix() const {
         return mMtx;
+    }
+    void SetMatrix(const math::MTX34& rMtx) {
+        mMtx = rMtx;
     }
 
     f32 GetInteriorSize() const {
         return mInteriorSize;
     }
-    void SetInteriorSize(f32 size);
+    void SetInteriorSize(f32 size) {
+        mInteriorSize = size;
+    }
 
     f32 GetMaxVolumeDistance() const {
         return mMaxVolumeDistance;
     }
-
-    void SetMaxVolumeDistance(f32 distance);
+    void SetMaxVolumeDistance(f32 distance) {
+        mMaxVolumeDistance = distance;
+    }
 
     f32 GetUnitDistance() const {
         return mUnitDistance;
     }
-    void SetUnitDistance(f32 distance);
+    void SetUnitDistance(f32 distance) {
+        mUnitDistance = distance;
+    }
 
 private:
     math::MTX34 mMtx;       // at 0x0

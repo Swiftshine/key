@@ -1,13 +1,14 @@
 #include <cstdio>
 #include <rand.h>
 
+#include <nw4r/g3d/g3d_scnmdl.h>
+#include <nw4r/g3d/res/g3d_resfile.h>
 #include "graphics/FullSortScene.h"
 #include "object/gimmick/GmkSimpleMdl.h"
 #include "util/SimpleMdlCommon.h"
 #include "util/FullSortSceneUtil.h"
 #include "manager/StageManager.h"
 #include "graphics/FlfMdlDraw.h"
-#include "nw4r/g3d.h"
 
 const char MdlWrapperStr[] = "GmkSimpleMdl:%s";
 const char GmkSimpleMdl::BRRES_path_template[] = "bggimmick/%s/%s.brres";

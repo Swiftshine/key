@@ -1,5 +1,3 @@
-#pragma ipa file // TODO: REMOVE AFTER REFACTOR
-
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
 
@@ -402,9 +400,9 @@ void SeqTrack::SetPitch(f32 pitch) {
     mExtPitch = pitch;
 }
 
-volatile s16* SeqTrack::GetVariablePtr(int i) {
-    if (i < VARIABLE_NUM) {
-        return &mTrackVariable[i];
+volatile s16* SeqTrack::GetVariablePtr(int idx) {
+    if (idx < VARIABLE_NUM) {
+        return &mTrackVariable[idx];
     }
 
     return NULL;

@@ -1,5 +1,3 @@
-#pragma ipa file // TODO: REMOVE AFTER REFACTOR
-
 #include <nw4r/ut.h>
 
 namespace nw4r {
@@ -16,10 +14,9 @@ bool IOStream::ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
     return false;
 }
 
-bool IOStream::Write(const void* pSrc, u32 size) {
+void IOStream::Write(const void* pSrc, u32 size) {
 #pragma unused(pSrc)
 #pragma unused(size)
-    return false;
 }
 
 bool IOStream::WriteAsync(const void* pSrc, u32 size, StreamCallback pCallback,

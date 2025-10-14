@@ -1,8 +1,9 @@
 #ifndef FLUFF_GMKMOLEHOLERENDER_H
 #define FLUFF_GMKMOLEHOLERENDER_H
 
-#include <nw4r/g3d.h>
 #include "types.h"
+
+#include <nw4r/g3d/res/g3d_restex.h>
 #include "gfl/gflCustomRenderObj.h"
 #include "gfl/gflLinkedList.h"
 #include "gfl/gflResFileInfo.h"

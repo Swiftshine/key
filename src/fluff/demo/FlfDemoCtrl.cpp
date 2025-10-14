@@ -25,7 +25,7 @@ FlfDemoNodeCtrl::~FlfDemoNodeCtrl() { }
 
 const char* FlfDemoNodeCtrl::GetResName() {
     NW4R_RESNODE_ASSERT(mResNode);
-    return mResNode.GetName();
+    return mResNode.GetResName().GetName();
 }
 
 // https://decomp.me/scratch/eCUhG
@@ -387,7 +387,7 @@ void FlfDemoBeadCtrl::SetVisibility(bool visibility) {
         }
 
         if (create) {
-            GmkBead* bead = BeadUtil::CreateBead(mBeadType, mBeadColor, mBeadPosition);
+            GmkBead* bead = BeadUtil::CreateBead(mBeadType, mBeadColor, (nw4r::math::VEC2&)mBeadPosition);
 
             if (bead != nullptr) {
                 mBeadHandle.SetObject(bead->GetHandleObject());
@@ -531,7 +531,10 @@ void FlfDemoCamCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
     memcpy(mtx2, matrices + mtxID, sizeof(nw4r::math::MTX34));
     mtx = mtx2;
     CameraManager* camMgr = CameraManager::Instance();
-    camMgr->SetAllPositions(GetMTXTranslation(mtx));
+
+    nw4r::math::VEC3 trans = GetMTXTranslation(mtx);
+
+    camMgr->SetAllPositions(nw4r::math::VEC2(trans.x, trans.y));
     camMgr->SetZoom(mtx[0][0]);
 }
 
@@ -692,9 +695,9 @@ void FlfDemoCtrl::fn_802BB920() {
     if (mScnMdlWrapper != nullptr) {
         *reinterpret_cast<void**>(reinterpret_cast<u8*>(mScnMdlWrapper->GetScnMdl()) + 0x11C) = this;
 
-        mScnMdlWrapper->GetScnMdl()->EnableScnObjCallbackTiming(nw4r::g3d::ScnObj::TIMING_4);
+        mScnMdlWrapper->GetScnMdl()->EnableScnObjCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
         mScnMdlWrapper->ScnMdlProc(0);
-        mScnMdlWrapper->GetScnMdl()->DisableScnObjCallbackTiming(nw4r::g3d::ScnObj::TIMING_4);
+        mScnMdlWrapper->GetScnMdl()->DisableScnMdlCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
     }
 }
 

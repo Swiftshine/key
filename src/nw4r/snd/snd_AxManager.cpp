@@ -1,5 +1,3 @@
-#pragma ipa file // TODO: REMOVE AFTER REFACTOR
-
 #include <nw4r/snd.h>
 
 #include <revolution/AXFX.h>
@@ -12,7 +10,7 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-NW4R_UT_LIST_TYPEDEF_FORCE(FxBase);
+NW4R_UT_LINKLIST_TYPEDEF_FORCE(FxBase);
 
 u8 AxManager::sZeroBuffer[AxManager::ZERO_BUFFER_SIZE];
 
@@ -231,9 +229,8 @@ void AxManager::SetMasterVolume(f32 volume, int frame) {
 }
 
 void AxManager::AxCallbackFunc() {
-    NW4R_UT_LIST_SAFE_FOREACH(GetInstance().mCallbackList,
-        it->callback();
-    );
+    NW4R_UT_LINKLIST_FOREACH_SAFE(it, GetInstance().mCallbackList,
+                                  { it->callback(); });
 
     if (GetInstance().mNextAxRegisterCallback != NULL) {
         GetInstance().mNextAxRegisterCallback();

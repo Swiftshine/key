@@ -1,3 +1,5 @@
+#include <nw4r/g3d/res/g3d_resfile.h>
+
 #include "graphics/BgBackImage.h"
 #include "graphics/FlfMdlDraw.h"
 #include "util/FullSortSceneUtil.h"
@@ -5,7 +7,6 @@
 #include "manager/StageManager.h"
 #include "manager/CameraManager.h"
 
-#include <nw4r/g3d.h>
 
 const char BRTEX_path[] = "gimmick/bgTex/bgTex.brtex";
 const char twopend[] = "2pend";
@@ -72,7 +73,7 @@ void BgBackImage::Render() {
     float float2;
     nw4r::math::MTX34 mtx;
     ZERO_MTX_34(mtx);
-    nw4r::g3d::ScnObj::GetMtx(MTX_TYPE_VIEW, &mtx);
+    nw4r::g3d::ScnObj::GetMtx(MTX_VIEW, &mtx);
     GXLoadPosMtxImm(mtx, 0);
     GXSetCurrentMtx(0);
     GXLoadTexObj(&mTexObj, GX_TEXMAP0);

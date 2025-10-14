@@ -2,7 +2,7 @@
 #define FLUFF_CAM_H
 
 #include "graphics/FullSortScene.h"
-#include <nw4r/g3d.h>
+#include <nw4r/g3d/g3d_camera.h>
 
 // size: 0x44
 class Cam {

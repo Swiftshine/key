@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include <string>
-#include <nw4r/g3d.h>
+#include <nw4r/g3d/res/g3d_resnode.h>
 #include "gfl/gflLinkedList.h"
 #include "gfl/gflResFileInfo.h"
 #include "gfl/gflScnMdlWrapper.h"

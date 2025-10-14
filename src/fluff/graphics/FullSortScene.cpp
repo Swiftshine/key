@@ -1,6 +1,6 @@
 #include "graphics/FullSortScene.h"
 #include "gfl/gflMemory.h"
-
+#include <nw4r/g3d/g3d_state.h>
 
 FullSortScene::FullSortScene(u8 heapID, uint maxNumChildren, uint maxNumScnObj)
     : gfl::Scene(heapID, maxNumChildren, maxNumScnObj)
@@ -15,8 +15,8 @@ FullSortScene::~FullSortScene() {
     mFullSortGroup->Destroy();
 }
 
-void FullSortScene::Insert(nw4r::g3d::ScnObj* object) {
-    mFullSortGroup->Insert(mFullSortGroup->mSize, object);
+void FullSortScene::Insert(nw4r::g3d::ScnObj* pObject) {
+    mFullSortGroup->Insert(mFullSortGroup->Size(), pObject);
 }
 
 void FullSortScene::Remove(nw4r::g3d::ScnObj* object) {
@@ -30,7 +30,9 @@ void FullSortScene::DrawOpa() {
     camera.GXSetProjection();
     camera.GXSetScissor();
     camera.GXSetScissorBoxOffset();
-    camera.SetCameraProjMtx(cameraID, true);
+    nw4r::g3d::G3DState::SetCameraProjMtx(camera, cameraID, true);
+
+
     nw4r::g3d::G3DState::Invalidate(0x100);
     nw4r::g3d::G3DState::SetLightSetting(mScnRoot->GetLightSetting());
 
@@ -48,5 +50,5 @@ void FullSortScene::DrawXlu() {
 }
 
 bool FullSortScene::IsScnRootSizeValid() {
-    return mFullSortGroup->mSize != 0;
+    return mFullSortGroup->Size() != 0;
 }

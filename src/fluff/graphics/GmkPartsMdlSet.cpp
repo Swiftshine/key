@@ -1,3 +1,4 @@
+#include <nw4r/g3d/res/g3d_resfile.h>
 #include "graphics/GmkPartsMdlSet.h"
 #include <string>
 

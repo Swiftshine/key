@@ -41,7 +41,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     mFbMokoMoko.Create(fbMokoMoko);
     fbMokoMoko = mFbMokoMoko.Get();
 
-    fbMokoMoko->UpdateMatrix(nw4r::math::VEC2(mPosition));
+    fbMokoMoko->UpdateMatrix(nw4r::math::VEC2(mPosition.x, mPosition.y));
     mFbMokoMoko->SetUnk150(true);
     mFbMokoMoko->vf30(5.0f);
 }

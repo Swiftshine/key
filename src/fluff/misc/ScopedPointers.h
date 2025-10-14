@@ -2,7 +2,6 @@
 #define FLUFF_SCOPEDPOINTERS_H
 
 #include "types.h"
-#include <nw4r/g3d.h>
 #include <nw4r/g3d/g3d_obj.h>
 
 #include "gfl/gflPointer.h"

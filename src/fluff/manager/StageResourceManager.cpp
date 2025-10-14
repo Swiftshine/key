@@ -1,6 +1,8 @@
 #include <cstring>
 #include <cstdio>
 
+#include <nw4r/g3d/res/g3d_resfile.h>
+
 #include "gfl/gflGfArch.h"
 #include "gfl/gflMemoryUtil.h"
 #include "gfl/gflFile.h"

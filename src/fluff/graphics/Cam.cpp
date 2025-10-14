@@ -67,7 +67,7 @@ void Cam::Reset() {
 }
 
 nw4r::g3d::Camera Cam::GetCamera() {
-    mFullSortScene->GetScnRoot()->SetCameraID(0);
+    mFullSortScene->GetScnRoot()->SetCurrentCamera(0);
     return mFullSortScene->GetScnRoot()->GetCamera(0);
 }
 

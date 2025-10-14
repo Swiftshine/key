@@ -15,7 +15,8 @@ namespace math {
  * VEC2 structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _VEC2 {
     f32 x, y;
 };
@@ -26,7 +27,6 @@ struct VEC2 : _VEC2 {
         x = fx;
         y = fy;
     }
-    VEC2(const VEC3& rRhs);
 
     operator f32*() {
         return reinterpret_cast<f32*>(this);
@@ -34,13 +34,13 @@ struct VEC2 : _VEC2 {
     operator const f32*() const {
         return reinterpret_cast<const f32*>(this);
     }
+
     VEC2 operator+(const VEC2& rRhs) const {
         return VEC2(x + rRhs.x, y + rRhs.y);
     }
     VEC2 operator-(const VEC2& rRhs) const {
         return VEC2(x - rRhs.x, y - rRhs.y);
     }
-
 
     VEC2& operator+=(const VEC2& rRhs) {
         x += rRhs.x;
@@ -67,11 +67,13 @@ struct VEC2 : _VEC2 {
  *
  ******************************************************************************/
 // Forward declarations
+struct VEC3;
 VEC3* VEC3Add(VEC3* pOut, const VEC3* pA, const VEC3* pB);
 VEC3* VEC3Sub(VEC3* pOut, const VEC3* pA, const VEC3* pB);
 VEC3* VEC3Scale(VEC3* pOut, const VEC3* pIn, f32 scale);
 
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _VEC3 {
     f32 x, y, z;
 };
@@ -163,7 +165,8 @@ struct VEC3 : _VEC3 {
  * MTX33 structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _MTX33 {
     union {
         struct {
@@ -186,7 +189,8 @@ struct MTX33 : _MTX33 {
  * MTX34 structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _MTX34 {
     union {
         struct {
@@ -230,7 +234,8 @@ struct MTX34 : _MTX34 {
  * MTX44 structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _MTX44 {
     union {
         struct {
@@ -265,7 +270,8 @@ struct MTX44 : _MTX44 {
  * QUAT structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _QUAT {
     f32 x, y, z, w;
 };
@@ -487,7 +493,7 @@ MTX33* MTX33Identity(MTX33* pMtx);
  *
  ******************************************************************************/
 MTX33* MTX34ToMTX33(MTX33* pOut, const MTX34* pIn);
-bool MTX34InvTranspose(MTX33* pOut, const MTX34* pIn);
+u32 MTX34InvTranspose(MTX33* pOut, const MTX34* pIn);
 MTX34* MTX34Zero(MTX34* pMtx);
 MTX34* MTX34Scale(MTX34* pOut, const MTX34* pIn, const VEC3* pScale);
 MTX34* MTX34Trans(MTX34* pOut, const MTX34* pIn, const VEC3* pTrans);
@@ -504,9 +510,12 @@ inline MTX34* MTX34Identity(MTX34* pMtx) {
     return pMtx;
 }
 
-inline MTX34* MTX34Inv(MTX34* pOut, const MTX34* pIn) {
-    PSMTXInverse(*pIn, *pOut);
-    return pOut;
+inline u32 MTX34Inv(MTX34* pOut, const MTX34* pIn) {
+    return PSMTXInverse(*pIn, *pOut);
+}
+
+inline u32 MTX34InvTranspose(MTX34* pOut, const MTX34* pIn) {
+    return PSMTXInvXpose(*pIn, *pOut);
 }
 
 inline MTX34* MTX34LookAt(MTX34* pMtx, const VEC3* pPos, const VEC3* pUp,
@@ -557,7 +566,6 @@ inline MTX34* MTX34Trans(MTX34* pOut, const VEC3* pTrans, const MTX34* pIn) {
     return pOut;
 }
 
-
 /******************************************************************************
  *
  * MTX44 functions
@@ -576,6 +584,7 @@ inline MTX34* QUATToMTX34(MTX34* pMtx, const QUAT* pQuat) {
     return pMtx;
 }
 
+// @bug QUATSlerp macro changes this function name!
 inline QUAT* C_QUATSlerp(QUAT* pOut, const QUAT* p1, const QUAT* p2, f32 t) {
     ::C_QUATSlerp(*p1, *p2, *pOut, t);
     return pOut;

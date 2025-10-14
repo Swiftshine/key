@@ -4,7 +4,6 @@
 #include "types.h"
 #include <revolution/MEM.h>
 #include <nw4r/g3d/g3d_scnobj.h>
-#include <nw4r/g3d.h>
 #include "gfl_types.h"
 
 namespace gfl {

@@ -38,7 +38,7 @@ gfl::Vec3 vec3(mPosition.z, vec);
     
     UpdateMatrix();
 
-    nw4r::math::VEC2 vec2 = mPosition;
+    nw4r::math::VEC2 vec2 = nw4r::math::VEC2(mPosition.x, mPosition.y);
     mMoleLight->SetPosition(vec2);
 
     nw4r::math::MTX34 mtx;

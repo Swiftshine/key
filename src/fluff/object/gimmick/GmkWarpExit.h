@@ -5,7 +5,7 @@
 #include "misc/ScopedPointers.h"
 #include "graphics/NwAnmCtrl.h"
 #include "graphics/FbMokoMoko.h"
-#include <nw4r/g3d.h>
+
 
 // size: 0x144
 class GmkWarpExit : Gimmick {

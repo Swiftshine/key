@@ -1,14 +1,12 @@
-#pragma ipa file // TODO: REMOVE AFTER REFACTOR
-
 #include <nw4r/ut.h>
 
 namespace nw4r {
 namespace ut {
 namespace {
 
-template <typename T> void ResolveOffset(T*& rpPtr, void* pBase) {
+template <typename T> inline void ResolveOffset(T*& rpPtr, void* pBase) {
     rpPtr = reinterpret_cast<T*>(static_cast<char*>(pBase) +
-                                 reinterpret_cast<std::ptrdiff_t>(rpPtr));
+                                 reinterpret_cast<s32>(rpPtr));
 }
 
 } // namespace

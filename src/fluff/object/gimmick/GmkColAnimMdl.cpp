@@ -1,3 +1,5 @@
+#include <nw4r/g3d/res/g3d_resfile.h>
+
 #include "object/gimmick/GmkColAnimMdl.h"
 #include "util/FullSortSceneUtil.h"
 #include "util/GimmickUtil.h"
