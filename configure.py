@@ -308,6 +308,7 @@ cflags_NW4R = [
     *cflags_base,
     "-func_align 16",
     "-fp_contract off",
+    "-RTTI off",
 ]
 
 cflags_NW4R_ut = [
@@ -425,7 +426,8 @@ config.libs = [
         "objects" : [
             Object(Matching, "nw4r/ut/ut_IOStream.cpp"),
             Object(Matching, "nw4r/ut/ut_FileStream.cpp"),
-            Object(NonMatching, "nw4r/ut/ut_DvdFileStream.cpp"),
+            Object(Matching, "nw4r/ut/ut_DvdFileStream.cpp"),
+            Object(NonMatching, "nw4r/ut/ut_DvdLockedFileStream.cpp"),
         ],
     },
     {

@@ -35,13 +35,13 @@ public:
     virtual bool CanRead() const = 0;  // at 0x2C
     virtual bool CanWrite() const = 0; // at 0x30
 
-    virtual u32 GetOffsetAlign() const {
+    inline virtual u32 GetOffsetAlign() const {
         return 1;
     } // at 0x34
-    virtual u32 GetSizeAlign() const {
+    inline virtual u32 GetSizeAlign() const {
         return 1;
     } // at 0x38
-    virtual u32 GetBufferAlign() const {
+    inline virtual u32 GetBufferAlign() const {
         return 1;
     } // at 0x3C
 

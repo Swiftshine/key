@@ -55,26 +55,26 @@ public:
     virtual bool CanAsync() const {
         return true;
     } // at 0x28
-    virtual bool CanSeek() const {
+    DECL_WEAK virtual bool CanSeek() const {
         return true;
     } // at 0x50
-    virtual bool CanRead() const {
+    DECL_WEAK virtual bool CanRead() const {
         return true;
     } // at 0x2C
-    virtual bool CanWrite() const {
+    DECL_WEAK virtual bool CanWrite() const {
         return false;
     } // at 0x30
     virtual bool CanCancel() const {
         return true;
     } // at 0x54
 
-    virtual u32 GetOffsetAlign() const {
+    inline virtual u32 GetOffsetAlign() const {
         return 4;
     } // at 0x34
-    virtual u32 GetSizeAlign() const {
+    inline virtual u32 GetSizeAlign() const {
         return 32;
     } // at 0x38
-    virtual u32 GetBufferAlign() const {
+    inline virtual u32 GetBufferAlign() const {
         return 32;
     } // at 0x3C
 

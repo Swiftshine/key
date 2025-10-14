@@ -173,7 +173,7 @@ bool DvdFileStream::CancelAsync(StreamCallback pCallback, void* pCallbackArg) {
     return success;
 }
 
-u32 DvdFileStream::AdjustReadLength_(u32 len) {
+inline u32 DvdFileStream::AdjustReadLength_(u32 len) {
     u32 currOffset = mFilePosition.Tell();
     u32 fileSize = mFilePosition.GetFileSize();
 
