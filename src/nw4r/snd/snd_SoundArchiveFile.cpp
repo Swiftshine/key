@@ -378,6 +378,16 @@ u32 SoundArchiveFileReader::GetGroupCount() const {
     return pTable->count - 1;
 }
 
+u32 SoundArchiveFileReader::GetFileCount() const {
+	const SoundArchiveFile::FileInfoTable* table =
+		Util::GetDataRefAddress0(mInfo->fileTableRef, mInfo);
+	if (table == NULL)
+		return false;
+
+	return table->count;
+}
+
+
 const char* SoundArchiveFileReader::GetSoundLabelString(u32 id) const {
     return GetString(GetSoundStringId(id));
 }

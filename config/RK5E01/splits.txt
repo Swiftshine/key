@@ -317,6 +317,9 @@ hbm/homebutton/HBMController.cpp:
 nw4r/snd/snd_DvdSoundArchive.cpp:
 	.text       start:0x80789FB0 end:0x8078A690 align:16
 
+nw4r/snd/snd_SoundArchive.cpp:
+	.text       start:0x807939A0 end:0x80794040
+
 nw4r/ut/ut_IOStream.cpp:
 	.text       start:0x807A3C90 end:0x807A3CC0
 	.ctors      start:0x807E376C end:0x807E3770

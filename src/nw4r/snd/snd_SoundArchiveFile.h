@@ -123,7 +123,7 @@ struct FileInfo {
     Util::DataRef<char> extFilePathRef;          // at 0xC
     Util::DataRef<FilePosTable> filePosTableRef; // at 0x14
 };
-typedef Util::Table<Util::DataRef<FileInfo> > FileTable;
+typedef Util::Table<Util::DataRef<FileInfo> > FileInfoTable;
 
 struct GroupItemInfo {
     u32 fileId;         // at 0x0
@@ -160,7 +160,7 @@ struct Info {
     Util::DataRef<SoundCommonTable> soundTableRef;                   // at 0x0
     Util::DataRef<BankTable> bankTableRef;                           // at 0x8
     Util::DataRef<PlayerTable> playerTableRef;                       // at 0x10
-    Util::DataRef<FileTable> fileTableRef;                           // at 0x18
+    Util::DataRef<FileInfoTable> fileTableRef;                       // at 0x18
     Util::DataRef<GroupTable> groupTableRef;                         // at 0x20
     Util::DataRef<SoundArchivePlayerInfo> soundArchivePlayerInfoRef; // at 0x28
 };
@@ -226,6 +226,7 @@ public:
     u32 GetSoundStringId(u32 id) const;
     u32 GetPlayerCount() const;
     u32 GetGroupCount() const;
+    u32 GetFileCount() const;
 
     const char* GetSoundLabelString(u32 id) const;
     u32 GetSoundUserParam(u32 id) const;
