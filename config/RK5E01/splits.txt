@@ -146,6 +146,9 @@ fluff/util/NURBSOption.cpp:
 fluff/demo/FlfDemoCtrl.cpp:
 	.text       start:0x802B99E0 end:0x802BCBC8
 
+gfl/gflSD3DActor.cpp:
+	.text       start:0x802CFBB4 end:0x802D0360
+
 fluff/object/gimmick/GmkBeadDrop.cpp:
 	.text       start:0x802E1348 end:0x802E1D08
 

@@ -474,6 +474,7 @@ config.libs = [
             Object(NonMatching, "gfl/gflRenderObj.cpp"),
             Object(NonMatching, "gfl/gflResArchivedFileInfo.cpp"),
             Object(Matching,    "gfl/gflResInfo.cpp"),
+            Object(NonMatching, "gfl/gflSD3DActor.cpp"),
             Object(NonMatching, "gfl/gflSoundHandleInner.cpp"),
             Object(NonMatching, "gfl/gflSoundArchiveMng.cpp"),
             Object(NonMatching, "gfl/gflTask.cpp"),

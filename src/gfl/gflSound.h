@@ -2,6 +2,7 @@
 #define GFL_SOUND_H
 
 #include "gflSoundFadeCtrl.h"
+#include "gflSD3DActorInner.h"
 
 namespace gfl {
     class SoundHandleInner;
@@ -19,6 +20,8 @@ namespace gfl {
         // add to the queue if add is true
         // remove if false
         void ManagerSoundHandle(SoundHandleInner* handle, int arg2, bool add);
+        SD3DActorInner* CreateSD3DActorInner();
+        void DestroySD3DActorInner(SD3DActorInner* pActor);
     };
 }
 
