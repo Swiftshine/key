@@ -286,6 +286,8 @@ cflags_fluff_base_no_inline_deferred = [
 cflags_fluff = [
     *cflags_fluff_base_no_inline_deferred,
     "-str reuse,readonly",
+    "-pragma \"merge_float_consts on\""
+
 ]
 
 cflags_fluff_manager = [
@@ -507,7 +509,6 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects": [
-
             # fluff/object/
 
             Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
