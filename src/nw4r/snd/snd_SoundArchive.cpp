@@ -103,6 +103,10 @@ bool SoundArchive::detail_ReadGroupItemInfo(u32 groupId, u32 itemId,
     return mFileReader->ReadGroupItemInfo(groupId, itemId, pInfo);
 }
 
+u32 SoundArchive::detail_GetFileCount() const {
+    return mFileReader->GetFileCount();
+}
+
 bool SoundArchive::detail_ReadFileInfo(u32 id, FileInfo* pInfo) const {
     return mFileReader->ReadFileInfo(id, pInfo);
 }
@@ -112,44 +116,49 @@ bool SoundArchive::detail_ReadFilePos(u32 fileId, u32 posId,
     return mFileReader->ReadFilePos(fileId, posId, pPos);
 }
 
-ut::FileStream* SoundArchive::detail_OpenFileStream(u32 id, void* pBuffer,
-                                                    int bufferSize) const {
+ut::FileStream *SoundArchive::detail_OpenFileStream(u32 fileId, void *buffer,
+                                                    int size) const
+{
+	FileInfo fileInfo;
+	if (!detail_ReadFileInfo(fileId, &fileInfo))
+		return nullptr;
 
-    FileInfo fileInfo;
-    if (!detail_ReadFileInfo(id, &fileInfo)) {
-        return NULL;
-    }
+	if (fileInfo.extFilePath)
+	{
+		ut::FileStream *stream = OpenExtStreamImpl(
+			buffer, size, fileInfo.extFilePath, 0, fileInfo.fileSize);
 
-    if (fileInfo.extFilePath != NULL) {
-        return OpenExtStreamImpl(pBuffer, bufferSize, fileInfo.extFilePath, 0,
-                                 0);
-    }
+		return stream;
+	}
 
-    FilePos filePos;
-    if (!detail_ReadFilePos(id, 0, &filePos)) {
-        return NULL;
-    }
+	FilePos filePos;
+	if (!detail_ReadFilePos(fileId, 0, &filePos))
+		return nullptr;
 
-    GroupInfo groupInfo;
-    if (!detail_ReadGroupInfo(filePos.groupId, &groupInfo)) {
-        return NULL;
-    }
+	GroupInfo groupInfo;
+	if (!detail_ReadGroupInfo(filePos.groupId, &groupInfo))
+		return nullptr;
 
-    GroupItemInfo groupItemInfo;
-    if (!detail_ReadGroupItemInfo(filePos.groupId, filePos.index,
-                                  &groupItemInfo)) {
-        return NULL;
-    }
+	GroupItemInfo itemInfo;
+	if (!detail_ReadGroupItemInfo(filePos.groupId, filePos.index, &itemInfo))
+		return nullptr;
 
-    u32 offset = groupInfo.offset + groupItemInfo.offset;
-    u32 size = groupItemInfo.size;
+	u32 itemOffset = groupInfo.offset + itemInfo.offset;
+	u32 itemSize = itemInfo.size;
 
-    if (groupInfo.extFilePath != NULL) {
-        return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.extFilePath,
-                                 offset, size);
-    }
+	if (groupInfo.extFilePath)
+	{
+		ut::FileStream *stream = OpenExtStreamImpl(
+			buffer, size, groupInfo.extFilePath, itemOffset, itemSize);
 
-    return OpenStream(pBuffer, bufferSize, offset, size);
+		return stream;
+	}
+	else
+	{
+		ut::FileStream *stream = OpenStream(buffer, size, itemOffset, itemSize);
+
+		return stream;
+	}
 }
 
 ut::FileStream* SoundArchive::detail_OpenGroupStream(u32 id, void* pBuffer,

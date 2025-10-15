@@ -431,7 +431,8 @@ config.libs = [
         "cflags" : cflags_NW4R_snd,
         "host" : "False",
         "objects" : [
-            Object(NonMatching, "nw4r/snd/snd_SoundArchive.cpp"),
+            Object(Matching, "nw4r/snd/snd_SoundArchive.cpp"),
+            Object(NonMatching, "nw4r/snd/snd_SoundArchiveFile.cpp"),
             Object(NonMatching, "nw4r/snd/snd_DvdSoundArchive.cpp"),
         ]
     },

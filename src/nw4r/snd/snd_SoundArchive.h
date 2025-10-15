@@ -152,6 +152,8 @@ public:
     bool detail_ReadGroupItemInfo(u32 groupId, u32 itemId,
                                   GroupItemInfo* pInfo) const;
 
+    u32 detail_GetFileCount() const;
+    
     bool detail_ReadFileInfo(u32 id, FileInfo* pInfo) const;
     bool detail_ReadFilePos(u32 fileId, u32 posId, FilePos* pPos) const;
 

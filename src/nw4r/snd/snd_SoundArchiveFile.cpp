@@ -405,7 +405,7 @@ u32 SoundArchiveFileReader::GetSoundUserParam(u32 id) const {
 bool SoundArchiveFileReader::ReadFileInfo(u32 id,
                                           SoundArchive::FileInfo* pInfo) const {
 
-    const SoundArchiveFile::FileTable* pFileTable =
+    const SoundArchiveFile::FileInfoTable* pFileTable =
         Util::GetDataRefAddress0(mInfo->fileTableRef, mInfo);
 
     if (pFileTable == NULL) {
@@ -441,7 +441,7 @@ bool SoundArchiveFileReader::ReadFileInfo(u32 id,
 bool SoundArchiveFileReader::ReadFilePos(u32 fileId, u32 id,
                                          SoundArchive::FilePos* pPos) const {
 
-    const SoundArchiveFile::FileTable* pFileTable =
+    const SoundArchiveFile::FileInfoTable* pFileTable =
         Util::GetDataRefAddress0(mInfo->fileTableRef, mInfo);
 
     if (pFileTable == NULL) {
