@@ -197,7 +197,7 @@ SoundArchive::detail_OpenGroupWaveDataStream(u32 id, void* pBuffer,
 ut::FileStream* SoundArchive::OpenExtStreamImpl(void* pBuffer, int bufferSize,
                                                 const char* pExtPath,
                                                 u32 offset, u32 size) const {
-    char pathBuffer[FILE_PATH_MAX];
+    char pathBuffer[FILE_PATH_MAX + 1];
     const char* pFullPath;
 
     if (pExtPath[0] == '/') {
@@ -206,7 +206,7 @@ ut::FileStream* SoundArchive::OpenExtStreamImpl(void* pBuffer, int bufferSize,
         u32 fileLen = std::strlen(pExtPath);
         u32 dirLen = std::strlen(mExtFileRoot);
 
-        if (fileLen + dirLen >= FILE_PATH_MAX) {
+        if (fileLen + dirLen >= FILE_PATH_MAX + 1) {
             return NULL;
         }
 

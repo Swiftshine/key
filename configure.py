@@ -433,7 +433,8 @@ config.libs = [
         "objects" : [
             Object(Matching, "nw4r/snd/snd_SoundArchive.cpp"),
             Object(NonMatching, "nw4r/snd/snd_SoundArchiveFile.cpp"),
-            Object(NonMatching, "nw4r/snd/snd_DvdSoundArchive.cpp"),
+            Object(Matching, "nw4r/snd/snd_DvdSoundArchive.cpp"),
+            Object(NonMatching, "nw4r/snd/snd_EnvGenerator.cpp"),
         ]
     },
     {

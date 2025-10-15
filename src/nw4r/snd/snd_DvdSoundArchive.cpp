@@ -10,8 +10,8 @@ namespace snd {
 
 class DvdSoundArchive::DvdFileStream : public ut::DvdLockedFileStream {
 public:
-    inline DvdFileStream(const DVDFileInfo* pFileInfo, u32 offset, u32 size);
-    inline DvdFileStream(s32 entrynum, u32 offset, u32 size);
+    DvdFileStream(const DVDFileInfo* pFileInfo, u32 offset, u32 size);
+    DvdFileStream(s32 entrynum, u32 offset, u32 size);
 
     virtual s32 Read(void* pDst, u32 size);    // at 0x14
     virtual void Seek(s32 offset, u32 origin); // at 0x44
@@ -32,9 +32,7 @@ private:
 DvdSoundArchive::DvdSoundArchive() : mOpen(false) {}
 
 DvdSoundArchive::~DvdSoundArchive() {
-    if (mOpen) {
-        Close();
-    }
+    Close();
 }
 
 bool DvdSoundArchive::Open(s32 entrynum) {
@@ -58,8 +56,10 @@ bool DvdSoundArchive::Open(const char* pPath) {
 
     char extRoot[FILE_PATH_MAX];
     for (int i = std::strlen(pPath) - 1; i >= 0; i--) {
-        if (pPath[i] == '/' || pPath[i] == '\\') {
-            // @bug Long path can overflow extRoot buffer
+        if ((pPath[i] == '/' || pPath[i] == '\\')) {
+            if (i >= FILE_PATH_MAX + 1) {
+                return false;
+            }
             std::strncpy(extRoot, pPath, i);
             extRoot[i] = '\0';
 
@@ -71,9 +71,12 @@ bool DvdSoundArchive::Open(const char* pPath) {
     return true;
 }
 
+
 void DvdSoundArchive::Close() {
-    DVDClose(&mFileInfo);
-    mOpen = false;
+    if (mOpen) {
+        DVDClose(&mFileInfo);
+        mOpen = false;
+    }
     Shutdown();
 }
 
@@ -117,7 +120,7 @@ bool DvdSoundArchive::LoadFileHeader() {
     u8 headerArea[detail::SoundArchiveFile::HEADER_AREA_SIZE];
 
     static const u32 headerAlignSize =
-        ut::RoundUp(sizeof(detail::SoundArchiveFile::Header), 32);
+        ROUND_UP(sizeof(detail::SoundArchiveFile::Header), 32);
 
     void* pFile = ut::RoundUp<u8>(headerArea, 32);
 
@@ -175,9 +178,6 @@ bool DvdSoundArchive::LoadLabelStringData(void* pBuffer, u32 size) {
 DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo* pFileInfo,
                                               u32 offset, u32 size)
     : DvdLockedFileStream(pFileInfo, false), mOffset(offset), mSize(size) {
-    if (mSize == 0) {
-        mSize = ut::DvdFileStream::GetSize();
-    }
 
     ut::DvdFileStream::Seek(mOffset, SEEK_BEG);
 }
@@ -185,9 +185,6 @@ DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo* pFileInfo,
 DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 offset,
                                               u32 size)
     : DvdLockedFileStream(entrynum), mOffset(offset), mSize(size) {
-    if (mSize == 0) {
-        mSize = ut::DvdFileStream::GetSize();
-    }
 
     ut::DvdFileStream::Seek(mOffset, SEEK_BEG);
 }

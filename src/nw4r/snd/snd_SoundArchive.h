@@ -153,7 +153,7 @@ public:
                                   GroupItemInfo* pInfo) const;
 
     u32 detail_GetFileCount() const;
-    
+
     bool detail_ReadFileInfo(u32 id, FileInfo* pInfo) const;
     bool detail_ReadFilePos(u32 fileId, u32 posId, FilePos* pPos) const;
 
@@ -167,7 +167,7 @@ public:
     void SetExternalFileRoot(const char* pExtFileRoot);
 
 protected:
-    static const int FILE_PATH_MAX = 256;
+    static const int FILE_PATH_MAX = 255;
 
 private:
     ut::FileStream* OpenExtStreamImpl(void* pBuffer, int bufferSize,
@@ -176,7 +176,7 @@ private:
 
 private:
     detail::SoundArchiveFileReader* mFileReader; // at 0x4
-    char mExtFileRoot[FILE_PATH_MAX];            // at 0x8
+    char mExtFileRoot[FILE_PATH_MAX + 1];            // at 0x8
 };
 
 } // namespace snd
