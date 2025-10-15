@@ -4,12 +4,9 @@
 
 // heap
 extern "C" void* lbl_808E4D00;
-extern "C" float lbl_808E6908;
 extern "C" int lbl_808E0368;
 extern "C" void* lbl_808E4FD8;
 extern "C" void* GetBgImageSquare(void*, u16 index);
-
-
 
 BGST::File::File()
     : mLoadState(BGST::LoadState::BGST_LOADING_NOT_INITED)
@@ -126,7 +123,7 @@ void BGST::File::ReadImage() {
 
 void BGST::File::SetupImage() {
     if (lbl_808E0368 == mHeader->m_4) {
-        mHeader->mYOffset = lbl_808E6908;
+        mHeader->mYOffset = 1.0f;
     }
 
     BGST::Header* header = mHeader.Get();

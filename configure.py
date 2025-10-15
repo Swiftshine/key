@@ -505,14 +505,16 @@ config.libs = [
     {
         "lib" : "fluff/object/",
         "mw_version": config.linker_version,
-        "cflags": cflags_fluff,
+        "cflags": [
+            *cflags_fluff,
+        ],
         "host": False,
         "progress_category": "fluff",
         "objects": [
             # fluff/object/
 
             Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
-            Object(NonMatching,    "fluff/object/FlfGameObj.cpp"),
+            Object(Matching,    "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching, "fluff/object/Gimmick.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
             Object(NonMatching, "fluff/object/SpringBase.cpp"),
