@@ -1,4 +1,4 @@
-#include "syn.h"
+#include "hbm/sound/syn.h"
 
 /*******************************************************************************
  * headers
@@ -7,18 +7,20 @@
 #include <macros.h>
 #include <types.h>
 
-#include "mix.h"
-#include "synctrl.h"
-#include "synvoice.h" // __HBMSYNServiceVoice
+#include "hbm/sound/mix.h"
+#include "hbm/sound/synctrl.h"
+#include "hbm/sound/synvoice.h" // __HBMSYNServiceVoice
 
-#if 0
+// #if 0
 #include <revolution/OS/OSAddress.h> // OSCachedToPhysical
 #include <revolution/OS/OSError.h>
 #include <revolution/OS/OSInterrupt.h>
 #include <revolution/AX.h>
-#endif
+// #endif
 
 #include <hbm/context_rvl.h>
+
+extern "C" BOOL AXIsInit(void);
 
 /*******************************************************************************
  * local function declarations

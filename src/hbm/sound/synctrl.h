@@ -7,7 +7,7 @@
 
 #include <types.h>
 
-#include "syn.h"
+#include "hbm/sound/syn.h"
 
 /*******************************************************************************
  * external variables

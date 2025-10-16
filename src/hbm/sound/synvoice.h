@@ -7,7 +7,7 @@
 
 #include <types.h>
 
-#include "syn.h"
+#include "hbm/sound/syn.h"
 
 #if 0
 #include <revolution/AX/AX.h> // AXVPB

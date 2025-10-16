@@ -425,6 +425,7 @@ config.libs = [
             Object(Matching, "hbm/homebutton/HBMFrameController.cpp"),
             Object(Matching, "hbm/homebutton/HBMGUIManager.cpp"),
             Object(NonMatching, "hbm/homebutton/HBMController.cpp"),
+            Object(Matching, "hbm/sound/syn.cpp"),
         ],
     },
     {
