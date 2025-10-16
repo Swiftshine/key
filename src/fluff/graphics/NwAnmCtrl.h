@@ -50,12 +50,12 @@ public:
 
     /* Class Members */
 
-    /* 0x */ gfl::ResFileObject mResFileInfo;
-    /* 0x */ gfl::Pointer<gfl::ScnMdlWrapper> mScnMdlWrapper;
-    /* 0x */ std::string mResMdlName;
-    /* 0x */ uint mCurrentAnimIndex;
-    /* 0x */ gfl::Array<NwAnm> mAnimations;
-    /* 0x */ uint mNumAnims;
+    /* 0x04 */ gfl::ResFileObject mResFileInfo;
+    /* 0x08 */ gfl::Pointer<gfl::ScnMdlWrapper> mScnMdlWrapper;
+    /* 0x0C */ std::string mResMdlName;
+    /* 0x18 */ uint mCurrentAnimIndex;
+    /* 0x1C */ gfl::Array<NwAnm> mAnimations;
+    /* 0x20 */ uint mNumAnims;
 };
 
 // ASSERT_SIZE(NwAnmCtrl, 0x24);
