@@ -519,6 +519,7 @@ config.libs = [
             Object(Matching,    "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching, "fluff/object/Gimmick.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
+            Object(Matching,    "fluff/env/EnvParts_PlayGuideIconLocator.cpp"),
             Object(NonMatching, "fluff/object/SpringBase.cpp"),
         ],
     },

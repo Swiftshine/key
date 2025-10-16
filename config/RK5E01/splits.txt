@@ -213,6 +213,12 @@ fluff/object/gimmick/GmkTurtle.cpp:
 fluff/manager/GmkBeadManager.cpp:
 	.text       start:0x8051D524 end:0x8051D968
 
+fluff/env/EnvParts_PlayGuideIconLocator.cpp:
+	.text       start:0x8054ADD0 end:0x8054AE14
+	.rodata     start:0x8081FB20 end:0x8081FB48
+	.data       start:0x8089B590 end:0x8089B610
+	.sdata      start:0x808E3598 end:0x808E35A0
+
 fluff/util/GimmickResource.cpp:
 	.text       start:0x8059540C end:0x80595724
 
