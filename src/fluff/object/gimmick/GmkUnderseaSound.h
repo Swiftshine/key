@@ -34,7 +34,7 @@ public:
 private:
     int m_130;
     bool mSoundPlayed; // @ 0x134
-    sound::SoundHandle mSoundHandle; // @ 0x138
+    gfl::SoundHandle mSoundHandle; // @ 0x138
 };
 
 #endif

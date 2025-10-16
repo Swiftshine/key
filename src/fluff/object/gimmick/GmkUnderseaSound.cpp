@@ -51,7 +51,7 @@ void GmkUnderseaSound::Update() {
 
     if (unk != 0) {
         if (!mSoundPlayed) {
-            mSoundHandle = sound::SoundHandle::CreateSoundHandle(0x1CE, 0);
+            mSoundHandle = gfl::SoundHandle::CreateSoundHandle(0x1CE, 0);
             mSoundPlayed = true;
         }
     } else if (mSoundPlayed) {

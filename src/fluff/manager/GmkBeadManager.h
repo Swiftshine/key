@@ -7,7 +7,7 @@
 #include "object/FlfHandleObj.h"
 #include "gfl/gflTask.h"
 #include "gfl/gflLinkedList.h"
-#include "sound/SoundHandle.h"
+#include "gfl/gflSoundHandle.h"
 
 class GmkBead;
 class GmkBeadPopItem;
@@ -30,7 +30,7 @@ public:
         void SetUserHandle(FlfHandleObj* pHandleObj);
 
         /* 0x00 */ int mNumUserHandles;
-        /* 0x04 */ sound::SoundHandle mSoundHandle;
+        /* 0x04 */ gfl::SoundHandle mSoundHandle;
         /* 0x0C */ FlfHandle mUserHandles[8];
         /* 0x4C */ u32 m_4C[2][128];
     };

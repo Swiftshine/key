@@ -3,7 +3,7 @@
 
 #include "object/Gimmick.h"
 #include "sound/GameSound.h"
-#include "sound/SD3DActor.h"
+#include "gfl/gflSD3DActor.h"
 #include "graphics/FlfMdlDraw.h"
 #include "graphics/FbAlpha.h"
 #include "manager/GameManager.h"
@@ -60,7 +60,7 @@ private:
     int m_158;
     int m_15C;
     int m_160;
-    SD3DActor mSD3DActor;
+    gfl::SD3DActor mSD3DActor;
     int m_19C;
     int m_1A0;
     gfl::Pointer<FlfMdlDraw> mFlfMdl1;

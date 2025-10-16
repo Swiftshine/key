@@ -5,13 +5,18 @@
 #include "gfl/gflSoundHandleInner.h"
 #include <nw4r/math.h>
 
-namespace sound {
+namespace gfl {
     class SoundHandle {
     public:
         /* Constructors */
 
         inline SoundHandle() { }
         
+        inline SoundHandle(nw4r::math::VEC3* pPos, SoundHandleInner* pHandleInner) {
+            mPosition = pPos;
+            mSoundHandleInner = pHandleInner;
+        }
+
         inline SoundHandle(const SoundHandle& other) {
             mPosition = other.mPosition;
             mSoundHandleInner = other.mSoundHandleInner;
@@ -45,15 +50,12 @@ namespace sound {
             SoundHandle handle;
             handle.PlaySound(rPos, soundID, arg3, arg4);
         }
-    private:
+    
         /* Class Members */
 
         /* 0x0 */ nw4r::math::VEC3* mPosition;
         /* 0x4 */ gfl::SoundHandleInner* mSoundHandleInner;
     };
-
-    void PlaySoundEffect(uint soundEffectID, uint arg2);
-    void PlaySoundEffect(SoundHandle& rHandle, nw4r::math::VEC3& pos);
 }
 
 #endif

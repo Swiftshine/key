@@ -1,26 +1,27 @@
 #include "gflSD3DActor.h"
+#include "gflSoundHandle.h"
 
 using namespace gfl;
 
 SD3DActorWrapper::SD3DActorWrapper()
     : mActor()
 {
-    mSub[0].m_0 = -1;
-    mSub[1].m_0 = -1;
-    mSub[2].m_0 = -1;
-    mSub[3].m_0 = -1;
+    mInfo[0].mSoundID = -1;
+    mInfo[1].mSoundID = -1;
+    mInfo[2].mSoundID = -1;
+    mInfo[3].mSoundID = -1;
 }
 
 inline SD3DActor::~SD3DActor() {
     Sound::Instance()->DestroySD3DActorInner(mActorInner);
 }
 
-SD3DActor::SubStruct::SubStruct()
-    : m_4(0)
-    , m_8(0)
-{ }
+SD3DActorInfo::SD3DActorInfo() {
+    mSoundHandle.mPosition = nullptr;
+    mSoundHandle.mSoundHandleInner = nullptr;
+}
 
-SD3DActor::SubStruct::~SubStruct() { }
+SD3DActorInfo::~SD3DActorInfo() { }
 
 SD3DActorWrapper::~SD3DActorWrapper() { }
 
@@ -41,10 +42,61 @@ nw4r::math::VEC3 SD3DActor::GetPosition() {
     return mActorInner->GetPosition();
 }
 
-void SD3DActorWrapper::fn_802CFDAC(nw4r::math::VEC2& rDst, float arg2, int arg3) {
+SoundHandle SD3DActorWrapper::GetSoundHandle(int soundID, int arg2, int arg3) {
+    fn_802D02B0();
+    SD3DActorInfo* info = GetSD3DActorInfo();
 
+    if (info == nullptr) {
+        return SoundHandle(nullptr, nullptr);
+    }
+
+    if (soundID != -1) {
+        info->mSoundID = soundID;
+        info->mSoundHandle = mActor.GetSoundHandle(soundID, arg2, arg3);
+        return info->mSoundHandle;
+    }
+
+    return SoundHandle(nullptr, nullptr);
 }
 
-void SD3DActor::vf14(nw4r::math::VEC3& rDst, float arg2, int arg3) {
-    
+SoundHandle SD3DActor::GetSoundHandle(int soundID, int arg2, int arg3) {
+    const SoundHandle& handle = mActorInner->GetSoundHandle(soundID, arg2, arg3);
+    return handle;
+}
+
+SoundHandle SD3DActorWrapper::fn_802CFEBC(
+    float arg1,
+    float arg2,
+    int soundID,
+    int arg5,
+    int arg6
+) {
+    SoundHandle rHandle = GetSoundHandle(soundID, 0, arg6);
+    SoundHandleInner* inner = rHandle.mSoundHandleInner;
+
+    bool unk;
+
+    if (inner != nullptr) {
+        unk = rHandle.mPosition == inner->mPosition;
+    } else {
+        unk = false;
+    }
+
+    if (unk) {
+        Sound::Instance()->fn_8064D288(arg1, inner, 0);
+    }
+
+    inner = rHandle.mSoundHandleInner;
+
+    if (inner != nullptr) {
+        unk = rHandle.mPosition == inner->mPosition;
+    } else {
+        unk = false;
+    }
+
+    if (unk) {
+        Sound::Instance()->fn_8064D2B4(arg2, inner);
+    }
+
+    return rHandle;
 }
