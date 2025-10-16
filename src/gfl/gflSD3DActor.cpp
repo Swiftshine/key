@@ -138,7 +138,6 @@ void SD3DActorWrapper::fn_802D0074(int arg2, bool add) {
     }
 }
 
-// https://decomp.me/scratch/o6SVQ
 bool SD3DActorWrapper::HasSoundID(int soundID) {
     bool ret = false;
     
@@ -146,23 +145,22 @@ bool SD3DActorWrapper::HasSoundID(int soundID) {
         return false;
     }
 
+    SD3DActorInfo* info = &mInfo[0];
 
-    for (int i = 0; i < 4; i++) {
-        if (!mInfo[i].CheckSoundID(soundID)) {
-            continue;
-        }
-
-        bool valid;
-
-        IF_HANDLE_POS_EQUAL(mInfo[i].mSoundHandle, {
-            valid = Sound::Instance()->ValidateSoundHandleSound(inner);
-        } else {
-            valid = false;
-        })
-
-        if (valid) {
-            ret = true;
-            break;
+    for (int i = 0; i < 4; i++, info++) {
+        if (info->CheckSoundID(soundID)) {        
+            bool valid;
+    
+            IF_HANDLE_POS_EQUAL(info->mSoundHandle, {
+                valid = Sound::Instance()->ValidateSoundHandleSound(inner);
+            } else {
+                valid = false;
+            })
+    
+            if (valid) {
+                ret = true;
+                break;
+            }
         }
     }
 

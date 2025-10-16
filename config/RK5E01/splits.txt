@@ -148,6 +148,9 @@ fluff/demo/FlfDemoCtrl.cpp:
 
 gfl/gflSD3DActor.cpp:
 	.text       start:0x802CFBB4 end:0x802D0360
+	.rodata     start:0x808024B8 end:0x808024C8
+	.data       start:0x80865F20 end:0x80865F38
+	.sdata      start:0x808E1308 end:0x808E1310
 
 fluff/object/gimmick/GmkBeadDrop.cpp:
 	.text       start:0x802E1348 end:0x802E1D08
