@@ -13,8 +13,15 @@ namespace gfl {
 class SD3DActorInfo {
 public:
     /* Constructor + Destructor */
+
     SD3DActorInfo() DONT_INLINE_CLASS;
     DECL_WEAK ~SD3DActorInfo() DONT_INLINE_CLASS;
+
+    /* Class Methods */
+
+    inline bool CheckSoundID(int id) {
+        return mSoundID == id;
+    }
 
     /* Class Members */
 
@@ -59,8 +66,6 @@ public:
     void SetPosition(const nw4r::math::VEC2& rSrc);
     nw4r::math::VEC3 GetPosition();
     SoundHandle GetSoundHandle(int soundID, int arg2, int arg3) DONT_INLINE_CLASS;
-    void fn_802D02B0();
-    SD3DActorInfo* GetSD3DActorInfo();
     SoundHandle fn_802CFEBC(
         float arg1,
         float arg2,
@@ -68,7 +73,14 @@ public:
         int arg5,
         int arg6
     );
-    
+    void fn_802CFF80(int soundID, int arg2, bool add);
+    void fn_802D0074(int arg2, bool add);
+    bool HasSoundID(int soundID);
+    SD3DActorInfo* GetSD3DActorInfo();
+    void InvalidateInfoSoundID(SD3DActorInfo* pInfo) DONT_INLINE_CLASS;
+    int GetMatchingIndex(int soundID);
+    void fn_802D02B0();
+
     /* Class Members */
 
     /* 0x00 */ SD3DActorInfo mInfo[4];
