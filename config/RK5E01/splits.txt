@@ -197,6 +197,9 @@ fluff/object/gimmick/GmkVictoryStand.cpp:
 
 fluff/stage/mission/MissionClearChecker.cpp:
 	.text       start:0x804F56DC end:0x804F5ECC
+	.rodata     start:0x8081B768 end:0x8081B818
+	.data       start:0x808934C0 end:0x808935A8
+	.sdata      start:0x808E2FB0 end:0x808E2FE0
 
 fluff/object/gimmick/GmkMsCarrierGoal.cpp:
 	.text       start:0x804FA380 end:0x804FA9A0
