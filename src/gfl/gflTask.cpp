@@ -36,9 +36,9 @@ uint Task::PollTask() {
     Task* childTask;
     
     // if the task is about to execute and it has the means to do so, it will
-    if (!(mFlags & ~m_14) && mFunctor.HasFunctor()) {
+    if (!(mFlags & ~m_14) && mFunctorBase != nullptr) {
         TaskInfo::SetCurrentTask(this);
-        mFunctor();
+        mFunctorBase->operator()();
         TaskInfo::ClearCurrentTask();
 
         // after executing, check the task's information to see if the task still exists

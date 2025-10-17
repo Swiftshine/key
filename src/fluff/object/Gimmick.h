@@ -7,7 +7,6 @@
 #include "gfl/gflResFileInfo.h"
 #include "gflTask.h"
 #include "gfl/gflVec3.h"
-#include "util/FullSortSceneUtil.h"
 #include "misc/ScopedPointers.h"
 
 #include <nw4r/math.h>
@@ -52,7 +51,7 @@ public:
             , mPosition(0.0f, 0.0f, 0.0f)
             , mRotation(0.0f, 0.0f, 0.0f)
             , m_24(65)
-            , mFullSortSceneIndex(FullSortSceneUtil::SceneID::Game)
+            , mFullSortSceneIndex(6) // game index
             , m_2C(4)
             , m_30(0)
         {
