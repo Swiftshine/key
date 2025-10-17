@@ -14,7 +14,8 @@ static const int REMOTE_FILTER_MAX = 127;
 static const f32 VOLUME_MIN_DB = -90.4f;
 static const f32 VOLUME_MAX_DB = 6.0f;
 static const f32 VOLUME_RANGE_DB = -(VOLUME_MIN_DB - VOLUME_MAX_DB);
-static const int VOLUME_RANGE_MB = static_cast<int>(10 * VOLUME_RANGE_DB);
+// static const int VOLUME_RANGE_MB = static_cast<int>(10 * VOLUME_RANGE_DB);
+static const int VOLUME_RANGE_MB = 964;
 
 enum OutputLineFlag {
     OUTPUT_LINE_MAIN = (1 << 0),
