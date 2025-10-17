@@ -26,14 +26,16 @@ namespace gfl {
             , m_14(0)
         { }
 
-        inline Task(void* owner, void* functor)
-            : mFunctor()
+
+        // must rely on automatic type deduction
+        template <typename OwnerT, typename FunctionT>
+        inline Task(OwnerT owner, FunctionT function, const char* pTaskName)
+            : mFunctor(CreateTaskFunctor<void, OwnerT, FunctionT>(owner, function))
             , mFlags(0)
             , m_14(0)
         {
-            
+            Init(pTaskName);
         }
-            
 
         void Init(const char* newname);
 
@@ -63,11 +65,23 @@ namespace gfl {
             m_14 |= value;
         }
         
-    private:
-        TaskInfo* mTaskInfo;
-        gfl::Functor0<void> mFunctor;
-        int mFlags;
-        int m_14;
+        template <typename ReturnT, typename OwnerT, typename FunctionT>
+        inline Functor0<void> CreateTaskFunctor(OwnerT owner, FunctionT function) {
+            FunctorClassMethod0<ReturnT, OwnerT, FunctionT>* fcm0
+                = new (gfl::HeapID::LIB1) FunctorClassMethod0<ReturnT, OwnerT, FunctionT>(owner, function);
+
+            mFunctorBase = static_cast<FunctorBase0<ReturnT>*>(fcm0);
+            Functor0<ReturnT> f;
+            return f;
+        }
+
+        /* Class Members */
+
+        /* 0x04 */ TaskInfo* mTaskInfo;
+        /* 0x08 */ Functor0<void> mFunctor;
+        /* 0x0C */ FunctorBase0<void>* mFunctorBase;
+        /* 0x10 */ int mFlags;
+        /* 0x14 */ int m_14;
     };
 
     ASSERT_SIZE(Task, 0x18);

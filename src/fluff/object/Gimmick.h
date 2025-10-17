@@ -6,13 +6,14 @@
 #include "demo/EventDemoGimmickCommand.h"
 #include "gfl/gflResFileInfo.h"
 #include "gflTask.h"
+#include "gfl/gflVec3.h"
+#include "util/FullSortSceneUtil.h"
+#include "misc/ScopedPointers.h"
 
 #include <nw4r/math.h>
 #include <utility>
 #include <string>
 #include <vector>
-
-extern "C" const char Blank[];
 
 class StatedGimmick;
 class IObjHitCB;
@@ -46,25 +47,22 @@ public:
     public:
         /* Constructor + Destructor */
 
-        // this constructor was matching a while ago, what happened?
         inline GimmickBuildInfo()
             : mGimmickID(-1)
             , mPosition(0.0f, 0.0f, 0.0f)
             , mRotation(0.0f, 0.0f, 0.0f)
+            , m_24(65)
+            , mFullSortSceneIndex(FullSortSceneUtil::SceneID::Game)
+            , m_2C(4)
+            , m_30(0)
         {
-
-            m_24 = 'A';
-            mFullSortSceneIndex = 6;
-            m_2C = 4;
-            m_30 = 0;
-
             mGimmickInfo = nullptr;
             mCommonTag.mParts[0] = 0;
 
-            for (uint i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
                 mIntParams[i] = 0;
                 mFloatParams[i] = 0.0f;
-                mStringParams[i] = Blank;
+                mStringParams[i] = "";
             }
         }
 
@@ -123,7 +121,7 @@ public:
         } mCommonTag;
 
         /* 0x20 */ uint m_20;
-        /* 0x24 */ bool m_24;
+        /* 0x24 */ u8 m_24;
         /* 0x28 */ uint mFullSortSceneIndex;
         /* 0x2C */ uint m_2C;
         /* 0x30 */ uint m_30;
@@ -136,9 +134,9 @@ public:
 
     /* Constructors */
     /// @brief  For the most basic gimmicks.
-    Gimmick(int gmkID);
+    Gimmick(int gimmickID);
     /// @brief For gimmicks that control things in-level
-    Gimmick(int gmkID, const char* pTaskName);
+    Gimmick(int gimmickID, const char* pTaskName);
     /// @brief For "common" gimmicks.
     Gimmick(GimmickBuildInfo* pBuildInfo, const char* pTaskName);
     // unk
@@ -177,7 +175,7 @@ public:
     /* 0xB4 */ virtual void vfB4();
     /* 0xB8 */ virtual nw4r::math::VEC2 vfB8();
     /// @brief Executes processes.
-    /* 0xBC */ virtual void Update();
+    /* 0xBC */ virtual void Update() const;
     /* 0xC0 */ virtual bool vfC0(const char*);
 
     /* Class Methods */
@@ -207,7 +205,7 @@ public:
     /* 0x084 */ GimmickBuildInfo* mBuildInfoPtr;
     /* 0x088 */ GimmickBuildInfo mBuildInfo;
     /* 0x124 */ void* m_124;
-    /* 0x128 */ gfl::Task* mTask;
+    /* 0x128 */ gfl::Pointer<gfl::Task> mTask;
     /* 0x12C */ demo::EventDemoGimmickCommand* mCommand;
 };
 

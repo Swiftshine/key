@@ -9,122 +9,57 @@ namespace gfl {
     // the number at the end indicates how many parameters
     // this class takes. e.g. FunctorBase0, takes 0 parameters
 
-    /* FunctorBaseX */
-
     // FunctorBase is presumably an interface; there are no members
 
-
-    // ReturnT - return type
     template <typename ReturnT>
     class FunctorBase0 {
     public:
-        inline FunctorBase0() {
+        /* Virtual Methods */
 
-        }
-
-        virtual ReturnT operator()(); // not confirmed
-        virtual void operator=(const FunctorBase0<ReturnT>&); // not confirmed
-
-        virtual ~FunctorBase0();
-    private:
-
+        /* 0x08 */ virtual ReturnT operator()() = 0;
+        /* 0x0C */ virtual void operator=(const FunctorBase0<ReturnT>*) = 0;
+        /* 0x10 */ virtual ~FunctorBase0() = 0;
     };
 
-    template <typename ReturnT, typename Arg1T>
-    class FunctorBase1;
 
-
-    /* FunctorClassMethod */
-
-    // OwnerT is typically a pointer anyways
-    // e.g. `gfl::FunctorClassMethod0<void, Gimmick*, void (Gimmick::*)()const>`
     template <typename ReturnT, typename OwnerT, typename FunctionT>
-    class FunctorClassMethod0 {
-    private:
-        typedef FunctorClassMethod0<ReturnT, OwnerT, FunctionT> FunctorT;
+    class FunctorClassMethod0 : public FunctorBase0<ReturnT> {
     public:
-    
-        inline FunctorClassMethod0(OwnerT owner, FunctionT function) {
-            mOwner = owner;
-            mFunction = function;
-        }
+        inline FunctorClassMethod0(OwnerT owner, FunctionT function)
+            : mOwner(owner)
+            , mFunction(function)
+        { }
+        
+        /* 0x08 */ virtual ReturnT operator()() override;
+        /* 0x0C */ virtual void operator=(const FunctorBase0<ReturnT>*) override;
+        /* 0x10 */ virtual ~FunctorClassMethod0();
 
-        virtual ReturnT operator()();
-        virtual FunctorT* Clone();
-        virtual ~FunctorClassMethod0();
+        /* Class Members */
 
-        inline void SetOwner(OwnerT owner) {
-            mOwner = owner;
-        }
-
-        inline void SetOwner(void* owner) {
-            mOwner = (OwnerT)owner;
-        }
-
-        inline void SetFunction(FunctionT function) {
-            mFunction = function;
-        }
-
-        inline void SetFunction(void* function) {
-            mFunction = function;
-        }
-    private:
-        OwnerT mOwner;
-        FunctionT mFunction;
+        /* 0x4 */ OwnerT mOwner;
+        /* 0x8 */ FunctionT mFunction;
     };
 
-    /* FunctorImpl */
 
-    // FunctorT - `gfl::FunctorBaseX` class
     template <typename FunctorT>
     class FunctorImpl {
     public:
-
-        // template <typename ReturnT, typename OwnerT, typename FunctionT>
-        // inline FunctorImpl(OwnerT* owner, FunctionT function)
-        //     : mFunctor(new gfl::FunctorClassMethod0<ReturnT, OwnerT, FunctionT>(owner, function))
-        // {
-
-        // }
-
-        
-
-        inline FunctorImpl()
-            : mFunctor(new FunctorT)
-        {
-
-        }
-
-        inline virtual ~FunctorImpl() {
-            if (mFunctor != nullptr) {
-                delete mFunctor;
-            }
-        }
-
-        inline bool HasFunctor() {
-            return mFunctor != nullptr;
-        }
-
-        inline void operator()() {
-            mFunctor->operator()();
-        }
-    private:
-        FunctorT* mFunctor;
+        /* Virtual Methods */
+    
+        /* 0x8 */ virtual ~FunctorImpl() { }
     };
-
-    /* Functor0 */
 
     template <typename ReturnT>
-    class Functor0 : public FunctorImpl< FunctorBase0<void> > {
+    class Functor0 : public FunctorImpl<FunctorBase0<ReturnT> > {
     public:
-        inline Functor0()
-            : FunctorImpl()
-        { }
+        /* Virtual Methods */
 
-        inline virtual ~Functor0() { }
+        /* 0x8 */ virtual ~Functor0() { }
     };
 
 
+    template <typename ReturnT, typename Arg1T>
+    class FunctorBase1;
 
     template <typename ReturnT, typename Arg1T, typename Arg2T>
     class FunctorBase2 {

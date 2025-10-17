@@ -1,11 +1,12 @@
+#pragma ipa file
+
 #include "object/Gimmick.h"
 #include "manager/GmkMng.h"
 
-Gimmick::Gimmick(int gmkID)
+Gimmick::Gimmick(int gimmickID)
     : FlfGameObj(ObjectCategory::Gimmick)
-    , mGimmickID(gmkID)
+    , mGimmickID(gimmickID)
     , mBuildInfoPtr(0)
-
 {
     m_124 = 0;
     mTask = nullptr;
@@ -15,32 +16,22 @@ Gimmick::Gimmick(int gmkID)
     InitCommand();
 }
 
-Gimmick::Gimmick(int gmkID, const char* taskName)
+Gimmick::Gimmick(int gimmickID, const char* pTaskName)
     : FlfGameObj(ObjectCategory::Gimmick)
-    , mGimmickID(gmkID)
+    , mGimmickID(gimmickID)
     , mBuildInfoPtr(0)
 {
     m_124 = 0;
     mTask = nullptr;
     mCommand = nullptr;
-    
 
-    // "gfl::FunctorClassMethod0<void, Gimmick *, void (Gimmick::*)()const >"
+    mTask.Create(
+        new (gfl::HeapID::Work) gfl::Task(this, Gimmick::Update, pTaskName)
+    );
 
-    mTask = new gfl::Task;
-    if (mTask) {
-        mTask->Init(taskName);
-    } else {
-        delete mTask;
-        mTask = nullptr;
-    }
-
-    if (!mTask) {
-        delete mTask;
-        mTask = nullptr;
-    }
-
+    GmkMng::Instance()->mTask->MakeChild(mTask);
     GmkMng::Instance()->AddGimmick(this);
+    InitCommand();
 }
 
 void Gimmick::vfB0(int arg0) { /*(this->*state1)();*/ return; }
