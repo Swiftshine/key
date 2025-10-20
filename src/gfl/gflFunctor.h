@@ -16,9 +16,9 @@ namespace gfl {
     public:
         /* Virtual Methods */
 
-        /* 0x08 */ virtual ReturnT operator()() = 0;
-        /* 0x0C */ virtual void operator=(const FunctorBase0<ReturnT>*) = 0;
-        /* 0x10 */ virtual ~FunctorBase0() = 0;
+        /* 0x08 */ DECL_WEAK virtual ReturnT operator()() = 0;
+        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone(const FunctorBase0<ReturnT>*) = 0;
+        /* 0x10 */ DECL_WEAK virtual ~FunctorBase0() = 0;
     };
 
 
@@ -30,9 +30,12 @@ namespace gfl {
             , mFunction(function)
         { }
         
-        /* 0x08 */ virtual ReturnT operator()() override;
-        /* 0x0C */ virtual void operator=(const FunctorBase0<ReturnT>*) override;
-        /* 0x10 */ virtual ~FunctorClassMethod0();
+        /* 0x08 */ DECL_WEAK virtual ReturnT operator()();
+        
+        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone(const FunctorBase0<ReturnT>*);
+        
+
+        /* 0x10 */ DECL_WEAK virtual ~FunctorClassMethod0();
 
         /* Class Members */
 
