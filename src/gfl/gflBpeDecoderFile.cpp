@@ -16,6 +16,7 @@ BpeDecoderFile::BpeDecoderFile(File* pFile, size_t inputStreamPos) {
 
 BpeDecoderFile::~BpeDecoderFile() { }
 
+// nonmatching (unfinished)
 void* BpeDecoderFile::Decode(u8 heapID, size_t* pDecompressedSize, uint align) {
 	PrepareDecode();
 
@@ -65,4 +66,6 @@ LAB_80645298:
 
 	memcpy(left, left2, sizeof(left));
 	memset(right, 0, sizeof(right));
+
+	return 0;
 }
