@@ -8,6 +8,7 @@
 #include "gflTask.h"
 #include "gfl/gflVec3.h"
 #include "misc/ScopedPointers.h"
+#include "stage/StageModCtrl.h"
 
 #include <nw4r/math.h>
 #include <utility>
@@ -54,9 +55,9 @@ public:
             , mFullSortSceneIndex(6) // game index
             , m_2C(4)
             , m_30(0)
+            , mGimmickInfo(nullptr)
         {
-            mGimmickInfo = nullptr;
-            mCommonTag.mParts[0] = 0;
+            mCommonTag[0] = 0;
 
             for (int i = 0; i < 5; i++) {
                 mIntParams[i] = 0;
@@ -66,13 +67,6 @@ public:
         }
 
         inline ~GimmickBuildInfo() { }
-
-        inline void operator=(GimmickBuildInfo& rOther) {
-            mGimmickID = rOther.mGimmickID;
-            // mPosition = other.mPosition;
-            // mRotation = other.mRotation;
-            mCommonTag = rOther.mCommonTag;
-        }
 
         /* Helpful Inlines */
 
@@ -101,11 +95,7 @@ public:
         }
 
         inline const char* GetCommonTag() {
-            return mCommonTag.mParts;
-        }
-
-        inline uint GetCommonTagValue() {
-            return mCommonTag.mWhole;
+            return mCommonTag;
         }
 
         /* Class Members */
@@ -114,12 +104,8 @@ public:
         /* 0x04 */ nw4r::math::VEC3 mPosition;
         /* 0x10 */ nw4r::math::VEC3 mRotation;
 
-        /* 0x1C */ union {
-            char mParts[4];
-            uint mWhole;
-        } mCommonTag;
+        /* 0x1C */ char mCommonTag[8];
 
-        /* 0x20 */ uint m_20;
         /* 0x24 */ u8 m_24;
         /* 0x28 */ uint mFullSortSceneIndex;
         /* 0x2C */ uint m_2C;
@@ -182,7 +168,8 @@ public:
     void fn_8004E650(const char*);
     void InitCommand();
     void ProcessCommand();
-    void fn_8004ED1C();
+    void ClearGimmickCommands();
+
 
     /* Static Methods */
 
@@ -203,7 +190,7 @@ public:
     /* 0x080 */ int mGimmickID;
     /* 0x084 */ GimmickBuildInfo* mBuildInfoPtr;
     /* 0x088 */ GimmickBuildInfo mBuildInfo;
-    /* 0x124 */ void* m_124;
+    /* 0x124 */ gfl::Pointer<StageModCtrl> mStageModCtrl;
     /* 0x128 */ gfl::Pointer<gfl::Task> mTask;
     /* 0x12C */ demo::EventDemoGimmickCommand* mCommand;
 };
