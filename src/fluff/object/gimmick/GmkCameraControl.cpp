@@ -39,7 +39,7 @@ void GmkCameraControl::Init(GimmickBuildInfo* buildInfo) {
         mCameraType = CameraType::Both;
     } 
 
-    mCameraInfo.fn_803CB458(0, buildInfo->mCommonTag.mParts, 0);
+    mCameraInfo.fn_803CB458(0, buildInfo->mCommonTag, 0);
 
     const nw4r::math::VEC2 cam(buildInfo->mFloatParams[0], buildInfo->mFloatParams[1]);
     
