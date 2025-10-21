@@ -29,6 +29,20 @@ void SpringBase::Particle::CopyVec(const nw4r::math::VEC3& rSrc) {
     mEffectPosition = rSrc;
 }
 
+/* Spring */
+
+SpringBase::Spring::Spring() {
+    m_0 = 0;
+    m_4 = 0;
+    m_8 = 0.0f;
+    m_C = 0;
+    m_10 = -1.0f;
+}
+
+SpringBase::Spring::~Spring() { }
+
+/* SpringBase */
+
 int SpringBase::fn_800086B0() {
     return m_10C->mCount;
 }
