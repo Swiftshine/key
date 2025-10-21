@@ -9,6 +9,8 @@
 #include "gfl/gflVec3.h"
 #include "misc/ScopedPointers.h"
 #include "stage/StageModCtrl.h"
+#include "gfl/gflScnMdlWrapper.h"
+#include "graphics/FullSortScene.h"
 
 #include <nw4r/math.h>
 #include <utility>
@@ -165,7 +167,15 @@ public:
 
     /* Class Methods */
 
-    void fn_8004E650(const char*);
+    /* Staitc Methods */
+    gfl::Task* InitTask(const char* pTaskName);
+    gfl::ScnMdlWrapper* CreateScnMdlWrapper(
+        nw4r::g3d::ResFile resFile,
+        const char* pResMdlName,
+        uint flags,
+        FullSortScene* pScene
+    );
+
     void InitCommand();
     void ProcessCommand();
     void ClearGimmickCommands();
@@ -173,8 +183,9 @@ public:
 
     /* Static Methods */
 
-    static void GetResFileInfo(gfl::ResFileObject& rDest, Gimmick* pGmk);
-    static void GetResFileInfo(gfl::ResFileObject& rDest, Gimmick* pGmk, int gimmickID);
+    static void GetResFileInfo(gfl::ResFileObject& rDest, Gimmick* pGimmick) DONT_INLINE_CLASS;
+    static void GetResFileInfo(gfl::ResFileObject& rDest, Gimmick* pGimmick, int gimmickID) DONT_INLINE_CLASS;
+
     /// @brief Splits a formatted tag list into a vector of individual tags.
     /// @param pTagList The formatted tag list. E.g. "tag1;tag2;tag3;"
     /// @param rDest The destination vector.
