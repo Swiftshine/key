@@ -1,5 +1,33 @@
 #include "object/SpringBase.h"
 
+/* Particle */
+
+SpringBase::Particle::Particle()
+    : m_28(0.0f, 0.0f, 0.0f)
+    , m_60(0.0f, 0.0f, 0.0f)
+{
+    m_0 = 0.0f;
+    m_4 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    mEffectPosition = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    mPosition = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    m_34 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    m_40 = 0.0f;
+    m_44 = nullptr;
+    m_48 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    m_54 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+}
+
+SpringBase::Particle::~Particle() {
+    if (m_44 != nullptr) {
+        m_44->Destroy();
+    }
+}
+
+void SpringBase::Particle::CopyVec(const nw4r::math::VEC3& rSrc) {
+    mPosition = rSrc;
+    m_54 = rSrc;
+    mEffectPosition = rSrc;
+}
 
 int SpringBase::fn_800086B0() {
     return m_10C->mCount;
@@ -19,7 +47,7 @@ bool SpringBase::fn_80008738(uint index) {
     return mMainParticleArray[index].m_40;
 }
 
-void SpringBase::SetParticleEffectPositionByIndex(uint index, Vec3f& vec, bool syncPos) {
+void SpringBase::SetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& vec, bool syncPos) {
     Particle* particle = &mMainParticleArray[index];
 
     particle->mEffectPosition.x = vec.x;
@@ -35,11 +63,11 @@ void SpringBase::SetParticleEffectPositionByIndex(uint index, Vec3f& vec, bool s
     }
 }
 
-Vec3f SpringBase::GetParticleEffectPositionByIndex(uint index) {
+nw4r::math::VEC3 SpringBase::GetParticleEffectPositionByIndex(uint index) {
     return mMainParticleArray[index].mEffectPosition;
 }
 
-// void SpringBase::OffsetParticleEffectPositionByIndex(uint index, Vec3f& offset, bool syncPos) {
+// void SpringBase::OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& offset, bool syncPos) {
 
 // }
 
@@ -56,10 +84,10 @@ void SpringBase::OffsetParticleEffectPositionByIndex(uint index, Vec2f& offset, 
     }
 }
 
-// Vec3f SpringBase::GetParticleEffectOffsetByIndex(uint index) {
+// nw4r::math::VEC3 SpringBase::GetParticleEffectOffsetByIndex(uint index) {
 
 // }
 
-Vec3f SpringBase::fn_80008908(uint index) {
+nw4r::math::VEC3 SpringBase::fn_80008908(uint index) {
     return mMainParticleArray[index].m_54;
 }
