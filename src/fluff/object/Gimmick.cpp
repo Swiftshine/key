@@ -34,7 +34,7 @@ Gimmick::Gimmick(int gimmickID, const char* pTaskName)
     InitCommand();
 }
 
-// nonmatching
+
 Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo, const char* pTaskName)
     : FlfGameObj(ObjectCategory::Gimmick)
     , mStageModCtrl(nullptr)
@@ -66,7 +66,6 @@ Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo, const char* pTaskName)
 
 void Gimmick::Update() const { }
 
-// nonmatching
 Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo)
     : FlfGameObj(ObjectCategory::Gimmick)
     , mStageModCtrl(nullptr)
