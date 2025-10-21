@@ -5,8 +5,8 @@
 #include "gfl/gflTask.h"
 #include "graphics/KeyFrame.h"
 #include "gfl/gflArray.h"
-#include "gfl/gflResArchivedFileInfo.h"
 #include "gfl/gflPointer.h"
+#include "gfl/gflResFileInfo.h"
 #include <nw4r/g3d/g3d_obj.h>
 
 /// @note Size: `0x150`
@@ -83,7 +83,7 @@ public:
 
     /* Constructor */
 
-    SpringBase(u32, const char* pTaskName);
+    SpringBase(int arg1, const char* pTaskName);
 
     /* Virtual Methods */
 
@@ -93,7 +93,7 @@ public:
 
     /* 0x68 */ virtual void vf68();
     /* 0x6C */ virtual float GetZPos();
-    /* 0x70 */ virtual void vf70();
+    /* 0x70 */ virtual void Update() const;
     /* 0x74 */ virtual void vf74();
     /* 0x78 */ virtual void vf78();
     /* 0x7C */ virtual void vf7C();
@@ -143,17 +143,17 @@ public:
     /* Class Members */
 
     /* 0x80 */ gfl::Task mTask;
-    /* 0x98 */ gfl::Pointer<gfl::ResArchivedFileInfo> mResArchivedFileInfo;
+    /* 0x98 */ gfl::ResFileObject mResFileObject;
     /* 0x9C */ int m_9C;
-    /* 0xA0 */ gfl::Array<Particle> mMainParticleArray;
-    /* 0xA4 */ gfl::Array<Particle> mSubParticleArrays[4];
-    /* 0xA8 */ gfl::Array<Spring> mSprings;
+    /* 0xA0 */ Particle* mParticleArray1;
+    /* 0xA4 */ Particle* mParticleArray2;
+    /* 0xA8 */ Particle* mParticleArray3;
+    /* 0xAC */ Particle* mParticleArray4;
+    /* 0xB0 */ Particle* mParticleArray5;
+    /* 0xB4 */ Spring* mSpringArray;
     /* 0xB8 */ KeyFrame<float> mKeyFrame1;
-    /* 0xD0 */ bool m_D0;
     /* 0xD4 */ KeyFrame<float> mKeyFrame2;
-    /* 0xEC */ bool m_EC;
     /* 0xF0 */ KeyFrame<float> mKeyFrame3;
-    /* 0x108 */ bool m_108;
     /* 0x10C */ UnkStruct1* m_10C;
     /* 0x110 */ float m_110;
     /* 0x114 */ float m_114;
@@ -170,7 +170,7 @@ public:
     /* 0x140 */ float m_140;
     /* 0x144 */ int m_144;
     /* 0x148 */ int m_148;
-    /* 0x14C */ gfl::Array<UnkStruct2> m_14C;
+    /* 0x14C */ UnkStruct2* m_14C;
 };
 
 #endif
