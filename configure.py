@@ -471,7 +471,7 @@ config.libs = [
             Object(NonMatching, "gfl/gflMemory.cpp"),
             Object(Matching,    "gfl/gflMemoryBase.cpp"),
             Object(Matching,    "gfl/gflMemoryManagement.cpp"),
-            Object(NonMatching, "gfl/gflParam.cpp"),
+            Object(Matching, "gfl/gflParam.cpp"),
             Object(NonMatching, "gfl/gflRenderObj.cpp"),
             Object(NonMatching, "gfl/gflResArchivedFileInfo.cpp"),
             Object(Matching,    "gfl/gflResInfo.cpp"),

@@ -10,20 +10,27 @@ namespace gfl {
     class ParamS32;
     class ParamBool;
     
+    /// @brief Base class for parameter types.
+    /// @note Size: `0x24`
     class Param {
     public:
-        Param(const char* newLabel);
+        /* Constructor */
+        Param(const char* pLabel);
 
-        virtual int vf8() = 0;
-        virtual void vfC() = 0;
-        DECL_WEAK virtual ~Param();
-        virtual void Print(Console* console, uint numTabs) = 0;
+        /* Virtual Methods */
 
-        bool Matches(const char* queryLabel, uint queryChecksum);
-        void PrintTabs(Console* console, uint count);
-    public:
-        char mLabel[32];
-        uint mChecksum;
+        /* 0x08 */ virtual int vf8() = 0;
+        /* 0x0C */ virtual void vfC() = 0;
+        /* 0x10 */ DECL_WEAK virtual ~Param();
+        /* 0x14 */ virtual void Print(Console* pConsole, uint numTabs) = 0;
+
+        bool Matches(const char* pQuery, uint queryChecksum);
+        void PrintTabs(Console* pConsole, uint count);
+
+        /* Class Members */
+
+        /* 0x04 */ char mLabel[32];
+        /* 0x24 */ uint mChecksum;
     };
 
     // 'A' means 'array'

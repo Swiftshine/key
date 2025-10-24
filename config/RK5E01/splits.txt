@@ -290,7 +290,8 @@ gfl/gflFixedMemoryStream.cpp:
 
 gfl/gflParam.cpp:
 	.text       start:0x80656BD4 end:0x80656D00
-	.data       start:0x808B84C0 end:0x808B84D8
+	.rodata     start:0x8082CD20 end:0x8082CD28
+	.data       start:0x808B8520 end:0x808B8538
 
 gfl/gflCustomRenderObj.cpp:
 	.text       start:0x8065CF98 end:0x8065D5E8

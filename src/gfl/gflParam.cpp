@@ -6,46 +6,46 @@
 
 using namespace gfl;
 
-// String Array
+// // String Array
 
-ParamStrA::ParamStrA(const char* newLabel, uint count)
-    : Param(newLabel)
-    , mArray(nullptr)
-    , mCount(count)
-{
-    mArray = new (gfl::HeapID::LIB1) std::string[mCount];
-}
+// ParamStrA::ParamStrA(const char* newLabel, uint count)
+//     : Param(newLabel)
+//     , mArray(nullptr)
+//     , mCount(count)
+// {
+//     mArray = new (gfl::HeapID::LIB1) std::string[mCount];
+// }
 
-ParamStrA::~ParamStrA() {
-    delete[] mArray;
-}
+// ParamStrA::~ParamStrA() {
+//     delete[] mArray;
+// }
 
-int ParamStrA::vf8() {
-    return 0;
-}
+// int ParamStrA::vf8() {
+//     return 0;
+// }
 
-void ParamStrA::vfC() {
-    return;
-}
+// void ParamStrA::vfC() {
+//     return;
+// }
 
-void ParamStrA::Print(Console* console, uint numTabs) {
-    PrintTabs(console, numTabs);
+// void ParamStrA::Print(Console* console, uint numTabs) {
+//     PrintTabs(console, numTabs);
     
-    console->Print("str[]  %-20s= {\n", mLabel);
+//     console->Print("str[]  %-20s= {\n", mLabel);
 
-    for (uint i = 0; i < mCount; i++) {
-        PrintTabs(console, numTabs + 1);
-        const char* str = mArray[i].begin();
-        console->Print("\"%s\",\n", str);
-    }
+//     for (uint i = 0; i < mCount; i++) {
+//         PrintTabs(console, numTabs + 1);
+//         const char* str = mArray[i].begin();
+//         console->Print("\"%s\",\n", str);
+//     }
 
-    PrintTabs(console, numTabs);
-    console->Print("} ");
-    console->Print("\t#%s\n", 0);
-    console->Print("\n");
-}
+//     PrintTabs(console, numTabs);
+//     console->Print("} ");
+//     console->Print("\t#%s\n", 0);
+//     console->Print("\n");
+// }
 
-// Base Class
+// // Base Class
 
 Param::Param(const char* newLabel) {
     gfl::Strcpy(mLabel, sizeof(mLabel), newLabel);
@@ -61,11 +61,12 @@ bool Param::Matches(const char* queryLabel, uint queryChecksum) {
         ret = false;
     } else {
         int compResult = strcmp(mLabel, queryLabel);
-        ret = 0 == compResult;
+        ret = compResult == 0;
     }
 
     return ret;
 }
+
 
 void Param::PrintTabs(Console* console, uint count) {
     for (uint i = 0; i < count; i++) {
