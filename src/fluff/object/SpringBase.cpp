@@ -47,9 +47,9 @@ SpringBase::SpringBase(int arg1, const char* pTaskName)
     : FlfGameObj(ObjectCategory::Spring)
     , mTask(this, SpringBase::Update, pTaskName)
     , mResFileObject(nullptr)
-    , mKeyFrame1()
-    , mKeyFrame2()
-    , mKeyFrame3()
+    , mKeyFrameX()
+    , mKeyFrameY()
+    , mKeyFrameZ()
 {
     m_110 = 0.0f;
     m_114 = 0.0f;
@@ -119,42 +119,64 @@ bool SpringBase::fn_80008738(uint index) {
 }
 
 void SpringBase::SetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rVec, bool syncPos) {
-    Particle* particle = &mParticleArray1[index];
-
-    particle->mEffectPosition = rVec;
-
+    mParticleArray1[index].mEffectPosition = rVec;
     if (syncPos) {
-        particle = &mParticleArray1[index];
-
-        particle->mPosition = rVec;
+        mParticleArray1[index].mPosition = rVec;
     }
 }
 
 nw4r::math::VEC3 SpringBase::GetParticleEffectPositionByIndex(uint index) {
-    return mParticleArray1[index].mEffectPosition;
+    nw4r::math::VEC3 vec;
+    vec = mParticleArray1[index].mEffectPosition;
+    return vec;
 }
 
-// void SpringBase::OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& offset, bool syncPos) {
-
-// }
-
-void SpringBase::OffsetParticleEffectPositionByIndex(uint index, Vec2f& offset, bool syncPos ) {
+// https://decomp.me/scratch/Y9XVP
+void SpringBase::OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rOffset, bool syncPos) {
     Particle* particle = &mParticleArray1[index];
 
-    particle->mEffectPosition.x = offset.x - mPosition.x;
-    particle->mEffectPosition.y = offset.y - mPosition.y;
+    particle->mEffectPosition.x = rOffset.x - mPosition.x;
+    particle->mEffectPosition.y = rOffset.y - mPosition.y;
+    particle->mEffectPosition.z = rOffset.z - mPosition.z;
 
     if (syncPos) {
-        particle->mPosition.x = particle->mEffectPosition.x;
-        particle->mPosition.y = particle->mEffectPosition.y;
-        particle->mPosition.z = particle->mEffectPosition.z;
+        particle->mPosition = particle->mEffectPosition;
     }
 }
 
-// nw4r::math::VEC3 SpringBase::GetParticleEffectOffsetByIndex(uint index) {
+void SpringBase::OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC2& rOffset, bool syncPos ) {
+    Particle* particle = &mParticleArray1[index];
 
-// }
+    particle->mEffectPosition.x = rOffset.x - mPosition.x;
+    particle->mEffectPosition.y = rOffset.y - mPosition.y;
+
+    if (syncPos) {
+        particle->mPosition = particle->mEffectPosition;
+    }
+}
+
+// https://decomp.me/scratch/cAPvg
+void SpringBase::GetParticleEffectOffsetByIndex(nw4r::math::VEC3& rDst, uint index) {
+    nw4r::math::VEC3 offs = GetParticleEffectPositionByIndex(index);
+    rDst = offs + mPosition;
+}
 
 nw4r::math::VEC3 SpringBase::fn_80008908(uint index) {
     return mParticleArray1[index].m_54;
+}
+
+nw4r::math::VEC3 SpringBase::fn_80008930(uint index) {
+    nw4r::math::VEC3 offs = fn_80008908(index);
+    nw4r::math::VEC3 vec = nw4r::math::VEC3(0, 0, 0);
+
+    vec = offs - mPosition;
+    
+    return vec;
+}
+
+void SpringBase::fn_800089A0() {
+    if (m_14C == nullptr) {
+        m_14C = new (gfl::HeapID::Work) UnkStruct2[m_10C->mCount];
+        fn_8000BB50();
+    }
 }

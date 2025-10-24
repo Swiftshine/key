@@ -106,11 +106,11 @@ public:
     bool fn_80008738(uint index);
     void SetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rPos, bool syncPosition);
     nw4r::math::VEC3 GetParticleEffectPositionByIndex(uint index) DONT_INLINE_CLASS;
-    void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rOffset, bool syncPosition);
-    void OffsetParticleEffectPositionByIndex(uint index, Vec2f& rOffset, bool syncPosition);
-    nw4r::math::VEC3 GetParticleEffectOffsetByIndex(uint index);
-    nw4r::math::VEC3 fn_80008908(uint index);
-    nw4r::math::VEC3 fn_80008930(uint index);
+    void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rOffset, bool syncPosition) DONT_INLINE_CLASS;
+    void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC2& rOffset, bool syncPosition) DONT_INLINE_CLASS;
+    void GetParticleEffectOffsetByIndex(nw4r::math::VEC3& rDst, uint index) DONT_INLINE_CLASS;
+    nw4r::math::VEC3 fn_80008908(uint index) DONT_INLINE_CLASS;
+    nw4r::math::VEC3 fn_80008930(uint index) DONT_INLINE_CLASS;
     void fn_800089A0();
     void fn_80008A34(uint index, nw4r::math::VEC3& rVec, void* pArg3);
     void fn_80008A68(nw4r::math::VEC3& rVec, void* pArg2);
@@ -137,9 +137,12 @@ public:
     void fn_8000B74C();
     static bool fn_8000B888(float&, nw4r::math::VEC3&, nw4r::math::VEC3&);
     void fn_8000BA30();
-    void fn_8000BB50();
+    void fn_8000BB50() DONT_INLINE_CLASS;
     void fn_8000BBD4();
-
+    
+    inline nw4r::math::VEC3 GetBlankVec() {
+        return nw4r::math::VEC3(0, 0, 0);
+    }
     /* Class Members */
 
     /* 0x80 */ gfl::Task mTask;
@@ -151,9 +154,9 @@ public:
     /* 0xAC */ Particle* mParticleArray4;
     /* 0xB0 */ Particle* mParticleArray5;
     /* 0xB4 */ Spring* mSpringArray;
-    /* 0xB8 */ KeyFrame<float> mKeyFrame1;
-    /* 0xD4 */ KeyFrame<float> mKeyFrame2;
-    /* 0xF0 */ KeyFrame<float> mKeyFrame3;
+    /* 0xB8 */ KeyFrame<float> mKeyFrameX;
+    /* 0xD4 */ KeyFrame<float> mKeyFrameY;
+    /* 0xF0 */ KeyFrame<float> mKeyFrameZ;
     /* 0x10C */ UnkStruct1* m_10C;
     /* 0x110 */ float m_110;
     /* 0x114 */ float m_114;
