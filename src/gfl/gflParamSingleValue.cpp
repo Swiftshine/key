@@ -12,6 +12,6 @@ int ParamS32::vf8() {
     return 0;
 }
 
-__declspec(no_linker_opts) void ParamS32::vfC() { }
+DONT_OPTIMIZE void ParamS32::vfC() { }
 
-__declspec(no_linker_opts) void ParamS32::Print(Console* pConsole, uint numTabs) { }
+DONT_OPTIMIZE void ParamS32::Print(Console* pConsole, uint numTabs) { }

@@ -20,9 +20,9 @@ namespace gfl {
         /* Virtual Methods */
 
         /* 0x08 */ DECL_WEAK virtual int vf8() = 0;
-        /* 0x0C */ __declspec(no_linker_opts) virtual void vfC() = 0;
+        /* 0x0C */ virtual void vfC() = 0;
         /* 0x10 */ DECL_WEAK virtual ~Param();
-        /* 0x14 */ __declspec(no_linker_opts) virtual void Print(Console* pConsole, uint numTabs) = 0;
+        /* 0x14 */ virtual void Print(Console* pConsole, uint numTabs) = 0;
 
         bool Matches(const char* pQuery, uint queryChecksum);
         void PrintTabs(Console* pConsole, uint count);
@@ -40,13 +40,29 @@ namespace gfl {
         /* Virtual Methods */
 
         /* 0x08 */ DECL_WEAK virtual int vf8();
-        /* 0x0C */ __declspec(no_linker_opts) virtual void vfC();
+        /* 0x0C */ DONT_OPTIMIZE virtual void vfC();
         /* 0x10 */ DECL_WEAK virtual ~ParamS32();
-        /* 0x14 */ __declspec(no_linker_opts) virtual void Print(Console* pConsole, uint numTabs);
+        /* 0x14 */ DONT_OPTIMIZE virtual void Print(Console* pConsole, uint numTabs);
 
         /* Class Members */
 
         /* 0x28 */ int mValue;
+    };
+
+    class ParamF32 : public Param {
+    public:
+        ParamF32(const char* pLabel);
+
+        /* Virtual Methods */
+
+        /* 0x08 */ DECL_WEAK virtual int vf8();
+        /* 0x0C */ DONT_OPTIMIZE virtual void vfC();
+        /* 0x10 */ DECL_WEAK virtual ~ParamF32();
+        /* 0x14 */ DONT_OPTIMIZE virtual void Print(Console* pConsole, uint numTabs);
+
+        /* Class Methods */
+
+        /* 0x28 */ float mValue;
     };
 
 

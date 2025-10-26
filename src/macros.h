@@ -68,4 +68,6 @@
 # define NW4HBM_RANGE_FOR				NW4R_RANGE_FOR
 # define NW4HBM_RANGE_FOR_NO_AUTO_INC	NW4R_RANGE_FOR_NO_AUTO_INC
 
+#define DONT_OPTIMIZE __declspec(no_linker_opts)
+
 #endif
