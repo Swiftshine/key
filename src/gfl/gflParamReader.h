@@ -53,9 +53,9 @@ public:
     ParamStr* GetParamStr(ParamGroup* pParamGroup);
     ParamBool* GetParamBool(ParamGroup* pParamGroup);
     ParamS32A* GetParamS32A(ParamGroup* pParamGroup);
-    ParamS32A* GetParamF32A(ParamGroup* pParamGroup);
-    ParamS32A* GetParamStrA(ParamGroup* pParamGroup);
-    ParamS32A* GetParamBoolA(ParamGroup* pParamGroup);
+    ParamF32A* GetParamF32A(ParamGroup* pParamGroup);
+    ParamStrA* GetParamStrA(ParamGroup* pParamGroup);
+    ParamBoolA* GetParamBoolA(ParamGroup* pParamGroup);
 
     /* Class Members */
 

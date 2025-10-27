@@ -6,6 +6,7 @@ using namespace gfl;
 // https://decomp.me/scratch/gZhIe
 ParamReader::~ParamReader() { }
 
+// unfinished
 int ParamReader::GetTokenType() {
     int unk;
     
