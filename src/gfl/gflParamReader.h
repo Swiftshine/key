@@ -7,22 +7,43 @@
 
 namespace gfl {
 
+// force 4-byte alignment
+#pragma pack(push, 1)
 class ParamReader {
 public:
+    // required to use because the std::string destructor is both
+    // non-inline and non-matching
+    struct String {
+        String() 
+            : m_0(0)
+            , m_4(0)
+            , mString(nullptr)
+        { }
+
+        ~String() {
+            if ((m_0 >> 31)) {
+                delete mString;
+            }
+        }
+        unsigned int m_0;
+        unsigned int m_4;
+        const char* mString;
+    };
+
     /* Structures */
 
     ENUM_CLASS(TokenType,
         End             = -1,
         Invalid         = 0,
-        LeftBrace       = 1,
-        RightBrace      = 2,
-        LeftParen       = 3,
-        RightParen      = 4,
-        LeftBracket     = 5,
-        RightBracket    = 6,
-        Comma           = 7,
-        Assignment      = 8,
-        Minus           = 9,
+        LeftBrace       = 1, // {
+        RightBrace      = 2, // }
+        LeftParen       = 3, // (
+        RightParen      = 4, // )
+        LeftBracket     = 5, // [
+        RightBracket    = 6, // ]
+        Comma           = 7, // ,
+        Assignment      = 8, // =
+        Minus           = 9, // -
         TypeS32         = 10, // the data type "s32"
         TypeF32         = 11, // the data type "f32"
         TypeString      = 12, // the data type "str"
@@ -42,7 +63,8 @@ public:
     ~ParamReader();
 
     /* Class Methods */
-    int GetTokenType();
+    /// @return a `TokenType`.
+    int ParseToken();
     const char* GetTokenString(int tokenType);
     void fn_80652EC8();
     void fn_80653124();
@@ -57,28 +79,64 @@ public:
     ParamStrA* GetParamStrA(ParamGroup* pParamGroup);
     ParamBoolA* GetParamBoolA(ParamGroup* pParamGroup);
 
+    inline void ReadCharacter() {
+        int lastRead;
+        if (mBufferSeekPosition == mBufferLength) {
+            size_t numRead = mFixedMemoryStream->Read(mBuffer, sizeof(mBuffer));
+            mBufferLength = numRead;
+            if (numRead == 0) {
+                lastRead = -1;
+            } else {
+                mBufferSeekPosition = 0;
+            }
+        } else {
+            char byte = mBuffer[mBufferSeekPosition];
+            lastRead = byte;
+            mBufferSeekPosition++;
+            mCurrentLineContents[mCurrentColumn] = byte;
+            mCurrentColumn++;
+        }
+
+        mLastReadCharacter = lastRead;
+    }
+
+    bool IsAlphabetic(int character) {
+        if (character - 'A' < 26 || character - 'a' < 26) {
+            return true;
+        }
+
+        return false;
+    }
+
+    bool IsNewline(int character) {
+        if (character == '\r' || character == '\n') {
+            return true;
+        }
+
+        return false;
+    }
+
+    void UpdateWorkingBuffer(char byte) {
+        mWorkingBuffer[mWorkingBufferLength++] = byte;
+    }
     /* Class Members */
 
     /* 0x000 */ FixedMemoryStream* mFixedMemoryStream;
-    /* 0x004 */ union {
-        int mInt;
-        float mFloat;
-        double mDouble;
-    } mCurrentValue;
-    /* 0x00C */ char mParamGroupName[512];
-    /* 0x20C */ size_t mParamGroupNameLength;
+    /* 0x004 */ double mCurrentValue;
+    /* 0x00C */ char mWorkingBuffer[512];
+    /* 0x20C */ size_t mWorkingBufferLength;
     /* 0x210 */ char mBuffer[512];
-    /* 0x410 */ size_t mBufferSize;
+    /* 0x410 */ size_t mBufferLength;
     /* 0x414 */ size_t mBufferSeekPosition;
     /* 0x418 */ int mLastReadCharacter; // specifically an int, not a char
     /* 0x41C */ char mCurrentLineContents[512];
     /* 0x61C */ size_t mCurrentColumn; // refers to the file
     /* 0x620 */ size_t mCurrentLineNumber; // refers to the file
-    /* 0x624 */ std::string mFilename;
+    /* 0x624 */ String mFilename;
     /* 0x630 */ bool m_630;
     /* 0x634 */ int mCurrentTokenType;
 };
-
+#pragma pack(pop)
 }
 
 #endif
