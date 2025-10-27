@@ -294,6 +294,9 @@ gfl/gflParamSingleValue.cpp:
 	.data       start:0x808B8380 end:0x808B8468
 	.sdata      start:0x808E4478 end:0x808E4498
 
+gfl/gflParamReader.cpp:
+	.text       start:0x80651D00 end:0x8065664C
+
 gfl/gflParamBase.cpp:
 	.text       start:0x80656BD4 end:0x80656D00
 	.rodata     start:0x8082CD20 end:0x8082CD28

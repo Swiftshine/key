@@ -7,8 +7,13 @@
 #include "gflConsole.h"
 
 namespace gfl {
+    class ParamStr;
     class ParamS32;
     class ParamBool;
+    class ParamS32A;
+    class ParamF32A;
+    class ParamStrA;
+    class ParamBoolA;
     
     /// @brief Base class for parameter types.
     /// @note Size: `0x24`
