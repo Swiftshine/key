@@ -7,8 +7,6 @@
 
 namespace gfl {
 
-// force 4-byte alignment
-#pragma pack(push, 1)
 class ParamReader {
 public:
     // required to use because the std::string destructor is both
@@ -59,7 +57,7 @@ public:
 
 
     /* Constructor + Destructor */
-    ParamReader();
+    ParamReader(FixedMemoryStream* pMemoryStream);
     ~ParamReader();
 
     /* Class Methods */
@@ -67,7 +65,7 @@ public:
     int ParseToken();
     const char* GetTokenString(int tokenType);
     void fn_80652EC8();
-    void fn_80653124();
+    void Reset() DONT_INLINE_CLASS;
     Param* GetNextParam(ParamGroup* pParamGroup);
     ParamGroup* GetParamGroup(ParamGroup* pParamGroup);
     ParamS32* GetParamS32(ParamGroup* pParamGroup);
@@ -79,29 +77,46 @@ public:
     ParamStrA* GetParamStrA(ParamGroup* pParamGroup);
     ParamBoolA* GetParamBoolA(ParamGroup* pParamGroup);
 
-    inline void ReadCharacter() {
-        int lastRead;
-        if (mBufferSeekPosition == mBufferLength) {
-            size_t numRead = mFixedMemoryStream->Read(mBuffer, sizeof(mBuffer));
-            mBufferLength = numRead;
-            if (numRead == 0) {
-                lastRead = -1;
-            } else {
-                mBufferSeekPosition = 0;
-            }
-        } else {
-            char byte = mBuffer[mBufferSeekPosition];
-            lastRead = byte;
-            mBufferSeekPosition++;
-            mCurrentLineContents[mCurrentColumn] = byte;
-            mCurrentColumn++;
+    // the below inline functions are not inline in YWW
+    
+    inline bool Read() {
+        size_t len = mFixedMemoryStream->Read(mBuffer, sizeof(mBuffer));
+
+        mBufferLength = len;
+        if (len == 0) {
+            return false;
         }
 
-        mLastReadCharacter = lastRead;
+        mBufferSeekPosition = 0;
+        return true;
     }
+    
+    inline int ReadCharacter() {
+        if (mBufferSeekPosition == mBufferLength) {            
+            if (!Read()) {
+                return -1;
+            }
+        } 
+
+        u8 chr = mBuffer[mBufferSeekPosition];
+        mBufferSeekPosition++;
+        mCurrentLineContents[mCurrentColumn] = chr;
+        mCurrentColumn++;
+
+        return chr;
+    }
+    
 
     bool IsAlphabetic(int character) {
         if (character - 'A' < 26 || character - 'a' < 26) {
+            return true;
+        }
+
+        return false;
+    }
+
+    bool IsNumeric(int character) {
+        if (character - '0' <= 9 || character == '.') {
             return true;
         }
 
@@ -115,19 +130,30 @@ public:
 
         return false;
     }
+    
+    bool IsWhitespace(int character) {
+        if (character == ' ' || character == '\t') {
+            return true;
+        }
+
+        return false;
+    }
+
 
     void UpdateWorkingBuffer(char byte) {
         mWorkingBuffer[mWorkingBufferLength++] = byte;
     }
+
     /* Class Members */
 
     /* 0x000 */ FixedMemoryStream* mFixedMemoryStream;
-    /* 0x004 */ double mCurrentValue;
+    /* 0x004 */ int mIntValue;
+    /* 0x008 */ float mFloatValue;
     /* 0x00C */ char mWorkingBuffer[512];
     /* 0x20C */ size_t mWorkingBufferLength;
     /* 0x210 */ char mBuffer[512];
-    /* 0x410 */ size_t mBufferLength;
-    /* 0x414 */ size_t mBufferSeekPosition;
+    /* 0x410 */ int mBufferLength;
+    /* 0x414 */ int mBufferSeekPosition;
     /* 0x418 */ int mLastReadCharacter; // specifically an int, not a char
     /* 0x41C */ char mCurrentLineContents[512];
     /* 0x61C */ size_t mCurrentColumn; // refers to the file
@@ -136,7 +162,7 @@ public:
     /* 0x630 */ bool m_630;
     /* 0x634 */ int mCurrentTokenType;
 };
-#pragma pack(pop)
+
 }
 
 #endif

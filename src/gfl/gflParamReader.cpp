@@ -1,7 +1,15 @@
+#pragma merge_float_consts off
 #include <cstring>
 #include "gflParamReader.h"
 
 using namespace gfl;
+
+extern "C" void GFL_HALT();
+
+const char* TokenTypes[] = {
+    "TOKEN_INVALID",
+    
+};
 
 ParamReader::~ParamReader() { }
 
@@ -10,8 +18,8 @@ int ParamReader::ParseToken() {
     mWorkingBufferLength = 0;
     mWorkingBuffer[0] = '\0';
 
-    if (mLastReadCharacter == 0xFFFFFFFE) {
-        ReadCharacter();
+    if (mLastReadCharacter == -2) {
+        mLastReadCharacter = ReadCharacter();
     }
 
     fn_80652EC8();
@@ -68,7 +76,7 @@ int ParamReader::ParseToken() {
     }
 
 
-    if (lastRead - '0' > 9 && lastRead != '.') {
+    if (IsNumeric(lastRead)) {
         // maybe alphabetic
         bool isAlphabetic = IsAlphabetic(lastRead);
 
@@ -167,7 +175,7 @@ int ParamReader::ParseToken() {
         while (true) {
             int lastRead = mLastReadCharacter;
 
-            if (lastRead - '0' > 9 && lastRead != '.' && lastRead != 'f') {
+            if (!IsNumeric(lastRead) && lastRead != 'f') {
                 goto END;
             }
 
@@ -188,11 +196,11 @@ END:
         UpdateWorkingBuffer('\0');
 
         if (isFloat) {
-            mCurrentValue = strtod(mWorkingBuffer, nullptr);
+            mFloatValue = static_cast<float>(strtod(mWorkingBuffer, nullptr));
             return TokenType::ValueF32;
         }
 
-        mCurrentValue = static_cast<float>(strtol(mWorkingBuffer, nullptr, 10));
+        mFloatValue = static_cast<float>(strtol(mWorkingBuffer, nullptr, 10));
         return TokenType::ValueS32;
     }
 }
@@ -224,4 +232,74 @@ const char* ParamReader::GetTokenString(int tokenType) {
         
         default:                        return "UNKNOWN TOKEN";
     }
+}
+
+// https://decomp.me/scratch/oHJ5Z
+void ParamReader::fn_80652EC8() {
+    while (true) {
+        int lastRead = mLastReadCharacter;
+
+        if (!IsNewline(lastRead)) {
+            if (!IsWhitespace(lastRead)) {
+                if (lastRead != '/') {
+                    return;
+                }
+
+                ReadCharacter();
+
+                if (lastRead == '/') {
+                    while (mLastReadCharacter != '\n' && mLastReadCharacter > -1) {
+                        ReadCharacter();
+                    }
+                } else {
+                    Reset();
+                }
+
+                continue;
+            }
+        }
+
+        if (lastRead == '\n') {
+            mCurrentColumn = 0;
+            mCurrentLineNumber++;
+
+            ReadCharacter();
+        }
+    }
+}
+
+void ParamReader::Reset() {
+    int lastRead = ReadCharacter();
+
+    while (!IsNewline(lastRead) && lastRead >= 0) {
+        lastRead = ReadCharacter();
+    }
+
+    if (IsNewline(lastRead)) {
+        int col = mCurrentColumn;
+        if (col >= 2) {
+            mCurrentLineContents[mCurrentColumn - 2] = '\0';
+        } else if (col >= 1) {
+            mCurrentLineContents[mCurrentColumn - 1] = '\0';
+        }
+    } else {
+        mCurrentLineContents[mCurrentColumn] = '\0';
+    }
+}
+
+ParamReader::ParamReader(FixedMemoryStream* pMemoryStream)
+    : mFixedMemoryStream(pMemoryStream)
+    , mIntValue(0)
+    , mFloatValue(0.0f)
+    , mWorkingBufferLength(0)
+    , mBufferLength(0)
+    , mBufferSeekPosition(0)
+    , mLastReadCharacter(-2)
+    , mCurrentColumn(0)
+    , mCurrentLineNumber(1)
+    , mFilename()
+{
+    memset(mWorkingBuffer, 0, sizeof(mWorkingBuffer));
+    memset(mCurrentLineContents, 0, sizeof(mCurrentLineContents));
+    m_630 = false;
 }
