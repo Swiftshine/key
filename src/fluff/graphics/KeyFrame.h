@@ -54,7 +54,7 @@ public:
 
     /* Class Methods */
     void IncrementCurrentFrame(float amount);
-
+    float GetFrame(std::string* pString);
     /* Class Members */
 
     /* 0x04 */ Dummy2 mFrameHolder;

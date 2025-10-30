@@ -69,7 +69,7 @@ public:
     /// @note Size: `0x38`
     struct UnkStruct1 {
         /* 0x00 */ STRUCT_FILL(0x34);
-        /* 0x34 */ int mCount;
+        /* 0x34 */ uint mCount;
     };
 
     /// @note Size: `0x10`
@@ -77,7 +77,7 @@ public:
         UnkStruct2();
 
         /* 0x0 */ nw4r::math::VEC3 m_0;
-        /* 0xC */ void* m_C;
+        /* 0xC */ int m_C;
     };
 
 
@@ -108,14 +108,14 @@ public:
     nw4r::math::VEC3 GetParticleEffectPositionByIndex(uint index) DONT_INLINE_CLASS;
     void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rOffset, bool syncPosition) DONT_INLINE_CLASS;
     void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC2& rOffset, bool syncPosition) DONT_INLINE_CLASS;
-    void GetParticleEffectOffsetByIndex(nw4r::math::VEC3& rDst, uint index) DONT_INLINE_CLASS;
-    nw4r::math::VEC3 fn_80008908(uint index) DONT_INLINE_CLASS;
-    nw4r::math::VEC3 fn_80008930(uint index) DONT_INLINE_CLASS;
+    static void GetParticleEffectOffsetByIndex(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) DONT_INLINE_CLASS;
+    static void fn_80008908(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) DONT_INLINE_CLASS;
+    static void fn_80008930(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) DONT_INLINE_CLASS;
     void fn_800089A0();
-    void fn_80008A34(uint index, nw4r::math::VEC3& rVec, void* pArg3);
-    void fn_80008A68(nw4r::math::VEC3& rVec, void* pArg2);
-    nw4r::math::VEC3 fn_80008AE0();
-    void fn_80008BB0(MTX34& mtx);
+    void fn_80008A34(uint index, const nw4r::math::VEC3& rVec, int arg3) DONT_INLINE_CLASS;
+    void fn_80008A68(nw4r::math::VEC3& rVec, int arg2) DONT_INLINE_CLASS;
+    static void GetKeyframes(nw4r::math::VEC3& rDst, SpringBase* pSpringBase);
+    void fn_80008BB0(nw4r::math::MTX34& rMtx);
     void fn_80008DC0(MTX34& mtx);
     void fn_800090A4(void* pArg1, void* pArg2, void* pArg3);
     float fn_80009248(uint index);
@@ -140,9 +140,6 @@ public:
     void fn_8000BB50() DONT_INLINE_CLASS;
     void fn_8000BBD4();
     
-    inline nw4r::math::VEC3 GetBlankVec() {
-        return nw4r::math::VEC3(0, 0, 0);
-    }
     /* Class Members */
 
     /* 0x80 */ gfl::Task mTask;
