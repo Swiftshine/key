@@ -234,41 +234,33 @@ const char* ParamReader::GetTokenString(int tokenType) {
     }
 }
 
-// https://decomp.me/scratch/oHJ5Z
+// https://decomp.me/scratch/0pegK
+// (not done)
 void ParamReader::fn_80652EC8() {
-    while (true) {
-        int lastRead = mLastReadCharacter;
+    int lastRead;
 
-        if (!IsNewline(lastRead)) {
-            if (!IsWhitespace(lastRead)) {
-                if (lastRead != '/') {
+    while (true) {
+        lastRead = mLastReadCharacter;
+        if (!IsWhitespace(lastRead)) {
+            while (!IsNewline(lastRead)) {
+                if (lastRead < 0 || lastRead != '/') {
                     return;
                 }
 
-                ReadCharacter();
+                lastRead = ReadCharacter();
+                mLastReadCharacter = lastRead;
 
-                if (lastRead == '/') {
-                    while (mLastReadCharacter != '\n' && mLastReadCharacter > -1) {
-                        ReadCharacter();
-                    }
-                } else {
-                    Reset();
+                if (lastRead != '/') {
+                    return;
                 }
-
-                continue;
             }
         }
 
-        if (lastRead == '\n') {
-            mCurrentColumn = 0;
-            mCurrentLineNumber++;
-
-            ReadCharacter();
-        }
+        mLastReadCharacter = ReadCharacter();
+        Reset();
     }
 }
-
-void ParamReader::Reset() {
+void ParamReader::Reset(int) { // argument is unused
     int lastRead = ReadCharacter();
 
     while (!IsNewline(lastRead) && lastRead >= 0) {

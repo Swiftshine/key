@@ -23,9 +23,15 @@ public:
                 delete mString;
             }
         }
+
+        std::string& ToString() {
+            return *reinterpret_cast<std::string*>(this);
+        }
+
         unsigned int m_0;
         unsigned int m_4;
         const char* mString;
+
     };
 
     /* Structures */
@@ -65,7 +71,7 @@ public:
     int ParseToken();
     const char* GetTokenString(int tokenType);
     void fn_80652EC8();
-    void Reset() DONT_INLINE_CLASS;
+    void Reset(int unused = 1) DONT_INLINE_CLASS;
     Param* GetNextParam(ParamGroup* pParamGroup);
     ParamGroup* GetParamGroup(ParamGroup* pParamGroup);
     ParamS32* GetParamS32(ParamGroup* pParamGroup);
