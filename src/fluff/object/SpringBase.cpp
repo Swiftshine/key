@@ -50,10 +50,8 @@ SpringBase::SpringBase(int arg1, const char* pTaskName)
     , mKeyFrameX()
     , mKeyFrameY()
     , mKeyFrameZ()
+    , mCurrentKeyFrames(0.0f, 0.0f, 0.0f)
 {
-    m_110 = 0.0f;
-    m_114 = 0.0f;
-    m_118 = 0.0f;
     m_11C = 0.0f;
     m_120 = 0.0f;
     m_124 = 0.0f;
@@ -203,15 +201,15 @@ void SpringBase::GetKeyframes(nw4r::math::VEC3& rDst, SpringBase* pSpringBase) {
     float y = 0.0f;
     float z = 0.0f;
 
-    if (pSpringBase->mKeyFrameX.mFrameHolder.mCount != 0) {
+    if (pSpringBase->mKeyFrameX.mInnerKeyFrames.size() != 0) {
         x = pSpringBase->mKeyFrameX.GetFrame(nullptr);
     }
 
-    if (pSpringBase->mKeyFrameY.mFrameHolder.mCount != 0) {
+    if (pSpringBase->mKeyFrameY.mInnerKeyFrames.size() != 0) {
         y = pSpringBase->mKeyFrameY.GetFrame(nullptr);
     }
 
-    if (pSpringBase->mKeyFrameZ.mFrameHolder.mCount != 0) {
+    if (pSpringBase->mKeyFrameZ.mInnerKeyFrames.size() != 0) {
         z = pSpringBase->mKeyFrameZ.GetFrame(nullptr);
     }
 
@@ -220,54 +218,137 @@ void SpringBase::GetKeyframes(nw4r::math::VEC3& rDst, SpringBase* pSpringBase) {
     rDst.z = z;
 }
 
+
+inline float FloatAbs(float f) {
+    return f < 0.0f ? -f : f;
+} 
+
 inline bool SomeInline(const nw4r::math::VEC3& rVec) {
-    float f = rVec.x;
-
-    if (rVec.x < 0.0f) {
-        f = -rVec.x;
-    }
-
-    if (f < NW4R_MATH_FLT_EPSILON) {
-        f = rVec.y;
-        if (rVec.y < 0.0f) {
-            f = -rVec.y;
-        }
-
-        if (f < NW4R_MATH_FLT_EPSILON) {
-            f = rVec.z;
-            if (rVec.z < 0.0f) {
-                f = -rVec.z;
-            }
-
-            if (f < NW4R_MATH_FLT_EPSILON) {
-                return true;
-            }
-        }
+    if (FloatAbs(rVec.x) < NW4R_MATH_FLT_EPSILON &&
+        FloatAbs(rVec.y) < NW4R_MATH_FLT_EPSILON && 
+        FloatAbs(rVec.z) < NW4R_MATH_FLT_EPSILON)
+    {
+        return true;
     }
 
     return false;
 }
 
-// not complete
-void SpringBase::fn_80008BB0(nw4r::math::MTX34& rMtx) {
-    PSMTXIdentity(rMtx);
-    nw4r::math::VEC3 offs0;
-    nw4r::math::VEC3 offs1;
-    GetParticleEffectOffsetByIndex(offs0, this, 0);
-    GetParticleEffectOffsetByIndex(offs1, this, 1);
-    
-    nw4r::math::VEC3 offs;
-    VEC3Sub(&offs, &offs0, &offs1);
 
-    nw4r::math::VEC3 vec1(0.0f, -1.0f, 0.0f);
+inline float VecAngle(nw4r::math::VEC3 &vec1, nw4r::math::VEC3 &vec2){
+    float y =  VEC3Dot(&vec1, &vec2) / (PSVECMag(vec1) * PSVECMag(vec2));
 
-    if (SomeInline(offs)) {
-
+    if (y > 1.0f) {
+        y = 1.0f;
     }
 
+    if (y < -1.0f) {
+        y = -1.0f;
+    }
 
-    rMtx[0][3] = offs.x;
-    rMtx[1][3] = offs.y;
-    rMtx[2][3] = offs.z;
+    return acos(y);
 }
 
+void SpringBase::fn_80008BB0(nw4r::math::MTX34& rMtx) {
+    nw4r::math::VEC3 offs0;
+    nw4r::math::VEC3 offs;
+    nw4r::math::VEC3 vec1;
+    nw4r::math::VEC3 vec2;
+    nw4r::math::VEC3 offs1;
+    
+    PSMTXIdentity(rMtx);
+    GetParticleEffectOffsetByIndex(offs0, this, 0);
+    GetParticleEffectOffsetByIndex(offs1, this, 1);
+
+    const nw4r::math::VEC3* offsptr1 = &offs1;
+    nw4r::math::VEC3* offsptr = &offs;
+    const nw4r::math::VEC3* offsptr0 = &offs0;
+
+    offs.x = 0.0f;
+    offs.y = 0.0f;
+    offs.z = 0.0f;
+    
+    VEC3Sub(offsptr, offsptr0, offsptr1);
+    
+    float y = 0.0f;
+
+    vec1.x = 0.0f;
+    vec1.y = -1.0f;
+    vec1.z = 0.0f;
+
+    
+    if (!SomeInline(offs)) {
+        y = VecAngle(offs,vec1);
+    }
+
+    vec2.x = 0.0f;
+    vec2.y = 0.0f;
+    vec2.z = 0.0f;
+
+    PSVECCrossProduct(vec1, offs, vec2);
+
+    y *= vec2.z >= 0.0f ? 1.0f : -1.0f;
+
+    MTX34RotXYZRad(&rMtx, 0.0f, 0.0f, y);
+    rMtx[0][3] = offs0.x;
+    rMtx[1][3] = offs0.y;
+    rMtx[2][3] = offs0.z;
+}
+
+void SpringBase::fn_80008DC0(nw4r::math::MTX34& rMtx) {
+    nw4r::math::VEC3 offs0;
+    nw4r::math::VEC3 offs;
+    nw4r::math::VEC3 vec1;
+    nw4r::math::VEC3 vec2;
+    nw4r::math::VEC3 offs1;
+    
+    PSMTXIdentity(rMtx);
+    GetParticleEffectOffsetByIndex(offs0, this, m_10C->mCount - 1);
+    GetParticleEffectOffsetByIndex(offs1, this, m_10C->mCount - 2);
+
+    const nw4r::math::VEC3* offsptr1 = &offs1;
+    nw4r::math::VEC3* offsptr = &offs;
+    const nw4r::math::VEC3* offsptr0 = &offs0;
+
+    offs.x = 0.0f;
+    offs.y = 0.0f;
+    offs.z = 0.0f;
+    
+    VEC3Sub(offsptr, offsptr0, offsptr1);
+    offs.z = 0.0f;
+
+    float y = 0.0f;
+
+    vec1.x = 0.0f;
+    vec1.y = -1.0f;
+    vec1.z = 0.0f;
+
+    
+    if (!SomeInline(offs)) {
+        y = VecAngle(offs,vec1);
+    }
+
+    vec2.x = 0.0f;
+    vec2.y = 0.0f;
+    vec2.z = 0.0f;
+
+    PSVECCrossProduct(vec1, offs, vec2);
+
+    y *= vec2.z >= 0.0f ? 1.0f : -1.0f;
+
+    MTX34RotXYZRad(&rMtx, 0.0f, 0.0f, y);
+    rMtx[0][3] = offs0.x;
+    rMtx[1][3] = offs0.y;
+    rMtx[2][3] = offs0.z;
+    
+}
+
+float SpringBase::vf68() {
+    float ret = 0.0f;
+    
+    for (uint i = 0; i < m_10C->m_38; i++) {
+        ret += mSpringArray[i].m_8;
+    }
+
+    return ret;
+}

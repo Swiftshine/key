@@ -66,10 +66,11 @@ public:
 
 
 
-    /// @note Size: `0x38`
+    /// @note size unk
     struct UnkStruct1 {
         /* 0x00 */ STRUCT_FILL(0x34);
         /* 0x34 */ uint mCount;
+        /* 0x38 */ int m_38;
     };
 
     /// @note Size: `0x10`
@@ -91,7 +92,7 @@ public:
 
     /* SpringBase */
 
-    /* 0x68 */ virtual void vf68();
+    /* 0x68 */ virtual float vf68();
     /* 0x6C */ virtual float GetZPos();
     /* 0x70 */ virtual void Update() const;
     /* 0x74 */ virtual void vf74();
@@ -116,7 +117,7 @@ public:
     void fn_80008A68(nw4r::math::VEC3& rVec, int arg2) DONT_INLINE_CLASS;
     static void GetKeyframes(nw4r::math::VEC3& rDst, SpringBase* pSpringBase);
     void fn_80008BB0(nw4r::math::MTX34& rMtx);
-    void fn_80008DC0(MTX34& mtx);
+    void fn_80008DC0(nw4r::math::MTX34& rMtx);
     void fn_800090A4(void* pArg1, void* pArg2, void* pArg3);
     float fn_80009248(uint index);
     float fn_8000925C(uint index);
@@ -142,22 +143,20 @@ public:
     
     /* Class Members */
 
-    /* 0x80 */ gfl::Task mTask;
-    /* 0x98 */ gfl::ResFileObject mResFileObject;
-    /* 0x9C */ int m_9C;
-    /* 0xA0 */ Particle* mParticleArray1;
-    /* 0xA4 */ Particle* mParticleArray2;
-    /* 0xA8 */ Particle* mParticleArray3;
-    /* 0xAC */ Particle* mParticleArray4;
-    /* 0xB0 */ Particle* mParticleArray5;
-    /* 0xB4 */ Spring* mSpringArray;
-    /* 0xB8 */ KeyFrame<float> mKeyFrameX;
-    /* 0xD4 */ KeyFrame<float> mKeyFrameY;
-    /* 0xF0 */ KeyFrame<float> mKeyFrameZ;
+    /* 0x080 */ gfl::Task mTask;
+    /* 0x098 */ gfl::ResFileObject mResFileObject;
+    /* 0x09C */ int m_9C;
+    /* 0x0A0 */ Particle* mParticleArray1;
+    /* 0x0A4 */ Particle* mParticleArray2;
+    /* 0x0A8 */ Particle* mParticleArray3;
+    /* 0x0AC */ Particle* mParticleArray4;
+    /* 0x0B0 */ Particle* mParticleArray5;
+    /* 0x0B4 */ Spring* mSpringArray;
+    /* 0x0B8 */ KeyFrame<float> mKeyFrameX;
+    /* 0x0D4 */ KeyFrame<float> mKeyFrameY;
+    /* 0x0F0 */ KeyFrame<float> mKeyFrameZ;
     /* 0x10C */ UnkStruct1* m_10C;
-    /* 0x110 */ float m_110;
-    /* 0x114 */ float m_114;
-    /* 0x118 */ float m_118;
+    /* 0x110 */ nw4r::math::VEC3 mCurrentKeyFrames;
     /* 0x11C */ float m_11C;
     /* 0x120 */ float m_120;
     /* 0x124 */ float m_124;

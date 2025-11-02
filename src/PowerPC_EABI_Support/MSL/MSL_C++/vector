@@ -37,12 +37,14 @@ namespace std {
         explicit __vec_deleter(allocator_param alloc)
             : m_Ptr(nullptr), m_Count(0), m_Capacity(0, alloc) {}
 
-        ~__vec_deleter() DONT_INLINE_CLASS {
-            if (m_Ptr) {
-                clear();
-                m_Capacity.second().deallocate(m_Ptr, m_Capacity.first());
-            }
-        }
+        // ~__vec_deleter() DONT_INLINE_CLASS {
+        //     if (m_Ptr) {
+        //         clear();
+        //         m_Capacity.second().deallocate(m_Ptr, m_Capacity.first());
+        //     }
+        // }
+
+        ~__vec_deleter();
 
         void clear() {
             size_type n = m_Count;
