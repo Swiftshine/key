@@ -19,6 +19,14 @@ public:
         std::string mName;
     };
 
+
+    struct FrameTemplate {
+        int mCount; // the number of start/end frames the structure uses
+        T mStartFrames[8];
+        T mEndFrames[8];
+        T mDefaultFrame;
+    };
+    
     /* Constructor */
 
     inline KeyFrame()
@@ -34,8 +42,17 @@ public:
     /* 0xC */ void vfC();
 
     /* Class Methods */
+
     void IncrementCurrentFrame(T amount);
     T GetFrame(std::string* pString);
+    void Add(T start, T end, const char* pName = nullptr);
+    
+    inline void Reset() {
+        mInnerKeyFrames.clear();
+        mCurrentFrame = 0;
+        mHasFrames = false;
+    }
+
     /* Class Members */
 
     /* 0x04 */ std::vector<InnerKeyFrame> mInnerKeyFrames;

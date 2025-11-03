@@ -5,8 +5,10 @@
 
 #define STR_(x)					#x
 #define STR(x)					STR_(x)
-#define IS_ALIGNED(x, align)	(((u32)(x) & ((align) - 1)) == 0)
+#define CAT_(a, b) a ## b
+#define CAT(a, b) CAT_(a, b)
 
+#define IS_ALIGNED(x, align)	(((u32)(x) & ((align) - 1)) == 0)
 
 // Useful macros
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
@@ -52,7 +54,7 @@
 #define TEMPORARY_VIRTUAL() \
     virtual void dummy_temp();
 
-#define STRUCT_FILL(size) u8 unk_contents##__LINE__[size];
+#define STRUCT_FILL(size) CAT(CAT(u8 unk_contents_, __LINE__),[size])
 
 // Sort of like C++11's range for, except now it's a macro for NW4R iterators
 # define NW4R_RANGE_FOR(it_, list_)	\

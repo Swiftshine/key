@@ -30,7 +30,7 @@ public:
         /* 0x48 */ nw4r::math::VEC3 m_48;
         /* 0x54 */ nw4r::math::VEC3 m_54;
         /* 0x60 */ nw4r::math::VEC3 m_60;
-        /* 0x6C */ float m_6C;
+        /* 0x6C */ bool m_6C;
 
         /* Constructor */
 
@@ -68,9 +68,14 @@ public:
 
     /// @note size unk
     struct UnkStruct1 {
-        /* 0x00 */ STRUCT_FILL(0x34);
+        /* 0x00 */ STRUCT_FILL(0x18);
+        /* 0x18 */ nw4r::math::VEC3 m_18;
+        /* 0x24 */ STRUCT_FILL(0x10);
         /* 0x34 */ uint mCount;
         /* 0x38 */ int m_38;
+        /* 0x3C */ int m_3C;
+        /* 0x40 */ bool m_40;
+        /* 0x41 */ bool m_41;
     };
 
     /// @note Size: `0x10`
@@ -118,14 +123,14 @@ public:
     static void GetKeyframes(nw4r::math::VEC3& rDst, SpringBase* pSpringBase);
     void fn_80008BB0(nw4r::math::MTX34& rMtx);
     void fn_80008DC0(nw4r::math::MTX34& rMtx);
-    void fn_800090A4(void* pArg1, void* pArg2, void* pArg3);
+    void ResetKeyFrames(KeyFrame<float>::FrameTemplate* pFTX, KeyFrame<float>::FrameTemplate* pFTY, KeyFrame<float>::FrameTemplate* pFTZ);
     float fn_80009248(uint index);
     float fn_8000925C(uint index);
     int fn_80009270(uint index);
     void fn_80009284(nw4r::math::VEC3& rVec);
     void fn_800092A4();
-    void fn_800092AC(float& rArg1);
-    void fn_80009568(UnkStruct1& rArg1);
+    void fn_800092AC(float arg1);
+    void fn_80009568(UnkStruct1* pArg1) DONT_INLINE_CLASS;
     void fn_80009678();
     void fn_80009E28(float& rArg1);
     void fn_80009F64(float& rArg1);
@@ -157,18 +162,12 @@ public:
     /* 0x0F0 */ KeyFrame<float> mKeyFrameZ;
     /* 0x10C */ UnkStruct1* m_10C;
     /* 0x110 */ nw4r::math::VEC3 mCurrentKeyFrames;
-    /* 0x11C */ float m_11C;
-    /* 0x120 */ float m_120;
-    /* 0x124 */ float m_124;
-    /* 0x128 */ float m_128;
-    /* 0x12C */ float m_12C;
-    /* 0x130 */ float m_130;
+    /* 0x11C */ nw4r::math::VEC3 m_11C;
+    /* 0x128 */ nw4r::math::VEC3 m_128;
     /* 0x134 */ float m_134;
-    /* 0x138 */ float m_138;
-    /* 0x13C */ float m_13C;
-    /* 0x140 */ float m_140;
-    /* 0x144 */ int m_144;
-    /* 0x148 */ int m_148;
+    /* 0x138 */ nw4r::math::VEC3 mParticleEffectMultiplier;
+    /* 0x144 */ float m_144;
+    /* 0x148 */ float m_148;
     /* 0x14C */ UnkStruct2* m_14C;
 };
 

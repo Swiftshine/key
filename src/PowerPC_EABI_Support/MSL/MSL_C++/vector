@@ -46,16 +46,31 @@ namespace std {
 
         ~__vec_deleter();
 
-        void clear() {
-            size_type n = m_Count;
-            m_Count = 0;
+        // void clear() {
+        //     size_type n = m_Count;
+        //     m_Count = 0;
 
-            T* end = m_Ptr + n;
-            for (; n != 0; n--) {
-                end--;
-                end->~T();
-            }
+        //     T* end = m_Ptr + n;
+        //     for (; n != 0; n--) {
+        //         end--;
+        //         end->~T();
+        //     }
+        // }
+
+        // void clear() {
+        //     clear(m_Count);
+        // }
+
+        // void clear(size_type n); // same as above
+
+        void clear() {
+            bool unk[4];
+            size_t count = m_Count;
+            unk[0] = false;
+            clear(count, unk[0]);
         }
+        
+        void clear(size_type n, bool& unk); // same as above
 
         size_type grow_by(size_type n) {
             size_type capacity = m_Capacity.first();

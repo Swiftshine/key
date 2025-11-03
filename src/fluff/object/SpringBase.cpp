@@ -51,16 +51,10 @@ SpringBase::SpringBase(int arg1, const char* pTaskName)
     , mKeyFrameY()
     , mKeyFrameZ()
     , mCurrentKeyFrames(0.0f, 0.0f, 0.0f)
+    , m_11C(0.0f, 0.0f, 0.0f)
+    , m_128(0.0f, 0.0f, 0.0f)
+    , mParticleEffectMultiplier(0.0f, 0.0f, 0.0f)
 {
-    m_11C = 0.0f;
-    m_120 = 0.0f;
-    m_124 = 0.0f;
-    m_128 = 0.0f;
-    m_12C = 0.0f;
-    m_130 = 0.0f;
-    m_138 = 0.0f;
-    m_13C = 0.0f;
-    m_140 = 0.0f;
     m_14C = nullptr;
     m_9C = arg1;
     mParticleArray1 = nullptr;
@@ -351,4 +345,89 @@ float SpringBase::vf68() {
     }
 
     return ret;
+}
+
+void SpringBase::ResetKeyFrames(
+    KeyFrame<float>::FrameTemplate* pFTX,
+    KeyFrame<float>::FrameTemplate* pFTY,
+    KeyFrame<float>::FrameTemplate* pFTZ
+) {
+    mKeyFrameX.Reset();
+    if (pFTX != nullptr) {
+        mKeyFrameX.mIncrementAmount = 1.0f / 60.0f;
+
+        for (uint i = 0; i < pFTX->mCount; i++) {
+            mKeyFrameX.Add(pFTX->mStartFrames[i], pFTX->mEndFrames[i]);
+        }
+
+        mKeyFrameX.mCurrentFrame = pFTX->mDefaultFrame;
+        mKeyFrameX.mHasFrames = true;
+    }
+    
+    mKeyFrameY.Reset();
+    if (pFTY != nullptr) {
+        mKeyFrameY.mIncrementAmount = 1.0f / 60.0f;
+
+        for (uint i = 0; i < pFTY->mCount; i++) {
+            mKeyFrameY.Add(pFTY->mStartFrames[i], pFTY->mEndFrames[i]);
+        }
+
+        mKeyFrameY.mCurrentFrame = pFTY->mDefaultFrame;
+        mKeyFrameY.mHasFrames = true;
+    }
+    
+    mKeyFrameZ.Reset();
+    if (pFTZ != nullptr) {
+        mKeyFrameZ.mIncrementAmount = 1.0f / 60.0f;
+
+        for (uint i = 0; i < pFTZ->mCount; i++) {
+            mKeyFrameZ.Add(pFTZ->mStartFrames[i], pFTZ->mEndFrames[i]);
+        }
+
+        mKeyFrameZ.mCurrentFrame = pFTZ->mDefaultFrame;
+        mKeyFrameZ.mHasFrames = true;
+    }
+}
+
+float SpringBase::fn_80009248(uint index) {
+    return mSpringArray[index].m_8;
+}
+
+float SpringBase::fn_8000925C(uint index) {
+    return mSpringArray[index].m_10;
+}
+
+int SpringBase::fn_80009270(uint index) {
+    return mSpringArray[index].m_C;
+}
+
+void SpringBase::fn_80009284(nw4r::math::VEC3& rVec) {
+    m_10C->m_18 = rVec;
+}
+
+void SpringBase::fn_800092A4() {
+    fn_80009568(m_10C);
+}
+
+// not complete
+void SpringBase::fn_800092AC(float arg1) {
+    float f = 0.0f;
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        mParticleArray1[i].m_28 = mParticleArray1[i].mPosition;
+    }
+
+    if (m_10C->m_41) {
+        if (m_10C->mCount != 0) {
+            for (uint i = 0; i < m_10C->mCount; i++) {
+
+                
+            }
+        }
+
+        m_144 -= m_148;
+    } else {
+        for (uint i = 0; i < m_10C->mCount; i++) {
+            mParticleArray1[i].m_6C = true;
+        }
+    }
 }
