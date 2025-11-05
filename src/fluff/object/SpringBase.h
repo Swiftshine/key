@@ -31,6 +31,7 @@ public:
         /* 0x54 */ nw4r::math::VEC3 m_54;
         /* 0x60 */ nw4r::math::VEC3 m_60;
         /* 0x6C */ bool m_6C;
+        /* 0x6D */ bool m_6D;
 
         /* Constructor */
 
@@ -65,15 +66,16 @@ public:
     };
 
 
-
     /// @note size unk
     struct UnkStruct1 {
         /* 0x00 */ STRUCT_FILL(0x18);
         /* 0x18 */ nw4r::math::VEC3 m_18;
-        /* 0x24 */ STRUCT_FILL(0x10);
+        /* 0x24 */ int m_24;
+        /* 0x28 */ bool m_28;
+        /* 0x2C */ STRUCT_FILL(0x8);
         /* 0x34 */ uint mCount;
         /* 0x38 */ int m_38;
-        /* 0x3C */ int m_3C;
+        /* 0x3C */ uint m_3C;
         /* 0x40 */ bool m_40;
         /* 0x41 */ bool m_41;
     };
@@ -100,8 +102,8 @@ public:
     /* 0x68 */ virtual float vf68();
     /* 0x6C */ virtual float GetZPos();
     /* 0x70 */ virtual void Update() const;
-    /* 0x74 */ virtual void vf74();
-    /* 0x78 */ virtual void vf78();
+    /* 0x74 */ virtual void vf74(float, Particle*, const nw4r::math::VEC3&);
+    /* 0x78 */ virtual void vf78(float, Particle*, const nw4r::math::VEC3&);
     /* 0x7C */ virtual void vf7C();
 
     /* Class Methods */
@@ -129,21 +131,21 @@ public:
     int fn_80009270(uint index);
     void fn_80009284(nw4r::math::VEC3& rVec);
     void fn_800092A4();
-    void fn_800092AC(float arg1);
+    void fn_800092AC(float scale);
     void fn_80009568(UnkStruct1* pArg1) DONT_INLINE_CLASS;
-    void fn_80009678();
-    void fn_80009E28(float& rArg1);
-    void fn_80009F64(float& rArg1);
-    void fn_8000A148();
-    void fn_8000a748();
+    void fn_80009678(float scale) DONT_INLINE_CLASS;
+    void fn_80009E28(float scale);
+    void fn_80009F64(float scale);
+    void fn_8000A148(float scale);
+    void fn_8000A748(Particle* pParticleArray);
     void fn_8000AC6C();
-    void fn_8000B15C(void* pSrc, void* pDest, UnkStruct1& rArg3);
-    void fn_8000B270();
+    void CopyParticles(Particle* pSrc, Particle* pDst, UnkStruct1* pArg3) DONT_INLINE_CLASS;
+    void fn_8000B270() DONT_INLINE_CLASS;
     void fn_8000B6BC();
     void fn_8000B74C();
     static bool fn_8000B888(float&, nw4r::math::VEC3&, nw4r::math::VEC3&);
     void fn_8000BA30();
-    void fn_8000BB50() DONT_INLINE_CLASS;
+    void fn_8000BB50() const DONT_INLINE_CLASS;
     void fn_8000BBD4();
     
     /* Class Members */

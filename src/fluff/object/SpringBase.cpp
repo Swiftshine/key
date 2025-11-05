@@ -409,18 +409,23 @@ void SpringBase::fn_800092A4() {
     fn_80009568(m_10C);
 }
 
-// not complete
-void SpringBase::fn_800092AC(float arg1) {
-    float f = 0.0f;
+// https://decomp.me/scratch/R1T4Y
+void SpringBase::fn_800092AC(float scale) {
     for (uint i = 0; i < m_10C->mCount; i++) {
-        mParticleArray1[i].m_28 = mParticleArray1[i].mPosition;
+        mParticleArray1[i].m_28 = mParticleArray1[i].mEffectPosition;
     }
 
     if (m_10C->m_41) {
-        if (m_10C->mCount != 0) {
-            for (uint i = 0; i < m_10C->mCount; i++) {
-
-                
+        for (uint i = 0; i < m_10C->mCount; i++) {
+            Particle* particle = &mParticleArray1[i];
+            float dot = VEC3Dot(
+                &particle->mEffectPosition,
+                &mParticleEffectMultiplier
+            );
+            if (m_144 + dot < 0.0f) {                    
+                particle->m_6C = true;
+            } else {
+                particle->m_6C = false;
             }
         }
 
@@ -429,5 +434,187 @@ void SpringBase::fn_800092AC(float arg1) {
         for (uint i = 0; i < m_10C->mCount; i++) {
             mParticleArray1[i].m_6C = true;
         }
+    }
+
+    switch (m_10C->m_24) {
+        case 0:
+            fn_80009E28(scale);
+            break;
+        case 2:
+            fn_80009F64(scale);
+            break;
+        case 3:
+            fn_8000A148(scale);
+            break;
+        case 1:
+            fn_80009678(scale);
+            break;
+    }
+
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        mParticleArray1[i].mPosition = mParticleArray1[i].m_28;
+    }
+
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* particle = &mParticleArray1[i];
+        
+        if (!particle->m_40) {
+            vf78(scale, particle, particle->m_60);
+
+            if (m_10C->m_28) {
+                vf74(scale, particle, particle->m_60);
+            }
+
+            particle->mEffectPosition += particle->m_60;
+        }
+    }
+}
+
+void SpringBase::vf78(float, Particle*, const nw4r::math::VEC3&) { }
+
+void SpringBase::fn_80009568(UnkStruct1* pArg1) {
+    for (uint i = 0; i < pArg1->mCount; i++) {
+        Particle* particle = &mParticleArray1[i];
+        particle->m_34 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    }
+
+    fn_8000BB50();
+}
+
+void SpringBase::Update() const {
+    const_cast<SpringBase*>(this)->fn_8000B270();
+    
+    for (uint i = 0; i < m_10C->m_3C; i++) {
+        const_cast<SpringBase*>(this)->fn_800092AC(1.0f / 60.0f / m_10C->m_3C);
+        const_cast<SpringBase*>(this)->fn_80009568(m_10C);
+    }
+}
+
+// not complete -- https://decomp.me/scratch/lM0lL
+void SpringBase::fn_80009678(float scale) {
+    CopyParticles(mParticleArray1, mParticleArray2, m_10C);
+    
+    fn_8000A748(mParticleArray2);
+
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* particle = &mParticleArray2[i];
+        particle->m_48 = particle->m_34 * ((1.0f / particle->m_0) * scale);
+    }
+
+    CopyParticles(mParticleArray2, mParticleArray3, m_10C);
+
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* pa = &mParticleArray2[i];
+        Particle* pb = &mParticleArray3[i];
+        
+        pb->m_4 += pa->m_48 * (0.5 * scale);
+        pb->mEffectPosition += pb->m_4 * (0.5 * scale);
+    }
+    
+    fn_8000A748(mParticleArray3);
+    
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* particle = &mParticleArray3[i];
+        particle->m_48 = particle->m_34 * ((1.0f / particle->m_0) * scale);
+    }
+
+    CopyParticles(mParticleArray2, mParticleArray4, m_10C);
+    
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* pa = &mParticleArray3[i];
+        Particle* pb = &mParticleArray4[i];
+        
+        pb->m_4 += pa->m_48 * (0.5 * scale);
+        pb->mEffectPosition += pb->m_4 * (0.5 * scale);
+    }
+
+    fn_8000A748(mParticleArray4);
+
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* particle = &mParticleArray4[i];
+        particle->m_48 = particle->m_34 * ((1.0f / particle->m_0) * scale);
+    }
+    
+    CopyParticles(mParticleArray2, mParticleArray5, m_10C);
+
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* pa = &mParticleArray4[i];
+        Particle* pb = &mParticleArray5[i];
+        
+        pb->m_4 += pa->m_48 * scale;
+        pb->mEffectPosition += pb->m_4 * scale;
+    }
+
+    fn_8000A748(mParticleArray5);
+
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* particle = &mParticleArray5[i];
+        particle->m_48 = particle->m_34 * ((1.0f / particle->m_0) * scale);
+    }
+
+
+    for (uint i = 0; i < m_10C->mCount; i++) {
+        Particle* p1 = &mParticleArray1[i];
+
+        if (!p1->m_40) {
+            continue;
+        }
+
+        // not complete
+    }
+}
+
+void SpringBase::fn_80009E28(float scale) {
+    UnkStruct1* s = m_10C;
+    
+    fn_8000A748(mParticleArray1);
+
+    nw4r::math::VEC3 vec2;
+    nw4r::math::VEC3 vec1;
+    nw4r::math::VEC3 vec3;
+    
+    for (uint i = 0; i < s->mCount; i++) {
+        Particle* particle = &mParticleArray1[i];
+
+        if (particle->m_40) {
+            continue;
+        }
+        
+        float rate = 1.0f / particle->m_0;
+        
+        vec1.x = 0.0f;
+        vec1.y = 0.0f;
+        vec1.z = 0.0f;
+
+        VEC3Scale(&vec1, &particle->m_34, rate);
+        
+        vec2.x = 0.0f;
+        vec2.y = 0.0f;
+        vec2.z = 0.0f;
+        
+        VEC3Scale(&vec2, &vec1, scale);
+        
+        particle->m_4 += vec2;
+        
+        vec3.x = 0.0f;
+        vec3.y = 0.0f;
+        vec3.z = 0.0f;
+
+        VEC3Scale(&vec3, &particle->m_4, scale);
+
+        particle->m_60 = vec3;
+    }
+}
+
+
+// https://decomp.me/scratch/vwO7T
+void SpringBase::fn_80009F64(float scale) {
+    // not complete
+}
+
+void SpringBase::CopyParticles(Particle* pSrc, Particle* pDst, UnkStruct1* pArg3) {
+    for (uint i = 0; i < pArg3->mCount; i++) {
+        pDst[i] = pSrc[i];
+        pDst[i].m_44 = nullptr;
     }
 }
