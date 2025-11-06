@@ -14,7 +14,7 @@ class SpringBase : public FlfGameObj {
 public:
 
     /* Structures  */
-        /// @note Size: `0x74`
+    /// @note Size: `0x74`
     class Particle {
     public:
         /* Class Members */
@@ -25,7 +25,7 @@ public:
         /* 0x1C */ nw4r::math::VEC3 mPosition;
         /* 0x28 */ nw4r::math::VEC3 m_28;
         /* 0x34 */ nw4r::math::VEC3 m_34;
-        /* 0x40 */ bool m_40;
+        /* 0x40 */ bool mInvalid;
         /* 0x44 */ nw4r::g3d::G3dObj* m_44;
         /* 0x48 */ nw4r::math::VEC3 m_48;
         /* 0x54 */ nw4r::math::VEC3 m_54;
@@ -50,10 +50,10 @@ public:
     public:
         /* Class Members */
 
-        /* 0x00 */ int m_0;
-        /* 0x04 */ int m_4;
+        /* 0x00 */ uint mParticleIndex1;
+        /* 0x04 */ uint mParticleIndex2;
         /* 0x08 */ float m_8;
-        /* 0x0C */ int m_C;
+        /* 0x0C */ int mActiveParticleIndex; // 0 for neither, 1 for the first, 2 for the second
         /* 0x10 */ float m_10;
 
         /* Constructor */
@@ -66,18 +66,26 @@ public:
     };
 
 
-    /// @note size unk
-    struct UnkStruct1 {
-        /* 0x00 */ STRUCT_FILL(0x18);
+    /// @note size unk (`0x4C`?)
+    struct SpringTemplate {
+        /* 0x00 */ float m_0;
+        /* 0x04 */ float m_4;
+        /* 0x08 */ int m_8;
+        /* 0x0C */ int m_C;
+        /* 0x10 */ float mPercentage;
+        /* 0x14 */ int m_14;
         /* 0x18 */ nw4r::math::VEC3 m_18;
         /* 0x24 */ int m_24;
         /* 0x28 */ bool m_28;
-        /* 0x2C */ STRUCT_FILL(0x8);
-        /* 0x34 */ uint mCount;
-        /* 0x38 */ int m_38;
+        /* 0x2C */ float m_2C;
+        /* 0x30 */ int m_30;
+        /* 0x34 */ uint mParticleCount;
+        /* 0x38 */ uint mSpringCount;
         /* 0x3C */ uint m_3C;
         /* 0x40 */ bool m_40;
         /* 0x41 */ bool m_41;
+        /* 0x44 */ int m_44;
+        /* 0x48 */ int m_48;
     };
 
     /// @note Size: `0x10`
@@ -104,14 +112,14 @@ public:
     /* 0x70 */ virtual void Update() const;
     /* 0x74 */ virtual void vf74(float, Particle*, const nw4r::math::VEC3&);
     /* 0x78 */ virtual void vf78(float, Particle*, const nw4r::math::VEC3&);
-    /* 0x7C */ virtual void vf7C();
+    /* 0x7C */ virtual void vf7C(Particle*);
 
     /* Class Methods */
 
-    int fn_800086B0();
-    void fn_800086BC(uint index, bool value) DONT_INLINE_CLASS;
-    void fn_800086D0(bool value);
-    bool fn_80008738(uint index);
+    int GetParticleCount();
+    void SetParticleInvalid(uint index, bool value) DONT_INLINE_CLASS;
+    void SetParticlesInvalid(bool value);
+    bool IsParticleInvalid(uint index);
     void SetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rPos, bool syncPosition);
     nw4r::math::VEC3 GetParticleEffectPositionByIndex(uint index) DONT_INLINE_CLASS;
     void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rOffset, bool syncPosition) DONT_INLINE_CLASS;
@@ -132,14 +140,14 @@ public:
     void fn_80009284(nw4r::math::VEC3& rVec);
     void fn_800092A4();
     void fn_800092AC(float scale);
-    void fn_80009568(UnkStruct1* pArg1) DONT_INLINE_CLASS;
+    void fn_80009568(SpringTemplate* pSpringTemplate) DONT_INLINE_CLASS;
     void fn_80009678(float scale) DONT_INLINE_CLASS;
     void fn_80009E28(float scale);
     void fn_80009F64(float scale);
     void fn_8000A148(float scale);
     void fn_8000A748(Particle* pParticleArray);
     void fn_8000AC6C();
-    void CopyParticles(Particle* pSrc, Particle* pDst, UnkStruct1* pArg3) DONT_INLINE_CLASS;
+    void CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* pSpringTemplate) DONT_INLINE_CLASS;
     void fn_8000B270() DONT_INLINE_CLASS;
     void fn_8000B6BC();
     void fn_8000B74C();
@@ -162,7 +170,7 @@ public:
     /* 0x0B8 */ KeyFrame<float> mKeyFrameX;
     /* 0x0D4 */ KeyFrame<float> mKeyFrameY;
     /* 0x0F0 */ KeyFrame<float> mKeyFrameZ;
-    /* 0x10C */ UnkStruct1* m_10C;
+    /* 0x10C */ SpringTemplate* mSpringTemplate;
     /* 0x110 */ nw4r::math::VEC3 mCurrentKeyFrames;
     /* 0x11C */ nw4r::math::VEC3 m_11C;
     /* 0x128 */ nw4r::math::VEC3 m_128;
