@@ -11,7 +11,7 @@ SpringBase::Particle::Particle()
     mEffectPosition = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
     mPosition = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
     m_34 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
-    mInvalid = 0.0f;
+    mInvalid = false;
     m_44 = nullptr;
     m_48 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
     m_54 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
