@@ -55,12 +55,12 @@ void GmkCartBtn::Init(ButtonBuildInfo* buildInfo) {
     FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mSceneIndex);
     mPartsModelSet.Create(gfl::HeapID::Work);
     mPartsModelSet->RegisterResources(mResFileObject, "pull", "button_shadow", scene, 0);
-    mPartsModelSet->SetMatrix(0.0099999998f, mMatrix, true);
+    mPartsModelSet->SetMatrix(0.01f, mMatrix, true);
 }
 
 void GmkCartBtn::Update() {
     UpdateMatrix();
-    mPartsModelSet->SetMatrix(0.0099999998f, mMatrix, true);
+    mPartsModelSet->SetMatrix(0.01f, mMatrix, true);
 }
 
 GmkCart* GmkCartBtn::GetCart() {

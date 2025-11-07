@@ -7,7 +7,7 @@
 #define BASE_BOTTOM         -BASE_TOP
 #define BASE_LEFT           -9.333333f
 #define BASE_RIGHT          -BASE_LEFT
-#define NEAR                0.0099999998f
+#define NEAR                0.01f
 #define FAR                 6000.0f
 #define BASE_Z              3000.0f
 #define SCREEN_WIDTH        640

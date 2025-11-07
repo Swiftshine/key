@@ -67,7 +67,7 @@ void FlfDemoNodeCtrl::vf18(float arg0) {
     }
 
     if (mUpdateRate.IsValid()) {
-        SetUpdateRate(0.0099999998f * static_cast<float>(static_cast<int>(mUpdateRate->GetOption(arg0))));
+        SetUpdateRate(0.01f * static_cast<float>(static_cast<int>(mUpdateRate->GetOption(arg0))));
     }
 
     if (mLayer.IsValid()) {
