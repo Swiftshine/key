@@ -44,6 +44,7 @@ public:
     /* Class Methods */
 
     void IncrementCurrentFrame(T amount);
+    
     T GetFrame(std::string* pString);
     void Add(T start, T end, const char* pName = nullptr);
     
@@ -51,6 +52,14 @@ public:
         mInnerKeyFrames.clear();
         mCurrentFrame = 0;
         mHasFrames = false;
+    }
+
+    inline size_t Count() {
+        return mInnerKeyFrames.size();
+    }
+
+    inline void IncrementCurrentFrame() {
+        IncrementCurrentFrame(mIncrementAmount);
     }
 
     /* Class Members */

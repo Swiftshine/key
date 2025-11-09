@@ -190,7 +190,7 @@ void SpringBase::fn_80008A68(nw4r::math::VEC3& rVec, int arg2) {
     }
 }
 
-void SpringBase::GetKeyframes(nw4r::math::VEC3& rDst, SpringBase* pSpringBase) {
+void SpringBase::GetKeyFrames(nw4r::math::VEC3& rDst, SpringBase* pSpringBase) {
     float x = 0.0f;
     float y = 0.0f;
     float z = 0.0f;
@@ -230,7 +230,7 @@ inline bool SomeInline(const nw4r::math::VEC3& rVec) {
 
 
 inline float VecAngle(nw4r::math::VEC3 &vec1, nw4r::math::VEC3 &vec2){
-    float y =  VEC3Dot(&vec1, &vec2) / (PSVECMag(vec1) * PSVECMag(vec2));
+    float y =  VEC3Dot(&vec1, &vec2) / (VEC3Len(&vec1) * VEC3Len(&vec2));
 
     if (y > 1.0f) {
         y = 1.0f;
@@ -669,7 +669,7 @@ void SpringBase::fn_8000A148(float scale) {
     SpringTemplate* springTemplate = mSpringTemplate;
     fn_8000AC6C();
 
-    float unk1 = 0.009999999f * (100.0f - springTemplate->mPercentage);
+    float unk1 = 0.01f * (100.0f - springTemplate->mPercentage);
 
     for (uint i = 0; i < springTemplate->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
@@ -711,7 +711,7 @@ void SpringBase::fn_8000A148(float scale) {
 
                 unk2 = 0.0f;
             } else {
-                unk2 = PSVECMag(vecA);
+                unk2 = VEC3Len(&vecA);
                 vecA *= 1.0f / unk2;
             }
 
@@ -742,5 +742,54 @@ void SpringBase::CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* p
     for (uint i = 0; i < pSpringTemplate->mParticleCount; i++) {
         pDst[i] = pSrc[i];
         pDst[i].m_44 = nullptr;
+    }
+}
+
+void SpringBase::fn_8000B270() {
+    nw4r::math::VEC3 keyFramesA;
+    GetKeyFrames(keyFramesA, this);
+
+    if (mKeyFrameX.Count() != 0) {
+        mKeyFrameX.IncrementCurrentFrame();
+    }
+
+    if (mKeyFrameY.Count() != 0) {
+        mKeyFrameY.IncrementCurrentFrame();
+    }
+
+    if (mKeyFrameZ.Count() != 0) {
+        mKeyFrameZ.IncrementCurrentFrame();
+    }
+
+    nw4r::math::VEC3 keyFramesB;
+    GetKeyFrames(keyFramesB, this);
+    mCurrentKeyFrames = keyFramesB;
+    
+    if (!mSpringTemplate->m_41) {
+        return;
+    }
+    
+    if (VEC3LenSq(&mCurrentKeyFrames) > 0.0f) {
+        bool unk = false;
+
+        if (VEC3LenSq(&keyFramesA) == 0.0f) {
+            unk = true;
+        } else {
+            float angle = VecAngle(keyFramesA, mCurrentKeyFrames);
+            
+            if (180.0f * (angle / NW4R_MATH_PI) > 10.0f) {
+                unk = true;
+            }
+        }
+
+        if (unk) {
+            mParticleEffectMultiplier = mCurrentKeyFrames;
+            VEC3Normalize(&mParticleEffectMultiplier, &mParticleEffectMultiplier);
+            m_144 = m_134 + VEC3Len(&m_128);
+        }
+    }
+
+    if (VEC3LenSq(&mCurrentKeyFrames) > 0.0f) {
+        m_148 = 0.001f * VEC3Len(&mCurrentKeyFrames);
     }
 }

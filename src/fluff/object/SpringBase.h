@@ -130,7 +130,7 @@ public:
     void fn_800089A0();
     void fn_80008A34(uint index, const nw4r::math::VEC3& rVec, int arg3) DONT_INLINE_CLASS;
     void fn_80008A68(nw4r::math::VEC3& rVec, int arg2) DONT_INLINE_CLASS;
-    static void GetKeyframes(nw4r::math::VEC3& rDst, SpringBase* pSpringBase);
+    static void GetKeyFrames(nw4r::math::VEC3& rDst, SpringBase* pSpringBase) DONT_INLINE_CLASS;
     void fn_80008BB0(nw4r::math::MTX34& rMtx);
     void fn_80008DC0(nw4r::math::MTX34& rMtx);
     void ResetKeyFrames(KeyFrame<float>::FrameTemplate* pFTX, KeyFrame<float>::FrameTemplate* pFTY, KeyFrame<float>::FrameTemplate* pFTZ);
