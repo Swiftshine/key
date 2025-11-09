@@ -146,15 +146,15 @@ public:
     void fn_80009F64(float scale);
     void fn_8000A148(float scale);
     void fn_8000A748(Particle* pParticleArray);
-    void fn_8000AC6C();
+    void fn_8000AC6C(Particle* pParticle);
     void CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* pSpringTemplate) DONT_INLINE_CLASS;
     void fn_8000B270() DONT_INLINE_CLASS;
     void fn_8000B6BC();
     bool fn_8000B74C();
     static bool fn_8000B888(float, nw4r::math::VEC3&, nw4r::math::VEC3&);
     void LoadDefaultKeyFrames();
-    void fn_8000BB50() const DONT_INLINE_CLASS;
-    void fn_8000BBD4();
+    void fn_8000BB50() DONT_INLINE_CLASS;
+    void CreateParticleArrays() DONT_INLINE_CLASS;
     
     /* Class Members */
 

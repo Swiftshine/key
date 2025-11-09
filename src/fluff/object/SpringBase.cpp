@@ -1,7 +1,7 @@
 #include "object/SpringBase.h"
 #include "gfl/gflVec3.h"
 
-const KeyFrame<float>::FrameTemplate FrameTemplateX = {
+const KeyFrame<float>::FrameTemplate SpringBase_FrameTemplateX = {
     /* mCount */ 5,
     /* mStartFrames */ {
         /* 0 */ 0.0f,
@@ -26,7 +26,7 @@ const KeyFrame<float>::FrameTemplate FrameTemplateX = {
     /* mDefaultFrame */ 0.0f
 };
 
-const KeyFrame<float>::FrameTemplate FrameTemplateY = {
+const KeyFrame<float>::FrameTemplate SpringBase_FrameTemplateY = {
     /* mCount */ 5,
     /* mStartFrames */ {
         /* 0 */ 0.0f,
@@ -52,7 +52,7 @@ const KeyFrame<float>::FrameTemplate FrameTemplateY = {
 };
 
 
-const KeyFrame<float>::FrameTemplate FrameTemplateZ = {
+const KeyFrame<float>::FrameTemplate SpringBase_FrameTemplateZ = {
     /* mCount */ 5,
     /* mStartFrames */ {
         /* 0 */ 0.0f,
@@ -744,7 +744,7 @@ void SpringBase::fn_80009F64(float scale) {
 // https://decomp.me/scratch/zb3kQ
 void SpringBase::fn_8000A148(float scale) {
     SpringTemplate* springTemplate = mSpringTemplate;
-    fn_8000AC6C();
+    fn_8000AC6C(mParticleArray1);
 
     float unk1 = 0.01f * (100.0f - springTemplate->mPercentage);
 
@@ -955,7 +955,7 @@ bool SpringBase::fn_8000B74C() {
     } else {
         
         if (mSpringTemplate->m_24 == 1) {
-            fn_8000BBD4();
+            CreateParticleArrays();
         }
         
         mSpringArray = new (gfl::HeapID::Work) Spring[mSpringTemplate->mSpringCount];
@@ -1024,6 +1024,90 @@ bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, nw4r::math::VEC
     return ret;
 }
 
+// https://decomp.me/scratch/Hb6IE
 void SpringBase::LoadDefaultKeyFrames() {
+    KeyFrame<float>::FrameTemplate ftX, ftY, ftZ;
 
+    ftX = SpringBase_FrameTemplateX;
+    ftY = SpringBase_FrameTemplateY;
+    ftZ = SpringBase_FrameTemplateZ;
+
+    ResetKeyFrames(&ftX, &ftY, &ftZ);
+}
+
+void SpringBase::vf7C(Particle* pParticles) {
+    if (m_14C == nullptr) {
+        return;
+    }
+
+    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+        UnkStruct2* s = &m_14C[i];
+        Particle* particle = &pParticles[i];
+        
+        if (s->m_C == 0) {
+            continue;
+        }
+
+        particle->m_34 += s->m_0;
+    }
+}
+
+void SpringBase::fn_8000BB50() {
+    if (m_14C == nullptr) {
+        return;
+    }
+
+    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+        if (m_14C[i].m_C != 0) {
+            m_14C[i].m_C--;
+        }
+
+        UnkStruct2* s = &m_14C[i];
+        
+        if (s->m_C == 0) {
+            s->m_0 = gfl::Vec3::Zero;
+        }
+    }
+}
+
+void SpringBase::CreateParticleArrays() {
+    for (uint i = 0; i < 4; i++) {
+        Particle** arr = &mParticleArray2;
+        arr[i] = new (gfl::HeapID::Work) Particle[mSpringTemplate->mParticleCount];
+    }
+}
+
+
+/* FlfGameObj */
+
+void FlfGameObj::vf64(bool) { }
+
+float FlfGameObj::GetCullThreshold() {
+    return mCullThreshold;
+}
+
+void FlfGameObj::SetCullThreshold(float thresh) {
+    mCullThreshold = thresh;
+}
+
+void FlfGameObj::vf58() { }
+
+bool FlfGameObj::vf54() {
+    return m_7D;
+}
+
+void FlfGameObj::vf50(bool arg1) {
+    m_7D = arg1;
+}
+
+void FlfGameObj::SetState(FlfGameObj* pSetter, std::string& rState) { }
+
+int FlfGameObj::vf44() {
+    return 1;
+}
+
+void FlfGameObj::vf40(FlfGameObj*) { }
+
+int FlfGameObj::vf3C() {
+    return 0;
 }
