@@ -517,8 +517,8 @@ config.libs = [
         "objects": [
             # fluff/object/
 
-            Object(Matching,    "fluff/object/FlfHandleObj.cpp"),
-            Object(Matching,    "fluff/object/FlfGameObj.cpp"),
+            Object(NonMatching,    "fluff/object/FlfHandleObj.cpp"),
+            Object(NonMatching,    "fluff/object/FlfGameObj.cpp"),
             Object(NonMatching, "fluff/object/Gimmick.cpp"),
             Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
             Object(Matching,    "fluff/env/EnvParts_PlayGuideIconLocator.cpp"),

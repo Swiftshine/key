@@ -1,6 +1,82 @@
 #include "object/SpringBase.h"
 #include "gfl/gflVec3.h"
 
+const KeyFrame<float>::FrameTemplate FrameTemplateX = {
+    /* mCount */ 5,
+    /* mStartFrames */ {
+        /* 0 */ 0.0f,
+        /* 1 */ -5.0f,
+        /* 2 */ 0.0f,
+        /* 3 */ 5.0f,
+        /* 4 */ 0.0f,
+        /* 5 */ 0.0f,
+        /* 6 */ 0.0f,
+        /* 7 */ 0.0f,
+    },
+    /* mEndFrames */ {
+        /* 0 */ 0.0f,
+        /* 1 */ 2.0f,
+        /* 2 */ 2.0f,
+        /* 3 */ 2.0f,
+        /* 4 */ 2.0f,
+        /* 5 */ 0.0f,
+        /* 6 */ 0.0f,
+        /* 7 */ 0.0f
+    },
+    /* mDefaultFrame */ 0.0f
+};
+
+const KeyFrame<float>::FrameTemplate FrameTemplateY = {
+    /* mCount */ 5,
+    /* mStartFrames */ {
+        /* 0 */ 0.0f,
+        /* 1 */ 1.0f,
+        /* 2 */ 0.0f,
+        /* 3 */ 1.0f,
+        /* 4 */ 0.0f,
+        /* 5 */ 0.0f,
+        /* 6 */ 0.0f,
+        /* 7 */ 0.0f,
+    },
+    /* mEndFrames */ {
+        /* 0 */ 0.0f,
+        /* 1 */ 1.0f,
+        /* 2 */ 1.0f,
+        /* 3 */ 1.0f,
+        /* 4 */ 1.0f,
+        /* 5 */ 0.0f,
+        /* 6 */ 0.0f,
+        /* 7 */ 0.0f
+    },
+    /* mDefaultFrame */ 0.0f
+};
+
+
+const KeyFrame<float>::FrameTemplate FrameTemplateZ = {
+    /* mCount */ 5,
+    /* mStartFrames */ {
+        /* 0 */ 0.0f,
+        /* 1 */ -5.0f,
+        /* 2 */ 0.0f,
+        /* 3 */ 5.0f,
+        /* 4 */ 0.0f,
+        /* 5 */ 0.0f,
+        /* 6 */ 0.0f,
+        /* 7 */ 0.0f,
+    },
+    /* mEndFrames */ {
+        /* 0 */ 0.0f,
+        /* 1 */ 1.0f,
+        /* 2 */ 1.0f,
+        /* 3 */ 1.0f,
+        /* 4 */ 1.0f,
+        /* 5 */ 0.0f,
+        /* 6 */ 0.0f,
+        /* 7 */ 0.0f
+    },
+    /* mDefaultFrame */ 0.0f
+};
+
 /* Particle */
 
 SpringBase::Particle::Particle()
@@ -903,4 +979,51 @@ bool SpringBase::fn_8000B74C() {
     }
 
     return true;
+}
+
+// https://decomp.me/scratch/YC7xN
+bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, nw4r::math::VEC3& rArg3) {
+    bool ret;
+    nw4r::math::VEC3 vec1; // 0x20
+    nw4r::math::VEC3 vec3; // 0x14
+    nw4r::math::VEC3 vec2; // 0x08
+    
+    ClearVec(vec1);
+    
+    VEC3Sub(&vec1, &rArg3, &rArg2);
+    
+    if (mag <= PSVECMag(vec1)) {
+        ret = true;
+        rArg2.x = rArg3.x;
+        rArg2.y = rArg3.y;
+        rArg2.z = rArg3.z;
+    } else {
+        VEC3Normalize(&vec1, &vec1);
+
+        ClearVec(vec2);
+        
+        VEC3Scale(&vec1, &vec1, mag);
+        
+        VEC3Add(&vec2, &rArg2, &vec1);
+        
+        rArg2 = vec2;
+        
+        ClearVec(vec3);
+        
+        
+        VEC3Sub(&vec3, &rArg3, &rArg2);
+
+        if (VEC3Dot(&vec3, &vec1) < 0.0f || PSVECMag(vec3) < mag) {
+            ret = true;
+            rArg2 = rArg3;
+        } else {
+            ret = false;
+        }
+    }
+
+    return ret;
+}
+
+void SpringBase::LoadDefaultKeyFrames() {
+
 }
