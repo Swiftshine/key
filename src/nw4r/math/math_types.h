@@ -359,6 +359,30 @@ inline f32 VEC3Dot(register const VEC3* pA, register const VEC3* pB) {
     return dot;
 }
 
+inline f32 VEC3Dot_(register const VEC3* pA, register const VEC3* pB) {
+    register f32 dot;
+    register f32 work0, work3, work2, work1;
+
+    // clang-format off
+    asm {
+        // YZ product
+        psq_l  work0, VEC3.y(pA), 0, 0
+        psq_l  work1, VEC3.y(pB), 0, 0
+        ps_mul work0, work0, work1
+        
+        // X product + YZ product
+        psq_l   work3, VEC3.x(pA), 1, 0
+        psq_l   work2, VEC3.x(pB), 1, 0
+        ps_madd work1, work3, work2, work0
+        
+        // Dot product
+        ps_sum0 dot, work1, work0, work0
+    }
+    // clang-format on
+
+    return dot;
+}
+
 inline f32 VEC3LenSq(register const VEC3* pVec) {
     register f32 work0, work1, work2;
 

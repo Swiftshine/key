@@ -989,20 +989,18 @@ bool SpringBase::fn_8000B74C() {
     return true;
 }
 
-// https://decomp.me/scratch/YC7xN
 bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, const nw4r::math::VEC3& rArg3) {
-    bool ret;
-    nw4r::math::VEC3 vec1; // 0x20
-    nw4r::math::VEC3 vec3; // 0x14
-    nw4r::math::VEC3 vec2; // 0x08
+    nw4r::math::VEC3 vec1;
+    nw4r::math::VEC3 vec3;
+    nw4r::math::VEC3 vec2;
     
     ClearVec(vec1);
     
     VEC3Sub(&vec1, &rArg3, &rArg2);
     
     if (PSVECMag(vec1) <= mag) {
-        ret = true;
         rArg2 = rArg3;
+        return true;
     } else {
         VEC3Normalize(&vec1, &vec1);
 
@@ -1018,17 +1016,15 @@ bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, const nw4r::mat
         
         VEC3Sub(&vec3, &rArg3, &rArg2);
 
-        float dot = VEC3Dot(&vec3, &vec1);
+        float dot = VEC3Dot_(&vec3, &vec1);
         
         if (dot < 0.0f || PSVECMag(vec3) < mag) {
-            ret = true;
             rArg2 = rArg3;
-        } else {
-            ret = false;
+            return true;
         }
     }
 
-    return ret;
+    return false;
 }
 
 // https://decomp.me/scratch/Hb6IE
