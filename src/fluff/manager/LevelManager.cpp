@@ -1,9 +1,9 @@
 #include "manager/LevelManager.h"
 #include "gfl/gflAlloc.h"
 #include "manager/GameManager.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 
-LevelManager::LevelManager(Stage& rStage)
+LevelManager::LevelManager(StageInfo& rStage)
     : mLoadPhase(0)
     , mStage(rStage)
     , mColObjTree(nullptr)
@@ -27,10 +27,10 @@ void LevelManager::SetGraphicsStage() {
     }
 
     if (manualBGLoad) {
-        Stage stage = StageManager::Instance()->GetStageResourceManager().mPreviewBgLoadStage;
+        StageInfo stage = Stage::Instance()->GetStageResourceManager().mPreviewBgLoadStage;
         mGraphicResources.SetStage(stage);
     } else {
-        Stage stage = mStage;
+        StageInfo stage = mStage;
         mGraphicResources.SetStage(stage);
     }
 }
@@ -44,8 +44,8 @@ void LevelManager::ResetPhase() {
 }
 
 void LevelManager::InitColObjTree() {
-    Mapdata* mapdata = StageManager::Instance()->GetLevelSection(
-        StageManager::Instance()->mStage.GetSectionID()
+    Mapdata* mapdata = Stage::Instance()->GetLevelSection(
+        Stage::Instance()->mStage.GetSectionID()
     );
 
     mColObjTree.Create(gfl::HeapID::Work);
@@ -74,9 +74,9 @@ void LevelManager::fn_800444D8() {
 
     switch (mLoadPhase) {
         case 1: {
-            StageManager::Instance()->fn_8024F630();
-            Mapdata* mapdata = StageManager::Instance()->GetLevelSection(
-                StageManager::Instance()->mStage.GetSectionID()
+            Stage::Instance()->fn_8024F630();
+            Mapdata* mapdata = Stage::Instance()->GetLevelSection(
+                Stage::Instance()->mStage.GetSectionID()
             );
             mGimmickManager->SetMapdata(mapdata);
             mLoadPhase = 2;

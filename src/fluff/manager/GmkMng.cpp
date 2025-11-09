@@ -1,5 +1,5 @@
 #include "manager/GmkMng.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "manager/GameManager.h"
 #include "object/Gimmick.h"
 #include "mapdata/Mapdata.h"
@@ -97,7 +97,7 @@ void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& rDest)
 }
 
 void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest) {
-    Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
+    Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
     for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
@@ -129,7 +129,7 @@ Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& rTag) {
 
 // https://decomp.me/scratch/VH6w7 - regswaps
 Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const char* pTag) {
-    Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
+    Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
     uint i = 0;
     const uint count = mapdata->mNumCommonGimmicks;
@@ -232,8 +232,8 @@ void GmkMng::CreateGimmicksFromMapdata() {
 
 // https://decomp.me/scratch/5kVxc
 void GmkMng::ManageOnScreenGimmicks() {
-    if (StageManager::Instance() != nullptr && !StageManager::Instance()->fn_80044C6C()) {
-        Mapdata* mapdata = StageManager::Instance()->GetCurrentLevelSection();
+    if (Stage::Instance() != nullptr && !Stage::Instance()->fn_80044C6C()) {
+        Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
         nw4r::math::VEC2 pos;
         pos = CameraManager::Instance()->GetCurrentPosition();
@@ -302,7 +302,7 @@ void GmkMng::ManageOnScreenGimmicks() {
 
 
 void GmkMng::AddEffect(Gimmick::GimmickBuildInfo* pBuildInfo) {
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(
         pBuildInfo->mFullSortSceneIndex
     );
 

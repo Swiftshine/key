@@ -1,6 +1,6 @@
 #include "object/gimmick/GmkCandleStick.h"
 #include "object/gimmick/GmkLamp.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "gfl/gflVec3.h"
 
 namespace nw4r {
@@ -125,7 +125,7 @@ void GmkCandleStick::UpdateGraphics(bool createEffect) {
 
     if (createEffect) {
         mFlfMdlDraw->ResetNURBSAnimation(0, true);
-        FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(mBuildInfoPtr->mFullSortSceneIndex);
+        FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mBuildInfoPtr->mFullSortSceneIndex);
         EffectObj* effect = scene->CreateEffectObject("ef_gk_07a", 0, 0);
         UpdateMatrix();
         nw4r::math::MTX34 effectMtx = mMatrix;

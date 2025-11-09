@@ -1,6 +1,6 @@
 #include "demo/FlfDemoCtrl.h"
 #include "util/FullSortSceneUtil.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "manager/GameManager.h"
 #include "manager/GmkMng.h"
 #include "manager/DemoManager.h"
@@ -167,7 +167,7 @@ FlfDemoCharCtrl::FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name)
     , mResourcePath()
     , mFlfMdlDraw(nullptr)
 {
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(mFullSortSceneID);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mFullSortSceneID);
     {
         std::string n = GetCharaResourceName(name);
         mResourcePath += n;
@@ -204,7 +204,7 @@ void FlfDemoCharCtrl::vf24(int arg1) {
 }
 
 void FlfDemoCharCtrl::SetFullSortScene(uint sceneID) {
-    mFlfMdlDraw->SetFullSortScene(StageManager::Instance()->GetFullSortSceneByID(sceneID));
+    mFlfMdlDraw->SetFullSortScene(Stage::Instance()->GetFullSortSceneByID(sceneID));
 }
 
 void FlfDemoCharCtrl::SetVisibility(bool visibility) {
@@ -334,7 +334,7 @@ void FlfDemoPlayerCtrl::SetUpdateRate(float rate) {
 
 void FlfDemoPlayerCtrl::SetFullSortScene(uint sceneID) {
     if (mPlayer != nullptr) {
-        mPlayer->SetFullSortScene(StageManager::Instance()->GetFullSortSceneByID(sceneID), 0);
+        mPlayer->SetFullSortScene(Stage::Instance()->GetFullSortSceneByID(sceneID), 0);
     }
 }
 
@@ -563,7 +563,7 @@ FlfDemoCtrl::~FlfDemoCtrl() {
 void FlfDemoCtrl::ResetFlfMdlDraw(const char* resourcePath) {
     DestroyResources();
 
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
 
     mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, resourcePath, 0, 0));
     mFlfMdlDraw->LoadNURBSFromFileList();
@@ -625,7 +625,7 @@ void FlfDemoCtrl::Update() {
             }
 
             if (create) {
-                FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+                FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
 
                 mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
             }

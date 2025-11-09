@@ -4,7 +4,7 @@
 #include "object/collision/CollisionTemplate.h"
 #include "gfl/gflVec2.h"
 #include "graphics/FlfMdlDraw.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 
 GmkCartBtn::GmkCartBtn()
     : Gimmick(0x115)
@@ -52,7 +52,7 @@ void GmkCartBtn::Init(ButtonBuildInfo* buildInfo) {
         mResFileObject = obj;
     }
 
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneIndex);
     mPartsModelSet.Create(gfl::HeapID::Work);
     mPartsModelSet->RegisterResources(mResFileObject, "pull", "button_shadow", scene, 0);
     mPartsModelSet->SetMatrix(0.01f, mMatrix, true);

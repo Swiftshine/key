@@ -4,7 +4,7 @@
 #include "graphics/FlfMdlDraw.h"
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "manager/CameraManager.h"
 
 
@@ -62,7 +62,7 @@ BgBackImage::BgBackImage()
     matrix[1][3] = vec.y;
     matrix[2][3] = vec.z;
 
-    FullSortScene* fss = StageManager::Instance()->GetFullSortSceneByID(0);
+    FullSortScene* fss = Stage::Instance()->GetFullSortSceneByID(0);
     fss->AddRenderObj(static_cast<gfl::RenderObj*>(this));
 }
 

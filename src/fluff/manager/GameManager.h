@@ -11,12 +11,12 @@
 
 #include "manager/CameraManager.h"
 #include "manager/PointerManager.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 
 #include "demo/FlfDemoCtrl.h"
 
 #include "object/PlayerBase.h"
-#include "stage/Stage.h"
+#include "stage/StageInfo.h"
 #include "mapdata/Mapdata.h"
 
 class PointerManagerWrapper {
@@ -123,7 +123,7 @@ public:
     static bool fn_8000F09C(uint id);
     static void fn_8000f0E4();
     static void SetCurrentSection(uint sectionID);
-    static Stage GetStage();
+    static StageInfo GetStage();
     // Returns *(Instance + 0x30)
     static uint  fn_8000F51C();
     static bool IsInLevel();
@@ -181,7 +181,7 @@ public:
     /* 0x18 */ int m_18;
     /* 0x1C */ int m_1C;
     /* 0x14 */ int mCurrentMissionID;
-    /* 0x18 */ Stage mStage;
+    /* 0x18 */ StageInfo mStage;
     /* 0x30 */ uint m_30;
     /* 0x34 */ uint mCurrentLoadPhase;
     /* 0x38 */ uint mPreviousLoadPhase;
@@ -202,7 +202,7 @@ public:
     /* 0x58 */ uint mCurrentPlayerID;
     /* 0x5C */ float m_5C;
     /* 0x60 */ nw4r::math::VEC3 mPlayerStartPosition;
-    /* 0x6C */ StageManager* mStageManager;
+    /* 0x6C */ Stage* mStageManager;
     /* 0x70 */ CameraManager* mCameraManager;
     /* 0x74 */ gfl::FixedArray<PlayerBase*, 2> mPlayers;
     /* 0x7C */ gfl::FixedArray<PointerManagerWrapper, 2> mPlayerPointerManagers;

@@ -1,43 +1,43 @@
-#ifndef FLUFF_STAGE_H
-#define FLUFF_STAGE_H
+#ifndef FLUFF_STAGEINFO_H
+#define FLUFF_STAGEINFO_H
 
 #include "types.h"
 
-class Stage {
+class StageInfo {
 public:
-    inline Stage() { }
+    inline StageInfo() { }
 
-    inline Stage(const Stage& other) {
+    inline StageInfo(const StageInfo& other) {
         mStageID = other.mStageID;
         mResourceID = other.mResourceID;
         mSectionID = other.mSectionID;
     }
 
-    inline Stage(int val) {
+    inline StageInfo(int val) {
         mStageID = val;
         mResourceID = val;
         mSectionID = val;
     }
 
-    inline Stage(int st, int re, int se) {
+    inline StageInfo(int st, int re, int se) {
         mStageID = st;
         mResourceID = re;
         mSectionID = se;
     }
 
-    inline Stage(const Stage* other) {
+    inline StageInfo(const StageInfo* other) {
         mStageID = other->mStageID;
         mResourceID = other->mResourceID;
         mSectionID = other->mSectionID;
     }
 
-    inline void operator=(const Stage& other) {
+    inline void operator=(const StageInfo& other) {
         mStageID = other.mStageID;
         mResourceID = other.mResourceID;
         mSectionID = other.mSectionID;
     }
 
-    inline void operator=(const Stage* other) {
+    inline void operator=(const StageInfo* other) {
         mStageID = other->mStageID;
         mResourceID = other->mResourceID;
         mSectionID = other->mSectionID;

@@ -4,7 +4,7 @@
 
 #include "types.h"
 
-#include "stage/Stage.h"
+#include "stage/StageInfo.h"
 #include "object/collision/ColData.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/BGSTFile.h"
@@ -15,7 +15,7 @@ public:
     StageGraphicResources();
     ~StageGraphicResources();
 
-    void SetStage(Stage& stage);
+    void SetStage(StageInfo& stage);
     bool IsLoadedFromFolder();
     void LoadLevelGraphics();
     bool fn_800C566C();
@@ -33,7 +33,7 @@ private:
     nw4r::math::VEC3 mBGPosition;
     bool m_10;
     bool m_11;
-    Stage mStage;
+    StageInfo mStage;
     bool m_20;
     ColDataSegLabel* mColDataSegLabel;
     uint m_28;

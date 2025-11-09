@@ -1,7 +1,7 @@
 #include "object/gimmick/GmkBeadPopItem.h"
 #include "util/GimmickUtil.h"
 #include "util/FullSortSceneUtil.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "manager/GmkBeadManager.h"
 #include "sound/GameSound.h"
 
@@ -96,7 +96,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     
     mCollisionEntry.Create(CollisionEntry::Get(&cTemplate, static_cast<IObjHitCB*>(this), nullptr, mMatrix, "GmkBeadPopItem"));
 
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
 
     if (!m_138) {
         gfl::ResFileObject resFileInfo;

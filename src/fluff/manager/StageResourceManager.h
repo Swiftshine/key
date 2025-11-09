@@ -7,7 +7,7 @@
 #include "gfl/gflArray.h"
 #include "types.h"
 
-#include "stage/Stage.h"
+#include "stage/StageInfo.h"
 #include "stage/StageResources.h"
 #include "mapdata/Mapdata.h"
 #include "mapdata/BGData.h"
@@ -90,7 +90,7 @@ public:
     /* 0x11 */ bool mLevelProcessed;
     /* 0x14 */ int mFolderStageID;
     /* 0x18 */ bool mPreviewBgLoad;
-    /* 0x1C */ Stage mPreviewBgLoadStage;
+    /* 0x1C */ StageInfo mPreviewBgLoadStage;
     /* 0x28 */ gfl::ResFileObject mMapdataResFileInfo;
     /* 0x2C */ Mapdata* mCurrentSections[STAGE_RESOURCE_MANAGER_STAGE_COUNT];
 };

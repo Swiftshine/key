@@ -4,7 +4,7 @@
 
 #include "object/Gimmick.h"
 #include "manager/GmkMng.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "util/GimmickUtil.h"
 #include "util/ModelUtil.h"
 #include <nw4r/g3d/res/g3d_resfile.h>
@@ -160,7 +160,7 @@ gfl::ScnMdlWrapper* Gimmick::CreateScnMdlWrapper(
     scnMdlWrapper->SetUpdate(true);
 
     if (pScene == nullptr) {
-        pScene = StageManager::Instance()->GetFullSortSceneByID(6); // game
+        pScene = Stage::Instance()->GetFullSortSceneByID(6); // game
     }
     
     pScene->AddRenderObj(scnMdlWrapper);

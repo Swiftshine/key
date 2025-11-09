@@ -8,7 +8,7 @@
 #include "graphics/NwAnmCtrl.h"
 #include "misc/ScopedPointers.h"
 #include "util/FullSortSceneUtil.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include <nw4r/math.h>
 
 class GmkUpdownWater;

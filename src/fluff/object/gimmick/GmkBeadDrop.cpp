@@ -2,7 +2,7 @@
 #include "object/gimmick/GmkBead.h"
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "util/GimmickUtil.h"
 
 extern "C" {
@@ -80,7 +80,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
 
     UpdateMatrix();
 
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
 
     {
         std::string resourceName = "gimmick/";

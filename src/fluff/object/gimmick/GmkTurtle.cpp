@@ -42,7 +42,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
 
     UpdateMatrix();
 
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
     
     gfl::ResFileObject fileInfo;
     GetResFileInfo(fileInfo, this);

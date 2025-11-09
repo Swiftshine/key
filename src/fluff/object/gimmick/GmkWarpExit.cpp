@@ -1,7 +1,7 @@
 #include "object/gimmick/GmkWarpExit.h"
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 
 const char* exit_B_MT = "exit_B_MT";
 const char* exit_F_MT = "exit_F_MT";
@@ -29,7 +29,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     mAnimCtrl.Create(animCtrl);
     animCtrl = mAnimCtrl.Get();
 
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mFullSortSceneIndex);
     animCtrl->SetFullSortSceneModelWrapper(scene, 0x204);
     mAnimCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
     mAnimCtrl->mScnMdlWrapper->vf30(5.0f);

@@ -1,7 +1,7 @@
 #include "gfl/gflVec3.h"
 #include "object/gimmick/GmkMsCarrierGoal.h"
 #include "util/FullSortSceneUtil.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "manager/FlfFriendManager.h"
 #include "manager/GameManager.h"
 #include "object/friend/Friend03.h"
@@ -56,7 +56,7 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
     mAnimationPosition.y = gfl::Vec3::Zero.y;
     mAnimationPosition.z = gfl::Vec3::Zero.z;
 
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(sceneID);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
 
     // this scope must be here because the ResFileObject destructs
     // before the end of the ctor.
@@ -159,7 +159,7 @@ bool FlfFriendManager::fn_804FA7D8() {
 
 void GmkMsCarrierGoal::PlayEffect() {
     nw4r::math::VEC3 pos = GetEffectPosition();
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
     EffectObj* effectObj = scene->CreateEffectObject("ef_gk_09a", 0, 0);
 
     if (effectObj != nullptr) {

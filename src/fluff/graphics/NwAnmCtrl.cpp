@@ -1,6 +1,6 @@
 #include <nw4r/g3d/res/g3d_resfile.h>
 #include "graphics/NwAnmCtrl.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 
 NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& rFileInfo, const char* pAnimName)
     : mResFileInfo(rFileInfo)
@@ -63,7 +63,7 @@ void NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* pScene, uint flags) 
 }
 
 void NwAnmCtrl::SetStageFullSortSceneModelWrapper(uint flags) {
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(6);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(6);
     SetFullSortSceneModelWrapper(scene, flags);
 }
 

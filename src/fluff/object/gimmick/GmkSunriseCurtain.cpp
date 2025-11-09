@@ -46,7 +46,7 @@ void GmkSunriseCurtain::SetState(FlfGameObj* setter, std::string& stateStr) {
 void GmkSunriseCurtain::fn_803CA82C() { }
 
 void GmkSunriseCurtain::SetBGSTEntries(bool day) {
-    LevelManager* mgr = StageManager::Instance()->GetLevelManager();
+    LevelManager* mgr = Stage::Instance()->GetLevelManager();
 
     if (day) {
         mgr->SetBGSTEntryEnabled(mNightMainBGSTIndex, false);

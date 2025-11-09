@@ -5,7 +5,7 @@
 #include "util/GimmickUtil.h"
 #include "util/SimpleMdlCommon.h"
 #include "stage/StageResources.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "graphics/FlfMdlDraw.h"
 
 
@@ -33,7 +33,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     , mZRotationGmk(nullptr)
     , mModelScale(0.0f, 0.0f, 0.0f)
 {
-    StageManager* stageMgr = StageManager::Instance();
+    Stage* stageMgr = Stage::Instance();
     int sceneIndex = mBuildInfo.GetIntParam(Parameter::SortSceneIndex) + 6;
     FullSortScene* scene = stageMgr->GetFullSortSceneByID(sceneIndex);
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, 4);

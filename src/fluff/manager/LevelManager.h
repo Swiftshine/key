@@ -2,7 +2,7 @@
 #define FLUFF_LEVELMANAGER_H
 
 #include "types.h"
-#include "stage/Stage.h"
+#include "stage/StageInfo.h"
 #include "object/collision/ColObjTree.h"
 #include "manager/GmkMng.h"
 #include "stage/StageGraphicResources.h"
@@ -12,7 +12,7 @@
 class LevelManager {
 public:
     /* Constructor + Destructor */
-    LevelManager(Stage& rStage);
+    LevelManager(StageInfo& rStage);
     ~LevelManager();
     
     /* Class Methods */
@@ -35,7 +35,7 @@ public:
     /* Class Members */
 
     /* 0x00 */ int mLoadPhase;
-    /* 0x04 */ Stage mStage;
+    /* 0x04 */ StageInfo mStage;
     /* 0x10 */ gfl::Pointer<ColObjTree> mColObjTree;
     /* 0x14 */ gfl::Pointer<GmkMng> mGimmickManager;
     /* 0x18 */ StageGraphicResources mGraphicResources;

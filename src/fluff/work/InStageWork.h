@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-#include "stage/Stage.h"
+#include "stage/StageInfo.h"
 
 /// @brief Contains information about the current state of the stage.
 /// @note Size: `0x1E4`
@@ -40,7 +40,7 @@ public:
     /* Class Methods */
 
     void Reset();
-    void CopyStage(const Stage& rStage, void* pArg2);
+    void CopyStage(const StageInfo& rStage, void* pArg2);
     void Init();
     void fn_801FEEB8(int arg1);
     void SetTimeLimit(int limit);
@@ -90,7 +90,7 @@ public:
 
     /* Class Members */
 
-    /* 0x04 */ Stage mStage;
+    /* 0x04 */ StageInfo mStage;
     /* 0x10 */ void* m_10;
     /* 0x14 */ int m_14;
     /* 0x18 */ int mTimeLimit; // milliseconds

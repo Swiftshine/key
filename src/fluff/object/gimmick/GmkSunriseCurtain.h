@@ -7,7 +7,7 @@
 #include "graphics/FlfMdlDraw.h"
 #include "graphics/FbAlpha.h"
 #include "manager/GameManager.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "misc/ScopedPointers.h"
 
 // size: 0x1B0

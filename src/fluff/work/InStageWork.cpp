@@ -1,25 +1,25 @@
 #include "work/InStageWork.h"
 
 InStageWork::InStageWork() {
-    mStage = Stage(-1, -1, 1);
+    mStage = StageInfo(-1, -1, 1);
     Reset();
 }
 
 InStageWork::~InStageWork() { }
 
 void InStageWork::Reset() {
-    mStage = Stage(-1, -1, 1);
+    mStage = StageInfo(-1, -1, 1);
     m_10 = nullptr;
     Init();
 }
 
 // https://decomp.me/scratch/QkSy6 - regswap
-void InStageWork::CopyStage(const Stage& stage, void* arg2) {
+void InStageWork::CopyStage(const StageInfo& stage, void* arg2) {
     if (nullptr == arg2) {
         return;
     }
 
-    mStage = Stage(stage.GetStageID(), stage.GetResourceID(), stage.GetSectionID());
+    mStage = StageInfo(stage.GetStageID(), stage.GetResourceID(), stage.GetSectionID());
 
     m_10 = arg2;
     Init();

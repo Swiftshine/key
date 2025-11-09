@@ -3,26 +3,26 @@
 
 #include "graphics/FullSortScene.h"
 #include "gflTask.h"
-#include "stage/Stage.h"
+#include "stage/StageInfo.h"
 #include "manager/StageResourceManager.h"
 #include "manager/LevelManager.h"
 #include "graphics/FbDof.h"
 #include "mapdata/Mapdata.h"
 
-class StageManager {
+class Stage {
 public:
     /* Static Variables */
 
-    static StageManager* sInstance;
+    static Stage* sInstance;
 
-    static inline StageManager* Instance() {
+    static inline Stage* Instance() {
         return sInstance;
     }
     
     /* Constructor + Destructor */
 
-    StageManager();
-    ~StageManager();
+    Stage();
+    ~Stage();
     
     /* Class Methods */
 
@@ -50,7 +50,7 @@ public:
     
     /* 0x000 */ gfl::Task m_0;
     /* 0x018 */ gfl::Task mStageTask;
-    /* 0x030 */ Stage mStage;
+    /* 0x030 */ StageInfo mStage;
     /* 0x03C */ gfl::Task mSceneGameTop;
     /* 0x054 */ gfl::Task mSceneWorldMtxTop;
     /* 0x06C */ gfl::Task mSceneDrawTop;

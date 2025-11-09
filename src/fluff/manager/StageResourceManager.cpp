@@ -70,7 +70,7 @@ bool StageResourceManager::LoadResources() {
             
             // "PreviewBgLoad"
             if (buildInfo->mGimmickID == 0x13) {
-                mPreviewBgLoadStage = Stage(-1, -1, 1);
+                mPreviewBgLoadStage = StageInfo(-1, -1, 1);
                 mPreviewBgLoadStage.SetResourceID(buildInfo->GetIntParam(0));
                 mPreviewBgLoadStage.SetSectionID(buildInfo->GetIntParam(1));
                 mPreviewBgLoad = true;

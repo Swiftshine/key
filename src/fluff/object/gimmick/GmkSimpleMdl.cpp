@@ -7,7 +7,7 @@
 #include "object/gimmick/GmkSimpleMdl.h"
 #include "util/SimpleMdlCommon.h"
 #include "util/FullSortSceneUtil.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 #include "graphics/FlfMdlDraw.h"
 
 const char MdlWrapperStr[] = "GmkSimpleMdl:%s";
@@ -99,7 +99,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 GmkSimpleMdl::~GmkSimpleMdl() { }
 
 void GmkSimpleMdl::SetModelWrapperByFullSortSceneIndex(int index) {
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(index);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(index);
     scene->AddRenderObj(mModelWrapper.Get());
 
     if (mShadowModelWrapper.IsValid()) {

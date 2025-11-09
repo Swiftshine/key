@@ -2,7 +2,7 @@
 #include "object/gimmick/GmkDecolativeBall.h"
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
-#include "manager/StageManager.h"
+#include "manager/Stage.h"
 
 extern "C" {
     float lbl_808E697C;
@@ -94,7 +94,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
 
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneID, buildInfoPtr->m_2C);
     UpdateMatrix();
-    FullSortScene* scene = StageManager::Instance()->GetFullSortSceneByID(sceneID);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
 
     gfl::ResFileObject fileInfo;
     GetResFileInfo(fileInfo, this);
