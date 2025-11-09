@@ -21,6 +21,7 @@ fluff/game/Game.cpp:
 fluff/object/SpringBase.cpp:
 	.text       start:0x8000818C end:0x8000CEE8
 	.rodata     start:0x807E38D8 end:0x807E3B48
+	.sdata      start:0x808DF420 end:0x808DF468
 	.sdata2     start:0x808E6960 end:0x808E6988
 
 fluff/language/Language.cpp:
@@ -117,7 +118,6 @@ fluff/graphics/BGSTFile.cpp:
 fluff/object/FlfHandleObj.cpp:
 	.text       start:0x8016874C end:0x80168804
 	.data       start:0x80849798 end:0x808497A4
-	.sdata      start:0x808DF460 end:0x808DF468
 
 fluff/object/FlfHandleList.cpp:
 	.text       start:0x80168804 end:0x80168960
