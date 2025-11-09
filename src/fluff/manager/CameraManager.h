@@ -2,6 +2,7 @@
 #define FLUFF_CAMERAMANAGER_H
 
 #include <nw4r/math.h>
+#include "util/ScreenPosition.h"
 
 class CameraManager {
 public:
@@ -22,7 +23,7 @@ public:
     void fn_800548AC();
     void fn_800545B4(int, int);
     void fn_800545D8(int);
-    bool CheckCull(nw4r::math::VEC3& rPosition);
+    bool ShouldCull(ScreenPosition&);
     nw4r::math::VEC2& GetCurrentPosition();
     void SetAllPositions(const nw4r::math::VEC2&);
     void SetZoom(float);

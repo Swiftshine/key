@@ -815,6 +815,14 @@ void SpringBase::fn_8000A148(float scale) {
     }
 }
 
+void SpringBase::fn_8000A748(Particle* pParticles) {
+    // not decompiled
+}
+
+void SpringBase::fn_8000AC6C(Particle* pParticles) {
+    // not decompiled
+}
+
 void SpringBase::CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* pSpringTemplate) {
     for (uint i = 0; i < pSpringTemplate->mParticleCount; i++) {
         pDst[i] = pSrc[i];
@@ -982,7 +990,7 @@ bool SpringBase::fn_8000B74C() {
 }
 
 // https://decomp.me/scratch/YC7xN
-bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, nw4r::math::VEC3& rArg3) {
+bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, const nw4r::math::VEC3& rArg3) {
     bool ret;
     nw4r::math::VEC3 vec1; // 0x20
     nw4r::math::VEC3 vec3; // 0x14
@@ -992,11 +1000,9 @@ bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, nw4r::math::VEC
     
     VEC3Sub(&vec1, &rArg3, &rArg2);
     
-    if (mag <= PSVECMag(vec1)) {
+    if (PSVECMag(vec1) <= mag) {
         ret = true;
-        rArg2.x = rArg3.x;
-        rArg2.y = rArg3.y;
-        rArg2.z = rArg3.z;
+        rArg2 = rArg3;
     } else {
         VEC3Normalize(&vec1, &vec1);
 
@@ -1010,10 +1016,11 @@ bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, nw4r::math::VEC
         
         ClearVec(vec3);
         
-        
         VEC3Sub(&vec3, &rArg3, &rArg2);
 
-        if (VEC3Dot(&vec3, &vec1) < 0.0f || PSVECMag(vec3) < mag) {
+        float dot = VEC3Dot(&vec3, &vec1);
+        
+        if (dot < 0.0f || PSVECMag(vec3) < mag) {
             ret = true;
             rArg2 = rArg3;
         } else {
@@ -1110,4 +1117,128 @@ void FlfGameObj::vf40(FlfGameObj*) { }
 
 int FlfGameObj::vf3C() {
     return 0;
+}
+
+ScreenPosition FlfGameObj::GetScreenPosition() {
+    ScreenPosition pos;
+    pos.mPosition.x = 0.0f;
+    pos.mPosition.y = 0.0f;
+    pos.mPosition = &mPosition.x;
+    pos.mCullThreshold = mCullThreshold;
+    return pos;
+}
+
+void FlfGameObj::vf30() { }
+
+void FlfGameObj::vf2C(
+    nw4r::math::VEC3& rArg1,
+    const nw4r::math::VEC3& rOffset,
+    nw4r::math::VEC3* pDst
+) {
+    if (m_6F) {
+        return;
+    }
+
+    nw4r::math::VEC3 pos;
+    pos = mPosition;
+    pos += rOffset;
+    SetPosition(pos);
+
+    if (pDst != nullptr) {
+        *pDst = rOffset;
+    }
+}
+
+void FlfGameObj::SetPosition(const nw4r::math::VEC3& rPosition) {
+    mPosition = rPosition;
+}
+
+void FlfGameObj::vf28() { }
+
+void FlfGameObj::Interact(FlfGameObj* pOther) { }
+
+void FlfGameObj::SetSecondaryPosition(const nw4r::math::VEC3& rPosition) {
+    FlfGameObj::SetPosition(rPosition);
+}
+
+nw4r::math::VEC3 FlfGameObj::GetPosition() {
+    nw4r::math::VEC3 pos;
+    pos = mPosition;
+    return pos;
+}
+
+float SpringBase::GetZPos() {
+    return mPosition.z;
+}
+
+/* KeyFrame */
+
+template <>
+void KeyFrame<float>::Add(float start, float end, const char* pName) {
+    size_t count = Count();
+    if (count != 0) {
+        AddNew(start, end + mInnerKeyFrames[count - 1].mEnd, pName);
+    } else {
+        AddNew(start, end, pName);
+    }
+}
+
+template <>
+float KeyFrame<float>::GetFrame(std::string* pName) {
+    return CalculateFrame(mCurrentFrame, pName);
+}
+
+// not complete
+template <>
+float KeyFrame<float>::CalculateFrame(float frame, std::string* pName) {
+    float newFrame;
+
+    if (mHasFrames && GetPreviousEndFrame() < frame) {
+        float prev = GetPreviousEndFrame();
+        uint unk = static_cast<unsigned int>(frame / prev);
+        newFrame = static_cast<float>(unk);
+    }
+
+    size_t count = Count();
+    size_t i = count;
+    while (true) {
+        if (i == 0) {
+            if (pName != nullptr) {
+                *pName = mInnerKeyFrames[count - 1].mName;
+            }
+
+            return mInnerKeyFrames[Count() - 1].mStart;
+        }
+    }
+}
+
+template <>
+void KeyFrame<float>::IncrementCurrentFrame(float amt) {
+    float prevEnd;
+    float total = mCurrentFrame + amt;
+    mCurrentFrame = total;
+
+    if (!mHasFrames) {
+        return;
+    }
+
+    prevEnd = mInnerKeyFrames[Count() - 1].mEnd;
+
+    if (total > prevEnd) {
+        mCurrentFrame = total - prevEnd;
+    }
+}
+
+template <>
+float KeyFrame<float>::GetPreviousEndFrame() {
+    return mInnerKeyFrames[Count() - 1].mEnd;
+}
+
+// https://decomp.me/scratch/Mhuwm
+template <>
+void KeyFrame<float>::GetNextStartFrame(float mult, uint index, InnerKeyFrame* pDst) {
+    InnerKeyFrame* frame = mInnerKeyFrames.data();
+
+    float start = frame[index].mStart;
+    pDst->mStart = (frame[index].mStart - start) * mult + start;
 }

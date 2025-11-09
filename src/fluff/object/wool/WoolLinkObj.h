@@ -17,7 +17,7 @@ public:
     
     /* 0x08 */ virtual ~WoolLinkObj();
     /* 0x24 */ virtual void Interact(FlfGameObj*) override;
-    /* 0x38 */ virtual nw4r::math::VEC3 GetScreenPosition() override;
+    /* 0x38 */ virtual ScreenPosition GetScreenPosition() override;
     /* 0x58 */ virtual void vf58() override;
     /* 0x70 */ virtual void vf70() override;
 private:

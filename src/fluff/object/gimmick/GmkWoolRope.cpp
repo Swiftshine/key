@@ -31,7 +31,7 @@ GmkWoolRope::~GmkWoolRope() {
     mWoolLink = nullptr;
 }
 
-nw4r::math::VEC3 GmkWoolRope::GetScreenPosition() {
+ScreenPosition GmkWoolRope::GetScreenPosition() {
     return mWoolLink->GetScreenPosition();
 }
 

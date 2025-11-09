@@ -39,15 +39,18 @@ public:
     /* Virtual Methods */
 
     /* 0x8 */ inline virtual ~KeyFrame() { }
-    /* 0xC */ void vfC();
+    /* 0xC */ void GetNextStartFrame(T mult, uint index, InnerKeyFrame* pDst);
 
     /* Class Methods */
 
     void IncrementCurrentFrame(T amount);
     
-    T GetFrame(std::string* pString);
     void Add(T start, T end, const char* pName = nullptr);
-    
+    void AddNew(T start, T end, const char* pName);
+    T GetFrame(std::string* pString);
+    T CalculateFrame(T start, std::string* pName);
+    T GetPreviousEndFrame();
+
     inline void Reset() {
         mInnerKeyFrames.clear();
         mCurrentFrame = 0;

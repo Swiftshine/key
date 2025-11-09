@@ -114,7 +114,7 @@ void FlfGameObj::SetCulled(bool arg1) {
     }
 }
 
-bool FlfGameObj::ShouldCull(CameraManager* camMgr) {
-    nw4r::math::VEC3 screenPos = GetScreenPosition();
-    return camMgr->CheckCull(screenPos);
+bool FlfGameObj::ShouldCull(CameraManager* pCamMgr) {
+    ScreenPosition screenPos = GetScreenPosition();
+    return pCamMgr->ShouldCull(screenPos);
 }

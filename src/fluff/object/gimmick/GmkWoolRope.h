@@ -41,7 +41,7 @@ public:
     virtual ~GmkWoolRope();
 
     /* FlfGameObj */
-    virtual nw4r::math::VEC3 GetScreenPosition() override;
+    virtual ScreenPosition GetScreenPosition() override;
 
     /* Gimmick */
     virtual void Update() override;

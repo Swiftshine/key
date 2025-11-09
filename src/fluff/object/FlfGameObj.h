@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "object/FlfHandleObj.h"
+#include "util/ScreenPosition.h"
 
 #include <nw4r/math.h>
 
@@ -42,22 +43,22 @@ public:
     /* Virtual Methods */
     
     /* 0x08 */ virtual ~FlfGameObj();
-    /* 0x0C */ virtual void SetPosition(nw4r::math::VEC3& rPosition);
+    /* 0x0C */ virtual void SetPosition(const nw4r::math::VEC3& rPosition) DONT_INLINE_CLASS;
     /* 0x10 */ virtual void vf10(bool val);
     /* 0x14 */ DECL_WEAK virtual bool vf14();
     /* 0x18 */ virtual void vf18();
     /* 0x1C */ virtual nw4r::math::VEC3 GetPosition();
-    /* 0x20 */ virtual void SetSecondaryPosition(nw4r::math::VEC3& rPosition);
+    /* 0x20 */ virtual void SetSecondaryPosition(const nw4r::math::VEC3& rPosition);
     /* 0x24 */ virtual void Interact(FlfGameObj* pOther);
     /* 0x28 */ virtual void vf28();
     /* 0x2C */ virtual void vf2C(
         nw4r::math::VEC3& rArg1,
-        nw4r::math::VEC3& rArg2,
-        nw4r::math::VEC3& rArg3
+        const nw4r::math::VEC3& rOffset,
+        nw4r::math::VEC3* pDst
     );
     /* 0x30 */ virtual void vf30();
     /* 0x34 */ virtual bool ShouldCull(CameraManager* pCamMgr);
-    /* 0x38 */ virtual nw4r::math::VEC3 GetScreenPosition();
+    /* 0x38 */ virtual ScreenPosition GetScreenPosition();
     /* 0x3C */ virtual int  vf3C();
     /* 0x40 */ virtual void vf40(FlfGameObj*);
     /* 0x44 */ virtual int  vf44();
