@@ -16,7 +16,7 @@ BGST::File::File()
     , mGridCount(0)
     , mFile(nullptr)
 {
-    memset(mColumns, 0, 0x30);
+    memset(mEntryInfo, 0, 0x30);
 }
 
 
@@ -26,16 +26,16 @@ BGST::File::~File() {
     }
 }
 
-bool BGST::File::IsColumnValid(int index) {
-    return nullptr != mColumns[index];
+bool BGST::File::IsEntryInfoValid(int index) {
+    return mEntryInfo[index] != nullptr;
 }
 
 void* BGST::File::GetByGrid(int sceneID, int xGridIndex, int yGridIndex) {
-    return this->mColumns[sceneID] + xGridIndex + yGridIndex * this->mHeader->mGridWidth;
+    return this->mEntryInfo[sceneID] + xGridIndex + yGridIndex * this->mHeader->mGridWidth;
 }
 
 BGST::EntryInfo* BGST::File::GetEntryInfoByIndex(int index) {
-    return mColumns[index];
+    return mEntryInfo[index];
 }
 
 void* BGST::File::GetByIndex(int index) {
@@ -85,16 +85,16 @@ bool BGST::File::ProcessLoadState() {
 
 
 void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, int id, int xGridIndex, int yGridIndex) {
-    BGST::EntryInfo* column = (BGST::EntryInfo*)GetByGrid(id, xGridIndex, yGridIndex);
+    BGST::EntryInfo* entryInfo = (BGST::EntryInfo*)GetByGrid(id, xGridIndex, yGridIndex);
     BGST::List* list = BGST::List::Instance();
     
-    if (1 >= (unsigned short)(column->m_0 + 0xFFF9)) {
-        *pCMPRImage = list->GetImageByIndex(column->mImageIndex);
+    if (1 >= (unsigned short)(entryInfo->m_0 + 0xFFF9)) {
+        *pCMPRImage = list->GetImageByIndex(entryInfo->mImageIndex);
 
-        if ((u16)0xFFFE == column->mType) {
+        if ((u16)0xFFFE == entryInfo->mType) {
             *pI4Image = (void*)-1U;
         } else {
-            *pI4Image = list->GetImageByIndex(column->mShadowImageIndex);
+            *pI4Image = list->GetImageByIndex(entryInfo->mShadowImageIndex);
         }
         
     } else {
@@ -159,10 +159,10 @@ void BGST::File::LoadGrid() {
 
     for (size_t i = 0; i < 12; i++) {
         if (mHeader->mLayerEnabled[i]) {
-            mColumns[i] = &((BGST::EntryInfo*)(mOutputImage.Get()))[gridArea * totalGridArea];
+            mEntryInfo[i] = &((BGST::EntryInfo*)(mOutputImage.Get()))[gridArea * totalGridArea];
             totalGridArea++;
         } else {
-            mColumns[i] = nullptr;
+            mEntryInfo[i] = nullptr;
         }
     }
 }

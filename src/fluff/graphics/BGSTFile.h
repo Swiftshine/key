@@ -21,7 +21,7 @@ namespace BGST {
 
         /* Class Methods */
 
-        bool IsColumnValid(int index);
+        bool IsEntryInfoValid(int index);
         void* GetByGrid(int sceneID, int xGridIndex, int yGridIndex) DONT_INLINE_CLASS;
         BGST::EntryInfo* GetEntryInfoByIndex(int index);
         void* GetByIndex(int index);
@@ -44,7 +44,7 @@ namespace BGST {
         /* 0x08 */ gfl::FreedPointer<BGST::Image> mOutputImage;
         /* 0x0C */ size_t mImageFilesize;
         /* 0x10 */ int mGridCount;
-        /* 0x14 */ BGST::EntryInfo* mColumns[12];
+        /* 0x14 */ BGST::EntryInfo* mEntryInfo[12];
         /* 0x44 */ gfl::File* mFile;
     };
 
