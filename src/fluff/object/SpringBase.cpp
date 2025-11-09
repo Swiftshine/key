@@ -1,4 +1,5 @@
 #include "object/SpringBase.h"
+#include "gfl/gflVec3.h"
 
 /* Particle */
 
@@ -92,7 +93,7 @@ SpringBase::~SpringBase() {
     }
 }
 
-int SpringBase::GetParticleCount() {
+uint SpringBase::GetParticleCount() {
     return mSpringTemplate->mParticleCount;
 }
 
@@ -470,7 +471,7 @@ void SpringBase::fn_800092AC(float scale) {
     }
 }
 
-void SpringBase::vf78(float, Particle*, const nw4r::math::VEC3&) { }
+void SpringBase::vf78(float, Particle*, nw4r::math::VEC3&) { }
 
 void SpringBase::fn_80009568(SpringTemplate* pSpringTemplate) {
     for (uint i = 0; i < pSpringTemplate->mParticleCount; i++) {
@@ -792,4 +793,114 @@ void SpringBase::fn_8000B270() {
     if (VEC3LenSq(&mCurrentKeyFrames) > 0.0f) {
         m_148 = 0.001f * VEC3Len(&mCurrentKeyFrames);
     }
+}
+
+// no idea what tu this belongs to
+bool fn_80012914(
+    float,
+    nw4r::math::VEC3&,
+    nw4r::math::VEC3&,
+    nw4r::math::VEC3&,
+    nw4r::math::VEC3&,
+    float*
+);
+
+using nw4r::math::VEC3;
+
+// https://decomp.me/scratch/XCrDu
+void SpringBase::vf74(float scale, Particle* pParticle, nw4r::math::VEC3& rVec) {
+    nw4r::math::VEC3 vec1;
+    
+    vec1.x = 0.0f;
+    vec1.y = 1.0f;
+    vec1.z = 0.0f;
+    
+    nw4r::math::VEC3 vec2;
+    nw4r::math::VEC3 vec3;
+
+    ClearVec(vec2);
+    VEC3Add(&vec2, &mPosition, &pParticle->mEffectPosition);
+    ClearVec(vec3);
+    
+    VEC3 vec4;
+    VEC3 vec5;
+    VEC3 vec6;
+    VEC3 vec7;
+    VEC3 vec8;
+    VEC3 vec9;
+
+    bool unk = fn_80012914(0.0f, rVec, vec2, vec1, vec3, nullptr);
+    
+    if (!unk) {
+        return;
+    }
+    
+    ClearVec(vec4);
+    // ClearVec(vec5);
+    // ClearVec(vec6);
+        
+    float dot = VEC3Dot(&pParticle->m_4, &vec1);
+
+    VEC3Scale(&vec4, &vec1, dot);
+
+    vec5.x = -vec4.x;
+    vec5.y = -vec4.y;
+    vec5.z = -vec4.z;
+
+    VEC3Sub(&vec6, &pParticle->m_4, &vec4);
+    VEC3Scale(&vec7, &vec5, 0.5f);
+    VEC3Scale(&vec8, &vec7, 0.8f);
+    VEC3Add(&vec9, &vec6, &vec8);
+    
+    pParticle->m_4 = vec9;
+
+    
+    // VEC
+    // (pParticle->m_4).x = -(vec1.x * dot) * f0.5 + ((pParticle->m_4).x - vec1.x * dot) * f0.8;
+
+
+    VEC3 t;
+    VEC3Scale(&t, &pParticle->m_4, scale);
+    rVec = t;
+}
+
+void SpringBase::fn_8000B6BC() {
+    for (uint i = 0; i < GetParticleCount(); i++) {
+        Particle* particle = &mParticleArray1[i];
+        particle->m_4 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    }
+}
+
+bool SpringBase::fn_8000B74C() {
+    mParticleArray1 = new (gfl::HeapID::Work) Particle[mSpringTemplate->mParticleCount];
+
+    if (mParticleArray1 == nullptr) {
+        return false;
+    } else {
+        
+        if (mSpringTemplate->m_24 == 1) {
+            fn_8000BBD4();
+        }
+        
+        mSpringArray = new (gfl::HeapID::Work) Spring[mSpringTemplate->mSpringCount];
+    
+        // is an inline involved? it doesn't make sense to
+        // check the spring template for nullptr after it was used
+
+        if (mSpringArray == nullptr) {
+            return false;
+        }
+        
+        if (mSpringTemplate != nullptr) {
+            for (uint i = 0; i < GetParticleCount(); i++) {
+                Particle* particle = &mParticleArray1[i];
+                particle->CopyVec(gfl::Vec3::Zero);
+                particle->m_0 = mSpringTemplate->m_0;
+            }
+            
+            SetParticlesInvalid(false);
+        }
+    }
+
+    return true;
 }

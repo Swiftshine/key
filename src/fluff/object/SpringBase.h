@@ -42,7 +42,7 @@ public:
         /* 0x8 */ virtual ~Particle();
 
         /* Class Methods */
-        void CopyVec(const nw4r::math::VEC3& rSrc);
+        void CopyVec(const nw4r::math::VEC3& rSrc) DONT_INLINE_CLASS;
     };
 
     /// @note Size: `0x18`
@@ -110,15 +110,15 @@ public:
     /* 0x68 */ virtual float vf68();
     /* 0x6C */ virtual float GetZPos();
     /* 0x70 */ virtual void Update() const;
-    /* 0x74 */ virtual void vf74(float, Particle*, const nw4r::math::VEC3&);
-    /* 0x78 */ virtual void vf78(float, Particle*, const nw4r::math::VEC3&);
+    /* 0x74 */ virtual void vf74(float scale, Particle* pParticle, nw4r::math::VEC3& rDst);
+    /* 0x78 */ virtual void vf78(float, Particle*, nw4r::math::VEC3&);
     /* 0x7C */ virtual void vf7C(Particle*);
 
     /* Class Methods */
 
-    int GetParticleCount();
+    uint GetParticleCount() DONT_INLINE_CLASS;
     void SetParticleInvalid(uint index, bool value) DONT_INLINE_CLASS;
-    void SetParticlesInvalid(bool value);
+    void SetParticlesInvalid(bool value) DONT_INLINE_CLASS;
     bool IsParticleInvalid(uint index);
     void SetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rPos, bool syncPosition);
     nw4r::math::VEC3 GetParticleEffectPositionByIndex(uint index) DONT_INLINE_CLASS;
@@ -150,7 +150,7 @@ public:
     void CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* pSpringTemplate) DONT_INLINE_CLASS;
     void fn_8000B270() DONT_INLINE_CLASS;
     void fn_8000B6BC();
-    void fn_8000B74C();
+    bool fn_8000B74C();
     static bool fn_8000B888(float&, nw4r::math::VEC3&, nw4r::math::VEC3&);
     void fn_8000BA30();
     void fn_8000BB50() const DONT_INLINE_CLASS;

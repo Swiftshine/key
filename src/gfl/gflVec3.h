@@ -36,6 +36,13 @@ namespace gfl {
         Vec3 operator-(Vec3& other);
         Vec3 operator+(Vec3& other);
 
+        inline operator nw4r::math::VEC3*() {
+            return reinterpret_cast<nw4r::math::VEC3*>(this);
+        }
+
+        inline operator nw4r::math::VEC3&() {
+            return *reinterpret_cast<nw4r::math::VEC3*>(this);
+        }
     public:
         float x, y, z;
     };
