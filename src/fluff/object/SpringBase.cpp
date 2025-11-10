@@ -1,6 +1,8 @@
 #include "object/SpringBase.h"
 #include "gfl/gflVec3.h"
 
+typedef gfl::FunctorClassMethod0<void, SpringBase*, void (SpringBase::*)() const> FunctorType;
+
 const KeyFrame<float>::FrameTemplate SpringBase_FrameTemplateX = {
     /* mCount */ 5,
     /* mStartFrames */ {
@@ -1225,16 +1227,41 @@ void KeyFrame<float>::IncrementCurrentFrame(float amt) {
     }
 }
 
+// todo: move these to the header
+
 template <>
 float KeyFrame<float>::GetPreviousEndFrame() {
     return mInnerKeyFrames[Count() - 1].mEnd;
 }
 
-// https://decomp.me/scratch/Mhuwm
 template <>
 void KeyFrame<float>::GetNextStartFrame(float mult, uint index, InnerKeyFrame* pDst) {
-    InnerKeyFrame* frame = mInnerKeyFrames.data();
+    InnerKeyFrame* frames = mInnerKeyFrames.data();
+    float cur = frames[index].mStart;
+    float delta = frames[index + 1].mStart - frames[index].mStart;
+    pDst->mStart = frames[index].mStart + delta * mult;
+}
 
-    float start = frame[index].mStart;
-    pDst->mStart = (frame[index].mStart - start) * mult + start;
+// https://decomp.me/scratch/aNK5Z
+template <>
+void KeyFrame<float>::AddNew(float start, float end, const char* pName) {
+    std::string name;
+
+    if (pName != nullptr) {
+        name = pName;
+    }
+
+    InnerKeyFrame inner(start, end, name);
+
+    size_t count = Count();
+
+    if (count < mInnerKeyFrames.capacity()) {
+        InnerKeyFrame* last = &mInnerKeyFrames[count];
+
+        if (last != nullptr) {
+            *last = inner;
+        }
+    } else {
+        mInnerKeyFrames.insert(inner);
+    }
 }

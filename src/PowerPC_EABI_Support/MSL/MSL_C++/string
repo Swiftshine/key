@@ -93,7 +93,9 @@ namespace std {
             __longbuf longBuf;
             __shortbuf shortBuf;
 
-            bool is_short() const { return !(shortFlag >> 31); }
+            inline bool is_short() const {
+                return !(shortFlag >> 31);
+            }
         };
 
         CharT *get_pointer() {
@@ -158,7 +160,7 @@ namespace std {
         }
         basic_string(const Allocator &alloc) : m(alloc) { zero(); }
 
-        basic_string(const basic_string &other) DONT_INLINE_CLASS : m(other.m.second()) {
+        DECL_WEAK basic_string(const basic_string &other) DONT_INLINE_CLASS {
             const rep_s &other_rep = other.m.first();
             if (other_rep.is_short()) {
                 m.first() = other_rep;
@@ -260,7 +262,7 @@ namespace std {
             do_replace(cur_size, 0, src, src + size, tag);
         }
 
-        void append(const CharT *str) {
+        DECL_WEAK void append(const CharT *str) {
             // required to be here to match; probably an inline missing
             random_access_iterator_tag tag;
 
@@ -281,7 +283,7 @@ namespace std {
 
         DONT_INLINE_CLASS void reserve(size_t size) {}
 
-        DONT_INLINE_CLASS void operator=(const CharT *str) {
+        DECL_WEAK void operator=(const CharT *str) DONT_INLINE_CLASS {
             // required to be here to match; probably an inline missing
             random_access_iterator_tag tag;
 
@@ -289,9 +291,13 @@ namespace std {
             do_replace(0, cur_size, str, str + Traits::length(str), tag);
         }
 
-        DONT_INLINE_CLASS void operator=(const basic_string& str);
+        DECL_WEAK void operator=(const basic_string& str);
 
-        DONT_INLINE_CLASS void operator+=(const basic_string &str) { append(str); }
+        // DONT_INLINE_CLASS void operator+=(const basic_string &str) { append(str); }
+        void operator+=(const basic_string& str) DONT_INLINE_CLASS {
+            
+        } 
+        
         DONT_INLINE_CLASS void operator+=(const char *str) { append(str); }
         DONT_INLINE_CLASS void operator+=(CharT c) { append(c); }
 
@@ -301,104 +307,105 @@ namespace std {
 
         bool starts_with(const char*) const;
     private:
-        void do_replace(
-            size_t cur_size,
-            size_t append_size,
-            const CharT *start,
-            const CharT *end,
-            random_access_iterator_tag
-        ) {
-            CharT *buffer;
-            size_t length;
-            size_t capacity;
+        void do_replace(size_t, size_t, const CharT*, const CharT*, random_access_iterator_tag);
+        // DECL_WEAK void do_replace(
+        //     size_t cur_size,
+        //     size_t append_size,
+        //     const CharT *start,
+        //     const CharT *end,
+        //     random_access_iterator_tag
+        // ) DONT_INLINE_CLASS {
+        //     CharT *buffer;
+        //     size_t length;
+        //     size_t capacity;
 
-            rep_s &rep = m.first();
-            if (rep.is_short()) {
-                buffer = rep.shortBuf.buffer;
-                capacity = sizeof(rep.shortBuf.buffer);
-                length = rep.shortBuf.length & 0x80;
-            } else {
-                buffer = rep.longBuf.buffer;
-                capacity = rep.longBuf.capacity;
-                length = rep.longBuf.length;
-            }
+        //     rep_s &rep = m.first();
+        //     if (rep.is_short()) {
+        //         buffer = rep.shortBuf.buffer;
+        //         capacity = sizeof(rep.shortBuf.buffer);
+        //         length = rep.shortBuf.length & 0x80;
+        //     } else {
+        //         buffer = rep.longBuf.buffer;
+        //         capacity = rep.longBuf.capacity;
+        //         length = rep.longBuf.length;
+        //     }
 
-            if (cur_size > length) {
-                // throw out_of_range("basic_string: out_of_range");
-                fprintf(stderr, "basic_string: out_of_range");
-                abort();
-            }
+        //     if (cur_size > length) {
+        //         // throw out_of_range("basic_string: out_of_range");
+        //         fprintf(stderr, "basic_string: out_of_range");
+        //         abort();
+        //     }
 
-            size_t remaining = min(length - cur_size, append_size);
-            size_t dist = end - start;
-            if (dist > (INT_MAX - 1) || (INT_MAX - dist) < (length - remaining)) {
-                // throw length_error("basic_string: length_error");
-                fprintf(stderr, "basic_string: length_error");
-                abort();
-            }
+        //     size_t remaining = min(length - cur_size, append_size);
+        //     size_t dist = end - start;
+        //     if (dist > (INT_MAX - 1) || (INT_MAX - dist) < (length - remaining)) {
+        //         // throw length_error("basic_string: length_error");
+        //         fprintf(stderr, "basic_string: length_error");
+        //         abort();
+        //     }
 
-            size_t final_size = dist + (length - remaining);
-            size_t n = length - (cur_size + remaining);
-            if (final_size >= capacity) {
-                length = capacity;
+        //     size_t final_size = dist + (length - remaining);
+        //     size_t n = length - (cur_size + remaining);
+        //     if (final_size >= capacity) {
+        //         length = capacity;
 
-                int new_size;
-                while (new_size = (length + 0xF) & 0xFFFFFFF0,
-                       final_size + 1 <= new_size) {
-                    length = new_size << 1;
-                }
+        //         int new_size;
+        //         while (new_size = (length + 0xF) & 0xFFFFFFF0,
+        //                final_size + 1 <= new_size) {
+        //             length = new_size << 1;
+        //         }
 
-                CharT *new_buf = m.second().allocate(new_size);
-                if (cur_size != 0) {
-                    std::memcpy(new_buf, buffer, cur_size);
-                }
-                std::memmove(new_buf + cur_size, start, end - start);
-                if (n != 0) {
-                    std::memcpy(
-                        new_buf + cur_size + dist, buffer + remaining + cur_size, n
-                    );
-                }
-                new_buf[final_size] = *"";
+        //         CharT *new_buf = m.second().allocate(new_size);
+        //         if (cur_size != 0) {
+        //             std::memcpy(new_buf, buffer, cur_size);
+        //         }
+        //         std::memmove(new_buf + cur_size, start, end - start);
+        //         if (n != 0) {
+        //             std::memcpy(
+        //                 new_buf + cur_size + dist, buffer + remaining + cur_size, n
+        //             );
+        //         }
+        //         new_buf[final_size] = *"";
 
-                if (!rep.is_short()) {
-                    m.second().deallocate(buffer, capacity);
-                } else {
-                    rep.shortFlag |= 0x80000000;
-                }
+        //         if (!rep.is_short()) {
+        //             m.second().deallocate(buffer, capacity);
+        //         } else {
+        //             rep.shortFlag |= 0x80000000;
+        //         }
 
-                rep.longBuf.buffer = new_buf;
-                rep.longBuf.length = final_size;
-                rep.longBuf.capacity =
-                    ((length + 0xF) & 0x7FFFFFF0) | (rep.longBuf.capacity & 0x80000000);
-            } else {
-                basic_string copy(m.second());
+        //         rep.longBuf.buffer = new_buf;
+        //         rep.longBuf.length = final_size;
+        //         rep.longBuf.capacity =
+        //             ((length + 0xF) & 0x7FFFFFF0) | (rep.longBuf.capacity & 0x80000000);
+        //     } else {
+        //         basic_string copy(m.second());
 
-                if (n != 0 && buffer + dist + cur_size < end && end <= buffer + length) {
-                    copy.do_replace(
-                        0, append_size, start, end, random_access_iterator_tag()
-                    );
-                    CharT *new_start;
-                    size_t dummy;
-                    copy.pointer_size(new_start, dummy);
-                    start = new_start;
-                }
+        //         if (n != 0 && buffer + dist + cur_size < end && end <= buffer + length) {
+        //             copy.do_replace(
+        //                 0, append_size, start, end, random_access_iterator_tag()
+        //             );
+        //             CharT *new_start;
+        //             size_t dummy;
+        //             copy.pointer_size(new_start, dummy);
+        //             start = new_start;
+        //         }
 
-                if (n != 0) {
-                    std::memmove(
-                        buffer + dist + cur_size, buffer + remaining + cur_size, n
-                    );
-                }
-                memmove(buffer + cur_size, start, dist);
-                buffer[final_size] = *"";
+        //         if (n != 0) {
+        //             std::memmove(
+        //                 buffer + dist + cur_size, buffer + remaining + cur_size, n
+        //             );
+        //         }
+        //         memmove(buffer + cur_size, start, dist);
+        //         buffer[final_size] = *"";
 
-                if (!rep.is_short()) {
-                    rep.longBuf.length = final_size;
-                } else {
-                    rep.shortBuf.length =
-                        (final_size & 0x7F) | (rep.shortBuf.length & 0x80);
-                }
-            }
-        }
+        //         if (!rep.is_short()) {
+        //             rep.longBuf.length = final_size;
+        //         } else {
+        //             rep.shortBuf.length =
+        //                 (final_size & 0x7F) | (rep.shortBuf.length & 0x80);
+        //         }
+        //     }
+        // }
 
     private:
         Metrowerks::compressed_pair<basic_string::rep_s, Allocator> m;

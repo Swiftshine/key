@@ -172,10 +172,3 @@ gfl::ScnMdlWrapper* Gimmick::CreateScnMdlWrapper(
 
 
 void Gimmick::vfB0(int arg0) { /*(this->*state1)();*/ return; }
-
-// nonmatching
-template <>
-gfl::FunctorBase0<void>* FunctorType::Clone(const gfl::FunctorBase0<void>* pSrc) {
-    const FunctorType* functor = static_cast<const FunctorType*>(pSrc);
-    return new (gfl::HeapID::LIB1) FunctorType(functor->mOwner, functor->mFunction);
-}

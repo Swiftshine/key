@@ -17,22 +17,32 @@ namespace gfl {
         /* Virtual Methods */
 
         /* 0x08 */ DECL_WEAK virtual ReturnT operator()() = 0;
-        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone(const FunctorBase0<ReturnT>*) = 0;
+        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone() = 0;
         /* 0x10 */ DECL_WEAK virtual ~FunctorBase0() = 0;
     };
 
 
     template <typename ReturnT, typename OwnerT, typename FunctionT>
     class FunctorClassMethod0 : public FunctorBase0<ReturnT> {
+        typedef FunctorClassMethod0<ReturnT, OwnerT, FunctionT> FunctorType;
     public:
         inline FunctorClassMethod0(OwnerT owner, FunctionT function)
             : mOwner(owner)
             , mFunction(function)
         { }
+
+        inline FunctorClassMethod0(FunctorClassMethod0* pOther)
+            : mOwner(pOther->mOwner)
+            , mFunction(pOther->mFunction)
+        { }
         
-        /* 0x08 */ DECL_WEAK virtual ReturnT operator()();
+        /* 0x08 */ DECL_WEAK virtual ReturnT operator()() {
+            (mOwner->*mFunction)();
+        }
         
-        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone(const FunctorBase0<ReturnT>*);
+        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone() {
+            return new (gfl::HeapID::LIB1) FunctorType(this);
+        }
         
 
         /* 0x10 */ DECL_WEAK virtual ~FunctorClassMethod0();

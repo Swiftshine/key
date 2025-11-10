@@ -37,7 +37,7 @@ namespace std {
         explicit __vec_deleter(allocator_param alloc)
             : m_Ptr(nullptr), m_Count(0), m_Capacity(0, alloc) {}
 
-        // ~__vec_deleter() DONT_INLINE_CLASS {
+        // DECL_WEAK ~__vec_deleter() DONT_INLINE_CLASS {
         //     if (m_Ptr) {
         //         clear();
         //         m_Capacity.second().deallocate(m_Ptr, m_Capacity.first());
@@ -46,15 +46,9 @@ namespace std {
 
         ~__vec_deleter();
 
-        // void clear() {
-        //     size_type n = m_Count;
-        //     m_Count = 0;
+        // ~__vec_deleter();
 
-        //     T* end = m_Ptr + n;
-        //     for (; n != 0; n--) {
-        //         end--;
-        //         end->~T();
-        //     }
+        // void clear() {
         // }
 
         // void clear() {
@@ -63,14 +57,25 @@ namespace std {
 
         // void clear(size_type n); // same as above
 
-        void clear() {
-            bool unk[4];
+        inline void clear() {
+            bool unk[4]; // i think that the "bool&" is actually just an iterator tag.
+            // see <string>.
             size_t count = m_Count;
             unk[0] = false;
             clear(count, unk[0]);
         }
         
-        void clear(size_type n, bool& unk); // same as above
+        DECL_WEAK void clear(size_type n, bool& unk) DONT_INLINE_CLASS {
+            size_t count = m_Count;
+            T* end = &m_Ptr[count];
+            m_Count = count - n;
+
+            while (n != 0) {
+                end--;
+                end->~T();
+                n--;
+            }
+        }
 
         size_type grow_by(size_type n) {
             size_type capacity = m_Capacity.first();
@@ -221,6 +226,13 @@ namespace std {
         // void push_back(const_reference value) {
         //     _Base::push_back(value);
         // }
+
+        iterator insert(const_reference value) {
+            bool dummy; // this is probably an iterator tag based on <string>
+            // but i don't feel like doing that rn
+            // dummy = 0;
+            return insert(value, dummy);
+        }
 
         iterator insert(iterator pos, const_reference value) {
             if (m_Count >= m_Capacity.first()) {
