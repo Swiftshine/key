@@ -1253,15 +1253,18 @@ void KeyFrame<float>::AddNew(float start, float end, const char* pName) {
 
     InnerKeyFrame inner(start, end, name);
 
-    size_t count = Count();
+    // size_t count = Count();
 
-    if (count < mInnerKeyFrames.capacity()) {
-        InnerKeyFrame* last = &mInnerKeyFrames[count];
+    mInnerKeyFrames.push_back(inner);
+    
+    // if (count < mInnerKeyFrames.capacity()) {
+    //     InnerKeyFrame* last = &mInnerKeyFrames[count];
 
-        if (last != nullptr) {
-            *last = inner;
-        }
-    } else {
-        mInnerKeyFrames.insert(inner);
-    }
+    //     if (last != nullptr) {
+    //         mInnerKeyFrames[count] = inner;
+    //         // mInnerKeyFrames.m_Count++;
+    //     }
+    // } else {
+    //     mInnerKeyFrames.insert(inner);
+    // }
 }

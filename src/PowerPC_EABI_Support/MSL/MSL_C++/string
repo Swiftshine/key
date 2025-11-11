@@ -219,6 +219,7 @@ namespace std {
             return ptr + size;
         }
 
+        // why is there a difference between size() and length()?
         size_t size() const {
             const rep_s &rep = m.first();
             return rep.is_short() ? rep.shortBuf.length : rep.longBuf.length;
@@ -285,10 +286,9 @@ namespace std {
 
         DECL_WEAK void operator=(const CharT *str) DONT_INLINE_CLASS {
             // required to be here to match; probably an inline missing
-            random_access_iterator_tag tag;
-
-            size_t cur_size = size();
-            do_replace(0, cur_size, str, str + Traits::length(str), tag);
+            // random_access_iterator_tag tag;
+            // size_t cur_size = length();
+            do_replace(0, length(), str);
         }
 
         DECL_WEAK void operator=(const basic_string& str);
@@ -307,6 +307,11 @@ namespace std {
 
         bool starts_with(const char*) const;
     private:
+        DECL_WEAK void do_replace(size_t pos, size_t count, const CharT* pSrc) DONT_INLINE_CLASS {
+            do_replace(pos, count, pSrc, pSrc + strlen(pSrc), random_access_iterator_tag());
+        }
+        
+        // void do_replace(size_t pos, size_t count, const CharT* pSrc, random_access_iterator_tag);
         void do_replace(size_t, size_t, const CharT*, const CharT*, random_access_iterator_tag);
         // DECL_WEAK void do_replace(
         //     size_t cur_size,

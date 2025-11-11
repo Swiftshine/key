@@ -8,7 +8,7 @@
 #include <MSL_C++/Metrowerks/compressed_pair.h>
 
 namespace std {
-    // void throw_length_error();
+    void throw_length_error();
     
     template <typename T, typename Allocator>
     class __vec_deleter_helper;
@@ -77,10 +77,11 @@ namespace std {
             }
         }
 
-        size_type grow_by(size_type n) {
+        DECL_WEAK size_type grow_by(size_type n) DONT_INLINE_CLASS {
             size_type capacity = m_Capacity.first();
             if ((0xFFFFFFFF / sizeof(T)) - capacity - 1 < n) {
-                throw std::length_error("vector length error");
+                // throw std::length_error("vector length error");
+                throw_length_error();
             }
 
             if (capacity < 0xFFFFFFFF / (sizeof(T) * 3)) {
@@ -138,7 +139,7 @@ namespace std {
             return pos;
         }
 
-        iterator reallocate_insert(iterator pos, const_reference value) {
+        DECL_WEAK iterator reallocate_insert(iterator pos, const_reference value) DONT_INLINE_CLASS {
             // Retain old values for later
             T* oldPtr = m_Ptr;
             size_type oldCapacity = m_Capacity.first();
@@ -234,7 +235,7 @@ namespace std {
             return insert(value, dummy);
         }
 
-        iterator insert(iterator pos, const_reference value) {
+        DECL_WEAK iterator insert(iterator pos, const_reference value) DONT_INLINE_CLASS {
             if (m_Count >= m_Capacity.first()) {
                 // ? ends up doing nothing, grow_by has no side-effects
                 _Base::grow_by(1);
@@ -255,7 +256,7 @@ namespace std {
             m_Ptr[m_Count - 1] = value;
         }
 
-        inline void push_back(const_reference value) {
+        DECL_WEAK void push_back(const_reference value) {
             if (m_Count < m_Capacity.first()) {
                 m_Count++;
                 set_back(value);
