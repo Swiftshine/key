@@ -1169,6 +1169,8 @@ float SpringBase::GetZPos() {
     return mPosition.z;
 }
 
+// todo: move these to the header
+
 /* KeyFrame */
 
 template <>
@@ -1227,7 +1229,6 @@ void KeyFrame<float>::IncrementCurrentFrame(float amt) {
     }
 }
 
-// todo: move these to the header
 
 template <>
 float KeyFrame<float>::GetPreviousEndFrame() {
@@ -1251,20 +1252,10 @@ void KeyFrame<float>::AddNew(float start, float end, const char* pName) {
         name = pName;
     }
 
-    InnerKeyFrame inner(start, end, name);
-
-    // size_t count = Count();
-
-    mInnerKeyFrames.push_back(inner);
+    InnerKeyFrame inner;
+    inner.mStart = start;
+    inner.mEnd = end;
+    inner.mName = std::string(name);
     
-    // if (count < mInnerKeyFrames.capacity()) {
-    //     InnerKeyFrame* last = &mInnerKeyFrames[count];
-
-    //     if (last != nullptr) {
-    //         mInnerKeyFrames[count] = inner;
-    //         // mInnerKeyFrames.m_Count++;
-    //     }
-    // } else {
-    //     mInnerKeyFrames.insert(inner);
-    // }
+    mInnerKeyFrames.push_back_(inner);
 }

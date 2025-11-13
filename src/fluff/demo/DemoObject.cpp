@@ -2,11 +2,22 @@
 
 using namespace demo;
 
-const uint lbl_80800ff8[8] = {};
+typedef gfl::FunctorClassMethod0<void, DemoObject*, void (DemoObject::*)() const> FuctorType;
+
+const uint lbl_80800FF8[8] = {
+    0x0,
+    0xC0,
+    0xE0,
+    0x11E0,
+    0x11E2,
+    0x0,
+    0x80,
+    0xA0
+};
 
 DemoObject::DemoObject(gfl::Task* pParentTask, const char* pTaskName, uint index)
     : mTask(nullptr)
-    , m_8(lbl_80800ff8[index])
+    , m_8(lbl_80800FF8[index])
 {
     mTask.Create(InitTask(pParentTask, 0xF1, pTaskName, m_8));
 }
@@ -15,27 +26,22 @@ DemoObject::~DemoObject() {
     mTask.Destroy();
 }
 
-extern "C" void fn_8005E590();
-
-void DemoObject::fn_802A4F28() {
-    fn_8005E590();
+// code merged with env::EnvObject::DoUpdate
+void DemoObject::DoUpdate() {
+    Update();
 }
 
 // not done
 // i don't know how to structure the gfl::Task ctor to support
 // the construction of these templated functors
 gfl::Task* DemoObject::InitTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, uint arg4) {
+    gfl::Task* task = new (gfl::HeapID::Work) gfl::Task(this, Update, pTaskName);
+    
+    if (task != nullptr) {
+        task->SetFlags(flags);
+        pParentTask->MakeChild(task);
+        task->m_14 |= arg4;
+    }
 
-    // gfl::FunctorClassMethod0<void, demo::DemoObject*, void (demo::DemoObject::*)()const>* functor = new gfl::FunctorClassMethod0<void, demo::DemoObject*, void (demo::DemoObject::*)()const>(this, (void(demo::DemoObject::*)()const)fn_802A4F28);
-
-    // gfl::Task* task = new (gfl::HeapID::Work) gfl::Task(this, functor);
-
-    // if (nullptr != task) {
-    //     task->SetFlags(flags);
-    //     parent->MakeChild(task);
-    //     task->OrUnk14(arg4);
-    // }
-    // return task;
-
-    return 0;
+    return task;
 }

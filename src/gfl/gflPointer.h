@@ -134,7 +134,7 @@ namespace gfl {
             mPointer = nullptr;
         }
 
-        inline operator T*() {
+        inline operator T*() const {
             return mPointer;
         }
     };

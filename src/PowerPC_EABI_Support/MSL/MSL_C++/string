@@ -293,10 +293,10 @@ namespace std {
 
         DECL_WEAK void operator=(const basic_string& str);
 
-        // DONT_INLINE_CLASS void operator+=(const basic_string &str) { append(str); }
-        void operator+=(const basic_string& str) DONT_INLINE_CLASS {
+        DONT_INLINE_CLASS void operator+=(const basic_string &str) { append(str); }
+        // void operator+=(const basic_string& str) DONT_INLINE_CLASS {
             
-        } 
+        // } 
         
         DONT_INLINE_CLASS void operator+=(const char *str) { append(str); }
         DONT_INLINE_CLASS void operator+=(CharT c) { append(c); }

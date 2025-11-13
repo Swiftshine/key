@@ -14,6 +14,8 @@ public:
     /* Structures */
     
     struct InnerKeyFrame {
+        inline InnerKeyFrame() { }
+        
         inline InnerKeyFrame(T start, T end, const std::string& rName)
             : mStart(start)
             , mEnd(end)

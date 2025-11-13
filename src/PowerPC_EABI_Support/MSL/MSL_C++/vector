@@ -265,6 +265,17 @@ namespace std {
                 insert(value, unk);
             }
         }
+
+        inline void push_back_(const_reference value) {
+            if (m_Count < m_Capacity.first()) {
+                if (end() != nullptr) {
+                    m_Ptr[m_Count] = value;
+                }
+                m_Count++;
+            } else {
+                insert(value);
+            }
+        }
     };
 
 }

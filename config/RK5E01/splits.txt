@@ -139,7 +139,10 @@ fluff/object/gimmick/GmkCartBtn.cpp:
 	.text       start:0x802512D0 end:0x802518EC
 
 fluff/demo/DemoObject.cpp:
-	.text       start:0x802A4DD8 end:0x802A5038
+	.text       start:0x802A4DD8 end:0x802A50A8
+	.rodata     start:0x80800FF8 end:0x80801088
+	.data       start:0x80864280 end:0x808642C0
+	.sdata      start:0x808E1118 end:0x808E1128
 
 fluff/util/NURBSOption.cpp:
 	.text       start:0x802B96C0 end:0x802B99E0

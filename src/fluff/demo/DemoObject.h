@@ -15,11 +15,12 @@ namespace demo {
 
         /* Virtual Methods */
 
-        virtual ~DemoObject();
+        /* 0x8 */ virtual ~DemoObject();
+        /* 0xC */ virtual void Update() const = 0;
         
         /* Class Methods */
         
-        void fn_802A4F28();
+        void DoUpdate();
         gfl::Task* InitTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, uint arg4) DONT_INLINE_CLASS;
 
 
