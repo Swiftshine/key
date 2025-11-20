@@ -424,7 +424,7 @@ void SpringBase::fn_800092AC(float scale) {
     if (mSpringTemplate->m_41) {
         for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
             Particle* particle = &mParticleArray1[i];
-            float dot = gfl::Vec3::Dot2(mParticleEffectMultiplier, particle->mEffectPosition);
+            float dot = gfl::Vec3::Dot2(particle->mEffectPosition, mParticleEffectMultiplier);
 
             if (m_144 + dot < 0.0f) {                    
                 particle->m_6C = true;

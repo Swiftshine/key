@@ -35,18 +35,17 @@ namespace gfl {
         static inline float DotProduct2(register const Vec3* pA, register const Vec3* pB) {
             register float dot;
             register float work3, work2, work1, work0;
-        
             
             // clang-format off
             asm {
                 // YZ product
-                psq_l  work0, Vec3.y(pB), 0, 0
-                psq_l  work1, Vec3.y(pA), 0, 0
+                psq_l  work0, Vec3.y(pA), 0, 0
+                psq_l  work1, Vec3.y(pB), 0, 0
                 ps_mul work0, work0, work1
                 
                 // X product + YZ product
-                psq_l   work3, Vec3.x(pB), 1, 0
-                psq_l   work2, Vec3.x(pA), 1, 0
+                psq_l   work3, Vec3.x(pA), 1, 0
+                psq_l   work2, Vec3.x(pB), 1, 0
                 ps_madd work1, work3, work2, work0
                 
                 // Dot product
