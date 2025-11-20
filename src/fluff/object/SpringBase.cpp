@@ -82,18 +82,18 @@ const KeyFrame<float>::FrameTemplate SpringBase_FrameTemplateZ = {
 /* Particle */
 
 SpringBase::Particle::Particle()
-    : m_28(0.0f, 0.0f, 0.0f)
-    , m_60(0.0f, 0.0f, 0.0f)
+    : m_28(0.0f)
+    , m_60(0.0f)
 {
     m_0 = 0.0f;
-    m_4 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
-    mEffectPosition = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
-    mPosition = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
-    m_34 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    m_4 = gfl::Vec3(0.0f);
+    mEffectPosition = gfl::Vec3(0.0f);
+    mPosition = gfl::Vec3(0.0f);
+    m_34 = gfl::Vec3(0.0f);
     mInvalid = false;
     m_44 = nullptr;
-    m_48 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
-    m_54 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    m_48 = gfl::Vec3(0.0f);
+    m_54 = gfl::Vec3(0.0f);
 }
 
 SpringBase::Particle::~Particle() {
@@ -102,7 +102,7 @@ SpringBase::Particle::~Particle() {
     }
 }
 
-void SpringBase::Particle::CopyVec(const nw4r::math::VEC3& rSrc) {
+void SpringBase::Particle::CopyVec(const gfl::Vec3& rSrc) {
     mPosition = rSrc;
     m_54 = rSrc;
     mEffectPosition = rSrc;
@@ -129,10 +129,10 @@ SpringBase::SpringBase(int arg1, const char* pTaskName)
     , mKeyFrameX()
     , mKeyFrameY()
     , mKeyFrameZ()
-    , mCurrentKeyFrames(0.0f, 0.0f, 0.0f)
-    , m_11C(0.0f, 0.0f, 0.0f)
-    , m_128(0.0f, 0.0f, 0.0f)
-    , mParticleEffectMultiplier(0.0f, 0.0f, 0.0f)
+    , mCurrentKeyFrames(0.0f)
+    , m_11C(0.0f)
+    , m_128(0.0f)
+    , mParticleEffectMultiplier(0.0f)
 {
     m_14C = nullptr;
     m_9C = arg1;
@@ -142,7 +142,7 @@ SpringBase::SpringBase(int arg1, const char* pTaskName)
     mParticleArray4 = nullptr;
     mParticleArray5 = nullptr;
     mSpringArray = nullptr;
-    mPosition = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+    mPosition = gfl::Vec3(0.0f);
     mSpringTemplate = nullptr;
 }
 
@@ -189,25 +189,22 @@ bool SpringBase::IsParticleInvalid(uint index) {
     return mParticleArray1[index].mInvalid;
 }
 
-void SpringBase::SetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rVec, bool syncPos) {
+void SpringBase::SetParticleEffectPositionByIndex(uint index, gfl::Vec3& rVec, bool syncPos) {
     mParticleArray1[index].mEffectPosition = rVec;
     if (syncPos) {
         mParticleArray1[index].mPosition = rVec;
     }
 }
 
-nw4r::math::VEC3 SpringBase::GetParticleEffectPositionByIndex(uint index) {
-    nw4r::math::VEC3 vec;
-    vec = mParticleArray1[index].mEffectPosition;
+gfl::Vec3 SpringBase::GetParticleEffectPositionByIndex(uint index) {
+    gfl::Vec3 vec = mParticleArray1[index].mEffectPosition;
     return vec;
 }
 
-void SpringBase::OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rOffset, bool syncPos) {
+void SpringBase::OffsetParticleEffectPositionByIndex(uint index, gfl::Vec3& rOffset, bool syncPos) {
     Particle* particle = &mParticleArray1[index];
-    nw4r::math::VEC3 vec(0, 0, 0);
-    VEC3Sub(&vec, &rOffset, &mPosition);
-    
-    particle->mEffectPosition = vec;
+
+    particle->mEffectPosition = rOffset - mPosition;
     
     if (syncPos) {
         particle->mPosition = particle->mEffectPosition;
@@ -225,25 +222,24 @@ void SpringBase::OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC
     }
 }
 
-void SpringBase::GetParticleEffectOffsetByIndex(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) {
-    nw4r::math::VEC3 offs = pSpringBase->GetParticleEffectPositionByIndex(index);
-    rDst.x = 0.0f;
-    rDst.y = 0.0f;
-    rDst.z = 0.0f;
-    VEC3Add(&rDst, &offs, &pSpringBase->mPosition);
+gfl::Vec3 SpringBase::GetParticleEffectOffsetByIndex(uint index) {
+    return GetParticleEffectPositionByIndex(index) + mPosition;
 }
 
-void SpringBase::fn_80008908(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) {
-    rDst = pSpringBase->mParticleArray1[index].m_54;
+gfl::Vec3 SpringBase::fn_80008908(uint index) {
+    gfl::Vec3 vec = mParticleArray1[index].m_54;
+    return vec;
 }
 
-void SpringBase::fn_80008930(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) {
-    nw4r::math::VEC3 offs;
-    fn_80008908(offs, pSpringBase, index);
-    rDst.x = 0.0f;
-    rDst.y = 0.0f;
-    rDst.z = 0.0f;
-    VEC3Add(&rDst, &offs, &pSpringBase->mPosition);
+gfl::Vec3 SpringBase::fn_80008930(uint index) {
+    gfl::Vec3 offs = fn_80008908(index);
+    // fn_80008908(offs, pSpringBase, index);
+    // rDst.x = 0.0f;
+    // rDst.y = 0.0f;
+    // rDst.z = 0.0f;
+    // VEC3Add(&rDst, &offs, &pSpringBase->mPosition);
+
+    return offs + mPosition;
 }
 
 void SpringBase::fn_800089A0() {
@@ -258,18 +254,18 @@ SpringBase::UnkStruct2::UnkStruct2()
     , m_C(0)
 { }
 
-void SpringBase::fn_80008A34(uint index, const nw4r::math::VEC3& rVec, int arg3) {
+void SpringBase::fn_80008A34(uint index, const gfl::Vec3& rVec, int arg3) {
     m_14C[index].m_0 = rVec;
     m_14C[index].m_C = arg3;
 }
 
-void SpringBase::fn_80008A68(nw4r::math::VEC3& rVec, int arg2) {
+void SpringBase::fn_80008A68(gfl::Vec3& rVec, int arg2) {
     for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
         fn_80008A34(i, rVec, arg2);
     }
 }
 
-void SpringBase::GetKeyFrames(nw4r::math::VEC3& rDst, SpringBase* pSpringBase) {
+void SpringBase::GetKeyFrames(gfl::Vec3& rDst, SpringBase* pSpringBase) {
     float x = 0.0f;
     float y = 0.0f;
     float z = 0.0f;
@@ -292,128 +288,60 @@ void SpringBase::GetKeyFrames(nw4r::math::VEC3& rDst, SpringBase* pSpringBase) {
 }
 
 
-inline float FloatAbs(float f) {
-    return f < 0.0f ? -f : f;
-} 
-
-inline bool SomeInline(const nw4r::math::VEC3& rVec) {
-    if (FloatAbs(rVec.x) < NW4R_MATH_FLT_EPSILON &&
-        FloatAbs(rVec.y) < NW4R_MATH_FLT_EPSILON && 
-        FloatAbs(rVec.z) < NW4R_MATH_FLT_EPSILON)
-    {
-        return true;
-    }
-
-    return false;
-}
-
-
-inline float VecAngle(nw4r::math::VEC3 &vec1, nw4r::math::VEC3 &vec2){
-    float y =  VEC3Dot(&vec1, &vec2) / (VEC3Len(&vec1) * VEC3Len(&vec2));
-
-    if (y > 1.0f) {
-        y = 1.0f;
-    }
-
-    if (y < -1.0f) {
-        y = -1.0f;
-    }
-
-    return acos(y);
-}
-
 void SpringBase::fn_80008BB0(nw4r::math::MTX34& rMtx) {
-    nw4r::math::VEC3 offs0;
-    nw4r::math::VEC3 offs;
-    nw4r::math::VEC3 vec1;
-    nw4r::math::VEC3 vec2;
-    nw4r::math::VEC3 offs1;
-    
     PSMTXIdentity(rMtx);
-    GetParticleEffectOffsetByIndex(offs0, this, 0);
-    GetParticleEffectOffsetByIndex(offs1, this, 1);
-
-    const nw4r::math::VEC3* offsptr1 = &offs1;
-    nw4r::math::VEC3* offsptr = &offs;
-    const nw4r::math::VEC3* offsptr0 = &offs0;
-
-    offs.x = 0.0f;
-    offs.y = 0.0f;
-    offs.z = 0.0f;
     
-    VEC3Sub(offsptr, offsptr0, offsptr1);
-    
-    float y = 0.0f;
+    gfl::Vec3 offs0 = GetParticleEffectOffsetByIndex(0);
+    gfl::Vec3 offs = offs0 - GetParticleEffectOffsetByIndex(1);
 
-    vec1.x = 0.0f;
-    vec1.y = -1.0f;
-    vec1.z = 0.0f;
 
-    
-    if (!SomeInline(offs)) {
-        y = VecAngle(offs,vec1);
+    gfl::Vec3 unk;
+    unk.x = 0.0f;
+    unk.y = -1.0f;
+    unk.z = 0.0f;
+
+    float angle = 0.0f;
+    if (!offs.IsInvalid()) {
+        angle = gfl::Vec3::AngleRad(offs, unk);
     }
 
-    vec2.x = 0.0f;
-    vec2.y = 0.0f;
-    vec2.z = 0.0f;
+    gfl::Vec3 cross = gfl::Vec3::Cross(unk, offs);
 
-    PSVECCrossProduct(vec1, offs, vec2);
-
-    y *= vec2.z >= 0.0f ? 1.0f : -1.0f;
-
-    MTX34RotXYZRad(&rMtx, 0.0f, 0.0f, y);
+    angle *= cross.z >= 0.0f ? 1.0f : -1.0f;
+    
+    MTX34RotXYZRad(&rMtx, 0.0f, 0.0f, angle);
+    
     rMtx[0][3] = offs0.x;
     rMtx[1][3] = offs0.y;
     rMtx[2][3] = offs0.z;
 }
 
 void SpringBase::fn_80008DC0(nw4r::math::MTX34& rMtx) {
-    nw4r::math::VEC3 offs0;
-    nw4r::math::VEC3 offs;
-    nw4r::math::VEC3 vec1;
-    nw4r::math::VEC3 vec2;
-    nw4r::math::VEC3 offs1;
-    
     PSMTXIdentity(rMtx);
-    GetParticleEffectOffsetByIndex(offs0, this, mSpringTemplate->mParticleCount - 1);
-    GetParticleEffectOffsetByIndex(offs1, this, mSpringTemplate->mParticleCount - 2);
-
-    const nw4r::math::VEC3* offsptr1 = &offs1;
-    nw4r::math::VEC3* offsptr = &offs;
-    const nw4r::math::VEC3* offsptr0 = &offs0;
-
-    offs.x = 0.0f;
-    offs.y = 0.0f;
+    
+    gfl::Vec3 offs0 = GetParticleEffectOffsetByIndex(mSpringTemplate->mParticleCount - 1);
+    gfl::Vec3 offs = offs0 - GetParticleEffectOffsetByIndex(mSpringTemplate->mParticleCount - 2);
     offs.z = 0.0f;
     
-    VEC3Sub(offsptr, offsptr0, offsptr1);
-    offs.z = 0.0f;
+    gfl::Vec3 unk;
+    unk.x = 0.0f;
+    unk.y = -1.0f;
+    unk.z = 0.0f;
 
-    float y = 0.0f;
-
-    vec1.x = 0.0f;
-    vec1.y = -1.0f;
-    vec1.z = 0.0f;
-
-    
-    if (!SomeInline(offs)) {
-        y = VecAngle(offs,vec1);
+    float angle = 0.0f;
+    if (!offs.IsInvalid()) {
+        angle = gfl::Vec3::AngleRad(offs, unk);
     }
 
-    vec2.x = 0.0f;
-    vec2.y = 0.0f;
-    vec2.z = 0.0f;
+    gfl::Vec3 cross = gfl::Vec3::Cross(unk, offs);
 
-    PSVECCrossProduct(vec1, offs, vec2);
-
-    y *= vec2.z >= 0.0f ? 1.0f : -1.0f;
-
-    MTX34RotXYZRad(&rMtx, 0.0f, 0.0f, y);
+    angle *= cross.z >= 0.0f ? 1.0f : -1.0f;
+    
+    MTX34RotXYZRad(&rMtx, 0.0f, 0.0f, angle);
+    
     rMtx[0][3] = offs0.x;
     rMtx[1][3] = offs0.y;
-    rMtx[2][3] = offs0.z;
-    
+    rMtx[2][3] = offs0.z;   
 }
 
 float SpringBase::vf68() {
@@ -480,7 +408,7 @@ int SpringBase::fn_80009270(uint index) {
     return mSpringArray[index].mActiveParticleIndex;
 }
 
-void SpringBase::fn_80009284(nw4r::math::VEC3& rVec) {
+void SpringBase::fn_80009284(gfl::Vec3& rVec) {
     mSpringTemplate->m_18 = rVec;
 }
 
@@ -488,7 +416,6 @@ void SpringBase::fn_800092A4() {
     fn_80009568(mSpringTemplate);
 }
 
-// https://decomp.me/scratch/R1T4Y
 void SpringBase::fn_800092AC(float scale) {
     for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
         mParticleArray1[i].m_28 = mParticleArray1[i].mEffectPosition;
@@ -497,10 +424,8 @@ void SpringBase::fn_800092AC(float scale) {
     if (mSpringTemplate->m_41) {
         for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
             Particle* particle = &mParticleArray1[i];
-            float dot = VEC3Dot(
-                &particle->mEffectPosition,
-                &mParticleEffectMultiplier
-            );
+            float dot = gfl::Vec3::Dot2(mParticleEffectMultiplier, particle->mEffectPosition);
+
             if (m_144 + dot < 0.0f) {                    
                 particle->m_6C = true;
             } else {
@@ -549,12 +474,12 @@ void SpringBase::fn_800092AC(float scale) {
     }
 }
 
-void SpringBase::vf78(float, Particle*, nw4r::math::VEC3&) { }
+void SpringBase::vf78(float, Particle*, gfl::Vec3&) { }
 
 void SpringBase::fn_80009568(SpringTemplate* pSpringTemplate) {
     for (uint i = 0; i < pSpringTemplate->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
-        particle->m_34 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+        particle->m_34 = gfl::Vec3(0.0f);
     }
 
     fn_8000BB50();
@@ -643,20 +568,11 @@ void SpringBase::fn_80009678(float scale) {
     }
 }
 
-inline void ClearVec(nw4r::math::VEC3& v) {
-    v.x = 0.0f;
-    v.y = 0.0f;
-    v.z = 0.0f;
-}
-
 void SpringBase::fn_80009E28(float scale) {
     SpringTemplate* springTemplate = mSpringTemplate;
     
     fn_8000A748(mParticleArray1);
 
-    nw4r::math::VEC3 vec2;
-    nw4r::math::VEC3 vec1;
-    nw4r::math::VEC3 vec3;
     
     for (uint i = 0; i < springTemplate->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
@@ -664,161 +580,226 @@ void SpringBase::fn_80009E28(float scale) {
         if (particle->mInvalid) {
             continue;
         }
-        
+
         float rate = 1.0f / particle->m_0;
 
-        ClearVec(vec1);
-    
-        VEC3Scale(&vec1, &particle->m_34, rate);
-        
-        ClearVec(vec2);
-
-        VEC3Scale(&vec2, &vec1, scale);
-        
-        particle->m_4 += vec2;
-
-        ClearVec(vec3);
-
-        VEC3Scale(&vec3, &particle->m_4, scale);
-        
-        particle->m_60 = vec3;
+        gfl::Vec3 temp = particle->m_34 * rate * scale;
+        particle->m_4 += temp;
+        particle->m_60 = particle->m_4 * scale;
     }
 }
 
 // https://decomp.me/scratch/vwO7T
 void SpringBase::fn_80009F64(float scale) {
-    SpringTemplate* springTemplate = mSpringTemplate;
+    // SpringTemplate* springTemplate = mSpringTemplate;
 
-    fn_8000A748(mParticleArray1);
+    // fn_8000A748(mParticleArray1);
 
-    nw4r::math::VEC3 vec2;
-    nw4r::math::VEC3 vec1;
-    nw4r::math::VEC3 vec7;
-    nw4r::math::VEC3 vec3;
-    nw4r::math::VEC3 vec6;
-    nw4r::math::VEC3 vec5;
-    nw4r::math::VEC3 vec4;
+    // gfl::Vec3 vec2;
+    // gfl::Vec3 vec1;
+    // gfl::Vec3 vec7;
+    // gfl::Vec3 vec3;
+    // gfl::Vec3 vec6;
+    // gfl::Vec3 vec5;
+    // gfl::Vec3 vec4;
 
     
-    for (uint i = 0; i < springTemplate->mParticleCount; i++) {
-        Particle* particle = &mParticleArray1[i];
+    // for (uint i = 0; i < springTemplate->mParticleCount; i++) {
+    //     Particle* particle = &mParticleArray1[i];
 
-        if (particle->mInvalid) {
-            continue;
-        }
+    //     if (particle->mInvalid) {
+    //         continue;
+    //     }
     
-        float rate = 1.0f / particle->m_0;
+    //     float rate = 1.0f / particle->m_0;
 
-        ClearVec(vec1);
+    //     ClearVec(vec1);
         
-        ClearVec(vec2);
+    //     ClearVec(vec2);
 
-        VEC3Scale(&vec1, &particle->m_34, rate);
+    //     VEC3Scale(&vec1, &particle->m_34, rate);
 
-        VEC3Scale(&vec2, &vec1, scale);
+    //     VEC3Scale(&vec2, &vec1, scale);
 
-        particle->m_4 += vec2;
+    //     particle->m_4 += vec2;
 
-        ClearVec(vec4); 
+    //     ClearVec(vec4); 
 
-        ClearVec(vec3); 
+    //     ClearVec(vec3); 
 
-        ClearVec(vec5);
+    //     ClearVec(vec5);
   
-        ClearVec(vec6);
+    //     ClearVec(vec6);
         
-        ClearVec(vec7);
+    //     ClearVec(vec7);
 
-        VEC3Sub(&vec3, &particle->mEffectPosition, &particle->mPosition);
+    //     VEC3Sub(&vec3, &particle->mEffectPosition, &particle->mPosition);
 
-        VEC3Scale(&vec4, &particle->m_34, 1.0f / particle->m_0);
+    //     VEC3Scale(&vec4, &particle->m_34, 1.0f / particle->m_0);
 
-        VEC3Scale(&vec5, &vec4, scale);
+    //     VEC3Scale(&vec5, &vec4, scale);
 
-        VEC3Scale(&vec6, &vec5, scale);
+    //     VEC3Scale(&vec6, &vec5, scale);
   
-        VEC3Add(&vec7, &vec3, &vec6);
+    //     VEC3Add(&vec7, &vec3, &vec6);
 
-        particle->m_60 = vec7;
-    }
+    //     particle->m_60 = vec7;
+    // }
 }
 
 // https://decomp.me/scratch/zb3kQ
 void SpringBase::fn_8000A148(float scale) {
-    SpringTemplate* springTemplate = mSpringTemplate;
-    fn_8000AC6C(mParticleArray1);
+    // SpringTemplate* springTemplate = mSpringTemplate;
+    // fn_8000AC6C(mParticleArray1);
 
-    float unk1 = 0.01f * (100.0f - springTemplate->mPercentage);
+    // float unk1 = 0.01f * (100.0f - springTemplate->mPercentage);
 
-    for (uint i = 0; i < springTemplate->mParticleCount; i++) {
-        Particle* particle = &mParticleArray1[i];
+    // for (uint i = 0; i < springTemplate->mParticleCount; i++) {
+    //     Particle* particle = &mParticleArray1[i];
+
+    //     if (particle->mInvalid) {
+    //         continue;
+    //     }
+
+    //     float rate = 1.0f / particle->m_0;
+    //     particle->m_60 = (particle->mEffectPosition - particle->mPosition) * unk1 + particle->m_34 * rate * scale * scale;
+    // }
+
+    // for (uint i = 0; i < springTemplate->mParticleCount; i++) {
+    //     mParticleArray1[i].m_6D = false;
+    // }
+
+
+    // for (uint i = 0; i < mSpringTemplate->mSpringCount; i++) {
+    //     Spring* spring = &mSpringArray[i];
+
+    //     if (1.0f > spring->m_10) {
+    //         continue;
+    //     }
+
+    //     uint index1 = spring->mParticleIndex1;
+    //     uint index2 = spring->mParticleIndex2;
+
+    //     Particle* p1 = &mParticleArray1[index1];
+    //     Particle* p2 = &mParticleArray1[index2];
+
+    //     if (!p1->mInvalid || !p2->mInvalid) {
+    //         gfl::Vec3 vecA = (p2->mEffectPosition + p2->m_60) - (p1->mEffectPosition - p1->m_60);
+
+    //         float unk2;
+    //         if (SomeInline(vecA)) {
+    //             vecA.x = unk1;
+    //             vecA.y = -1.0f;
+    //             vecA.z = unk1;
+
+    //             unk2 = 0.0f;
+    //         } else {
+    //             unk2 = VEC3Len(&vecA);
+    //             vecA *= 1.0f / unk2;
+    //         }
+
+    //         float unk3 = -(spring->m_8 * spring->m_10 - unk2);
+
+    //         if (unk3 >= 0.0f) {
+    //             continue;
+    //         }
+
+    //         gfl::Vec3 vecB = vecA * unk3 * 0.5f;
+
+    //         if (p1->mInvalid || p1->mInvalid) {
+    //             vecB *= 2.0f;
+    //         }
+
+    //         if (!p1->mInvalid) {
+    //             p1->m_60 = (p1->mEffectPosition + p1->m_60 + vecB) - p1->mEffectPosition;
+    //         }
+
+    //         if (!p2->mInvalid) {
+    //             p2->m_60 = (p2->mEffectPosition + p2->m_60 + vecB) - p2->mEffectPosition;
+    //         }
+    //     }
+    // }
+}
+
+// https://decomp.me/scratch/jpA3V
+void SpringBase::fn_8000A748(Particle* pParticles) {
+    SpringTemplate* st = mSpringTemplate;
+
+    for (uint i = 0; i < st->mParticleCount; i++) {
+        Particle* particle = &pParticles[i];
 
         if (particle->mInvalid) {
             continue;
         }
 
-        float rate = 1.0f / particle->m_0;
-        particle->m_60 = (particle->mEffectPosition - particle->mPosition) * unk1 + particle->m_34 * rate * scale * scale;
+        particle->m_34 -= st->m_18 * particle->m_0;
+        particle->m_34 -= particle->m_4 * st->m_14;
+
+        if (particle->m_6C) {
+            particle->m_34 += mCurrentKeyFrames;
+        }
     }
 
-    for (uint i = 0; i < springTemplate->mParticleCount; i++) {
-        mParticleArray1[i].m_6D = false;
+
+    if (st->m_44 > 0.0f) {
+        for (uint i = 0; i < st->mParticleCount; i++) {
+            Particle* particle = &pParticles[i];
+
+            gfl::Vec3 temp = particle->m_54 - particle->mEffectPosition;
+
+            if (st->m_48 > 0.0f) {
+                float mag = temp.Length();
+                float unk = 1.0f / st->m_48;
+
+                temp = temp * mag * unk;
+            }
+
+            if (temp.IsInvalid()) {
+                temp.Normalize();
+                particle->m_34 += temp * st->m_44;
+            }
+        }
     }
 
+    vf7C(pParticles);
 
-    for (uint i = 0; i < mSpringTemplate->mSpringCount; i++) {
+    for (uint i = 0; i < st->mSpringCount; i++) {
         Spring* spring = &mSpringArray[i];
 
-        if (1.0f > spring->m_10) {
-            continue;
-        }
+        Particle* p1 = &pParticles[spring->mParticleIndex1];
+        Particle* p2 = &pParticles[spring->mParticleIndex2];
 
-        uint index1 = spring->mParticleIndex1;
-        uint index2 = spring->mParticleIndex2;
+        gfl::Vec3 diff = p1->mEffectPosition - p2->mEffectPosition;
 
-        Particle* p1 = &mParticleArray1[index1];
-        Particle* p2 = &mParticleArray1[index2];
+        float mag = diff.Length();
 
-        if (!p1->mInvalid || !p2->mInvalid) {
-            nw4r::math::VEC3 vecA = (p2->mEffectPosition + p2->m_60) - (p1->mEffectPosition - p1->m_60);
+        if (mag <= 0.0f) {
+            gfl::Vec3 temp1(0.0f);
+            gfl::Vec3::Normalize(diff, temp1);
+            float rate = 1.0f / mag;
 
-            float unk2;
-            if (SomeInline(vecA)) {
-                vecA.x = unk1;
-                vecA.y = -1.0f;
-                vecA.z = unk1;
+            gfl::Vec3 temp2 = p1->m_4 - p2->m_4;
+            
+            float dot = gfl::Vec3::Dot1(temp2, diff);
 
-                unk2 = 0.0f;
-            } else {
-                unk2 = VEC3Len(&vecA);
-                vecA *= 1.0f / unk2;
-            }
+            float unk = -(
+                st->m_4[spring->mActiveParticleIndex] *
+                mag - spring->m_8 *
+                st->mPercentage *
+                dot / mag
+            );
 
-            float unk3 = -(spring->m_8 * spring->m_10 - unk2);
-
-            if (unk3 >= 0.0f) {
-                continue;
-            }
-
-            nw4r::math::VEC3 vecB = vecA * unk3 * 0.5f;
-
-            if (p1->mInvalid || p1->mInvalid) {
-                vecB *= 2.0f;
-            }
-
+            gfl::Vec3 temp3 = diff * unk * rate;
+            
             if (!p1->mInvalid) {
-                p1->m_60 = (p1->mEffectPosition + p1->m_60 + vecB) - p1->mEffectPosition;
+                p1->m_34 += temp3;
             }
 
             if (!p2->mInvalid) {
-                p2->m_60 = (p2->mEffectPosition + p2->m_60 + vecB) - p2->mEffectPosition;
+                p2->m_34 += temp3;
             }
         }
     }
-}
-
-void SpringBase::fn_8000A748(Particle* pParticles) {
-    // not decompiled
 }
 
 void SpringBase::fn_8000AC6C(Particle* pParticles) {
@@ -833,127 +814,94 @@ void SpringBase::CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* p
 }
 
 void SpringBase::fn_8000B270() {
-    nw4r::math::VEC3 keyFramesA;
-    GetKeyFrames(keyFramesA, this);
+    // gfl::Vec3 keyFramesA;
+    // GetKeyFrames(keyFramesA, this);
 
-    if (mKeyFrameX.Count() != 0) {
-        mKeyFrameX.IncrementCurrentFrame();
-    }
+    // if (mKeyFrameX.Count() != 0) {
+    //     mKeyFrameX.IncrementCurrentFrame();
+    // }
 
-    if (mKeyFrameY.Count() != 0) {
-        mKeyFrameY.IncrementCurrentFrame();
-    }
+    // if (mKeyFrameY.Count() != 0) {
+    //     mKeyFrameY.IncrementCurrentFrame();
+    // }
 
-    if (mKeyFrameZ.Count() != 0) {
-        mKeyFrameZ.IncrementCurrentFrame();
-    }
+    // if (mKeyFrameZ.Count() != 0) {
+    //     mKeyFrameZ.IncrementCurrentFrame();
+    // }
 
-    nw4r::math::VEC3 keyFramesB;
-    GetKeyFrames(keyFramesB, this);
-    mCurrentKeyFrames = keyFramesB;
+    // gfl::Vec3 keyFramesB;
+    // GetKeyFrames(keyFramesB, this);
+    // mCurrentKeyFrames = keyFramesB;
     
-    if (!mSpringTemplate->m_41) {
-        return;
-    }
+    // if (!mSpringTemplate->m_41) {
+    //     return;
+    // }
     
-    if (VEC3LenSq(&mCurrentKeyFrames) > 0.0f) {
-        bool unk = false;
+    // if (VEC3LenSq(&mCurrentKeyFrames) > 0.0f) {
+    //     bool unk = false;
 
-        if (VEC3LenSq(&keyFramesA) == 0.0f) {
-            unk = true;
-        } else {
-            float angle = VecAngle(keyFramesA, mCurrentKeyFrames);
+    //     if (VEC3LenSq(&keyFramesA) == 0.0f) {
+    //         unk = true;
+    //     } else {
+    //         float angle = VecAngle(keyFramesA, mCurrentKeyFrames);
             
-            if (180.0f * (angle / NW4R_MATH_PI) > 10.0f) {
-                unk = true;
-            }
-        }
+    //         if (180.0f * (angle / NW4R_MATH_PI) > 10.0f) {
+    //             unk = true;
+    //         }
+    //     }
 
-        if (unk) {
-            mParticleEffectMultiplier = mCurrentKeyFrames;
-            VEC3Normalize(&mParticleEffectMultiplier, &mParticleEffectMultiplier);
-            m_144 = m_134 + VEC3Len(&m_128);
-        }
-    }
+    //     if (unk) {
+    //         mParticleEffectMultiplier = mCurrentKeyFrames;
+    //         VEC3Normalize(&mParticleEffectMultiplier, &mParticleEffectMultiplier);
+    //         m_144 = m_134 + VEC3Len(&m_128);
+    //     }
+    // }
 
-    if (VEC3LenSq(&mCurrentKeyFrames) > 0.0f) {
-        m_148 = 0.001f * VEC3Len(&mCurrentKeyFrames);
-    }
+    // if (VEC3LenSq(&mCurrentKeyFrames) > 0.0f) {
+    //     m_148 = 0.001f * VEC3Len(&mCurrentKeyFrames);
+    // }
 }
 
 // no idea what tu this belongs to
 bool fn_80012914(
     float,
-    nw4r::math::VEC3&,
-    nw4r::math::VEC3&,
-    nw4r::math::VEC3&,
-    nw4r::math::VEC3&,
+    gfl::Vec3&,
+    gfl::Vec3&,
+    gfl::Vec3&,
+    gfl::Vec3&,
     float*
 );
 
-using nw4r::math::VEC3;
+using gfl::Vec3;
 
-// https://decomp.me/scratch/XCrDu
-void SpringBase::vf74(float scale, Particle* pParticle, nw4r::math::VEC3& rVec) {
-    nw4r::math::VEC3 vec1;
-    
-    vec1.x = 0.0f;
-    vec1.y = 1.0f;
-    vec1.z = 0.0f;
-    
-    nw4r::math::VEC3 vec2;
-    nw4r::math::VEC3 vec3;
+// https://decomp.me/scratch/94H5I
+void SpringBase::vf74(float scale, Particle* pParticle, gfl::Vec3& rVec) {
+    gfl::Vec3 v1(0.0f);
+    v1.y = 1.0f;
 
-    ClearVec(vec2);
-    VEC3Add(&vec2, &mPosition, &pParticle->mEffectPosition);
-    ClearVec(vec3);
-    
-    VEC3 vec4;
-    VEC3 vec5;
-    VEC3 vec6;
-    VEC3 vec7;
-    VEC3 vec8;
-    VEC3 vec9;
+    gfl::Vec3 v2 = mPosition + pParticle->mEffectPosition;
+    gfl::Vec3 v3(0.0f);
 
-    bool unk = fn_80012914(0.0f, rVec, vec2, vec1, vec3, nullptr);
-    
-    if (!unk) {
+    if (!fn_80012914(0.0f, rVec, v2, v1, v3, nullptr)) {
         return;
     }
+
+    float dot = VEC3Dot(&pParticle->m_4, &v1);
+
+    gfl::Vec3 temp1 = -(v1 * dot) * 0.5f;
+    gfl::Vec3 temp2 = (pParticle->m_4 - v1 * dot) * 0.8f;
+    // temp1 *= 0.8f;
+    // temp2 *= 0.5f;
     
-    ClearVec(vec4);
-    // ClearVec(vec5);
-    // ClearVec(vec6);
-        
-    float dot = VEC3Dot(&pParticle->m_4, &vec1);
+    pParticle->m_4 = temp1 + temp2;
 
-    VEC3Scale(&vec4, &vec1, dot);
-
-    vec5.x = -vec4.x;
-    vec5.y = -vec4.y;
-    vec5.z = -vec4.z;
-
-    VEC3Sub(&vec6, &pParticle->m_4, &vec4);
-    VEC3Scale(&vec7, &vec5, 0.5f);
-    VEC3Scale(&vec8, &vec7, 0.8f);
-    VEC3Add(&vec9, &vec6, &vec8);
-    
-    pParticle->m_4 = vec9;
-
-    
-    // VEC
-    // (pParticle->m_4).x = -(vec1.x * dot) * f0.5 + ((pParticle->m_4).x - vec1.x * dot) * f0.8;
-
-
-    VEC3 t;
-    VEC3Scale(&t, &pParticle->m_4, scale);
-    rVec = t;
+    rVec = pParticle->m_4 * scale;
 }
 
 void SpringBase::fn_8000B6BC() {
     for (uint i = 0; i < GetParticleCount(); i++) {
         Particle* particle = &mParticleArray1[i];
-        particle->m_4 = nw4r::math::VEC3(0.0f, 0.0f, 0.0f);
+        particle->m_4 = gfl::Vec3(0.0f);
     }
 }
 
@@ -991,36 +939,21 @@ bool SpringBase::fn_8000B74C() {
     return true;
 }
 
-bool SpringBase::fn_8000B888(float mag, nw4r::math::VEC3& rArg2, const nw4r::math::VEC3& rArg3) {
-    nw4r::math::VEC3 vec1;
-    nw4r::math::VEC3 vec3;
-    nw4r::math::VEC3 vec2;
-    
-    ClearVec(vec1);
-    
-    VEC3Sub(&vec1, &rArg3, &rArg2);
-    
-    if (PSVECMag(vec1) <= mag) {
+bool SpringBase::fn_8000B888(float mag, gfl::Vec3& rArg2, const gfl::Vec3& rArg3) {
+    gfl::Vec3 v1 = rArg3 - rArg2;
+
+    if (v1.Length() <= mag) {
         rArg2 = rArg3;
         return true;
     } else {
-        VEC3Normalize(&vec1, &vec1);
+        v1.Normalize();
+        v1 *= mag;
 
-        ClearVec(vec2);
-        
-        VEC3Scale(&vec1, &vec1, mag);
-        
-        VEC3Add(&vec2, &rArg2, &vec1);
-        
-        rArg2 = vec2;
-        
-        ClearVec(vec3);
-        
-        VEC3Sub(&vec3, &rArg3, &rArg2);
+        rArg2 = rArg2 + v1;
 
-        float dot = VEC3Dot_(&vec3, &vec1);
-        
-        if (dot < 0.0f || PSVECMag(vec3) < mag) {
+        gfl::Vec3 v3 = rArg3 - rArg2;
+
+        if (gfl::Vec3::Dot1(v3, v1) < 0.0f || v3.Length() < mag) {
             rArg2 = rArg3;
             return true;
         }
@@ -1128,42 +1061,42 @@ ScreenPosition FlfGameObj::GetScreenPosition() {
 
 void FlfGameObj::vf30() { }
 
-void FlfGameObj::vf2C(
-    nw4r::math::VEC3& rArg1,
-    const nw4r::math::VEC3& rOffset,
-    nw4r::math::VEC3* pDst
-) {
-    if (m_6F) {
-        return;
-    }
+// void FlfGameObj::vf2C(
+//     gfl::Vec3& rArg1,
+//     const gfl::Vec3& rOffset,
+//     gfl::Vec3* pDst
+// ) {
+//     if (m_6F) {
+//         return;
+//     }
 
-    nw4r::math::VEC3 pos;
-    pos = mPosition;
-    pos += rOffset;
-    SetPosition(pos);
+//     gfl::Vec3 pos;
+//     pos = mPosition;
+//     pos += rOffset;
+//     SetPosition(pos);
 
-    if (pDst != nullptr) {
-        *pDst = rOffset;
-    }
-}
+//     if (pDst != nullptr) {
+//         *pDst = rOffset;
+//     }
+// }
 
-void FlfGameObj::SetPosition(const nw4r::math::VEC3& rPosition) {
-    mPosition = rPosition;
-}
+// void FlfGameObj::SetPosition(const gfl::Vec3& rPosition) {
+//     mPosition = rPosition;
+// }
 
-void FlfGameObj::vf28() { }
+// void FlfGameObj::vf28() { }
 
-void FlfGameObj::Interact(FlfGameObj* pOther) { }
+// void FlfGameObj::Interact(FlfGameObj* pOther) { }
 
-void FlfGameObj::SetSecondaryPosition(const nw4r::math::VEC3& rPosition) {
-    FlfGameObj::SetPosition(rPosition);
-}
+// void FlfGameObj::SetSecondaryPosition(const gfl::Vec3& rPosition) {
+//     FlfGameObj::SetPosition(rPosition);
+// }
 
-nw4r::math::VEC3 FlfGameObj::GetPosition() {
-    nw4r::math::VEC3 pos;
-    pos = mPosition;
-    return pos;
-}
+// gfl::Vec3 FlfGameObj::GetPosition() {
+//     gfl::Vec3 pos;
+//     pos = mPosition;
+//     return pos;
+// }
 
 float SpringBase::GetZPos() {
     return mPosition.z;

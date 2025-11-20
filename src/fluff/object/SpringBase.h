@@ -7,6 +7,7 @@
 #include "gfl/gflArray.h"
 #include "gfl/gflPointer.h"
 #include "gfl/gflResFileInfo.h"
+#include "gfl/gflVec3.h"
 #include <nw4r/g3d/g3d_obj.h>
 
 /// @note Size: `0x150`
@@ -20,16 +21,16 @@ public:
         /* Class Members */
 
         /* 0x00 */ float m_0;
-        /* 0x04 */ nw4r::math::VEC3 m_4;
-        /* 0x10 */ nw4r::math::VEC3 mEffectPosition;
-        /* 0x1C */ nw4r::math::VEC3 mPosition;
-        /* 0x28 */ nw4r::math::VEC3 m_28;
-        /* 0x34 */ nw4r::math::VEC3 m_34;
+        /* 0x04 */ gfl::Vec3 m_4;
+        /* 0x10 */ gfl::Vec3 mEffectPosition;
+        /* 0x1C */ gfl::Vec3 mPosition;
+        /* 0x28 */ gfl::Vec3 m_28;
+        /* 0x34 */ gfl::Vec3 m_34;
         /* 0x40 */ bool mInvalid;
         /* 0x44 */ nw4r::g3d::G3dObj* m_44;
-        /* 0x48 */ nw4r::math::VEC3 m_48;
-        /* 0x54 */ nw4r::math::VEC3 m_54;
-        /* 0x60 */ nw4r::math::VEC3 m_60;
+        /* 0x48 */ gfl::Vec3 m_48;
+        /* 0x54 */ gfl::Vec3 m_54;
+        /* 0x60 */ gfl::Vec3 m_60;
         /* 0x6C */ bool m_6C;
         /* 0x6D */ bool m_6D;
 
@@ -42,7 +43,7 @@ public:
         /* 0x8 */ virtual ~Particle();
 
         /* Class Methods */
-        void CopyVec(const nw4r::math::VEC3& rSrc) DONT_INLINE_CLASS;
+        void CopyVec(const gfl::Vec3& rSrc) DONT_INLINE_CLASS;
     };
 
     /// @note Size: `0x18`
@@ -69,12 +70,10 @@ public:
     /// @note size unk (`0x4C`?)
     struct SpringTemplate {
         /* 0x00 */ float m_0;
-        /* 0x04 */ float m_4;
-        /* 0x08 */ int m_8;
-        /* 0x0C */ int m_C;
+        /* 0x04 */ float m_4[3];
         /* 0x10 */ float mPercentage;
-        /* 0x14 */ int m_14;
-        /* 0x18 */ nw4r::math::VEC3 m_18;
+        /* 0x14 */ float m_14;
+        /* 0x18 */ gfl::Vec3 m_18;
         /* 0x24 */ int m_24;
         /* 0x28 */ bool m_28;
         /* 0x2C */ float m_2C;
@@ -84,15 +83,15 @@ public:
         /* 0x3C */ uint m_3C;
         /* 0x40 */ bool m_40;
         /* 0x41 */ bool m_41;
-        /* 0x44 */ int m_44;
-        /* 0x48 */ int m_48;
+        /* 0x44 */ float m_44;
+        /* 0x48 */ float m_48;
     };
 
     /// @note Size: `0x10`
     struct UnkStruct2 {
         UnkStruct2();
 
-        /* 0x0 */ nw4r::math::VEC3 m_0;
+        /* 0x0 */ gfl::Vec3 m_0;
         /* 0xC */ int m_C;
     };
 
@@ -110,8 +109,8 @@ public:
     /* 0x68 */ virtual float vf68();
     /* 0x6C */ virtual float GetZPos();
     /* 0x70 */ virtual void Update() const;
-    /* 0x74 */ virtual void vf74(float scale, Particle* pParticle, nw4r::math::VEC3& rDst);
-    /* 0x78 */ virtual void vf78(float, Particle*, nw4r::math::VEC3&);
+    /* 0x74 */ virtual void vf74(float scale, Particle* pParticle, gfl::Vec3& rDst);
+    /* 0x78 */ virtual void vf78(float, Particle*, gfl::Vec3&);
     /* 0x7C */ virtual void vf7C(Particle*);
 
     /* Class Methods */
@@ -120,24 +119,24 @@ public:
     void SetParticleInvalid(uint index, bool value) DONT_INLINE_CLASS;
     void SetParticlesInvalid(bool value) DONT_INLINE_CLASS;
     bool IsParticleInvalid(uint index);
-    void SetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rPos, bool syncPosition);
-    nw4r::math::VEC3 GetParticleEffectPositionByIndex(uint index) DONT_INLINE_CLASS;
-    void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC3& rOffset, bool syncPosition) DONT_INLINE_CLASS;
+    void SetParticleEffectPositionByIndex(uint index, gfl::Vec3& rPos, bool syncPosition);
+    gfl::Vec3 GetParticleEffectPositionByIndex(uint index) DONT_INLINE_CLASS;
+    void OffsetParticleEffectPositionByIndex(uint index, gfl::Vec3& rOffset, bool syncPosition) DONT_INLINE_CLASS;
     void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC2& rOffset, bool syncPosition) DONT_INLINE_CLASS;
-    static void GetParticleEffectOffsetByIndex(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) DONT_INLINE_CLASS;
-    static void fn_80008908(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) DONT_INLINE_CLASS;
-    static void fn_80008930(nw4r::math::VEC3& rDst, SpringBase* pSpringBase, uint index) DONT_INLINE_CLASS;
+    gfl::Vec3 GetParticleEffectOffsetByIndex(uint index) DONT_INLINE_CLASS;
+    gfl::Vec3 fn_80008908(uint index) DONT_INLINE_CLASS;
+    gfl::Vec3 fn_80008930(uint index) DONT_INLINE_CLASS;
     void fn_800089A0();
-    void fn_80008A34(uint index, const nw4r::math::VEC3& rVec, int arg3) DONT_INLINE_CLASS;
-    void fn_80008A68(nw4r::math::VEC3& rVec, int arg2) DONT_INLINE_CLASS;
-    static void GetKeyFrames(nw4r::math::VEC3& rDst, SpringBase* pSpringBase) DONT_INLINE_CLASS;
+    void fn_80008A34(uint index, const gfl::Vec3& rVec, int arg3) DONT_INLINE_CLASS;
+    void fn_80008A68(gfl::Vec3& rVec, int arg2) DONT_INLINE_CLASS;
+    static void GetKeyFrames(gfl::Vec3& rDst, SpringBase* pSpringBase) DONT_INLINE_CLASS;
     void fn_80008BB0(nw4r::math::MTX34& rMtx);
     void fn_80008DC0(nw4r::math::MTX34& rMtx);
     void ResetKeyFrames(KeyFrame<float>::FrameTemplate* pFTX, KeyFrame<float>::FrameTemplate* pFTY, KeyFrame<float>::FrameTemplate* pFTZ);
     float fn_80009248(uint index);
     float fn_8000925C(uint index);
     int fn_80009270(uint index);
-    void fn_80009284(nw4r::math::VEC3& rVec);
+    void fn_80009284(gfl::Vec3& rVec);
     void fn_800092A4();
     void fn_800092AC(float scale);
     void fn_80009568(SpringTemplate* pSpringTemplate) DONT_INLINE_CLASS;
@@ -151,7 +150,7 @@ public:
     void fn_8000B270() DONT_INLINE_CLASS;
     void fn_8000B6BC();
     bool fn_8000B74C();
-    static bool fn_8000B888(float, nw4r::math::VEC3&, const nw4r::math::VEC3&);
+    static bool fn_8000B888(float, gfl::Vec3&, const gfl::Vec3&);
     void LoadDefaultKeyFrames();
     void fn_8000BB50() DONT_INLINE_CLASS;
     void CreateParticleArrays() DONT_INLINE_CLASS;
@@ -171,11 +170,11 @@ public:
     /* 0x0D4 */ KeyFrame<float> mKeyFrameY;
     /* 0x0F0 */ KeyFrame<float> mKeyFrameZ;
     /* 0x10C */ SpringTemplate* mSpringTemplate;
-    /* 0x110 */ nw4r::math::VEC3 mCurrentKeyFrames;
-    /* 0x11C */ nw4r::math::VEC3 m_11C;
-    /* 0x128 */ nw4r::math::VEC3 m_128;
+    /* 0x110 */ gfl::Vec3 mCurrentKeyFrames;
+    /* 0x11C */ gfl::Vec3 m_11C;
+    /* 0x128 */ gfl::Vec3 m_128;
     /* 0x134 */ float m_134;
-    /* 0x138 */ nw4r::math::VEC3 mParticleEffectMultiplier;
+    /* 0x138 */ gfl::Vec3 mParticleEffectMultiplier;
     /* 0x144 */ float m_144;
     /* 0x148 */ float m_148;
     /* 0x14C */ UnkStruct2* m_14C;
