@@ -2,6 +2,7 @@
 #define GFL_CUSTOMRENDEROBJ_H
 
 #include "gflRenderObj.h"
+#include "gflVec3.h"
 
 namespace gfl {
     class CustomRenderObj : public nw4r::g3d::ScnLeaf, public gfl::RenderObj {
@@ -30,7 +31,7 @@ namespace gfl {
         virtual void vf84();
         virtual void vf88();
         virtual void vf8C();
-        virtual void vf90();
+        virtual Vec3 vf90();
         virtual void vf94();
         // calls nw4r::g3d::ScnLeaf::G3dProc(1, 0, arg1)
         virtual void ScnLeafProc(void* arg1); 
