@@ -176,6 +176,10 @@ namespace gfl {
             VEC3Normalize(this, this);
         }
 
+        inline void Normalize(const Vec3& other) {
+            VEC3Normalize(this, &other);
+        }
+
         static inline float Dot1(const Vec3& a, const Vec3& b);
         static inline float Dot2(const Vec3& a, const Vec3& b);
         static inline Vec3 Cross(const Vec3& a, const Vec3& b);

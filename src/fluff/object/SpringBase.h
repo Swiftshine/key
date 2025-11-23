@@ -129,7 +129,7 @@ public:
     void fn_800089A0();
     void fn_80008A34(uint index, const gfl::Vec3& rVec, int arg3) DONT_INLINE_CLASS;
     void fn_80008A68(gfl::Vec3& rVec, int arg2) DONT_INLINE_CLASS;
-    static void GetKeyFrames(gfl::Vec3& rDst, SpringBase* pSpringBase) DONT_INLINE_CLASS;
+    gfl::Vec3 GetKeyFrames() DONT_INLINE_CLASS;
     void fn_80008BB0(nw4r::math::MTX34& rMtx);
     void fn_80008DC0(nw4r::math::MTX34& rMtx);
     void ResetKeyFrames(KeyFrame<float>::FrameTemplate* pFTX, KeyFrame<float>::FrameTemplate* pFTY, KeyFrame<float>::FrameTemplate* pFTZ);
