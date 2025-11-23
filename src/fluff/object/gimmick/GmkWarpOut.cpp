@@ -1,0 +1,30 @@
+#include "object/gimmick/GmkWarpOut.h"
+#include "util/FullSortSceneUtil.h"
+#include "manager/Stage.h"
+
+GmkWarpOut* GmkWarpOut::Build(GimmickBuildInfo* pBuildInfo) {
+    return new (gfl::HeapID::Work) GmkWarpOut(pBuildInfo);
+}
+
+GmkWarpOut::GmkWarpOut(GimmickBuildInfo* pBuildInfo)
+    : Gimmick(pBuildInfo, "GmkWarp")
+    , mAnmCtrl(nullptr)
+{
+    mPosition.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mFullSortSceneIndex, 4);
+    FlfGameObj::UpdateMatrix();
+    
+    gfl::ResFileObject resFileObject;
+    GetResFileInfo(resFileObject, this);
+
+    const char* name = "warp_02";
+    mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(1, resFileObject, name));
+    mAnmCtrl->PlayAnimationByNameAndIndex(0, "warp_02_000");
+
+    NwAnmCtrl* anmCtrl = mAnmCtrl;
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(pBuildInfo->mFullSortSceneIndex);
+
+    anmCtrl->SetFullSortSceneModelWrapper(scene, 0);
+    mAnmCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
+}
+
+GmkWarpOut::~GmkWarpOut() { }
