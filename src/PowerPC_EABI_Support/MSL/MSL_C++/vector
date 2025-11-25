@@ -6,6 +6,7 @@
 #include <MSL_C++/memory>
 #include <MSL_C++/stdexcept>
 #include <MSL_C++/Metrowerks/compressed_pair.h>
+#include <MSL_C++/Metrowerks/int2type.h>
 
 namespace std {
     void throw_length_error();
@@ -33,14 +34,14 @@ namespace std {
         typedef std::reverse_iterator<iterator> reverse_iterator;
         typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
-        __vec_deleter() : m_Ptr(nullptr), m_Count(0), m_Capacity(0) {}
+        __vec_deleter() : m_Data(nullptr), m_Size(0), m_Capacity(0) {}
         explicit __vec_deleter(allocator_param alloc)
-            : m_Ptr(nullptr), m_Count(0), m_Capacity(0, alloc) {}
+            : m_Data(nullptr), m_Size(0), m_Capacity(0, alloc) {}
 
         // DECL_WEAK ~__vec_deleter() DONT_INLINE_CLASS {
-        //     if (m_Ptr) {
+        //     if (m_Data) {
         //         clear();
-        //         m_Capacity.second().deallocate(m_Ptr, m_Capacity.first());
+        //         m_Capacity.second().deallocate(m_Data, m_Capacity.first());
         //     }
         // }
 
@@ -52,7 +53,7 @@ namespace std {
         // }
 
         // void clear() {
-        //     clear(m_Count);
+        //     clear(m_Size);
         // }
 
         // void clear(size_type n); // same as above
@@ -60,15 +61,15 @@ namespace std {
         inline void clear() {
             bool unk[4]; // i think that the "bool&" is actually just an iterator tag.
             // see <string>.
-            size_t count = m_Count;
+            size_t count = m_Size;
             unk[0] = false;
             clear(count, unk[0]);
         }
         
         DECL_WEAK void clear(size_type n, bool& unk) DONT_INLINE_CLASS {
-            size_t count = m_Count;
-            T* end = &m_Ptr[count];
-            m_Count = count - n;
+            size_t count = m_Size;
+            T* end = &m_Data[count];
+            m_Size = count - n;
 
             while (n != 0) {
                 end--;
@@ -93,10 +94,17 @@ namespace std {
             }
         }
 
+        DECL_WEAK bool expand_by(size_t n) {
+            return expand_by(n, Metrowerks::int2type<1>());
+        }
+
+        DECL_WEAK bool expand_by(size_t n, Metrowerks::int2type<1> max_cap) {
+            max_cap.value = grow_by(n);
+        }
     protected:
-        T *m_Ptr;
-        size_t m_Count;
-        Metrowerks::compressed_pair<size_t, Allocator> m_Capacity;
+        T *m_Data; // actually called "data"
+        size_t m_Size; // actually called "size"
+        Metrowerks::compressed_pair<size_t, Allocator> m_Capacity; // actually called "capacity"
     };
 
     template <typename T, typename Allocator, int I /* we will never know what this is */>
@@ -125,14 +133,14 @@ namespace std {
 
         iterator existing_insert(iterator pos, const_reference value) {
             const T* valuePtr = &value;
-            T* end = m_Ptr + m_Count;
+            T* end = m_Data + m_Size;
 
             // ? checks if the address of `value` is within the vector's storage
             if (pos <= valuePtr && valuePtr < end) {
                 valuePtr++;
             }
 
-            m_Count++;
+            m_Size++;
             size_type moveSize = end - pos;
             std::memmove(end + 1 - moveSize, pos, moveSize);
             *pos = *valuePtr;
@@ -141,28 +149,28 @@ namespace std {
 
         DECL_WEAK iterator reallocate_insert(iterator pos, const_reference value) DONT_INLINE_CLASS {
             // Retain old values for later
-            T* oldPtr = m_Ptr;
+            T* oldPtr = m_Data;
             size_type oldCapacity = m_Capacity.first();
             size_type posDist = pos - oldPtr;
 
             // Reallocate with a larger storage area
             size_type newCapacity = _Base::grow_by(1);
-            m_Ptr = m_Capacity.second().allocate(newCapacity);
+            m_Data = m_Capacity.second().allocate(newCapacity);
             m_Capacity.first() = newCapacity;
 
             // Insert new element
-            m_Ptr[posDist] = value;
+            m_Data[posDist] = value;
 
             // Transfer old elements over
             if (oldPtr) {
                 // Move elements before inserted one
-                T* ptr = m_Ptr;
+                T* ptr = m_Data;
                 std::memmove(ptr, oldPtr, posDist);
 
                 // Move elements after inserted one
                 T* oldAfterPos = oldPtr + posDist;
                 T* newAfterPos = ptr + posDist;
-                size_type moveSize = (size_type)((oldPtr + m_Count) - (size_type)oldAfterPos);
+                size_type moveSize = (size_type)((oldPtr + m_Size) - (size_type)oldAfterPos);
                 std::memmove(newAfterPos + 1, oldAfterPos, moveSize);
 
                 // Free old storage
@@ -170,8 +178,8 @@ namespace std {
                 m_Capacity.second().deallocate(oldPtr, oldCapacity);
             }
 
-            m_Count++;
-            return m_Ptr + posDist;
+            m_Size++;
+            return m_Data + posDist;
         }
     };
 
@@ -208,20 +216,21 @@ namespace std {
         template <class InputIter>
         vector(InputIter first, InputIter last, const Allocator &alloc = Allocator());
 
-        iterator begin() { return m_Ptr; }
-        const_iterator begin() const { return m_Ptr; }
-        iterator end() { return m_Ptr + m_Count; }
-        const_iterator end() const { return m_Ptr + m_Count; }
+        iterator begin() { return m_Data; }
+        const_iterator begin() const { return m_Data; }
+        iterator end() { return m_Data + m_Size; }
+        const_iterator end() const { return m_Data + m_Size; }
 
         reverse_iterator rbegin() { return reverse_iterator(end()); }
         const_reverse_iterator rbegin() const { return const_reverse_iterator(end()); }
         reverse_iterator rend() { return reverse_iterator(begin()); }
         const_reverse_iterator rend() const { return const_reverse_iterator(begin()); }
 
-        pointer data() { return m_Ptr; }
-        const_pointer data() const { return m_Ptr; }
-
-        size_type size() const { return m_Count; }
+        pointer data() { return m_Data; }
+        const_pointer data() const { return m_Data; }
+        pointer back() { return m_Data + (m_Size - 1); }
+        const_pointer back() const { return m_Data + (m_Size - 1); }
+        size_type size() const { return m_Size; }
         size_type capacity() const { return m_Capacity.first(); }
 
         // void push_back(const_reference value) {
@@ -236,7 +245,7 @@ namespace std {
         }
 
         DECL_WEAK iterator insert(iterator pos, const_reference value) DONT_INLINE_CLASS {
-            if (m_Count >= m_Capacity.first()) {
+            if (m_Size >= m_Capacity.first()) {
                 // ? ends up doing nothing, grow_by has no side-effects
                 _Base::grow_by(1);
             } else {
@@ -249,29 +258,30 @@ namespace std {
         iterator insert(const_reference value, bool&);
 
         inline T& operator[](size_t index) {
-            return m_Ptr[index];
+            return m_Data[index];
         }
 
-        inline void set_back(const_reference value) {
-            m_Ptr[m_Count - 1] = value;
-        }
+        void sub_push_back(const_reference value);
 
         DECL_WEAK void push_back(const_reference value) {
-            if (m_Count < m_Capacity.first()) {
-                m_Count++;
-                set_back(value);
+            if (m_Size < m_Capacity.first()) {
+                m_Size++;
+                pointer last = back();
+                *last = value;
             } else {
-                bool unk = false;
-                insert(value, unk);
+                sub_push_back(value);
+                // bool unk = false;
+                // insert(value, unk);
             }
         }
 
+
         inline void push_back_(const_reference value) {
-            if (m_Count < m_Capacity.first()) {
+            if (m_Size < m_Capacity.first()) {
                 if (end() != nullptr) {
-                    m_Ptr[m_Count] = value;
+                    m_Data[m_Size] = value;
                 }
-                m_Count++;
+                m_Size++;
             } else {
                 insert(value);
             }
