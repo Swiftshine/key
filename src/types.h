@@ -31,30 +31,6 @@ struct Rect {
     float h;
 };
 
-struct Vec2f {
-    float x;
-    float y;
-};
-
-struct Vec3f {
-    inline Vec3f() {
-        x = 0.0f;
-        y = 0.0f;
-        z = 0.0f;
-    }
-
-    inline Vec3f(const Vec3f& other) {
-        x = other.x;
-        y = other.y;
-        z = other.z;
-    }
-
-    float x;
-    float y;
-    float z;
-};
-
-
 typedef int placeholder_t;
 
 typedef struct dummy_t { } dummy_t;
