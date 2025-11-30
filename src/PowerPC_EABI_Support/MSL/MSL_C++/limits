@@ -40,12 +40,12 @@ namespace std {
         static unsigned char max() { return 0xFF; }
     };
 
-    template <>
-    class numeric_limits<short> {
-    public:
-        static short min() { return -0x8000; }
-        static short max() { return 0x7FFF; }
-    };
+    // template <>
+    // class numeric_limits<short> {
+    // public:
+    //     static short min() { return -0x8000; }
+    //     static short max() { return 0x7FFF; }
+    // };
 
     template <>
     class numeric_limits<signed short> {
@@ -61,12 +61,12 @@ namespace std {
         static unsigned short max() { return 0xFFFF; }
     };
 
-    template <>
-    class numeric_limits<int> {
-    public:
-        static int min() { return -0x80000000; }
-        static int max() { return 0x7FFFFFFF; }
-    };
+    // template <>
+    // class numeric_limits<int> {
+    // public:
+    //     static int min() { return -0x80000000; }
+    //     static int max() { return 0x7FFFFFFF; }
+    // };
 
     template <>
     class numeric_limits<signed int> {
@@ -82,12 +82,12 @@ namespace std {
         static unsigned int max() { return 0xFFFFFFFF; }
     };
 
-    template <>
-    class numeric_limits<long> {
-    public:
-        static long min() { return -0x80000000; }
-        static long max() { return 0x7FFFFFFF; }
-    };
+    // template <>
+    // class numeric_limits<long> {
+    // public:
+    //     static long min() { return -0x80000000; }
+    //     static long max() { return 0x7FFFFFFF; }
+    // };
 
     template <>
     class numeric_limits<signed long> {
@@ -103,12 +103,12 @@ namespace std {
         static unsigned long max() { return 0xFFFFFFFF; }
     };
 
-    template <>
-    class numeric_limits<long long> {
-    public:
-        static long long min() { return -0x8000000000000000; }
-        static long long max() { return 0x7FFFFFFFFFFFFFFF; }
-    };
+    // template <>
+    // class numeric_limits<long long> {
+    // public:
+    //     static long long min() { return -0x8000000000000000; }
+    //     static long long max() { return 0x7FFFFFFFFFFFFFFF; }
+    // };
 
     template <>
     class numeric_limits<signed long long> {

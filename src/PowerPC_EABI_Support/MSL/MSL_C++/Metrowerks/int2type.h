@@ -3,6 +3,6 @@ namespace Metrowerks {
     struct int2type {
         enum { val = I };
 
-        int value; // assumed
+        // int value; // assumed
     };
 }

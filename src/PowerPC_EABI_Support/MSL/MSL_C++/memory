@@ -7,6 +7,7 @@
 #include <MSL_C++/cstdio>
 #include <MSL_C++/cstdlib>
 #include <MSL_C++/MSL_Common/type_traits.h>
+#include <MSL_C++/limits>
 
 namespace std {
 
@@ -32,7 +33,9 @@ namespace std {
         allocator(const allocator<U> &) throw() {}
         ~allocator() {}
 
-        size_type max_size() const throw() { return 0x3FFFFFFF; } // guessed number
+        size_type max_size() const throw() {
+            return std::numeric_limits<T>::max() / 4;
+        }
 
         pointer allocate(size_type count, const void *hint = 0) {
             if (count > max_size()) {
