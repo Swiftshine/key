@@ -24,7 +24,7 @@ namespace BGST {
         /* 0x1C */ bool mLayerEnabled[12];
         /* 0x28 */ u32 mImageDataOffset;
         /* 0x2C */ u32 mSomeOffset3;
-        /* 0x30 */ float mScale;
+        /* 0x30 */ float mScaleModifier;
         /* 0x34 */ char padding[0xC];
     };
 

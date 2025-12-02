@@ -123,7 +123,7 @@ void BGST::File::ReadImage() {
 
 void BGST::File::SetupImage() {
     if (lbl_808E0368 == mHeader->mFlags) {
-        mHeader->mScale = 1.0f;
+        mHeader->mScaleModifier = 1.0f;
     }
 
     BGST::Header* header = mHeader.Get();
