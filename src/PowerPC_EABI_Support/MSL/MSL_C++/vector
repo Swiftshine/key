@@ -45,7 +45,7 @@ public:
         , capacity_(0, a)
     { }
 
-    ~__vec_deleter() {
+    ~__vec_deleter() DONT_INLINE_CLASS {
         if (data_ != nullptr) {
             clear();
             alloc().deallocate(data_, cap());
@@ -283,7 +283,7 @@ protected:
     typedef _Base::const_iterator const_iterator;
 public:
     __vec_constructor() { }
-    ~__vec_constructor() { }
+    ~__vec_constructor();
 };
 
 template <typename T, class Allocator>
@@ -303,7 +303,7 @@ protected:
     typedef _Constructor::const_iterator const_iterator;
 
     __vec_constructor() { }
-    ~__vec_constructor() { }
+    // ~__vec_constructor() { }
 
     // inline void push_back(const_reference x) {
     //     _Deleter::push_back((const typename _Deleter::value_type&)(x));
@@ -335,7 +335,7 @@ protected:
     typedef _Constructor::const_iterator const_iterator;
 public:
     vector() { }
-    ~vector() { }
+    // ~vector() { }
 
     // void push_back(const_reference x) {
     //     _Constructor::push_back(x);
