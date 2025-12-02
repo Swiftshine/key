@@ -22,7 +22,6 @@ public:
 
 template <typename T, class Allocator>
 class __vec_deleter {
-protected:
     typedef typename Metrowerks::compressed_pair<size_t, Allocator>::second_param allocator_param;
 public:
     typedef T value_type;
@@ -32,17 +31,19 @@ public:
     typedef const value_type& const_reference;
     typedef T* iterator;
     typedef const T* const_iterator;
-    
+    typedef T* pointer;
+    typedef const pointer const_pointer;
+
     __vec_deleter()
         : data_(nullptr)
         , size_(0)
         , capacity_(0)
     { }
 
-    __vec_deleter(allocator_param a)
+    explicit __vec_deleter(allocator_param a)
         : data_(nullptr)
         , size_(0)
-        , capacity(0, a)
+        , capacity_(0, a)
     { }
 
     ~__vec_deleter() {
@@ -111,10 +112,12 @@ public:
     }
 
     void append_realloc(size_t n, const_reference x) {
-        __vec_deleter_helper<T, Allocator> helper(alloc());
+        __vec_deleter_helper<T, Allocator> tmp(alloc());
         
-        size_t max = helper.grow_by((size_ + n) - cap());
-
+        size_t max = tmp.grow_by((size_ + n) - cap());
+        tmp.allocate(size_ + n, max);
+        temp.start_ = size_;
+        tmp.construct_at_end(n, x);
         // not done
     }
 
@@ -151,6 +154,11 @@ public:
         return alloc().max_size();
     }
 
+    size_t size() const {
+        // not done
+        return size_;
+    }
+
 protected:
     T* data_;
     size_t size_;
@@ -160,6 +168,21 @@ protected:
 
 template <typename T, class Allocator>
 class __vec_deleter_helper : public __vec_deleter<T, Allocator> {
+protected:
+    typedef __vec_deleter<T, Allocator> _Base;
+    typedef _Base::allocator_param allocator_param;
+    typedef _Base::value_type value_type;
+    typedef _Base::allocator_type allocator_type;
+    typedef _Base::size_type size_type;
+    typedef _Base::difference_type difference_type;
+    typedef _Base::reference reference;
+    typedef _Base::const_reference const_reference;
+    typedef typename Allocator::pointer pointer;
+    typedef typename Allocator::const_pointer const_pointer;
+    typedef _Base::iterator iterator;
+    typedef _Base::const_iterator const_iterator;
+    typedef _Base::reverse_iterator reverse_iterator;
+    typedef _Base::const_reverse_iterator const_reverse_iterator;
 public:
     __vec_deleter_helper(allocator_param a)
         : __vec_deleter(a)
@@ -178,6 +201,20 @@ public:
         size_ = 0;
     }
     
+
+    void construct_at_end(size_t n, const_reference x) {
+        construct_at_end(n, x, Metrowerks::int2type<1>());
+    }
+
+    void construct_at_end(size_t n, const_reference x, Metrowerks::int2type<1>) {
+        std::fill_n<T, size_t, T>::fill_n(data_ + start_ + size_, n, x);
+        size_ += n;
+    }
+
+    void move_construct_to_begin(pointer first, pointer last, Metrowerks::int2type<2>) {
+        // not done
+    }
+
     size_t start_;
 };
 template <typename T, class Allocator, bool I>

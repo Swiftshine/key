@@ -50,6 +50,19 @@ namespace std {
         }
     }
 
+    template <typename T, typename Size, bool V /* ? */> 
+    struct __fill_n {
+        static inline void fill_n(T* first, Size n, const T& value) {
+            for (; n != 0; first++, n--) {
+                *first = value;
+            }
+        }
+    };
+
+    template <typename OutputIt /* ? */, typename Size, typename T>
+    inline void fill_n(OutputIt* first, Size n, const T& value) {
+        __fill_n<OutputIt, Size, false>::fill_n(first, n, value);
+    }
 }
 
 #endif
