@@ -122,8 +122,8 @@ void BGST::File::ReadImage() {
 
 
 void BGST::File::SetupImage() {
-    if (lbl_808E0368 == mHeader->m_4) {
-        mHeader->mYOffset = 1.0f;
+    if (lbl_808E0368 == mHeader->mFlags) {
+        mHeader->mScale = 1.0f;
     }
 
     BGST::Header* header = mHeader.Get();

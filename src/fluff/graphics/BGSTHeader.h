@@ -15,7 +15,7 @@ namespace BGST {
         }
 
         /* 0x00 */ char mMagic[4]; // "BGST"
-        /* 0x04 */ uint m_4;
+        /* 0x04 */ uint mFlags;
         /* 0x08 */ uint mImageWidth;  // in pixels; this value is usually 512
         /* 0x0C */ uint mImageHeight; // same as above
         /* 0x10 */ uint mGridWidth;
@@ -24,7 +24,7 @@ namespace BGST {
         /* 0x1C */ bool mLayerEnabled[12];
         /* 0x28 */ u32 mImageDataOffset;
         /* 0x2C */ u32 mSomeOffset3;
-        /* 0x30 */ float mYOffset;
+        /* 0x30 */ float mScale;
         /* 0x34 */ char padding[0xC];
     };
 
