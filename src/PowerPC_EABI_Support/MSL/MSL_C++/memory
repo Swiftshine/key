@@ -34,7 +34,7 @@ namespace std {
         ~allocator() {}
 
         size_type max_size() const throw() {
-            return std::numeric_limits<T>::max() / 4;
+            return std::numeric_limits<size_t>::max() / sizeof(T);
         }
 
         pointer allocate(size_type count, const void *hint = 0) {
@@ -48,8 +48,10 @@ namespace std {
         void deallocate(pointer p, size_type n) { operator delete(p); }
 
         void construct(pointer p, const_reference val) { new (p) T(val); }
-        void destroy(pointer p) { __destroy_aux(p, is_trivially_destructible<T>()); }
-
+        // void destroy(pointer p) { __destroy_aux(p, is_trivially_destructible<T>()); }
+        void destroy(pointer p) {
+            p->~T();
+        }
     private:
         void destroy(pointer p, const true_type &) {}
         void destroy(pointer p, const false_type &) { p->~T(); }

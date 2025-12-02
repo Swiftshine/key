@@ -63,6 +63,18 @@ namespace std {
     inline void fill_n(OutputIt* first, Size n, const T& value) {
         __fill_n<OutputIt, Size, false>::fill_n(first, n, value);
     }
+
+    template <typename T>
+    inline T& move(T& p) {
+        return p;
+    }
+
+    template <typename T>
+    inline void swap(T& a, T& b) {
+        T& temp = move(a);
+        a = move(b);
+        b = move(temp);
+    }
 }
 
 #endif
