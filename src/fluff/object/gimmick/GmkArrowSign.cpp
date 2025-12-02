@@ -21,15 +21,17 @@ GmkArrowSign::GmkArrowSign(GimmickBuildInfo* buildInfo, const char* taskName)
     // not decompiled
 }
 
-// https://decomp.me/scratch/FAOOK
-GmkArrowSign::~GmkArrowSign() {
 
+// https://decomp.me/scratch/6nZqJ
+GmkArrowSign::~GmkArrowSign() {
+    for (uint i = 0; i < mPoleUnitModels.size(); i++) {
+        delete mPoleUnitModels[i];
+    }
 }
 
 void GmkArrowSign::Update() {
     return;
 }
-
 
 const char* GmkArrowSign::GetOrientationAnimationName() {
     float angle = static_cast<float>(mBuildInfoPtr->GetIntParam(Parameter::Angle));
