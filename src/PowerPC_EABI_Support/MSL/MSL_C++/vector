@@ -11,7 +11,6 @@
 #include <MSL_C++/Metrowerks/compressed_pair.h>
 #include <MSL_C++/Metrowerks/int2type.h>
 
-
 namespace std {
 
 template <bool>
@@ -99,11 +98,11 @@ public:
         return capacity_.second();
     }
 
-    void push_back(const_reference x) {
+    inline void push_back(const_reference x) {
         push_back(x, Metrowerks::int2type<1>());
     }
 
-    void push_back(const_reference x, Metrowerks::int2type<1>) {
+    inline void push_back(const_reference x, Metrowerks::int2type<1>) {
         if (size_ < cap()) {
             size_++;
             back() = x;
@@ -116,14 +115,7 @@ public:
         sub_push_back(x, Metrowerks::int2type<1>());
     }
 
-    void sub_push_back(const_reference x, Metrowerks::int2type<1>) {
-        if (expand_by(1)) {
-            size_++;
-            back() = x;
-        } else {
-            append_realloc(1, x);
-        }
-    }
+    void sub_push_back(const_reference x, Metrowerks::int2type<1>);
 
     void allocate(size_t min, size_t max) {
         allocate(min, max, Metrowerks::int2type<1>());
@@ -210,6 +202,15 @@ protected:
     Metrowerks::compressed_pair<size_t, Allocator> capacity_;
 };
 
+template <typename T, typename Allocator>
+void __vec_deleter<T, Allocator>::sub_push_back(const_reference x, Metrowerks::int2type<1>) {
+    if (expand_by(1)) {
+        size_++;
+        back() = x;
+    } else {
+        append_realloc(1, x);
+    }
+}
 
 template <typename T, class Allocator>
 class __vec_deleter_helper : public __vec_deleter<T, Allocator> {
@@ -242,7 +243,6 @@ public:
 
         size_ = 0;
     }
-    
 
     void construct_at_end(size_t n, const_reference x) {
         construct_at_end(n, x, Metrowerks::int2type<1>());
@@ -305,9 +305,9 @@ protected:
     __vec_constructor() { }
     ~__vec_constructor() { }
 
-    void push_back(const_reference x) {
-        _Deleter::push_back((const typename _Deleter::value_type&)(x));
-    }
+    // inline void push_back(const_reference x) {
+    //     _Deleter::push_back((const typename _Deleter::value_type&)(x));
+    // }
 
     reference operator[](size_t n) {
         return _Deleter::operator[](n);
@@ -337,9 +337,9 @@ public:
     vector() { }
     ~vector() { }
 
-    void push_back(const_reference x) {
-        _Constructor::push_back(x);
-    }
+    // void push_back(const_reference x) {
+    //     _Constructor::push_back(x);
+    // }
 
     void clear() {
         _Deleter::clear();
