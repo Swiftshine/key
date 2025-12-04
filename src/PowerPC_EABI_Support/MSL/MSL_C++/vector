@@ -283,7 +283,7 @@ protected:
     typedef _Base::const_iterator const_iterator;
 public:
     __vec_constructor() { }
-    ~__vec_constructor();
+    ~__vec_constructor() { }
 };
 
 template <typename T, class Allocator>

@@ -22,7 +22,6 @@ GmkArrowSign::GmkArrowSign(GimmickBuildInfo* buildInfo, const char* taskName)
 }
 
 
-// https://decomp.me/scratch/6nZqJ
 GmkArrowSign::~GmkArrowSign() {
     for (uint i = 0; i < mPoleUnitModels.size(); i++) {
         delete mPoleUnitModels[i];
