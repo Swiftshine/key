@@ -20,7 +20,7 @@ public:
     public:
         /* Class Members */
 
-        /* 0x00 */ float m_0;
+        /* 0x00 */ float mScaleFactor;
         /* 0x04 */ gfl::Vec3 m_4;
         /* 0x10 */ gfl::Vec3 mEffectPosition;
         /* 0x1C */ gfl::Vec3 mPosition;

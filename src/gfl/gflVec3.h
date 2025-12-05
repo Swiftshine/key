@@ -92,6 +92,12 @@ namespace gfl {
         
         /* Operators */
 
+        inline void operator=(const Base& rOther) {
+            x = rOther.x;
+            y = rOther.y;
+            z = rOther.z;
+        }
+        
         inline void operator=(float val) {
             x = val;
             y = val;
@@ -105,6 +111,7 @@ namespace gfl {
             v.z = -z;
             return v;
         }
+        
         
         void operator=(const nw4r::math::VEC2& other);
 
@@ -134,9 +141,17 @@ namespace gfl {
             return reinterpret_cast<nw4r::math::VEC3*>(this);
         }
 
+        inline operator const nw4r::math::VEC3*() const {
+            return reinterpret_cast<const nw4r::math::VEC3*>(this);
+        }
+
         inline operator nw4r::math::VEC3&() {
             return *reinterpret_cast<nw4r::math::VEC3*>(this);
         }
+        inline operator const nw4r::math::VEC3&() const {
+            return *reinterpret_cast<const nw4r::math::VEC3*>(this);
+        }
+        
 
         /* Class Methods */
 
