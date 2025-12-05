@@ -53,8 +53,8 @@ public:
 
     void IncrementCurrentFrame(T amount);
     
-    void Add(T start, T end, const char* pName = nullptr);
-    void AddNew(T start, T end, const char* pName);
+    // void Add(T start, T end, const char* pName = nullptr);
+    // void AddNew(T start, T end, const char* pName);
     T GetFrame(std::string* pString);
     T CalculateFrame(T start, std::string* pName);
     T GetPreviousEndFrame();
@@ -71,6 +71,31 @@ public:
 
     inline void IncrementCurrentFrame() {
         IncrementCurrentFrame(mIncrementAmount);
+    }
+
+    void Add(T start, T end, const char* pName = nullptr) DONT_INLINE_CLASS {
+        size_t count = mInnerKeyFrames.size();
+
+        if (count != 0) {
+            AddNew(start, end + mInnerKeyFrames[count - 1].mEnd, pName);
+        } else {
+            AddNew(start, end, pName);
+        }
+    }
+
+    void AddNew(T start, T end, const char* pName) DONT_INLINE_CLASS {
+        // std::string name;
+
+        // if (pName != nullptr) {
+        //     name = pName;
+        // }
+
+        // InnerKeyFrame inner;
+        // inner.mStart = start;
+        // inner.mEnd = end;
+        // inner.mName = std::string(name);
+        
+        // mInnerKeyFrames.push_back(inner);
     }
 
     /* Class Members */
