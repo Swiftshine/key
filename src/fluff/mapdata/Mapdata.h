@@ -127,7 +127,7 @@ ASSERT_SIZE(Mapdata, 0x4C);
 /// @brief A representation of stage entity data stored on disk.
 /// @note Size: `0x58`
 struct Mapbin {
-    /* 0x00 */ float m_0;
+    /* 0x00 */ float mVersion; // the game checks against 3.1 and 3.3 (but most (all?) levels are 3.3)
     /* 0x04 */ nw4r::math::VEC2 mBoundsMin;
     /* 0x0C */ nw4r::math::VEC2 mBoundsMax;
     /* 0x14 */ u32 mNumWalls;
