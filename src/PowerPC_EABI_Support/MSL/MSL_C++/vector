@@ -68,6 +68,14 @@ public:
         return data_ + size_;
     }
 
+    reference front() {
+        return data_[0];
+    }
+
+    const_reference front() const {
+        return data_[0];
+    }
+    
     reference back() {
         return data_[size_ - 1];
     }
