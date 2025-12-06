@@ -135,7 +135,7 @@ public:
     void ResetKeyFrames(KeyFrame<float>::FrameTemplate* pFTX, KeyFrame<float>::FrameTemplate* pFTY, KeyFrame<float>::FrameTemplate* pFTZ);
     float fn_80009248(uint index);
     float fn_8000925C(uint index);
-    int fn_80009270(uint index);
+    int GetSpringActiveParticleIndex(uint index);
     void fn_80009284(gfl::Vec3& rVec);
     void fn_800092A4();
     void fn_800092AC(float scale);

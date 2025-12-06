@@ -400,7 +400,7 @@ float SpringBase::fn_8000925C(uint index) {
     return mSpringArray[index].m_10;
 }
 
-int SpringBase::fn_80009270(uint index) {
+int SpringBase::GetSpringActiveParticleIndex(uint index) {
     return mSpringArray[index].mActiveParticleIndex;
 }
 
