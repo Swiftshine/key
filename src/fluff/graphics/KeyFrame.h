@@ -47,18 +47,67 @@ public:
     /* Virtual Methods */
 
     /* 0x8 */ inline virtual ~KeyFrame() { }
-    /* 0xC */ void GetNextStartFrame(T mult, uint index, InnerKeyFrame* pDst);
+    /* 0xC */ virtual void GetNextStartFrame(T mult, uint index, InnerKeyFrame* pDst) {
+        T cur = mInnerKeyFrames[index].mStart;
+        T delta = mInnerKeyFrames[index + 1].mStart - mInnerKeyFrames[index].mStart;
+        pDst->mStart = mInnerKeyFrames[index].mStart + delta * mult;
+    }
 
     /* Class Methods */
 
-    void IncrementCurrentFrame(T amount);
-    
-    // void Add(T start, T end, const char* pName = nullptr);
-    // void AddNew(T start, T end, const char* pName);
-    T GetFrame(std::string* pString);
-    T CalculateFrame(T start, std::string* pName);
-    T GetPreviousEndFrame();
+    void IncrementCurrentFrame(T amount) DONT_INLINE_CLASS {
+        T prevEnd;
+        T total = mCurrentFrame + amount;
+        mCurrentFrame = total;
 
+        if (!mHasFrames) {
+            return;
+        }
+
+        prevEnd = mInnerKeyFrames.back().mEnd;
+
+        if (total > prevEnd) {
+            mCurrentFrame = total - prevEnd;
+        }
+    }
+
+    // not complete - https://decomp.me/scratch/yjhK1
+    T CalculateFrame(T start, std::string* pName) DONT_INLINE_CLASS {
+        // T newFrame;
+
+        // if (mHasFrames && GetPreviousEndFrame() < start) {
+        //     T prev = GetPreviousEndFrame();
+
+        //     uint unk = static_cast<unsigned int>(start / prev);
+        //     newFrame = (T)(unk);
+        // }
+
+        // uint c = mInnerKeyFrames.size();
+        // uint i = 0;
+
+        // while (true) {
+        //     if (c == 0) {
+        //         if (pName != nullptr) {
+        //             *pName = mInnerKeyFrames.back().mName;
+        //         }
+        //     }
+        // }
+
+        // if (pName != nullptr) {
+            
+        // }
+
+
+    }
+
+    T GetPreviousEndFrame() DONT_INLINE_CLASS {
+        return mInnerKeyFrames.back().mEnd;
+    }
+
+    T GetFrame(std::string* pName) DONT_INLINE_CLASS {
+        return CalculateFrame(mCurrentFrame, pName);
+    }
+    
     inline void Reset() {
         mInnerKeyFrames.clear();
         mCurrentFrame = 0;
@@ -83,6 +132,7 @@ public:
         }
     }
 
+    // https://decomp.me/scratch/hbETT
     void AddNew(T start, T end, const char* pName) DONT_INLINE_CLASS {
         // std::string name;
 

@@ -400,7 +400,7 @@ float SpringBase::fn_8000925C(uint index) {
     return mSpringArray[index].m_10;
 }
 
-int SpringBase::fn_80009270(uint index) {
+int SpringBase::GetSpringActiveParticleIndex(uint index) {
     return mSpringArray[index].mActiveParticleIndex;
 }
 
@@ -1218,95 +1218,4 @@ void SpringBase::CreateParticleArrays() {
 
 // float SpringBase::GetZPos() {
 //     return mPosition.z;
-// }
-
-// todo: move these to the header
-
-/* KeyFrame */
-
-// template <>
-// void KeyFrame<float>::Add(float start, float end, const char* pName) {
-//     size_t count = Count();
-//     if (count != 0) {
-//         AddNew(start, end + mInnerKeyFrames[count - 1].mEnd, pName);
-//     } else {
-//         AddNew(start, end, pName);
-//     }
-// }
-
-// template <>
-// float KeyFrame<float>::GetFrame(std::string* pName) {
-//     return CalculateFrame(mCurrentFrame, pName);
-// }
-
-// // not complete
-// template <>
-// float KeyFrame<float>::CalculateFrame(float frame, std::string* pName) {
-//     float newFrame;
-
-//     if (mHasFrames && GetPreviousEndFrame() < frame) {
-//         float prev = GetPreviousEndFrame();
-//         uint unk = static_cast<unsigned int>(frame / prev);
-//         newFrame = static_cast<float>(unk);
-//     }
-
-//     size_t count = Count();
-//     size_t i = count;
-//     while (true) {
-//         if (i == 0) {
-//             if (pName != nullptr) {
-//                 *pName = mInnerKeyFrames[count - 1].mName;
-//             }
-
-//             return mInnerKeyFrames[Count() - 1].mStart;
-//         }
-//     }
-// }
-
-// template <>
-// void KeyFrame<float>::IncrementCurrentFrame(float amt) {
-//     float prevEnd;
-//     float total = mCurrentFrame + amt;
-//     mCurrentFrame = total;
-
-//     if (!mHasFrames) {
-//         return;
-//     }
-
-//     prevEnd = mInnerKeyFrames[Count() - 1].mEnd;
-
-//     if (total > prevEnd) {
-//         mCurrentFrame = total - prevEnd;
-//     }
-// }
-
-
-// template <>
-// float KeyFrame<float>::GetPreviousEndFrame() {
-//     return mInnerKeyFrames[Count() - 1].mEnd;
-// }
-
-// template <>
-// void KeyFrame<float>::GetNextStartFrame(float mult, uint index, InnerKeyFrame* pDst) {
-//     InnerKeyFrame* frames = mInnerKeyFrames.data();
-//     float cur = frames[index].mStart;
-//     float delta = frames[index + 1].mStart - frames[index].mStart;
-//     pDst->mStart = frames[index].mStart + delta * mult;
-// }
-
-// // https://decomp.me/scratch/aNK5Z
-// template <>
-// void KeyFrame<float>::AddNew(float start, float end, const char* pName) {
-//     std::string name;
-
-//     if (pName != nullptr) {
-//         name = pName;
-//     }
-
-//     InnerKeyFrame inner;
-//     inner.mStart = start;
-//     inner.mEnd = end;
-//     inner.mName = std::string(name);
-    
-//     mInnerKeyFrames.push_back_(inner);
 // }
