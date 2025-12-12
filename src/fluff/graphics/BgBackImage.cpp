@@ -73,9 +73,6 @@ BgBackImage::~BgBackImage() { }
 #define FLOOR(x) static_cast<float>(static_cast<int>(x))
 #define SCALE_FACTOR 46.0f
 
-#define FLOOR(x) static_cast<float>(static_cast<int>(x))
-#define SCALE_FACTOR 46.0f
-
 void BgBackImage::Render() {
     nw4r::math::MTX34 mtx;
     ZERO_MTX_34(mtx);
