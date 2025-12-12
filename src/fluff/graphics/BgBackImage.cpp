@@ -4,6 +4,7 @@
 #include "GX/GXVert.h"
 #include "gflResFileInfo.h"
 #include "graphics/BgBackImage.h"
+#include "types.h"
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
 #include "manager/Stage.h"
@@ -35,29 +36,13 @@ BgBackImage::BgBackImage()
     mWidth = static_cast<float>(width);
     mHeight = static_cast<float>(height);
 
-    MTX34 matrix;
-
-    matrix[0][0] = 0.0f;
-    matrix[0][1] = 0.0f;
-    matrix[0][2] = 0.0f;
-    matrix[0][3] = 0.0f;
-    matrix[1][0] = 0.0f;
-    matrix[1][1] = 0.0f;
-    matrix[1][2] = 0.0f;
-    matrix[1][3] = 0.0f;
-    matrix[2][0] = 0.0f;
-    matrix[2][1] = 0.0f;
-    matrix[2][2] = 0.0f;
-    matrix[2][3] = 0.0f;
-
+    MTX34 matrix; // never used
+    ZERO_MTX_34(matrix);
     PSMTXIdentity(matrix);
 
     float zOrder = FullSortSceneUtil::GetZOrder(0, 1) - 105.0f - 100.0f;
     
-    gfl::Vec3 vec;
-    
-    vec.x = 0.0f;
-    vec.y = 0.0f;
+    gfl::Vec3 vec(0.0f);
     vec.z = zOrder;
     
     matrix[0][3] = vec.x;
@@ -126,8 +111,8 @@ void BgBackImage::Render() {
     float minX = pos.x / width - FLOOR(pos.x / width);
     float minY = 1.0f - (pos.y / height - FLOOR(pos.y / height));
 
-    float a = offs.x / width;
-    float b = offs.y / height;
+    float w = offs.x / width;
+    float h = offs.y / height;
 
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
@@ -135,13 +120,13 @@ void BgBackImage::Render() {
     GXTexCoord2f32(minX, minY); // top left?
 
     GXPosition3f32(pos.x + offs.x, pos.y, 0.0f);
-    GXTexCoord2f32(minX + a, minY); // top right?
+    GXTexCoord2f32(minX + w, minY); // top right?
 
     GXPosition3f32(pos.x + offs.x, pos.y - offs.y, 0.0f);
-    GXTexCoord2f32(minX + a, minY + b); // bottom right?
+    GXTexCoord2f32(minX + w, minY + h); // bottom right?
 
     GXPosition3f32(pos.x, pos.y - offs.y, 0.0f);
-    GXTexCoord2f32(minX, minY + b); // bottom left?
+    GXTexCoord2f32(minX, minY + h); // bottom left?
     
     GXEnd();
 }
