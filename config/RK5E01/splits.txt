@@ -285,7 +285,7 @@ fluff/main.cpp:
 	.text       start:0x80647640 end:0x80647690
 
 gfl/gflRenderObj.cpp:
-	.text       start:0x80647A64 end:0x80647F74
+	.text       start:0x80647A64 end:0x80647DA4
 
 gfl/gflSoundHandleInner.cpp:
 	.text       start:0x8064BC78 end:0x8064BCF8

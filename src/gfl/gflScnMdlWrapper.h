@@ -21,7 +21,7 @@ namespace gfl {
         nw4r::g3d::ResMdl GetResMdl(const char* modelName);
 
         /* gfl::RenderObj */
-        virtual void vf28(nw4r::math::VEC3&) override;
+        virtual gfl::Vec3 vf28() override;
         virtual void UpdateFrame() override;
         virtual void ScnMdlProc(int) override;
         

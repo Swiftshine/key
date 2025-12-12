@@ -1,22 +1,22 @@
 #include "gflRenderObj.h"
 #include "gflMemoryUtil.h"
 #include "gflMemory.h"
-
 #include "gflScene.h"
+
+#pragma merge_float_consts off
 
 using namespace gfl;
 
-RenderObj::RenderObj() {
-    mScene = nullptr;
-    m_C = true;
-    m_D = true;
-    mShouldUpdate = true;
-    mIsActive = false;
-    m_10 = 0.0f;
-    m_14 = 0;
-
-    gfl::Memory::InitIfNotInited();
-    mAllocator = &gfl::Memory::Instance()->GetHeapByAddress(this)->GetAllocator1();
+RenderObj::RenderObj()
+    : mScene(nullptr)
+    , m_C(true)
+    , m_D(true)
+    , mShouldUpdate(true)
+    , mIsActive(false)
+    , m_10(0.0f)
+    , m_14(0)
+{
+    mAllocator = &gfl::Memory::TryGetInstance()->GetHeapByAddress(this)->GetAllocator1();
 }
 
 RenderObj::~RenderObj() {
@@ -34,7 +34,7 @@ void RenderObj::SetUpdate(bool arg1) {
 void RenderObj::vf18(bool arg1) {
     m_C = arg1;
 
-    if (nullptr == mScene) {
+    if (mScene == nullptr) {
         return;
     }
 
@@ -48,42 +48,42 @@ void RenderObj::vf20(bool arg1) {
         Update(arg1);
     }
 
-    if (nullptr != mScene) {
+    if (mScene != nullptr) {
         mScene->HandleRenderObj(this);
     }
 }
 
-// https://decomp.me/scratch/EKLdu
-bool RenderObj::vf34(float& arg0, float& arg1, float& arg2, float& arg3) {
-    // bool b;
-    // float f1;
-    // float f2;
-    // float f3;
+bool RenderObj::vf34(float arg0, float arg1, float arg2, float arg3) {
+    if (!vf1C()) {
+        return true;
+    }
+    
+    float unk1 = vf2C();
 
-    // if (!vf1C()) {
-    //     b = true;
-    // } else {
-    //     f3 = vf2C();
+    if (unk1 <= 0.0f) {
+        return false;
+    }
+    
+    gfl::Vec3 vec = vf28();
 
-    //     if (0.0f > f3) {
-    //         vf28(f1);
-    //         if ((arg0 - f1) * (arg0 - f1) <= (arg2 + f3) * (arg2 + f3)) {
-    //             b = (arg3 + f3) * (arg3 + f3) < (arg1 - f2) * (arg1 - f2);
-    //         } else {
-    //             b = true;
-    //         }
-    //     } else {
-    //         b = false;
-    //     }
-    // }
+    float temp = (arg0 - vec.x);
+    float temp2 = (arg2 + unk1);
 
-    return 0;
+    if (temp * temp > temp2 * temp2) {
+        return true;
+    }
+
+    float temp3 = (arg1 - vec.y);
+    float temp4 = (arg3 + unk1);
+    
+    return temp3 * temp3 > temp4 * temp4;
+
 }
 
 void RenderObj::Update(bool arg1)  {
     mShouldUpdate = arg1;
 
-    if (nullptr == mScene) {
+    if (mScene == nullptr) {
         return;
     }
 
@@ -96,14 +96,4 @@ void RenderObj::SetActive(bool state) {
 
 nw4r::g3d::G3dObj* RenderObj::GetObject() {
     return nullptr;
-}
-
-// not decompiled
-bool RenderObj::XluSortCheck(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj) {
-    return 0;
-}
-
-// not decompiled
-bool RenderObj::OpaSortCheck(nw4r::g3d::ScnLeaf* scnleaf, gfl::RenderObj* renderObj) {
-    return 0;
 }

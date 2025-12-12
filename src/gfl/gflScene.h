@@ -10,6 +10,9 @@ class RenderObj;
 
 class Scene {
     public:
+        static bool XluSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB);
+        static bool OpaSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB);
+        
         Scene(u8 heapID, uint maxNumChildren, uint maxNumScnObj);
 
         // either add to the list or remove it
@@ -28,6 +31,7 @@ class Scene {
         inline nw4r::g3d::ScnRoot* GetScnRoot() {
             return mScnRoot;
         }
+
 
     protected:
         bool m_4;

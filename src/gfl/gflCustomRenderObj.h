@@ -19,7 +19,7 @@ namespace gfl {
         virtual int vf10() override;
         virtual void vf18() override;
         virtual void vf20(float& arg1) override;
-        virtual void vf28(nw4r::math::VEC3&) override;
+        virtual gfl::Vec3 vf28() override;
         virtual void Update(bool arg1) override;
         virtual void UpdateFrame() override;
         virtual void ScnMdlProc(int) override;
