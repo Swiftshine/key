@@ -73,7 +73,9 @@ BgBackImage::~BgBackImage() { }
 #define FLOOR(x) static_cast<float>(static_cast<int>(x))
 #define SCALE_FACTOR 46.0f
 
-// https://decomp.me/scratch/lkmyp
+#define FLOOR(x) static_cast<float>(static_cast<int>(x))
+#define SCALE_FACTOR 46.0f
+
 void BgBackImage::Render() {
     nw4r::math::MTX34 mtx;
     ZERO_MTX_34(mtx);
@@ -124,31 +126,25 @@ void BgBackImage::Render() {
     float width = mWidth / SCALE_FACTOR;
     float height = mHeight / SCALE_FACTOR;
 
-    float tempH = pos.y / height;
-    float tempW = pos.x / width;
+    float minX = pos.x / width - FLOOR(pos.x / width);
+    float minY = 1.0f - (pos.y / height - FLOOR(pos.y / height));
 
-    height = offs.y / height;
-    width = offs.x / width;
-    
-    float minX = tempW - FLOOR(tempW);
-    float minY = 1.0f - (tempH - FLOOR(tempH));
+    float a = offs.x / width;
+    float b = offs.y / height;
 
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
-
-    float maxY = minY + height;
-    float maxX = minX + width;
 
     GXPosition3f32(pos.x, pos.y, 0.0f);
     GXTexCoord2f32(minX, minY); // top left?
 
     GXPosition3f32(pos.x + offs.x, pos.y, 0.0f);
-    GXTexCoord2f32(maxX, minY); // top right?
+    GXTexCoord2f32(minX + a, minY); // top right?
 
     GXPosition3f32(pos.x + offs.x, pos.y - offs.y, 0.0f);
-    GXTexCoord2f32(maxX, maxY); // bottom right?
+    GXTexCoord2f32(minX + a, minY + b); // bottom right?
 
     GXPosition3f32(pos.x, pos.y - offs.y, 0.0f);
-    GXTexCoord2f32(minX, maxY); // bottom left?
+    GXTexCoord2f32(minX, minY + b); // bottom left?
     
     GXEnd();
 }
