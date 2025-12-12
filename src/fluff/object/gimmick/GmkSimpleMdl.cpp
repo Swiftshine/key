@@ -3,6 +3,7 @@
 
 #include <nw4r/g3d/g3d_scnmdl.h>
 #include <nw4r/g3d/res/g3d_resfile.h>
+#include "gflResFileInfo.h"
 #include "graphics/FullSortScene.h"
 #include "object/gimmick/GmkSimpleMdl.h"
 #include "util/SimpleMdlCommon.h"
@@ -29,7 +30,7 @@ GmkSimpleMdl::GmkSimpleMdl()
     , mShadowModelWrapper(nullptr)
     , mShadowAnim(nullptr)
     , mZRotationGmk(nullptr)
-    , mResFileInfo(nullptr)
+    , mResFileObject(nullptr)
     , mModelScale(0.0f, 0.0f, 0.0f)
 { }
 
@@ -42,7 +43,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     , mShadowModelWrapper(nullptr)
     , mShadowAnim(nullptr)
     , mZRotationGmk(nullptr)
-    , mResFileInfo(nullptr)
+    , mResFileObject(nullptr)
     , mModelScale(0.0f, 0.0f, 0.0f)
 {
     int secondVal = mBuildInfo.GetIntParam(ParameterID::SECOND);
@@ -108,11 +109,9 @@ void GmkSimpleMdl::SetModelWrapperByFullSortSceneIndex(int index) {
 }
 
 void GmkSimpleMdl::SetModel(const char* brresPath, const char* modelName, bool playAnim) {
-    gfl::ResFileInfo* fileInfo;
+    mResFileObject = gfl::ResFileObject::FromArchive(brresPath);
 
-    FlfMdlDraw::FromArchive(mResFileInfo, brresPath);
-
-    nw4r::g3d::ResFile resfile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
+    nw4r::g3d::ResFile resfile(mResFileObject.IsValid() ? mResFileObject->GetGfArch() : nullptr);
 
     NW4R_G3D_RESFILE_AC_ASSERT(resfile);
 

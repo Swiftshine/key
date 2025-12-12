@@ -144,20 +144,6 @@ public:
     static void GetFileInfoFromArchive(gfl::ResFileObject& rObject, const char* pFilepath);
     static void GetFileInfoFromFolder(gfl::ResFileObject& rObject, const char* pFilepath);
 
-    // todo - remove the following two functions
-    static inline void FromArchive(gfl::ResFileObject& rObject, const char* pFilepath) {
-        gfl::ResFileObject object;
-        gfl::ResFileObject::FromArchive(object, pFilepath);
-        rObject = object;
-    }
-
-    static inline void FromFolder(gfl::ResFileObject& rObject, const char* rFilepath) {
-        gfl::ResFileObject object;
-        gfl::ResFileObject::FromFolder(object, rFilepath);
-        rObject = object;
-    }
-
-    
     /* Class Members */
 
     /* 0x004 */ std::string mResourcePath;

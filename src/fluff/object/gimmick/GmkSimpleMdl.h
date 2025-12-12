@@ -45,7 +45,7 @@ public:
     gfl::Pointer<NwAnm> mShadowAnim;
     nw4r::math::VEC3 mModelScale;
     gfl::Pointer<GmkSimpleMdlRotZ> mZRotationGmk;
-    gfl::ResFileObject mResFileInfo;
+    gfl::ResFileObject mResFileObject;
     // gfl::ResFileInfo* mResFileInfo;
     uint m_154;
 };

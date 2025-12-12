@@ -1,5 +1,6 @@
 #include <nw4r/g3d/res/g3d_resfile.h>
 
+#include "gflResFileInfo.h"
 #include "object/gimmick/GmkColAnimMdl.h"
 #include "util/FullSortSceneUtil.h"
 #include "util/GimmickUtil.h"
@@ -38,19 +39,16 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     FullSortScene* scene = stageMgr->GetFullSortSceneByID(sceneIndex);
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, 4);
 
-    UpdateModel();
-
     char animName[0x200];
     char brresPath[0x200];
     const char* name = mBuildInfo.GetStringParam(Parameter::AnimationName).c_str();
 
     snprintf(animName, sizeof(animName), AnimNameTemplate, name);
     snprintf(brresPath, sizeof(brresPath), BRRESPathTemplate, name, name);
-    gfl::ResFileInfo* fileInfo;
 
-    FlfMdlDraw::FromArchive(mResFileInfo, brresPath);
+    mResFileObject = gfl::ResFileObject::FromArchive(brresPath);
 
-    mAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileInfo, animName));
+    mAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, animName));
 
     for (uint i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
         char animNameTemp[0x200];
@@ -60,7 +58,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
 
     mAnimCtrl->SetFullSortSceneModelWrapper(scene, nullptr);
 
-    nw4r::g3d::ResFile resFile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
+    nw4r::g3d::ResFile resFile(mResFileObject.IsValid() ? mResFileObject->GetGfArch() : nullptr);
 
     NW4R_G3D_RESFILE_AC_ASSERT(resFile);
 
@@ -68,7 +66,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     snprintf(shadowAnimName, sizeof(shadowAnimName), ShadowAnimNameTemplate, name);
     
     if (nullptr != resFile.GetResMdl(shadowAnimName).ptr()) {
-        mShadowAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileInfo, shadowAnimName));
+        mShadowAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, shadowAnimName));
 
         for (uint i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
             char animNameTemp[0x200];

@@ -51,7 +51,7 @@ public:
     void UpdateModel();
 
 private:
-    gfl::ResFileObject mResFileInfo;
+    gfl::ResFileObject mResFileObject;
     gfl::Pointer<NwAnmCtrl> mAnimCtrl;
     gfl::Pointer<NwAnmCtrl> mShadowAnimCtrl;
     gfl::Pointer<GmkColAnimCtrl> mColAnimCtrlGmk;

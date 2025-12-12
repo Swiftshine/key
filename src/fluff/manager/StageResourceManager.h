@@ -45,8 +45,8 @@ public:
     void ProcessLevelData() DONT_INLINE_CLASS;
 
     inline bool CheckBGResFileInfo() {
-        if (mBGResFileInfo.IsValid()) {
-            if ((mBGResFileInfo->GetFlags() & 256) != 0) {
+        if (mBGResFileObject.IsValid()) {
+            if ((mBGResFileObject->GetFlags() & 256) != 0) {
                 return true;
             } else {
                 return false;
@@ -57,8 +57,8 @@ public:
     }
 
     inline bool CheckMapdataResFileInfo() {
-        if (mMapdataResFileInfo.IsValid()) {
-            if ((mMapdataResFileInfo->GetFlags() & 256) != 0) {
+        if (mMapdataResFileObject.IsValid()) {
+            if ((mMapdataResFileObject->GetFlags() & 256) != 0) {
                 return true;
             } else {
                 return false;
@@ -69,8 +69,8 @@ public:
     }
 
     inline bool CheckCommonResFileInfo() {
-        if (mCommonResFileInfo.IsValid()) {
-            if ((mCommonResFileInfo->GetFlags() & 256) != 0) {
+        if (mCommonResFileObject.IsValid()) {
+            if ((mCommonResFileObject->GetFlags() & 256) != 0) {
                 return true;
             } else {
                 return false;
@@ -83,15 +83,15 @@ public:
     /* Class Members */
 
     /* 0x00 */ gfl::Pointer<StageResources> mStageResources;
-    /* 0x04 */ gfl::ResFileObject mBGResFileInfo;
+    /* 0x04 */ gfl::ResFileObject mBGResFileObject;
     /* 0x08 */ BGData* mBGData;
-    /* 0x0C */ gfl::ResFileObject mCommonResFileInfo;
+    /* 0x0C */ gfl::ResFileObject mCommonResFileObject;
     /* 0x10 */ bool mCommonValid;
     /* 0x11 */ bool mLevelProcessed;
     /* 0x14 */ int mFolderStageID;
     /* 0x18 */ bool mPreviewBgLoad;
     /* 0x1C */ StageInfo mPreviewBgLoadStage;
-    /* 0x28 */ gfl::ResFileObject mMapdataResFileInfo;
+    /* 0x28 */ gfl::ResFileObject mMapdataResFileObject;
     /* 0x2C */ Mapdata* mCurrentSections[STAGE_RESOURCE_MANAGER_STAGE_COUNT];
 };
 #endif

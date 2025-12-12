@@ -7,6 +7,7 @@
 #include "gfl/gflMemoryUtil.h"
 #include "gfl/gflFile.h"
 
+#include "gflResFileInfo.h"
 #include "manager/GameManager.h"
 #include "manager/StageResourceManager.h"
 #include "stage/StageResources.h"
@@ -17,14 +18,14 @@
 
 StageResourceManager::StageResourceManager()
     : mStageResources(nullptr)
-    , mBGResFileInfo(nullptr)
+    , mBGResFileObject(nullptr)
     , mBGData(nullptr)
-    , mCommonResFileInfo(nullptr)
+    , mCommonResFileObject(nullptr)
     , mCommonValid(false)
     , mLevelProcessed(false)
     , mPreviewBgLoad(false)
     , mPreviewBgLoadStage(-1, -1, 1)
-    , mMapdataResFileInfo(nullptr)
+    , mMapdataResFileObject(nullptr)
 {
     mStageResources.Create(gfl::HeapID::Work);
     memset(mCurrentSections, 0, 0x78);
@@ -83,8 +84,8 @@ bool StageResourceManager::LoadResources() {
             LoadCommonFromArchive(mPreviewBgLoadStage.GetResourceID());
             BGData* bgData;
 
-            if (mBGResFileInfo.IsValid()) {
-                bgData = (BGData*)mBGResFileInfo->GetGfArch();
+            if (mBGResFileObject.IsValid()) {
+                bgData = (BGData*)mBGResFileObject->GetGfArch();
             } else {
                 bgData = nullptr;
             }
@@ -104,10 +105,10 @@ bool StageResourceManager::LoadResources() {
         }
 
         if (!mLevelProcessed) {
-            void* archive = mBGResFileInfo.IsValid() ? mBGResFileInfo->GetGfArch() : nullptr;
+            void* archive = mBGResFileObject.IsValid() ? mBGResFileObject->GetGfArch() : nullptr;
             if (nullptr != archive) {
                 BGData* data;
-                data = mBGResFileInfo.IsValid() ? (BGData*)mBGResFileInfo->GetGfArch() : nullptr;
+                data = mBGResFileObject.IsValid() ? (BGData*)mBGResFileObject->GetGfArch() : nullptr;
                 CopyBGData(data);
             }
             ProcessLevelData();
@@ -131,10 +132,10 @@ bool StageResourceManager::LoadBGFromArchive(int resourceID) {
     
     snprintf(path, 0x200, "stage/stage%03d/bg.dat", resourceID);
 
-    FlfMdlDraw::FromArchive(mBGResFileInfo, path);
+    mBGResFileObject = gfl::ResFileObject::FromArchive(path);
 
-    if (mBGResFileInfo.IsValid()) {
-        bgdata = (BGData*)mBGResFileInfo->GetGfArch();
+    if (mBGResFileObject.IsValid()) {
+        bgdata = (BGData*)mBGResFileObject->GetGfArch();
     } else {
         bgdata = nullptr;
     }
@@ -149,7 +150,8 @@ void StageResourceManager::LoadBGFromFolder(int resourceID) {
     char path[0x200];
  
     snprintf(path, 0x200, "stage/stage%03d/bg.dat", resourceID);
-    FlfMdlDraw::FromFolder(mBGResFileInfo, path);
+    // calls a thunk
+    mBGResFileObject = gfl::ResFileObject::FromFolder(path);
 }
 
 void StageResourceManager::LoadCommonFromArchive(int stageID) {
@@ -173,8 +175,6 @@ void StageResourceManager::LoadCommonFromArchive(int stageID) {
     );
     
     if (gfl::File::Open(stageCommonPath)) {
-        gfl::ResFileInfo* fileInfo;
-        
         snprintf(
             stageCommonPath,
             sizeof(stageCommonPath),
@@ -183,7 +183,7 @@ void StageResourceManager::LoadCommonFromArchive(int stageID) {
             stageID
         );
 
-        FlfMdlDraw::FromArchive(mCommonResFileInfo, stageCommonPath);
+        mCommonResFileObject = gfl::ResFileObject::FromArchive(stageCommonPath);
 
         mCommonValid = true;
     } else {
@@ -208,7 +208,8 @@ void StageResourceManager::LoadCommonFromFolder(int stageID) {
     
     if (gfl::File::Open(stagePath)) {
         snprintf(stagePath, 0x200, "stage/%s/common/", stageName, stageID);
-        FlfMdlDraw::FromFolder(mCommonResFileInfo, stagePath);
+        // a thunk
+        mCommonResFileObject = gfl::ResFileObject::FromFolder(stagePath);
         mCommonValid = true;
     } else {
         mCommonValid = false;
@@ -229,8 +230,8 @@ void StageResourceManager::LoadMapdataFromFolder(int resourceID) {
     char mapdataPath[0x100];
 
     snprintf(mapdataPath, sizeof(mapdataPath), "mapdata/stage%03d", resourceID);
-
-    FlfMdlDraw::FromFolder(mMapdataResFileInfo, mapdataPath);
+    
+    mMapdataResFileObject = gfl::ResFileObject::FromFolder(mapdataPath);
 }
 
 struct unk_struct {
@@ -302,5 +303,5 @@ void StageResourceManager::ProcessLevelData() {
 }
 
 void StageResourceManager::ClearMapdata() {
-    mMapdataResFileInfo = gfl::ResFileObject(nullptr);
+    mMapdataResFileObject = gfl::ResFileObject(nullptr);
 }
