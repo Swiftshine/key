@@ -90,7 +90,8 @@ void FB2Tex::Blit(bool setBlendMode) {
 
     GXPosition3f32(1.0f, -1.0f, 0.0f);
     GXTexCoord2f32(1.0f, 1.0f); // bottom right
-
+    GXEnd();
+    
     cam.SetCameraMtxDirectly(camMtx);
     cam.SetProjectionMtxDirectly(&projMtx);
     cam.GXSetProjection();

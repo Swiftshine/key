@@ -1,12 +1,13 @@
 #include <nw4r/g3d/res/g3d_resfile.h>
 
+#include "GX/GXTypes.h"
+#include "GX/GXVert.h"
 #include "gflResFileInfo.h"
 #include "graphics/BgBackImage.h"
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
 #include "manager/Stage.h"
 #include "manager/CameraManager.h"
-
 
 BgBackImage::BgBackImage()
     : CustomRenderObj(true, false, "BgBackImage")
@@ -69,17 +70,20 @@ BgBackImage::BgBackImage()
 
 BgBackImage::~BgBackImage() { }
 
+#define FLOOR(x) static_cast<float>(static_cast<int>(x))
+#define SCALE_FACTOR 46.0f
+
+// https://decomp.me/scratch/lkmyp
 void BgBackImage::Render() {
-    float float1;
-    float float2;
     nw4r::math::MTX34 mtx;
     ZERO_MTX_34(mtx);
+
     nw4r::g3d::ScnObj::GetMtx(MTX_VIEW, &mtx);
     GXLoadPosMtxImm(mtx, 0);
     GXSetCurrentMtx(0);
     GXLoadTexObj(&mTexObj, GX_TEXMAP0);
     GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0A0, false, GX_SRC_REG, GX_SRC_REG, GX_LIGHT0, GX_DF_NONE, GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR0A0, false, GX_SRC_REG, GX_SRC_REG, (GXLightID)0, GX_DF_NONE, GX_AF_NONE);
     GXSetZCompLoc(true);
     GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_AND, GX_ALWAYS, 0);
     GXSetColorUpdate(true);
@@ -105,17 +109,46 @@ void BgBackImage::Render() {
     GXSetVtxDesc((GXAttr)0xd, (GXAttrType)1);
     GXSetVtxAttrFmt((GXVtxFmt)0, (GXAttr)0xd, (GXCompCnt)1, (GXCompType)4, 0);
 
-    CameraManager::Instance()->fn_800548AC();
+    struct Vec2f_swapped {
+        float y;
+        float x;
+    };
+    
+    Vec2f_swapped pos;
+    Vec2f_swapped offs;
 
-    // float height = mHeight / 46.0;
-    // float width = mWidth / 46.0;
+    // rect instead maybe?
 
-    // float adjHeight = float1 / height;
-    // float adjWidth = float2 / width;
+    CameraManager::Instance()->fn_800548AC(&pos.x, &pos.y, &offs.x, &offs.y, 6);
 
-    /* missing stuff */
+    float width = mWidth / SCALE_FACTOR;
+    float height = mHeight / SCALE_FACTOR;
 
-    GXBegin((GXPrimitive)0x80, (GXVtxFmt)0, 4);
+    float tempH = pos.y / height;
+    float tempW = pos.x / width;
 
-    /* missing stuff */
+    height = offs.y / height;
+    width = offs.x / width;
+    
+    float minX = tempW - FLOOR(tempW);
+    float minY = 1.0f - (tempH - FLOOR(tempH));
+
+    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+
+    float maxY = minY + height;
+    float maxX = minX + width;
+
+    GXPosition3f32(pos.x, pos.y, 0.0f);
+    GXTexCoord2f32(minX, minY); // top left?
+
+    GXPosition3f32(pos.x + offs.x, pos.y, 0.0f);
+    GXTexCoord2f32(maxX, minY); // top right?
+
+    GXPosition3f32(pos.x + offs.x, pos.y - offs.y, 0.0f);
+    GXTexCoord2f32(maxX, maxY); // bottom right?
+
+    GXPosition3f32(pos.x, pos.y - offs.y, 0.0f);
+    GXTexCoord2f32(minX, maxY); // bottom left?
+    
+    GXEnd();
 }
