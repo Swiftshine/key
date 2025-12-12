@@ -189,6 +189,18 @@ namespace gfl {
         static void FromArchive(ResFileObject& dst, const char* path);
         static void FromFolder(ResFileObject& dst, const char* path);
 
+        static inline ResFileObject FromArchive(const char* pFilepath) {
+            gfl::ResFileObject obj;
+            FromArchive(obj, pFilepath);
+            return obj;
+        }
+
+        static inline ResFileObject FromFolder(const char* pFolderpath) {
+            gfl::ResFileObject obj;
+            FromFolder(obj, pFolderpath);
+            return obj;
+        }
+        
         inline ResFileObject() { }
 
         ResFileObject(ResFileInfo* info)

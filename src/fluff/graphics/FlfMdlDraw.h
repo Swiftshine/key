@@ -144,6 +144,7 @@ public:
     static void GetFileInfoFromArchive(gfl::ResFileObject& rObject, const char* pFilepath);
     static void GetFileInfoFromFolder(gfl::ResFileObject& rObject, const char* pFilepath);
 
+    // todo - remove the following two functions
     static inline void FromArchive(gfl::ResFileObject& rObject, const char* pFilepath) {
         gfl::ResFileObject object;
         gfl::ResFileObject::FromArchive(object, pFilepath);

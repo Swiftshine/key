@@ -10,7 +10,7 @@ class FB2Tex : public gfl::CustomRenderObj {
 public:
     /* Constructor */
 
-    FB2Tex(gfl::Scene* pScene, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture);
+    FB2Tex(gfl::Scene* pScene, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture, const char* pName);
 
     /* Virtual Methods */
 

@@ -1,8 +1,7 @@
 #include "graphics/FB2Tex.h"
 
-// https://decomp.me/scratch/WjWND
-FB2Tex::FB2Tex(gfl::Scene* pScene, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture)
-    : gfl::CustomRenderObj(false, true)
+FB2Tex::FB2Tex(gfl::Scene* pScene, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture, const char* pName)
+    : gfl::CustomRenderObj(false, true, pName)
     , mScene(pScene)
     , mImage(nullptr)
     , mSourceWidth(sourceW)

@@ -55,6 +55,7 @@
     virtual void dummy_temp();
 
 #define STRUCT_FILL(size) CAT(u8 unk_contents_, __LINE__)[size]
+#define PAD(size) CAT(u8 padding_, __LINE__)[size]
 
 // Sort of like C++11's range for, except now it's a macro for NW4R iterators
 # define NW4R_RANGE_FOR(it_, list_)	\

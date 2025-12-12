@@ -3,7 +3,7 @@
 
 using namespace gfl;
 
-CustomRenderObj::CustomRenderObj(bool arg1, bool arg2)
+CustomRenderObj::CustomRenderObj(bool arg1, bool arg2, const char* pName)
     : ScnLeaf(&gfl::Memory::TryGetHeapByAddress(this)->GetAllocator1())
     , RenderObj()
 {

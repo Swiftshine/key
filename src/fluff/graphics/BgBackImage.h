@@ -24,7 +24,7 @@ public:
     /* 0x104 */ GXTexObj mTexObj;
     /* 0x124 */ float mWidth;
     /* 0x128 */ float mHeight;
-    /* 0x12C */ gfl::ResFileObject mResFileInfo;
+    /* 0x12C */ gfl::ResFileObject mResFileObject;
 };
 
 ASSERT_SIZE(BgBackImage, 0x130);

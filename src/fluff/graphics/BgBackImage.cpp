@@ -1,28 +1,24 @@
 #include <nw4r/g3d/res/g3d_resfile.h>
 
+#include "gflResFileInfo.h"
 #include "graphics/BgBackImage.h"
-#include "graphics/FlfMdlDraw.h"
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
 #include "manager/Stage.h"
 #include "manager/CameraManager.h"
 
 
-const char BRTEX_path[] = "gimmick/bgTex/bgTex.brtex";
-const char twopend[] = "2pend";
-
 BgBackImage::BgBackImage()
-    : CustomRenderObj(true, false)
+    : CustomRenderObj(true, false, "BgBackImage")
+    , mResFileObject(nullptr)
 {
-    mResFileInfo = nullptr;
-    gfl::ResFileInfo* fileInfo;
-    FlfMdlDraw::FromArchive(mResFileInfo, BRTEX_path);
+    mResFileObject = gfl::ResFileObject::FromArchive("gimmick/bgTex/bgTex.brtex");
 
-    nw4r::g3d::ResFile resfile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
+    nw4r::g3d::ResFile resfile(mResFileObject.IsValid() ? mResFileObject->GetGfArch() : nullptr);
 
     NW4R_G3D_RESFILE_AC_ASSERT(resfile);
 
-    nw4r::g3d::ResTex tex = resfile.GetResTex(twopend);
+    nw4r::g3d::ResTex tex = resfile.GetResTex("2pend");
 
     void* image;
     u16 width;
@@ -55,9 +51,14 @@ BgBackImage::BgBackImage()
 
     PSMTXIdentity(matrix);
 
-    float zOrder = FullSortSceneUtil::GetZOrder(0, 1);
-    nw4r::math::VEC3 vec(0.0f, 0.0f, 0.0f);
-    vec.z = (zOrder - 105.0f) - 100.0f;
+    float zOrder = FullSortSceneUtil::GetZOrder(0, 1) - 105.0f - 100.0f;
+    
+    gfl::Vec3 vec;
+    
+    vec.x = 0.0f;
+    vec.y = 0.0f;
+    vec.z = zOrder;
+    
     matrix[0][3] = vec.x;
     matrix[1][3] = vec.y;
     matrix[2][3] = vec.z;

@@ -7,7 +7,7 @@
 namespace gfl {
     class CustomRenderObj : public nw4r::g3d::ScnLeaf, public gfl::RenderObj {
     public:
-        CustomRenderObj(bool arg1, bool arg2);
+        CustomRenderObj(bool arg1, bool arg2, const char* pName = nullptr);
 
         /* nw4r::g3d::ScnLeaf */
 
@@ -46,6 +46,7 @@ namespace gfl {
         bool m_100;
         bool m_101;
         bool mOptionsSet;
+        PAD(1);
     };
 }
 
