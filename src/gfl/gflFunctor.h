@@ -71,6 +71,21 @@ namespace gfl {
     };
 
 
+    template <typename FunctionT, typename ReturnT>
+    class FunctorFunc0 {
+    public:
+        FunctorFunc0(FunctionT function)
+            : mFunction(function)
+        { }
+
+        virtual ReturnT operator()();
+        virtual void Clone(const FunctorFunc0* pOther);
+        virtual ~FunctorFunc0();
+
+        /* 0x8 */ FunctionT mFunction;
+    };
+
+
     template <typename ReturnT, typename Arg1T>
     class FunctorBase1;
 

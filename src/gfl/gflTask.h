@@ -37,6 +37,15 @@ namespace gfl {
             Init(pTaskName);
         }
 
+        // template <typename FunctionT>
+        // inline Task(FunctionT function, const char* pTaskName)
+        //     : mFunctor(CreateTaskFunctor_<FunctionT>(function))
+        //     , mFlags(0)
+        //     , m_14(0)
+        // {
+        //     Init(pTaskName);
+        // }
+        
         void Init(const char* newname);
 
         virtual ~Task();
@@ -74,6 +83,14 @@ namespace gfl {
             Functor0<ReturnT> f;
             return f;
         }
+
+        // template <typename FunctionT, typename ReturnT>
+        // inline Functor0<void> CreateTaskFunctor_(FunctionT function) {
+        //     FunctorFunc0<FunctionT, ReturnT>* ff0 = new (gfl::HeapID::LIB1) FunctorFunc0<FunctionT, ReturnT>(function);
+        //     mFunctorBase = (FunctorBase0<ReturnT>*)(ff0);
+        //     Functor0<ReturnT> f;
+        //     return f;
+        // }
 
         /* Class Members */
 

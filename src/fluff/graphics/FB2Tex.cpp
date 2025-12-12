@@ -1,4 +1,5 @@
 #include "graphics/FB2Tex.h"
+#include "graphics/FbMem.h"
 
 FB2Tex::FB2Tex(gfl::Scene* pScene, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture, const char* pName)
     : gfl::CustomRenderObj(false, true, pName)
@@ -105,12 +106,7 @@ void FB2Tex::Blit(bool setBlendMode) {
 }
 
 extern "C" {
-    /* GX */
-    u32 GXGetTexBufferSize(u16, u16, GXTexFmt, int, int);
-
     /* Fluff */
-    void* GetFrameBufferData(int, u32, bool);
-    void DisableFrameBufferByID(int);
     static GXRenderModeObj** CurrentRenderModeObj;
 }
 
@@ -119,9 +115,9 @@ void FB2Tex::RefreshTexture() {
 
     if (!mRefreshTexture) {
         if (mTextureFormat == GX_TF_RGBA8) {
-            mImage = GetFrameBufferData(7, len, false);
+            mImage = FbMem::GetFrameBufferData(7, len, false);
         } else if (mTextureFormat == GX_TF_RGB565) {
-            mImage = GetFrameBufferData(8, len, false);
+            mImage = FbMem::GetFrameBufferData(8, len, false);
         }
     }
 
@@ -150,9 +146,9 @@ void FB2Tex::InitTexObj() {
     u32 len = GXGetTexBufferSize(mDestWidth, mDestHeight, mTextureFormat, 0, 0);
 
     if (mTextureFormat == GX_TF_RGBA8) {
-        mImage = GetFrameBufferData(7, len, mRefreshTexture);
+        mImage = FbMem::GetFrameBufferData(7, len, mRefreshTexture);
     } else if (mTextureFormat == GX_TF_RGB565) {
-        mImage = GetFrameBufferData(8, len, mRefreshTexture);
+        mImage = FbMem::GetFrameBufferData(8, len, mRefreshTexture);
     }
 
     DCInvalidateRange(mImage, len);
@@ -160,8 +156,8 @@ void FB2Tex::InitTexObj() {
 
 void FB2Tex::DisableFrameBuffer() {
     if (mTextureFormat == GX_TF_RGBA8) {
-        DisableFrameBufferByID(7);
+        FbMem::DisableFrameBuffer(7);
     } else if (mTextureFormat == GX_TF_RGB565) {
-        DisableFrameBufferByID(8);
+        FbMem::DisableFrameBuffer(8);
     }
 }

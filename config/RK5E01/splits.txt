@@ -98,6 +98,11 @@ fluff/env/EnvUnitBase.cpp:
 fluff/object/gimmick/GmkColAnimMdl.cpp:
 	.text       start:0x800D591C end:0x800D62B8
 
+fluff/graphics/FbMem.cpp:
+	.text       start:0x800DCABC end:0x800DCE50
+	.sbss       start:0x808E4F10 end:0x808E4F18
+	.bss        start:0x808F0930 end:0x808F0970
+
 fluff/graphics/NwAnmCtrl.cpp:
 	.text       start:0x800E9DDC end:0x800EA4E4
 	.data       start:0x808420B8 end:0x808420C8

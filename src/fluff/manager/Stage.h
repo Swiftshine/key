@@ -18,6 +18,8 @@ public:
     static inline Stage* Instance() {
         return sInstance;
     }
+
+    static gfl::Task* sDrawRootTask;
     
     /* Constructor + Destructor */
 

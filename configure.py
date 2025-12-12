@@ -492,7 +492,7 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects": [
-            Object(Matching, "fluff/main.cpp"),
+            Object(NonMatching, "fluff/main.cpp"),
         ],
     },
     {
@@ -545,6 +545,7 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/graphics/Cam.cpp"),
+            Object(NonMatching, "fluff/graphics/FbMem.cpp"),
             Object(NonMatching, "fluff/graphics/FlfMdlDraw.cpp"),
         ]
     },

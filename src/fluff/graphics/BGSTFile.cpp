@@ -1,12 +1,11 @@
 #include "graphics/BGSTFile.h"
 #include "gfl/gflMemoryManagement.h"
+#include "game/Game.h"
 #include <cstring>
 
-// heap
-extern "C" void* lbl_808E4D00;
-extern "C" int lbl_808E0368;
-extern "C" void* lbl_808E4FD8;
+extern "C" int lbl_808E0368; // actually in sdata
 extern "C" void* GetBgImageSquare(void*, u16 index);
+extern "C" gfl::Heap* Mem1Heap; // actually Game::Mem1Heap at 808e4d00 but it's not linked yet
 
 BGST::File::File()
     : mLoadState(BGST::LoadState::BGST_LOADING_NOT_INITED)
@@ -104,7 +103,7 @@ void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, int id, int x
 }
 
 bool BGST::File::SetHeader(const char* pFilepath) {    
-    mHeader.Create((BGST::Header*)gfl::Alloc((gfl::Heap*)lbl_808E4D00, 0x40, 0x20));
+    mHeader.Create((BGST::Header*)gfl::Alloc(Mem1Heap, 0x40, 0x20));
 
     mFile = gfl::File::Open(pFilepath, 1);
     
@@ -146,7 +145,7 @@ void BGST::File::SetupImage() {
     uint biggerArea = gridArea *0x10 ;
     uint temp3 = biggerArea * mGridCount;
     mImageFilesize = ROUND_UP(temp3  , 0x20);
-    mOutputImage.Create((BGST::Image*)gfl::Alloc((gfl::Heap*)lbl_808E4D00, mImageFilesize, 0x20));
+    mOutputImage.Create((BGST::Image*)gfl::Alloc(Mem1Heap, mImageFilesize, 0x20));
 }
 
 void BGST::File::LoadGrid() {
