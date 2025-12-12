@@ -76,28 +76,20 @@ void FB2Tex::Blit(bool setBlendMode) {
     GXSetVtxDesc((GXAttr)9, (GXAttrType)1);
     GXSetVtxDesc((GXAttr)0xD, (GXAttrType)1);
     GXSetCullMode((GXCullMode)1);
-    GXBegin(GX_TRIANGLESTRIP, (GXVtxFmt)0, 4);
 
-    WGPIPE.f = -1.0f;
-    WGPIPE.f = 1.0f;
-    WGPIPE.f = 0.0f;
-    WGPIPE.f = 0.0f;
-    WGPIPE.f = 0.0f;
-    WGPIPE.f = -1.0f;
-    WGPIPE.f = -1.0f;
-    WGPIPE.f = 0.0f;
-    WGPIPE.f = 0.0f;
-    WGPIPE.f = 1.0f;
-    WGPIPE.f = 1.0f;
-    WGPIPE.f = 1.0f;
-    WGPIPE.f = 0.0f;
-    WGPIPE.f = 1.0f;
-    WGPIPE.f = 0.0f;
-    WGPIPE.f = 1.0f;
-    WGPIPE.f = -1.0f;
-    WGPIPE.f = 0.0f;
-    WGPIPE.f = 1.0f;
-    WGPIPE.f = 1.0f;
+    GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, 4);
+
+    GXPosition3f32(-1.0f, 1.0f, 0.0f);
+    GXTexCoord2f32(0.0f, 0.0f);
+
+    GXPosition3f32(-1.0f, -1.0f, 0.0f);
+    GXTexCoord2f32(0.0f, 1.0f);
+
+    GXPosition3f32(1.0f, 1.0f, 0.0f);
+    GXTexCoord2f32(1.0f, 0.0f);
+
+    GXPosition3f32(1.0f, -1.0f, 0.0f);
+    GXTexCoord2f32(1.0f, 1.0f);
 
     cam.SetCameraMtxDirectly(camMtx);
     cam.SetProjectionMtxDirectly(&projMtx);
