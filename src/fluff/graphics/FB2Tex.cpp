@@ -80,16 +80,16 @@ void FB2Tex::Blit(bool setBlendMode) {
     GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, 4);
 
     GXPosition3f32(-1.0f, 1.0f, 0.0f);
-    GXTexCoord2f32(0.0f, 0.0f);
+    GXTexCoord2f32(0.0f, 0.0f); // top left
 
     GXPosition3f32(-1.0f, -1.0f, 0.0f);
-    GXTexCoord2f32(0.0f, 1.0f);
+    GXTexCoord2f32(0.0f, 1.0f); // bottom left
 
     GXPosition3f32(1.0f, 1.0f, 0.0f);
-    GXTexCoord2f32(1.0f, 0.0f);
+    GXTexCoord2f32(1.0f, 0.0f); // top right
 
     GXPosition3f32(1.0f, -1.0f, 0.0f);
-    GXTexCoord2f32(1.0f, 1.0f);
+    GXTexCoord2f32(1.0f, 1.0f); // bottom right
 
     cam.SetCameraMtxDirectly(camMtx);
     cam.SetProjectionMtxDirectly(&projMtx);
