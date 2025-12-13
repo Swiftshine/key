@@ -1,14 +1,15 @@
 #ifndef FLUFF_SPRINGBASE_H
 #define FLUFF_SPRINGBASE_H
 
+#include <nw4r/g3d/g3d_obj.h>
 #include "object/FlfGameObj.h"
 #include "gfl/gflTask.h"
-#include "graphics/KeyFrame.h"
 #include "gfl/gflArray.h"
 #include "gfl/gflPointer.h"
 #include "gfl/gflResFileInfo.h"
 #include "gfl/gflVec3.h"
-#include <nw4r/g3d/g3d_obj.h>
+#include "graphics/KeyFrame.h"
+#include "graphics/FullSortScene.h"
 
 /// @note Size: `0x150`
 class SpringBase : public FlfGameObj {
@@ -98,7 +99,7 @@ public:
 
     /* Constructor */
 
-    SpringBase(int arg1, const char* pTaskName);
+    SpringBase(FullSortScene* pScene, const char* pTaskName);
 
     /* Virtual Methods */
 
@@ -159,7 +160,7 @@ public:
 
     /* 0x080 */ gfl::Task mTask;
     /* 0x098 */ gfl::ResFileObject mResFileObject;
-    /* 0x09C */ int m_9C;
+    /* 0x09C */ FullSortScene* mFullSortScene;
     /* 0x0A0 */ Particle* mParticleArray1;
     /* 0x0A4 */ Particle* mParticleArray2;
     /* 0x0A8 */ Particle* mParticleArray3;

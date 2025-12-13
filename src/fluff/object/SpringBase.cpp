@@ -122,7 +122,7 @@ SpringBase::Spring::~Spring() { }
 
 /* SpringBase */
 
-SpringBase::SpringBase(int arg1, const char* pTaskName)
+SpringBase::SpringBase(FullSortScene* pScene, const char* pTaskName)
     : FlfGameObj(ObjectCategory::Spring)
     , mTask(this, SpringBase::Update, pTaskName)
     , mResFileObject(nullptr)
@@ -135,7 +135,7 @@ SpringBase::SpringBase(int arg1, const char* pTaskName)
     , mParticleEffectMultiplier(0.0f)
 {
     m_14C = nullptr;
-    m_9C = arg1;
+    mFullSortScene = pScene;
     mParticleArray1 = nullptr;
     mParticleArray2 = nullptr;
     mParticleArray3 = nullptr;
