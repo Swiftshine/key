@@ -36,11 +36,11 @@ namespace gfl {
         }
 
         static inline Heap* TryGetHeapByAddress(void* addr) {
-            Memory* mem = Instance();
-            if (nullptr == Instance()) {
-                mem = InitInstance();
-            }
-            return mem->GetHeapByAddress(addr);
+            // Memory* mem = Instance();
+            // if (nullptr == Instance()) {
+            //     mem = InitInstance();
+            // }
+            return TryGetInstance()->GetHeapByAddress(addr);
         }
 
         static inline bool IsInited() { return sIsInited; }

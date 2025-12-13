@@ -15,7 +15,7 @@ public:
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~FB2Tex();
-    /* 0xB4 */ virtual void Render() override;
+    /* 0xC4 */ virtual void DrawXlu() override;
 
     /* Class Methods */
 

@@ -7,45 +7,46 @@
 namespace gfl {
     class CustomRenderObj : public nw4r::g3d::ScnLeaf, public gfl::RenderObj {
     public:
-        CustomRenderObj(bool arg1, bool arg2, const char* pName = nullptr);
+        CustomRenderObj(bool opa, bool xlu, const char* pName = nullptr);
+
+        /* gfl::CustomRenderObj */
+
+        /* 0x84 */ virtual void vf84();
+        /* 0x88 */ virtual void vf88();
+        /* 0x8C */ virtual void vf8C();
+        /* 0x90 */ virtual void vf90();
+        /* 0x94 */ virtual void vf94(bool arg1);
+        /* 0x98 */ virtual void vf98(bool arg1);
+        /* 0x9C */ virtual void ToggleUpdate(bool update);
+        /* 0xA0 */ virtual void vfA0();
+        /* 0xA4 */ virtual void FrameUpdate();
+        /* 0xA8 */ virtual void ScnLeafProc(void* pArg1);
+        /* 0xAC */ virtual void DoFrameUpdate();
+        /* 0xB0 */ virtual void BeforeCalcWorld(void* pInfo, u32* pParam);  // usually, this does nothing
+        /* 0xB4 */ virtual void AfterCalcWorld(void* pInfo, u32* pParam);   // ^
+        /* 0xB8 */ virtual void BeforeCalcView(void* pInfo, u32* pParam);   // ^
+        /* 0xBC */ virtual void AfterCalcView(void* pInfo, u32* pParam);    // ^
+        /* 0xC0 */ virtual void DrawOpa();
+        /* 0xC4 */ virtual void DrawXlu();
 
         /* nw4r::g3d::ScnLeaf */
 
-        virtual void G3dProc(u32, u32, void*) override;
-        virtual ~CustomRenderObj();
+        /* 0x0C */ virtual void G3dProc(u32 task, u32 param, void* pInfo) override;
+        /* 0x10 */ virtual ~CustomRenderObj();
 
         /* gfl::RenderObj */
 
-        virtual int vf10() override;
-        virtual void vf18() override;
-        virtual void vf20(float& arg1) override;
+        virtual DECL_WEAK nw4r::g3d::G3dObj* GetObject() override;
+        virtual void vf18(bool arg1) override;
+        virtual void vf20(bool arg1) override;
         virtual gfl::Vec3 vf28() override;
-        virtual void Update(bool arg1) override;
+        virtual void Update(bool shouldUpdate) override;
         virtual void UpdateFrame() override;
         virtual void ScnMdlProc(int) override;
-
-        /* gfl::CustomRenderObj */
-        virtual void vf78();
-        virtual void vf7C();
-        virtual void vf80();
-        virtual void vf84();
-        virtual void vf88();
-        virtual void vf8C();
-        virtual Vec3 vf90();
-        virtual void vf94();
-        // calls nw4r::g3d::ScnLeaf::G3dProc(1, 0, arg1)
-        virtual void ScnLeafProc(void* arg1); 
-        virtual void vf9C();
-        virtual void vfA0();
-        virtual void vfA4();
-        virtual void vfA8();
-        virtual void vfAC();
-        virtual void vfB0();
-        virtual void Render();
     private:
-        bool m_100;
-        bool m_101;
-        bool mOptionsSet;
+        /* 0x100 */ bool mOpa;
+        /* 0x101 */ bool mXlu;
+        /* 0x102 */ bool mOptionsSet;
         PAD(1);
     };
 }

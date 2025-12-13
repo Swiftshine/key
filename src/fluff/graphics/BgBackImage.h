@@ -17,7 +17,7 @@ public:
 
     /* 0x08 */ virtual ~BgBackImage();
 
-    /* 0xB4 */ virtual void Render() override;
+    /* 0xC4 */ virtual void DrawXlu() override;
 
     /* Class Members */
 

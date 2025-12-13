@@ -17,7 +17,7 @@ public:
     /* 0x08 */ virtual ~FbDof();
 
     /* 0x9C */ virtual void vf9C() override;
-    /* 0xB4 */ virtual void Render() override; // calls CheckRender()
+    /* 0xC4 */ virtual void DrawXlu() override; // calls CheckRender()
 
     /* Class Methods */
 

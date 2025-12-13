@@ -126,7 +126,7 @@ void FB2Tex::RefreshTexture() {
     GXInitTexObjLOD(&mTexObj, (GXTexFilter)1, (GXTexFilter)0, zero, zero, zero, FALSE, FALSE, (GXAnisotropy)0);
 }
 
-void FB2Tex::Render() {
+void FB2Tex::DrawXlu() {
     if (mShouldRender) {
         RefreshTexture();
     }
