@@ -72,6 +72,11 @@ private:
     NW4R_G3D_RTTI_DECL_DERIVED(AnmScn, G3dObj);
 };
 
+class AnmScnRes {
+public:
+    float GetUpdateRate();
+};
+
 } // namespace g3d
 } // namespace nw4r
 

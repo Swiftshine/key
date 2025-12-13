@@ -25,7 +25,7 @@ namespace gfl {
         /* 0x20 */ virtual void vf20(bool arg1);
         /* 0x24 */ virtual bool vf24();
         /* 0x28 */ virtual gfl::Vec3 vf28() = 0;
-        /* 0x2C */ virtual float vf2C();
+        /* 0x2C */ virtual float GetUpdateRate();
         /* 0x30 */ virtual void vf30(float arg1);
         /* 0x34 */ virtual bool vf34(float arg0, float arg1, float arg2, float arg3);
         /* 0x38 */ virtual void Update(bool shouldUpdate);
@@ -41,7 +41,7 @@ namespace gfl {
         /* 0x0D */ bool m_D;
         /* 0x0E */ bool mShouldUpdate;
         /* 0x0F */ bool mIsActive;
-        /* 0x10 */ float m_10;
+        /* 0x10 */ float mUpdateRate;
         /* 0x14 */ int m_14;
     };
 };

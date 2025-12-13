@@ -13,7 +13,7 @@ RenderObj::RenderObj()
     , m_D(true)
     , mShouldUpdate(true)
     , mIsActive(false)
-    , m_10(0.0f)
+    , mUpdateRate(0.0f)
     , m_14(0)
 {
     mAllocator = &gfl::Memory::TryGetInstance()->GetHeapByAddress(this)->GetAllocator1();
@@ -58,23 +58,23 @@ bool RenderObj::vf34(float arg0, float arg1, float arg2, float arg3) {
         return true;
     }
     
-    float unk1 = vf2C();
+    float updateRate = GetUpdateRate();
 
-    if (unk1 <= 0.0f) {
+    if (updateRate <= 0.0f) {
         return false;
     }
     
     gfl::Vec3 vec = vf28();
 
     float temp = (arg0 - vec.x);
-    float temp2 = (arg2 + unk1);
+    float temp2 = (arg2 + updateRate);
 
     if (temp * temp > temp2 * temp2) {
         return true;
     }
 
     float temp3 = (arg1 - vec.y);
-    float temp4 = (arg3 + unk1);
+    float temp4 = (arg3 + updateRate);
     
     return temp3 * temp3 > temp4 * temp4;
 
