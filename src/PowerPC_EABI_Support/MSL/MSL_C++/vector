@@ -60,6 +60,10 @@ public:
         return data_[n];
     }
     
+    pointer data() {
+        return data_;
+    }
+    
     iterator begin() {
         return data_;
     }
@@ -209,6 +213,10 @@ public:
 
     size_t size() const {
         return size_;
+    }
+
+    void resize(size_t n) {
+        size_ = n;
     }
 
 protected:
