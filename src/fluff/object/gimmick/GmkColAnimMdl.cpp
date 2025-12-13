@@ -65,7 +65,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     char shadowAnimName[0x200];
     snprintf(shadowAnimName, sizeof(shadowAnimName), ShadowAnimNameTemplate, name);
     
-    if (nullptr != resFile.GetResMdl(shadowAnimName).ptr()) {
+    if (resFile.GetResMdl(shadowAnimName).ptr() != nullptr) {
         mShadowAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, shadowAnimName));
 
         for (uint i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
@@ -78,12 +78,12 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
         mShadowAnimCtrl->mScnMdlWrapper->fn_8004DB94(mModelScale);
     }
 
-    if (0.0f != mBuildInfo.GetFloatParam(Parameter::ZRotation)) {
+    if (mBuildInfo.GetFloatParam(Parameter::ZRotation) != 0.0f) {
         mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mAnimCtrl->mScnMdlWrapper->GetScnMdl()));
         mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::ZRotation));
     }
 
-    if (0 != mBuildInfo.GetIntParam(Parameter::InitialFrameIndex)) {
+    if (mBuildInfo.GetIntParam(Parameter::InitialFrameIndex) != 0) {
         float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(Parameter::InitialFrameIndex));
 
         if (mAnimCtrl.IsValid()) {
@@ -98,13 +98,13 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     mColAnimCtrlGmk.Create(new (gfl::HeapID::Work) GmkColAnimCtrl(this, mBuildInfo.GetIntParam(ParameterID::SECOND), buildInfo));
     mColAnimCtrlGmk->fn_800D5130((void*)mBuildInfo.GetStringParam(0).c_str());
 
-    float floatUnk = mBuildInfo.GetFloatParam(ParameterID::THIRD);
+    float rate = mBuildInfo.GetFloatParam(Parameter::AnimationSpeed);
 
-    if (0.0f != floatUnk) {
-        mAnimCtrl->mScnMdlWrapper->vf30(floatUnk);
+    if (rate != 0.0f) {
+        mAnimCtrl->mScnMdlWrapper->SetUpdateRate(rate);
 
         if (mShadowAnimCtrl.IsValid()) {
-            mShadowAnimCtrl->mScnMdlWrapper->vf30(floatUnk);
+            mShadowAnimCtrl->mScnMdlWrapper->SetUpdateRate(rate);
         }
     }
 

@@ -65,13 +65,13 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
         SetModelWrapperByFullSortSceneIndex(sortSceneIndex);
 
         // GmkSimpleMdl uses an auxiliary gimmick for Z rotation if it's needed
-        if (0.0f != mBuildInfo.GetFloatParam(Parameter::ZRotation)) {
+        if (mBuildInfo.GetFloatParam(Parameter::ZRotation) != 0.0f) {
             mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mModelWrapper->GetScnMdl()));
             mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::ZRotation));
         }
 
 
-        if (0 != mBuildInfo.GetIntParam(Parameter::InitialFrameIndex)) {
+        if (mBuildInfo.GetIntParam(Parameter::InitialFrameIndex) != 0) {
             float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(Parameter::InitialFrameIndex));
 
             if (mAnim.IsValid()) {
@@ -84,16 +84,16 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
         }
     }
 
-    float secondFloat = mBuildInfo.GetFloatParam(ParameterID::THIRD);
+    float rate = mBuildInfo.GetFloatParam(Parameter::AnimationSpeed);
 
-    if (0.0f == secondFloat) {
+    if (rate == 0.0f) {
         return;
     }
 
-    mModelWrapper->vf30(secondFloat);
+    mModelWrapper->SetUpdateRate(rate);
 
     if (mShadowModelWrapper.IsValid()) {
-        mShadowModelWrapper->vf30(secondFloat);
+        mShadowModelWrapper->SetUpdateRate(rate);
     }
 }
 

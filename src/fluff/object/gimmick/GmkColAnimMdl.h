@@ -19,8 +19,8 @@ private:
         SortSceneIndex = 0, // int 0
         ZRotation = 0,      // float 0
         AnimationName = 0,  // string 0
-
         InitialFrameIndex = 2, // int 2
+        AnimationSpeed = 2, // float 2
     );
 public:
     static GmkColAnimMdl* Build(GimmickBuildInfo* buildInfo);

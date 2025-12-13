@@ -32,7 +32,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mFullSortSceneIndex);
     animCtrl->SetFullSortSceneModelWrapper(scene, 0x204);
     mAnimCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
-    mAnimCtrl->mScnMdlWrapper->vf30(5.0f);
+    mAnimCtrl->mScnMdlWrapper->SetUpdateRate(5.0f);
 
     gfl::ScnMdlWrapper* modelWrapper = mAnimCtrl->mScnMdlWrapper;
 
@@ -43,7 +43,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
 
     fbMokoMoko->UpdateMatrix(nw4r::math::VEC2(mPosition.x, mPosition.y));
     mFbMokoMoko->SetUnk150(true);
-    mFbMokoMoko->vf30(5.0f);
+    mFbMokoMoko->SetUpdateRate(5.0f);
 }
 
 GmkWarpExit::~GmkWarpExit() { }

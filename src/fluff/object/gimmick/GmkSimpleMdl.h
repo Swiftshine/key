@@ -25,6 +25,7 @@ public:
         PlayAnim = 1,       // int 1
 
         InitialFrameIndex = 2, // int 2
+        AnimationSpeed = 2, // float 2
     );
 public:
     GmkSimpleMdl();
