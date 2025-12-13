@@ -97,7 +97,7 @@ public:
             
         // }
 
-
+        return 0;
     }
 
     T GetPreviousEndFrame() DONT_INLINE_CLASS {
