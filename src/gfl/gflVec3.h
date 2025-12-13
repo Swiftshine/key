@@ -4,6 +4,8 @@
 #include <nw4r/math.h>
 
 namespace gfl {
+    struct Vec2;
+
     struct Vec3 : public nw4r::math::VEC3 {
         typedef nw4r::math::VEC3 Base;
 
@@ -70,6 +72,7 @@ namespace gfl {
         Vec3(float, float, float);
         Vec3(float, nw4r::math::VEC2&);
         Vec3(const nw4r::math::VEC2&);
+        Vec3(const Vec2&);
         
         inline Vec3(const Base& rOther) {
             x = rOther.x;
@@ -113,7 +116,7 @@ namespace gfl {
         }
         
         
-        void operator=(const nw4r::math::VEC2& other);
+        void operator=(const Vec2& other);
 
         // Vec3 operator+(const Base& rhs) const;
         Vec3 operator+(const Vec3& other) const;

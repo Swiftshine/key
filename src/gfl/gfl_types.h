@@ -60,4 +60,6 @@ const char ResNode[] = "ResNode";
     NW4R_ASSERT_MSG(isfinite(x) && !isnan(x),                                  \
         "NW4R:Floating Point Value Error(%f)\nframe is infinite or nan.", (x))
 
+void NW4R_MATH_WARNING(...);
+
 #endif

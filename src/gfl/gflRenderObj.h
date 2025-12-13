@@ -26,14 +26,18 @@ namespace gfl {
         /* 0x24 */ virtual bool vf24();
         /* 0x28 */ virtual gfl::Vec3 vf28() = 0;
         /* 0x2C */ virtual float GetUpdateRate();
-        /* 0x30 */ virtual void SetUpdateRate(float rate);
+        /* 0x30 */ virtual void SetUpdateRate(float rate) {
+            mUpdateRate = rate;
+        }
         /* 0x34 */ virtual bool vf34(float arg0, float arg1, float arg2, float arg3);
         /* 0x38 */ virtual void Update(bool shouldUpdate);
         /* 0x3C */ virtual bool ShouldUpdate();
         /* 0x40 */ virtual void UpdateFrame() = 0;
         /* 0x44 */ virtual void ScnMdlProc(int) = 0;
         /* 0x48 */ DECL_WEAK virtual void SetScene(gfl::Scene* scene);
-        /* 0x4C */ virtual gfl::Scene* GetScene();
+        /* 0x4C */ DECL_WEAK virtual gfl::Scene* GetScene() {
+            return mScene;
+        }
     public:
         /* 0x04 */ MEMAllocator* mAllocator;
         /* 0x08 */ Scene* mScene;

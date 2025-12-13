@@ -18,7 +18,7 @@ namespace gfl {
         /* 0x94 */ virtual void vf94(bool arg1);
         /* 0x98 */ virtual void vf98(bool arg1);
         /* 0x9C */ virtual void ToggleUpdate(bool update);
-        /* 0xA0 */ virtual void vfA0();
+        /* 0xA0 */ virtual gfl::Vec3 vfA0();
         /* 0xA4 */ virtual void FrameUpdate();
         /* 0xA8 */ virtual void ScnLeafProc(void* pArg1);
         /* 0xAC */ virtual void DoFrameUpdate();
