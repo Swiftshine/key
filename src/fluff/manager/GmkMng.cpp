@@ -231,74 +231,74 @@ void GmkMng::CreateGimmicksFromMapdata() {
 }
 
 // https://decomp.me/scratch/5kVxc
-void GmkMng::ManageOnScreenGimmicks() {
-    if (Stage::Instance() != nullptr && !Stage::Instance()->fn_80044C6C()) {
-        Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
+// void GmkMng::ManageOnScreenGimmicks() {
+//     if (Stage::Instance() != nullptr && !Stage::Instance()->fn_80044C6C()) {
+//         Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
-        nw4r::math::VEC2 pos;
-        pos = CameraManager::Instance()->GetCurrentPosition();
+//         nw4r::math::VEC2 pos;
+//         pos = CameraManager::Instance()->GetCurrentPosition();
         
-        CameraManager* camMgr = CameraManager::Instance();
+//         CameraManager* camMgr = CameraManager::Instance();
 
-        for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
-            Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
-            Gimmick::GimmickInfo* gimmickInfo = buildInfo->mGimmickInfo;
+//         for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
+//             Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
+//             Gimmick::GimmickInfo* gimmickInfo = buildInfo->mGimmickInfo;
 
-            if (GimmickUtil::CheckCommonByGimmickID(buildInfo->mGimmickID)) {
-                Gimmick* gimmick = gimmickInfo->mGimmick;
-                if (gimmick != nullptr || gimmickInfo->mIsCommon) {
-                    // either there are multiple redundancies
-                    // or this is the result of some inlining
+//             if (GimmickUtil::CheckCommonByGimmickID(buildInfo->mGimmickID)) {
+//                 Gimmick* gimmick = gimmickInfo->mGimmick;
+//                 if (gimmick != nullptr || gimmickInfo->mIsCommon) {
+//                     // either there are multiple redundancies
+//                     // or this is the result of some inlining
 
-                    if (gimmick != nullptr && IsGimmickOnScreen(pos, gimmick)) {
-                        gimmick = gimmickInfo->mGimmick;
+//                     if (gimmick != nullptr && IsGimmickOnScreen(pos, gimmick)) {
+//                         gimmick = gimmickInfo->mGimmick;
 
-                        if (gimmick != nullptr) {
-                            delete gimmick;
-                        }
+//                         if (gimmick != nullptr) {
+//                             delete gimmick;
+//                         }
 
-                        gimmickInfo->mIsDeleted = true;
-                        break;
-                    }
-                } else {
-                    if (IsGimmickInSpawnRadius(pos, buildInfo)) {
-                        CreateGimmick(buildInfo);
-                        break;
-                    }
-                }
-            }
-        }
-
-
-        for (
-            gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
-            node != mGimmicks.GetNode();
-            node = node->GetNext()
-        ) {
-            Gimmick* gimmick = node->ToNode()->GetData();
-            gimmick->SetCulled(gimmick->ShouldCull(camMgr));
-        }
+//                         gimmickInfo->mIsDeleted = true;
+//                         break;
+//                     }
+//                 } else {
+//                     if (IsGimmickInSpawnRadius(pos, buildInfo)) {
+//                         CreateGimmick(buildInfo);
+//                         break;
+//                     }
+//                 }
+//             }
+//         }
 
 
-        gfl::LinkedList<GimmickResource*>::NodeBase* node = mGimmickResources.GetNode()->GetNext();
+//         for (
+//             gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
+//             node != mGimmicks.GetNode();
+//             node = node->GetNext()
+//         ) {
+//             Gimmick* gimmick = node->ToNode()->GetData();
+//             gimmick->SetCulled(gimmick->ShouldCull(camMgr));
+//         }
 
-        while (node != mGimmickResources.GetNode()) {
-            GimmickResource* resource = node->ToNode()->GetData();
 
-            if (resource->mGimmickHandles.GetCount() == 0) {
-                gfl::LinkedList<GimmickResource*>::Modifier mod;
-                mod.SetNode2(node);
-                mod.RemoveNode2FromList(mGimmickResources);
-                node = mod.GetNode1();
-                delete resource;
-            } else {
-                resource->Clear();
-                node = node->GetNext();
-            }
-        }
+//         gfl::LinkedList<GimmickResource*>::NodeBase* node = mGimmickResources.GetNode()->GetNext();
 
-    }
-}
+//         while (node != mGimmickResources.GetNode()) {
+//             GimmickResource* resource = node->ToNode()->GetData();
+
+//             if (resource->mGimmickHandles.GetCount() == 0) {
+//                 gfl::LinkedList<GimmickResource*>::Modifier mod;
+//                 mod.SetNode2(node);
+//                 mod.RemoveNode2FromList(mGimmickResources);
+//                 node = mod.GetNode1();
+//                 delete resource;
+//             } else {
+//                 resource->Clear();
+//                 node = node->GetNext();
+//             }
+//         }
+
+//     }
+// }
 
 
 void GmkMng::AddEffect(Gimmick::GimmickBuildInfo* pBuildInfo) {
