@@ -1,7 +1,7 @@
 #ifndef GFL_RESINFO_H
 #define GFL_RESINFO_H
 
-#include "types.h"
+#include "gflRefCounter.h"
 
 namespace gfl {
     class ResInfo {
@@ -14,16 +14,18 @@ namespace gfl {
             UseGfArch = 0x100,
         );
     public:
-        virtual void IncrementLevel();
+        ResInfo() { }
+        ~ResInfo() { }
         
-        inline u16 GetFlags() { return mFlags; }
-        inline void AddFlag(u16 flag) { mFlags |= flag; }
-    protected:
-        ResInfo();
-        ~ResInfo();
+        virtual void IncrementRefCount();
+        
+        inline u16 GetFlags() {
+            return mFlags;
+        }
+
     public:
         u16 mFlags;
-        u16 mLevel;
+        RefCounter mRefCount;
     };
 
     ASSERT_SIZE(ResInfo, 8);

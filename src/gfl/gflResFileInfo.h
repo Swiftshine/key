@@ -231,7 +231,7 @@ namespace gfl {
                 TryDestroy();
                 mPointer = other.mPointer;
                 if (IsValid()) {
-                    mPointer->IncrementLevel();
+                    mPointer->IncrementRefCount();
                 }
             }
         }

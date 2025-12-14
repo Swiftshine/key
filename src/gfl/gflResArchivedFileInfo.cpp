@@ -21,10 +21,10 @@ GfArch* ResFileInfo::TryGetGfArch() {
 }
 
 ResArchivedFileInfo::~ResArchivedFileInfo() {
-    u16 level = mLevel;
+    u16 refCount = mRefCount;
 
-    if ((0 != level) && (level--, mLevel = level, 0 == level)) {
-        if (nullptr != mData) {
+    if (refCount != 0 && --refCount == 0) {
+        if (mData != nullptr) {
             mOwner->Destroy();
             mOwner = nullptr;
             mData = nullptr;

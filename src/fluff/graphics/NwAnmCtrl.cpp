@@ -6,7 +6,7 @@ NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& rFileInfo, const char* 
     : mResFileInfo(rFileInfo)
 {
     if (mResFileInfo.IsValid()) {
-        mResFileInfo->IncrementLevel();
+        mResFileInfo->IncrementRefCount();
     }
 
     mScnMdlWrapper = nullptr;
