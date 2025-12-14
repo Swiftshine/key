@@ -14,25 +14,21 @@
 class WoolBaseMdl : public gfl::CustomRenderObj {
 public:
     /* Structures */
+
     class BackupBuff {
     public:
         /* Constructor */
 
         inline BackupBuff()
-            : m_0(nullptr)
-            , m_4(0.0f)
-            , m_10(0.0f)
-            , m_1C(0.0f)
-            , m_28(0.0f)
-        { }
+            : mPoints(nullptr)
+        {
+            ZERO_MTX_34(mMtx);
+        }
         
         /* Class Members */
 
-        /* 0x00 */ gfl::Vec2* m_0; // array<gfl::Vec2> of some kind
-        /* 0x04 */ gfl::Vec3 m_4;
-        /* 0x10 */ gfl::Vec3 m_10;
-        /* 0x1C */ gfl::Vec3 m_1C;
-        /* 0x28 */ gfl::Vec3 m_28;
+        /* 0x0 */ gfl::Vec2* mPoints; // array
+        /* 0x4 */ nw4r::math::MTX34 mMtx;
 
         /* Virtual Methods */
 
@@ -64,7 +60,9 @@ public:
 
     virtual ~WoolBaseMdl();
 
-    /* 0xA0 */ gfl::Vec3 vfA0();
+    /* 0x28 */ virtual gfl::Vec3 vf28() override;
+    /* 0xA0 */ virtual gfl::Vec3 vfA0() override;
+    /* 0xC4 */ virtual void DrawXlu() override;
 
     /* Class Methods */
 
@@ -76,6 +74,14 @@ public:
     int ResetScene(FullSortScene* pScene);
     void fn_8001AB34(int);
     void fn_8001AB58();
+    void fn_8001AD5C(float);
+    void fn_8001AD68();
+    void fn_8001AD74(int);
+    void fn_8001AD80(float);
+    void fn_8001AD8C(int, int);
+    void fn_8001AEE4();
+    void fn_8001B4DC();
+    void fn_8001BCD0(nw4r::math::MTX34* pMtx);
 
     /* Class Members */
 

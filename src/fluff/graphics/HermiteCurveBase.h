@@ -33,7 +33,7 @@ public:
     void fn_806606A8(uint index, gfl::Vec3&, gfl::Vec3&);
     gfl::Vec3 fn_806606F0(float, uint index);
     gfl::Vec3 fn_80660B10(float, int, uint index);
-    void fn_80660fA8();
+    void fn_80660FA8();
 
     /* Class Members */
 

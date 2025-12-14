@@ -29,18 +29,23 @@ public:
     int Register(gfl::ResFileObject& rResFileObject, const char* pWoolName1, const char* pWoolName2);
     void fn_800267B0(int index, int);
     void fn_80026A54(int);
+    int fn_80026B54(int index);
     void fn_80026DFC(float);
+    void fn_80026E74(float, uint index);
+    void fn_80026E88(int);
 
     gfl::Vec2* fn_80026A60(uint index1, uint index2);
 
     /* Class Members */
 
-    STRUCT_FILL(0x14);
-    float m_18;
-    float m_1C;
-    STRUCT_FILL(0x48 - 0x20);
-    Substruct* m_48;
-    STRUCT_FILL(0x60 - 0x4C);
+    /* 0x00 */ STRUCT_FILL(0x14);
+    /* 0x18 */ float m_18;
+    /* 0x1C */ float m_1C;
+    /* 0x20 */ STRUCT_FILL(0x48 - 0x20);
+    /* 0x48 */ Substruct* m_48;
+    /* 0x4C */ STRUCT_FILL(0xC);
+    /* 0x58 */ int m_58;
+    /* 0x5C */ float m_5C;
 };
 
 #endif

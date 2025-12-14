@@ -123,8 +123,8 @@ WoolBaseMdl::~WoolBaseMdl() {
 }
 
 WoolBaseMdl::BackupBuff::~BackupBuff() {
-    if (m_0 != nullptr) {
-        delete[] m_0;
+    if (mPoints != nullptr) {
+        delete[] mPoints;
     }
 }
 
@@ -215,4 +215,109 @@ void WoolBaseMdl::fn_8001AB58() {
 gfl::Vec2::Vec2() {
     x = 0.0f;
     y = 0.0f;
+}
+
+void WoolBaseMdl::fn_8001AD5C(float arg1) {
+    mFlfWoolDraw->fn_80026E74(arg1, 0);
+}
+
+void WoolBaseMdl::fn_8001AD68() {
+    mFlfWoolDraw->fn_80026E88(0);
+}
+
+void WoolBaseMdl::fn_8001AD74(int arg1) {
+    mFlfWoolDraw->m_58 = arg1;
+}
+
+void WoolBaseMdl::fn_8001AD80(float arg1) {
+    mFlfWoolDraw->m_5C = arg1;
+}
+
+void WoolBaseMdl::fn_8001AD8C(int arg1, int arg2) {
+    m_154 = arg1;
+
+    int num = mFlfWoolDraw->fn_80026B54(0);
+
+    for (uint i = 0; i < m_154; i++) {
+        BackupBuff* buf = new (gfl::HeapID::Work) BackupBuff;
+        buf->mPoints = new (gfl::HeapID::Work) gfl::Vec2[num];
+        mBackupBuffs.push_back(buf);
+    }
+
+    m_15C = arg2;
+}
+
+void WoolBaseMdl::fn_8001AEE4() {
+    uint count = mWoolBaseTask->GetParticleCount();
+    gfl::Vec3 pos = mWoolBaseTask->GetParticleEffectOffsetByIndex(count - 1);
+
+    nw4r::math::MTX34 mtx;
+    PSMTXIdentity(mtx);
+    mtx[0][0] = m_128.x;
+    mtx[1][1] = m_128.y;
+    mtx[2][2] = 1.0f;
+
+    mtx[0][3] = pos.x + mWoolBaseTask->mPosition.x;
+    mtx[1][3] = pos.y + mWoolBaseTask->mPosition.y;
+    mtx[2][3] = mWoolBaseTask->GetZPos();
+
+    nw4r::g3d::ScnObj::SetMtx(MTX_LOCAL, &mtx);
+}
+
+// https://decomp.me/scratch/jqMgw
+void WoolBaseMdl::DrawXlu() {
+    if (m_108 || m_158) {
+        if (m_10C != 0) {
+            for (uint i = 0; i < mWoolBaseTask->mSpringTemplate->mParticleCount; i++) {
+                gfl::Vec3 pos1 = mWoolBaseTask->GetParticleEffectOffsetByIndex(i);
+
+                gfl::Vec3 vec1(0.0f);
+                gfl::Vec3 vec2;
+
+                if (i == mWoolBaseTask->mSpringTemplate->mParticleCount - 1) {
+                    gfl::Vec3 pos2 = mWoolBaseTask->GetParticleEffectPositionByIndex(i - 1);
+                    vec2 = pos1 - pos2;
+                } else if (i == 0) {
+                    gfl::Vec3 pos2 = mWoolBaseTask->GetParticleEffectPositionByIndex(1);
+                    vec2 = pos2 - pos1;
+                } else {
+                    gfl::Vec3 pos2 = mWoolBaseTask->GetParticleEffectPositionByIndex(i + 1);
+                    vec2 = ((pos2 - pos1) + vec1) * 0.5f;
+                }
+
+                gfl::Vec3 vec3 = vec2 * 2.0f;
+                mHermiteCurve.fn_806606A8(i, pos1, vec3);
+            }
+            mHermiteCurve.fn_80660FA8();
+        }
+
+        uint count = mWoolBaseTask->GetParticleCount();
+        gfl::Vec3 pos1 = mWoolBaseTask->GetParticleEffectPositionByIndex(count - 1);
+
+        gfl::Vec2 vec(0.0f, 0.0f);
+
+        for (uint i = 0; i < mWoolBaseTask->mSpringTemplate->mParticleCount; i++) {
+            gfl::Vec3 pos2 = mWoolBaseTask->GetParticleEffectPositionByIndex(i);
+
+            // not done
+        }
+    }
+}
+
+void WoolBaseMdl::fn_8001B4DC() {
+    // not decompiled
+}
+
+void WoolBaseMdl::fn_8001BCD0(nw4r::math::MTX34* pMtx) {
+    if (mWoolBaseTask->mTask.mFlags & ~mWoolBaseTask->mTask.m_14) {
+        return;
+    }
+
+    BackupBuff* buf = mBackupBuffs[m_150];
+    
+    for (uint i = 0; i < mFlfWoolDraw->fn_80026B54(0); i++) {
+        buf->mPoints[i] = *mFlfWoolDraw->fn_80026A60(0, i);
+    }
+
+    buf->mMtx = *pMtx;
 }

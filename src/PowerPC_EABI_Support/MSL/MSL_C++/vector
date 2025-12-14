@@ -144,7 +144,7 @@ public:
         allocate(max, t);
     }
 
-    void allocate(size_t n, Metrowerks::int2type<1> t) {
+    void allocate(size_t n, Metrowerks::int2type<1> t) DONT_INLINE_CLASS {
         size_t max = max_size();
 
         if (max < n) {
@@ -155,7 +155,7 @@ public:
         cap() = n;
     }
 
-    void append_realloc(size_t n, const_reference x) {
+    void append_realloc(size_t n, const_reference x) DONT_INLINE_CLASS {
         __vec_deleter_helper<T, Allocator> tmp(alloc());
         
         size_t max = tmp.grow_by((size_ + n) - cap());
@@ -188,7 +188,7 @@ public:
         return false;
     }
 
-    size_t grow_by(size_t n) {
+    size_t grow_by(size_t n) DONT_INLINE_CLASS {
         size_t max = max_size();
         size_t c = cap();
 
