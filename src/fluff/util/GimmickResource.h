@@ -2,7 +2,8 @@
 #define FLUFF_GIMMICKRESOURCE_H
 
 #include "object/Gimmick.h"
-#include "gfl/gflLinkedList.h"
+// #include "gfl/gflLinkedList.h"
+#include <list>
 #include <string>
 
 /// @brief Used for keeping track of gimmicks that use a particular resource.
@@ -23,7 +24,8 @@ public:
     
     /* 0x00 */ std::string mResourceName;
     /* 0x0C */ bool m_C;
-    /* 0x10 */ gfl::LinkedList<FlfHandle> mGimmickHandles;
+    // /* 0x10 */ gfl::LinkedList<FlfHandle> mGimmickHandles;
+    /* 0x10 */ std::list<FlfHandle> mGimmickHandles;
 };
 
 #endif

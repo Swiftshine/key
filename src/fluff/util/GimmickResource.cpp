@@ -5,6 +5,7 @@
 GimmickResource::GimmickResource(const char* pResName)
     : mResourceName(pResName)
     , m_C(true)
+    , mGimmickHandles()
 { }
 
 // https://decomp.me/scratch/I6rGn
@@ -13,18 +14,18 @@ GimmickResource::~GimmickResource() {
 }
 
 void GimmickResource::RegisterGimmick(Gimmick* pGmk) {
-    gfl::LinkedList<FlfHandle>::Modifier mod;
+    // gfl::LinkedList<FlfHandle>::Modifier mod;
 
-    if (pGmk != nullptr) {
-        mod.GetData().SetObject(pGmk->GetHandleObject());
-        mod.GetData().SetID(pGmk->GetHandleID());
-    } else {
-        mod.GetData().SetObject(nullptr);
-        mod.GetData().SetID(0);
-    }
+    // if (pGmk != nullptr) {
+    //     mod.GetData().SetObject(pGmk->GetHandleObject());
+    //     mod.GetData().SetID(pGmk->GetHandleID());
+    // } else {
+    //     mod.GetData().SetObject(nullptr);
+    //     mod.GetData().SetID(0);
+    // }
 
-    mod.SetNode2(mGimmickHandles.GetNode());
-    mod.AddToListAfterNode2(mGimmickHandles);
+    // mod.SetNode2(mGimmickHandles.GetNode());
+    // mod.AddToListAfterNode2(mGimmickHandles);
 }
 
 void GimmickResource::Clear() {

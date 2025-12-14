@@ -1,3 +1,6 @@
+#ifndef MSL_INT2TYPE_H
+#define MSL_INT2TYPE_H
+
 namespace Metrowerks {
     template <int I>
     struct int2type {
@@ -6,3 +9,5 @@ namespace Metrowerks {
         // int value; // assumed
     };
 }
+
+#endif
