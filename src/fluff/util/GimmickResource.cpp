@@ -22,23 +22,24 @@ void GimmickResource::RegisterGimmick(Gimmick* pGmk) {
     mGimmickHandles.push_back(handle);
 }
 
-// https://decomp.me/scratch/w1tKx
+// https://decomp.me/scratch/7nV6s
 void GimmickResource::Clear() {
     bool uncull = false;
 
     std::list<FlfHandle>::iterator it = mGimmickHandles.begin();
-
+    
     while (it != mGimmickHandles.end()) {  
         FlfHandle handle = *it;
         FlfHandleObj** ptr;
 
         FLFHANDLEOBJ_DO_IF_VALID(handle, ptr) {
-            if (uncull || !static_cast<FlfGameObj*>(*ptr)->mIsCulled) {
-                uncull = true;
-            } 
+            uncull = uncull || !static_cast<FlfGameObj*>(*ptr)->mIsCulled;
+            it++;
+        } else {
+            std::list<FlfHandle>::iterator i;
+            std::list<FlfHandle>::erase(i, &mGimmickHandles, it);
+            it = i;
         }
-
-        it++;
     }
 
     if (!mCullAll) {

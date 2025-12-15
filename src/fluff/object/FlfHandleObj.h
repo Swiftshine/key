@@ -10,11 +10,17 @@ class FlfHandleObj;
 class FlfHandle {
 public:
     /* Constructor */
+
     inline FlfHandle()
         : mObject(nullptr)
         , mHandleID(0)
     { }
 
+    inline FlfHandle(const FlfHandle& rOther)
+        : mObject(rOther.mObject)
+        , mHandleID(rOther.mHandleID)
+    { }
+    
     /* Helpful Inlines */
     inline void SetID(uint id) {
         mHandleID = id;
@@ -24,11 +30,11 @@ public:
         mObject = pObject;
     }
 
-    inline uint GetID() {
+    inline uint GetID() const {
         return mHandleID;
     }
 
-    inline FlfHandleObj** GetObject() {
+    inline FlfHandleObj** GetObject() const {
         return mObject;
     }
 
@@ -92,8 +98,8 @@ ASSERT_SIZE(FlfHandleObj, 0xC);
 
 // used for doing something if the given handle is valid.
 #define FLFHANDLEOBJ_DO_IF_VALID(handle, handleObjPtr) \
-    handleObjPtr = handle.GetObject(); \
-    FlfHandleObj* handleObj; \
+handleObjPtr = handle.GetObject(); \
+FlfHandleObj* handleObj; \
     \
     if ( \
         handleObjPtr != nullptr && \

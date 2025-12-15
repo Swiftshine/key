@@ -10,6 +10,7 @@
 #include <MSL_C++/stdexcept>
 #include <MSL_C++/Metrowerks/compressed_pair.h>
 #include <MSL_C++/Metrowerks/int2type.h>
+#include <MSL_C++/Metrowerks/alloc_ptr.h>
 
 namespace std {
 
@@ -27,6 +28,7 @@ public:
     typedef const node_base* const_node_base_pointer;
     typedef node* node_pointer;
     typedef const node* const_node_pointer;
+    typedef allocator<node> node_allocator_type;
 
     struct node_base {
         node_pointer prev_;
@@ -67,23 +69,23 @@ public:
 
         generic_iterator operator++(int) {
             generic_iterator temp = *this;
-            node_++;
+            node_ = node_->next_;
             return temp;
         }
 
         generic_iterator operator--(int) {
             generic_iterator temp = *this;
-            ptr--;
+            node_ = node_->prev_;
             return temp;
         }
 
         generic_iterator& operator++() {
-            node_++;
+            node_ = node_->next_;
             return *this;
         }
 
         generic_iterator& operator--() {
-            node_--;
+            node_ = node_->prev_;
             return *this;
         }
 
@@ -95,6 +97,8 @@ public:
             return x.node_ != y.node_;
         }
     private:
+        friend class __list_deleter;
+
         node* node_;
     };
 
@@ -123,8 +127,20 @@ public:
         return iterator(tail().next_);
     }
 
+    Allocator& alloc() {
+        return size_.first();
+    }
+
     const Allocator& alloc() const {
         return size_.first();
+    }
+
+    node_allocator_type& node_alloc() {
+        return end_.first();
+    }
+
+    const node_allocator_type& node_alloc() const {
+        return end_.first();
     }
 
     node_base& tail() {
@@ -135,24 +151,54 @@ public:
         return end_.second();
     }
 
+    size_t& sz() {
+        return size_.second();
+    }
+
+    const size_t& sz() const {
+        return size_.second();
+    }
+
     void clear() {
         iterator i;
         erase(i, this, begin(), end());
     }
 
+    static node_pointer __iterator2pointer(iterator it) {
+        return it.node_;
+    }
+
+    static iterator __pointer2iterator(node_pointer p) {
+        return iterator(p);
+    }
+
+    void insert_nodes(node_base_pointer here, node_base_pointer first, node_base_pointer last) {
+        here->prev_->next_ = (node_pointer)first;
+        first->prev_ = here->prev_;
+        here->prev_ = (node_pointer)last;
+        last->next_ = (node_pointer)here;
+    }
+
     // the erase function from Food Network - Cook or Be Cooked! has this signature
     // iterator erase(iterator first, iterator last);
     // perhaps it changed after?
-
-
+    
+    
     static iterator erase(iterator& dst, __list_deleter* list, iterator first, iterator last);
     static iterator erase(iterator& dst, __list_deleter* list, iterator position);
-    static iterator insert(iterator& dst, __list_deleter* list, iterator position, const_reference x);
+    static void insert(iterator& dst, __list_deleter* list, iterator position, const_reference x) DONT_INLINE_CLASS {
+        Metrowerks::alloc_ptr<node, node_allocator_type&> ap (list->node_alloc().allocate(1), list->node_alloc());
+        list->alloc().construct(&ap->data_, x);
+        node_pointer newnode = ap.release();
+        list->insert_nodes(__iterator2pointer(position), newnode, newnode);
+        list->sz()++;
+        dst = __pointer2iterator(newnode);
+        // return dst;
+    }
 protected:
     Metrowerks::compressed_pair<Allocator, size_t> size_;
-    Metrowerks::compressed_pair<allocator<node_base>, node_base> end_;
+    Metrowerks::compressed_pair<node_allocator_type, node_base> end_;
 };
-
 
 template <typename T, typename Allocator>
 class __list_imp : public __list_deleter<T, Allocator> {

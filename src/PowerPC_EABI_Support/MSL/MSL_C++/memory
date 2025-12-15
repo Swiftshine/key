@@ -47,7 +47,14 @@ namespace std {
         }
         void deallocate(pointer p, size_type n) { operator delete(p); }
 
-        void construct(pointer p, const_reference val) { new (p) T(val); }
+        void construct(pointer p, const_reference val) {
+            new (p) T(val);
+
+            if (p == nullptr) {
+                fprintf(stderr, "Memory allocation failure");
+                abort();
+            }
+        }
         // void destroy(pointer p) { __destroy_aux(p, is_trivially_destructible<T>()); }
         void destroy(pointer p) {
             p->~T();
