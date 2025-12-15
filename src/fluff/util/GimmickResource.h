@@ -23,8 +23,7 @@ public:
     /* Class Members */
     
     /* 0x00 */ std::string mResourceName;
-    /* 0x0C */ bool m_C;
-    // /* 0x10 */ gfl::LinkedList<FlfHandle> mGimmickHandles;
+    /* 0x0C */ bool mCullAll;
     /* 0x10 */ std::list<FlfHandle> mGimmickHandles;
 };
 

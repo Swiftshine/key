@@ -1,7 +1,6 @@
 #ifndef _STD_LIST_
 #define _STD_LIST
 
-
 // documented from the Food Network - Cook or Be Cooked! debug build
 // (CulinaryAcademy_debug.elf)
 
@@ -41,49 +40,62 @@ public:
     template <bool B = false>
     class generic_iterator {
     public:
+        generic_iterator() { }
         generic_iterator(node_pointer n)
-            : ptr_(n)
+            : node_(n)
         { }
 
         generic_iterator(node_base_pointer n)
-            : ptr_((node_pointer)n)
+            : node_((node_pointer)n)
         { }
 
         reference operator*() {
-            return *ptr_;
+            return node_->data_;
         }
 
         const_reference operator*() const {
-            return *ptr_;
+            return node_->data_;
         }
 
         pointer operator->() {
-            return ptr_;
+            return &node_->data_;
         }
 
         const_pointer operator->() const {
-            return ptr_;
+            return &node_->data_;
+        }
+
+        generic_iterator operator++(int) {
+            generic_iterator temp = *this;
+            node_++;
+            return temp;
+        }
+
+        generic_iterator operator--(int) {
+            generic_iterator temp = *this;
+            ptr--;
+            return temp;
         }
 
         generic_iterator& operator++() {
-            ptr_++;
+            node_++;
             return *this;
         }
 
         generic_iterator& operator--() {
-            ptr_--;
+            node_--;
             return *this;
         }
 
         friend bool operator==(const generic_iterator& x, const generic_iterator& y) {
-            return x.ptr_ == y.ptr_;
+            return x.node_ == y.node_;
         }
 
         friend bool operator!=(const generic_iterator& x, const generic_iterator& y) {
-            return x.ptr_ != y.ptr_;
+            return x.node_ != y.node_;
         }
     private:
-        node* ptr_;
+        node* node_;
     };
 
     inline __list_deleter()
@@ -99,7 +111,8 @@ public:
     // then what is const_iterator?
 
     ~__list_deleter() {
-        erase(begin(), end());
+        iterator i;
+        erase(i, this, begin(), end());
     }
 
     iterator end() {
@@ -123,10 +136,18 @@ public:
     }
 
     void clear() {
-        erase(begin(), end());
+        iterator i;
+        erase(i, this, begin(), end());
     }
-    
-    iterator erase(iterator first, iterator last) DONT_INLINE_CLASS;
+
+    // the erase function from Food Network - Cook or Be Cooked! has this signature
+    // iterator erase(iterator first, iterator last);
+    // perhaps it changed after?
+
+
+    static iterator erase(iterator& dst, __list_deleter* list, iterator first, iterator last);
+    static iterator erase(iterator& dst, __list_deleter* list, iterator position);
+    static iterator insert(iterator& dst, __list_deleter* list, iterator position, const_reference x);
 protected:
     Metrowerks::compressed_pair<Allocator, size_t> size_;
     Metrowerks::compressed_pair<allocator<node_base>, node_base> end_;
@@ -135,8 +156,15 @@ protected:
 
 template <typename T, typename Allocator>
 class __list_imp : public __list_deleter<T, Allocator> {
+    typedef __list_deleter<T, Allocator> Base;
+    typedef Base::const_reference const_reference;
 public:
     ~__list_imp() { }
+
+    void push_back(const_reference x) {
+        iterator i;
+        insert(i, this, end(), x);
+    }
 };
 
 template <typename T, typename Allocator = allocator<T> >

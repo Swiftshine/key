@@ -1,33 +1,53 @@
 #include "util/GimmickResource.h"
 
-// every issue in this TU is because of Good-Feel's linked list
-
 GimmickResource::GimmickResource(const char* pResName)
     : mResourceName(pResName)
-    , m_C(true)
+    , mCullAll(true)
     , mGimmickHandles()
 { }
 
-// https://decomp.me/scratch/I6rGn
-GimmickResource::~GimmickResource() {
-
-}
+GimmickResource::~GimmickResource() { }
 
 void GimmickResource::RegisterGimmick(Gimmick* pGmk) {
-    // gfl::LinkedList<FlfHandle>::Modifier mod;
+    FlfHandle handle;
 
-    // if (pGmk != nullptr) {
-    //     mod.GetData().SetObject(pGmk->GetHandleObject());
-    //     mod.GetData().SetID(pGmk->GetHandleID());
-    // } else {
-    //     mod.GetData().SetObject(nullptr);
-    //     mod.GetData().SetID(0);
-    // }
+    if (pGmk != nullptr) {
+        handle.SetObject(pGmk->GetHandleObject());
+        handle.SetID(pGmk->GetHandleID());
+    } else {
+        handle.SetObject(nullptr);
+        handle.SetID(0);
+    }
 
-    // mod.SetNode2(mGimmickHandles.GetNode());
-    // mod.AddToListAfterNode2(mGimmickHandles);
+    mGimmickHandles.push_back(handle);
 }
 
+// https://decomp.me/scratch/w1tKx
 void GimmickResource::Clear() {
-    // not decompiled
+    bool uncull = false;
+
+    std::list<FlfHandle>::iterator it = mGimmickHandles.begin();
+
+    while (it != mGimmickHandles.end()) {  
+        FlfHandle handle = *it;
+        FlfHandleObj** ptr;
+
+        FLFHANDLEOBJ_DO_IF_VALID(handle, ptr) {
+            if (uncull || !static_cast<FlfGameObj*>(*ptr)->mIsCulled) {
+                uncull = true;
+            } 
+        }
+
+        it++;
+    }
+
+    if (!mCullAll) {
+        uncull = true;
+    }
+
+    if (uncull) {
+        for (std::list<FlfHandle>::iterator it = mGimmickHandles.begin(); it != mGimmickHandles.end(); it++) {
+            static_cast<FlfGameObj*>(*it->GetObject())->SetCulled(false);
+        }
+    }
 }
