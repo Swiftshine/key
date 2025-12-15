@@ -20,7 +20,7 @@ public:
         : mObject(rOther.mObject)
         , mHandleID(rOther.mHandleID)
     { }
-    
+
     /* Helpful Inlines */
     inline void SetID(uint id) {
         mHandleID = id;
@@ -98,8 +98,8 @@ ASSERT_SIZE(FlfHandleObj, 0xC);
 
 // used for doing something if the given handle is valid.
 #define FLFHANDLEOBJ_DO_IF_VALID(handle, handleObjPtr) \
-handleObjPtr = handle.GetObject(); \
-FlfHandleObj* handleObj; \
+    handleObjPtr = handle.GetObject(); \
+    FlfHandleObj* handleObj; \
     \
     if ( \
         handleObjPtr != nullptr && \
