@@ -6,7 +6,7 @@
 #include <cstdlib>
 
 namespace Metrowerks {
-    void error(const char* msg) {
+    inline void error(const char* msg) {
         fprintf(stderr, msg);
         abort();
     }
