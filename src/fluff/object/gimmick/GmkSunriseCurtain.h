@@ -47,26 +47,23 @@ public:
     virtual void Update() override;
 
 private:
-    int mState;
-    int m_134;
-    int mNightMainBGSTIndex;
-    int mNightShadowBGSTIndex;
-    int mDayMainBGSTIndex;
-    int mDayShadowBGSTIndex;
-    bool m_148;
-    int m_14C;
-    GXColor mScreenTintColor;
-    int m_154;
-    int m_158;
-    int m_15C;
-    int m_160;
-    gfl::SD3DActor mSD3DActor;
-    int m_19C;
-    int m_1A0;
-    gfl::Pointer<FlfMdlDraw> mFlfMdl1;
-    gfl::Pointer<FlfMdlDraw> mFlfMdl2;
-    G3dObjPointer<FbAlpha> mFbAlpha;
-    // FbAlpha* mFbAlpha;
+    /* 0x130 */ int mState;
+    /* 0x134 */ int m_134;
+    /* 0x138 */ int mNightMainBGSTIndex;
+    /* 0x13C */ int mNightShadowBGSTIndex;
+    /* 0x140 */ int mDayMainBGSTIndex;
+    /* 0x144 */ int mDayShadowBGSTIndex;
+    /* 0x148 */ bool m_148;
+    /* 0x14C */ int m_14C;
+    /* 0x150 */ GXColor mScreenTintColor;
+    /* 0x154 */ gfl::SoundHandle mSoundHandle1;
+    /* 0x15C */ gfl::SoundHandle mSoundHandle2;
+    /* 0x164 */ gfl::SD3DActor mSD3DActor;
+    /* 0x16C */ STRUCT_FILL(0x30);
+    /* 0x19C */ FlfHandle mGateHandle; // GmkGate3
+    /* 0x1A4 */ gfl::Pointer<FlfMdlDraw> mFlfMdl1;
+    /* 0x1A8 */ gfl::Pointer<FlfMdlDraw> mFlfMdl2;
+    /* 0x1AC */ G3dObjPointer<FbAlpha> mFbAlpha;
 };
 
 // ASSERT_SIZE(GmkSunriseCurtain, 0x1B0);
