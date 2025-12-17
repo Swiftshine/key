@@ -183,17 +183,18 @@ public:
     // iterator erase(iterator first, iterator last);
     // perhaps it changed after?
     
-    
     static iterator erase(iterator& dst, __list_deleter* list, iterator first, iterator last);
     static iterator erase(iterator& dst, __list_deleter* list, iterator position);
     static void insert(iterator& dst, __list_deleter* list, iterator position, const_reference x) DONT_INLINE_CLASS {
         Metrowerks::alloc_ptr<node, node_allocator_type&> ap (list->node_alloc().allocate(1), list->node_alloc());
+        
         list->alloc().construct(&ap->data_, x);
+
         node_pointer newnode = ap.release();
+
         list->insert_nodes(__iterator2pointer(position), newnode, newnode);
         list->sz()++;
         dst = __pointer2iterator(newnode);
-        // return dst;
     }
 protected:
     Metrowerks::compressed_pair<Allocator, size_t> size_;

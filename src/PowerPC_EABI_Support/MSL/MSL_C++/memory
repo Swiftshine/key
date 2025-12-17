@@ -8,6 +8,7 @@
 #include <MSL_C++/cstdlib>
 #include <MSL_C++/MSL_Common/type_traits.h>
 #include <MSL_C++/limits>
+#include <MSL_C++/msl_utility>
 
 namespace std {
 
@@ -48,12 +49,11 @@ namespace std {
         void deallocate(pointer p, size_type n) { operator delete(p); }
 
         void construct(pointer p, const_reference val) {
-            new (p) T(val);
-
             if (p == nullptr) {
-                fprintf(stderr, "Memory allocation failure");
-                abort();
+                Metrowerks::error("Memory allocation failure");
             }
+
+            new (p) T(val);
         }
         // void destroy(pointer p) { __destroy_aux(p, is_trivially_destructible<T>()); }
         void destroy(pointer p) {

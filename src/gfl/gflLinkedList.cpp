@@ -1,5 +1,4 @@
 #include "gflLinkedList.h"
-#include "gflError.h"
 
 using namespace gfl;
 
