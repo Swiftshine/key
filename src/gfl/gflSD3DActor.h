@@ -29,31 +29,32 @@ public:
     /* 0x4 */ SoundHandle mSoundHandle;
 };
 
-/// @note Size: `0x38`
+/// @note Size: `0x8`
 class SD3DActor {
-public:
+    public:
     /* Structures */
-
-
+    
+    
     /* Constructor */
-
+    
     inline SD3DActor() {
         mActorInner = Sound::Instance()->CreateSD3DActorInner();
     }
-
+    
     /* Virtual Methods */
-
+    
     /* 0x08 */ inline virtual ~SD3DActor();
     /* 0x0C */ virtual void SetPosition(const nw4r::math::VEC3&);
     /* 0x10 */ virtual nw4r::math::VEC3 GetPosition();
     /* 0x14 */ virtual SoundHandle GetSoundHandle(int soundID, int, int);
-
+    
     /* Class Members  */
-
+    
     /* 0x4 */ SD3DActorInner* mActorInner;
 };
 
 
+/// @note Size: `0x38`
 class SD3DActorWrapper {
 public:
     /* Constructor + Destructor */

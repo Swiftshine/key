@@ -58,8 +58,7 @@ private:
     /* 0x150 */ GXColor mScreenTintColor;
     /* 0x154 */ gfl::SoundHandle mSoundHandle1;
     /* 0x15C */ gfl::SoundHandle mSoundHandle2;
-    /* 0x164 */ gfl::SD3DActor mSD3DActor;
-    /* 0x16C */ STRUCT_FILL(0x30);
+    /* 0x164 */ gfl::SD3DActorWrapper mSD3DActorWrapper;
     /* 0x19C */ FlfHandle mGateHandle; // GmkGate3
     /* 0x1A4 */ gfl::Pointer<FlfMdlDraw> mFlfMdl1;
     /* 0x1A8 */ gfl::Pointer<FlfMdlDraw> mFlfMdl2;
