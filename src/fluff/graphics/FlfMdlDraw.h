@@ -115,6 +115,7 @@ public:
     /* Class Methods */
     
     void LoadNURBSFromFileList();
+    void LoadNURBSFromFileList(int* pIndices /* ? */, int count);
     void SetVisibility(bool visible);
     void ResetNURBSAnimation(int, bool);
     void SetWoolDrawMatrix(nw4r::math::MTX34&);

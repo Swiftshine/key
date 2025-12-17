@@ -581,7 +581,9 @@ config.libs = [
     {
         "lib" : "fluff/object/gimmick/",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_base_no_inline_deferred],
+        "cflags": [
+            *cflags_fluff_base_no_inline_deferred,
+            "-pragma \"merge_float_consts on\""],
         "host": False,
         "progress_category": "fluff",
         "objects": [

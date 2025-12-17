@@ -33,7 +33,7 @@ public:
     Mapdata* GetLevelSection(int section);
 
     inline Mapdata* GetCurrentLevelSection() {
-        return GetLevelSection(mStage.GetSectionID());
+        return GetLevelSection(mStageInfo.GetSectionID());
     }
     
     void fn_8024F630();
@@ -52,7 +52,7 @@ public:
     
     /* 0x000 */ gfl::Task m_0;
     /* 0x018 */ gfl::Task mStageTask;
-    /* 0x030 */ StageInfo mStage;
+    /* 0x030 */ StageInfo mStageInfo;
     /* 0x03C */ gfl::Task mSceneGameTop;
     /* 0x054 */ gfl::Task mSceneWorldMtxTop;
     /* 0x06C */ gfl::Task mSceneDrawTop;

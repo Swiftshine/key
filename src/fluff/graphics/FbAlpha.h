@@ -13,6 +13,9 @@ public:
 
     /* 0x08 */ virtual ~FbAlpha();
 
+    /* Class Methods */
+    void SetColor(const GXColor& rColor);
+
     /* Class Members */
 
     /* 0x104 */ GXColor mColor;

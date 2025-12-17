@@ -30,9 +30,16 @@ public:
         State_6 = 6,
     );
 
-    static GmkSunriseCurtain* Build(GimmickBuildInfo* buildInfo);
+    ENUM_CLASS(Parameter,
+        NightMainBGSTIndex = 0, // int 0
+        NightShadowBGSTIndex = 1, // int 1
+        DayMainBGSTIndex = 2, // int 2
+        DayShadowBGSTIndex = 3, // int 4
+    );
 
-    GmkSunriseCurtain(GimmickBuildInfo* buildInfo) DONT_INLINE_CLASS;
+    static GmkSunriseCurtain* Build(GimmickBuildInfo* pBuildInfo);
+
+    GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo) DONT_INLINE_CLASS;
     virtual ~GmkSunriseCurtain();
     void SetBGSTEntriesBasedOnMission();
     void SwitchStates() DONT_INLINE_CLASS;
@@ -55,13 +62,21 @@ private:
     /* 0x144 */ int mDayShadowBGSTIndex;
     /* 0x148 */ bool m_148;
     /* 0x14C */ int m_14C;
-    /* 0x150 */ GXColor mScreenTintColor;
-    /* 0x154 */ gfl::SoundHandle mSoundHandle1;
-    /* 0x15C */ gfl::SoundHandle mSoundHandle2;
+    /* 0x150 */ union {
+        GXColor mScreenTintColor;
+        struct {
+            u8 mTintR;
+            u8 mTintG;
+            u8 mTintB;
+            u8 mTintA;
+        };
+    };
+    /* 0x154 */ gfl::SoundHandle mMainSoundHandle;
+    /* 0x15C */ gfl::SoundHandle mSplashBeachSoundHandle;
     /* 0x164 */ gfl::SD3DActorWrapper mSD3DActorWrapper;
     /* 0x19C */ FlfHandle mGateHandle; // GmkGate3
-    /* 0x1A4 */ gfl::Pointer<FlfMdlDraw> mFlfMdl1;
-    /* 0x1A8 */ gfl::Pointer<FlfMdlDraw> mFlfMdl2;
+    /* 0x1A4 */ gfl::Pointer<FlfMdlDraw> mFlfMdlDraw1;
+    /* 0x1A8 */ gfl::Pointer<FlfMdlDraw> mFlfMdlDraw2;
     /* 0x1AC */ G3dObjPointer<FbAlpha> mFbAlpha;
 };
 

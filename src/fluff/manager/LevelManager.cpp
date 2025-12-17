@@ -45,7 +45,7 @@ void LevelManager::ResetPhase() {
 
 void LevelManager::InitColObjTree() {
     Mapdata* mapdata = Stage::Instance()->GetLevelSection(
-        Stage::Instance()->mStage.GetSectionID()
+        Stage::Instance()->mStageInfo.GetSectionID()
     );
 
     mColObjTree.Create(gfl::HeapID::Work);
@@ -76,7 +76,7 @@ void LevelManager::fn_800444D8() {
         case 1: {
             Stage::Instance()->fn_8024F630();
             Mapdata* mapdata = Stage::Instance()->GetLevelSection(
-                Stage::Instance()->mStage.GetSectionID()
+                Stage::Instance()->mStageInfo.GetSectionID()
             );
             mGimmickManager->SetMapdata(mapdata);
             mLoadPhase = 2;

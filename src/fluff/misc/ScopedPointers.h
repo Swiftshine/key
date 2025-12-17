@@ -10,6 +10,7 @@ template <typename T>
 class G3dObjPointer : public gfl::PointerBase<T> {
 public:
     inline G3dObjPointer() { }
+    
     inline G3dObjPointer(T* ptr) {
         mPointer = ptr;
     }
@@ -21,6 +22,7 @@ public:
             mPointer = ptr;
         }
     }
+
     inline ~G3dObjPointer() {
         if (nullptr != mPointer) {
             reinterpret_cast<nw4r::g3d::G3dObj*>(mPointer)->Destroy();
