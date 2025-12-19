@@ -57,9 +57,9 @@ bool BGST::List::AssignImageIndices(BGST::EntryInfo* pEntryInfo) {
     return true;
 }
 
-void BGST::List::AddEntry(BGST::Entry* pEntry) { }
+void BGST::List::AddLayer(BGST::Layer* pEntry) { }
 
-void BGST::List::RemoveEntry(BGST::Entry* pEntry) { }
+void BGST::List::RemoveLayer(BGST::Layer* pEntry) { }
 
 void BGST::List::RemoveEntryInfo(BGST::EntryInfo* pEntryInfo) {
     // mEntryList.remove something or other

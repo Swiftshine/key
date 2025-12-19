@@ -66,8 +66,8 @@ void LevelManager::fn_800444C8() {
     return mGraphicResources.fn_800C56D0();
 }
 
-void LevelManager::SetBGSTEntryEnabled(uint index, bool value) {
-    mGraphicResources.SetBGSTEntryEnabled(index, value);
+void LevelManager::SetBGSTLayerEnabled(uint index, bool value) {
+    mGraphicResources.SetBGSTLayerEnabled(index, value);
 }
 
 void LevelManager::fn_800444D8() {

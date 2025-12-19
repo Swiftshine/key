@@ -8,7 +8,9 @@
 #include "object/collision/ColData.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/BGSTFile.h"
+#include "graphics/BGSTLayer.h"
 #include "graphics/BgBackImage.h"
+
 
 class StageGraphicResources {
 public:
@@ -20,7 +22,7 @@ public:
     void LoadLevelGraphics();
     bool fn_800C566C();
     void fn_800C56D0();
-    void SetBGSTEntryEnabled(uint index, bool value);
+    void SetBGSTLayerEnabled(uint index, bool value);
     void fn_800C57C4();
     void fn_800C59A4();
     void fn_800C59BC();
@@ -44,7 +46,7 @@ private:
     uint m_3C;
     uint m_40;
     BGST::File* mBGSTFile;
-    void* mBGSTEntries;
+    BGST::Layer* mBGSTLayers;
     BgBackImage* mBgBackImage;
 };
 

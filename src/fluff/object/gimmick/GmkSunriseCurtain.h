@@ -31,21 +31,21 @@ public:
     );
 
     ENUM_CLASS(Parameter,
-        NightMainBGSTIndex = 0, // int 0
-        NightShadowBGSTIndex = 1, // int 1
-        DayMainBGSTIndex = 2, // int 2
-        DayShadowBGSTIndex = 3, // int 4
+        NightMainBGSTLayer = 0, // int 0
+        NightShadowBGSTLayer = 1, // int 1
+        DayMainBGSTLayer = 2, // int 2
+        DayShadowBGSTLayer = 3, // int 4
     );
 
     static GmkSunriseCurtain* Build(GimmickBuildInfo* pBuildInfo);
 
     GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo) DONT_INLINE_CLASS;
     virtual ~GmkSunriseCurtain();
-    void SetBGSTEntriesBasedOnMission();
+    void SetBGSTLayersBasedOnMission();
     void SwitchStates() DONT_INLINE_CLASS;
     void OnTimeSwitch();
     void fn_803CA82C();
-    void SetBGSTEntries(bool setDay);
+    void SetBGSTLayers(bool setDay);
 
     /* FlfGameObj */
     virtual void SetState(FlfGameObj* setter, std::string& state);
@@ -56,10 +56,10 @@ public:
 private:
     /* 0x130 */ int mState;
     /* 0x134 */ int m_134;
-    /* 0x138 */ int mNightMainBGSTIndex;
-    /* 0x13C */ int mNightShadowBGSTIndex;
-    /* 0x140 */ int mDayMainBGSTIndex;
-    /* 0x144 */ int mDayShadowBGSTIndex;
+    /* 0x138 */ int mNightMainBGSTLayer;
+    /* 0x13C */ int mNightShadowBGSTLayer;
+    /* 0x140 */ int mDayMainBGSTLayer;
+    /* 0x144 */ int mDayShadowBGSTLayer;
     /* 0x148 */ bool m_148;
     /* 0x14C */ int m_14C;
     /* 0x150 */ union {

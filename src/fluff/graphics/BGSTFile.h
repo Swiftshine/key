@@ -2,7 +2,7 @@
 #define FLUFF_BGSTFILE_H
 
 #include "graphics/BGSTHeader.h"
-#include "graphics/BGSTEntry.h"
+#include "graphics/BGSTLayer.h"
 #include "graphics/BGSTLoadState.h"
 #include "graphics/BGSTImage.h"
 #include "graphics/BGSTEntryInfo.h"

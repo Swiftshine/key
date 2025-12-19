@@ -9,7 +9,7 @@
 #include "gfl/gflMemoryUtil.h"
 #include "graphics/BGSTImage.h"
 #include "graphics/BGSTEntryInfo.h"
-#include "graphics/BGSTEntry.h"
+#include "graphics/BGSTLayer.h"
 
 class StageGraphicResources;
 
@@ -37,8 +37,8 @@ namespace BGST {
         u16 GetNextImageIndex();
         // returns true if both the main and shadow image indices were successfully set
         bool AssignImageIndices(BGST::EntryInfo* pEntryInfo);
-        void AddEntry(BGST::Entry* pEntry);
-        void RemoveEntry(BGST::Entry* pEntryInfo);
+        void AddLayer(BGST::Layer* pLayer);
+        void RemoveLayer(BGST::Layer* pEntryInfo);
         void RemoveEntryInfo(BGST::EntryInfo* pEntryInfo);
         void ResetBit(size_t index);
     
@@ -47,7 +47,7 @@ namespace BGST {
         /* 0x00 */ gfl::FreedPointer<BGST::Image> mImages;
         /* 0x04 */ size_t mCount; // signed instead?
         /* 0x08 */ std::bitset<200> mBitset;
-        /* 0x24 */ gfl::LinkedList<BGST::Entry> mEntryList;
+        /* 0x24 */ gfl::LinkedList<BGST::Layer> mLayerList;
         /* 0x30 */ StageGraphicResources* mResources;
     };
     

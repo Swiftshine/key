@@ -51,10 +51,10 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     mFlfMdlDraw2->SetWoolDrawMatrix(mtx1);
     mFlfMdlDraw2->SetVisibility(false);
 
-    mNightMainBGSTIndex = pBuildInfo->GetIntParam(Parameter::NightMainBGSTIndex) + 6;
-    mNightShadowBGSTIndex = pBuildInfo->GetIntParam(Parameter::NightShadowBGSTIndex) + 6;
-    mDayMainBGSTIndex = pBuildInfo->GetIntParam(Parameter::DayMainBGSTIndex) + 6;
-    mDayShadowBGSTIndex = pBuildInfo->GetIntParam(Parameter::DayShadowBGSTIndex) + 6;
+    mNightMainBGSTLayer = pBuildInfo->GetIntParam(Parameter::NightMainBGSTLayer) + 6;
+    mNightShadowBGSTLayer = pBuildInfo->GetIntParam(Parameter::NightShadowBGSTLayer) + 6;
+    mDayMainBGSTLayer = pBuildInfo->GetIntParam(Parameter::DayMainBGSTLayer) + 6;
+    mDayShadowBGSTLayer = pBuildInfo->GetIntParam(Parameter::DayShadowBGSTLayer) + 6;
     
     mFbAlpha.Create(::new (gfl::HeapID::Work) FbAlpha);
 
@@ -91,11 +91,11 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
 
 GmkSunriseCurtain::~GmkSunriseCurtain() { }
 
-void GmkSunriseCurtain::SetBGSTEntriesBasedOnMission() {
+void GmkSunriseCurtain::SetBGSTLayersBasedOnMission() {
     if (GameManager::IsInMission()) {
-        SetBGSTEntries(TimeType::Day);
+        SetBGSTLayers(TimeType::Day);
     } else {
-        SetBGSTEntries(TimeType::Night);
+        SetBGSTLayers(TimeType::Night);
     }
 }
 
@@ -122,18 +122,18 @@ void GmkSunriseCurtain::SetState(FlfGameObj* setter, std::string& stateStr) {
 // unmatched
 void GmkSunriseCurtain::fn_803CA82C() { }
 
-void GmkSunriseCurtain::SetBGSTEntries(bool day) {
+void GmkSunriseCurtain::SetBGSTLayers(bool day) {
     LevelManager* mgr = Stage::Instance()->GetLevelManager();
 
     if (day) {
-        mgr->SetBGSTEntryEnabled(mNightMainBGSTIndex, false);
-        mgr->SetBGSTEntryEnabled(mNightShadowBGSTIndex, false);
-        mgr->SetBGSTEntryEnabled(mDayMainBGSTIndex, true);
-        mgr->SetBGSTEntryEnabled(mDayShadowBGSTIndex, true);
+        mgr->SetBGSTLayerEnabled(mNightMainBGSTLayer, false);
+        mgr->SetBGSTLayerEnabled(mNightShadowBGSTLayer, false);
+        mgr->SetBGSTLayerEnabled(mDayMainBGSTLayer, true);
+        mgr->SetBGSTLayerEnabled(mDayShadowBGSTLayer, true);
     } else {
-        mgr->SetBGSTEntryEnabled(mNightMainBGSTIndex, true);
-        mgr->SetBGSTEntryEnabled(mNightShadowBGSTIndex, true);
-        mgr->SetBGSTEntryEnabled(mDayMainBGSTIndex, false);
-        mgr->SetBGSTEntryEnabled(mDayShadowBGSTIndex, false);
+        mgr->SetBGSTLayerEnabled(mNightMainBGSTLayer, true);
+        mgr->SetBGSTLayerEnabled(mNightShadowBGSTLayer, true);
+        mgr->SetBGSTLayerEnabled(mDayMainBGSTLayer, false);
+        mgr->SetBGSTLayerEnabled(mDayShadowBGSTLayer, false);
     }
 }
