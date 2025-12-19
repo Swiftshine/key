@@ -31,10 +31,10 @@ public:
     );
 
     ENUM_CLASS(Parameter,
-        NightMainBGSTLayer = 0, // int 0
-        NightShadowBGSTLayer = 1, // int 1
-        DayMainBGSTLayer = 2, // int 2
-        DayShadowBGSTLayer = 3, // int 4
+        NightBackgroundBGSTLayer = 0, // int 0
+        NightForegroundBGSTLayer = 1, // int 1
+        DayBackgroundBGSTLayer = 2, // int 2
+        DayForegroundBGSTLayer = 3, // int 4
     );
 
     static GmkSunriseCurtain* Build(GimmickBuildInfo* pBuildInfo);
@@ -56,10 +56,10 @@ public:
 private:
     /* 0x130 */ int mState;
     /* 0x134 */ int m_134;
-    /* 0x138 */ int mNightMainBGSTLayer;
-    /* 0x13C */ int mNightShadowBGSTLayer;
-    /* 0x140 */ int mDayMainBGSTLayer;
-    /* 0x144 */ int mDayShadowBGSTLayer;
+    /* 0x138 */ int mNightBackgroundBGSTLayer;
+    /* 0x13C */ int mNightForegroundBGSTLayer;
+    /* 0x140 */ int mDayBackgroundBGSTLayer;
+    /* 0x144 */ int mDayForegroundBGSTLayer;
     /* 0x148 */ bool m_148;
     /* 0x14C */ int m_14C;
     /* 0x150 */ union {

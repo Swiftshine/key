@@ -51,10 +51,10 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     mFlfMdlDraw2->SetWoolDrawMatrix(mtx1);
     mFlfMdlDraw2->SetVisibility(false);
 
-    mNightMainBGSTLayer = pBuildInfo->GetIntParam(Parameter::NightMainBGSTLayer) + 6;
-    mNightShadowBGSTLayer = pBuildInfo->GetIntParam(Parameter::NightShadowBGSTLayer) + 6;
-    mDayMainBGSTLayer = pBuildInfo->GetIntParam(Parameter::DayMainBGSTLayer) + 6;
-    mDayShadowBGSTLayer = pBuildInfo->GetIntParam(Parameter::DayShadowBGSTLayer) + 6;
+    mNightBackgroundBGSTLayer = pBuildInfo->GetIntParam(Parameter::NightBackgroundBGSTLayer) + 6;
+    mNightForegroundBGSTLayer = pBuildInfo->GetIntParam(Parameter::NightForegroundBGSTLayer) + 6;
+    mDayBackgroundBGSTLayer = pBuildInfo->GetIntParam(Parameter::DayBackgroundBGSTLayer) + 6;
+    mDayForegroundBGSTLayer = pBuildInfo->GetIntParam(Parameter::DayForegroundBGSTLayer) + 6;
     
     mFbAlpha.Create(::new (gfl::HeapID::Work) FbAlpha);
 
@@ -126,14 +126,14 @@ void GmkSunriseCurtain::SetBGSTLayers(bool day) {
     LevelManager* mgr = Stage::Instance()->GetLevelManager();
 
     if (day) {
-        mgr->SetBGSTLayerEnabled(mNightMainBGSTLayer, false);
-        mgr->SetBGSTLayerEnabled(mNightShadowBGSTLayer, false);
-        mgr->SetBGSTLayerEnabled(mDayMainBGSTLayer, true);
-        mgr->SetBGSTLayerEnabled(mDayShadowBGSTLayer, true);
+        mgr->SetBGSTLayerEnabled(mNightBackgroundBGSTLayer, false);
+        mgr->SetBGSTLayerEnabled(mNightForegroundBGSTLayer, false);
+        mgr->SetBGSTLayerEnabled(mDayBackgroundBGSTLayer, true);
+        mgr->SetBGSTLayerEnabled(mDayForegroundBGSTLayer, true);
     } else {
-        mgr->SetBGSTLayerEnabled(mNightMainBGSTLayer, true);
-        mgr->SetBGSTLayerEnabled(mNightShadowBGSTLayer, true);
-        mgr->SetBGSTLayerEnabled(mDayMainBGSTLayer, false);
-        mgr->SetBGSTLayerEnabled(mDayShadowBGSTLayer, false);
+        mgr->SetBGSTLayerEnabled(mNightBackgroundBGSTLayer, true);
+        mgr->SetBGSTLayerEnabled(mNightForegroundBGSTLayer, true);
+        mgr->SetBGSTLayerEnabled(mDayBackgroundBGSTLayer, false);
+        mgr->SetBGSTLayerEnabled(mDayForegroundBGSTLayer, false);
     }
 }
