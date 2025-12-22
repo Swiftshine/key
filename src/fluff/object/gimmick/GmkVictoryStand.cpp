@@ -39,7 +39,7 @@ void GmkVictoryStand::SpawnDecorativeBall(uint rank) {
     gfl::Vec3 vec3 = vec2;
     GmkVictoryStand* stand = Instance();
     vec3.y += 5.0f;
-    Instance()->mDecorativeBallBuildInfo.mGimmickID = GimmickIDs::DecorativeBall;
+    Instance()->mDecorativeBallBuildInfo.mGimmickID = GimmickID::DecorativeBall;
     stand->mDecorativeBallBuildInfo.mPosition.x = vec3.x;
     stand->mDecorativeBallBuildInfo.mPosition.y = vec3.y;
     stand->mDecorativeBallBuildInfo.mPosition.z = vec3.z;

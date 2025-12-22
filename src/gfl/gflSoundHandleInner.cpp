@@ -3,7 +3,7 @@
 using namespace gfl;
 
 SoundHandleInner::SoundHandleInner() {
-    m_8 = false;
+    mEnabled = false;
     m_9 = false;
     mPosition = nullptr;
 }

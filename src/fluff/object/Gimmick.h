@@ -36,8 +36,8 @@ public:
 
     /// @note Size: `0x8`
     struct GimmickInfo {
-        /* 0x0 */ bool mIsCommon;
-        /* 0x1 */ bool mIsDeleted;
+        /* 0x0 */ bool mIsDeleted1;
+        /* 0x1 */ bool mIsDeleted2;
         /* 0x2 */ bool m_2;
         /* 0x3 */ bool m_3;
         /* 0x4 */ Gimmick* mGimmick;
@@ -73,7 +73,7 @@ public:
         /* Helpful Inlines */
 
         inline bool IsCommon() {
-            return mGimmickInfo->mIsCommon;
+            return mGimmickInfo->mIsDeleted1;
         }
 
         inline Gimmick* GetOwner() {

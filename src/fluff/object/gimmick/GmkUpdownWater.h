@@ -15,6 +15,9 @@ public:
     virtual void vfDC();
     virtual void vfF0();
     virtual float vfF4();
+
+    /* Class Methods */
+    void fn_80212B60(int);
 };
 
 #endif

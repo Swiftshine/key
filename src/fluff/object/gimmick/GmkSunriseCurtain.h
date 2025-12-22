@@ -45,8 +45,8 @@ public:
     virtual ~GmkSunriseCurtain();
     void SetBGSTLayersBasedOnMission();
     void SwitchStates() DONT_INLINE_CLASS;
-    void OnTimeSwitch() DONT_INLINE_CLASS;
-    void fn_803CA82C() DONT_INLINE_CLASS;
+    void DoTimeSwitch() DONT_INLINE_CLASS;
+    void RemoveSoundHandle() DONT_INLINE_CLASS;
     void SetBGSTLayers(bool setDay);
 
     /* FlfGameObj */
@@ -62,7 +62,7 @@ private:
     /* 0x13C */ int mNightForegroundBGSTLayer;
     /* 0x140 */ int mDayBackgroundBGSTLayer;
     /* 0x144 */ int mDayForegroundBGSTLayer;
-    /* 0x148 */ bool m_148;
+    /* 0x148 */ bool mTimeChanged; // never actually used in any meaningful way
     /* 0x14C */ uint mColorChangeFrames;
     /* 0x150 */ gfl::Color mScreenTintColor; // a frame counter
     /* 0x154 */ gfl::SoundHandle mMainSoundHandle;

@@ -28,7 +28,7 @@ inline void GmkMng::CreateGimmickConditionally(
     if (Mapdata::MapdataCommonGimmick::fn_8004f604(pBuildInfo)) {
         if (GimmickUtil::CheckCommonByGimmickID(pBuildInfo->mGimmickID)
             && pBuildInfo->mGimmickInfo != nullptr) {
-            pBuildInfo->mGimmickInfo->mIsCommon = true;
+            pBuildInfo->mGimmickInfo->mIsDeleted1 = true;
         }
     } else {
         if (GimmickUtil::CheckCommonByGimmickID(pBuildInfo->mGimmickID)) {
@@ -44,18 +44,18 @@ inline void GmkMng::CreateGimmickConditionally(
 
 // https://decomp.me/scratch/KVSCV - regswaps
 void GmkMng::CreateGimmicksFromMapdata(Mapdata* pMapdata) {
-    // this will not work if you put the declaration and assignment in the same line
-    nw4r::math::VEC2 pos;
-    pos = CameraManager::Instance()->GetCurrentPosition();
+    // // this will not work if you put the declaration and assignment in the same line
+    // nw4r::math::VEC2 pos;
+    // pos = CameraManager::Instance()->GetCurrentPosition();
 
-    for (uint i = 0; i < pMapdata->mNumCommonGimmicks; i++) {
-        Gimmick::GimmickBuildInfo* buildInfo = pMapdata->GetCommonGimmickBuildInfo(i);
-        CreateGimmickConditionally(pos, buildInfo);
-    }
+    // for (uint i = 0; i < pMapdata->mNumCommonGimmicks; i++) {
+    //     Gimmick::GimmickBuildInfo* buildInfo = pMapdata->GetCommonGimmickBuildInfo(i);
+    //     CreateGimmickConditionally(pos, buildInfo);
+    // }
     
-    pMapdata->ConstructObjects();
-    mMapdata = pMapdata;
-    fn_80051B3C();
+    // pMapdata->ConstructObjects();
+    // mMapdata = pMapdata;
+    // fn_80051B3C();
 }
 
 void GmkMng::SetMapdata(Mapdata* pMapdata) {
@@ -176,58 +176,58 @@ void GmkMng::CreateGimmick(Gimmick::GimmickBuildInfo* pBuildInfo) {
 
 // https://decomp.me/scratch/tulOa - regswap
 void GmkMng::CreateGimmicksFromMapdata() {
-    switch (mState) {
-        case State::CreateCommonGimmicks: {
-            nw4r::math::VEC2 pos;
-            pos = CameraManager::Instance()->GetCurrentPosition();
+    // switch (mState) {
+    //     case State::CreateCommonGimmicks: {
+    //         nw4r::math::VEC2 pos;
+    //         pos = CameraManager::Instance()->GetCurrentPosition();
 
-            uint a = mNumCommonGimmicks;
-            uint b = mMapdata->mNumCommonGimmicks;
+    //         uint a = mNumCommonGimmicks;
+    //         uint b = mMapdata->mNumCommonGimmicks;
 
-            uint limit;
-            limit = a + 30;
-            if (a + 30 > b) {
-                limit = b;
-            }
+    //         uint limit;
+    //         limit = a + 30;
+    //         if (a + 30 > b) {
+    //             limit = b;
+    //         }
             
             
-            for (; a < limit; a++) {
-                Gimmick::GimmickBuildInfo* buildInfo = mMapdata->GetCommonGimmickBuildInfo(a);
-                CreateGimmickConditionally(pos, buildInfo);
-            }
+    //         for (; a < limit; a++) {
+    //             Gimmick::GimmickBuildInfo* buildInfo = mMapdata->GetCommonGimmickBuildInfo(a);
+    //             CreateGimmickConditionally(pos, buildInfo);
+    //         }
 
-            if (limit >= mMapdata->mNumCommonGimmicks) {
-                mState = 2;
-            } else {
-                mNumCommonGimmicks = limit;
-            }
+    //         if (limit >= mMapdata->mNumCommonGimmicks) {
+    //             mState = 2;
+    //         } else {
+    //             mNumCommonGimmicks = limit;
+    //         }
 
-            GameManager::fn_8000F7CC(1);
-            break;
-        }
+    //         GameManager::fn_8000F7CC(1);
+    //         break;
+    //     }
 
-        case 2: {
-            mState = State::ConstructMapdataObjects;
-            break;
-        }
+    //     case 2: {
+    //         mState = State::ConstructMapdataObjects;
+    //         break;
+    //     }
 
-        case State::ConstructMapdataObjects: {
-            mMapdata->ConstructObjects();
-            GameManager::fn_8000F7CC(1);
-            mState = 4;
-            break;
-        }
+    //     case State::ConstructMapdataObjects: {
+    //         mMapdata->ConstructObjects();
+    //         GameManager::fn_8000F7CC(1);
+    //         mState = 4;
+    //         break;
+    //     }
 
-        case 4: {
-            mState = State::ManageGimmickCulling;
-            break;
-        }
+    //     case 4: {
+    //         mState = State::ManageGimmickCulling;
+    //         break;
+    //     }
 
-        case State::ManageGimmickCulling: {
-            ManageOnScreenGimmicks();
-            break;
-        }
-    }
+    //     case State::ManageGimmickCulling: {
+    //         ManageOnScreenGimmicks();
+    //         break;
+    //     }
+    // }
 }
 
 // https://decomp.me/scratch/5kVxc

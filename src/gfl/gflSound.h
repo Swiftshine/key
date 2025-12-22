@@ -29,7 +29,7 @@ namespace gfl {
         void fn_8064D288(float, SoundHandleInner*, int);
         void fn_8064D2B4(float, SoundHandleInner*);
         bool ValidateSoundHandleSound(SoundHandleInner*);
-
+        static void fn_8000781C(int, int /* duration? */);
     };
 }
 

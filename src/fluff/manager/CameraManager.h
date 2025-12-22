@@ -3,7 +3,9 @@
 
 #include <nw4r/math.h>
 #include "util/ScreenPosition.h"
+#include "gfl/gflVec2.h"
 
+// todo: rename this to CamMng
 class CameraManager {
 public:
     /* Static Variables */
@@ -24,7 +26,7 @@ public:
     void fn_800545B4(int, int);
     void fn_800545D8(int);
     bool ShouldCull(ScreenPosition&);
-    nw4r::math::VEC2& GetCurrentPosition();
+    const gfl::Vec2& GetCurrentPosition() const;
     void SetAllPositions(const nw4r::math::VEC2&);
     void SetZoom(float);
 };

@@ -24,7 +24,7 @@ extern "C" float ZeroFloat;
 
 
 GmkSimpleMdl::GmkSimpleMdl()
-    : Gimmick(GimmickIDs::GMK_TYPE_SIMPLE_MDL)
+    : Gimmick(GimmickID::GMK_TYPE_SIMPLE_MDL)
     , mModelWrapper(nullptr)
     , mAnim(nullptr)
     , mShadowModelWrapper(nullptr)

@@ -1,8 +1,10 @@
 #include "gfl/gflMtx34.h"
 
+#include "object/GimmickList.h"
 #include "object/gimmick/GmkGate3.h"
 #include "object/gimmick/GmkSunriseCurtain.h"
 #include "object/gimmick/GmkTurtle.h"
+#include "object/gimmick/GmkUpdownWater.h"
 
 GmkSunriseCurtain* GmkSunriseCurtain::Build(GimmickBuildInfo* pBuildInfo) {
     return new (gfl::HeapID::Work) GmkSunriseCurtain(pBuildInfo);
@@ -21,7 +23,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     : Gimmick(pBuildInfo, "GmkSunriseCurtain")
     , mState(State::Start)
     , mStateFrames(0)
-    , m_148(false)
+    , mTimeChanged(false)
     , mScreenTintColor()
     , mMainSoundHandle(nullptr, nullptr)
     , mSplashBeachSoundHandle(nullptr, nullptr)
@@ -137,7 +139,7 @@ void GmkSunriseCurtain::Update() {
                 }
     
                 if (GameManager::IsInMission()) {
-                    OnTimeSwitch();
+                    DoTimeSwitch();
                     mState = State::Day;
                 } else {
                     SetStateForTaggedObjects(
@@ -203,7 +205,7 @@ void GmkSunriseCurtain::Update() {
                 mFbAlpha->SetColor(color);
                 mColorChangeFrames++;
             } else {
-                OnTimeSwitch();
+                DoTimeSwitch();
                 mStateFrames = 20;
                 mState = State::Wait;
             }
@@ -257,22 +259,124 @@ void GmkSunriseCurtain::Update() {
         }
     }
 
-    fn_803CA82C();
+    RemoveSoundHandle();
 }
 
-// unmatched
-void GmkSunriseCurtain::OnTimeSwitch() { }
+// https://decomp.me/scratch/e0weB - regswaps
+const char* star07 = "star07";
 
-const char State_ON[] = "ON";
+void GmkSunriseCurtain::DoTimeSwitch() {
+    std::vector<Gimmick*> gimmicks;
+    GmkMng::Instance()->GetGimmicksByGimmickID(GimmickID::GmkTurtle, gimmicks);
 
-void GmkSunriseCurtain::SetState(FlfGameObj* setter, std::string& stateStr) {
-    if (State_ON == stateStr && State::State_1 == mState) {
+    for (std::vector<Gimmick*>::iterator it = gimmicks.begin(); it != gimmicks.end(); it++) {
+        GmkTurtle* turtle = dynamic_cast<GmkTurtle*>(*it);
+
+        if (turtle != nullptr) {
+            turtle->BecomeActive();
+        }
+    }
+    
+    gimmicks.clear();
+    GmkMng::Instance()->GetGimmicksByGimmickID(GimmickID::GmkUpdownWater, gimmicks);
+
+    for (std::vector<Gimmick*>::iterator it = gimmicks.begin(); it != gimmicks.end(); it++) {
+        GmkUpdownWater* water = dynamic_cast<GmkUpdownWater*>(*it);
+
+        if (water != nullptr) {
+            water->fn_80212B60(0);
+        }
+    }
+
+    std::vector<GimmickBuildInfo*> stars;
+    GmkMng::Instance()->GetCommonGimmicksByID(GimmickID::GmkSimpleMdl, stars);
+
+    for (std::vector<GimmickBuildInfo*>::iterator it = stars.begin(); it != stars.end(); it++) {
+        GimmickBuildInfo* buildInfo = *it;
+
+        if (
+            buildInfo->GetStringParam(ParameterID::FIRST) == star07
+            && buildInfo->mGimmickInfo != nullptr
+        ) {
+            Gimmick* gmk = buildInfo->mGimmickInfo->mGimmick;
+            
+            if (gmk != nullptr) {
+                delete gmk;
+            }
+
+            buildInfo->mGimmickInfo->mIsDeleted1 = true;
+        }
+    } 
+
+    SetStateForTaggedObjects("OFF", mBuildInfoPtr->GetStringParam(ParameterID::FIRST).c_str());
+    SetStateForTaggedObjects("ON", mBuildInfoPtr->GetStringParam(ParameterID::SECOND).c_str());
+
+    if (GameManager::IsInMission()) {
+        mFbAlpha->SetUpdate(false);
+    } else {
+        mFbAlpha->SetColor(0xFFFFFFFF);
+    }
+
+    mFlfMdlDraw1->ResetNURBSAnimation(2, true);
+    mFlfMdlDraw2->ResetNURBSAnimation(3, true);
+    mFlfMdlDraw2->SetVisibility(true);
+
+    SetBGSTLayers(true);
+
+    if (!GameManager::IsInMission()) {
+        gfl::SoundHandle::CreateSoundHandle(0x10C, 0);
+        gfl::SoundHandle::CreateSoundHandle(0x11F, 0);
+        gfl::Sound::fn_8000781C(0x15, 60);
+    }
+
+    mTimeChanged = true;
+}
+
+void GmkSunriseCurtain::SetState(FlfGameObj* pSetter, std::string& rState) {
+    if (rState == "ON" && State::State_1 == mState) {
         SwitchStates();
     }
 }
 
-// unmatched
-void GmkSunriseCurtain::fn_803CA82C() { }
+// https://decomp.me/scratch/wiAl5
+void GmkSunriseCurtain::RemoveSoundHandle() {
+    StageInfo stageInfo = Stage::Instance()->mStageInfo;
+
+    if (stageInfo.GetStageID() == StageIDs::SplashBeach) {
+        gfl::Vec2 pos2 = CameraManager::Instance()->GetCurrentPosition();
+
+        if (pos2.y > 29.0f) {
+            pos2.y = 29.0f;
+        }
+
+        gfl::Vec3 pos3 = pos2;
+        mSD3DActorWrapper.SetPosition((const nw4r::math::VEC2&)pos3);
+
+        FlfHandleObj** objPtr;
+        FLFHANDLEOBJ_DO_IF_VALID(mGateHandle, objPtr) {
+            if (static_cast<GmkGate3*>(*objPtr)->fn_8037EFF8() == 2) {
+                bool valid;
+                if (mSplashBeachSoundHandle.HandlePositionValid()) {
+                    valid = mSplashBeachSoundHandle.GetInnerSoundHandle()->mSoundHandle.IsAttachedSound() &&
+                        mSplashBeachSoundHandle.GetInnerSoundHandle()->mEnabled;
+                }
+
+                if (valid) {
+                    if (mSplashBeachSoundHandle.HandlePositionValid()) {
+                        gfl::Sound::Instance()->ManageSoundHandleInner(
+                            mSplashBeachSoundHandle.GetInnerSoundHandle(),
+                            0x78,
+                            false
+                        );
+                    }
+
+                    mSplashBeachSoundHandle.SetPosition(nullptr);
+                    mSplashBeachSoundHandle.SetInnerSoundHandle(nullptr);
+                }
+            }
+        }
+    }
+}
 
 void GmkSunriseCurtain::SetBGSTLayers(bool day) {
     LevelManager* mgr = Stage::Instance()->GetLevelManager();

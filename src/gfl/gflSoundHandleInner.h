@@ -18,7 +18,7 @@ namespace gfl {
         /* Class Members */
 
         /* 0x4 */ nw4r::math::VEC3* mPosition;
-        /* 0x8 */ bool m_8;
+        /* 0x8 */ bool mEnabled;
         /* 0x9 */ bool m_9;
         /* 0xC */ nw4r::snd::SoundHandle mSoundHandle;
     };

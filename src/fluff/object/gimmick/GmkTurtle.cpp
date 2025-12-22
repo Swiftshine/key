@@ -231,7 +231,7 @@ void GmkTurtle::Interact(FlfGameObj* other) {
     mRideHitCtrlTrans->AddBead(static_cast<GmkBead*>(other));
 }
 
-// this function is called by `GmkSunriseCurtain::OnTimeSwitch()`
+// this function is called by `GmkSunriseCurtain::DoTimeSwitch()`
 void GmkTurtle::BecomeActive() {
     switch (mNumTurtles) {
         case 1:

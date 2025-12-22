@@ -3,18 +3,20 @@
 
 #include "types.h"
 
-// todo - fill this out later
+// todo - fill this out later (and rename enumerations to class names instead)
 
 // [ID label] = [ID number] // [is common]
 
 // A large portion of these Gimmick names are written in Japanese.
 
-ENUM_CLASS(GimmickIDs,
+ENUM_CLASS(GimmickID,
     Invalid = -1,
     None = 0,
     GMK_TYPE_SIMPLE_MDL = 1,        // common
     SimpleMdlCommon = 2,            // common
-    SimpleMdlGmk    = 3,            // common
+
+    GmkSimpleMdl    = 3,            // common
+    
     SimpleNurbsCommon = 4,          // common
     SimpleNurbsGmk  = 5,            // common
     ColAnimMdl      = 6,            // common
@@ -67,6 +69,9 @@ ENUM_CLASS(GimmickIDs,
     Curtains,                       
     HappyGate_Goal,                 
     TreasureChest,                
+
+    GmkUpdownWater = 0x61,
+    GmkTurtle = 0x8D,
 
     DecorativeBall = 0x102,
       

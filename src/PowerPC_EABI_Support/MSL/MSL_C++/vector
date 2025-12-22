@@ -95,19 +95,20 @@ public:
     }
 
     void erase_at_end(size_t n) {
-        erase_at_end(n, Metrowerks::int2type<1>());
-    }
-
-    void erase_at_end(size_t n, Metrowerks::int2type<1>) DONT_INLINE_CLASS {
-        T* e = end();
+        // erase_at_end(n, Metrowerks::int2type<1>());
         size_ -= n;
-
-        while (n != 0) {
-            e--;
-            e->~T();
-            n--;
-        }
     }
+
+    // void erase_at_end(size_t n, Metrowerks::int2type<1>) DONT_INLINE_CLASS {
+    //     T* e = end();
+    //     size_ -= n;
+
+    //     while (n != 0) {
+    //         e--;
+    //         e->~T();
+    //         n--;
+    //     }
+    // }
 
     size_t& cap() {
         return capacity_.first();
@@ -358,9 +359,10 @@ protected:
     typedef _Constructor::const_reference const_reference;
     typedef _Constructor::pointer pointer;
     typedef _Constructor::const_pointer const_pointer;
+public:
     typedef _Constructor::iterator iterator;
     typedef _Constructor::const_iterator const_iterator;
-public:
+
     vector() { }
     // ~vector() { }
 
