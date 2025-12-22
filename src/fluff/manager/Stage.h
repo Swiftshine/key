@@ -48,6 +48,8 @@ public:
 
     bool fn_80044C6C();
     
+    bool fn_80044C88(); // related to checking BGST layers
+    
     /* Class Members */
     
     /* 0x000 */ gfl::Task m_0;

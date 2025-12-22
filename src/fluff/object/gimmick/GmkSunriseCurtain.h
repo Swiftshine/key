@@ -3,6 +3,7 @@
 
 #include "object/Gimmick.h"
 #include "sound/GameSound.h"
+#include "gfl/gflColor.h"
 #include "gfl/gflSD3DActor.h"
 #include "graphics/FlfMdlDraw.h"
 #include "graphics/FbAlpha.h"
@@ -10,10 +11,11 @@
 #include "manager/Stage.h"
 #include "misc/ScopedPointers.h"
 
-// size: 0x1B0
-// this gimmick is tied to the Day/Night system in Splash Beach.
-// it can interact with `GmkTurtle` and `GmkUpdownWater`.
+/// @brief A gimmick tied to the day/night system in Splash Beach.
+/// It can interact with `GmkTurtle` and `GmkUpdownWater`.
+/// @note Size: `0x1B0`
 class GmkSunriseCurtain : public Gimmick {
+private:
 public:
     ENUM_CLASS(TimeType,
         Night = 0,
@@ -21,13 +23,13 @@ public:
     );
 
     ENUM_CLASS(State,
-        State_0 = 0,
+        Start = 0,
         State_1 = 1,
         State_2 = 2,
-        State_3 = 3,
-        State_4 = 4,
-        State_5 = 5,
-        State_6 = 6,
+        AfterNight = 3,
+        Wait = 4,
+        BeforeDay = 5,
+        Day = 6,
     );
 
     ENUM_CLASS(Parameter,
@@ -43,8 +45,8 @@ public:
     virtual ~GmkSunriseCurtain();
     void SetBGSTLayersBasedOnMission();
     void SwitchStates() DONT_INLINE_CLASS;
-    void OnTimeSwitch();
-    void fn_803CA82C();
+    void OnTimeSwitch() DONT_INLINE_CLASS;
+    void fn_803CA82C() DONT_INLINE_CLASS;
     void SetBGSTLayers(bool setDay);
 
     /* FlfGameObj */
@@ -55,22 +57,14 @@ public:
 
 private:
     /* 0x130 */ int mState;
-    /* 0x134 */ int m_134;
+    /* 0x134 */ uint mStateFrames; // a frame counter
     /* 0x138 */ int mNightBackgroundBGSTLayer;
     /* 0x13C */ int mNightForegroundBGSTLayer;
     /* 0x140 */ int mDayBackgroundBGSTLayer;
     /* 0x144 */ int mDayForegroundBGSTLayer;
     /* 0x148 */ bool m_148;
-    /* 0x14C */ int m_14C;
-    /* 0x150 */ union {
-        GXColor mScreenTintColor;
-        struct {
-            u8 mTintR;
-            u8 mTintG;
-            u8 mTintB;
-            u8 mTintA;
-        };
-    };
+    /* 0x14C */ uint mColorChangeFrames;
+    /* 0x150 */ gfl::Color mScreenTintColor; // a frame counter
     /* 0x154 */ gfl::SoundHandle mMainSoundHandle;
     /* 0x15C */ gfl::SoundHandle mSplashBeachSoundHandle;
     /* 0x164 */ gfl::SD3DActorWrapper mSD3DActorWrapper;

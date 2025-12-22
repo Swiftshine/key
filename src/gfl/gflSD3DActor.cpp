@@ -3,17 +3,6 @@
 
 using namespace gfl;
 
-#define IF_HANDLE_POS_EQUAL(handle, code) { \
-    bool eq; \
-    SoundHandleInner* inner = handle.mSoundHandleInner; \
-    if (inner != nullptr) { \
-        eq = handle.mPosition == inner->mPosition; \
-    } else { \
-        eq = false; \
-    } \
-    if (eq) code \
-}
-
 SD3DActorWrapper::SD3DActorWrapper()
     : mActor()
 {
@@ -28,8 +17,8 @@ inline SD3DActor::~SD3DActor() {
 }
 
 SD3DActorInfo::SD3DActorInfo() {
-    mSoundHandle.mPosition = nullptr;
-    mSoundHandle.mSoundHandleInner = nullptr;
+    mSoundHandle.SetPosition(nullptr);
+    mSoundHandle.SetInnerSoundHandle(nullptr);
 }
 
 SD3DActorInfo::~SD3DActorInfo() { }
@@ -84,13 +73,13 @@ SoundHandle SD3DActorWrapper::fn_802CFEBC(
 ) {
     SoundHandle handle = GetSoundHandle(soundID, 0, arg6);
 
-    IF_HANDLE_POS_EQUAL(handle, {
-        Sound::Instance()->fn_8064D288(arg1, inner, 0);
-    })
+    if (handle.HandlePositionValid()) {
+        Sound::Instance()->fn_8064D288(arg1, handle.GetInnerSoundHandle(), 0);
+    }
 
-    IF_HANDLE_POS_EQUAL(handle, {
-        Sound::Instance()->fn_8064D2B4(arg2, inner);
-    })
+    if (handle.HandlePositionValid()) {
+        Sound::Instance()->fn_8064D2B4(arg2, handle.GetInnerSoundHandle());
+    }
 
     return handle;
 }
@@ -106,18 +95,10 @@ void SD3DActorWrapper::fn_802CFF80(int soundID, int arg2, bool add) {
             continue;
         }
 
-        bool valid;
-
-        IF_HANDLE_POS_EQUAL(mInfo[i].mSoundHandle, {
-            valid = Sound::Instance()->ValidateSoundHandleSound(inner);
-        } else {
-            valid = false;
-        })
-
-        if (valid) {
-            IF_HANDLE_POS_EQUAL(mInfo[i].mSoundHandle, {
-                Sound::Instance()->ManageSoundHandleInner(inner, arg2, add);
-            })
+        if (InfoHandlePositionValid(i)) {
+            if (mInfo[i].mSoundHandle.HandlePositionValid()) {
+                Sound::Instance()->ManageSoundHandleInner(mInfo[i].mSoundHandle.GetInnerSoundHandle(), arg2, add);
+            }
         }
 
         InvalidateInfoSoundID(&mInfo[i]);
@@ -130,9 +111,9 @@ void SD3DActorWrapper::fn_802D0074(int arg2, bool add) {
             continue;
         }
 
-        IF_HANDLE_POS_EQUAL(mInfo[i].mSoundHandle, {
-            Sound::Instance()->ManageSoundHandleInner(inner, arg2, add);
-        })
+        if (mInfo[i].mSoundHandle.HandlePositionValid()) {
+            Sound::Instance()->ManageSoundHandleInner(mInfo[i].mSoundHandle.GetInnerSoundHandle(), arg2, add);
+        }
 
         InvalidateInfoSoundID(&mInfo[i]);
     }
@@ -149,15 +130,7 @@ bool SD3DActorWrapper::HasSoundID(int soundID) {
 
     for (int i = 0; i < 4; i++, info++) {
         if (info->CheckSoundID(soundID)) {        
-            bool valid;
-    
-            IF_HANDLE_POS_EQUAL(info->mSoundHandle, {
-                valid = Sound::Instance()->ValidateSoundHandleSound(inner);
-            } else {
-                valid = false;
-            })
-    
-            if (valid) {
+            if (info->HandlePositionValid()) {
                 ret = true;
                 break;
             }
@@ -210,15 +183,7 @@ void SD3DActorWrapper::fn_802D02B0() {
             continue;
         }
 
-        bool valid;
-
-        IF_HANDLE_POS_EQUAL(mInfo[i].mSoundHandle, {
-            valid = Sound::Instance()->ValidateSoundHandleSound(inner);
-        } else {
-            valid = false;
-        })
-
-        if (!valid) {
+        if (!InfoHandlePositionValid(i)) {
             InvalidateInfoSoundID(&mInfo[i]);
         }
     }

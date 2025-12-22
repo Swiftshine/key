@@ -131,6 +131,7 @@ public:
     gfl::ScnMdlWrapper* GetNURBSAnimWrapperModelWrapper();
     NURBSSet* GetNURBSAnimWrapperNURBSSet();
     void LoadWoolTextures();
+    bool fn_80023B1C();
 
     inline void SetCurrentFrameInt(int value) {
         *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;

@@ -267,7 +267,7 @@ bool GmkBeadPopItem::Enable() {
     }
 
     if (!m_138) {
-        gfl::SoundHandle::CreateAndPlaySound(mPosition, 0xE7, 0, 0);
+        gfl::SoundHandle::PlaySound(mPosition, 0xE7, 0, 0);
     }
 
     return true;

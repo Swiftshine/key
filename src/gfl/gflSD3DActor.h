@@ -23,6 +23,12 @@ public:
         return mSoundID == id;
     }
 
+    /* Helper Methods */
+
+    inline bool HandlePositionValid() {
+        return mSoundHandle.HandlePositionValid() ? Sound::Instance()->ValidateSoundHandleSound(mSoundHandle.GetInnerSoundHandle()) : false;
+    }
+
     /* Class Members */
 
     /* 0x0 */ int mSoundID;
@@ -31,10 +37,7 @@ public:
 
 /// @note Size: `0x8`
 class SD3DActor {
-    public:
-    /* Structures */
-    
-    
+    public:    
     /* Constructor */
     
     inline SD3DActor() {
@@ -47,7 +50,7 @@ class SD3DActor {
     /* 0x0C */ virtual void SetPosition(const nw4r::math::VEC3&);
     /* 0x10 */ virtual nw4r::math::VEC3 GetPosition();
     /* 0x14 */ virtual SoundHandle GetSoundHandle(int soundID, int, int);
-    
+
     /* Class Members  */
     
     /* 0x4 */ SD3DActorInner* mActorInner;
@@ -81,6 +84,12 @@ public:
     void InvalidateInfoSoundID(SD3DActorInfo* pInfo) DONT_INLINE_CLASS;
     int GetMatchingIndex(int soundID);
     void fn_802D02B0();
+
+    /* Helper Methods */
+
+    inline bool InfoHandlePositionValid(int id) {
+        return mInfo[id].HandlePositionValid();
+    }
 
     /* Class Members */
 

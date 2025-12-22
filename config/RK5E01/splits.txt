@@ -180,6 +180,9 @@ fluff/object/FlfGameObjLocator.cpp:
 
 fluff/object/gimmick/GmkSunriseCurtain.cpp:
 	.text       start:0x803C9A84 end:0x803CAA74
+	.rodata     start:0x8080AA20 end:0x8080AB00
+	.data       start:0x8087AFF4 end:0x8087B0D8
+	.sdata      start:0x808E1E70 end:0x808E1E88
 
 fluff/util/SignatureUtil.cpp:
 	.text       start:0x803D8098 end:0x803D820C

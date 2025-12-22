@@ -1,21 +1,28 @@
+#include "gfl/gflMtx34.h"
+
+#include "object/gimmick/GmkGate3.h"
 #include "object/gimmick/GmkSunriseCurtain.h"
 #include "object/gimmick/GmkTurtle.h"
-#include "gfl/gflMtx34.h"
 
 GmkSunriseCurtain* GmkSunriseCurtain::Build(GimmickBuildInfo* pBuildInfo) {
     return new (gfl::HeapID::Work) GmkSunriseCurtain(pBuildInfo);
 }
 
-// https://decomp.me/scratch/551V7
+// rodata
+const int lbl_8080AA20 = 0; // 0
+const int lbl_8080AA24 = 1; // 1
+const int lbl_8080AA28 = 2; // 2
+
+// sdata2
+int lbl_808EA238; // 3
+
+// https://decomp.me/scratch/8CZ4w
 GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     : Gimmick(pBuildInfo, "GmkSunriseCurtain")
-    , mState(State::State_0)
-    , m_134(0)
+    , mState(State::Start)
+    , mStateFrames(0)
     , m_148(false)
-    , mTintR(0xFF)
-    , mTintG(0xFF)
-    , mTintB(0xFF)
-    , mTintA(0xFF)
+    , mScreenTintColor()
     , mMainSoundHandle(nullptr, nullptr)
     , mSplashBeachSoundHandle(nullptr, nullptr)
     , mSD3DActorWrapper()
@@ -27,7 +34,12 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(pBuildInfo->mFullSortSceneIndex);
     mFlfMdlDraw1.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
 
-    int indices[] = {0, 1, 2};
+    int indices[] = {
+        lbl_8080AA20,
+        lbl_8080AA24,
+        lbl_8080AA28
+    };
+    
     mFlfMdlDraw1->LoadNURBSFromFileList(indices, ARRAY_LENGTH(indices));
 
     mPosition.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mFullSortSceneIndex, pBuildInfo->m_2C);
@@ -37,7 +49,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Near_05);
     mFlfMdlDraw2.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
 
-    int index = 3;
+    int index = lbl_808EA238;
     mFlfMdlDraw2->LoadNURBSFromFileList(&index, 1);
 
     gfl::Mtx34 mtx1;
@@ -72,14 +84,11 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     mFbAlpha->SetLocalMtx_thunk(&mtx2);
     mFbAlpha->SetUpdateRate(0.0f);
 
-    mScreenTintColor.r = 0x0;
-    mScreenTintColor.g = 0x35;
-    mScreenTintColor.b = 0x67;
-    mScreenTintColor.a = 0x50;
+    mScreenTintColor = gfl::Color(0, 0x35, 0x67, 0x50);
 
     mFbAlpha->SetColor(mScreenTintColor);
 
-    m_134 = 4;
+    mStateFrames = 4;
     m_6E = false;
 
     StageInfo stageInfo = Stage::Instance()->mStageInfo;
@@ -105,8 +114,151 @@ void GmkSunriseCurtain::SwitchStates() {
     mState = State::State_2;
 }
 
-// unmatched
-void GmkSunriseCurtain::Update() { }
+void GmkSunriseCurtain::Update() {
+    switch (mState) {
+        case State::Start: {
+            if (mStateFrames != 0) {
+                mStateFrames--;
+            } else {
+                std::vector<Gimmick*> gates;
+                GmkMng::Instance()->GetGimmicksByGimmickID(0x42, gates);
+    
+                if (!gates.empty()) {
+                    // only care about the first one
+    
+                    GmkGate3* gate = dynamic_cast<GmkGate3*>(gates.front());
+    
+                    if (gate != nullptr) {
+                        mGateHandle.SetObject(gate->GetHandleObject());
+                        mGateHandle.SetID(gate->GetHandleID());
+                    } else {
+                        mGateHandle = FlfHandle();
+                    }
+                }
+    
+                if (GameManager::IsInMission()) {
+                    OnTimeSwitch();
+                    mState = State::Day;
+                } else {
+                    SetStateForTaggedObjects(
+                        "ON",
+                        mBuildInfoPtr->GetStringParam(ParameterID::FIRST).c_str()
+                    );
+                    SetStateForTaggedObjects(
+                        "OFF",
+                        mBuildInfoPtr->GetStringParam(ParameterID::SECOND).c_str()
+                    );
+                    mState = State::State_1;
+                }
+            }
+
+            break;
+        }
+
+        case State::State_2: {
+            if (mFlfMdlDraw1->GetCurrentFrame() == 37.0f) {
+                gfl::SoundHandle::PlaySound(mPosition, 0xF5, 0, 0);
+            }
+
+            if (mFlfMdlDraw1->GetCurrentFrame() == 125.0f) {
+                mMainSoundHandle = gfl::SoundHandle::PlaySound(mPosition, 0x199, 0, 0);
+            }
+            
+            if (mFlfMdlDraw1->GetCurrentFrame() == 220.0f) {
+                if (mMainSoundHandle.HandlePositionValid()) {
+                    gfl::Sound::Instance()->ManageSoundHandleInner(
+                        mMainSoundHandle.GetInnerSoundHandle(),
+                        0xF,
+                        false
+                    );
+                }
+            }
+
+            if (mFlfMdlDraw1->GetCurrentFrame() == 305.0f) {
+                gfl::SoundHandle::PlaySound(mPosition, 0x1EF, 0, 0);
+            }
+
+            if (mFlfMdlDraw1->IsAnimationDone()) {
+                mColorChangeFrames = 0;
+                mState = State::AfterNight;
+            }
+
+            break;
+        }
+
+        case State::AfterNight: {
+            if (mColorChangeFrames < 30) {
+                gfl::Color from = 0xFFFFFFFF;
+                gfl::Color color;
+        
+                float frame = static_cast<float>(mColorChangeFrames);
+                
+                color.Interpolate(
+                    frame / 30.0f,
+                    1.0f - frame / 30.0f,
+                    from,
+                    mScreenTintColor
+                );
+                
+                mFbAlpha->SetColor(color);
+                mColorChangeFrames++;
+            } else {
+                OnTimeSwitch();
+                mStateFrames = 20;
+                mState = State::Wait;
+            }
+
+            break;
+        }
+
+        case State::Wait: {
+            if (!Stage::Instance()->fn_80044C88()) {
+                if (mStateFrames != 0) {
+                    mStateFrames--;
+                } else {
+                    mColorChangeFrames = 0;
+                    mState = State::BeforeDay;
+                }
+            }
+
+            break;
+        }
+
+        case State::BeforeDay: {
+            if (mColorChangeFrames < 60) {
+                gfl::Color from = 0xFFFFFFFF;
+                gfl::Color to = 0xFFFFFFFF;
+                to.a = 0;
+                gfl::Color color;
+                
+                float frame = static_cast<float>(mColorChangeFrames);
+                
+                color.Interpolate(
+                    frame / 30.0f,
+                    1.0f - frame / 30.0f,
+                    to,
+                    from
+                );
+                mFbAlpha->SetColor(color);
+                mColorChangeFrames++;
+            } else {
+                mFbAlpha->SetUpdate(false);
+                mState = State::Day;
+            }
+
+            break;
+        }
+
+        case State::Day: {
+            if (mFlfMdlDraw2->fn_80023B1C() && mFlfMdlDraw2->IsAnimationDone()) {
+                mFlfMdlDraw2->SetVisibility(false);
+            }
+            break;
+        }
+    }
+
+    fn_803CA82C();
+}
 
 // unmatched
 void GmkSunriseCurtain::OnTimeSwitch() { }
