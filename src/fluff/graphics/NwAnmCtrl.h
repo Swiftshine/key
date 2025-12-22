@@ -20,7 +20,7 @@ class NwAnmCtrl {
 public:
     /* Constructor */
 
-    NwAnmCtrl(uint animCount, gfl::ResFileObject& fileInfo, const char* animName);
+    NwAnmCtrl(uint animCount, gfl::ResFileObject& rResFileObject, const char* pAnimName);
 
     /* Virtual Methods */
 
@@ -30,7 +30,7 @@ public:
     
     void PlayAnimationByNameAndIndex(uint animIndex, const char* pAnimName, int dummy = 1);
     gfl::ScnMdlWrapper* SetupModelWrapper(uint flags) DONT_INLINE_CLASS;
-    void SetFullSortSceneModelWrapper(FullSortScene* pScene, uint flags) DONT_INLINE_CLASS;
+    gfl::ScnMdlWrapper* SetFullSortSceneModelWrapper(FullSortScene* pScene, uint flags) DONT_INLINE_CLASS;
     void SetStageFullSortSceneModelWrapper(uint flags) DONT_INLINE_CLASS;
     uint CalculateFlags();
     NwAnm* GetAnimationByIndex(uint index) DONT_INLINE_CLASS;
@@ -50,7 +50,7 @@ public:
 
     /* Class Members */
 
-    /* 0x04 */ gfl::ResFileObject mResFileInfo;
+    /* 0x04 */ gfl::ResFileObject mResFileObject;
     /* 0x08 */ gfl::Pointer<gfl::ScnMdlWrapper> mScnMdlWrapper;
     /* 0x0C */ std::string mResMdlName;
     /* 0x18 */ uint mCurrentAnimIndex;

@@ -38,6 +38,9 @@ public:
     bool Init(nw4r::g3d::ResFile& rResFileObject, const char* pResMdlName, const char* pAnimName, nw4r::g3d::ResName* pResName /* ? */);
     nw4r::math::VEC3 GetPosition(gfl::ScnMdlWrapper* pScnMdlWrapper, nw4r::g3d::ResMdl& rResMdl);
 
+    inline uint GetFlags() const {
+        return mFlags;
+    }
     /* Class Members */
 
     /* 0x04 */ uint mFlags;

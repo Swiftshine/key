@@ -207,6 +207,14 @@ namespace gfl {
             : mPointer(info)
         { }
 
+        ResFileObject(const ResFileObject& rOther)
+            : mPointer(rOther.mPointer)
+        {
+            if (IsValid()) {
+                mPointer->IncrementRefCount();
+            }
+        }
+
         inline ~ResFileObject() {
             if (IsValid()) {
                 mPointer->Destroy();

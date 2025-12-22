@@ -2,19 +2,14 @@
 #include "graphics/NwAnmCtrl.h"
 #include "manager/Stage.h"
 
-NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& rFileInfo, const char* pAnimName)
-    : mResFileInfo(rFileInfo)
+NwAnmCtrl::NwAnmCtrl(uint animCount, gfl::ResFileObject& rResFileObject, const char* pAnimName)
+    : mResFileObject(rResFileObject)
+    , mScnMdlWrapper(nullptr)
+    , mResMdlName(pAnimName)
+    , mCurrentAnimIndex(0)
+    , mAnimations(nullptr)
+    , mNumAnims(animCount)
 {
-    if (mResFileInfo.IsValid()) {
-        mResFileInfo->IncrementRefCount();
-    }
-
-    mScnMdlWrapper = nullptr;
-    mResMdlName = pAnimName;
-    mCurrentAnimIndex = 0;
-    mAnimations = nullptr;
-    mNumAnims = animCount;
-
     mAnimations.Create(animCount);
 }
 
@@ -22,44 +17,35 @@ NwAnmCtrl::~NwAnmCtrl() { }
 
 void NwAnmCtrl::PlayAnimationByNameAndIndex(uint animIndex, const char* pAnimName, int) {
     NwAnm* anim = GetAnimationByIndex(animIndex);
-    anim->Play(mResFileInfo, mResMdlName.c_str(), pAnimName, nullptr);
+    anim->Play(mResFileObject, mResMdlName.c_str(), pAnimName, nullptr);
 }
 
+// https://decomp.me/scratch/uP0o3
 gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint flags) {
-    nw4r::g3d::ResFile resFile(mResFileInfo.IsValid() ? mResFileInfo->GetGfArch() : nullptr);
-
+    nw4r::g3d::ResFile resFile(mResFileObject.IsValid() ? mResFileObject->GetGfArch() : nullptr);
     NW4R_G3D_RESFILE_AC_ASSERT(resFile);
 
     resFile.Release();
     resFile.Bind();
 
-    nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(mResMdlName.c_str());
-
-    gfl::ScnMdlWrapper* wrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, CalculateFlags());
-
+    const char* name = mResMdlName.c_str();
+    nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(name);
+    
+    gfl::ScnMdlWrapper* wrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags | CalculateFlags(), name);
     wrapper->SetUpdate(true);
+    mScnMdlWrapper.Create(wrapper);
 
-    if (nullptr == wrapper) {
-        gfl::ScnMdlWrapper* ptr = mScnMdlWrapper.Get();
-
-        if (nullptr != ptr) {
-            delete ptr;
-        }
-
-        mScnMdlWrapper = ptr;
-    } else {
-        mScnMdlWrapper = wrapper;
-    }
-
-    if (0 != mNumAnims) {
+    if (mNumAnims != 0) {
         SetCurrentAnimationIndex(0);
     }
 
     return wrapper;
 }
 
-void NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* pScene, uint flags) {
-    pScene->AddRenderObj(SetupModelWrapper(flags));
+gfl::ScnMdlWrapper* NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* pScene, uint flags) {
+    gfl::ScnMdlWrapper* wrapper = SetupModelWrapper(flags);
+    pScene->AddRenderObj(wrapper);
+    return wrapper;
 }
 
 void NwAnmCtrl::SetStageFullSortSceneModelWrapper(uint flags) {
@@ -67,8 +53,17 @@ void NwAnmCtrl::SetStageFullSortSceneModelWrapper(uint flags) {
     SetFullSortSceneModelWrapper(scene, flags);
 }
 
+// https://decomp.me/scratch/Y8Ll9
 uint NwAnmCtrl::CalculateFlags() {
-    return 0;
+    uint i = 0;
+    uint result = 0;
+
+    while (i < mNumAnims) {
+        result |= mAnimations[i].GetFlags();
+        i++;
+    }
+    
+    return result;
 }
 
 NwAnm* NwAnmCtrl::GetAnimationByIndex(uint index) {
