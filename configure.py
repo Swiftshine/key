@@ -463,6 +463,7 @@ config.libs = [
             Object(Matching,    "gfl/gflAlloc.cpp"),
             Object(NonMatching, "gfl/gflBpeDecoderFile.cpp"),
             Object(Matching,    "gfl/gflChecksum.cpp"),
+            Object(NonMatching, "gfl/gflColor.cpp"),
             Object(NonMatching, "gfl/gflCustomRenderObj.cpp"),
             Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
             Object(Matching,    "gfl/gflFixedString.cpp"),

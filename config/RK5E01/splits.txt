@@ -248,6 +248,9 @@ fluff/graphics/BgBackImage.cpp:
 gfl/gflResArchivedFileInfo.cpp:
 	.text       start:0x8063EA68 end:0x8063EBAC
 
+gfl/gflColor.cpp:
+	.text       start:0x806400F8 end:0x80640370
+
 gfl/gflFixedString.cpp:
 	.text       start:0x80642B00 end:0x80642CB0
 
