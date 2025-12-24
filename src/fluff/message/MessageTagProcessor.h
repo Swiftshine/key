@@ -2,11 +2,12 @@
 #define FLUFF_MESSAGETAGPROCESSOR_H
 
 #include "types.h"
+#include <nw4r/ut/ut_TagProcessorBase.h>
 
 namespace message {
 
 /// @note Size: `0xC`
-class MessageTagProcessor {
+class MessageTagProcessor : public nw4r::ut::TagProcessorBase<wchar_t> {
 public:
     /* Constructor */
 
@@ -15,7 +16,9 @@ public:
     /* Virtual Methods */
     
     /* 0x08 */ virtual ~MessageTagProcessor();
-
+    /* 0x0C */ virtual Operation Process(u16 ch, ContextType* pCtx) override;
+    /* 0x10 */ virtual Operation CalcRect(Rect* pRect, u16 ch, ContextType* pCtx) override;
+    
     /* Class Members */
 
     /* 0x4 */ float m_4;
