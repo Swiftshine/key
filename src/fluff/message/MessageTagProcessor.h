@@ -18,7 +18,7 @@ public:
     /* 0x08 */ virtual ~MessageTagProcessor();
     /* 0x0C */ virtual Operation Process(u16 ch, ContextType* pCtx) override;
     /* 0x10 */ virtual Operation CalcRect(Rect* pRect, u16 ch, ContextType* pCtx) override;
-    
+
     /* Class Members */
 
     /* 0x4 */ float m_4;
@@ -27,8 +27,6 @@ public:
     /* 0xA */ u8 m_A;
     /* 0xB */ u8 m_B;
 };
-
-ASSERT_SIZE(MessageTagProcessor, 0xC);
 
 }
 
