@@ -9,7 +9,7 @@ Sections:
     - [Files and includes](#files-and-includes)
     - [Function signatures](#function-signatures)
     - [Function parameters](#function-parameters)
-    - [Function contents](#function-contents)
+    - [Function matching](#function-matching)
     - [Enums](#enums)
     - [Structures](#structures)
     - [Literals](#literals)
@@ -85,18 +85,7 @@ Function arguments should have certain prefixes if applicable:
 - `p` for pointers
 - `r` for values passed by reference
 
-### Function contents
-Functions that don't require code to be written, i.e. a `void` function that does nothing, should have the `return` keyword for the sake of clarity.
-Empty destructors should only take up one line.
-
-```cpp
-void DoesNothing() {
-    return;
-}
-
-Structure::~Structure() { }
-```
-
+### Function Matching
 If a function is not 100% matching, leave a comment above the function with a link to the associated [decomp.me](https://decomp.me) scratch. Remove it once the function has been matched.
 
 ```cpp
