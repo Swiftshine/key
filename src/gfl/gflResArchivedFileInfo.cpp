@@ -58,6 +58,6 @@ size_t ResFileInfo::GetFilesize() {
     return fileinfo.size;
 }
 
-GfArch* ResFileInfo::GetGfArch() {
+GfArch* ResFileInfo::GetGfArch() const {
     return mArchive;
 }

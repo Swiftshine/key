@@ -27,8 +27,8 @@ public:
         /* 0x28 */ bool m_28;
         /* 0x2C */ int m_2C;
         /* 0x30 */ int m_30;
-        /* 0x34 */ int m_34;
-        /* 0x38 */ int m_38;
+        /* 0x34 */ uint m_34;
+        /* 0x38 */ uint m_38;
         /* 0x3C */ int m_3C;
         /* 0x40 */ bool m_40;
         /* 0x41 */ bool m_41;

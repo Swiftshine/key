@@ -1,11 +1,12 @@
 #ifndef FLUFF_GMKWOOLROPE_H
 #define FLUFF_GMKWOOLROPE_H
 
-#include "object/wool/WoolLinkObj.h"
-#include "object/wool/WoolLinkObjBase.h"
 #include "gfl/gflPointer.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/FlfMdlDraw.h"
+#include "mapdata/Mapdata.h"
+#include "object/wool/WoolLinkObj.h"
+#include "object/wool/WoolLinkObjBase.h"
 #include "object/Gimmick.h"
 #include "object/gimmick/GmkWoolHook.h"
 
@@ -14,31 +15,47 @@ class WoolLinkObjBase;
 // size: 0x160
 class GmkWoolRope : public Gimmick {
 public:
-    ENUM_CLASS(Color,
-        Brown = 0,
-        Pink = 1,
-        White = 2,
-        Red = 3,
-        Orange = 4,
-        Yellow = 5,
-        LightBlue = 6,
-        RedWhiteBlue = 7,
-        LightGreen = 8,
-        Black = 9,
-        Tan = 10,
-        Cyan = 11,
-        Lavender = 12,
-        Silver = 13,
+    ENUM_CLASS(WoolTextureType,
+        Brown           = 0,
+        Pink            = 1,
+        White           = 2,
+        Red             = 3,
+        Orange          = 4,
+        Yellow          = 5,
+        LightBlue       = 6,
+        RedWhiteBlue    = 7,
+        LightGreen      = 8,
+        Black           = 9,
+        Tan             = 10,
+        Cyan            = 11,
+        Lavender        = 12,
+        Silver          = 13,
+        GreenCoil       = 50,
+        PinkZipper      = 51,
+    );
 
-        GreenCoil = 50,
-        PinkZipper = 51,
+    ENUM_CLASS(HookType,
+        Standard        = 0,
+        Flower          = 1,
+        WhiteBow        = 2,
+        RedWhiteBlueBow = 3,
+        RedButton       = 4,
+        BrownSquare     = 8,
+        Gizmo           = 49,
     );
 
     static GimmickBuildInfo GBuildInfo;
     static WoolBaseTask::WoolBuildInfo WBuildInfo;
 
 public:
-    GmkWoolRope(GmkWoolHook* firstHook, GmkWoolHook* secondHook, int woolColorIndex, uint arg4, void* arg5, const char* taskName);
+    GmkWoolRope(
+        GmkWoolHook* pFirstHook,
+        GmkWoolHook* pSecondHook,
+        int woolColor,
+        int hookType,
+        Mapdata::MapdataGimmick* pMapdataGimmick,
+        const char* pTaskName
+    );
 
     /* Virtual Methods */
     
@@ -70,13 +87,17 @@ public:
     /* 0x13C */ int m_13C;
     /* 0x140 */ int m_140;
     /* 0x144 */ WoolLinkObjBase* mWoolLink;
-    /* 0x148 */ int mWoolColor;
-    /* 0x14C */ uint m_14C;
+    /* 0x148 */ int mWoolTextureType;
+    /* 0x14C */ int mWoolHookType;
     /* 0x150 */ GmkWoolHook* mFirstWoolHook;
     /* 0x154 */ GmkWoolHook* mSecondWoolHook;
-    /* 0x158 */ void* m_158;
+    /// The associated "WoolBridge" gimmick. The position of the gimmick in mapdata
+    /// MUST be the same as the position of the first path node in order to bind.
+    /* 0x158 */ Mapdata::MapdataGimmick* mMapdataGimmick;
     /* 0x15C */ gfl::ResFileObject mResFileObject;
 };
+
+
 
 // ASSERT_SIZE(GmkWoolRope, 0x160);
 

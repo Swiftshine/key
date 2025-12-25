@@ -1,6 +1,8 @@
 #ifndef GFL_RESFILEINFO_H
 #define GFL_RESFILEINFO_H
 
+#include <nw4r/g3d/res/g3d_resfile.h>
+
 #include "gflResInfo.h"
 #include "gflFixedString.h"
 #include "gflFileSystemWii.h"
@@ -146,7 +148,7 @@ namespace gfl {
          * @note The difference between this function and `gfl::ResFileInfo::TryGetGfArch` is
          * that no flag validation is performed. The archive is immediately returned.
          */
-        DECL_WEAK virtual GfArch* GetGfArch();
+        DECL_WEAK virtual GfArch* GetGfArch() const;
 
         /**
          * @note Address: 0x8063EB30
@@ -272,6 +274,18 @@ namespace gfl {
 
         inline bool IsValid() const {
             return mPointer != nullptr;
+        }
+
+        inline nw4r::g3d::ResFile GetResFile() const {
+            nw4r::g3d::ResFile resFile(
+                IsValid() ?
+                mPointer->GetGfArch() :
+                nullptr
+            );
+
+            NW4R_G3D_RESFILE_AC_ASSERT(resFile);
+            
+            return resFile;
         }
     private:
         ResFileInfo* mPointer;

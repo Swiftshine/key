@@ -5,10 +5,16 @@ Gimmick::GimmickBuildInfo GmkWoolRope::GBuildInfo;
 WoolBaseTask::WoolBuildInfo GmkWoolRope::WBuildInfo;
 const char WoolBridgePath[] = "gimmick/wool_bridge/wool_bridge.brres";
 const char WoolColorNameTemplate[] = "wool_%02d";
-extern "C" float lbl_808E14E0;
 
-GmkWoolRope::GmkWoolRope(GmkWoolHook* first, GmkWoolHook* second, int colorIndex, uint arg4, void* arg5, const char* taskName)
-    : Gimmick(&GBuildInfo, taskName)
+GmkWoolRope::GmkWoolRope(
+    GmkWoolHook* pFirstHook,
+    GmkWoolHook* pSecondHook,
+    int woolTexture,
+    int hookType,
+    Mapdata::MapdataGimmick* pMapdataGimmick,
+    const char* pTaskName
+)
+    : Gimmick(&GBuildInfo, pTaskName)
     , m_134(m_130)
 {
     m_130 = 0;
@@ -16,11 +22,11 @@ GmkWoolRope::GmkWoolRope(GmkWoolHook* first, GmkWoolHook* second, int colorIndex
     m_13C = 0;
     m_140 = 0;
     mWoolLink = nullptr;
-    mWoolColor = colorIndex;
-    m_14C = arg4;
-    m_158 = arg5;
+    mWoolTextureType = woolTexture;
+    mWoolHookType = hookType;
+    mMapdataGimmick = pMapdataGimmick;
     mResFileObject = nullptr;
-    SetHooks(first, second);
+    SetHooks(pFirstHook, pSecondHook);
 }
 
 GmkWoolRope::~GmkWoolRope() {
@@ -41,107 +47,85 @@ void GmkWoolRope::SetHooks(GmkWoolHook* first, GmkWoolHook* second) {
     mSecondWoolHook = second;
 }
 
+// https://decomp.me/scratch/D7so7 - regswaps
 
-void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* wBuildInfo, const char* path) {
-    // int unkint1;
+// sdata
+float lbl_808E14E0 = 0.7f;
+float lbl_808E14E4 = 5.0f;
+float lbl_808E14E8 = 5.0f;
+float lbl_808E14EC = 50.0f;
 
-    // if (nullptr == wBuildInfo) {
-    //     wBuildInfo = &WBuildInfo;
-    // }
+void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const char* pFilepath) {
+    if (pBuildInfo == nullptr) {
+        pBuildInfo = &WBuildInfo;
+    }
 
-    // if (nullptr == path) {
-    //     path = WoolBridgePath;
-    // }
+    if (pFilepath == nullptr) {
+        pFilepath = "gimmick/wool_bridge/wool_bridge.brres";
+    }
+    
+    uint unk;
 
-    // if (wBuildInfo->m_34 < 2) {
-    //     GmkWoolHook* first = mFirstWoolHook;
-    //     GmkWoolHook* second = mSecondWoolHook;
+    if (pBuildInfo->m_34 >= 2) {
+        gfl::Vec3 diff = mFirstWoolHook->mPosition - mSecondWoolHook->mPosition;
 
-    //     Vec len1;
-    //     len1.x = first->mPosition.x - second->mPosition.x;
-    //     len1.y = first->mPosition.y - second->mPosition.y;
-    //     len1.z = first->mPosition.z - second->mPosition.z;
+        float mag = diff.Length();
 
-    //     double mag = PSVECMag((Vec*)&len1);
+        unk = pBuildInfo->m_34;
+        lbl_808E14E0 = mag / static_cast<float>(unk - 1);
+    } else {
+        gfl::Vec3 diff = mFirstWoolHook->mPosition - mSecondWoolHook->mPosition;
 
-    //     int dist = static_cast<int>(mag / lbl_808E14E0);
+        float magf = diff.Length();
+        unk = static_cast<uint>(magf / lbl_808E14E0);
 
-    //     if (5.0f < mag) {
-    //         float unkfloat1 = static_cast<int>(mag / 5.0f);
-    //         float unkfloat2;
-    //         // unkfloat2 = FLOAT_808e14e8 * (CONCAT44(local_30,unkfloat1) - DOUBLE_808e6970);
+        if (magf > 5.0f) {
+            float magf2 = lbl_808E14E8 * static_cast<float>(
+                static_cast<uint>(magf / lbl_808E14E4)
+            );
 
-    //         if (50.0f < unkfloat2) {
-    //             unkfloat2 = 50.0f;
-    //         }
+            if (magf2 > lbl_808E14EC) {
+                magf2 = lbl_808E14EC;
+            }
 
-    //         /*
-    //             uStack_34 = unkint1;
-    //             unkint1 = __double_to_unsigned_int
-    //                       ((CONCAT44(0x43300000,unkint1) - 4503599627370496.0) *
-    //             (1.0f - unkfloat2 / 100.0f));
-    //         */
-    //     }
-    // } else {
-    //     GmkWoolHook* first = mFirstWoolHook;
-    //     GmkWoolHook* second = mSecondWoolHook;
+            float val = 1.0f - magf2 / 100.0f;
+            unk *= val;
+        }
+    }
 
-    //     Vec len2;
-    //     len2.x = first->mPosition.x - second->mPosition.x;
-    //     len2.y = first->mPosition.y - second->mPosition.y;
-    //     len2.z = first->mPosition.z - second->mPosition.z;
+    if (mMapdataGimmick != nullptr) {
+        float f = mMapdataGimmick->mParams.mFloatParams[0];
 
-    //     double mag = PSVECMag(&len2);
-    //     unkint1 = wBuildInfo->m_34;
-    //     /*
-    //         uStack_34 = unkint1 - 1;
-    //         lbl_808E14E0 = mag / (CONCAT44(local_38,uStack_34) - 4503599627370496.0);
-    //     */
-    // }
+        if (f > 0.0f) {
+            unk = static_cast<uint>(static_cast<float>(unk) / f);
+        }
+    }
 
-    // if (nullptr != m_158 && 0.0f < *(float*)((u8*)m_158 + 0x24)) {
-    //     /*
-    //         unkfloat1 = unkint1;
-    //         unkint1 = __double_to_unsigned_int((CONCAT44(local_30,unkint1) - 4503599627370496.0) / unkfloat2);
-    //     */
-    // }
+    if (unk < 2) {
+        unk = 2;
+    }
 
-    // if (unkint1 < 2) {
-    //     unkint1 = 2;
-    // }
+    pBuildInfo->m_34 = unk;
+    pBuildInfo->m_38 = unk - 1;
 
-    // wBuildInfo->m_34 = unkint1;
-    // wBuildInfo->m_38 = unkint1 - 1;
+    gfl::ResFileObject resFileObject = gfl::ResFileObject::FromArchive(pFilepath);
+    nw4r::g3d::ResFile resFile = resFileObject.GetResFile();
+    
+    char woolTexName[0x20];
+    sprintf(woolTexName, "wool_%02d", mWoolTextureType);
 
-    // gfl::ResFileInfo* resfileinfo;
+    mWoolLink = new (gfl::HeapID::Work) WoolLinkObjBase(
+        this,
+        pBuildInfo,
+        resFileObject,
+        woolTexName,
+        mFirstWoolHook,
+        mSecondWoolHook
+    );
 
-    // FlfMdlDraw::GetFileInfoFromArchive(resfileinfo, path);
-
-    // nw4r::g3d::ResFile resFile(nullptr != resfileinfo ? resfileinfo->GetGfArch() : nullptr);
-
-    // NW4R_G3D_RESFILE_AC_ASSERT(resFile);
-
-    // char woolColorName[32];
-    // snprintf(woolColorName, 32, WoolColorNameTemplate, mWoolColorIndex);
-
-    // // mWoolLink = new (gfl::HeapID::Work) WoolLinkObjBase(/* params */);
-
-    // if (&mResFileInfo != &resfileinfo) {
-    //     if (nullptr != &mResFileInfo) {
-    //         mResFileInfo->Destroy();
-    //     }
-
-    //     mResFileInfo = resfileinfo;
-
-    //     if (nullptr != resfileinfo) {
-    //         resfileinfo->IncrementLevel();
-    //     }
-    // }
-
-    // if (nullptr != resfileinfo) {
-    //     resfileinfo->Destroy();
-    // }
+    mResFileObject = resFileObject;
 }
+
 
 void GmkWoolRope::Update() {
     mWoolLink->Update();
