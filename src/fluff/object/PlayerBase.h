@@ -96,13 +96,14 @@ public:
 
     /* Constructor */
 
-    PlayerBase(gfl::Task* pParentTask, uint flags, int unk3, FullSortScene* pScene, bool isCloned);
+    PlayerBase(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, int arg4, bool isCloned);
     
     /* Virtual Methods */
 
     /* 0x008 */ virtual ~PlayerBase();
 
     /* Class Methods */
+
     void SetupGlobalParams();
     void fn_8006B2C0(); // likely cut
     float GetGravityCorrection();
@@ -110,8 +111,9 @@ public:
     void SetPlayerState(int newState);
     void fn_80081158();
     void ResetWalkAnimSpeed();
+    void fn_8009CA20(bool);
 
-    void SetStartPosition(nw4r::math::VEC3& rPos);
+    void SetStartPosition(const gfl::Vec3& rPos);
     bool IsStateDefault();
     void fn_8009C464(bool);
     void Reset(uint arg1, int playerState, int arg3, int arg4);
@@ -120,7 +122,9 @@ public:
     void SetFullSortScene(FullSortScene* pScene, int arg2);
 
     /* Static Methods */
-    static PlayerBase* Build(gfl::Task* pGameMgrTask, uint flags, uint unk1, uint unk2);
+
+    static PlayerBase* Build(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, int);
+    static PlayerBase* BuildCloned(gfl::Task* pParentTask, FullSortScene* pScene, uint flags, int);
     
     /* Class Members */
     

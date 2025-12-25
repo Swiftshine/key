@@ -1,3 +1,4 @@
+// rodata
 const char player_normal3[] = "/player_normal3";
 const char WAIT_FRAME_ROLLED_GET[] = "WAIT_FRAME_ROLLED_GET";
 const char SECOND_ATTACK_MOT_FRAME[] = "SECOND_ATTACK_MOT_FRAME";
@@ -88,4 +89,53 @@ void PlayerBase::ResetWalkAnimSpeed() {
     }
 
     mWalkAnimSpeed = 1.0f;
+}
+
+PlayerBase* PlayerBase::Build(
+    gfl::Task* pParentTask,
+    uint flags,
+    FullSortScene* pScene,
+    int arg4
+) {
+    PlayerBase* player = new (gfl::HeapID::Work) PlayerBase(
+        pParentTask,
+        flags,
+        pScene,
+        arg4,
+        false
+    );
+
+    player->SetStartPosition(gfl::Vec3(0.0f));
+
+    return player;
+}
+
+PlayerBase* PlayerBase::BuildCloned(
+    gfl::Task* pParentTask,
+    FullSortScene* pScene,
+    uint flags,
+    int arg4
+) {
+    PlayerBase* player = new (gfl::HeapID::Work) PlayerBase(
+        pParentTask,
+        flags,
+        pScene,
+        arg4,
+        true
+    );
+    
+    player->SetStartPosition(gfl::Vec3(0.0f));
+    player->fn_8009CA20(true);
+    player->mPlayerMdlMng->fn_800A0A84();
+    player->SetFullSortScene(pScene, 0);
+
+    return player;
+}
+
+void FlfGameObj::Destroy(FlfGameObj* pTarget) {
+    delete pTarget;
+}
+
+void PlayerBase::fn_8009CA20(bool arg1) {
+    m_501 = arg1;
 }
