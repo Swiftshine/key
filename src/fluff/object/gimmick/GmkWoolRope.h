@@ -2,6 +2,7 @@
 #define FLUFF_GMKWOOLROPE_H
 
 #include "object/wool/WoolLinkObj.h"
+#include "object/wool/WoolLinkObjBase.h"
 #include "gfl/gflPointer.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/FlfMdlDraw.h"
@@ -38,38 +39,43 @@ public:
 
 public:
     GmkWoolRope(GmkWoolHook* firstHook, GmkWoolHook* secondHook, int woolColorIndex, uint arg4, void* arg5, const char* taskName);
-    virtual ~GmkWoolRope();
+
+    /* Virtual Methods */
+    
+    /* GmkWoolRope */
+
+    /* 0x08 */ virtual ~GmkWoolRope();
+    /* 0xC4 */ virtual void LoadTextures(WoolBaseTask::WoolBuildInfo* wBuildInfo, const char* path);
+    /* 0xC8 */ virtual void vfC8() DONT_INLINE_CLASS;
+    /* 0xCC */ virtual void vfCC() DONT_INLINE_CLASS;
+    /* 0xD0 */ virtual void SetHooks(GmkWoolHook* first, GmkWoolHook* second) DONT_INLINE_CLASS;
+    /* 0xD4 */ virtual void vfD4() DONT_INLINE_CLASS;
+    /* 0xD8 */ virtual void vfD8() DONT_INLINE_CLASS;
+
+    /* Overrides */
 
     /* FlfGameObj */
-    virtual ScreenPosition GetScreenPosition() override;
+
+    /* 0x38 */ virtual ScreenPosition GetScreenPosition() override;
 
     /* Gimmick */
-    virtual void Update() override;
 
-    /* GmkWoolRope */
-    virtual void LoadTextures(WoolBaseTask::WoolBuildInfo* wBuildInfo, const char* path);
-    virtual void vfC8() DONT_INLINE_CLASS;
-    virtual void vfCC() DONT_INLINE_CLASS;
-    virtual void SetHooks(GmkWoolHook* first, GmkWoolHook* second) DONT_INLINE_CLASS;
-    virtual void vfD4() DONT_INLINE_CLASS;
-    virtual void vfD8() DONT_INLINE_CLASS;
-private:
-    uint m_130;
-    uint m_134;
-    uint m_138;
-    uint m_13C;
-    uint m_140;
+    /* 0xBC */ virtual void Update() override;
+    
+    /* Class Members */
 
-    // mWoolLink is actually a `WoolLinkObjBase`, not a `WoolLinkObj`.
-    // `WoolLinkObj` does *not* inherit from `WoolLinkObjBase`, however
-    WoolLinkObj* mWoolLink;
-
-    int mWoolColorIndex;
-    uint m_14C;
-    GmkWoolHook* mFirstWoolHook;
-    GmkWoolHook* mSecondWoolHook;
-    void* m_158;
-    gfl::ResFileObject mResFileInfo;
+    /* 0x130 */ int m_130;
+    /* 0x134 */ int m_134;
+    /* 0x138 */ int m_138;
+    /* 0x13C */ int m_13C;
+    /* 0x140 */ int m_140;
+    /* 0x144 */ WoolLinkObjBase* mWoolLink;
+    /* 0x148 */ int mWoolColor;
+    /* 0x14C */ uint m_14C;
+    /* 0x150 */ GmkWoolHook* mFirstWoolHook;
+    /* 0x154 */ GmkWoolHook* mSecondWoolHook;
+    /* 0x158 */ void* m_158;
+    /* 0x15C */ gfl::ResFileObject mResFileObject;
 };
 
 // ASSERT_SIZE(GmkWoolRope, 0x160);

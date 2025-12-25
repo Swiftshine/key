@@ -16,10 +16,10 @@ GmkWoolRope::GmkWoolRope(GmkWoolHook* first, GmkWoolHook* second, int colorIndex
     m_13C = 0;
     m_140 = 0;
     mWoolLink = nullptr;
-    mWoolColorIndex = colorIndex;
+    mWoolColor = colorIndex;
     m_14C = arg4;
     m_158 = arg5;
-    mResFileInfo = nullptr;
+    mResFileObject = nullptr;
     SetHooks(first, second);
 }
 
@@ -144,9 +144,9 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* wBuildInfo, const ch
 }
 
 void GmkWoolRope::Update() {
-    mWoolLink->vf70();
+    mWoolLink->Update();
 
-    if (0 == m_130) {
+    if (m_130 == 0) {
         vfD4();
     }
 }
