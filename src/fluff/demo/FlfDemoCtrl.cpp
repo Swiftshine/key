@@ -245,7 +245,7 @@ FlfDemoPlayerCtrl::FlfDemoPlayerCtrl(nw4r::g3d::ResNode resNode, std::string& na
         mIsPlayerStateDefault = mPlayer->IsStateDefault();
         mPlayer->fn_8009C464(true);
         mPlayer->Reset(1, PlayerBase::PlayerState::TouchGround, 0, 10);
-        mPlayer->SetIsControlled(true);
+        mPlayer->mIsDemoControlled = true;
     }
 }
 
@@ -255,7 +255,7 @@ FlfDemoPlayerCtrl::~FlfDemoPlayerCtrl() {
             mPlayer->Reset(0, PlayerBase::PlayerState::TouchGround, 0, 10);
         }
 
-        FlfMdlCollision* flfMdlCollision = mPlayer->GetFlfMdlCollision();
+        FlfMdlCollision* flfMdlCollision = mPlayer->mFlfMdlCollision;
 
         if (flfMdlCollision != nullptr && m_25) {
             flfMdlCollision->fn_800F0B48(m_26);
@@ -265,34 +265,34 @@ FlfDemoPlayerCtrl::~FlfDemoPlayerCtrl() {
             GameManager::UpdatePrinceFluff(false);
         }
 
-        mPlayer->SetIsControlled(false);
+        mPlayer->mIsDemoControlled = false;
         mPlayer = nullptr;
     }
 }
 
 void FlfDemoPlayerCtrl::vf1C() {
     if (mPlayer != nullptr) {
-        mPlayer->GetPlayerMdlMng()->fn_800A0A84();
+        mPlayer->mPlayerMdlMng->fn_800A0A84();
     }
 }
 
 void FlfDemoPlayerCtrl::vf18(float arg0) {
     FlfDemoNodeCtrl::vf18(arg0);
 
-    if (mPlayer != nullptr && mPlayer->GetFlfMdlCollision() != nullptr) {
+    if (mPlayer != nullptr && mPlayer->mFlfMdlCollision != nullptr) {
         if (!m_25) {
-            m_26 = mPlayer->GetFlfMdlCollision()->fn_800F0BC0(0);
+            m_26 = mPlayer->mFlfMdlCollision->fn_800F0BC0(0);
             m_25 = true;
         }
 
-        mPlayer->GetFlfMdlCollision()->fn_800F0B48(false);
-        mPlayer->SetUnk78C(0);
+        mPlayer->mFlfMdlCollision->fn_800F0B48(false);
+        mPlayer->m_78C = 0;
     }
 }
 
 uint FlfDemoPlayerCtrl::vf20() {
     if (mPlayer != nullptr) {
-        return mPlayer->GetPlayerMdlMng()->GetFlfMdlDraw()->m_20;
+        return mPlayer->mPlayerMdlMng->GetFlfMdlDraw()->m_20;
     }
 
     return 0;
@@ -322,13 +322,13 @@ void FlfDemoPlayerCtrl::SetCurrentFrame(int frame) {
     mCurrentFrame = frame;
     
     if (mPlayer != nullptr) {
-        mPlayer->GetPlayerMdlMng()->GetFlfMdlDraw()->SetCurrentFrameInt(frame);
+        mPlayer->mPlayerMdlMng->GetFlfMdlDraw()->SetCurrentFrameInt(frame);
     }
 }
 
 void FlfDemoPlayerCtrl::SetUpdateRate(float rate) {
     if (mPlayer != nullptr) {
-        mPlayer->GetPlayerMdlMng()->SetUpdateRate(rate);
+        mPlayer->mPlayerMdlMng->SetUpdateRate(rate);
     }
 }
 
@@ -340,7 +340,7 @@ void FlfDemoPlayerCtrl::SetFullSortScene(uint sceneID) {
 
 void FlfDemoPlayerCtrl::SetVisibility(bool visibility) {
     if (mPlayer != nullptr) {
-        mPlayer->GetPlayerMdlMng()->SetVisibility(visibility);
+        mPlayer->mPlayerMdlMng->SetVisibility(visibility);
     }
 }
 

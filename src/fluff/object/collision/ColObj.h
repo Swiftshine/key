@@ -61,4 +61,6 @@ public:
 
 ASSERT_SIZE(ColObjTrans, 0x24)
 
+class ColObjMod;
+
 #endif

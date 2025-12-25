@@ -98,6 +98,9 @@ fluff/env/EnvObject.cpp:
 fluff/env/EnvUnitBase.cpp:
 	.text       start:0x80066FF4 end:0x8006728C
 
+fluff/object/PlayerBase.cpp:
+	.text       start:0x80097F94 end:0x8009DCC0
+
 fluff/object/gimmick/GmkColAnimMdl.cpp:
 	.text       start:0x800D591C end:0x800D62B8
 

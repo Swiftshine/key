@@ -151,8 +151,8 @@ public:
     /* Class Members */
 
     /* 0x04 */ std::vector<InnerKeyFrame> mInnerKeyFrames;
-    /* 0x10 */ T mCurrentFrame;
-    /* 0x14 */ T mIncrementAmount;
+    /* 0x10 */ float mCurrentFrame;
+    /* 0x14 */ float mIncrementAmount;
     /* 0x18 */ bool mHasFrames;
 };
 
