@@ -21,6 +21,7 @@
 #include "graphics/NURBSDrawObj.h"
 
 #include "object/player/HenshinCtrl.h"
+#include "object/player/HenshinSubmarine.h"
 
 /// @brief The player class.
 /// @note Size: `0xF68`
@@ -32,6 +33,13 @@ class PlayerBase : public FlfGameObj, public IObjHitCB {
         uint blah[3];
     };
 public:
+    /* Static Variables */
+
+    static float sQUICK_SAND_SPDY_COR;
+    static int sWAIT_FRAME_ROLLED_GET;
+    static int sZ_ATK_TEST;
+    static float sSECOND_ATTACK_MOT_FRAME;
+
     /* Structures */
 
     class PlayerBaseCallbacks2 { // ?
@@ -95,6 +103,13 @@ public:
     /* 0x008 */ virtual ~PlayerBase();
 
     /* Class Methods */
+    void SetupGlobalParams();
+    void fn_8006B2C0(); // likely cut
+    float GetGravityCorrection();
+    void ResetState();
+    void SetPlayerState(int newState);
+    void fn_80081158();
+    void ResetWalkAnimSpeed();
 
     void SetStartPosition(nw4r::math::VEC3& rPos);
     bool IsStateDefault();
@@ -194,7 +209,7 @@ public:
     /* 0x764 */ STRUCT_FILL(0x20);
     /* 0x784 */ ColObjTrans* mColObjTrans;
     /* 0x788 */ FlfMdlCollision* mFlfMdlCollision;
-    /* 0x78C */ int m_78C;
+    /* 0x78C */ uint m_78C;
     /* 0x790 */ STRUCT_FILL(0x64);
     /* 0x7F4 */ CollisionInfo* mColInfo_objHit_Atk_Horizon;
     /* 0x7F8 */ STRUCT_FILL(0x1C);

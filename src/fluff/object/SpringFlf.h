@@ -6,6 +6,8 @@
 /// @note Size: 0x584
 class SpringFlf : public SpringBase {
 public:
+    void fn_800B4FE0(int);
+    
     STRUCT_FILL(0x584 - 0x150);
 };
 

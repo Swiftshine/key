@@ -9,6 +9,7 @@
 namespace gfl {
     class ParamStr;
     class ParamS32;
+    class ParamF32;
     class ParamBool;
     class ParamS32A;
     class ParamF32A;
@@ -31,6 +32,12 @@ namespace gfl {
 
         bool Matches(const char* pQuery, uint queryChecksum);
         void PrintTabs(Console* pConsole, uint count);
+
+        /* Utility Inlines */
+        
+        inline ParamF32* ToParamF32() {
+            return (ParamF32*)this;
+        }
 
         /* Class Members */
 
@@ -97,7 +104,12 @@ namespace gfl {
 
     class ParamGroup : public Param {
     public:
-        static bool GetGlobalBool(const char* param);
+        static Param* GetGlobalParam(const char* pName);
+        static bool GetGlobalBool(const char* pName);
+        static ParamGroup* GetGlobalParamGroup(const char* pName);
+
+        ParamS32* GetS32Param(const char*);
+        ParamF32* GetF32Param(const char*);
     };
 }
 

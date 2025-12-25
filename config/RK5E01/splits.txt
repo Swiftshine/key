@@ -99,7 +99,10 @@ fluff/env/EnvUnitBase.cpp:
 	.text       start:0x80066FF4 end:0x8006728C
 
 fluff/object/PlayerBase.cpp:
-	.text       start:0x80097F94 end:0x8009DCC0
+	.text       start:0x8006A83C end:0x8009DCC0
+	.ctors      start:0x807E3468 end:0x807E346C
+	.rodata     start:0x807E8B40 end:0x807E8F24
+	.sbss       start:0x808E4E20 end:0x808E4E60
 
 fluff/object/gimmick/GmkColAnimMdl.cpp:
 	.text       start:0x800D591C end:0x800D62B8

@@ -14,6 +14,7 @@ public:
     void fn_800A0A84();
     void SetUpdateRate(float rate);
     void SetVisibility(bool visibility);
+    void ResetUpdateRate();
     
     FlfMdlDraw* GetFlfMdlDraw() {
         return *(reinterpret_cast<FlfMdlDraw**>(reinterpret_cast<u8*>(this) + 0x10));

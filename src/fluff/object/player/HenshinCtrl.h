@@ -17,7 +17,6 @@ public:
 };
 
 // todo - make separate headers for these
-class HenshinSubmarine : public HenshinCtrl { };
 class HenshinString : public HenshinCtrl { };
 class HenshinBoat : public HenshinCtrl { };
 class HenshinRobot : public HenshinCtrl { };
