@@ -131,7 +131,7 @@ public:
     /* 0x084 */ PTMF mCallbackMethods[93]; // not actually an array
     /* 0x4E0 */ gfl::Task mTask;
     /* 0x4F8 */ PlayerBaseCallbacks2* mCallbacks2;
-    /* 0x4FC */ NURBSDrawObj* mNURBSDrawObj;
+    /* 0x4FC */ FullSortScene* mFullSortScene;
     /* 0x500 */ bool m_500;
     /* 0x501 */ bool m_501;
     /* 0x502 */ bool m_502;
