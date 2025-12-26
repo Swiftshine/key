@@ -202,11 +202,11 @@ bool GmkBeadPopItem::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther
     return false;
 }
 
-extern "C" void TRKUARTInterruptHandler();
+extern "C" void DefaultSwitchThreadCallback();
 
 inline void CutFunction() {
     // a temporary workaround for code merging
-    TRKUARTInterruptHandler();
+    DefaultSwitchThreadCallback();
 }
 
 // mr r3, r9 is in the wrong place

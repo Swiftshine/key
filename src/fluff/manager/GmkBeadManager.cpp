@@ -59,11 +59,11 @@ GmkBeadManager::GmkBeadManager_Info* GmkBeadManager::GetInfoIfHandlePresent(
     return nullptr;
 }
 
-extern "C" void TRKUARTInterruptHandler();
+extern "C" void DefaultSwitchThreadCallback();
 
 inline void CutFunction() {
     // a temporary workaround for code merging
-    TRKUARTInterruptHandler();
+    DefaultSwitchThreadCallback();
 }
 
 // https://decomp.me/scratch/wZpkl

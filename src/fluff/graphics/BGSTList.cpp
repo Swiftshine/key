@@ -29,9 +29,9 @@ void BGST::List::SetBit(size_t index) {
 
 // u16 BGST::List::GetNextImageIndex() { }
 
-extern "C" void TRKUARTInterruptHandler(void*);
+extern "C" void DefaultSwitchThreadCallback(void*);
 void BGST::List::CutFunction() {
-    TRKUARTInterruptHandler(this);
+    DefaultSwitchThreadCallback(this);
 }
 
 bool BGST::List::AssignImageIndices(BGST::EntryInfo* pEntryInfo) {
