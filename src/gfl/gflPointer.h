@@ -30,16 +30,8 @@ namespace gfl {
             return mPointer == other;
         }
 
-        inline bool operator==(PointerBase* other) const {
-            return mPointer == other->Get();
-        }
-
         inline bool operator!=(T* other) const {
             return mPointer != other;
-        }
-
-        inline bool operator!=(PointerBase* other) const {
-            return mPointer != other->Get();
         }
 
         inline T& operator*() const {

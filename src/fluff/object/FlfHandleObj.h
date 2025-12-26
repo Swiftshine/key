@@ -24,6 +24,7 @@ public:
     inline FlfHandle(const FlfHandleObj* pHandleObj);
 
     /* Helpful Inlines */
+
     inline void SetID(uint id) {
         mHandleID = id;
     }
@@ -43,6 +44,8 @@ public:
     inline void ClearObject() {
         *mObject = nullptr;
     }
+
+    inline FlfHandleObj* TryGetHandleObj() const;
 
     inline void operator=(const FlfHandle& rOther) {
         mObject = rOther.mObject;
@@ -71,6 +74,7 @@ public:
     /* 0x8 */ virtual ~FlfHandleObj();
 
     /* Helpful Inlines */
+
     inline void SetHandleID(uint id) {
         mHandle.SetID(id);
     }
@@ -109,6 +113,17 @@ inline FlfHandle::FlfHandle(const FlfHandleObj* pHandleObj) {
         mObject = nullptr;
         mHandleID = 0;
     }
+}
+
+inline FlfHandleObj* FlfHandle::TryGetHandleObj() const {
+    FlfHandleObj** objPtr = GetObject();
+    if (objPtr != nullptr &&
+        *objPtr != nullptr &&
+        GetID() == (*objPtr)->GetHandleID())
+    {
+        return *objPtr;
+    }
+    return nullptr;
 }
 
 // used for doing something if the given handle is valid.

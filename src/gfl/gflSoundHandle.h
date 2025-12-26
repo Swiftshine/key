@@ -2,8 +2,9 @@
 #define FLUFF_SOUNDHANDLE_H
 
 #include "types.h"
-#include "gfl/gflSoundHandleInner.h"
 #include <nw4r/math.h>
+#include "gfl/gflSoundHandleInner.h"
+#include "gfl/gflVec3.h"
 
 namespace gfl {
     class SoundHandle {
@@ -60,7 +61,7 @@ namespace gfl {
 
         static SoundHandle CreateSoundHandle(int soundID, int arg1);
 
-        static SoundHandle PlaySound(nw4r::math::VEC3& rPos, uint soundID, int, int);
+        static SoundHandle PlaySound(const gfl::Vec3& rPos, uint soundID, int, int);
 
     // private:
         /* Class Members */

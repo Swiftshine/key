@@ -4,6 +4,8 @@
 #include "env/EnvManager_Sound.h"
 #include "env/EnvParts_PlayGuideIconLocator.h"
 
+#include "graphics/FlfMdlDraw.h"
+
 #include "object/FlfHandleObj.h"
 
 #include "object/collision/FlfMdlCollision.h"
@@ -62,7 +64,7 @@ public:
     /* 0x0A0 */ virtual void vfA0();
     /* 0x0A4 */ virtual void vfA4();
     /* 0x0A8 */ virtual void vfA8();
-    /* 0x0AC */ virtual void vfAC();
+    /* 0x0AC */ virtual void Init(const gfl::Vec3& rPos);
     /* 0x0B0 */ virtual void vfB0();
     /* 0x0B4 */ virtual void vfB4();
     /* 0x0B8 */ virtual void vfB8();
@@ -74,7 +76,7 @@ public:
     /* 0x0D0 */ virtual void vfD0();
     /* 0x0D4 */ virtual void vfD4();
     /* 0x0D8 */ virtual void vfD8();
-    /* 0x0DC */ virtual void vfDC();
+    /* 0x0DC */ virtual void vfDC(FlfMdlDraw* pFlfMdlDraw);
     /* 0x0E0 */ virtual void vfE0();
     /* 0x0E4 */ virtual void vfE4();
     /* 0x0E8 */ virtual void vfE8();
@@ -102,10 +104,10 @@ public:
     /* 0x0C */ gfl::Vec3 mPosition;
     /* 0x18 */ int m_18;
     /* 0x1C */ FlfMdlCollision* mFlfMdlCollision;
-    /* 0x20 */ int m_20;
-    /* 0x24 */ int m_24;
+    /* 0x20 */ int mCurrentState;
+    /* 0x24 */ int mPreviousState;
     /* 0x28 */ int m_28;
-    /* 0x2C */ int m_2C;
+    /* 0x2C */ uint m_2C;
     /* 0x30 */ int m_30;
     /* 0x34 */ gfl::Pointer<gfl::SoundFadeCtrl> mSoundFadeCtrl;
     /* 0x38 */ gfl::Vec3 m_38;
