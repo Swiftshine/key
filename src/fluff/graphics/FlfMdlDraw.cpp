@@ -21,7 +21,7 @@ FlfMdlDraw::FlfMdlDraw(
     , m_4C(nullptr)
     , mNURBSAnimWrapper(nullptr)
     , mNURBSAnimWrapper2(nullptr)
-    , m_58(0)
+    , mFlags(0)
     , mCurrentFrame(0.0f)
     , mCurrentFrameInt(10)
     , m_68(0)

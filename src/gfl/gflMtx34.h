@@ -25,6 +25,10 @@ public:
         mtx[2][3] = 0.0f;
     }
 
+    Mtx34(const nw4r::math::MTX34& rOther) {
+        *this = (const Mtx34&)rOther;
+    }
+
     operator nw4r::math::MTX34&() {
         return *this;
     }

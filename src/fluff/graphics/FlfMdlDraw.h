@@ -114,11 +114,16 @@ public:
 
     /* Class Methods */
     
+    void fn_80023CB4(bool);
+    nw4r::g3d::G3dObj* GetBlendAnmMatCtrlAnim(uint index);
+    void fn_80147C28(int, float);
+    void fn_80025204(float);
+    float fn_800252AC();
     void LoadNURBSFromFileList();
     void LoadNURBSFromFileList(int* pIndices /* ? */, int count);
     void SetVisibility(bool visible);
     void ResetNURBSAnimation(int, bool);
-    void SetWoolDrawMatrix(nw4r::math::MTX34&);
+    void SetWoolDrawMatrix(const nw4r::math::MTX34&);
     bool fn_800239CC();
     void fn_80023D38();
     void SetUpdateRate(float rate);
@@ -163,7 +168,7 @@ public:
     /* 0x04C */ NURBSModelWrapper* m_4C;
     /* 0x050 */ NURBSAnimWrapper* mNURBSAnimWrapper;
     /* 0x054 */ NURBSAnimWrapper* mNURBSAnimWrapper2;
-    /* 0x058 */ int m_58;
+    /* 0x058 */ uint mFlags;
     /* 0x05C */ float mCurrentFrame;
     /* 0x060 */ uint mCurrentFrameInt;
     /* 0x064 */ int m_64;
