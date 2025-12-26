@@ -58,9 +58,7 @@ void HenshinCtrl::Init(const gfl::Vec3& rPos) {
 }
 
 void HenshinCtrl::vfB0() {
-    gfl::SoundFadeCtrl* fade = mSoundFadeCtrl;
-
-    if (fade == nullptr) {
+    if (mSoundFadeCtrl == nullptr) {
         return;
     }
 
@@ -91,7 +89,7 @@ void HenshinCtrl::vfB0() {
         }
         
         case 3: {
-            fade->vfC(1.0f, 0, 0x1E);
+            mSoundFadeCtrl->vfC(1.0f, 0, 0x1E);
             mPreviousState = mCurrentState;
             mCurrentState = 0;
             m_28 = 0;
