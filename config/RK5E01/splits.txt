@@ -120,6 +120,9 @@ fluff/util/FullSortSceneUtil.cpp:
 	.text       start:0x800EA874 end:0x800EA8C8
 	.data       start:0x80842188 end:0x80842210
 
+fluff/manager/EnemyMdlManager.cpp:
+	.text       start:0x80111B7C end:0x801129BC
+
 fluff/object/gimmick/GmkWarpOut.cpp:
 	.text       start:0x80146B6C end:0x80146D8C
 	.rodata     start:0x807F22E8 end:0x807F2300

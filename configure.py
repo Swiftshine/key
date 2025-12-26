@@ -533,6 +533,7 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects": [
+            Object(NonMatching, "fluff/manager/EnemyMdlManager.cpp"),
             Object(NonMatching, "fluff/manager/GmkBeadManager.cpp"),
             Object(NonMatching, "fluff/manager/GmkMng.cpp"),
             Object(Matching,    "fluff/manager/LevelManager.cpp"),
