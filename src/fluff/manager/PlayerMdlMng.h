@@ -15,6 +15,7 @@ public:
     void SetUpdateRate(float rate);
     void SetVisibility(bool visibility);
     void ResetUpdateRate();
+    void ResetScene(FullSortScene*);
     
     FlfMdlDraw* GetFlfMdlDraw() {
         return *(reinterpret_cast<FlfMdlDraw**>(reinterpret_cast<u8*>(this) + 0x10));

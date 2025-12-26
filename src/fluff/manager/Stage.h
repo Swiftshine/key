@@ -28,6 +28,7 @@ public:
     
     /* Class Methods */
 
+    uint GetFullSortSceneIndex(FullSortScene* pScene);
     FullSortScene* GetFullSortSceneByID(uint sceneID);
 
     Mapdata* GetLevelSection(int section);

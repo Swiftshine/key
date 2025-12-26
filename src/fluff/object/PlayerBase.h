@@ -113,13 +113,16 @@ public:
     void ResetWalkAnimSpeed();
     void fn_8009CA20(bool);
 
+    void SetPosition(const gfl::Vec3&, bool);
+    void GetSavedPosition(gfl::Vec3& rDst) const;
     void SetStartPosition(const gfl::Vec3& rPos);
     bool IsStateDefault();
     void fn_8009C464(bool);
     void Reset(uint arg1, int playerState, int arg3, int arg4);
     uint GetPlayerID();
     void PlayAnimation(int id);
-    void SetFullSortScene(FullSortScene* pScene, int arg2);
+    /// @return The previous scene. 
+    FullSortScene* ResetScene(FullSortScene* pScene, bool resetPosition);
 
     /* Static Methods */
 

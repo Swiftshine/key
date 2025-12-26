@@ -112,7 +112,7 @@ namespace gfl {
         }
 
         inline void Create(T* ptr) {
-            if (nullptr == ptr) {
+            if (ptr == nullptr) {
                 Destroy();
             } else {
                 mPointer = ptr;

@@ -21,6 +21,8 @@ public:
         , mHandleID(rOther.mHandleID)
     { }
 
+    inline FlfHandle(const FlfHandleObj* pHandleObj);
+
     /* Helpful Inlines */
     inline void SetID(uint id) {
         mHandleID = id;
@@ -95,6 +97,19 @@ public:
 };
 
 ASSERT_SIZE(FlfHandleObj, 0xC);
+
+inline FlfHandle::FlfHandle(const FlfHandleObj* pHandleObj) {
+    mObject = nullptr;
+    mHandleID = 0;
+    
+    if (pHandleObj != nullptr) {
+        mObject = pHandleObj->mHandle.mObject;
+        mHandleID = pHandleObj->mHandle.mHandleID;
+    } else {
+        mObject = nullptr;
+        mHandleID = 0;
+    }
+}
 
 // used for doing something if the given handle is valid.
 #define FLFHANDLEOBJ_DO_IF_VALID(handle, handleObjPtr) \

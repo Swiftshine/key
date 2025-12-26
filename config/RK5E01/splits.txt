@@ -142,6 +142,10 @@ fluff/object/FlfHandleList.cpp:
 fluff/object/collision/FlfRideHitBase.cpp:
 	.text       start:0x80183CD8 end:0x80184080
 
+fluff/object/player/HenshinCtrl.cpp:
+	.text       start:0x8019E680 end:0x801A0E50
+	.data       start:0x8084D5F8 end:0x8084D728
+
 fluff/object/gimmick/GmkWarpExit.cpp:
 	.text       start:0x801B5164 end:0x801B5480
 

@@ -334,7 +334,7 @@ void FlfDemoPlayerCtrl::SetUpdateRate(float rate) {
 
 void FlfDemoPlayerCtrl::SetFullSortScene(uint sceneID) {
     if (mPlayer != nullptr) {
-        mPlayer->SetFullSortScene(Stage::Instance()->GetFullSortSceneByID(sceneID), 0);
+        mPlayer->ResetScene(Stage::Instance()->GetFullSortSceneByID(sceneID), 0);
     }
 }
 

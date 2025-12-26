@@ -9,6 +9,9 @@ const char Z_ATK_TEST[] = "Z_ATK_TEST";
 
 #include "object/PlayerBase.h"
 
+#include "manager/Stage.h"
+#include "util/FullSortSceneUtil.h"
+
 void PlayerBase::SetupGlobalParams() {
     gfl::ParamGroup* group = gfl::ParamGroup::GetGlobalParamGroup(player_normal3);
     sWAIT_FRAME_ROLLED_GET = group->GetS32Param(WAIT_FRAME_ROLLED_GET)->mValue;
@@ -127,7 +130,7 @@ PlayerBase* PlayerBase::BuildCloned(
     player->SetStartPosition(gfl::Vec3(0.0f));
     player->fn_8009CA20(true);
     player->mPlayerMdlMng->fn_800A0A84();
-    player->SetFullSortScene(pScene, 0);
+    player->ResetScene(pScene, 0);
 
     return player;
 }
@@ -138,4 +141,29 @@ void FlfGameObj::Destroy(FlfGameObj* pTarget) {
 
 void PlayerBase::fn_8009CA20(bool arg1) {
     m_501 = arg1;
+}
+
+FullSortScene* PlayerBase::ResetScene(FullSortScene* pScene, bool resetPosition) {
+    mSpringFlf->ResetScene(pScene);
+    mPlayerMdlMng->ResetScene(pScene);
+
+    if (mCurrentTransformation != nullptr) {
+        mCurrentTransformation->ResetScene(pScene);
+    }
+
+    FullSortScene* prev = mFullSortScene;
+    mFullSortScene = pScene;
+
+    if (resetPosition) {
+        uint index = Stage::Instance()->GetFullSortSceneIndex(pScene);
+        float z = FullSortSceneUtil::GetZOrder(index, 4);
+
+        gfl::Vec3 pos(0.0f);
+        GetSavedPosition(pos);
+        pos.z = z;
+
+        SetPosition(gfl::Vec3(pos), false);
+    }
+
+    return prev;
 }

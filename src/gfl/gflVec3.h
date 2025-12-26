@@ -79,13 +79,6 @@ namespace gfl {
             y = rOther.y;
             z = rOther.z;
         }
-        
-        inline Vec3(const Vec3& rOther) {
-            x = rOther.x;
-            y = rOther.y;
-            z = rOther.z;
-        }
-
     
         inline Vec3(float val) {
             x = val;

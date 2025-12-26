@@ -523,6 +523,7 @@ config.libs = [
             Object(Matching,        "fluff/object/FlfGameObjLocator.cpp"),
             Object(NonMatching,     "fluff/object/PlayerBase.cpp"),
             Object(NonMatching,     "fluff/object/SpringBase.cpp"),
+            Object(NonMatching,     "fluff/object/player/HenshinCtrl.cpp",)
         ],
     },
     {
