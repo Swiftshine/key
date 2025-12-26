@@ -1,6 +1,7 @@
 #include "gfl/gflSoundHandle.h"
 #include "object/player/HenshinCtrl.h"
 #include "object/PlayerBase.h"
+#include "manager/GameManager.h"
 
 HenshinCtrl::HenshinCtrl(PlayerBase* pPlayer)
     : mPlayerHandle(pPlayer)
@@ -99,3 +100,13 @@ void HenshinCtrl::vfB0() {
         }
     }
 }
+
+void HenshinCtrl::vfB4() { }
+
+bool HenshinCtrl::vfD8(float arg1, PlayerBase* pPlayer, PlTransMdl* pPlTransMdl) {
+    // not decompiled
+    return true;
+}
+
+void HenshinCtrl::vf2C() { }
+

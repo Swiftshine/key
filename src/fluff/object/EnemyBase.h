@@ -8,6 +8,8 @@
 #include "object/MoveTarget.h"
 #include "gfl/gflTask.h"
 
+/// @brief Base class for enemies and similar entities.
+/// @note Size: `0x1774`
 class EnemyBase : public FlfGameObj, public IObjHitCB, public demo::EventDemoAttachment {
 public:
 

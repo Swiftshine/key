@@ -13,8 +13,8 @@ public:
 
     /* Class Members */
 
-    /* 0x04 */ int m_4;
-    /* 0x08 */ int m_8;
+    /* 0x04 */ int mCurrentState;
+    /* 0x08 */ int mPreviousState;
     /* 0x0C */ int m_C;
     /* 0x10 */ int m_10;
     /* 0x14 */ int m_14;

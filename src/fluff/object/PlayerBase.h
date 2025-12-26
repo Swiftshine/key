@@ -12,16 +12,18 @@
 
 #include "object/FlfGameObj.h"
 #include "object/SpringFlf.h"
-#include "object/collision/IObjHitCB.h"
-#include "object/collision/FlfMdlCollision.h"
-#include "object/collision/ColObj.h"
 #include "object/collision/CollisionEntry.h"
+#include "object/collision/ColObj.h"
+#include "object/collision/FlfMdlCollision.h"
+#include "object/collision/IObjHitCB.h"
+#include "object/helper/HelperRobot.h"
+#include "object/player/HenshinCtrl.h"
+#include "object/player/HenshinSubmarine.h"
 
 #include "graphics/KeyFrame.h"
 #include "graphics/NURBSDrawObj.h"
+#include "graphics/PlParabola.h"
 
-#include "object/player/HenshinCtrl.h"
-#include "object/player/HenshinSubmarine.h"
 
 /// @brief The player class.
 /// @note Size: `0xF68`
@@ -234,13 +236,21 @@ public:
     /* 0xC1C */ int mDefaultState;
     /* 0xC20 */ STRUCT_FILL(0x8);
     /* 0xC28 */ uint m_C28; // flags of some sort
-    /* 0xC2C */ STRUCT_FILL(0x30);
+    /// (Probably) in milliseconds. Refers to player action, not input.
+    /// At ~9-10 seconds of inaction, an idle animation will play, and this field
+    /// is reset.
+    /* 0xC2C */ uint mTimeIdle;
+    /* 0xC30 */ STRUCT_FILL(0x2C);
     /* 0xC5C */ float m_C5C[10];
     /* 0xC84 */ STRUCT_FILL(0x14);
     /* 0xC98 */ int m_C98;
     /* 0xC9C */ KeyFrame<gfl::Vec3> mKeyFrames;
     /* 0xCB8 */ SpringFlf* mSpringFlf;
-    /* 0xCBC */ STRUCT_FILL(0x70);
+    /* 0xCBC */ int m_CBC;
+    /* 0xCC0 */ int m_CC0;
+    /* 0xCC4 */ int m_CC4;
+    /* 0xCC8 */ int m_CC8;
+    /* 0xCCC */ PlParabola mPlParabola;
     /* 0xD2C */ PlConfluenceMng mPlConfluenceMng;
     /* 0xD58 */ PlPathMoveMng mPlPathMoveMng;
     /* 0xDBC */ STRUCT_FILL(0x60);
@@ -263,8 +273,10 @@ public:
     /* 0xF0C */ HenshinUFO* mTransformUFO;
     /* 0xF10 */ HenshinBrightRobot* mTransformBrightRobot;
     /* 0xF14 */ HenshinTrainFree* mTransformTrainFree;
-    /* 0xF18 */ STRUCT_FILL(0x20);
-    /* 0xF38 */ bool m_F38;
+    /* 0xF18 */ int m_F18;
+    /* 0xF1C */ HelperRobot* mHelperRobot;
+    /* 0xF20 */ STRUCT_FILL(0x18);
+    /* 0xF38 */ bool mIsCloned;
     /* 0xF39 */ bool mIsDemoControlled;
     /* 0xF3C */ gfl::Vec2 m_F3C;
     /* 0xF44 */ bool mCanCaptureBlocks;
