@@ -38,4 +38,20 @@ public:
     }
 };
 
+// calls some method at vtable + 0xC, but it's not a dtor
+// if you have to use this, it's probably the result of some
+// unused field getting cut
+class DummyPointer_C : public gfl::PointerBase<pvd8_t> {
+public:
+    inline DummyPointer_C(pvd8_t* p) {
+        mPointer = p;
+    }
+
+    ~DummyPointer_C() {
+        if (mPointer != nullptr) {
+            mPointer->DummyC();
+        }
+    }
+};
+
 #endif

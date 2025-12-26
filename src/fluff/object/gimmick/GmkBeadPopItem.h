@@ -10,24 +10,6 @@
 
 // this gimmick spawns in beads when touched
 class GmkBeadPopItem : public Gimmick, public IObjHitCB {
-private:
-    // this exists because
-    // 1) i don't know m_158 is, it's never used anywhere
-    // 2) vtable + 0xC is not a destructor
-    // 3) i need it to match
-    // 4) Good-Feel is not normal
-    class Dummy : public gfl::PointerBase<dummy_virtual_dtor8> {
-    public:
-        inline Dummy(dummy_virtual_dtor8* a) {
-            mPointer = a;
-        }
-
-        ~Dummy() {
-            if (mPointer != nullptr) {
-                mPointer->DummyC();
-            }
-        }
-    };
 public:
     ENUM_CLASS(State,
         Init = 0,
@@ -66,7 +48,7 @@ private:
     bool mCollisionEnabled; // @ 0x148
     bool m_149;
     std::string m_14C; // size: 0xC
-    Dummy m_158;
+    DummyPointer_C m_158;
     gfl::Pointer<NwAnmCtrl> mAnimCtrl; // @ 0x15C
     gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry; // @ 0x160
     gfl::Pointer<GmkBeadPopItem_Info> mPopItemInfo; // @ 0x164

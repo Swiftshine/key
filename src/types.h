@@ -19,8 +19,6 @@ typedef float MTX34[3][4];
 typedef uint32_t uint;
 typedef unsigned long ulong;
 
-
-
 typedef char string32[0x20];
 typedef char string64[0x40];
 
@@ -33,15 +31,12 @@ struct Rect {
 
 typedef int placeholder_t;
 
-typedef struct dummy_t { } dummy_t;
-struct dummy_virtual_dtor8 {
-    virtual ~dummy_virtual_dtor8();
-    virtual void DummyC();
-};
+struct dummy_t { };
 
-struct dummy_virtual_dtorC {
-    virtual void Dummy8();
-    virtual ~dummy_virtual_dtorC();
+// placeholder, virtual dtor @ 0x8
+struct pvd8_t {
+    virtual ~pvd8_t();
+    virtual void DummyC();
 };
 
 typedef uint64_t u64;

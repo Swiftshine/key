@@ -529,7 +529,7 @@ config.libs = [
     {
         "lib" : "fluff/manager",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_manager],
+        "cflags": cflags_fluff,
         "host": False,
         "progress_category": "fluff",
         "objects": [

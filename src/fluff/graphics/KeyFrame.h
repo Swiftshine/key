@@ -7,6 +7,8 @@
 #include "gfl/gflArray.h"
 #include "gfl/gflPointer.h"
 
+#include "misc/VectorWrapper.h"
+
 /// @note Size: `0x1C`
 template <typename T>
 class KeyFrame {
@@ -27,6 +29,7 @@ public:
         std::string mName;
     };
 
+    
 
     struct FrameTemplate {
         int mCount; // the number of start/end frames the structure uses
@@ -47,11 +50,13 @@ public:
     /* Virtual Methods */
 
     /* 0x8 */ inline virtual ~KeyFrame() { }
-    /* 0xC */ virtual void GetNextStartFrame(T mult, uint index, InnerKeyFrame* pDst) {
-        T cur = mInnerKeyFrames[index].mStart;
-        T delta = mInnerKeyFrames[index + 1].mStart - mInnerKeyFrames[index].mStart;
-        pDst->mStart = mInnerKeyFrames[index].mStart + delta * mult;
-    }
+
+    /* 0xC */ virtual void GetNextStartFrame(T mult, uint index, InnerKeyFrame* pDst);
+    // /* 0xC */ virtual void GetNextStartFrame(T mult, uint index, InnerKeyFrame* pDst) {
+    //     T cur = mInnerKeyFrames[index].mStart;
+    //     T delta = mInnerKeyFrames[index + 1].mStart - mInnerKeyFrames[index].mStart;
+    //     pDst->mStart = mInnerKeyFrames[index].mStart + delta * mult;
+    // }
 
     /* Class Methods */
 
@@ -150,7 +155,7 @@ public:
 
     /* Class Members */
 
-    /* 0x04 */ std::vector<InnerKeyFrame> mInnerKeyFrames;
+    /* 0x04 */ VectorWrapper<InnerKeyFrame> mInnerKeyFrames;
     /* 0x10 */ float mCurrentFrame;
     /* 0x14 */ float mIncrementAmount;
     /* 0x18 */ bool mHasFrames;
