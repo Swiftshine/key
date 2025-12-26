@@ -21,8 +21,9 @@ struct vec : _vec{
 };
 
 template <typename T>
-struct VectorWrapper {
+struct VectorWrapper : vec {
     ~VectorWrapper() { }
+    
     inline std::vector<T>& AsVector() {
         return *reinterpret_cast<std::vector<T>*>(this);
     }
@@ -41,7 +42,6 @@ struct VectorWrapper {
     inline T& back() {
         return AsVector().back();
     }
-    vec v;
 };
 
 #endif
