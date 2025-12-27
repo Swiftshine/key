@@ -151,6 +151,10 @@ namespace gfl {
 
         /* Class Methods */
 
+        /// @return If the all of the values were set to 0.
+        bool Sanitize();
+        bool Sanitize2(); // the same, but only checks x and y
+
         static inline float AngleRad(const Vec3& lhs, const Vec3& rhs) {
             float angle = VEC3Dot(&lhs, &rhs) / (VEC3Len(&lhs) * VEC3Len(&rhs));
 

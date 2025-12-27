@@ -29,6 +29,12 @@ public:
         *this = (const Mtx34&)rOther;
     }
 
+    /* Class Methods */
+
+    bool IsValid();
+
+    /* Inlines */
+
     operator nw4r::math::MTX34&() {
         return *this;
     }

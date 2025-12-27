@@ -32,6 +32,8 @@ namespace gfl {
             y = val;
         }
         
+
+        bool Sanitize();
     };
 }
 
