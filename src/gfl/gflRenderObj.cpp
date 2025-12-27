@@ -3,8 +3,6 @@
 #include "gflMemory.h"
 #include "gflScene.h"
 
-#pragma merge_float_consts off
-
 using namespace gfl;
 
 RenderObj::RenderObj()

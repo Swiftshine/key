@@ -1,4 +1,3 @@
-#pragma merge_float_consts off
 #include <cstring>
 #include "gflParamReader.h"
 

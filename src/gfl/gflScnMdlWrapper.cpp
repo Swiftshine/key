@@ -1,9 +1,6 @@
 #include "gflScnMdlWrapper.h"
 #include "gflMtx34.h"
 
-// todo - fix gfl compiler flags. i shouldn't have to use this pragma at all
-#pragma merge_float_consts off
-
 using namespace gfl;
 
 void ScnMdlWrapper::SetDefaultUpdateRate(float rate) {

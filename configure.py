@@ -456,7 +456,7 @@ config.libs = [
     {
         "lib": "gfl",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_gfl, "-pragma \"merge_float_consts on\""],
+        "cflags": [*cflags_gfl],
         "host": False,
         "progress_category": "gfl",
         "objects": [
@@ -473,7 +473,7 @@ config.libs = [
             Object(Matching,    "gfl/gflMemoryBase.cpp"),
             Object(Matching,    "gfl/gflMemoryManagement.cpp"),
             Object(NonMatching, "gfl/gflParamReader.cpp"),
-            Object(Matching,    "gfl/gflParamBase.cpp"),
+            Object(NonMatching,    "gfl/gflParamBase.cpp"),
             Object(NonMatching,    "gfl/gflParamSingleValue.cpp"),
             Object(NonMatching, "gfl/gflRenderObj.cpp"),
             Object(NonMatching, "gfl/gflResArchivedFileInfo.cpp"),

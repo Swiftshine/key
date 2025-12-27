@@ -4,8 +4,6 @@
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_scnobj.h>
 
-#pragma merge_float_consts off
-
 using namespace gfl;
 
 CustomRenderObj::CustomRenderObj(bool opa, bool xlu, const char* pName)

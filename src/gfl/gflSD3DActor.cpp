@@ -1,6 +1,8 @@
 #include "gflSD3DActor.h"
 #include "gflSoundHandle.h"
 
+#pragma merge_float_consts on
+
 using namespace gfl;
 
 SD3DActorWrapper::SD3DActorWrapper()

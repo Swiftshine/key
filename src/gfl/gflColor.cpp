@@ -1,7 +1,5 @@
 #include "gflColor.h"
 
-#pragma merge_float_consts off
-
 using namespace gfl;
 
 #define CALC(weight, color, chan) (weight * (static_cast<float>(color.chan) / 255.0f))
