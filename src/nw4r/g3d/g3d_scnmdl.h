@@ -27,7 +27,12 @@ public:
         ResMatTevColor GetResMatTevColor(bool markDirty);
         ResTev GetResTev(bool markDirty);
 
+        ResTexObj GetResTexObjEx();
+        ResTlutObj GetResTlutObjEx();
         ResTexSrt GetResTexSrtEx();
+        ResMatChan GetResMatChanEx();
+        ResMatPix GetResMatPixEx();
+        ResTev GetResTevEx();
 
     private:
         ScnMdl* mpScnMdl;                     // at 0x0
