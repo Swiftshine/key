@@ -1,5 +1,5 @@
-#ifndef FLUFF_SOUNDHANDLE_H
-#define FLUFF_SOUNDHANDLE_H
+#ifndef GFL_SOUNDHANDLE_H
+#define GFL_SOUNDHANDLE_H
 
 #include "types.h"
 #include <nw4r/math.h>
