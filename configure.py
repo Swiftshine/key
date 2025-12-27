@@ -252,8 +252,8 @@ cflags_rvl = [
 cflags_gfl = [
     *cflags_base,
     "-use_lmw_stmw on",
-    "-str reuse,pool,readonly",
     "-func_align 4",
+    # "-str readonly",
     # "-common off",
     # "-inline auto,deferred",
 ]
@@ -287,7 +287,6 @@ cflags_fluff = [
     *cflags_fluff_base_no_inline_deferred,
     "-str reuse,readonly",
     "-pragma \"merge_float_consts on\""
-
 ]
 
 cflags_fluff_manager = [
@@ -456,7 +455,7 @@ config.libs = [
     {
         "lib": "gfl",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_gfl],
+        "cflags": cflags_gfl,
         "host": False,
         "progress_category": "gfl",
         "objects": [

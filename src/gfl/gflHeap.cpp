@@ -1,15 +1,14 @@
 #include "gflHeap.h"
 #include "gflMemoryUtil.h"
 
-using namespace gfl;
+#pragma readonly_strings on
 
-// typo on the developers' part
-const char Heap::DefaultName[] = "NOT INITALIZED";
+using namespace gfl;
 
 inline void Heap::SetMEMAllocatorParameters(MEMAllocator* allocator, size_t alignment, MEMiHeapHead* heap) {
     AllocFuncs.allocFunc = &HeapAlloc;
     AllocFuncs.freeFunc = &HeapFree;
-
+    
     allocator->funcs = &AllocFuncs;
     allocator->heap = heap;
     allocator->heapParam1 = alignment;
@@ -18,7 +17,7 @@ inline void Heap::SetMEMAllocatorParameters(MEMAllocator* allocator, size_t alig
 
 inline void* Heap::GetArenaHi(int type) {
     void* arena;
-
+    
     switch (type) {
         case 1: {
             arena = OSGetArenaHi();
@@ -29,7 +28,7 @@ inline void* Heap::GetArenaHi(int type) {
             arena = OSGetMEM2ArenaHi();
             break;
         }
-
+        
         default: {
             arena = nullptr;
             break;
@@ -47,18 +46,18 @@ inline void* Heap::GetArenaLo(int type) {
             arena = OSGetMEM1ArenaLo();
             break;
         }
-
+        
         case 2: {
             arena = OSGetMEM2ArenaLo();
             break;
         }
-
+        
         default: {
             arena = nullptr;
             break;
         }
     }
-
+    
     return arena;
 }
 
@@ -66,7 +65,7 @@ inline void* Heap::GetArena(int type, size_t* size) {
     void* arenaLo = GetArenaLo(type);
     void* arenaHi = GetArenaHi(type);
     void* start;
-
+    
     if (*size == 0xFFFFFFFF) { 
         *size = (u32)arenaHi - (u32)arenaLo;
         start = arenaHi;
@@ -74,9 +73,9 @@ inline void* Heap::GetArena(int type, size_t* size) {
         arenaHi = (void*)((u32)arenaLo + *size);
         start = arenaHi;
     }
-
+    
     SetArenaLo(type, start);
-
+    
     return arenaLo;
 }
 
@@ -100,7 +99,7 @@ inline void Heap::SetArenaHi(int type, void* arena) {
             OSSetMEM1ArenaHi(arena);
             break;
         }
-
+        
         case 2: {
             OSSetMEM2ArenaHi(arena);
             break;
@@ -128,7 +127,7 @@ void Heap::SetName(const char* newName) {
 
 Heap::Heap() {
     mHeapID = 0;
-    SetName(DefaultName);
+    SetName("NOT INITALIZED"); // typo on the developers' part
     mExpHeap = nullptr;
 }
 
@@ -159,7 +158,6 @@ void Heap::Init(size_t range, u16 optFlag, int heapType) {
     SetMEMAllocatorParameters(&mAllocator1, 0x20, mExpHeap);
     SetMEMAllocatorParameters(&mAllocator2, 0x10, mExpHeap);
 }
-
 
 void* Heap::Alloc(size_t size, uint alignment) {
     return MEMAllocFromExpHeapEx(mExpHeap, size, alignment);

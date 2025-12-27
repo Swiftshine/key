@@ -2,6 +2,7 @@
 #include "gflSoundHandle.h"
 
 #pragma merge_float_consts on
+#pragma readonly_strings on
 
 using namespace gfl;
 
