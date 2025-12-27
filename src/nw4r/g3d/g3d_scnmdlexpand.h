@@ -30,7 +30,7 @@ public:
 
 private:
     /* 0xE8 */ ScnMdlSimple* mScnMdl;
-    /* 0xEC */ int mNodeIDs;
+    /* 0xEC */ int mNodeID;
 
     NW4R_G3D_RTTI_DECL_DERIVED(ScnMdlExpand, ScnGroup);
 };
