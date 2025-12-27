@@ -127,7 +127,7 @@ public:
     bool fn_800239CC();
     void fn_80023D38();
     void SetUpdateRate(float rate);
-    int SetFullSortScene(FullSortScene* pFullSortScene);
+    int SetScene(FullSortScene* pFullSortScene);
     void fn_80023B24(float);
     bool IsAnimationDone();
     float GetCurrentFrame();

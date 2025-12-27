@@ -45,7 +45,7 @@ namespace gfl {
         }
         
 
-        /* 0x10 */ DECL_WEAK virtual ~FunctorClassMethod0();
+        /* 0x10 */ DECL_WEAK virtual ~FunctorClassMethod0() { }
 
         /* Class Members */
 

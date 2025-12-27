@@ -204,7 +204,7 @@ void FlfDemoCharCtrl::vf24(int arg1) {
 }
 
 void FlfDemoCharCtrl::SetFullSortScene(uint sceneID) {
-    mFlfMdlDraw->SetFullSortScene(Stage::Instance()->GetFullSortSceneByID(sceneID));
+    mFlfMdlDraw->SetScene(Stage::Instance()->GetFullSortSceneByID(sceneID));
 }
 
 void FlfDemoCharCtrl::SetVisibility(bool visibility) {

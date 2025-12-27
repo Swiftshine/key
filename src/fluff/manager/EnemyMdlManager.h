@@ -37,7 +37,6 @@ public:
             /* 0x30 */ virtual void vf30();
             /* 0x34 */ virtual void vf34();
             /* 0x38 */ virtual void vf38(bool);
-
         };
     public:
         /* Class Members */
@@ -137,7 +136,13 @@ public:
     void fn_8011285C(bool arg1);
     void fn_80112864(bool arg1);
     void fn_8011286C() DONT_INLINE_CLASS;
-
+    float GetCurrentFrame();
+    void SetCurrentFrame(float frame);
+    bool IsAnimationDone();
+    void SetUpdateRate(float rate);
+    float GetUpdateRate();
+    bool SetScene(FullSortScene* pScene);
+    
     /* Class Members */
 
     /* 0x004 */ gfl::Task* mTask;

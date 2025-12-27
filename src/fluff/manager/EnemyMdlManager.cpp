@@ -347,3 +347,32 @@ void EnemyMdlManager::fn_8011286C() {
         mMdlParts.m_0->vf38(b);
     }
 }
+
+float EnemyMdlManager::GetCurrentFrame() {
+    return mFlfMdlDraw->GetCurrentFrame();
+}
+
+void EnemyMdlManager::SetCurrentFrame(float frame) {
+    mFlfMdlDraw->SetCurrentNURBSFrame(frame);
+}
+
+bool EnemyMdlManager::IsAnimationDone() {
+    return mFlfMdlDraw->IsAnimationDone();
+}
+
+void EnemyMdlManager::SetUpdateRate(float rate) {
+    mFlfMdlDraw->SetUpdateRate(rate);
+}
+
+float EnemyMdlManager::GetUpdateRate() {
+    return mFlfMdlDraw->mUpdateRate;
+}
+
+bool EnemyMdlManager::SetScene(FullSortScene* pScene) {
+    if (mFlfMdlDraw == nullptr) {
+        return false;
+    }
+    
+    mFlfMdlDraw->SetScene(pScene);
+    return true;
+}
