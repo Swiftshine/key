@@ -4,6 +4,7 @@
 #include <nw4r/g3d/g3d_scnmdl.h>
 #include "gflRenderObj.h"
 #include "gflAlloc.h"
+#include "gflScnMdlExpandWrapper.h"
 
 namespace gfl {
     class ScnMdlWrapper : public RenderObj {
@@ -32,14 +33,14 @@ namespace gfl {
 
         void GetShadowOffset(nw4r::math::VEC2& dst, const char*);
     private:
-        void* m_18;
-        bool m_1C;
-        nw4r::math::VEC3 m_20;
-        nw4r::g3d::ScnMdl* mScnMdl;
-        void* m_30;
+        /* 0x18 */ void* m_18;
+        /* 0x1C */ bool mIsVisible;
+        /* 0x20 */ nw4r::math::VEC3 m_20;
+        /* 0x2C */ nw4r::g3d::ScnMdl* mScnMdl;
+        /* 0x30 */ ScnMdlExpandWrapper* mScnMdlExpandWrapper;
     };
 
-    ASSERT_SIZE(ScnMdlWrapper, 0x34)
+    ASSERT_SIZE(ScnMdlWrapper, 0x34);
 }
 
 
