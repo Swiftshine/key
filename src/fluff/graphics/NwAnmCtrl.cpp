@@ -31,7 +31,7 @@ gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint flags) {
     const char* name = mResMdlName.c_str();
     nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(name);
     
-    gfl::ScnMdlWrapper* wrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags | CalculateFlags(), name);
+    gfl::ScnMdlWrapper* wrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl.ptr(), flags | CalculateFlags(), name);
     wrapper->SetUpdate(true);
     mScnMdlWrapper.Create(wrapper);
 

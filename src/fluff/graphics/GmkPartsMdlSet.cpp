@@ -61,7 +61,7 @@ void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& rFileInfo, const char
 
     nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(pModelName);
 
-    mPrimaryModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags, pModelName);
+    mPrimaryModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl.ptr(), flags, pModelName);
     pScene->AddRenderObj(mPrimaryModel);
 
     nw4r::g3d::ResMdl shadowResMdl = resFile.GetResMdl(pShadowName);
@@ -70,7 +70,7 @@ void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& rFileInfo, const char
         return;
     }
 
-    mShadowModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(shadowResMdl, flags, pShadowName);
+    mShadowModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(shadowResMdl.ptr(), flags, pShadowName);
     pScene->AddRenderObj(mShadowModel);
 
     std::string partsStr = "GmkPartsMdlSet ";

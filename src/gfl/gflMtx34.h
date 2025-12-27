@@ -1,6 +1,7 @@
 #ifndef GFL_MTX34_H
 #define GFL_MTX34_H
 
+#include <cmath>
 #include <nw4r/math.h>
 #include "gfl/gflVec3.h"
 
@@ -9,6 +10,14 @@ namespace gfl {
 class Mtx34 : public nw4r::math::MTX34 {
     typedef float (*MtxRef)[4];
     typedef const float (*MtxRefConst)[4];
+
+    inline bool Finite(float f) {
+        return isfinite(f);
+    }
+
+    inline bool Nan(float f) {
+        return isnan(f);
+    }
 public:
     Mtx34() {
         mtx[0][0] = 0.0f;
@@ -31,7 +40,15 @@ public:
 
     /* Class Methods */
 
-    bool IsValid();
+    bool IsValid() DONT_INLINE_CLASS {
+        for (uint i = 0; i < 12; i++) {
+            if (!Finite(a[i]) || Nan(a[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     /* Inlines */
 

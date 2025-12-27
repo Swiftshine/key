@@ -4,6 +4,7 @@
 #include "types.h"
 
 const char g3d_resfile_ac_h[] = "g3d_resfile_ac.h";
+const char g3d_resmdl_ac_h[] = "g3d_resmdl_ac.h";
 const char NW4R_Failed_assertion_p_and_0x1f[] = "NW4R:Failed assertion !((u32)p & 0x1f)";
 const char NW4R_Failed_assertion_IsValid[] = "NW4R:Failed assertion IsValid()";
 const char LinkList_h[] = "LinkList.h";
@@ -14,10 +15,18 @@ const char ResNode[] = "ResNode";
 
 #define NW4R_G3D_RESFILE_AC_ASSERT(resfile) \
     do { \
-        if (0 != ((u32)resfile.ptr() & 0x1F)) { \
+        if (((u32)resfile.ptr() & 0x1F) != 0) { \
             nw4r::db::Panic(g3d_resfile_ac_h, 0x3C, NW4R_Failed_assertion_p_and_0x1f); \
         } \
     } while (0);
+
+#define NW4R_G3D_RESMDL_AC_ASSERT(resmdl) \
+    do { \
+        if (((u32)resmdl.ptr() & 0x1F) != 0) { \
+            nw4r::db::Panic("g3d_resmdl_ac.h", 120, "NW4R:Failed assertion !((u32)p & 0x1f)"); \
+        } \
+    } while (0);
+
 
 #define NW4R_LINKLIST_ASSERT(self) \
     do { \
