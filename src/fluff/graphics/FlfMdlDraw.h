@@ -96,7 +96,7 @@ public:
         /* 0x34 */ int m_34;
     };
 
-    /* Constructor */
+    
 
     FlfMdlDraw(
         FullSortScene* pFullSortScene,

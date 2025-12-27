@@ -9,7 +9,7 @@
 /// @brief This class is used as the "missing texture" image when BGST data is not loaded.
 class BgBackImage : public gfl::CustomRenderObj {
 public:
-    /* Constructor */
+    
 
     BgBackImage();
 

@@ -10,7 +10,7 @@
 /// @note Size: `0x1C`
 class GimmickResource {
 public:
-    /* Constructor + Destructor */
+    
 
     GimmickResource(const char* pResName);
     ~GimmickResource();

@@ -12,7 +12,7 @@ namespace gfl {
 /// @note Size: `0xC`
 class SD3DActorInfo {
 public:
-    /* Constructor + Destructor */
+    
 
     SD3DActorInfo() DONT_INLINE_CLASS;
     DECL_WEAK ~SD3DActorInfo() DONT_INLINE_CLASS;
@@ -38,7 +38,7 @@ public:
 /// @note Size: `0x8`
 class SD3DActor {
     public:    
-    /* Constructor */
+    
     
     inline SD3DActor() {
         mActorInner = Sound::Instance()->CreateSD3DActorInner();
@@ -60,7 +60,7 @@ class SD3DActor {
 /// @note Size: `0x38`
 class SD3DActorWrapper {
 public:
-    /* Constructor + Destructor */
+    
 
     SD3DActorWrapper();
     ~SD3DActorWrapper();

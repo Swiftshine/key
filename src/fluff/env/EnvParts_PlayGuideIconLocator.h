@@ -7,7 +7,7 @@ namespace env {
 
 class EnvParts_PlayGuideIconLocator : public FlfGameObj {
 public:
-    /* Constructor */
+    
     EnvParts_PlayGuideIconLocator();
 
     /* Virtual Methods */

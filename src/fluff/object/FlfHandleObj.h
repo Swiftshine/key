@@ -9,7 +9,7 @@ class FlfHandleObj;
 /// @note Size: `0x8`
 class FlfHandle {
 public:
-    /* Constructor */
+    
 
     inline FlfHandle()
         : mObject(nullptr)
@@ -65,7 +65,7 @@ ASSERT_SIZE(FlfHandle, 0x8);
 class FlfHandleObj {
 public:
     
-    /* Constructor */
+    
 
     FlfHandleObj();
 

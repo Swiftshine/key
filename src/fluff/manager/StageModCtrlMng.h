@@ -9,7 +9,7 @@ class StageModCtrl;
 /// @note Size: `0x24`
 class StageModCtrlMng {
 public:
-    /* Constructor + Destructor */
+    
 
     StageModCtrlMng();
     ~StageModCtrlMng();

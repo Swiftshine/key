@@ -8,7 +8,7 @@
 namespace env {
     class EnvUtil_FrameBuffer : public gfl::CustomRenderObj {
     public:
-        /* Constructor */
+        
 
         EnvUtil_FrameBuffer(gfl::Scene* pScene, int translucency, GXTexFmt texFormat, bool refreshTexture);
 

@@ -16,7 +16,7 @@ public:
     /// @note Size: `0x650`
     class HitResult {
     public:
-        /* Constructor */
+        
         
         inline HitResult() {
             mNumNodes = 0;
@@ -42,7 +42,7 @@ public:
         /* 0x64C */ uint mNumOverflow;
     };
 
-    /* Constructor */
+    
 
     KdTree();
 

@@ -18,7 +18,7 @@ public:
         return sInstance;
     }
 
-    /* Constructor + Destructor */
+    
 
     FlfHandleList() DONT_INLINE_CLASS;
     DECL_WEAK ~FlfHandleList() DONT_INLINE_CLASS;

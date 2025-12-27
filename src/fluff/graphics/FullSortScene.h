@@ -10,7 +10,7 @@
 // size: 0x34
 class FullSortScene : public gfl::Scene {
 public:
-    /* Constructor */
+    
 
     FullSortScene(u8 heapID, uint maxNumChildren, uint maxNumScnObj);
 

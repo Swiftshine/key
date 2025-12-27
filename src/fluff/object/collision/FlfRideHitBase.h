@@ -8,7 +8,7 @@
 class FlfRideHitBase {
 public:
 
-    /* Constructor */
+    
 
     FlfRideHitBase(FlfGameObj* pOwner);
 

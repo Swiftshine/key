@@ -36,7 +36,7 @@ namespace env {
 
         static EnvManager* sInstance;
 
-        /* Constructor */
+        
 
         EnvManager();
 

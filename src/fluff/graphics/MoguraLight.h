@@ -7,7 +7,7 @@
 /// @brief "Mole Light"
 class MoguraLight {
 public:
-    /* Constructor + Destructor */
+    
 
     MoguraLight();
     ~MoguraLight();

@@ -8,7 +8,7 @@
 namespace env {
     class EnvUnitBase : public EnvObject {
     public:
-        /* Constructor */
+        
 
         EnvUnitBase(gfl::Task* pParentTask, const char* pTaskName, uint arg3);
 

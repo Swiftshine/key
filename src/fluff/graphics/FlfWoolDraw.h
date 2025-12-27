@@ -16,7 +16,7 @@ public:
         STRUCT_FILL(0x24);
     };
 
-    /* Constructor */
+    
 
     FlfWoolDraw();
 

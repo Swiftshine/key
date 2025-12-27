@@ -9,7 +9,7 @@ namespace message {
 /// @note Size: `0xC`
 class MessageTagProcessor : public nw4r::ut::TagProcessorBase<wchar_t> {
 public:
-    /* Constructor */
+    
 
     MessageTagProcessor();
 

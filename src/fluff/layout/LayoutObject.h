@@ -13,7 +13,7 @@ namespace layout {
 // size: 0x138
 class LayoutObject {
 public:
-    /* Constructor */
+    
     LayoutObject(gfl::Task* pParentTask, const char* pLayoutName);
 
     /* Virtual Methods */

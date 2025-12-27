@@ -25,7 +25,7 @@ public:
         TimeAttackFailed    = 3,
     );
 
-    /* Constructor */
+    
 
     MissionClearCheckerBase() DONT_INLINE_CLASS;
 
@@ -62,7 +62,7 @@ public:
 /// @brief Checks the status of the bead collection mission.
 class MissionBeadClearChecker : public MissionClearCheckerBase {
 public:
-    /* Constructor */
+    
 
     MissionBeadClearChecker();
 
@@ -86,7 +86,7 @@ public:
 /// @brief Checks the status of the time attack mission.
 class MissionTimeAttackClearChecker : public MissionClearCheckerBase {
 public:
-    /* Constructor */
+    
 
     MissionTimeAttackClearChecker();
 
@@ -110,7 +110,7 @@ public:
 /// @brief Checks the status of the "defeat enemies" mission.
 class MissionDefeatEnemyClearChecker : public MissionClearCheckerBase {
 public:
-    /* Constructor */
+    
 
     MissionDefeatEnemyClearChecker();
 
@@ -136,7 +136,7 @@ public:
 /// @brief Checks the status of the carrier mission.
 class MissionCarrierClearChecker : public MissionClearCheckerBase {
 public:
-    /* Constructor */
+    
 
     MissionCarrierClearChecker();
 
@@ -161,7 +161,7 @@ public:
 /// @brief Checks the status of the "hide-and-seek" mission.
 class MissionHideAndSeekClearChecker : public MissionClearCheckerBase {
 public:
-    /* Constructor */
+    
 
     MissionHideAndSeekClearChecker();
     

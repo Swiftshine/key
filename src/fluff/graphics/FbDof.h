@@ -8,7 +8,7 @@
 /// @brief Frame Buffer Depth of Field
 class FbDof : public gfl::CustomRenderObj {
 public:
-    /* Constructor */
+    
 
     FbDof();
 

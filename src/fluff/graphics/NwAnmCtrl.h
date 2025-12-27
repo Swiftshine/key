@@ -18,7 +18,7 @@
 
 class NwAnmCtrl {
 public:
-    /* Constructor */
+    
 
     NwAnmCtrl(uint animCount, gfl::ResFileObject& rResFileObject, const char* pAnimName);
 

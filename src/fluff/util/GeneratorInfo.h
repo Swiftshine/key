@@ -14,7 +14,7 @@ extern "C" {
 /// @note Size: `0x1C`
 class GeneratorInfo {
 public:
-    /* Constructor + Destructor */
+    
 
     GeneratorInfo();
     ~GeneratorInfo();

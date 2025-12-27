@@ -12,7 +12,7 @@ namespace env {
         /* 0x00 */ PlayerBase* mPlayer;
         /* 0x04 */ PlTransMdl* mTransMdl;
 
-        /* Constructor */
+        
 
         inline PlayerCloneElement() { }
 

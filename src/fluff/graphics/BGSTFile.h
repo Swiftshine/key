@@ -14,7 +14,7 @@
 namespace BGST {
     class File {
     public:
-        /* Constructor + Destructor */
+        
 
         File();
         ~File();

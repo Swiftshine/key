@@ -8,7 +8,7 @@ namespace demo {
     class EventDemoAttachment {
     public:
 
-        /* Constructor */
+        
 
         EventDemoAttachment();
 

@@ -7,7 +7,7 @@
 /// @note Size: `0x1C`
 class BeadDropperInfo {
 public:
-    /* Constructor + Destructor */
+    
 
     BeadDropperInfo();
     DECL_WEAK ~BeadDropperInfo();

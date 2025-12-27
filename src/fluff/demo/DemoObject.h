@@ -9,7 +9,7 @@ namespace demo {
     class DemoObject {
     public:
 
-        /* Constructor */
+        
 
         DemoObject(gfl::Task* pParentTask, const char* pTaskName, uint index);
 

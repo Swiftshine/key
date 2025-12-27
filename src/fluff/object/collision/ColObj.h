@@ -10,7 +10,7 @@
 class ColObj {
 public:
 
-    /* Constructor */
+    
 
     inline ColObj()
         : m_4(0)
@@ -38,7 +38,7 @@ ASSERT_SIZE(ColObj, 0x1C)
 
 class ColObjTrans : public ColObj {
 public:
-    /* Constructor */
+    
 
     ColObjTrans();
 

@@ -6,7 +6,7 @@
 
 class NURBSOption {
 public:
-    /* Constructor + Destructor */
+    
 
     NURBSOption(const char* pName);
     ~NURBSOption();

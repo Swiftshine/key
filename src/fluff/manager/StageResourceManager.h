@@ -25,7 +25,7 @@ public:
     static const char lbl_807E4EF8[];
     static const char lbl_807E4E98[];
 
-    /* Constructor + Destructor */
+    
 
     StageResourceManager();
     ~StageResourceManager();

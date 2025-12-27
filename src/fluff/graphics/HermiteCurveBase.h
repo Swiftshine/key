@@ -17,7 +17,7 @@ public:
     };
 
 
-    /* Constructor */
+    
 
     HermiteCurveBase();
     

@@ -37,7 +37,7 @@ public:
 
     ASSERT_SIZE(GmkBeadManager_Info, 0x44C);
 
-    /* Constructor */
+    
 
     GmkBeadManager(gfl::Task* pParentTask);
 

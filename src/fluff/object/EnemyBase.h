@@ -13,7 +13,7 @@
 class EnemyBase : public FlfGameObj, public IObjHitCB, public demo::EventDemoAttachment {
 public:
 
-    /* Constructor */
+    
 
     EnemyBase(gfl::Task* pParentTask, uint arg2, uint arg3, const char* pArg4);
 

@@ -5,7 +5,7 @@
 #include "gfl/gflColor.h"
 class FbAlpha : public gfl::CustomRenderObj {
 public:
-    /* Constructor */
+    
 
     FbAlpha();
 

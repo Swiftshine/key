@@ -9,7 +9,7 @@
 namespace gfl {
     class SoundHandle {
     public:
-        /* Constructors */
+        
 
         inline SoundHandle() { }
         

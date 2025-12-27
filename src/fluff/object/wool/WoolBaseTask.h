@@ -37,7 +37,7 @@ public:
         /* 0x4C */ int m_4C;
     };
     
-    /* Constructor */
+    
 
     WoolBaseTask(
         WoolBuildInfo* pWoolBuildInfo,

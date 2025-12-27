@@ -17,7 +17,7 @@ public:
 
     class BackupBuff {
     public:
-        /* Constructor */
+        
 
         inline BackupBuff()
             : mPoints(nullptr)
@@ -36,7 +36,7 @@ public:
     };
 
 
-    /* Constructors */
+    
     WoolBaseMdl(
         FullSortScene* pScene,
         WoolBaseTask* pTask,

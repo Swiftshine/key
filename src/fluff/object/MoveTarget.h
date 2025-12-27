@@ -10,7 +10,7 @@ public:
 
     /* 0x0 */ float m_0[17];
 public:
-    /* Constructor */
+    
 
     MoveTarget();
 

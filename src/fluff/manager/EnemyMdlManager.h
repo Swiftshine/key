@@ -51,7 +51,7 @@ public:
         /* 0x68 */ gfl::Mtx34 mMatrix;
         /* 0x98 */ int m_98;
 
-        /* Constructor */
+        
 
         inline MdlParts()
             : m_0(0)

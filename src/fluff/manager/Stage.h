@@ -21,7 +21,7 @@ public:
 
     static gfl::Task* sDrawRootTask;
     
-    /* Constructor + Destructor */
+    
 
     Stage();
     ~Stage();

@@ -29,7 +29,7 @@ public:
         Gold    = 3,
     );
 
-    /* Constructor */
+    
 
     InStageWork();
 

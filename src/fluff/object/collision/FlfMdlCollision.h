@@ -9,7 +9,7 @@
 class FlfMdlCollision {
 public:
 
-    /* Constructor */
+    
 
     FlfMdlCollision(FlfMdlDraw* pFlfMdlDraw, void* pOwner);
 

@@ -7,7 +7,7 @@
 /// @note Size: `0x214`
 class WoolLinkObj : public WoolBaseTask {
 public:
-    /* Constructor */
+    
 
     WoolLinkObj(u32, WoolBuildInfo* pWoolBuildInfo, int**, u32, u32, u32, u32);
 

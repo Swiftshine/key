@@ -7,7 +7,7 @@ namespace env {
     template <typename StateT>
     class EnvUtil_State {
     public:
-        /* Constructor */
+        
 
         inline EnvUtil_State() { }
 

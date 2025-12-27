@@ -7,7 +7,7 @@
 /// @note Size: `0x10`
 class GmkBeadPopItem_Info {
 public:
-    /* Constructor + Destructor */
+    
 
     GmkBeadPopItem_Info();
     ~GmkBeadPopItem_Info();

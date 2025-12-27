@@ -7,7 +7,7 @@
 // size: 0x154
 class FbMokoMoko : public gfl::CustomRenderObj {
 public:
-    /* Constructor */
+    
     FbMokoMoko(float, float, float, const char*, gfl::ScnMdlWrapper*, uint, const char*, const char*);
 
     /* Virtual Methods */

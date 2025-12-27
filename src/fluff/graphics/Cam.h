@@ -7,7 +7,7 @@
 // size: 0x44
 class Cam {
 public:
-    /* Constructor */
+    
 
     Cam(FullSortScene* pFullSortScene, uint arg2) DONT_INLINE_CLASS;
 
@@ -45,7 +45,7 @@ ASSERT_SIZE(Cam, 0x44);
 // size: 0x58
 class CamOrtho : public Cam {
 public:
-    /* Constructor */
+    
 
     CamOrtho(FullSortScene* pFullSortScene, uint arg2);
 
@@ -79,7 +79,7 @@ public:
 ASSERT_SIZE(CamOrtho, 0x58);
 
 struct CamStruct {
-    /* Constructor + Destructor */
+    
 
     inline CamStruct()
         : m_0(0.0f)

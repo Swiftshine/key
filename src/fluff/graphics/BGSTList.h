@@ -24,7 +24,7 @@ namespace BGST {
             return sInstance;
         }
         
-        /* Constructor + Destructor */
+        
 
         List(StageGraphicResources* arg1, size_t count);
         ~List();

@@ -8,7 +8,7 @@
 
 class GmkPartsMdlSet {
 public:
-    /* Constructor + Destructor */
+    
 
     GmkPartsMdlSet();
     ~GmkPartsMdlSet();

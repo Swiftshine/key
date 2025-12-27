@@ -11,7 +11,7 @@
 
 class LevelManager {
 public:
-    /* Constructor + Destructor */
+    
     LevelManager(StageInfo& rStage);
     ~LevelManager();
     

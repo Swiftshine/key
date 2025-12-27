@@ -10,7 +10,7 @@
 // size: 0x34
 class KdTreeNode {
 public:
-    /* Constructors */
+    
 
     inline KdTreeNode(KdTreeNode* pParent, float minX, float minY) {
         mDepth = pParent->GetDepth() + 1;

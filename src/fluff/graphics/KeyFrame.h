@@ -38,7 +38,7 @@ public:
         T mDefaultFrame;
     };
     
-    /* Constructor */
+    
 
     inline KeyFrame()
         : mInnerKeyFrames()

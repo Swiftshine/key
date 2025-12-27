@@ -96,7 +96,7 @@ public:
         Digger      = 13, // "BrightRobot"
     );
 
-    /* Constructor */
+    
 
     PlayerBase(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, int arg4, bool isCloned);
     

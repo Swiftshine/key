@@ -8,7 +8,7 @@
 // size: 0xA88
 class ColObjTree {
 public:
-    /* Constructor + Destructor */
+    
     
     ColObjTree();
     ~ColObjTree();

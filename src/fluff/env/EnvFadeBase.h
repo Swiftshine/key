@@ -13,7 +13,7 @@ namespace env {
             int mStateValue;
         };
 
-        /* Constructor */
+        
 
         EnvFadeBase(gfl::Task* pParentTask, int arg2, int arg3, const char* pTaskName, uint flagIndex);
 

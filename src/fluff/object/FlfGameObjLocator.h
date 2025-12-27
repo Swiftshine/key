@@ -5,7 +5,7 @@
 
 class FlfGameObjLocator : public FlfGameObj {
 public:
-    /* Constructor */
+    
     FlfGameObjLocator();
 
     /* Virtual Methods */

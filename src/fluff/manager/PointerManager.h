@@ -6,7 +6,7 @@
 class PointerManager {
 public:
 
-    /* Constructor + Destructor */
+    
     
     PointerManager();
     ~PointerManager();

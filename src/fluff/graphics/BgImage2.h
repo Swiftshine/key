@@ -11,7 +11,7 @@ class BGSTFile;
 // size: 0x130
 class BgImage2 : public gfl::CustomRenderObj {
 public:
-    /* Constructor */
+    
 
     BgImage2(BGSTFile* bgst, uint sortSceneID);
 

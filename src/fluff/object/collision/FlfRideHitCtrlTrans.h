@@ -8,7 +8,7 @@ class GmkBead;
 
 class FlfRideHitCtrlTrans : public FlfRideHitBase {
 public:
-    /* Constructor */
+    
 
     FlfRideHitCtrlTrans(ColObj* pColObj, FlfGameObj* pOwner);
 

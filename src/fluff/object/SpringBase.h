@@ -35,7 +35,7 @@ public:
         /* 0x6C */ bool m_6C;
         /* 0x6D */ bool m_6D;
 
-        /* Constructor */
+        
 
         Particle();
         
@@ -58,7 +58,7 @@ public:
         /* 0x0C */ int mActiveParticleIndex; // 0 for neither, 1 for the first, 2 for the second
         /* 0x10 */ float m_10;
 
-        /* Constructor */
+        
 
         Spring();
 
@@ -97,7 +97,7 @@ public:
     };
 
 
-    /* Constructor */
+    
 
     SpringBase(FullSortScene* pScene, const char* pTaskName);
 

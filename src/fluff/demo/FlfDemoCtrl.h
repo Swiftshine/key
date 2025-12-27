@@ -17,7 +17,7 @@
 // size: 0x24
 class FlfDemoNodeCtrl {
 public:
-    /* Constructor */
+    
 
     FlfDemoNodeCtrl(nw4r::g3d::ResNode resNode) DONT_INLINE_CLASS;
 
@@ -72,7 +72,7 @@ public:
 // size: 0x34
 class FlfDemoCharCtrl : public FlfDemoNodeCtrl {
 public:
-    /* Constructor */
+    
 
     FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name);
 
@@ -98,8 +98,6 @@ public:
 // size: 0x30
 class FlfDemoPlayerCtrl : public FlfDemoNodeCtrl {
 public:
-    /* Constructor */
-
     FlfDemoPlayerCtrl(nw4r::g3d::ResNode resNode, std::string& name);
 
     /* Virtual Methods */
@@ -128,8 +126,6 @@ public:
 // size: 0x44
 class FlfDemoBeadCtrl : public FlfDemoNodeCtrl {
 public:
-    /* Constructor */
-
     FlfDemoBeadCtrl(nw4r::g3d::ResNode resNode, std::string& beadInfo);
 
     /* Virtual Methods  */
@@ -151,7 +147,7 @@ public:
 // size: 0x2C
 class FlfDemoGmkCtrl : public FlfDemoNodeCtrl {
 public:
-    /* Constructor */
+    
 
     FlfDemoGmkCtrl(nw4r::g3d::ResNode resNode, std::string& tag);
 
@@ -171,7 +167,7 @@ public:
 // size: 0x2C
 class FlfDemoFlgCtrl : public FlfDemoNodeCtrl {
 public:
-    /* Constructor */
+    
 
     FlfDemoFlgCtrl(nw4r::g3d::ResNode resNode, std::string& indexStr);
 
@@ -190,7 +186,7 @@ public:
 // size: 0x28
 class FlfDemoLoopCtrl : public FlfDemoNodeCtrl {
 public:
-    /* Constructor */
+    
     
     FlfDemoLoopCtrl(nw4r::g3d::ResNode resNode);
 
@@ -208,7 +204,7 @@ public:
 // size: 0x8
 class FlfDemoCamCtrl {
 public:
-    /* Constructor */
+    
 
     FlfDemoCamCtrl(nw4r::g3d::ResNode resNode);
 
@@ -240,7 +236,7 @@ struct FlfDemoCtrlStruct {
 // size: 0x5C
 class FlfDemoCtrl {
 public:
-    /* Constructor */
+    
 
     FlfDemoCtrl();
 

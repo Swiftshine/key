@@ -21,7 +21,7 @@
 
 class PointerManagerWrapper {
 public:
-    /* Constructor + Destructor */
+    
 
     PointerManagerWrapper();
     ~PointerManagerWrapper();
@@ -74,7 +74,7 @@ public:
         return sInstance;
     }
 
-    /* Constructor */
+    
     
     GameManager();
 

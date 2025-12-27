@@ -20,7 +20,7 @@ namespace gfl {
     /// @note Size: `0x24`
     class Param {
     public:
-        /* Constructor */
+        
         Param(const char* pLabel);
 
         /* Virtual Methods */

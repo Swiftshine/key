@@ -17,7 +17,7 @@ public:
         UseVis = 64,
     );
 
-    /* Constructor */
+    
 
     NwAnm();
 

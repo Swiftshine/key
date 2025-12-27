@@ -7,7 +7,7 @@
 namespace env {
     class EnvObject {
     public:
-        /* Constructors */
+        
 
         EnvObject(gfl::Task* pParentTask, const char* pTaskName, uint flagIndex);
         EnvObject(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, uint flagIndex);

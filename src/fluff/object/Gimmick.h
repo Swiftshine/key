@@ -47,7 +47,7 @@ public:
     /// @note Size: `0x9C`
     class GimmickBuildInfo {
     public:
-        /* Constructor + Destructor */
+        
 
         inline GimmickBuildInfo()
             : mGimmickID(-1)
@@ -119,7 +119,7 @@ public:
     };
     // ASSERT_SIZE(GimmickBuildInfo, 0x9C);
 
-    /* Constructors */
+    
     /// @brief  For the most basic gimmicks.
     Gimmick(int gimmickID);
     /// @brief For gimmicks that control things in-level

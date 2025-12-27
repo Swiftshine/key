@@ -62,7 +62,7 @@ public:
     );
 
 
-    /* Constructor + Destructor */
+    
     ParamReader(FixedMemoryStream* pMemoryStream);
     ~ParamReader();
 
