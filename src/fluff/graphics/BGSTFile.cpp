@@ -37,8 +37,8 @@ BGST::EntryInfo* BGST::File::GetEntryInfoByIndex(int index) {
     return mEntryInfo[index];
 }
 
-void* BGST::File::GetByIndex(int index) {
-    return (void*)(index * 0x20000 + mHeader->mSomeOffset3);
+size_t BGST::File::GetImageOffset(uint index) {
+    return index * 0x20000 + mHeader->mSomeOffset3;
 }
 
 bool BGST::File::TrySetHeader(const char* pFilepath) {
@@ -88,12 +88,12 @@ void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, int id, int x
     BGST::List* list = BGST::List::Instance();
     
     if (1 >= (unsigned short)(entryInfo->m_0 + 0xFFF9)) {
-        *pCMPRImage = list->GetImageByIndex(entryInfo->mImageIndex);
+        *pCMPRImage = list->GetImageByIndex(entryInfo->mMainImageIndex);
 
-        if ((u16)0xFFFE == entryInfo->mType) {
+        if ((u16)0xFFFE == entryInfo->mFileMaskImageIndex) {
             *pI4Image = (void*)-1U;
         } else {
-            *pI4Image = list->GetImageByIndex(entryInfo->mShadowImageIndex);
+            *pI4Image = list->GetImageByIndex(entryInfo->mMaskImageIndex);
         }
         
     } else {

@@ -13,6 +13,7 @@
 
 class StageGraphicResources;
 
+// todo - maybe rename to "manager"
 namespace BGST {
     class List {
     public:
@@ -32,7 +33,7 @@ namespace BGST {
         /* Class Methods */
 
         inline void CutFunction();
-        BGST::Image* GetImageByIndex(u16 index);
+        void* GetImageByIndex(u16 index);
         void SetBit(size_t index);
         u16 GetNextImageIndex();
         // returns true if both the main and shadow image indices were successfully set

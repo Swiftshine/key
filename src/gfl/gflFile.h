@@ -19,7 +19,7 @@ namespace gfl {
 
         virtual void Close();
         virtual void Read(void* addr, uint len, uint filepos);
-        virtual void ReadAsync(void* addr, uint len, uint offs, uint callback);
+        virtual void ReadAsync(void* addr, size_t len, size_t offs, u32 callback);
         virtual void vf14();
         virtual void vf18();
         virtual int GetFileStatus();

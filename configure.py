@@ -564,6 +564,7 @@ config.libs = [
             Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
             Object(Matching,    "fluff/graphics/BGSTFile.cpp"),
             Object(NonMatching, "fluff/graphics/BGSTList.cpp"),
+            Object(NonMatching, "fluff/graphics/BGSTReader.cpp"),
             Object(NonMatching, "fluff/graphics/FB2Tex.cpp"),
             Object(NonMatching, "fluff/graphics/FullSortScene.cpp"),
             Object(NonMatching, "fluff/graphics/GmkPartsMdlSet.cpp"),

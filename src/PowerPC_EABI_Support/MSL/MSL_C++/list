@@ -159,6 +159,10 @@ public:
         return size_.second();
     }
 
+    size_t size() const {
+        return size_.second();
+    }
+
     void clear() {
         iterator i;
         erase(i, this, begin(), end());

@@ -128,6 +128,9 @@ fluff/object/gimmick/GmkWarpOut.cpp:
 	.rodata     start:0x807F22E8 end:0x807F2300
 	.sdata2     start:0x808E7FD8 end:0x808E7FE8
 
+fluff/graphics/BGSTReader.cpp:
+	.text       start:0x80164158 end:0x801653F8
+
 fluff/graphics/BGSTList.cpp:
 	.text       start:0x801653F8 end:0x801659E0
 

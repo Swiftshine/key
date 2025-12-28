@@ -32,7 +32,7 @@ void gfl::File::Read(void* addr, uint len, uint fileOffs) {
     mFilesystem->Read(this, addr, len, fileOffs);
 }
 
-void gfl::File::ReadAsync(void* addr, uint len, uint fileOffs, uint callback) {
+void gfl::File::ReadAsync(void* addr, size_t len, size_t fileOffs, u32 callback) {
     mFilesystem->ReadAsync(this, addr, len, fileOffs, callback);
 }
 

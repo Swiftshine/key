@@ -19,7 +19,7 @@ BGST::List::~List() {
 
 }
 
-BGST::Image* BGST::List::GetImageByIndex(u16 index) {
+void* BGST::List::GetImageByIndex(u16 index) {
     return mImages + index;
 }
 
@@ -41,7 +41,7 @@ bool BGST::List::AssignImageIndices(BGST::EntryInfo* pEntryInfo) {
         return false;
     }
 
-    if (pEntryInfo->mType != (u16)-2u) {
+    if (pEntryInfo->mFileMaskImageIndex != (u16)-2u) {
         u16 shadowIndex = Instance()->GetNextImageIndex();
 
         if (shadowIndex == (u16)-1u) {
@@ -49,10 +49,10 @@ bool BGST::List::AssignImageIndices(BGST::EntryInfo* pEntryInfo) {
             return false;
         }
 
-        pEntryInfo->mShadowImageIndex = shadowIndex;
+        pEntryInfo->mMaskImageIndex = shadowIndex;
     }
 
-    pEntryInfo->mImageIndex = mainIndex;
+    pEntryInfo->mMainImageIndex = mainIndex;
     Instance()->CutFunction();
     return true;
 }
@@ -63,8 +63,8 @@ void BGST::List::RemoveLayer(BGST::Layer* pEntry) { }
 
 void BGST::List::RemoveEntryInfo(BGST::EntryInfo* pEntryInfo) {
     // mEntryList.remove something or other
-    ResetBit(pEntryInfo->mImageIndex);
-    ResetBit(pEntryInfo->mShadowImageIndex);
+    ResetBit(pEntryInfo->mMainImageIndex);
+    ResetBit(pEntryInfo->mMaskImageIndex);
     pEntryInfo->m_0 = 1;
 }
 
