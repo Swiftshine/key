@@ -75,7 +75,6 @@ bool RenderObj::vf34(float arg0, float arg1, float arg2, float arg3) {
     float temp4 = (arg3 + updateRate);
     
     return temp3 * temp3 > temp4 * temp4;
-
 }
 
 void RenderObj::Update(bool arg1)  {

@@ -2,7 +2,7 @@
 #define GFL_COLOR_H
 
 #include "types.h"
-
+#include <revolution/GX.h>
 
 namespace gfl {
 
@@ -27,7 +27,7 @@ public:
     { }
 
     void Interpolate(float fromWeight, float toWeight, const Color& rFrom, const Color& rTo);
-    
+
     union {
         struct {
             u8 r;
@@ -37,6 +37,8 @@ public:
         };
 
         uint val;
+
+        GXColor col;
     };
 };
 

@@ -696,7 +696,7 @@ void FlfDemoCtrl::fn_802BB920() {
         *reinterpret_cast<void**>(reinterpret_cast<u8*>(mScnMdlWrapper->GetScnMdl()) + 0x11C) = this;
 
         mScnMdlWrapper->GetScnMdl()->EnableScnObjCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
-        mScnMdlWrapper->ScnMdlProc(0);
+        mScnMdlWrapper->DoG3dProc(0);
         mScnMdlWrapper->GetScnMdl()->DisableScnMdlCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
     }
 }

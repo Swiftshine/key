@@ -48,7 +48,7 @@ namespace gfl {
         virtual gfl::Vec3 vf28() override;
         virtual void Update(bool shouldUpdate) override;
         virtual void UpdateFrame() override;
-        virtual void ScnMdlProc(int) override;
+        virtual void DoG3dProc(void* pInfo) override;
     private:
         /* 0x100 */ bool mOpa;
         /* 0x101 */ bool mXlu;

@@ -1,8 +1,9 @@
-#include "gflCustomRenderObj.h"
-#include "g3d_obj.h"
-#include "gflMemory.h"
+#include <nw4r/g3d/g3d_obj.h>
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_scnobj.h>
+
+#include "gflCustomRenderObj.h"
+#include "gflMemory.h"
 
 using namespace gfl;
 

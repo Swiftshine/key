@@ -43,7 +43,7 @@ namespace gfl {
             return mShouldUpdate;
         }
         /* 0x40 */ virtual void UpdateFrame() = 0;
-        /* 0x44 */ virtual void ScnMdlProc(int) = 0;
+        /* 0x44 */ virtual void DoG3dProc(void* pInfo) = 0;
         /* 0x48 */ DECL_WEAK virtual void SetScene(gfl::Scene* pScene) {
             mScene = pScene;
         }

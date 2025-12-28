@@ -48,7 +48,7 @@ void GmkPartsMdlSet::SetMatrix(const float zOffset, nw4r::math::MTX34& rSrcMatri
 
 
 bool GmkPartsMdlSet::GetPrimaryMatrix(nw4r::math::MTX34& rDstMatrix) {
-    return mPrimaryModel->GetMatrix(rDstMatrix);
+    return mPrimaryModel->GetMatrix((gfl::Mtx34&)rDstMatrix);
 }
 
 // https://decomp.me/scratch/EZvuo
