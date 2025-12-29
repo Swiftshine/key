@@ -16,7 +16,8 @@ namespace BGST {
         /* 0x04 */ u32 m_4;
         /* 0x08 */ File* mBGSTFile;
         /* 0x0C */ BgImage2* mBgImage;
-        /* 0x10 */ gfl::Vec3 mMatrixTranslation;
+        /* 0x10 */ gfl::Vec2 mMatrixTranslation;
+        /* 0x18 */ int m_18;
         /* 0x1C */ u32 m_1C;
         /* 0x20 */ float m_20;
         /* 0x24 */ float m_24;

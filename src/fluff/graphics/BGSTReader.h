@@ -23,6 +23,8 @@ public:
 
     /// @note Size: `0x20`
     struct EntryObject {
+        static bool Compare(EntryObject* pA, EntryObject* pB);
+        
         Layer* mLayer;
         EntryInfo* mEntryInfo;
         void* mMainImage;
