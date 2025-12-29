@@ -65,7 +65,7 @@ void BGST::List::RemoveEntryInfo(BGST::EntryInfo* pEntryInfo) {
     // mEntryList.remove something or other
     ResetBit(pEntryInfo->mMainImageIndex);
     ResetBit(pEntryInfo->mMaskImageIndex);
-    pEntryInfo->m_0 = 1;
+    pEntryInfo->mState = 1;
 }
 
 void BGST::List::ResetBit(size_t index) {

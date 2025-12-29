@@ -6,7 +6,7 @@
 namespace BGST {
 
     struct EntryInfo {
-        /* 0x00 */ u16 m_0;
+        /* 0x00 */ u16 mState;
         /* 0x02 */ u16 mLayer;
         /* 0x04 */ u16 mRow;
         /* 0x06 */ u16 mColumn;

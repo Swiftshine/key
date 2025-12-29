@@ -87,7 +87,7 @@ void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, int id, int x
     BGST::EntryInfo* entryInfo = (BGST::EntryInfo*)GetByGrid(id, xGridIndex, yGridIndex);
     BGST::List* list = BGST::List::Instance();
     
-    if (1 >= (unsigned short)(entryInfo->m_0 + 0xFFF9)) {
+    if (1 >= (unsigned short)(entryInfo->mState + 0xFFF9)) {
         *pCMPRImage = list->GetImageByIndex(entryInfo->mMainImageIndex);
 
         if ((u16)0xFFFE == entryInfo->mFileMaskImageIndex) {

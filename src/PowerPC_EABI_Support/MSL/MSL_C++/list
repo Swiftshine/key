@@ -168,6 +168,14 @@ public:
         erase(i, this, begin(), end());
     }
 
+    void pop_back() {
+        erase(end());
+    }
+
+    void pop_front() {
+        erase(begin());
+    }
+
     static node_pointer __iterator2pointer(iterator it) {
         return it.node_;
     }
@@ -181,6 +189,11 @@ public:
         first->prev_ = here->prev_;
         here->prev_ = (node_pointer)last;
         last->next_ = (node_pointer)here;
+    }
+
+    void erase(iterator pos) {
+        iterator dst;
+        erase(dst, this, pos);
     }
 
     // the erase function from Food Network - Cook or Be Cooked! has this signature

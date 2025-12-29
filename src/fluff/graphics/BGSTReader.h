@@ -10,42 +10,61 @@ namespace BGST {
 
 class File;
 class EntryInfo;
+class Layer;
 
 /// @note Size: `0x44`
 class Reader {
 public:
     ENUM_CLASS(State,
-        Clear       = 0,
-        GetImages   = 1,
-        State_2     = 2
+        PopEntryObject        = 0,
+        GetMainImage    = 1,
+        GetMaskImage    = 2
     );
+
+    /// @note Size: `0x20`
+    struct EntryObject {
+        Layer* mLayer;
+        EntryInfo* mEntryInfo;
+        void* mMainImage;
+        size_t mMainImageSize;
+        size_t mMainImageOffset; // referring to the file on disk
+        void* mMaskImage;
+        size_t mMaskImageSize;
+        size_t mMaskImageOffset;
+    };
+
     Reader(File* pBGSTFile);
     ~Reader();
 
     /* Class Methods */
 
     void Update();
-    void GetImages();
-    void fn_801643D0();
-    void Clear();
+    void GetMainImage();
+    void GetMaskImage();
+    void PushEntryObject(Layer* pLayer, EntryInfo* pEntryInfo);
+    void EraseEntryObject(EntryInfo* pEntryInfo);
+    void PopEntryObject();
+    void Sort();
 
     DECL_WEAK void _CutFunction() DONT_INLINE_CLASS;
+
+    /* Static Methods */
+
+    static void FillVector(
+        std::vector<EntryObject*>& rVec,
+        std::list<EntryObject*>::iterator begin,
+        std::list<EntryObject*>::iterator end
+    );
+
 
     /* Class Members */
 
     /* 0x00 */ int mState;
     /* 0x04 */ File* mBGSTFile;
     /* 0x08 */ int m_8;
-    /* 0x0C */ int m_C;
-    /* 0x10 */ EntryInfo* mEntryInfo;
-    /* 0x14 */ void* mMainImage;
-    /* 0x18 */ size_t mMainImageSize;
-    /* 0x1C */ size_t mMainImageOffset; // from the actual file on disk
-    /* 0x20 */ void* mMaskImage;
-    /* 0x24 */ size_t mMaskImageSize;
-    /* 0x28 */ size_t mMaskImageOffset;
-    /* 0x2C */ std::list<placeholder_t*> m_2C;
-    /* 0x38 */ std::vector<placeholder_t> m_38;
+    /* 0x0C */ EntryObject mEntryObject;
+    /* 0x2C */ std::list<EntryObject*> mObjectList;
+    /* 0x38 */ std::vector<EntryObject*> mObjectVector;
 };
 
 }

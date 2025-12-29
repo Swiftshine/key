@@ -145,6 +145,10 @@ public:
         allocate(max, t);
     }
 
+    void allocate(size_t n) {
+        allocate(n, Metrowerks::int2type<1>());
+    }
+
     void allocate(size_t n, Metrowerks::int2type<1> t) DONT_INLINE_CLASS {
         size_t max = max_size();
 
@@ -212,12 +216,34 @@ public:
         return alloc().max_size();
     }
 
+    size_t capacity() const {
+        return capacity_.first();
+    }
+
     size_t size() const {
         return size_;
     }
 
     void resize(size_t n) {
         size_ = n;
+    }
+
+    void move_construct_to_end(iterator begin, iterator end);
+
+    void reallocate_copy(size_t n) {
+        __vec_deleter<T, Allocator> tmp(alloc());
+        tmp.allocate(n);
+        tmp.move_construct_to_end(begin(), end());
+        optimize_after_moved_from();
+        swap(cap(), tmp.cap());
+        swap(data_, tmp.data_);
+        swap(size_, tmp.size_);
+    }
+
+    void reserve(size_t n) {
+        if (n > cap()) {
+            reallocate_copy(n);
+        }
     }
 
     bool empty() const {
