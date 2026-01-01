@@ -6,6 +6,15 @@
 namespace BGST {
 
     struct EntryInfo {
+        ENUM_CLASS(State,
+            Invalid         = 1,
+            Valid           = 2,
+            LoadMainImage   = 3, // assumed; this is never used
+            MainImageLoaded = 4,
+            LoadMaskImage   = 5,
+            MaskImageLoaded = 6,
+            ReadyToRender   = 7
+        );
         /* 0x00 */ u16 mState;
         /* 0x02 */ u16 mLayer;
         /* 0x04 */ u16 mRow;
