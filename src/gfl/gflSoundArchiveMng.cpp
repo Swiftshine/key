@@ -7,10 +7,7 @@ using namespace gfl;
 
 #define STRM_BUFFER_SIZE 0x60000
 
-const float ZERO = 0.0f;
-const float ONE = 1.0f;
-const float N_ONE = -1.0f;
-
+// https://decomp.me/scratch/Pkbtw
 void SoundArchiveMng::OpenArchive(const char* brsarPath) {
     mSoundArchive.Open(brsarPath);
     u32 memSize = mSoundArchive.GetHeaderSize();
@@ -49,9 +46,9 @@ void SoundArchiveMng::OpenArchive(const char* brsarPath) {
     nw4r::math::MTX34 mtx;
     C_MTXLookAt(mtx, (const Vec*)&vec1, (const Vec*)&vec2, (const Vec*)&vec3);
     mSound3DListener.SetMatrix(mtx);
-    mSound3DListener.SetMaxVolumeDistance(ONE);
-    mSound3DListener.SetUnitDistance(ONE);
-    mSound3DListener.SetInteriorSize(ONE);
+    mSound3DListener.SetMaxVolumeDistance(1.0f);
+    mSound3DListener.SetUnitDistance(1.0f);
+    mSound3DListener.SetInteriorSize(1.0f);
 }
 
 void SoundArchiveMng::ConfigureSound3DListener(const SoundListenerSettings& src) {
