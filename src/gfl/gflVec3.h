@@ -133,6 +133,14 @@ namespace gfl {
             return v;
         }
 
+        inline operator Vec*() {
+            return reinterpret_cast<Vec*>(this);
+        }
+
+        inline operator const Vec*() const {
+            return reinterpret_cast<const Vec*>(this);
+        }
+
         inline operator nw4r::math::VEC3*() {
             return reinterpret_cast<nw4r::math::VEC3*>(this);
         }
@@ -146,6 +154,12 @@ namespace gfl {
         }
         inline operator const nw4r::math::VEC3&() const {
             return *reinterpret_cast<const nw4r::math::VEC3*>(this);
+        }
+        inline operator Vec&() {
+            return *reinterpret_cast<Vec*>(this);
+        }
+        inline operator const Vec&() const {
+            return *reinterpret_cast<const Vec*>(this);
         }
         
 

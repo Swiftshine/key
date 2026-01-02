@@ -14,28 +14,28 @@ public:
     const math::MTX34& GetMatrix() const {
         return mMtx;
     }
-    void SetMatrix(const math::MTX34& rMtx) {
+    void SetMatrix(const math::MTX34& rMtx) DONT_INLINE_CLASS {
         mMtx = rMtx;
     }
 
     f32 GetInteriorSize() const {
         return mInteriorSize;
     }
-    void SetInteriorSize(f32 size) {
+    void SetInteriorSize(f32 size) DONT_INLINE_CLASS {
         mInteriorSize = size;
     }
 
     f32 GetMaxVolumeDistance() const {
         return mMaxVolumeDistance;
     }
-    void SetMaxVolumeDistance(f32 distance) {
+    void SetMaxVolumeDistance(f32 distance) DONT_INLINE_CLASS {
         mMaxVolumeDistance = distance;
     }
 
     f32 GetUnitDistance() const {
         return mUnitDistance;
     }
-    void SetUnitDistance(f32 distance) {
+    void SetUnitDistance(f32 distance) DONT_INLINE_CLASS {
         mUnitDistance = distance;
     }
 

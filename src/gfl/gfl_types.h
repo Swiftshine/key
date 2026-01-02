@@ -49,8 +49,8 @@ const char ResNode[] = "ResNode";
         } \
     } while(0); \
 
-#define NW4R_ASSERT(x)                                                         \
-    ((x) && 1 || (nw4r::db::Panic(__FILE__, __LINE__, #x), 0))
+// #define NW4R_ASSERT(x)                                                         \
+//     ((x) && 1 || (nw4r::db::Panic(__FILE__, __LINE__, #x), 0))
 
 #define NW4R_ASSERT_MSG(x, ...)                                                \
     ((x) && 1 || (nw4r::db::Panic(__FILE__, __LINE__, __VA_ARGS__), 0))

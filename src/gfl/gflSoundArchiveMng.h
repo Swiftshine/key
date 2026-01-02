@@ -29,8 +29,7 @@ namespace gfl {
         int m_278;
         nw4r::snd::Sound3DManager* mSound3DManager;
         int m_280;
-        int m_284;
-        nw4r::ut::LinkListNode mListNode;
+        nw4r::ut::LinkList<nw4r::snd::Sound3DListener, 0> mSound3DListeners;
         int m_290;
         int m_294;
         int m_298;
@@ -46,7 +45,7 @@ namespace gfl {
         float m_2F8;
         int m_2FC;
         int m_300;
-        nw4r::ut::LinkList<placeholder_t, 0> mList;
+        nw4r::ut::LinkList<nw4r::math::VEC3, 0> mList2;
         uint m_310;
         void* mFileInfo;
         void* mSymbolData;

@@ -1,5 +1,6 @@
 #include "gflSoundArchiveMng.h"
 #include "gfl/gflMemoryUtil.h"
+#include "gfl/gflVec3.h"
 #include "gfl_types.h"
 
 using namespace gfl;
@@ -32,26 +33,21 @@ void SoundArchiveMng::OpenArchive(const char* brsarPath) {
     mSound3DManager->Setup(&mSoundArchive, buf, memSize);
 
     m_298 = 0x20;
-    NW4R_LINKLIST_ASSERT(this);
 
-    // nw4r::ut::detail::LinkListImpl::Insert(&this->mListNode,&local_88,&(this->mList).mNode.mPrev)
+    // todo - update Sound3DListener header with the ss one
+    mSound3DListeners.Insert(mSound3DListeners.GetBeginIter(), &mSound3DListener);
     
-    Vec vec3;
-    vec3.x = ZERO + ZERO;
-    vec3.y = ZERO + ZERO;
-    vec3.z = ZERO + N_ONE;
+    gfl::Vec3 vec3(0.0f);
+    vec3.z = 1.0f;
 
-    Vec vec2;
-    vec2.x = ZERO;
-    vec2.y = ONE;
-    vec2.z = ZERO;
+    gfl::Vec3 vec2(0.0f);
+    vec2.y = 1.0f;
 
-    Vec vec1;
-    vec1.x = ZERO;
-    vec1.y = ONE;
-    vec1.z = ZERO;
+    gfl::Vec3 vec1(0.0f);
+    vec1.y = 1.0f;
+
     nw4r::math::MTX34 mtx;
-    C_MTXLookAt(mtx, &vec1, &vec2, &vec3);
+    C_MTXLookAt(mtx, (const Vec*)&vec1, (const Vec*)&vec2, (const Vec*)&vec3);
     mSound3DListener.SetMatrix(mtx);
     mSound3DListener.SetMaxVolumeDistance(ONE);
     mSound3DListener.SetUnitDistance(ONE);

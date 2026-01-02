@@ -4,6 +4,8 @@
 
 #include <nw4r/ut/ut_NonCopyable.h>
 
+#include <nw4r/NW4RAssert.hpp>
+
 namespace nw4r {
 namespace ut {
 
@@ -392,6 +394,7 @@ public:
     }
 
     static LinkListNode* GetNodeFromPointer(T* pElem) {
+        NW4RAssertPointerNonnull_FileLine("LinkList.h", 563, pElem);
         return reinterpret_cast<LinkListNode*>(reinterpret_cast<char*>(pElem) +
                                                Ofs);
     }

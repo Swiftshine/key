@@ -231,6 +231,7 @@ cflags_base = [
     f"-i build/{config.version}/src/",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
+    "-DNW4R_ASSERT",
 ]
 
 
