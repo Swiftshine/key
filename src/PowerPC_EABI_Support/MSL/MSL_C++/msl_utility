@@ -10,9 +10,9 @@ namespace std {
         fprintf(stderr, pMsg);
         abort();
     }
-
-    // probably
-    #define MSL_ERROR(msg) __msl_error(msg)
 }
+
+// probably
+#define MSL_ERROR(msg) std::__msl_error(msg)
 
 #endif
