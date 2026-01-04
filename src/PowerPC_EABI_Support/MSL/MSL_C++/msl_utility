@@ -5,12 +5,14 @@
 #include <cstdio>
 #include <cstdlib>
 
-namespace Metrowerks {
-    inline void error(const char* msg) {
-        fprintf(stderr, msg);
+namespace std {
+    inline void __msl_error(const char* pMsg) {
+        fprintf(stderr, pMsg);
         abort();
     }
-}
 
+    // probably
+    #define MSL_ERROR(msg) __msl_error(msg)
+}
 
 #endif

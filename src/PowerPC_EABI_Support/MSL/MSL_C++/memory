@@ -50,7 +50,7 @@ namespace std {
 
         void construct(pointer p, const_reference val) {
             if (p == nullptr) {
-                Metrowerks::error("Memory allocation failure");
+                MSL_ERROR("Memory allocation failure");
             }
 
             new (p) T(val);
