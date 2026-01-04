@@ -5,13 +5,10 @@
 #include "object/collision/KdTree.h"
 #include "object/FlfGameObj.h"
 #include "object/collision/CollisionData.h"
-#include <nw4r/math.h>
+#include "gfl/gflVec3.h"
 
 class ColObj {
 public:
-
-    
-
     inline ColObj()
         : m_4(0)
         , mOwner(nullptr)
@@ -31,7 +28,7 @@ public:
     /* 0x04 */ uint m_4;
     /* 0x08 */ FlfGameObj* mOwner;
     /* 0x0C */ KdTree* mTree;
-    /* 0x10 */ nw4r::math::VEC3 mPosition;
+    /* 0x10 */ gfl::Vec3 mPosition;
 };
 
 ASSERT_SIZE(ColObj, 0x1C)

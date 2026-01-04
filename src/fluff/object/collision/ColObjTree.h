@@ -5,11 +5,10 @@
 #include "object/collision/KdTree.h"
 #include "mapdata/Mapdata.h"
 
-// size: 0xA88
+#pragma pack(push, 1)
+/// @note Size: `0xA88`
 class ColObjTree {
 public:
-    
-    
     ColObjTree();
     ~ColObjTree();
 
@@ -21,9 +20,14 @@ public:
     /* Class Members */
 
     /* 0x000 */ KdTree mTree;
-    /* 0x658 */ u8 rest[0xA88 - sizeof(KdTree)];
+    /* 0x658 */ u8 m_658[512];
+    /* 0x858 */ u8 m_858[24];
+    /* 0x870 */ u8 m_870[24];
+    /* 0x888 */ u64 mCollisionFlags[64];
 };
+#pragma pack(pop)
 
 ASSERT_SIZE(ColObjTree, 0xA88);
+
 
 #endif
