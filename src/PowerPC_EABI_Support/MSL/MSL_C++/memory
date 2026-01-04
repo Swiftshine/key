@@ -9,9 +9,11 @@
 #include <MSL_C++/MSL_Common/type_traits.h>
 #include <MSL_C++/limits>
 #include <MSL_C++/msl_utility>
+#include <MSL_C++/msl_smart_pointers>
 
 namespace std {
-
+    /* Allocator */
+    
     template <class T>
     class allocator {
     public:
@@ -63,7 +65,6 @@ namespace std {
         void destroy(pointer p, const true_type &) {}
         void destroy(pointer p, const false_type &) { p->~T(); }
     };
-
 };
 
 #endif

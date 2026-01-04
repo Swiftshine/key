@@ -1,0 +1,56 @@
+namespace std {
+    template <typename T>
+    class auto_ptr {
+    public:
+        auto_ptr()
+            : ptr_(nullptr)
+        { }
+
+        auto_ptr(T* p)
+            : ptr_(p)
+        { }
+
+        auto_ptr(const auto_ptr& rOther)
+            : ptr_(rOther.release())
+        { }
+
+        ~auto_ptr() {
+            if (ptr_ != nullptr) {
+                delete ptr_;
+            }
+        }
+
+        void reset(T* p) {
+            if (ptr_ != p) {
+                if (ptr_ != nullptr) {
+                    delete ptr_;
+                }
+
+                ptr_ = p;
+            }
+        }
+
+        T* release(const auto_ptr& rOther) {
+            T* tmp = ptr_;
+            ptr_ = nullptr;
+            return tmp;
+        }
+
+        inline T* operator->() const {
+            return ptr_;
+        }
+
+        inline T& operator*() const {
+            return *ptr_;
+        }
+
+        inline T* get() const {
+            return ptr_;
+        }
+
+        /* ? for operator= ? */ 
+
+    private:
+        T* ptr_;
+    };
+}
