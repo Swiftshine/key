@@ -642,7 +642,6 @@ asm void __shl2i(void)
 	blr
 }
 
-//unused
 asm void __shr2u(void)
 {
 	nofralloc
@@ -673,7 +672,6 @@ L_802BA610:
     blr
 }
 
-//unused
 asm void __cvt_sll_dbl(void){
 	nofralloc
 	stwu r1,-16(r1)
@@ -876,7 +874,6 @@ zero:
 	blr
 }
 
-//unused
 asm void __cvt_dbl_usll(void)
 {
 	nofralloc

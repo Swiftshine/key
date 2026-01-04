@@ -334,6 +334,8 @@ cflags_runtime = [
     "-common off",
     "-inline auto",
     "-str reuse,pool,readonly",
+
+    "-func_align 4",
 ]
 
 # REL flags
@@ -381,6 +383,7 @@ config.libs = [
         "cflags": cflags_runtime,
         "host": False,
         "objects": [
+            Object(Matching, "PowerPC_EABI_Support/Runtime/runtime.c"),
             # Object(NonMatching, "PowerPC_EABI_Support/Runtime/global_destructor_chain.c"),
             # Object(NonMatching, "PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp"),
         ],

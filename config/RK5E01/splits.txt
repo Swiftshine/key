@@ -352,6 +352,10 @@ gfl/gflScnMdlWrapper.cpp:
 fluff/graphics/HermiteCurveBase.cpp:
 	.text       start:0x8065FE74 end:0x806610FC
 
+PowerPC_EABI_Support/Runtime/runtime.c:
+	.text       start:0x8068D448 end:0x8068DD08
+	.rodata     start:0x8082D0A8 end:0x8082D0C0
+
 PowerPC_EABI_Support/Runtime/__init_cpp_exceptions.cpp:
 	.text       start:0x8068DD08 end:0x8068DDEC
 	.ctors      start:0x807E3420 end:0x807E3424 rename:.ctors$10
