@@ -33,9 +33,6 @@ class ColDataSeg : public ColData {
 public:
     ColDataSeg();
     DECL_WEAK virtual ~ColDataSeg();
-
-    void AddSelf();
-    void RemoveSelf();
 private:
     u16 mIndex;
     u16 m_22;

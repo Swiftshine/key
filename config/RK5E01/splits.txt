@@ -66,12 +66,9 @@ fluff/manager/StageResourceManager.cpp:
 fluff/util/KdTreeUtil.cpp:
 	.text       start:0x80048354 end:0x8004855C
 
-fluff/object/collision/KdTreeNode.cpp:
-	.text       start:0x8004855C end:0x80048D7C
-	.data       start:0x8083B148 end:0x8083B158
-
 fluff/object/collision/KdTree.cpp:
-	.text       start:0x80048D7C end:0x80049018
+	.text       start:0x8004855C end:0x80049018
+	.data       start:0x8083B148 end:0x8083B158
 
 fluff/object/collision/ColObj.cpp:
 	.text       start:0x800497B0 end:0x80049B5C
