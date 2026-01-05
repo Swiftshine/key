@@ -639,14 +639,14 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects" : [
-            Object(Matching, "fluff/object/FlfHandleList.cpp"),
-            # fluff/util/
+            Object(Matching,    "fluff/object/FlfHandleList.cpp"),
+            Object(NonMatching, "fluff/stage/mission/MissionUtil.cpp"),
             Object(Matching,    "fluff/util/CollisionFlagUtil.cpp"),
             Object(NonMatching, "fluff/util/FullSortSceneUtil.cpp"),
             Object(NonMatching, "fluff/util/GimmickResource.cpp"),
             Object(NonMatching, "fluff/util/GimmickUtil.cpp"),
             Object(Matching,    "fluff/util/KdTreeUtil.cpp"),
-            Object(NonMatching, "fluff/stage/mission/MissionUtil.cpp"),
+            Object(NonMatching, "fluff/util/MoveTarget.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
             Object(Matching,    "fluff/util/SimpleMdlCommon.cpp"),
         ],

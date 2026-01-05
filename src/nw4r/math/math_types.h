@@ -303,6 +303,7 @@ inline f32 VEC2Len(const VEC2* pVec) {
     return FSqrt(pVec->x * pVec->x + pVec->y * pVec->y);
 }
 
+void VEC2Normalize(VEC2* pDst, const VEC2* pSrc);
 /******************************************************************************
  *
  * VEC3 functions

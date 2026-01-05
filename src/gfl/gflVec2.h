@@ -31,9 +31,14 @@ namespace gfl {
             x = val;
             y = val;
         }
+
+        inline void operator=(const nw4r::math::VEC2& rOther) {
+            x = rOther.x;
+            y = rOther.y;
+        }
         
 
-        bool Sanitize();
+        static bool Sanitize(nw4r::math::VEC2& rVec);
     };
 }
 

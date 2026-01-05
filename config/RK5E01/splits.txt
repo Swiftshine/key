@@ -349,6 +349,10 @@ gfl/gflScnMdlWrapper.cpp:
 	.text       start:0x8065D5E8 end:0x8065E4C8
 	.sbss       start:0x808E5E70 end:0x808E5E78
 
+fluff/util/MoveTarget.cpp:
+	.text       start:0x8065E4C8 end:0x8065EFD8
+	.data       start:0x808B8918 end:0x808B8940
+
 fluff/graphics/HermiteCurveBase.cpp:
 	.text       start:0x8065FE74 end:0x806610FC
 
