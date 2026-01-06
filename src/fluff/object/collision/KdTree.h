@@ -1,7 +1,6 @@
 #ifndef FLUFF_KDTREE_H
 #define FLUFF_KDTREE_H
 
-#include <utility>
 #include "types.h"
 
 #include "object/collision/ColData.h"
@@ -26,24 +25,18 @@ public:
         SetMaxY(pParent->GetMaxY());
     }
 
-    inline KdTreeNode(nw4r::math::VEC2& rMin, nw4r::math::VEC2& rMax) {
-        mDepth = 0;
-        float z = 0.0f;
-        SetMinX(z);
-        SetMinY(z);
-        SetMaxX(z);
-        SetMaxY(z);
-
+    inline KdTreeNode(const nw4r::math::VEC2& rMin, const nw4r::math::VEC2& rMax)
+        : mDepth(0)
+    {
         mParent = nullptr;
         mChild1 = nullptr;
         mChild2 = nullptr;
         mColDataSeg = nullptr;
         mColDataSegCount = 0;
-
-        SetMinX(rMin.x);
-        SetMinY(rMin.y);
-        SetMaxX(rMax.x);
-        SetMaxY(rMax.y);
+        mBounds.mMinX = rMin.x;
+        mBounds.mMinY = rMin.y;
+        mBounds.mMaxX = rMax.x;
+        mBounds.mMaxY = rMax.y;
     }
 
     /* Virtual Methods */
@@ -62,7 +55,7 @@ public:
     /* Static Methods */
     static void AddColDataSeg(ColDataSeg* pColDataSeg);
     static void RemoveColDataSeg(ColDataSeg* pColDataSeg);
-    
+
     inline uint GetDepth() {
         return mDepth;
     }
@@ -182,7 +175,7 @@ public:
     
     /* Class Methods */
 
-    void CreateRootNode(nw4r::math::VEC2& rMin, nw4r::math::VEC2& rMax);
+    void CreateRootNode(const nw4r::math::VEC2& rMin, const nw4r::math::VEC2& rMax);
     void AddItem(void*);
     void RemoveItem(void*);
 

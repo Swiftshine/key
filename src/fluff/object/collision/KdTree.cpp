@@ -383,8 +383,7 @@ KdTree::~KdTree() {
     delete mRootNode;
 }
 
-// https://decomp.me/scratch/wa8La
-void KdTree::CreateRootNode(nw4r::math::VEC2& min, nw4r::math::VEC2& max) {
+void KdTree::CreateRootNode(const nw4r::math::VEC2& min, const nw4r::math::VEC2& max) {
     mRootNode = new (gfl::HeapID::Work) KdTreeNode(min, max);
 }
 
