@@ -646,6 +646,7 @@ config.libs = [
             Object(NonMatching, "fluff/util/GimmickUtil.cpp"),
             Object(Matching,    "fluff/util/KdTreeUtil.cpp"),
             Object(NonMatching, "fluff/util/MoveTarget.cpp"),
+            Object(NonMatching, "fluff/util/PathInfo.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
             Object(Matching,    "fluff/util/SimpleMdlCommon.cpp"),
         ],

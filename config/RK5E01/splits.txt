@@ -191,6 +191,9 @@ fluff/object/FlfGameObjLocator.cpp:
 	.data       start:0x8086A9D8 end:0x8086AA58
 	.sdata      start:0x808E1578 end:0x808E1580
 
+fluff/util/PathInfo.cpp:
+	.text       start:0x802FF7E8 end:0x803006F8
+
 fluff/object/gimmick/GmkSunriseCurtain.cpp:
 	.text       start:0x803C9A84 end:0x803CAA74
 	.rodata     start:0x8080AA20 end:0x8080AB00

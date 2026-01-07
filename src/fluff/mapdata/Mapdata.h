@@ -51,9 +51,13 @@ public:
         bool BuildPathDraw();
         bool BuildMsKeepOutLine();
 
+        inline int GetNumSegments() const {
+            return mNumSegments;
+        }
+
         /* 0x00 */ std::string mName;
         /* 0x0C */ MapdataParams mParams;
-        /* 0x48 */ uint mNumPoints;
+        /* 0x48 */ int mNumSegments;
         /* 0x4C */ gfl::Array<nw4r::math::VEC2> mPoints;
     };
 
