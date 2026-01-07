@@ -1,12 +1,12 @@
 #include "util/PathInfo.h"
 
-PathInfo::PathInfo(Mapdata::MapdataPath* pPath, bool arg2)
+PathInfo::PathInfo(Mapdata::MapdataPath* pPath, bool looped)
     : mPath(pPath)
     , mPathLength(0.0f)
     , mSegments()
     , m_14(0.0f, 0.0f)
     , mNumSegments(0)
-    , m_20(arg2)
+    , mIsLooped(looped)
 {
     AddPoints();
 }
@@ -57,7 +57,7 @@ PathInfo::~PathInfo() { }
 // }
 
 const nw4r::math::VEC2& PathInfo::GetPoint(int index) const {
-    if (fn_802FFCBC()) {
+    if (IsLooped()) {
         index -= index / mPath->GetNumSegments() * mPath->GetNumSegments();
     } else {
         int last = mPath->GetNumSegments() - 1;

@@ -13,7 +13,7 @@ struct PathSegment {
 /// @note Size: `0x24`
 class PathInfo {
 public:
-    PathInfo(Mapdata::MapdataPath* pPath, bool arg2);
+    PathInfo(Mapdata::MapdataPath* pPath, bool looped);
     ~PathInfo();
 
     /* Class Methods */
@@ -21,7 +21,7 @@ public:
     nw4r::math::VEC2 fn_802FF9B8(float) const;
 
     
-    bool fn_802FFCBC() const;
+    bool IsLooped() const;
     const nw4r::math::VEC2& fn_802FF9FC(float) const;
     void AddPoints();
     const nw4r::math::VEC2& GetPoint(int index) const;
@@ -33,7 +33,7 @@ public:
     /* 0x08 */ VectorWrapper<PathSegment> mSegments;
     /* 0x14 */ nw4r::math::VEC2 m_14;
     /* 0x1C */ int mNumSegments;
-    /* 0x20 */ bool m_20;
+    /* 0x20 */ bool mIsLooped;
 };
 
 #endif
