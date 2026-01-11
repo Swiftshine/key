@@ -151,7 +151,7 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20250520"
-config.dtk_tag = "v1.6.2"
+config.dtk_tag = "v1.8.0"
 config.objdiff_tag = "v3.3.1"
 config.sjiswrap_tag = "v1.2.2"
 config.wibo_tag = "1.0.0-beta.4"
@@ -607,6 +607,7 @@ config.libs = [
             Object(NonMatching, "fluff/object/gimmick/GmkMsCarrierGoal.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkSimpleMdl.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkSunriseCurtain.cpp"),
+            Object(NonMatching, "fluff/object/gimmick/GmkTreasureItem.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkTurtle.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkUnderseaSound.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkVictoryStand.cpp"),

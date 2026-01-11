@@ -1,0 +1,1 @@
+#include "object/gimmick/GmkTreasureItem.h"

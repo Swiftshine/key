@@ -1,0 +1,45 @@
+#ifndef FLUFF_GMKTREASUREITEM_H
+#define FLUFF_GMKTREASUREITEM_H
+
+#include "gfl/gflResFileInfo.h"
+
+#include "object/Gimmick.h"
+#include "object/collision/IObjHitCB.h"
+
+#include "graphics/FlfMdlDraw.h"
+#include "graphics/GmkPartsMdlSet.h"
+#include "graphics/NwAnm.h"
+
+#include "util/PercentageWrapper.h"
+
+// cloth patch
+class GmkMekuri2;
+
+/// @brief A treasure for the player to collect.
+/// @note Size: `0x184`
+class GmkTreasureItem : public Gimmick, public IObjHitCB {
+public:
+    /* Class Members */
+
+    /* 0x134 */ int mCurrentState;
+    /* 0x138 */ int mPreviousState;
+    /* 0x13C */ int m_13C;
+    /* 0x140 */ int m_140;
+    /* 0x144 */ int m_144;
+    /* 0x148 */ FlfMdlDraw* mFlfMdlDraw;
+    /* 0x14C */ PercentageWrapper* mPercentageWrapper;
+    /* 0x150 */ int m_150;
+    /* 0x154 */ int m_154;
+    /* 0x158 */ bool mPlayAnimation;
+    /* 0x15C */ GmkPartsMdlSet* mGmkPartsMdlSet;
+    /* 0x160 */ NwAnm* mNwAnm1;
+    /* 0x164 */ NwAnm* mNwAnm2;
+    /* 0x168 */ CollisionEntry* mCollisionEntry;
+    /* 0x16C */ gfl::ResFileObject mResFileObject;
+    /* 0x170 */ bool m_170;
+    /* 0x171 */ bool mClothPatchPulled;
+    /* 0x174 */ GmkMekuri2* mClothPatch;
+    /* 0x178 */ std::string mClothPathState;
+};
+
+#endif

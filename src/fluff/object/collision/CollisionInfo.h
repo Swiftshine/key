@@ -2,8 +2,9 @@
 #define FLUFF_COLLISIONINFO_H
 
 #include <nw4r/math.h>
-#include "object/collision/IObjHitCB.h"
-#include "object/FlfGameObj.h"
+
+class IObjHitCB;
+class FlfGameObj;
 
 struct CollisionInfo {
     ENUM_CLASS(CollisionFlags,
@@ -25,8 +26,8 @@ struct CollisionInfo {
     /* 0x10 */ int m_10;
     /* 0x14 */ nw4r::math::VEC3 mPosition;
     /* 0x20 */ nw4r::math::VEC2 mDimensions;
-    /* 0x28 */ IObjHitCB* mCallbacks;
-    /* 0x2C */ const char* mOwnerName;
+    /* 0x28 */ IObjHitCB* mOwnerCallbacks;
+    /* 0x2C */ FlfGameObj* mOwnerObject; // maybe redundant?
     /* 0x30 */ nw4r::math::MTX34* mOwnerMatrix;
     /* 0x34 */ nw4r::math::VEC2 mRectStart;
     /* 0x3C */ int m_3C; // rect end?

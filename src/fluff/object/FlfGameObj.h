@@ -75,14 +75,10 @@ public:
     /// @param pTagList A string of four-character tags, delimited by a semicolon.
     /// e.g. "tag1;tag2;tag3;"
     /* 0x48 */ virtual void SetStateForTaggedObjects(const char* pState, const char* pTagList);
-
-
     /// @brief Sets the object state.
-    /// @param pSetter A pointer to the object that induced the call..
+    /// @param pSetter A pointer to the object that induced the call.
     /// @param rState The target state.
-    /// @note The setter object is usually unused.
-    /// To see an example of a usecase, see `GmkCandleStick::SetState`.
-    /* 0x4C */ virtual void SetState(FlfGameObj* pSetter, std::string& rState); 
+    /* 0x4C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState); 
     /* 0x50 */ virtual void vf50(bool arg1);
     /* 0x54 */ virtual bool vf54();
     /* 0x58 */ virtual void vf58();

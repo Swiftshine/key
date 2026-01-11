@@ -114,16 +114,14 @@ public:
 
     /* 0x28 */ int m_28;
     /* 0x2C */ int m_2C;
-    /* 0x30 */ bool m_30;
-    /* 0x31 */ bool m_31;
-    /* 0x32 */ bool m_32;
+    /* 0x30 */ bool mTreasureObtained[3];
     /* 0x34 */ int m_34;
     /* 0x38 */ bool m_38;
     /* 0x3C */ int m_3C;
     /* 0x40 */ int m_40;
     /* 0x44 */ int mNumEnemiesDefeated;
-    /* 0x48 */ int mNumZekeFound; // @ 0x48
-    /* 0x4C */ int mMaxZekeFound; // @ 0x4C
+    /* 0x48 */ int mNumZekeFound;
+    /* 0x4C */ int mMaxZekeFound;
     /* 0x50 */ float m_50;
     /* 0x54 */ float m_54;
     /* 0x58 */ float m_58;
