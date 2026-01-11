@@ -167,7 +167,7 @@ void GmkMsCarrierGoal::PlayEffect() {
         effectObj->SetPosition(pos);
     }
 
-    gfl::SoundHandle::PlaySound(pos, 0xE9, 0, 0);
+    Game::Sound::PlaySoundEffect((const gfl::Vec3&)pos, 0xE9, 0, 0);
 }
 
 NwAnmCtrl* GmkMsCarrierGoal::CreateAnimCtrl(const char* animName, gfl::ResFileObject& resFileObject) {

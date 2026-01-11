@@ -12,6 +12,8 @@
 
 #include "util/PercentageWrapper.h"
 
+#include "misc/ScopedPointers.h"
+
 // cloth patch
 class GmkMekuri2;
 
@@ -19,7 +21,23 @@ class GmkMekuri2;
 /// @note Size: `0x184`
 class GmkTreasureItem : public Gimmick, public IObjHitCB {
 public:
-    GmkTreasureItem(GimmickBuildInfo* pBuildInfo, const char* pTaskName);
+    static GmkTreasureItem* Build(GimmickBuildInfo* pBuildInfo);
+
+
+    GmkTreasureItem(GimmickBuildInfo* pBuildInfo, const char* pTaskName) DONT_INLINE_CLASS;
+
+    /* Virtual Methods */
+
+    /* Gimmick */
+
+    /* 0x4C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
+    /* 0xBC */ virtual void Update();
+
+    /* 0xD0 */ virtual bool OnCollision(CollisionInfo* pSolSelf, CollisionInfo* pColOther) override;
+
+
+    /* Class Methods */
+    void CreateEffect();
     
     /* Class Members */
 

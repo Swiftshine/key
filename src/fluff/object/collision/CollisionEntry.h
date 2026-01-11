@@ -39,7 +39,7 @@ public:
 
 
     inline void ResetMatrix(bool arg0) {
-        mInfo.mMatrixInited = arg0;
+        mInfo.mPendingCollision = arg0;
 
         nw4r::math::MTX34* ownerMtx = mInfo.mOwnerMatrix;
         
@@ -53,7 +53,7 @@ public:
     }
 
     inline void ResetMatrixIf(bool arg0) {
-        mInfo.mMatrixInited = arg0;
+        mInfo.mPendingCollision = arg0;
 
         if (arg0) {
             nw4r::math::MTX34* ownerMtx = mInfo.mOwnerMatrix;

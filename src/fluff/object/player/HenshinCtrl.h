@@ -126,7 +126,6 @@ class HenshinSplash : public HenshinCtrl { };
 class HenshinAquaRide : public HenshinCtrl { };
 class HenshinRocket : public HenshinCtrl { };
 class HenshinWarpStar : public HenshinCtrl { };
-class HenshinUFO : public HenshinCtrl { };
 class HenshinBrightRobot : public HenshinCtrl { };
 class HenshinTrainFree : public HenshinCtrl { };
 

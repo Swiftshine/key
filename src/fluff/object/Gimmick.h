@@ -47,8 +47,6 @@ public:
     /// @note Size: `0x9C`
     class GimmickBuildInfo {
     public:
-        
-
         inline GimmickBuildInfo()
             : mGimmickID(-1)
             , mPosition(0.0f, 0.0f, 0.0f)

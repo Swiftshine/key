@@ -16,7 +16,7 @@ struct CollisionInfo {
         SolidOnTop  = 0x10,
     );
 
-    /* 0x00 */ bool mMatrixInited;
+    /* 0x00 */ bool mPendingCollision;
     /* 0x01 */ bool m_1;
     /* 0x02 */ bool m_2;
     /* 0x03 */ bool mBoundsInited;

@@ -2,6 +2,7 @@
 #include "object/player/HenshinCtrl.h"
 #include "object/PlayerBase.h"
 #include "manager/GameManager.h"
+#include "sound/GameSound.h"
 
 HenshinCtrl::HenshinCtrl(PlayerBase* pPlayer)
     : mPlayerHandle(pPlayer)
@@ -50,7 +51,7 @@ void HenshinCtrl::vfDC(FlfMdlDraw* pFlfMdlDraw) {
 }
 
 void HenshinCtrl::Init(const gfl::Vec3& rPos) {
-    gfl::SoundHandle::PlaySound(rPos, 0x1EF, 0, 0);
+    Game::Sound::PlaySoundEffect(rPos, 0x1EF, 0, 0);
     mPreviousState = mCurrentState;
     mCurrentState = 1;
     m_28 = 0;

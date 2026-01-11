@@ -159,11 +159,11 @@ void GmkSunriseCurtain::Update() {
 
         case State::State_2: {
             if (mFlfMdlDraw1->GetCurrentFrame() == 37.0f) {
-                gfl::SoundHandle::PlaySound(mPosition, 0xF5, 0, 0);
+                Game::Sound::PlaySoundEffect(mPosition, 0xF5, 0, 0);
             }
 
             if (mFlfMdlDraw1->GetCurrentFrame() == 125.0f) {
-                mMainSoundHandle = gfl::SoundHandle::PlaySound(mPosition, 0x199, 0, 0);
+                Game::Sound::PlaySoundEffect(mPosition, 0x199, 0, 0);
             }
             
             if (mFlfMdlDraw1->GetCurrentFrame() == 220.0f) {
@@ -177,7 +177,7 @@ void GmkSunriseCurtain::Update() {
             }
 
             if (mFlfMdlDraw1->GetCurrentFrame() == 305.0f) {
-                gfl::SoundHandle::PlaySound(mPosition, 0x1EF, 0, 0);
+                Game::Sound::PlaySoundEffect(mPosition, 0x1EF, 0, 0);
             }
 
             if (mFlfMdlDraw1->IsAnimationDone()) {

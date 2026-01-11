@@ -19,6 +19,7 @@
 #include "object/helper/HelperRobot.h"
 #include "object/player/HenshinCtrl.h"
 #include "object/player/HenshinSubmarine.h"
+#include "object/player/HenshinUFO.h"
 
 #include "graphics/KeyFrame.h"
 #include "graphics/NURBSDrawObj.h"
