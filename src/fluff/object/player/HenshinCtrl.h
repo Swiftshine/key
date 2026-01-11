@@ -104,7 +104,7 @@ public:
     /* 0x0C */ gfl::Vec3 mPosition;
     /* 0x18 */ int m_18;
     /* 0x1C */ FlfMdlCollision* mFlfMdlCollision;
-    /* 0x20 */ int mCurrentState;
+    /* 0x20 */ int mCurrentState; // probably a StateObject?
     /* 0x24 */ int mPreviousState;
     /* 0x28 */ int m_28;
     /* 0x2C */ uint m_2C;

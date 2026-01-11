@@ -41,11 +41,7 @@ public:
     
     /* Class Members */
 
-    /* 0x134 */ int mCurrentState;
-    /* 0x138 */ int mPreviousState;
-    /* 0x13C */ int m_13C;
-    /* 0x140 */ int m_140;
-    /* 0x144 */ int m_144;
+    /* 0x134 */ StateObject mState;
     /* 0x148 */ FlfMdlDraw* mFlfMdlDraw;
     /* 0x14C */ PercentageWrapper* mPercentageWrapper;
     /* 0x150 */ int m_150;

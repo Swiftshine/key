@@ -22,11 +22,8 @@ void GmkVictoryStand::SetRankingInfo(uint playerRanking, nw4r::math::VEC2& posit
     GmkVictoryStand* stand = Instance();
     Instance()->mPlayerRanking = playerRanking;
     stand->mBeadAwardPosition = position;
-    stand->mPreviousState = stand->mCurrentState;
-    stand->mCurrentState = 1;
-    stand->mBeadAwardState = 0;
-    stand->m_13C = 0;
-    stand->m_140 = 0;
+    
+    stand->mBeadAwardState.SetCurrentStateAndClearOthers(1);
 }
 
 void GmkVictoryStand::SpawnDecorativeBall(uint rank) {
@@ -73,11 +70,7 @@ const char hitColbin[] = "gimmick/%s/hit.colbin";
 
 GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskName)
     : Gimmick(buildInfo, taskName)
-    , mPreviousState(mCurrentState)
-    , mCurrentState(0)
-    , mBeadAwardState(0)
-    , m_13C(0)
-    , m_140(0)
+    , mBeadAwardState()
     , mPlayerRanking(0)
     , mDecorativeBallBuildInfo()
 {
@@ -123,13 +116,13 @@ GmkVictoryStand::~GmkVictoryStand() {
 }
 
 void GmkVictoryStand::Update() {
-    if (1 == mCurrentState) {
+    if (mBeadAwardState.mCurrentState == 1) {
         AwardBeads();
     }
 }
 
 void GmkVictoryStand::AwardBeads() {
-    if (0 == mBeadAwardState) {
+    if (mBeadAwardState.mCurrentState == 0) {
         uint playerRanking = mPlayerRanking;
         int beadWinnings;
         switch (mPlayerRanking) {

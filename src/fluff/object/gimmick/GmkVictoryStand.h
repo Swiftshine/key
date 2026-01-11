@@ -1,13 +1,14 @@
 #ifndef FLUFF_GMKVICTORYSTAND_H
 #define FLUFF_GMKVICTORYSTAND_H
 
-#include "object/Gimmick.h"
-#include "util/BeadUtil.h"
-#include "graphics/GmkPartsMdlSet.h"
-#include "object/collision/ColObj.h"
-#include "misc/ScopedPointers.h"
-#include "stage/StageResources.h"
 #include "gfl/gflVec3.h"
+#include "graphics/GmkPartsMdlSet.h"
+#include "misc/ScopedPointers.h"
+#include "object/Gimmick.h"
+#include "object/collision/ColObj.h"
+#include "util/BeadUtil.h"
+#include "util/StateObject.h"
+#include "stage/StageResources.h"
 
 // size: 0x1FC
 class GmkVictoryStand : public Gimmick {
@@ -32,11 +33,7 @@ public:
 
     void AwardBeads() DONT_INLINE_CLASS;
 private:
-    int mCurrentState;
-    int mPreviousState; // guessed
-    int mBeadAwardState;
-    int m_13C;
-    int m_140;
+    StateObject mBeadAwardState;
     uint mPlayerRanking;
     gfl::Vec3 mBeadAwardPosition;
     int mTotalAwardedBeads;

@@ -25,6 +25,7 @@
 #include "graphics/NURBSDrawObj.h"
 #include "graphics/PlParabola.h"
 
+#include "util/StateObject.h"
 
 /// @brief The player class.
 /// @note Size: `0xF68`
@@ -231,11 +232,8 @@ public:
     /* 0x820 */ STRUCT_FILL(0x388);
     /* 0xBA8 */ float m_BA8[25];
     /* 0xC0C */ int mCurrentTransformationType;
-    /* 0xC10 */ int mCurrentState;
-    /* 0xC14 */ int mPreviousState;
-    /* 0xC18 */ int m_C18;
-    /* 0xC1C */ int mDefaultState;
-    /* 0xC20 */ STRUCT_FILL(0x8);
+    /* 0xC10 */ StateObject mState;
+    /* 0xC20 */ int m_C24;
     /* 0xC28 */ uint m_C28; // flags of some sort
     /// (Probably) in milliseconds. Refers to player action, not input.
     /// At ~9-10 seconds of inaction, an idle animation will play, and this field

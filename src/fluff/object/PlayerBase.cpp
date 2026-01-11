@@ -41,17 +41,16 @@ float PlayerBase::GetGravityCorrection() {
 
 void PlayerBase::ResetState() {
     SetPlayerState(PlayerState::Default);
-    mDefaultState = PlayerState::TouchGround;
+    mState.mDefaultState = PlayerState::TouchGround;
     ResetWalkAnimSpeed();
 }
 
 void PlayerBase::SetPlayerState(int newState) {
-    if (mCurrentState == newState) {
+    if (mState.mCurrentState == newState) {
         return;
     }
     
-    mPreviousState = mCurrentState;
-    mCurrentState = newState;
+    mState.SetCurrentState(newState);
 }
 
 // https://decomp.me/scratch/7wwft
@@ -63,7 +62,7 @@ void PlayerBase::fn_80081158() {
         }
         
         case Transformation::None: {
-            if (mCurrentState != PlayerState::YarnWhipLockOn) {
+            if (mState.mCurrentState != PlayerState::YarnWhipLockOn) {
                 mSpringFlf->fn_800B4FE0(5);
             }
 

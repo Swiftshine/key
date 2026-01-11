@@ -51,11 +51,7 @@ bool GmkTreasureItem::OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOt
         Game::Sound::PlaySoundEffect(mPosition, 0x12F, 0, 0);
     }
 
-    mPreviousState = mCurrentState;
-    mCurrentState = 1;
-    m_13C = 0;
-    m_140 = 0;
-    m_144 = 0;
+    mState.SetCurrentStateAndClearOthers(1);
     
     return true;
 }
