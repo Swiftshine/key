@@ -186,10 +186,8 @@ void GmkSimpleMdl::UpdateModel() {
     mShadowModelWrapper->SetMatrix(mtx1);
 }
 
-
-
-void GmkSimpleMdl::SetState(FlfGameObj* setter, std::string& stateStr) {
-    if (on == stateStr) {
+void GmkSimpleMdl::SetState(FlfGameObj* setter, const std::string& rState) {
+    if (rState == on) {
 
         if (mModelWrapper.IsValid()) {
             mModelWrapper->SetUpdate(true);
@@ -199,7 +197,7 @@ void GmkSimpleMdl::SetState(FlfGameObj* setter, std::string& stateStr) {
             mShadowModelWrapper->SetUpdate(true);
         }
     } else {
-        if (off == stateStr) {
+        if (rState == off) {
             if (mModelWrapper.IsValid()) {
                 mModelWrapper->SetUpdate(false);
             }

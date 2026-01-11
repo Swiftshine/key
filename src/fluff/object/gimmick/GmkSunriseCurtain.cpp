@@ -332,7 +332,7 @@ void GmkSunriseCurtain::DoTimeSwitch() {
     mTimeChanged = true;
 }
 
-void GmkSunriseCurtain::SetState(FlfGameObj* pSetter, std::string& rState) {
+void GmkSunriseCurtain::SetState(FlfGameObj* pSetter, const std::string& rState) {
     if (rState == "ON" && State::State_1 == mState) {
         SwitchStates();
     }

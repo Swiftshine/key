@@ -28,7 +28,7 @@ public:
     void SetState(int state);
 
     /* FlfGameObj */
-    virtual void SetState(FlfGameObj* setter, std::string& stateName) override;
+    virtual void SetState(FlfGameObj* setter, const std::string& stateName) override;
     /* Gimmick */
     virtual void Update() override;
     virtual bool vfC0(const char*) override;

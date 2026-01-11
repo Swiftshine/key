@@ -19,6 +19,8 @@ class GmkMekuri2;
 /// @note Size: `0x184`
 class GmkTreasureItem : public Gimmick, public IObjHitCB {
 public:
+    GmkTreasureItem(GimmickBuildInfo* pBuildInfo, const char* pTaskName);
+    
     /* Class Members */
 
     /* 0x134 */ int mCurrentState;

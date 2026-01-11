@@ -101,7 +101,7 @@ gfl::Vec3 vec3(mPosition.z, vec);
     mFlfMdlDraw->SetWoolDrawMatrix(mtx);
 }
 
-void GmkCandleStick::SetState(FlfGameObj* setter, std::string& state) {
+void GmkCandleStick::SetState(FlfGameObj* setter, const std::string& state) {
     if (state == "ON") {
         UpdateGraphics(true);
     } else if (state == "OFF") {

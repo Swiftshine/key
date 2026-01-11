@@ -134,7 +134,7 @@ void GmkCameraControl::SetState(int state) {
     m_138 = 0.0f;
 }
 
-void GmkCameraControl::SetState(FlfGameObj* setter, std::string& state) {
+void GmkCameraControl::SetState(FlfGameObj* setter, const std::string& state) {
     mCameraInfo.SetState(setter, state);
 }
 

@@ -29,7 +29,7 @@ public:
     void Init(GimmickBuildInfo* buildInfo);
 
     /* FlfGameObj */
-    virtual void SetState(FlfGameObj* setter, std::string& state);
+    virtual void SetState(FlfGameObj* setter, const std::string& state);
     
     /* Gimmick */
     virtual void Update();

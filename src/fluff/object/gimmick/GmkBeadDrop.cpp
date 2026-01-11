@@ -218,6 +218,6 @@ void GmkBeadDrop::SetSpawnState() {
     }
 }
 
-void GmkBeadDrop::SetState(FlfGameObj* setter, std::string& state) {
+void GmkBeadDrop::SetState(FlfGameObj* setter, const std::string& state) {
     mGeneratorInfo.SetState(setter, state);
 } 

@@ -31,7 +31,7 @@ public:
     void UpdateGraphics(bool createEffect);
 
     /* FlfGameObj */
-    void SetState(FlfGameObj* setter, std::string& state);
+    void SetState(FlfGameObj* setter, const std::string& state);
 
     
 

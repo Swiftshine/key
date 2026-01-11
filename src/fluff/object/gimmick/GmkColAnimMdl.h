@@ -30,7 +30,7 @@ public:
 
     /* FlfGameObj */
 
-    virtual void SetState(FlfGameObj* setter, std::string& stateStr) override;
+    virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
     virtual void vf64(bool) override;
     
     /* Gimmick */

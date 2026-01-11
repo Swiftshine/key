@@ -359,7 +359,7 @@ public:
     /* 0x02C */ virtual void vf2C(nw4r::math::VEC3& rArg1, nw4r::math::VEC3& rArg2, nw4r::math::VEC3& rArg3) override;
     /* 0x034 */ virtual bool ShouldCull(CameraManager* pCamMgr) override;
     /* 0x03C */ virtual int vf3C() override;
-    /* 0x04C */ virtual void SetState(FlfGameObj* pSetter, std::string& rState) override;
+    /* 0x04C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
     /* 0x064 */ virtual void vf64(bool) override;
 
     /* -> IObjHitCB */

@@ -24,7 +24,7 @@ public:
     virtual ~GmkBeadPopItem();
 
     /* FlfGameObj */
-    virtual void SetState(FlfGameObj* setter, std::string& state) override;
+    virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
 
     /* Gimmick */
     virtual void Update() override;
@@ -39,6 +39,8 @@ public:
     void SetCollisionEnabled(bool enabled) DONT_INLINE_CLASS;
     void SetupCollisionMatrix();
     std::string& GetStringParam(uint index);
+
+    DECL_WEAK void CutFunction() DONT_INLINE_CLASS;
 private:
     int m_134;
     bool m_138;

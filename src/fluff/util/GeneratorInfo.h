@@ -21,7 +21,7 @@ public:
 
     /* Class Methods */
 
-    void SetState(FlfGameObj* object, std::string& state);
+    void SetState(FlfGameObj* object, const std::string& state);
 
     DECL_WEAK void ResetCounter();
 

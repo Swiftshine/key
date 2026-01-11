@@ -202,16 +202,11 @@ bool GmkBeadPopItem::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther
     return false;
 }
 
-extern "C" void DefaultSwitchThreadCallback();
-
-inline void CutFunction() {
-    // a temporary workaround for code merging
-    DefaultSwitchThreadCallback();
-}
+void GmkBeadPopItem::CutFunction() { }
 
 // mr r3, r9 is in the wrong place
 // https://decomp.me/scratch/mrWYp
-void GmkBeadPopItem::SetState(FlfGameObj* setter, std::string& state) {
+void GmkBeadPopItem::SetState(FlfGameObj* setter, const std::string& state) {
     bool enabled = mCollisionEnabled;
 
     if (state.compare("ON") == 0) {
@@ -228,6 +223,7 @@ void GmkBeadPopItem::SetState(FlfGameObj* setter, std::string& state) {
         setter->mCategory == 1
     ) {
         CutFunction();
+        
         int gimmickID = static_cast<Gimmick*>(setter)->GetGimmickID();
         bool isClothTurnGimmick = GimmickUtil::IsClothTurnGimmick(gimmickID);
         if (isClothTurnGimmick && mState == State::Init) {

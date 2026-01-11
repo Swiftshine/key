@@ -34,7 +34,7 @@ public:
     void SetModelWrapperByFullSortSceneIndex(int index) DONT_INLINE_CLASS;
     void SetModel(const char* brres, const char* modelName, bool playAnim) DONT_INLINE_CLASS;
     void UpdateModel() DONT_INLINE_CLASS;
-    virtual void SetState(FlfGameObj* setter, std::string& strState) override;
+    virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
     gfl::ScnMdlWrapper* CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flag) DONT_INLINE_CLASS;
     NwAnm* CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName) DONT_INLINE_CLASS;
     void SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim) DONT_INLINE_CLASS;
