@@ -163,7 +163,7 @@ void GmkSunriseCurtain::Update() {
             }
 
             if (mFlfMdlDraw1->GetCurrentFrame() == 125.0f) {
-                Game::Sound::PlaySoundEffect(mPosition, 0x199, 0, 0);
+                mMainSoundHandle = Game::Sound::PlaySoundEffect(mPosition, 0x199, 0, 0);
             }
             
             if (mFlfMdlDraw1->GetCurrentFrame() == 220.0f) {
