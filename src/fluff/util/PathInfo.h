@@ -17,12 +17,12 @@ public:
     ~PathInfo();
 
     /* Class Methods */
-    nw4r::math::VEC2 GetPointAtPercentage(float percentage) const;
-    nw4r::math::VEC2 fn_802FF9B8(float) const;
+    gfl::Vec2 GetPointAtPercentage(float percentage) const;
+    gfl::Vec2 fn_802FF9B8(float) const;
 
+    void fn_802FF9FC(gfl::Vec2&) const;
     
     bool IsLooped() const;
-    const nw4r::math::VEC2& fn_802FF9FC(float) const;
     void AddPoints();
     const nw4r::math::VEC2& GetPoint(int index) const;
 
