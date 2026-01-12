@@ -32,7 +32,7 @@ void GmkTreasureItem::CreateEffect() {
     }
 }
 
-bool GmkTreasureItem::OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther) {
+bool GmkTreasureItem::OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther, const gfl::Vec3& rPosition) {
     HenshinUFO* ufo = dynamic_cast<HenshinUFO*>(pColOther->mOwnerCallbacks);
     
     if (ufo != nullptr) {

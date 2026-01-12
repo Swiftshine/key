@@ -12,7 +12,7 @@ public:
     
     // Returns whether or not something meaningful happens. What constitutes
     // "meaningful" is on a case-by-case basis.
-    virtual bool OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther, gfl::Vec3& pPosition);
+    virtual bool OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther, const gfl::Vec3& pPosition);
 };
 
 #endif
