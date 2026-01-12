@@ -105,11 +105,11 @@ bool FlfGameObj::vf14() {
 void FlfGameObj::SetCulled(bool arg1) {
     if (m_6E) {
         if (mIsCulled != arg1) {
-            vf64(arg1);
+            UpdateWater(arg1);
             mIsCulled = arg1;
         }
     } else if (mIsCulled) {
-        vf64(false);
+        UpdateWater(false);
         mIsCulled = false;
     }
 }

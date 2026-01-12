@@ -10,7 +10,7 @@
 
 #include <PowerPC_EABI_Support/MSL/MSL_C++/string>
 
-
+class ColObj;
 class CameraManager;
 
 /// @brief The base class for many entites.
@@ -60,7 +60,7 @@ public:
     /* 0x30 */ virtual void vf30();
     /* 0x34 */ virtual bool ShouldCull(CameraManager* pCamMgr);
     /* 0x38 */ virtual ScreenPosition GetScreenPosition();
-    /* 0x3C */ virtual int  vf3C();
+    /* 0x3C */ virtual ColObj* GetColObj();
     /* 0x40 */ virtual void vf40(FlfGameObj*);
     /* 0x44 */ virtual int  vf44();
 
@@ -84,7 +84,7 @@ public:
     /* 0x58 */ virtual void vf58();
     /* 0x5C */ virtual void SetCullThreshold(float threshold);
     /* 0x60 */ virtual float GetCullThreshold();
-    /* 0x64 */ virtual void vf64(bool);
+    /* 0x64 */ virtual void UpdateWater(bool);
 
     /* Class Methods */
 

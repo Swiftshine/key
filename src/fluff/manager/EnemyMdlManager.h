@@ -36,7 +36,7 @@ public:
             /* 0x2C */ virtual void vf2C();
             /* 0x30 */ virtual void vf30();
             /* 0x34 */ virtual void vf34();
-            /* 0x38 */ virtual void vf38(bool);
+            /* 0x38 */ virtual void Update(bool);
         };
     public:
         /* Class Members */

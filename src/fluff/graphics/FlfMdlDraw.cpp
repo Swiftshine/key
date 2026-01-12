@@ -14,7 +14,7 @@ FlfMdlDraw::FlfMdlDraw(
     , m_28(true)
     , m_2C(9.333333f)
     , m_30(0.0f, 0.0f, 0.0f)
-    , m_3C(true)
+    , mShouldUpdate(true)
     , m_40(1)
     , m_44(false)
     , m_48(1.0f)

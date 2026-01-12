@@ -168,8 +168,8 @@ void GmkColAnimMdl::SetState(FlfGameObj* pSetter, const std::string& rState) {
     mColAnimCtrlGmk->SetState(pSetter, rState);
 }
 
-void GmkColAnimMdl::vf64(bool arg1) {
-    Gimmick::vf64(arg1);
+void GmkColAnimMdl::UpdateWater(bool arg1) {
+    Gimmick::UpdateWater(arg1);
 
     if (mAnimCtrl.IsValid()) {
         mAnimCtrl->mScnMdlWrapper->Update(!arg1);

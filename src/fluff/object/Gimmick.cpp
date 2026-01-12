@@ -15,7 +15,7 @@ Gimmick::Gimmick(int gimmickID)
     : FlfGameObj(ObjectCategory::Gimmick)
     , mGimmickID(gimmickID)
     , mBuildInfoPtr(nullptr)
-    , mStageModCtrl(nullptr)
+    , mWaterRenderManager(nullptr)
     , mTask(nullptr)
     , mCommand(nullptr)
 {
@@ -27,7 +27,7 @@ Gimmick::Gimmick(int gimmickID, const char* pTaskName)
     : FlfGameObj(ObjectCategory::Gimmick)
     , mGimmickID(gimmickID)
     , mBuildInfoPtr(nullptr)
-    , mStageModCtrl(nullptr)
+    , mWaterRenderManager(nullptr)
     , mTask(nullptr)
     , mCommand(nullptr)
 {
@@ -43,7 +43,7 @@ Gimmick::Gimmick(int gimmickID, const char* pTaskName)
 
 Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo, const char* pTaskName)
     : FlfGameObj(ObjectCategory::Gimmick)
-    , mStageModCtrl(nullptr)
+    , mWaterRenderManager(nullptr)
     , mTask(nullptr)
     , mCommand(nullptr)
 {
@@ -74,7 +74,7 @@ void Gimmick::Update() const { }
 
 Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo)
     : FlfGameObj(ObjectCategory::Gimmick)
-    , mStageModCtrl(nullptr)
+    , mWaterRenderManager(nullptr)
     , mTask(nullptr)
     , mCommand(nullptr)
 {

@@ -8,9 +8,9 @@
 #include "gflTask.h"
 #include "gfl/gflVec3.h"
 #include "misc/ScopedPointers.h"
-#include "stage/StageModCtrl.h"
 #include "gfl/gflScnMdlWrapper.h"
 #include "graphics/FullSortScene.h"
+#include "manager/WaterRenderManager.h"
 
 #include <nw4r/math.h>
 #include <utility>
@@ -134,7 +134,7 @@ public:
     /* -> FlfGameObj */
 
     /* 0x40 */ void vf40(FlfGameObj*) override;
-    /* 0x64 */ void vf64(bool) override;
+    /* 0x64 */ void UpdateWater(bool) override;
 
     /* Gimmick */
 
@@ -165,7 +165,6 @@ public:
 
     /* Class Methods */
 
-    /* Staitc Methods */
     gfl::Task* InitTask(const char* pTaskName);
     gfl::ScnMdlWrapper* CreateScnMdlWrapper(
         nw4r::g3d::ResFile resFile,
@@ -177,7 +176,7 @@ public:
     void InitCommand();
     void ProcessCommand();
     void ClearGimmickCommands();
-
+    void AddWaterRenderer(GmkWoolWaterRender* pRenderer);
 
     /* Static Methods */
 
@@ -199,7 +198,7 @@ public:
     /* 0x080 */ int mGimmickID;
     /* 0x084 */ GimmickBuildInfo* mBuildInfoPtr;
     /* 0x088 */ GimmickBuildInfo mBuildInfo;
-    /* 0x124 */ gfl::Pointer<StageModCtrl> mStageModCtrl;
+    /* 0x124 */ gfl::Pointer<WaterRenderManager> mWaterRenderManager;
     /* 0x128 */ gfl::Pointer<gfl::Task> mTask;
     /* 0x12C */ demo::EventDemoGimmickCommand* mCommand;
 };

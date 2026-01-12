@@ -335,16 +335,16 @@ void EnemyMdlManager::fn_80112864(bool arg1) {
 }
 
 void EnemyMdlManager::fn_8011286C() {
-    bool b = false;
+    bool update = false;
 
     if (!m_55 && !m_56) {
-        b = true;
+        update = true;
     }
 
-    mFlfMdlDraw->fn_80023CB4(b);
+    mFlfMdlDraw->Update(update);
 
     if (mMdlParts.m_0 != nullptr) {
-        mMdlParts.m_0->vf38(b);
+        mMdlParts.m_0->Update(update);
     }
 }
 

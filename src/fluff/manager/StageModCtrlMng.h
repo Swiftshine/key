@@ -4,7 +4,7 @@
 #include "gfl/gflLinkedList.h"
 #include "gfl/gflTask.h"
 
-class StageModCtrl;
+class WaterRenderManager;
 
 /// @note Size: `0x24`
 class StageModCtrlMng {
@@ -15,12 +15,12 @@ public:
     ~StageModCtrlMng();
 
     /* Class Methods */
-    void AddToList(StageModCtrl*);
-    void RemoveFromList(StageModCtrl*);
+    void AddToList(WaterRenderManager*);
+    void RemoveFromList(WaterRenderManager*);
 
     /* Class Members */
 
-    /* 0x0 */ gfl::LinkedList<StageModCtrl> mList;
+    /* 0x0 */ gfl::LinkedList<WaterRenderManager> mList;
     /* 0xC */ gfl::Task mTask;
 };
 

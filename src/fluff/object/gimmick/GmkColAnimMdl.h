@@ -31,7 +31,7 @@ public:
     /* FlfGameObj */
 
     virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
-    virtual void vf64(bool) override;
+    virtual void UpdateWater(bool) override;
     
     /* Gimmick */
     virtual int vf88(FlfGameObj*, uint) override;

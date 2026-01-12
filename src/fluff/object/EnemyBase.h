@@ -360,7 +360,7 @@ public:
     /* 0x034 */ virtual bool ShouldCull(CameraManager* pCamMgr) override;
     /* 0x03C */ virtual int vf3C() override;
     /* 0x04C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
-    /* 0x064 */ virtual void vf64(bool) override;
+    /* 0x064 */ virtual void UpdateWater(bool) override;
 
     /* -> IObjHitCB */
     /* 0x70 */ virtual int vf8() override;

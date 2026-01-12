@@ -19,7 +19,7 @@ public:
     virtual ~GmkWarpExit();
 
     /* FlfGameObj */
-    virtual void vf64(bool);
+    virtual void UpdateWater(bool);
     
     /* Gimmick */
     void Update();

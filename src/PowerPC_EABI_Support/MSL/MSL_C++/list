@@ -1,5 +1,5 @@
 #ifndef _STD_LIST_
-#define _STD_LIST
+#define _STD_LIST_
 
 // documented from the Food Network - Cook or Be Cooked! debug build
 // (CulinaryAcademy_debug.elf)

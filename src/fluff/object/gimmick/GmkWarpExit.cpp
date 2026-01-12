@@ -48,8 +48,8 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
 
 GmkWarpExit::~GmkWarpExit() { }
 
-void GmkWarpExit::vf64(bool arg1) {
-    Gimmick::vf64(arg1);
+void GmkWarpExit::UpdateWater(bool arg1) {
+    Gimmick::UpdateWater(arg1);
 }
 
 void GmkWarpExit::Update() {

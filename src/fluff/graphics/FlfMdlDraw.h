@@ -114,7 +114,7 @@ public:
 
     /* Class Methods */
     
-    void fn_80023CB4(bool);
+    void Update(bool shouldUpdate);
     nw4r::g3d::G3dObj* GetBlendAnmMatCtrlAnim(uint index);
     void fn_80147C28(int, float);
     void fn_80025204(float);
@@ -161,7 +161,7 @@ public:
     /* 0x028 */ bool m_28;
     /* 0x02C */ float m_2C;
     /* 0x030 */ nw4r::math::VEC3 m_30;
-    /* 0x03C */ bool m_3C;
+    /* 0x03C */ bool mShouldUpdate;
     /* 0x040 */ int m_40;
     /* 0x044 */ bool m_44;
     /* 0x048 */ float m_48;
