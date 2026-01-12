@@ -39,7 +39,7 @@ bool GmkTreasureItem::OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOt
         return true;
     }
 
-    if (pColOther->mCollisionType != CollisionInfo::CollisionType::PlayerCollision) {
+    if (pColOther->mInteractionType != CollisionInfo::Interaction::Player) {
         return true;
     }
 

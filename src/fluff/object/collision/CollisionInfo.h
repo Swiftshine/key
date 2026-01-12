@@ -16,8 +16,8 @@ struct CollisionInfo {
         SolidOnTop  = 0x10,
     );
 
-    ENUM_CLASS(CollisionType,
-        PlayerCollision = 27,
+    ENUM_CLASS(Interaction,
+        Player = 27,
     );
 
     /* 0x00 */ bool mPendingCollision;
@@ -26,7 +26,7 @@ struct CollisionInfo {
     /* 0x03 */ bool mBoundsInited;
     /* 0x04 */ int m_4;
     /* 0x08 */ int mBoundsType;
-    /* 0x0C */ int mCollisionType;
+    /* 0x0C */ int mInteractionType;
     /* 0x10 */ int m_10;
     /* 0x14 */ nw4r::math::VEC3 mPosition;
     /* 0x20 */ nw4r::math::VEC2 mDimensions;

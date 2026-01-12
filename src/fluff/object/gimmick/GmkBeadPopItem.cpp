@@ -194,7 +194,7 @@ void GmkBeadPopItem::SetState(int state) {
 }
 
 bool GmkBeadPopItem::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gfl::Vec3& pos) {
-    if (colSelf->mCollisionType == 0x19 && colOther->mCollisionType == CollisionInfo::CollisionType::PlayerCollision && mState < 2) {
+    if (colSelf->mInteractionType == 0x19 && colOther->mInteractionType == CollisionInfo::Interaction::Player && mState < 2) {
         SetState(State::BeginSpawn);
         return true;
     }
