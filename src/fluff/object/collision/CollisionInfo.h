@@ -17,6 +17,7 @@ struct CollisionInfo {
     );
 
     ENUM_CLASS(Interaction,
+        Bead = 25,
         Player = 27,
     );
 
