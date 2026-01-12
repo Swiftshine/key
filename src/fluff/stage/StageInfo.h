@@ -47,7 +47,7 @@ public:
         return mStageID;
     }
 
-    int GetResourceID() const {
+    uint GetResourceID() const {
         return mResourceID;
     }
 
@@ -70,7 +70,7 @@ private:
     // The actual numeric stage number. Level 1 is 1, level 2 is 2...
     int mStageID;
     // This is used for finding files from disk. Level 1 is 101, level 2 is 102...
-    int mResourceID;
+    uint mResourceID;
     // This is used for stages that span multiple sections that need to be loaded seperately. A notable example is the world map.
     uint mSectionID;
 };

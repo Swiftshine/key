@@ -6,6 +6,8 @@
 
 class IObjHitCB {
 public:
+    inline IObjHitCB() { }
+
     /* Virtual Methods */
     
     // Returns whether or not something meaningful happens. What constitutes

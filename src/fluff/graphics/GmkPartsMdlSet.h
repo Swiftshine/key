@@ -20,7 +20,7 @@ public:
     void RegisterResources(gfl::ResFileObject& rFileInfo, const char* pModelName, const char* pShadowName, FullSortScene* pFullSortScene, uint flags);
     void SetUpdate(bool shouldUpdate);
     void fn_802374D4(float);
-    void ReplaceScene(gfl::Scene* pScene);
+    void SetScene(gfl::Scene* pScene);
 
     /* Class Members */
 

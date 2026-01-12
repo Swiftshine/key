@@ -32,7 +32,10 @@ namespace GimmickUtil {
     void GetButtonBRRES(gfl::ResFileObject& rDest) DONT_INLINE_CLASS;
     bool CheckString_hide(Gimmick::GimmickBuildInfo* pBuildInfo);
     bool CheckString_goal(Gimmick::GimmickBuildInfo* pBuildInfo);
-
+    
+    void SetString_gate_03(std::string& rString) {
+        rString = "gate_03";
+    }
     // not in this TU, likely doesnt belong to this namespace
 
     void AddGimmickName(Gimmick::GimmickBuildInfo*) DONT_INLINE_CLASS;

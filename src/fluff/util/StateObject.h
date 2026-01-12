@@ -7,14 +7,13 @@
 /// They are distinct.
 /// @note Size: `0x14`
 struct StateObject {
-public:
-    inline StateObject()
-        : mPreviousState(mCurrentState) // ...but why?
-        , mCurrentState(0)
-        , mState(0)
-        , mDefaultState(0)
-        , mCounter(0)
-    { }
+    // note to self: if you ever have to make a ctor with an identical signature,
+    // you're better off making single-value structs for all the members of this structure
+    // and using *them* in the ctor
+    
+    inline StateObject(int curState) {
+        SetCurrentStateAndClearOthers(curState);
+    }
 
     inline void SetCurrentState(int state) {
         mPreviousState = mCurrentState;

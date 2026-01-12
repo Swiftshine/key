@@ -5,7 +5,12 @@
 
 /// @note Size: `0x20`
 struct PercentageWrapper {
+    void Reset();
+    void SetDefault();
+    void Update();
+
     /* Members */
+
     int m_0;
     float m_4;
     float m_8;

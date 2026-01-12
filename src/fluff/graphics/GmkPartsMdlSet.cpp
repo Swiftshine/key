@@ -95,7 +95,7 @@ void GmkPartsMdlSet::fn_802374D4(float arg1) {
     }
 }
 
-void GmkPartsMdlSet::ReplaceScene(gfl::Scene* scene) {
+void GmkPartsMdlSet::SetScene(gfl::Scene* scene) {
     mPrimaryModel->GetScene()->RemoveRenderObj(mPrimaryModel);
     scene->AddRenderObj(mPrimaryModel);
 

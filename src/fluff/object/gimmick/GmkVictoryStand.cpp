@@ -70,7 +70,7 @@ const char hitColbin[] = "gimmick/%s/hit.colbin";
 
 GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskName)
     : Gimmick(buildInfo, taskName)
-    , mBeadAwardState()
+    , mBeadAwardState(0)
     , mPlayerRanking(0)
     , mDecorativeBallBuildInfo()
 {

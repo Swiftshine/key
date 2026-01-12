@@ -107,6 +107,7 @@ public:
     void    StartLoadPhase7();
     void    StartLoadPhase13();
 
+    
     /* Static Methods */
     static uint  GetPlayerCount();
     static PlayerBase*  GetPlayerByID(uint playerID);
@@ -168,9 +169,10 @@ public:
     static class MissionGameCtrl* GetMissionGameCtrl();
     // Mission related.
     static void fn_800123D8(int, int, int, int);
-
+    static StageInfo GetCurrentStageInfo();
+    
     inline gfl::FixedString* GetUnk8() { return m_8; }
-
+    
     /* Class Members */
     
     /* 0x04 */ bool m_4;
