@@ -80,7 +80,7 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
     mAnimationPosition = animPos;
 
     mAnimCtrl->SetUpdateRate(1.0f);
-    m_6E = false;
+    mShouldUpdateWater = false;
     
     ToStated()->SetState(0);
 }

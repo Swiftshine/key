@@ -26,7 +26,7 @@ FlfGameObj::FlfGameObj(uint category)
     mCategory = category;
     m_6C = false;
     mIsCulled = false;
-    m_6E = true;
+    mShouldUpdateWater = true;
     m_6F = false;
     mCullThreshold = 18.666666f;
     m_74 = 0;
@@ -103,7 +103,7 @@ bool FlfGameObj::vf14() {
 }
 
 void FlfGameObj::SetCulled(bool arg1) {
-    if (m_6E) {
+    if (mShouldUpdateWater) {
         if (mIsCulled != arg1) {
             UpdateWater(arg1);
             mIsCulled = arg1;

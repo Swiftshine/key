@@ -91,7 +91,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     mFbAlpha->SetColor(mScreenTintColor);
 
     mStateFrames = 4;
-    m_6E = false;
+    mShouldUpdateWater = false;
 
     StageInfo stageInfo = Stage::Instance()->mStageInfo;
 

@@ -65,7 +65,7 @@ void GmkCameraControl::Init(GimmickBuildInfo* buildInfo) {
 
     mState = 0;
     m_138 = 0.0f;
-    m_6E = false;
+    mShouldUpdateWater = false;
     mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
     UpdateMatrix();
 }

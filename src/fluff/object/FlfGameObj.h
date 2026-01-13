@@ -106,7 +106,7 @@ public:
     /* 0x68 */ int mCategory;           
     /* 0x6C */ bool m_6C;           
     /* 0x6D */ bool mIsCulled;           
-    /* 0x6E */ bool m_6E;           
+    /* 0x6E */ bool mShouldUpdateWater;           
     /* 0x6F */ bool m_6F;           
     /* 0x70 */ float mCullThreshold;
     /* 0x74 */ u32 m_74;            

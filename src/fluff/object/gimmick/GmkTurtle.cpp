@@ -79,7 +79,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     mRideHitCtrlTrans->m_38 = 1;
 
     if (m_13D) {
-        m_6E = false;
+        mShouldUpdateWater = false;
     }
 
     if (2 == mNumTurtles) {

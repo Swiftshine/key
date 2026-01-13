@@ -30,7 +30,7 @@ void GmkUnderseaSound::Init(GimmickBuildInfo* buildInfo) {
     mSoundPlayed = false;
     mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
     UpdateMatrix();
-    m_6E = false;
+    mShouldUpdateWater = false;
 }
 
 
