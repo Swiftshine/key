@@ -1,3 +1,4 @@
+#include "object/gimmick/GmkPullWoolBtn.h"
 #include "object/gimmick/GmkWindCurrent.h"
 
 #include "manager/Stage.h"
@@ -8,6 +9,8 @@ float DIR_MULTIPLIER    = 1.0f;
 float DEFAULT_WIDTH     = 2.0f;
 float DEFAULT_HEIGHT    = 5.0f;
 
+/* GmkWindCurrent */
+
 std::string GmkWindCurrent::GetResourceName() {
     return "windCurrent";
 }
@@ -16,7 +19,7 @@ GmkWindCurrent* GmkWindCurrent::Build(GimmickBuildInfo* pBuildInfo) {
     return new (gfl::HeapID::Work) GmkWindCurrent(pBuildInfo, "GmkWindCurrent");
 }
 
-gfl::Vec2 GmkWindCurrent::GetPushDirection_thunk() const {
+nw4r::math::VEC2 GmkWindCurrent::GetPushDirection_thunk() const {
     return GetPushDirection();
 }
 
@@ -88,7 +91,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
         cdw.SetFlags(0x20000000);
         
         mColObjTrans->SetColDataWrapper(&cdw);
-        mColObjTrans->mOwner = static_cast<FlfGameObj*>(this);
+        mColObjTrans->mOwner = this;
         mColObjTrans->SetEnabled(true);
         mColObjTrans->AddToTree();
     }
@@ -113,4 +116,141 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
 
     GmkWindCurrent_SoundMng::InitInstance();
     GmkWindCurrent_SoundMng::Instance()->AddWindCurrent(this);
+}
+
+GmkWindCurrent::~GmkWindCurrent() {
+    GmkWindCurrent_SoundMng::DestroyInstance();
+}
+
+void GmkWindCurrent::Update() const {
+    GmkWindCurrent* self = const_cast<GmkWindCurrent*>(this);
+
+    switch (mState.GetCurrentState()) {
+        case State::Disabled: {
+            self->DecreasePushSpeed();
+            break;
+        }
+
+        case State::Enabled: {
+            self->IncreasePushSpeed();
+            break;
+        }
+    }
+
+    self->fn_805CB050();
+}
+
+// https://decomp.me/scratch/mntqC
+void GmkWindCurrent::DecreasePushSpeed() {
+    if (mPushSpeed > 0.0f) {
+        mPushSpeed -= 1.0f / 30.0f;
+
+        if (mPushSpeed < 0.0f) {
+            mPushSpeed = 0.0f;
+        }
+    }
+}
+
+// unmatching, but same logic as above
+void GmkWindCurrent::IncreasePushSpeed() {
+    if (mPushSpeed < 1.0f) {
+        mPushSpeed += 1.0f / 30.0f;
+
+        if (mPushSpeed > 1.0f) {
+            mPushSpeed = 1.0f;
+        }
+    }
+}
+
+// https://decomp.me/scratch/bUThT
+nw4r::math::VEC2 GmkWindCurrent::GetPushDirection() const {
+    nw4r::math::VEC2 vec;
+
+    float mult = mPushSpeedMultiplier;
+    float strength = mWindStrength;
+
+    float x = mPushDirection.x * DIR_MULTIPLIER * (1.0f / 60.0f) * mult * strength;
+    float y = mPushDirection.y * DIR_MULTIPLIER * (1.0f / 60.0f) * mult * strength;
+
+    vec.x = x;
+    vec.y = y;
+
+    return vec;
+}
+
+void GmkWindCurrent::SetEnabled(bool enabled) {
+    mColObjTrans->SetEnabled(enabled);
+
+    if (enabled) {
+        mState.SetCurrentStateAndClearOthers(State::Enabled);
+    } else {
+        mState.SetCurrentStateAndClearOthers(State::Disabled);
+    }
+}
+
+
+/* GmkWindCurrentSwitch */
+
+GmkWindCurrentSwitch* GmkWindCurrentSwitch::Build(GimmickBuildInfo* pBuildInfo) {
+    return new (gfl::HeapID::Work) GmkWindCurrentSwitch(pBuildInfo);
+}
+
+GmkWindCurrentSwitch::GmkWindCurrentSwitch(GimmickBuildInfo* pBuildInfo)
+    : Gimmick(pBuildInfo, "GmkWindCurrentSwitch")
+    , mState(0)
+    , mButton(nullptr)
+{
+    mButton.Create(gfl::HeapID::Work);
+
+    GimmickModelResource res;
+    res.mBRRESPath = "gimmick/windCurrent/windCurrent.brres";
+    res.mResourceName = "wool_00";
+    res.mOwner = this;
+    res.mOwnerMatrix = nullptr;
+    res.m_20 = false;
+    res.m_21 = false;
+    res.m_30 = true;
+    res.m_10.x = 1.5f;
+    res.m_10.y = 3.0f;
+    
+    mButton->SetModelResource(res);
+}
+
+GmkWindCurrentSwitch::~GmkWindCurrentSwitch() { }
+
+// https://decomp.me/scratch/yd4Zv
+void GmkWindCurrentSwitch::Update() const {
+    GmkWindCurrentSwitch* self = const_cast<GmkWindCurrentSwitch*>(this);
+
+    switch (mState.GetCurrentState()) {
+        case 0: {
+            if (mButton->mIsPulled) {
+                self->SetStateForTaggedObjects("switch", GetBuildInfo()->GetStringParam(Parameter::TagList).c_str());
+                self->mState.SetCurrentStateAndClearOthers(1);   
+            }
+            break;
+        }
+
+        case 1: {
+            self->mState.mCounter++;
+            
+            float f = mState.mCounter * (1.0f / 60.0f);
+            float a = GetBuildInfo()->GetFloatParam(ParameterID::FIRST);
+
+            if (a > f) {
+                self->mButton->fn_80143A58(true, 3.0f);
+                self->mState.SetCurrentStateAndClearOthers(2);
+            }
+            break;
+        }
+
+        case 2: {
+            if (mButton->fn_80143A98()) {
+                self->mState.SetCurrentStateAndClearOthers(0);
+            }
+            break;
+        }
+    }
+
+    mButton->Update();
 }

@@ -9,12 +9,14 @@
 #include "gfl/gflVec2.h"
 #include "gfl/gflCustomRenderObj.h"
 
+#include "graphics/GimmickModelResource.h"
 #include "object/Gimmick.h"
 #include "object/collision/ColObj.h"
 #include "misc/ScopedPointers.h"
 #include "util/Orientation.h"
 #include "util/StateObject.h"
 
+class GmkPullWoolBtn;
 class GmkWindCurrent;
 
 /// @note Size: `0x1C`
@@ -43,7 +45,8 @@ public:
     }
 
     static void InitInstance();
-    
+    static void DestroyInstance();
+
     void AddWindCurrent(GmkWindCurrent* pWindCurrent);
 
     /* Class Members */
@@ -54,6 +57,7 @@ public:
 };
 
 /// @brief A wind current that can carry the player in any direction.
+/// @note Size: `0x204`
 class GmkWindCurrent : public Gimmick {
 public:
     /* Structures */
@@ -66,27 +70,29 @@ public:
     );
 
     ENUM_CLASS(State,
-        Disabled    = 0,
-        Enabled     = 1
+        Disabled        = 0,
+        Enabled         = 1
     );
 
     GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskName);
     
     /* Virtual Methods */
+
     /* 0x08 */ virtual ~GmkWindCurrent();
 
     /* 0x4C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
     
-    /* 0xBC */ virtual void Update() const;
+    /* 0xBC */ virtual void Update() const override;
 
     /* Class Methods */
-
+    nw4r::math::VEC2 GetPushDirection_thunk() const;
     void Deactivate();
-    
-    void SetCollisionBounds(int windDirection);
+    void DecreasePushSpeed();
+    void IncreasePushSpeed();
+    nw4r::math::VEC2 GetPushDirection() const;
     void SetEnabled(bool enabled);
-    gfl::Vec2 GetPushDirection_thunk() const;
-    gfl::Vec2 GetPushDirection() const;
+    void SetCollisionBounds(int windDirection);
+    void fn_805CB050();
 
     /* Static Methods */
 
@@ -109,6 +115,32 @@ public:
     /* 0x1BC */ gfl::SD3DActorObject mSD3DActorObject2;
     /* 0x1FC */ bool mIsActive;
     /* 0x200 */ int mWindDirection;
+};
+
+/// @brief Toggles the wind current.
+/// @note Size: `0x148`
+class GmkWindCurrentSwitch : public Gimmick {
+public:
+    /* Structures */
+    ENUM_CLASS(Parameter,
+        TagList     = 4, // string 4
+    );
+
+    GmkWindCurrentSwitch(GimmickBuildInfo* pBuildInfo);
+
+    /* Virtual Methods */
+    
+    /* 0x08 */ virtual ~GmkWindCurrentSwitch();
+
+    /* 0xBC */ virtual void Update() const override;
+
+    /* Static Methods */
+
+    static GmkWindCurrentSwitch* Build(GimmickBuildInfo* pBuildInfo);
+
+    /* Class Members */
+    /* 0x130 */ StateObject mState;
+    /* 0x144 */ gfl::Pointer<GmkPullWoolBtn> mButton;
 };
 
 #endif
