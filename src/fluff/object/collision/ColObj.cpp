@@ -17,8 +17,8 @@ void ColObj::RemoveFromTree() {
 
 ColObjTrans::ColObjTrans()
     : ColObj()
-    , mCollisionData1(nullptr)
-    , mCollisionData2(nullptr)
+    , mColDataWrapper1(nullptr)
+    , mColDataWrapper2(nullptr)
 { }
 
 ColObj::~ColObj() {
@@ -26,14 +26,12 @@ ColObj::~ColObj() {
 }
 
 ColObjTrans::~ColObjTrans() {
-    delete mCollisionData2;
-    delete mCollisionData1;
     RemoveFromTree();
 }
 
-void ColObjTrans::SetColbin(const char* pFilepath) { }
+void ColObjTrans::SetColDataWrapper(const char* pFilepath) { }
 
-void ColObjTrans::SetColbin(void* pData) { }
+void ColObjTrans::SetColDataWrapper(void* pData) { }
 
 void ColObjTrans::SetPosition(nw4r::math::VEC2& rPos) {
     bool posNotSame = false;

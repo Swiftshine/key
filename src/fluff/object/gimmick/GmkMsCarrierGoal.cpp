@@ -64,7 +64,7 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
     // a similar pattern in quite a few places
     {
         gfl::ResFileObject resFileInfo;
-        GetResFileInfo(resFileInfo, this);
+        GetResFileObject(resFileInfo, this);
 
         mAnimCtrl.Create(CreateAnimCtrl("pedestal_00", resFileInfo));
 

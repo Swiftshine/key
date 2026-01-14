@@ -100,7 +100,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     if (!m_138) {
         gfl::ResFileObject resFileInfo;
-        GetResFileInfo(resFileInfo, this);
+        GetResFileObject(resFileInfo, this);
 
         NwAnmCtrl* anmCtrl = new (gfl::HeapID::Work) NwAnmCtrl(1, resFileInfo, "todo: make this string correct");
         char animNameBuf[0x40];

@@ -9,8 +9,6 @@
 namespace gfl {
     class SoundHandle {
     public:
-        
-
         inline SoundHandle() { }
         
         inline SoundHandle(nw4r::math::VEC3* pPos, SoundHandleInner* pHandleInner) {

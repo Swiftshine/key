@@ -22,13 +22,6 @@ typedef unsigned long ulong;
 typedef char string32[0x20];
 typedef char string64[0x40];
 
-struct Rect {
-    float x;
-    float y;
-    float w;
-    float h;
-};
-
 typedef int placeholder_t;
 
 struct dummy_t { };

@@ -94,6 +94,10 @@ public:
             return static_cast<bool>(mIntParams[index]);
         }
 
+        inline bool CheckBoolParam(int index) {
+            return mIntParams[index] == true;
+        }
+
         inline const char* GetCommonTag() {
             return mCommonTag;
         }
@@ -130,14 +134,7 @@ public:
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~Gimmick();
-
-    /* -> FlfGameObj */
-
-    /* 0x40 */ void vf40(FlfGameObj*) override;
-    /* 0x64 */ void UpdateWater(bool) override;
-
-    /* Gimmick */
-
+    
     /* 0x68 */ virtual void vf68();
     /* 0x6C */ virtual nw4r::math::VEC3 vf6C();
     /* 0x70 */ virtual int GetGimmickID();
@@ -163,6 +160,11 @@ public:
     /* 0xBC */ virtual void Update() const;
     /* 0xC0 */ virtual bool vfC0(const char*);
 
+    /* overrides */
+
+    /* 0x40 */ void vf40(FlfGameObj*) override;
+    /* 0x64 */ void UpdateWater(bool) override;
+
     /* Class Methods */
 
     gfl::Task* InitTask(const char* pTaskName);
@@ -178,10 +180,18 @@ public:
     void ClearGimmickCommands();
     void AddWaterRenderer(GmkWoolWaterRender* pRenderer);
 
+    /* Helper Inlines */
+    inline GimmickBuildInfo* GetBuildInfo() const {
+        return mBuildInfoPtr;
+    }
+
+    inline StatedGimmick* ToStated() {
+        return reinterpret_cast<StatedGimmick*>(this);
+    }
     /* Static Methods */
 
-    static void GetResFileInfo(gfl::ResFileObject& rDest, Gimmick* pGimmick) DONT_INLINE_CLASS;
-    static void GetResFileInfo(gfl::ResFileObject& rDest, Gimmick* pGimmick, int gimmickID) DONT_INLINE_CLASS;
+    static void GetResFileObject(gfl::ResFileObject& rDest, Gimmick* pGimmick) DONT_INLINE_CLASS;
+    static void GetResFileObject(gfl::ResFileObject& rDest, Gimmick* pGimmick, int gimmickID) DONT_INLINE_CLASS;
 
     /// @brief Splits a formatted tag list into a vector of individual tags.
     /// @param pTagList The formatted tag list. E.g. "tag1;tag2;tag3;"
@@ -189,9 +199,6 @@ public:
     static void SplitCommonTags(const char* pTagList, std::vector<std::string>& rDest);
 
 
-    inline StatedGimmick* ToStated() {
-        return reinterpret_cast<StatedGimmick*>(this);
-    }
 
     /* Class Members */
 

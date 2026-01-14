@@ -88,7 +88,7 @@ SoundHandle SD3DActorWrapper::fn_802CFEBC(
 }
 
 
-void SD3DActorWrapper::fn_802CFF80(int soundID, int arg2, bool add) {
+void SD3DActorWrapper::ManageActorWrapper(int soundID, int frames, bool add) {
     if (soundID == -1) {
         return;
     }
@@ -100,7 +100,7 @@ void SD3DActorWrapper::fn_802CFF80(int soundID, int arg2, bool add) {
 
         if (InfoHandlePositionValid(i)) {
             if (mInfo[i].mSoundHandle.HandlePositionValid()) {
-                Sound::Instance()->ManageSoundHandleInner(mInfo[i].mSoundHandle.GetInnerSoundHandle(), arg2, add);
+                Sound::Instance()->ManageSoundHandleInner(mInfo[i].mSoundHandle.GetInnerSoundHandle(), frames, add);
             }
         }
 
@@ -108,14 +108,14 @@ void SD3DActorWrapper::fn_802CFF80(int soundID, int arg2, bool add) {
     }
 }
 
-void SD3DActorWrapper::fn_802D0074(int arg2, bool add) {
+void SD3DActorWrapper::ManageActorWrapper(int frames, bool add) {
     for (int i = 0; i < 4; i++) {
         if (mInfo[i].CheckSoundID(-1)) {
             continue;
         }
 
         if (mInfo[i].mSoundHandle.HandlePositionValid()) {
-            Sound::Instance()->ManageSoundHandleInner(mInfo[i].mSoundHandle.GetInnerSoundHandle(), arg2, add);
+            Sound::Instance()->ManageSoundHandleInner(mInfo[i].mSoundHandle.GetInnerSoundHandle(), frames, add);
         }
 
         InvalidateInfoSoundID(&mInfo[i]);

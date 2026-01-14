@@ -119,14 +119,14 @@ gfl::Task* Gimmick::InitTask(const char* pTaskName) {
     return mTask;
 }
 
-void Gimmick::GetResFileInfo(gfl::ResFileObject& rDst, Gimmick* pGimmick) {
-    GetResFileInfo(rDst, pGimmick, pGimmick->mBuildInfoPtr->mGimmickID);
+void Gimmick::GetResFileObject(gfl::ResFileObject& rDst, Gimmick* pGimmick) {
+    GetResFileObject(rDst, pGimmick, pGimmick->mBuildInfoPtr->mGimmickID);
 }
 
 const char Slash[] = "/";
 const char BRRES[] = ".brres";
 
-void Gimmick::GetResFileInfo(gfl::ResFileObject& rDst, Gimmick* pGimmick, int gimmickID) {
+void Gimmick::GetResFileObject(gfl::ResFileObject& rDst, Gimmick* pGimmick, int gimmickID) {
     std::string path = "gimmick/";
     
     path += GimmickUtil::GetResourceNameByGimmickID(gimmickID);

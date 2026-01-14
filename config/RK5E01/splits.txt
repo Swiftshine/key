@@ -258,6 +258,11 @@ fluff/util/GimmickResource.cpp:
 fluff/object/gimmick/GmkAllGetSwitch.cpp:
 	.text       start:0x8059BF34 end:0x8059C278
 
+fluff/object/gimmick/GmkWindCurrent.cpp:
+	.text       start:0x805CA74C end:0x805CCD20
+	.rodata     start:0x80824EA0 end:0x808251E0
+	.sdata      start:0x808E3C38 end:0x808E3C88
+
 fluff/object/gimmick/GmkUnderseaSound.cpp:
 	.text       start:0x806329A8 end:0x80632C58
 

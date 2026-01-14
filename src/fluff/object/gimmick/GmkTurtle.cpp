@@ -45,7 +45,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
     
     gfl::ResFileObject fileInfo;
-    GetResFileInfo(fileInfo, this);
+    GetResFileObject(fileInfo, this);
     
     mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, fileInfo, resourceName));
 
@@ -62,9 +62,9 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     mColObjTrans.Create(gfl::HeapID::Work);
 
     if (3 == mNumTurtles) {
-        mColObjTrans->SetColbin(GmkTurtle_ColbinSinglePath);
+        mColObjTrans->SetColDataWrapper(GmkTurtle_ColbinSinglePath);
     } else {
-        mColObjTrans->SetColbin(GmkTurtle_ColbinTriplePath);
+        mColObjTrans->SetColDataWrapper(GmkTurtle_ColbinTriplePath);
     }
 
     mColObjTrans->GetCollisionData()->fn_800D01EC(0, 0, 0x20000000);

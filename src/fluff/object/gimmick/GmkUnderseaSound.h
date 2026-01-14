@@ -19,7 +19,7 @@ private:
         }
 
         if (shouldDelete) {
-            gfl::Sound::Instance()->ManageSoundHandleInner(handleInner, 0xF, false);
+            gfl::Sound::Instance()->ManageSoundHandleInner(handleInner, 15, false);
         }
     }
 public:

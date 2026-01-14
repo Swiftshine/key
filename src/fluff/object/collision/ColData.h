@@ -7,6 +7,7 @@
 #include "object/collision/Colbin.h"
 #include "object/collision/KdTreeData.h"
 
+#pragma pack(push, 1)
 /// @note Size: `0x20`
 class ColData : public KdTreeData {
 public:
@@ -24,8 +25,7 @@ public:
     /* 0x0C */ uint m_C;
     /* 0x10 */ uint m_10;
     /* 0x14 */ uint mNumEntries;
-    /* 0x18 */ uint m_18;
-    /* 0x1C */ uint m_1C;
+    /* 0x18 */ u64 mFlags;
 };
 
 // size: 0x40
@@ -48,5 +48,5 @@ public:
     ColDataSegLabel();
     virtual ~ColDataSegLabel();
 };
-
+#pragma pack(pop)
 #endif

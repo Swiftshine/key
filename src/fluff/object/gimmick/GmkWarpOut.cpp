@@ -14,7 +14,7 @@ GmkWarpOut::GmkWarpOut(GimmickBuildInfo* pBuildInfo)
     FlfGameObj::UpdateMatrix();
     
     gfl::ResFileObject resFileObject;
-    GetResFileInfo(resFileObject, this);
+    GetResFileObject(resFileObject, this);
 
     const char* name = "warp_02";
     mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(1, resFileObject, name));

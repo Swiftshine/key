@@ -90,7 +90,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
 
     gfl::ResFileObject fileInfo;
-    GetResFileInfo(fileInfo, this);
+    GetResFileObject(fileInfo, this);
 
     mModel.Create(gfl::HeapID::Work);
     mModel->RegisterResources(fileInfo, victoryStand, 0, scene, 0);
@@ -101,7 +101,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
 
     char colbinPath[0x200];
     snprintf(colbinPath, sizeof(colbinPath), hitColbin, victoryStand_01);
-    mColObj->SetColbin(colbinPath);
+    mColObj->SetColDataWrapper(colbinPath);
     mColObj->AddToTree();
     nw4r::math::VEC2 position(mMatrix[0][3], mMatrix[1][3]);
     nw4r::math::VEC2 colbinPos = position;

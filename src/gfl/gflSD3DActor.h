@@ -77,8 +77,8 @@ public:
         int arg5,
         int arg6
     );
-    void fn_802CFF80(int soundID, int arg2, bool add);
-    void fn_802D0074(int arg2, bool add);
+    void ManageActorWrapper(int soundID, int arg2, bool add);
+    void ManageActorWrapper(int frames, bool add);
     bool HasSoundID(int soundID);
     SD3DActorInfo* GetSD3DActorInfo();
     void InvalidateInfoSoundID(SD3DActorInfo* pInfo) DONT_INLINE_CLASS;

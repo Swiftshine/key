@@ -365,7 +365,7 @@ void GmkSunriseCurtain::RemoveSoundHandle() {
                     if (mSplashBeachSoundHandle.HandlePositionValid()) {
                         gfl::Sound::Instance()->ManageSoundHandleInner(
                             mSplashBeachSoundHandle.GetInnerSoundHandle(),
-                            0x78,
+                            120,
                             false
                         );
                     }

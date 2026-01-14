@@ -30,6 +30,9 @@ namespace GimmickUtil {
     bool IsClothTurnGimmick(int id) DONT_INLINE_CLASS;
     bool fn_800507C8(int id) DONT_INLINE_CLASS;
     void GetButtonBRRES(gfl::ResFileObject& rDest) DONT_INLINE_CLASS;
+
+    // these are probably actually just defined on a TU by TU basis
+    // rather than being part of the GimmickUtil namespace
     bool CheckString_hide(Gimmick::GimmickBuildInfo* pBuildInfo);
     bool CheckString_goal(Gimmick::GimmickBuildInfo* pBuildInfo);
     

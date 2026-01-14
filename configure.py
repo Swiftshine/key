@@ -613,6 +613,7 @@ config.libs = [
             Object(NonMatching, "fluff/object/gimmick/GmkVictoryStand.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkWarpExit.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkWarpOut.cpp"),
+            Object(NonMatching, "fluff/object/gimmick/GmkWindCurrent.cpp"),
             Object(NonMatching, "fluff/object/gimmick/GmkWoolRope.cpp"),
         ],
     },

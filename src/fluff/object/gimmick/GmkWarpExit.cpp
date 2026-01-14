@@ -23,7 +23,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
 
     UpdateMatrix();
     gfl::ResFileObject resFileObject;
-    GetResFileInfo(resFileObject, this);
+    GetResFileObject(resFileObject, this);
 
     NwAnmCtrl* animCtrl = new (gfl::HeapID::Work) NwAnmCtrl(0, resFileObject, "warpExit_01");
     mAnimCtrl.Create(animCtrl);

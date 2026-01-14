@@ -15,6 +15,10 @@ struct StateObject {
         SetCurrentStateAndClearOthers(curState);
     }
 
+    inline int GetCurrentState() const {
+        return mCurrentState;
+    }
+
     inline void SetCurrentState(int state) {
         mPreviousState = mCurrentState;
         mCurrentState = mPreviousState;
