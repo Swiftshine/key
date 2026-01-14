@@ -32,7 +32,7 @@ void GmkWindCurrent::SetState(FlfGameObj* pSetter, const std::string& rState) {
 
 void GmkWindCurrent::Deactivate() {
     mIsActive = false;
-    mSD3DActorWrapper1.ManageActorWrapper(15, false);
+    mSD3DActorObject1.mActorWrapper.ManageActorWrapper(15, false);
 }
 
 // https://decomp.me/scratch/lFGd3
@@ -48,10 +48,8 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
     , mWoolGroup(nullptr)
     , mColObjTrans(nullptr)
     , mRect()
-    , mSD3DActorWrapper1()
-    , mSoundHandle1(nullptr, nullptr)
-    , mSD3DActorWrapper2()
-    , mSoundHandle2(nullptr, nullptr)
+    , mSD3DActorObject1()
+    , mSD3DActorObject2()
     , mIsActive(true)
     , mWindDirection(Orientation::Up)
 {

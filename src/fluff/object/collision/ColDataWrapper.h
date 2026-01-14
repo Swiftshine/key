@@ -17,12 +17,12 @@ public:
         , m_28(0.0f, 0.0f)
     {
         mNumPoints = 0;
-        mColDataPoints = nullptr;
         mNumSegs = 0;
-        mColDataSegs = nullptr;
         mNumCircles = 0;
-        mColDataCircles = nullptr;
         mNumRects = 0;
+        mColDataPoints = nullptr;
+        mColDataSegs = nullptr;
+        mColDataCircles = nullptr;
         mColDataRects = nullptr;
     }
 

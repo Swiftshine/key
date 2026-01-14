@@ -5,10 +5,10 @@
 #include <vector>
 
 #include "gfl/gflRect.h"
-#include "gfl/gflSD3DActor.h"
-#include "gfl/gflSoundHandle.h"
+#include "gfl/gflSD3DActorObject.h"
 #include "gfl/gflVec2.h"
 #include "gfl/gflCustomRenderObj.h"
+
 #include "object/Gimmick.h"
 #include "object/collision/ColObj.h"
 #include "misc/ScopedPointers.h"
@@ -105,10 +105,8 @@ public:
     /* 0x164 */ G3dObjPointer<WindCurrentWoolGroup> mWoolGroup;
     /* 0x168 */ gfl::Pointer<ColObjTrans> mColObjTrans;
     /* 0x16C */ gfl::Rect mRect;
-    /* 0x17C */ gfl::SD3DActorWrapper mSD3DActorWrapper1;
-    /* 0x1B4 */ gfl::SoundHandle mSoundHandle1;
-    /* 0x1BC */ gfl::SD3DActorWrapper mSD3DActorWrapper2;
-    /* 0x1F4 */ gfl::SoundHandle mSoundHandle2;
+    /* 0x17C */ gfl::SD3DActorObject mSD3DActorObject1;
+    /* 0x1BC */ gfl::SD3DActorObject mSD3DActorObject2;
     /* 0x1FC */ bool mIsActive;
     /* 0x200 */ int mWindDirection;
 };
