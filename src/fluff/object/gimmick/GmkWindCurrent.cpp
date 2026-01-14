@@ -106,7 +106,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
     gfl::ResFileObject resFileObject;
     GetResFileObject(resFileObject, this);
 
-    mWoolGroup.Create(::new (gfl::HeapID::Work) WindCurrentWoolGroup(resFileObject, this));
+    mWoolGroup.Create(new (gfl::HeapID::Work) WindCurrentWoolGroup(&resFileObject, this));
 
     mShouldUpdateWater = false;
 
@@ -140,10 +140,10 @@ void GmkWindCurrent::Update() const {
     self->fn_805CB050();
 }
 
-// https://decomp.me/scratch/mntqC
 void GmkWindCurrent::DecreasePushSpeed() {
     if (mPushSpeed > 0.0f) {
-        mPushSpeed -= 1.0f / 30.0f;
+        float temp = 1.0f / 30.0f;
+        mPushSpeed -= temp;
 
         if (mPushSpeed < 0.0f) {
             mPushSpeed = 0.0f;
@@ -151,10 +151,10 @@ void GmkWindCurrent::DecreasePushSpeed() {
     }
 }
 
-// unmatching, but same logic as above
 void GmkWindCurrent::IncreasePushSpeed() {
     if (mPushSpeed < 1.0f) {
-        mPushSpeed += 1.0f / 30.0f;
+        float temp = 1.0f / 30.0f;
+        mPushSpeed += temp;
 
         if (mPushSpeed > 1.0f) {
             mPushSpeed = 1.0f;
@@ -253,4 +253,48 @@ void GmkWindCurrentSwitch::Update() const {
     }
 
     mButton->Update();
+}
+
+/* WoolGroupUnit */
+
+// https://decomp.me/scratch/3PnJc
+WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject& rResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent)
+    : m_0(0.0f)
+    , m_4(0.0f)
+    , m_8()
+    , m_B4(1.0f)
+    , m_B8(0.0f)
+    , m_BC(0.0f)
+    , m_C0(0.0f)
+    , m_C4(0.0f)
+    , m_C8(0.0f)
+    , m_CC(0.0f)
+    , m_D0(0.0f)
+    , m_D4(0.0f)
+    , mWindCurrent(pWindCurrent)
+    , mFlfWoolDraw(nullptr)
+{
+    fn_805CB85C();
+
+    mFlfWoolDraw.Create(gfl::HeapID::Work);
+    int index = mFlfWoolDraw->Register(rResFileObject, pWoolName, nullptr);
+    mFlfWoolDraw->fn_800267B0(index, 20);
+    mFlfWoolDraw->m_18 = 0.5f;
+}
+
+WoolGroupUnit::~WoolGroupUnit() { }
+
+/* WindCurrentWoolGroup */
+
+WindCurrentWoolGroup::WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, GmkWindCurrent* pWindCurrent)
+    : gfl::CustomRenderObj(false, true, "WindCurrentWoolGroup")
+    , mResFileObject(pResFileObject)
+    , mWindCurrent(pWindCurrent)
+{
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mWindCurrent->GetBuildInfo()->mFullSortSceneIndex);
+    scene->AddRenderObj(this);
+
+    // for (uint i = 0; i < 5; i++) {
+    //     mWoolGroupUnits[i].Create(new (gfl::HeapID::Work) WoolGroupUnit(mResFileObject))
+    // }
 }

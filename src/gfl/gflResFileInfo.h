@@ -254,9 +254,9 @@ namespace gfl {
             return mPointer;
         }
 
-        inline ResFileInfo** operator&() {
-            return &mPointer;
-        }
+        // inline ResFileInfo** operator&() {
+        //     return &mPointer;
+        // }
 
         inline bool operator==(ResFileInfo* other) const {
             return mPointer == other;

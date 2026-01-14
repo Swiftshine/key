@@ -9,6 +9,7 @@
 #include "gfl/gflVec2.h"
 #include "gfl/gflCustomRenderObj.h"
 
+#include "graphics/FlfWoolDraw.h"
 #include "graphics/GimmickModelResource.h"
 #include "object/Gimmick.h"
 #include "object/collision/ColObj.h"
@@ -18,6 +19,7 @@
 
 class GmkPullWoolBtn;
 class GmkWindCurrent;
+class WindCurrentWoolGroup;
 
 /// @note Size: `0x1C`
 class GmkWindCurrent_AnimWrapper {
@@ -26,13 +28,6 @@ public:
     ~GmkWindCurrent_AnimWrapper();
 
     STRUCT_FILL(0x1C);
-};
-
-/// @note Size: `0x120`
-class WindCurrentWoolGroup : public gfl::CustomRenderObj {
-public:
-    WindCurrentWoolGroup(gfl::ResFileObject& rResFileObject, GmkWindCurrent* pWindCurrent);
-    STRUCT_FILL(0x120 - 0x104);
 };
 
 
@@ -141,6 +136,65 @@ public:
     /* Class Members */
     /* 0x130 */ StateObject mState;
     /* 0x144 */ gfl::Pointer<GmkPullWoolBtn> mButton;
+};
+
+/// @note Size: `0xE0`
+class WoolGroupUnit {
+public:
+    /* Structures */
+    /// @note Size: `0xAC`
+    struct Substruct {
+        Substruct() {
+            for (uint i = 0; i < ARRAY_LENGTH(m_0); i++) {
+                m_0[i] = nw4r::math::VEC2(0.0f, 0.0f);
+            }
+        }
+
+        nw4r::math::VEC2 m_0[19];
+        float m_98;
+        float m_9C;
+        float m_A0;
+        float m_A4;
+        float m_A8;
+    };
+
+    WoolGroupUnit(gfl::ResFileObject& rResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent);
+    ~WoolGroupUnit();
+
+    /* Class Methods */
+    void fn_805CB85C();
+    void fn_805CBA40();
+    void fn_805CBA44(MTX34&);
+    void fn_805CBB0C();
+    void fn_805CBC48();
+
+    /* Class Members */
+    /* 0x00 */ float m_0;
+    /* 0x04 */ float m_4;
+    /* 0x08 */ Substruct m_8;
+    /* 0xB4 */ float m_B4;
+    /* 0xB8 */ float m_B8;
+    /* 0xBC */ float m_BC;
+    /* 0xC0 */ float m_C0;
+    /* 0xC4 */ float m_C4;
+    /* 0xC8 */ float m_C8;
+    /* 0xCC */ float m_CC;
+    /* 0xD0 */ float m_D0;
+    /* 0xD4 */ float m_D4;
+    /* 0xD8 */ GmkWindCurrent* mWindCurrent;
+    /* 0xDC */ gfl::Pointer<FlfWoolDraw> mFlfWoolDraw;
+};
+
+/// @note Size: `0x120`
+class WindCurrentWoolGroup : public gfl::CustomRenderObj {
+public:
+    WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, GmkWindCurrent* pWindCurrent);
+
+    /* Class Members */
+    
+    /* 0x104 */ gfl::ResFileObject* mResFileObject;
+    /* 0x108 */ GmkWindCurrent* mWindCurrent;
+    /* 0x10C */ gfl::Pointer<WoolGroupUnit> mWoolGroupUnits[5];
 };
 
 #endif
