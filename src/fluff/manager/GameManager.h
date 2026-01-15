@@ -9,7 +9,7 @@
 #include "gfl/gflFixedString.h"
 #include "gfl/gflParam.h"
 
-#include "manager/CameraManager.h"
+#include "manager/CamMng.h"
 #include "manager/PointerManager.h"
 #include "manager/Stage.h"
 
@@ -205,7 +205,7 @@ public:
     /* 0x5C */ float m_5C;
     /* 0x60 */ nw4r::math::VEC3 mPlayerStartPosition;
     /* 0x6C */ Stage* mStageManager;
-    /* 0x70 */ CameraManager* mCameraManager;
+    /* 0x70 */ CamMng* mCamMng;
     /* 0x74 */ gfl::FixedArray<PlayerBase*, 2> mPlayers;
     /* 0x7C */ gfl::FixedArray<PointerManagerWrapper, 2> mPlayerPointerManagers;
     /* 0x84 */ gfl::Task mTask;

@@ -8,7 +8,7 @@
 #include "util/FullSortSceneUtil.h"
 #include "graphics/FullSortScene.h"
 #include "manager/Stage.h"
-#include "manager/CameraManager.h"
+#include "manager/CamMng.h"
 
 BgBackImage::BgBackImage()
     : CustomRenderObj(true, false, "BgBackImage")
@@ -103,7 +103,7 @@ void BgBackImage::DrawXlu() {
 
     // rect instead maybe?
 
-    CameraManager::Instance()->fn_800548AC(&pos.x, &pos.y, &offs.x, &offs.y, 6);
+    CamMng::Instance()->fn_800548AC(&pos.x, &pos.y, &offs.x, &offs.y, 6);
 
     float width = mWidth / SCALE_FACTOR;
     float height = mHeight / SCALE_FACTOR;

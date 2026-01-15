@@ -4,7 +4,7 @@
 #include "manager/GameManager.h"
 #include "manager/GmkMng.h"
 #include "manager/DemoManager.h"
-#include "manager/CameraManager.h"
+#include "manager/CamMng.h"
 #include "util/BeadUtil.h"
 #include "gfl/gflVec2.h"
 
@@ -503,11 +503,11 @@ FlfDemoCamCtrl::FlfDemoCamCtrl(nw4r::g3d::ResNode resNode)
 {
     mResNode = resNode;
 
-    CameraManager::Instance()->fn_800545B4(4, 0);
+    CamMng::Instance()->fn_800545B4(4, 0);
 }
 
 FlfDemoCamCtrl::~FlfDemoCamCtrl() {
-    CameraManager::Instance()->fn_800545D8(0);
+    CamMng::Instance()->fn_800545D8(0);
 }
 
 void FlfDemoCamCtrl::vfC() {
@@ -530,7 +530,7 @@ void FlfDemoCamCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
     nw4r::math::MTX34 mtx2;
     memcpy(mtx2, matrices + mtxID, sizeof(nw4r::math::MTX34));
     mtx = mtx2;
-    CameraManager* camMgr = CameraManager::Instance();
+    CamMng* camMgr = CamMng::Instance();
 
     nw4r::math::VEC3 trans = GetMTXTranslation(mtx);
 

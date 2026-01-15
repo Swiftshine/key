@@ -11,7 +11,7 @@
 #include "gfl/gflTask.h"
 #include "gfl/gflLinkedList.h"
 #include "object/FlfHandleObj.h"
-#include "manager/CameraManager.h"
+#include "manager/CamMng.h"
 #include "object/Gimmick.h"
 
 class GimmickResource;

@@ -11,7 +11,7 @@
 #include <PowerPC_EABI_Support/MSL/MSL_C++/string>
 
 class ColObj;
-class CameraManager;
+class CamMng;
 
 /// @brief The base class for many entites.
 /// @note Size: `0x80`
@@ -58,7 +58,7 @@ public:
         nw4r::math::VEC3* pDst
     );
     /* 0x30 */ virtual void vf30();
-    /* 0x34 */ virtual bool ShouldCull(CameraManager* pCamMgr);
+    /* 0x34 */ virtual bool ShouldCull(CamMng* pCamMgr);
     /* 0x38 */ virtual ScreenPosition GetScreenPosition();
     /* 0x3C */ virtual ColObj* GetColObj();
     /* 0x40 */ virtual void vf40(FlfGameObj*);

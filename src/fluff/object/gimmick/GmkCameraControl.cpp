@@ -2,7 +2,7 @@
 #include "gfl/gflVec2.h"
 #include "gfl/gflParam.h"
 #include "util/FullSortSceneUtil.h"
-#include "manager/CameraManager.h"
+#include "manager/CamMng.h"
 
 // todo: link this file
 
@@ -98,7 +98,7 @@ void GmkCameraControl::Update() {
             } else {
                 m_138 += unk;
                 if (m_138 >= m_13C) {
-                    dummy* cam = (dummy*)CameraManager::Instance();
+                    dummy* cam = (dummy*)CamMng::Instance();
                     cam->m_194 = unk * m_140;
                     cam->m_198 = false;
                     cam->m_199 = true;
@@ -113,7 +113,7 @@ void GmkCameraControl::Update() {
         }
 
         case 2: {
-            dummy* cam = (dummy*)CameraManager::Instance();
+            dummy* cam = (dummy*)CamMng::Instance();
             if (mCameraInfo.GetUnk14() == 1) {
                 cam->mCameraMax.x = mCameraMaxX;
                 cam->mCameraMax.y = mCameraMaxY;

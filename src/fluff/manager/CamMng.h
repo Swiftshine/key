@@ -1,18 +1,17 @@
-#ifndef FLUFF_CAMERAMANAGER_H
-#define FLUFF_CAMERAMANAGER_H
+#ifndef FLUFF_CAMMNG_H
+#define FLUFF_CAMMNG_H
 
 #include <nw4r/math.h>
 #include "util/ScreenPosition.h"
 #include "gfl/gflVec2.h"
 
-// todo: rename this to CamMng
-class CameraManager {
+class CamMng {
 public:
     /* Static Variables */
 
-    static CameraManager* sInstance;
+    static CamMng* sInstance;
 
-    static inline CameraManager* Instance() {
+    static inline CamMng* Instance() {
         return sInstance;
     }
 

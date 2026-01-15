@@ -343,7 +343,7 @@ void GmkSunriseCurtain::RemoveSoundHandle() {
     StageInfo stageInfo = Stage::Instance()->mStageInfo;
 
     if (stageInfo.GetStageID() == StageIDs::SplashBeach) {
-        gfl::Vec2 pos2 = CameraManager::Instance()->GetCurrentPosition();
+        gfl::Vec2 pos2 = CamMng::Instance()->GetCurrentPosition();
 
         if (pos2.y > 29.0f) {
             pos2.y = 29.0f;

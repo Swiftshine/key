@@ -1,5 +1,5 @@
 #include "object/FlfGameObj.h"
-#include "manager/CameraManager.h"
+#include "manager/CamMng.h"
 #include <revolution/MTX.h>
 #include <nw4r/math.h>
 
@@ -114,7 +114,7 @@ void FlfGameObj::SetCulled(bool arg1) {
     }
 }
 
-bool FlfGameObj::ShouldCull(CameraManager* pCamMgr) {
+bool FlfGameObj::ShouldCull(CamMng* pCamMgr) {
     ScreenPosition screenPos = GetScreenPosition();
     return pCamMgr->ShouldCull(screenPos);
 }

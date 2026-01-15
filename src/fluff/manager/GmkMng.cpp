@@ -46,7 +46,7 @@ inline void GmkMng::CreateGimmickConditionally(
 void GmkMng::CreateGimmicksFromMapdata(Mapdata* pMapdata) {
     // // this will not work if you put the declaration and assignment in the same line
     // nw4r::math::VEC2 pos;
-    // pos = CameraManager::Instance()->GetCurrentPosition();
+    // pos = CamMng::Instance()->GetCurrentPosition();
 
     // for (uint i = 0; i < pMapdata->mNumCommonGimmicks; i++) {
     //     Gimmick::GimmickBuildInfo* buildInfo = pMapdata->GetCommonGimmickBuildInfo(i);
@@ -179,7 +179,7 @@ void GmkMng::CreateGimmicksFromMapdata() {
     // switch (mState) {
     //     case State::CreateCommonGimmicks: {
     //         nw4r::math::VEC2 pos;
-    //         pos = CameraManager::Instance()->GetCurrentPosition();
+    //         pos = CamMng::Instance()->GetCurrentPosition();
 
     //         uint a = mNumCommonGimmicks;
     //         uint b = mMapdata->mNumCommonGimmicks;
@@ -236,9 +236,9 @@ void GmkMng::CreateGimmicksFromMapdata() {
 //         Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
 //         nw4r::math::VEC2 pos;
-//         pos = CameraManager::Instance()->GetCurrentPosition();
+//         pos = CamMng::Instance()->GetCurrentPosition();
         
-//         CameraManager* camMgr = CameraManager::Instance();
+//         CamMng* camMgr = CamMng::Instance();
 
 //         for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
 //             Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
