@@ -17,7 +17,7 @@ namespace gfl {
         /* Virtual Methods */
 
         /* 0x08 */ DECL_WEAK virtual ReturnT operator()() = 0;
-        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone() = 0;
+        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone() const = 0;
         /* 0x10 */ DECL_WEAK virtual ~FunctorBase0() = 0;
     };
 
@@ -30,18 +30,13 @@ namespace gfl {
             : mOwner(owner)
             , mFunction(function)
         { }
-
-        inline FunctorClassMethod0(FunctorClassMethod0* pOther)
-            : mOwner(pOther->mOwner)
-            , mFunction(pOther->mFunction)
-        { }
         
         /* 0x08 */ DECL_WEAK virtual ReturnT operator()() {
             (mOwner->*mFunction)();
         }
         
-        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone() {
-            return new (gfl::HeapID::LIB1) FunctorType(this);
+        /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone() const {
+            return new (gfl::HeapID::LIB1) FunctorType(*this);
         }
         
 
