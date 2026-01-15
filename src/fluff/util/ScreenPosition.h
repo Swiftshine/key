@@ -1,10 +1,10 @@
 #ifndef FLUFF_SCREENPOSITION_H
 #define FLUFF_SCREENPOSITION_H
 
-#include <nw4r/math.h>
+#include "gfl/gflVec2.h"
 
 struct ScreenPosition {
-    nw4r::math::VEC2 mPosition;
+    gfl::Vec2 mPosition;
     float mCullThreshold;
 };
 
