@@ -26,7 +26,7 @@ public:
     /* Class Methods */
 
     /// @return Some index.
-    int Register(gfl::ResFileObject& rResFileObject, const char* pWoolName1, const char* pWoolName2);
+    int Register(gfl::ResFileObject* pResFileObject, const char* pWoolName1, const char* pWoolName2);
     void fn_800267B0(int index, int);
     void fn_80026A54(int);
     int fn_80026B54(int index);

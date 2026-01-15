@@ -158,13 +158,13 @@ public:
         float m_A8;
     };
 
-    WoolGroupUnit(gfl::ResFileObject& rResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent);
-    ~WoolGroupUnit();
+    WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent);
+    DECL_WEAK ~WoolGroupUnit() DONT_INLINE_CLASS;
 
     /* Class Methods */
     void fn_805CB85C();
     void fn_805CBA40();
-    void fn_805CBA44(MTX34&);
+    void fn_805CBA44(nw4r::math::MTX34*);
     void fn_805CBB0C();
     void fn_805CBC48();
 
@@ -189,6 +189,18 @@ public:
 class WindCurrentWoolGroup : public gfl::CustomRenderObj {
 public:
     WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, GmkWindCurrent* pWindCurrent);
+
+    /* Virtual Methods */
+
+    virtual ~WindCurrentWoolGroup();
+
+    virtual void DrawXlu() override;
+
+    /* Class Methods */
+
+    void fn_805CBE78() DONT_INLINE_CLASS;
+    void fn_805CBEC4(nw4r::math::MTX34* pMtx) DONT_INLINE_CLASS;
+    void fn_8076A380(uint mtxID, nw4r::math::MTX34* pMtx);
 
     /* Class Members */
     

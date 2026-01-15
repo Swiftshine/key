@@ -233,11 +233,13 @@ void GmkWindCurrentSwitch::Update() const {
 
         case 1: {
             self->mState.mCounter++;
-            
-            float f = mState.mCounter * (1.0f / 60.0f);
-            float a = GetBuildInfo()->GetFloatParam(ParameterID::FIRST);
 
-            if (a > f) {
+            float rate = 1.0f / 60.0f;
+            float frame = mState.mCounter;
+            float threshold = GetBuildInfo()->GetFloatParam(ParameterID::FIRST);
+            frame *= rate;
+
+            if (frame > threshold) {
                 self->mButton->fn_80143A58(true, 3.0f);
                 self->mState.SetCurrentStateAndClearOthers(2);
             }
@@ -258,7 +260,7 @@ void GmkWindCurrentSwitch::Update() const {
 /* WoolGroupUnit */
 
 // https://decomp.me/scratch/3PnJc
-WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject& rResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent)
+WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent)
     : m_0(0.0f)
     , m_4(0.0f)
     , m_8()
@@ -277,7 +279,7 @@ WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject& rResFileObject, const char* pWo
     fn_805CB85C();
 
     mFlfWoolDraw.Create(gfl::HeapID::Work);
-    int index = mFlfWoolDraw->Register(rResFileObject, pWoolName, nullptr);
+    int index = mFlfWoolDraw->Register(pResFileObject, pWoolName, nullptr);
     mFlfWoolDraw->fn_800267B0(index, 20);
     mFlfWoolDraw->m_18 = 0.5f;
 }
@@ -294,7 +296,44 @@ WindCurrentWoolGroup::WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, G
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mWindCurrent->GetBuildInfo()->mFullSortSceneIndex);
     scene->AddRenderObj(this);
 
-    // for (uint i = 0; i < 5; i++) {
-    //     mWoolGroupUnits[i].Create(new (gfl::HeapID::Work) WoolGroupUnit(mResFileObject))
-    // }
+    const char* name = "wool_00";
+    for (uint i = 0; i < 5; i++) {
+        mWoolGroupUnits[i].Create(new (gfl::HeapID::Work) WoolGroupUnit(mResFileObject, name, pWindCurrent));
+    }
+}
+
+WindCurrentWoolGroup::~WindCurrentWoolGroup() { }
+
+void WindCurrentWoolGroup::fn_805CBE78() {
+    for (uint i = 0; i < 5; i++) {
+        mWoolGroupUnits[i]->fn_805CBA40();
+    }
+}
+
+void WindCurrentWoolGroup::fn_805CBEC4(nw4r::math::MTX34* pMtx) {
+    for (uint i = 0; i < 5; i++) {
+        mWoolGroupUnits[i]->fn_805CBA44(pMtx);
+    }
+}
+
+void WindCurrentWoolGroup::DrawXlu() {
+    nw4r::math::MTX34 mtx1;
+    nw4r::math::MTX34 mtx3;
+    nw4r::math::MTX34 mtx2;
+    nw4r::math::MTX34 mtx4;
+    
+    mtx1 = mWindCurrent->mMatrix;
+    mtx1[2][3] += 1.0f;
+
+    nw4r::g3d::Camera cam = GetScene()->GetScnRoot()->GetCurrentCamera();
+
+    PSMTXCopy(mtx1, mtx2);
+    cam.GetCameraMtx(&mtx3);
+    fn_8076A380(0, &mtx2);
+    PSMTXConcat(mtx3, mtx2, mtx3);
+    memcpy(&mtx4, &mtx3, sizeof(nw4r::math::MTX34));
+    GXLoadPosMtxImm(mtx4, 0);
+    GXSetCurrentMtx(0);
+    fn_805CBE78();
+    fn_805CBEC4(&mtx4);
 }

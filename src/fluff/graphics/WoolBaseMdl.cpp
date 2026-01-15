@@ -31,7 +31,7 @@ WoolBaseMdl::WoolBaseMdl(
 
     mFlfWoolDraw = new (gfl::HeapID::Work) FlfWoolDraw;
 
-    int index = mFlfWoolDraw->Register(rResFileObject, pWoolName1, pWoolName2);
+    int index = mFlfWoolDraw->Register(&rResFileObject, pWoolName1, pWoolName2);
 
     uint count = mWoolBaseTask->mSpringTemplate->mParticleCount;
     mFlfWoolDraw->fn_800267B0(index, count + m_10C * (count - 1));
@@ -75,7 +75,7 @@ WoolBaseMdl::WoolBaseMdl(
     for (uint i = 0; i < 0x40; i++) {
         char name[0x20];
         sprintf(name, "C8_wool_%02d", i);
-        idx = mFlfWoolDraw->Register(rResFileObject, name, name);
+        idx = mFlfWoolDraw->Register(&rResFileObject, name, name);
 
         if (i == 0) {
             index = idx;
@@ -90,7 +90,7 @@ WoolBaseMdl::WoolBaseMdl(
         for (uint i = 0; i < 0x40; i++) {
             char name[0x20];
             sprintf(name, wool_string_template, i);
-            idx = mFlfWoolDraw->Register(rResFileObject, name, name);
+            idx = mFlfWoolDraw->Register(&rResFileObject, name, name);
 
             if (i == 0) {
                 index = idx;
