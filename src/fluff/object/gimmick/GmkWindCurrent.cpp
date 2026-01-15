@@ -1,6 +1,7 @@
 #include "object/gimmick/GmkPullWoolBtn.h"
 #include "object/gimmick/GmkWindCurrent.h"
 
+#include "manager/GameManager.h"
 #include "manager/Stage.h"
 #include "object/collision/ColDataWrapper.h"
 #include "util/FullSortSceneUtil.h"
@@ -114,12 +115,12 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
         SetEnabled(false);
     }
 
-    GmkWindCurrent_SoundMng::InitInstance();
+    GmkWindCurrent_SoundMng::AddUser();
     GmkWindCurrent_SoundMng::Instance()->AddWindCurrent(this);
 }
 
 GmkWindCurrent::~GmkWindCurrent() {
-    GmkWindCurrent_SoundMng::DestroyInstance();
+    GmkWindCurrent_SoundMng::RemoveUser();
 }
 
 void GmkWindCurrent::Update() const {
@@ -321,7 +322,7 @@ void WindCurrentWoolGroup::DrawXlu() {
     nw4r::math::MTX34 mtx3;
     nw4r::math::MTX34 mtx2;
     nw4r::math::MTX34 mtx4;
-    
+
     mtx1 = mWindCurrent->mMatrix;
     mtx1[2][3] += 1.0f;
 
@@ -336,4 +337,56 @@ void WindCurrentWoolGroup::DrawXlu() {
     GXSetCurrentMtx(0);
     fn_805CBE78();
     fn_805CBEC4(&mtx4);
+}
+
+/* GmkWindCurrent_AnimWrapper */
+
+// (not touching any of that right now)
+
+/* GmkWindCurrent_SoundMng */
+
+void GmkWindCurrent_SoundMng::AddUser() {
+    if (sInstance == nullptr) {
+        sInstance = new (gfl::HeapID::Work) GmkWindCurrent_SoundMng();
+    }
+    sUserCount++;
+}
+
+void GmkWindCurrent_SoundMng::RemoveUser() {
+    sUserCount--;
+    if (sUserCount == 0) {
+        delete sInstance;
+        sInstance = nullptr;
+    }
+}
+
+void GmkWindCurrent_SoundMng::AddWindCurrent(GmkWindCurrent* pWindCurrent) {
+    mWindCurrents.push_back(pWindCurrent);
+}
+
+// https://decomp.me/scratch/xIuEs literally why
+bool GmkWindCurrent_SoundMng::IsClosestWindCurrent(GmkWindCurrent* pWindCurrent) const {
+    if (mClosestWindCurrent == pWindCurrent) {
+        return true;
+    }
+    
+    return false;
+}
+
+GmkWindCurrent_SoundMng::GmkWindCurrent_SoundMng()
+    : mTask(nullptr)
+    , mWindCurrents()
+{
+    mTask.Create(
+        new (gfl::HeapID::Work) gfl::Task(this, CheckClosestWindCurrent, "GmkWindCurrent_SoundMng")
+    );
+
+    GameManager::Instance()->mTask.MakeChild(mTask);
+    mClosestWindCurrent = nullptr;
+}
+
+GmkWindCurrent_SoundMng::~GmkWindCurrent_SoundMng() { }
+
+void GmkWindCurrent_SoundMng::CheckClosestWindCurrent() const {
+    // not decompiled
 }

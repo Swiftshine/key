@@ -20,36 +20,7 @@
 class GmkPullWoolBtn;
 class GmkWindCurrent;
 class WindCurrentWoolGroup;
-
-/// @note Size: `0x1C`
-class GmkWindCurrent_AnimWrapper {
-public:
-    GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurrent);
-    ~GmkWindCurrent_AnimWrapper();
-
-    STRUCT_FILL(0x1C);
-};
-
-
-class GmkWindCurrent_SoundMng {
-public:
-    static GmkWindCurrent_SoundMng* sInstance;
-
-    static inline GmkWindCurrent_SoundMng* Instance() {
-        return sInstance;
-    }
-
-    static void InitInstance();
-    static void DestroyInstance();
-
-    void AddWindCurrent(GmkWindCurrent* pWindCurrent);
-
-    /* Class Members */
-    gfl::Task* mTask;
-    std::vector<GmkWindCurrent*> mWindCurrents;
-    /// @brief The wind current to play sound for.
-    GmkWindCurrent* mClosestWindCurrent;
-};
+class GmkWindCurrent_AnimWrapper;
 
 /// @brief A wind current that can carry the player in any direction.
 /// @note Size: `0x204`
@@ -208,5 +179,47 @@ public:
     /* 0x108 */ GmkWindCurrent* mWindCurrent;
     /* 0x10C */ gfl::Pointer<WoolGroupUnit> mWoolGroupUnits[5];
 };
+
+/// @note Size: `0x1C`
+class GmkWindCurrent_AnimWrapper {
+public:
+    GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurrent);
+    ~GmkWindCurrent_AnimWrapper();
+
+    STRUCT_FILL(0x1C);
+};
+
+class GmkWindCurrent_SoundMng {
+public:    
+    static GmkWindCurrent_SoundMng* sInstance;
+    static int sUserCount;
+
+    static inline GmkWindCurrent_SoundMng* Instance() {
+        return sInstance;
+    }
+
+    GmkWindCurrent_SoundMng();
+    virtual ~GmkWindCurrent_SoundMng();
+
+    
+    /* Class Methods */
+    
+    void AddWindCurrent(GmkWindCurrent* pWindCurrent);
+    bool IsClosestWindCurrent(GmkWindCurrent* pWindCurrent) const;
+    void CheckClosestWindCurrent() const;
+
+    /* Static Methods */
+
+    static void AddUser();
+    static void RemoveUser();
+
+    /* Class Members */
+
+    /* 0x04 */ gfl::Pointer<gfl::Task> mTask;
+    /* 0x08 */ std::vector<GmkWindCurrent*> mWindCurrents;
+    /// @brief The wind current to play sound for.
+    /* 0x14 */ GmkWindCurrent* mClosestWindCurrent;
+};
+
 
 #endif
