@@ -155,6 +155,7 @@ namespace gfl {
         inline operator const nw4r::math::VEC3&() const {
             return *reinterpret_cast<const nw4r::math::VEC3*>(this);
         }
+
         inline operator Vec&() {
             return *reinterpret_cast<Vec*>(this);
         }

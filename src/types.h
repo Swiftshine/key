@@ -54,6 +54,8 @@ typedef uint64_t u64;
     mtx[2][3] = 0.0f; \
 }
 
+#define GET_UNCONST(type) type* self = const_cast<type*>(this);
+
 #ifdef __cplusplus
 namespace nw4r {
 namespace db {

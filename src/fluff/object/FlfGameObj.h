@@ -37,8 +37,6 @@ public:
 
     );
 
-    
-
     FlfGameObj(uint);
 
     /* Virtual Methods */
@@ -97,23 +95,23 @@ public:
 
     /* Class Members */
     
-    /* 0x0C */ gfl::Vec3 mPosition;     
-    /* 0x18 */ gfl::Vec3 mRotation;     
-    /* 0x24 */ gfl::Vec3 mScale;        
-    /* 0x30 */ nw4r::math::MTX34 mMatrix;       
-    /* 0x60 */ u32 mFlags;     
-    /* 0x64 */ u32 m_64;        
-    /* 0x68 */ int mCategory;           
-    /* 0x6C */ bool m_6C;           
-    /* 0x6D */ bool mIsCulled;           
-    /* 0x6E */ bool mShouldUpdateWater;           
-    /* 0x6F */ bool m_6F;           
+    /* 0x0C */ gfl::Vec3 mPosition;
+    /* 0x18 */ gfl::Vec3 mRotation;
+    /* 0x24 */ gfl::Vec3 mScale;
+    /* 0x30 */ nw4r::math::MTX34 mMatrix;
+    /* 0x60 */ u32 mFlags;
+    /* 0x64 */ u32 m_64;
+    /* 0x68 */ int mCategory;
+    /* 0x6C */ bool m_6C;
+    /* 0x6D */ bool mIsCulled;
+    /* 0x6E */ bool mShouldUpdateWater;
+    /* 0x6F */ bool m_6F;
     /* 0x70 */ float mCullThreshold;
-    /* 0x74 */ u32 m_74;            
-    /* 0x78 */ u32 m_78;            
-    /* 0x7C */ bool m_7C;           
-    /* 0x7D */ bool m_7D;           
-    /* 0x7E */ u16  m_7E;           
+    /* 0x74 */ u32 m_74;
+    /* 0x78 */ u32 m_78;
+    /* 0x7C */ bool m_7C;
+    /* 0x7D */ bool m_7D;
+    /* 0x7E */ u16  m_7E;
 };
 
 ASSERT_SIZE(FlfGameObj, 0x80);

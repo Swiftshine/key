@@ -197,9 +197,7 @@ public:
     /// @param pTagList The formatted tag list. E.g. "tag1;tag2;tag3;"
     /// @param rDest The destination vector.
     static void SplitCommonTags(const char* pTagList, std::vector<std::string>& rDest);
-
-
-
+    
     /* Class Members */
 
     /* 0x080 */ int mGimmickID;

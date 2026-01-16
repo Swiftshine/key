@@ -482,11 +482,12 @@ void SpringBase::fn_80009568(SpringTemplate* pSpringTemplate) {
 }
 
 void SpringBase::Update() const {
-    const_cast<SpringBase*>(this)->fn_8000B270();
+    GET_UNCONST(SpringBase);
+    self->fn_8000B270();
     
     for (uint i = 0; i < mSpringTemplate->m_3C; i++) {
-        const_cast<SpringBase*>(this)->fn_800092AC(1.0f / 60.0f / mSpringTemplate->m_3C);
-        const_cast<SpringBase*>(this)->fn_80009568(mSpringTemplate);
+        self->fn_800092AC(1.0f / 60.0f / mSpringTemplate->m_3C);
+        self->fn_80009568(mSpringTemplate);
     }
 }
 

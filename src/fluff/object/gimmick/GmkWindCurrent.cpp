@@ -124,7 +124,7 @@ GmkWindCurrent::~GmkWindCurrent() {
 }
 
 void GmkWindCurrent::Update() const {
-    GmkWindCurrent* self = const_cast<GmkWindCurrent*>(this);
+    GET_UNCONST(GmkWindCurrent);
 
     switch (mState.GetCurrentState()) {
         case State::Disabled: {
@@ -221,7 +221,7 @@ GmkWindCurrentSwitch::~GmkWindCurrentSwitch() { }
 
 // https://decomp.me/scratch/yd4Zv
 void GmkWindCurrentSwitch::Update() const {
-    GmkWindCurrentSwitch* self = const_cast<GmkWindCurrentSwitch*>(this);
+    GET_UNCONST(GmkWindCurrentSwitch);
 
     switch (mState.GetCurrentState()) {
         case 0: {
@@ -364,7 +364,9 @@ void GmkWindCurrent_SoundMng::AddWindCurrent(GmkWindCurrent* pWindCurrent) {
     mWindCurrents.push_back(pWindCurrent);
 }
 
-// https://decomp.me/scratch/xIuEs literally why
+#pragma push
+
+#pragma global_optimizer off // sure man, why not
 bool GmkWindCurrent_SoundMng::IsClosestWindCurrent(GmkWindCurrent* pWindCurrent) const {
     if (mClosestWindCurrent == pWindCurrent) {
         return true;
@@ -372,6 +374,8 @@ bool GmkWindCurrent_SoundMng::IsClosestWindCurrent(GmkWindCurrent* pWindCurrent)
     
     return false;
 }
+
+#pragma pop
 
 GmkWindCurrent_SoundMng::GmkWindCurrent_SoundMng()
     : mTask(nullptr)
@@ -387,6 +391,84 @@ GmkWindCurrent_SoundMng::GmkWindCurrent_SoundMng()
 
 GmkWindCurrent_SoundMng::~GmkWindCurrent_SoundMng() { }
 
+extern "C" bool fn_8064A518(const gfl::Vec3&);
+
+// https://decomp.me/scratch/wzWOK
 void GmkWindCurrent_SoundMng::CheckClosestWindCurrent() const {
-    // not decompiled
+    GET_UNCONST(GmkWindCurrent_SoundMng);
+
+    gfl::Vec3 cameraPos = CamMng::Instance()->GetCurrentPosition();
+    self->mClosestWindCurrent = nullptr;
+
+    bool found = false;
+    size_t index;
+
+    float lastFloat;
+
+    bool unk = false;
+    
+    for (size_t i = 0; i < mWindCurrents.size(); i++) {
+        if (mWindCurrents[i] == mClosestWindCurrent) {
+            unk = true;
+        }
+
+        if (!unk) {
+            gfl::Vec3 camPos;
+            camPos.x = cameraPos.x;
+            camPos.y = cameraPos.y;
+            camPos.z = cameraPos.z;
+    
+            nw4r::math::VEC2 windPos = mWindCurrents[i]->mPosition;
+    
+            GmkWindCurrent* wind = mWindCurrents[i];
+    
+            // ?
+            gfl::Vec3 windSearchPos;
+    
+            gfl::Vec2 rectH(wind->mRect.mLeft, wind->mRect.mRight);
+        
+            windSearchPos.x = rectH.x + windPos.x;
+            gfl::Vec2 rectV(wind->mRect.mTop, wind->mRect.mBottom);
+    
+            if (windSearchPos.x < camPos.x) {
+                windSearchPos.x = camPos.x;
+                if (rectH.y + windPos.x > camPos.x) {
+                    windSearchPos.x = rectH.y + windPos.x;
+                }
+            }
+    
+            windSearchPos.y = rectV.x + windPos.y;
+    
+            if (windSearchPos.y < camPos.y) {
+                windSearchPos.y = camPos.y;
+                if (rectV.y + windPos.y > camPos.y) {
+                    windSearchPos.y = rectV.y + windPos.y;
+                }
+            }
+    
+            windSearchPos.z = cameraPos.z;
+    
+            gfl::Vec3 vec3 = cameraPos - windSearchPos;
+    
+            float len = 0.0f;
+    
+            nw4r::math::VEC2 vec2 = vec3;
+    
+            if (!fn_8064A518(vec3)) {
+                len = nw4r::math::VEC2Len(&vec2);
+            }
+    
+            if (!(len > 20.0f)) {
+                if (!found || lastFloat < len) {
+                    found = true;
+                    index = i;
+                    lastFloat = len;
+                }
+            }
+        }        
+    }
+    
+    if (found) {
+        self->mClosestWindCurrent = mWindCurrents[index];
+    }
 }

@@ -76,8 +76,10 @@ EnemyMdlManager::~EnemyMdlManager() {
 }
 
 void EnemyMdlManager::Update() const {
-    const_cast<EnemyMdlManager*>(this)->fn_80112334();
-    const_cast<EnemyMdlManager*>(this)->fn_8011224C();
+    GET_UNCONST(EnemyMdlManager);
+
+    self->fn_80112334();
+    self->fn_8011224C();
 }
 
 void EnemyMdlManager::fn_801121E4(float arg1) {

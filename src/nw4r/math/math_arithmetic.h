@@ -83,7 +83,7 @@ inline f32 FModf(f32 x, f32* pY) {
 }
 
 inline f32 FSqrt(f32 x) {
-    if (x < 0.0f) {
+    if (!(x >= 0.0f)) {
         nw4r::db::Warning("arithmetic.h", 627, "FSqrt: Input is out of the domain.");
     }
 

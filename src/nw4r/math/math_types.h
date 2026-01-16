@@ -21,6 +21,8 @@ struct _VEC2 {
     f32 x, y;
 };
 
+struct VEC3;
+
 struct VEC2 : _VEC2 {
     VEC2() {}
     VEC2(f32 fx, f32 fy) {
@@ -28,7 +30,9 @@ struct VEC2 : _VEC2 {
         y = fy;
     }
 
+    VEC2(const VEC3&);
     VEC2& operator=(float[]);
+
     operator f32*() {
         return reinterpret_cast<f32*>(this);
     }
@@ -52,6 +56,7 @@ struct VEC2 : _VEC2 {
         y -= rRhs.y;
         return *this;
     }
+
 
     bool operator==(const VEC2& rRhs) const {
         return x == rRhs.x && y == rRhs.y;
