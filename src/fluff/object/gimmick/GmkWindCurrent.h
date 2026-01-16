@@ -115,12 +115,13 @@ public:
 class WoolGroupUnit {
 public:
     /* Structures */
-    
-    struct vec2 {
-        vec2() {
+
+    struct Vec2 {
+        Vec2() {
             x = 0;
             y = 0;
         }
+        
         float x, y;
     };
 
@@ -135,15 +136,14 @@ public:
     void fn_805CBC48();
 
     /* Class Members */
-    /* 0x00 */ vec2 m_0[20];
-    /* 0xA0 */ float m_A0;
-    /* 0xA4 */ float m_A4;
-    /* 0xA8 */ float m_A8;
+    /* 0x00 */ Vec2 m_0[20];
+    /* 0xA0 */ uint m_A0;
+    /* 0xA4 */ uint m_A4;
+    /* 0xA8 */ uint mMax;
     /* 0xAC */ float m_AC;
     /* 0xB0 */ float m_B0;
     /* 0xB4 */ float m_B4;
-    /* 0xB8 */ float m_B8;
-    /* 0xBC */ float m_BC;
+    /* 0xB8 */ Vec2 m_B8;
     /* 0xC0 */ float m_C0;
     /* 0xC4 */ float m_C4;
     /* 0xC8 */ int m_C8;

@@ -263,8 +263,7 @@ void GmkWindCurrentSwitch::Update() const {
 WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent)
     : m_0()
     , m_B4(1.0f)
-    , m_B8(0.0f)
-    , m_BC(0.0f)
+    , m_B8()
     , m_C0(0.0f)
     , m_C4(0.0f)
     , m_D0(0.0f)
@@ -282,8 +281,42 @@ WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWo
 
 WoolGroupUnit::~WoolGroupUnit() { }
 
+void WoolGroupUnit::fn_805CBA44(nw4r::math::MTX34* pMtx) {
+    if (mMax < 2) {
+        return;
+    }
+
+    mFlfWoolDraw->fn_80026DFC(m_B0 * m_B4);
+    mFlfWoolDraw->fn_80026AB0(0, mMax);
+
+    uint unk1 = m_A4;
+    for (uint i = 0; i < mMax; i++) {
+        mFlfWoolDraw->fn_80026A9C(i, (nw4r::math::VEC2*)&m_0[unk1]);
+
+        uint unk2 = 19;
+
+        if (unk1 != 0) {
+            unk2 = unk1 - 1;
+        }
+
+        unk1 = unk2;
+    }
+
+    mFlfWoolDraw->fn_80026B68(pMtx, true);
+}
+
 void WoolGroupUnit::fn_805CBC48() {
-    
+    m_0[m_A0] = m_B8;
+    m_A4 = m_A0;
+    m_A0++;
+
+    if (m_A0 >= 20) {
+        m_A0 = 0;
+    }
+
+    if (mMax < 20) {
+        mMax++;
+    }
 }
 
 /* WindCurrentWoolGroup */
