@@ -218,7 +218,6 @@ GmkWindCurrentSwitch::GmkWindCurrentSwitch(GimmickBuildInfo* pBuildInfo)
 
 GmkWindCurrentSwitch::~GmkWindCurrentSwitch() { }
 
-// https://decomp.me/scratch/yd4Zv
 void GmkWindCurrentSwitch::Update() const {
     GET_UNCONST(GmkWindCurrentSwitch);
 
@@ -234,12 +233,9 @@ void GmkWindCurrentSwitch::Update() const {
         case 1: {
             self->mState.mCounter++;
 
-            float rate = 1.0f / 60.0f;
-            float frame = mState.mCounter;
-            float threshold = GetBuildInfo()->GetFloatParam(ParameterID::FIRST);
-            frame *= rate;
+            float frame = mState.mCounter * (1.0f / 60.0f);
 
-            if (frame > threshold) {
+            if (frame > GetBuildInfo()->mFloatParams[ParameterID::FIRST]) {
                 self->mButton->fn_80143A58(true, 3.0f);
                 self->mState.SetCurrentStateAndClearOthers(2);
             }
