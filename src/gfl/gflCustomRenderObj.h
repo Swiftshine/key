@@ -8,10 +8,6 @@
 namespace gfl {
     class CustomRenderObj : public nw4r::g3d::ScnLeaf, public gfl::RenderObj {
     public:
-        static inline void* operator new(size_t, u8 heapID) {
-            return new(heapID);
-        }
-
         CustomRenderObj(bool opa, bool xlu, const char* pName = nullptr);
 
         /* gfl::CustomRenderObj */

@@ -39,7 +39,6 @@ void GmkWindCurrent::Deactivate() {
     mSD3DActorObject1.mActorWrapper.ManageActorWrapper(15, false);
 }
 
-// https://decomp.me/scratch/lFGd3
 GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskName)
     : Gimmick(pBuildInfo, pTaskName)
     , mState(State::Enabled)
@@ -107,7 +106,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
     gfl::ResFileObject resFileObject;
     GetResFileObject(resFileObject, this);
 
-    mWoolGroup.Create(new (gfl::HeapID::Work) WindCurrentWoolGroup(&resFileObject, this));
+    mWoolGroup.Create(::new (gfl::HeapID::Work) WindCurrentWoolGroup(&resFileObject, this));
 
     mShouldUpdateWater = false;
 
