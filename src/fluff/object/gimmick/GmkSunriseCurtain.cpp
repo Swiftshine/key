@@ -33,7 +33,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     , mFlfMdlDraw2(nullptr)
     , mFbAlpha(nullptr)
 {    
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(pBuildInfo->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(pBuildInfo->mSceneID);
     mFlfMdlDraw1.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
 
     int indices[] = {
@@ -44,7 +44,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     
     mFlfMdlDraw1->LoadNURBSFromFileList(indices, ARRAY_LENGTH(indices));
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mFullSortSceneIndex, pBuildInfo->m_2C);
+    mPosition.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mSceneID, pBuildInfo->mScenePriority);
     UpdateMatrix();
     mFlfMdlDraw1->SetWoolDrawMatrix(mMatrix);
 

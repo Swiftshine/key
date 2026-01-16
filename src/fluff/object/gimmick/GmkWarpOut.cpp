@@ -10,7 +10,7 @@ GmkWarpOut::GmkWarpOut(GimmickBuildInfo* pBuildInfo)
     : Gimmick(pBuildInfo, "GmkWarp")
     , mAnmCtrl(nullptr)
 {
-    mPosition.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mFullSortSceneIndex, 4);
+    mPosition.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mSceneID, 4);
     FlfGameObj::UpdateMatrix();
     
     gfl::ResFileObject resFileObject;
@@ -21,7 +21,7 @@ GmkWarpOut::GmkWarpOut(GimmickBuildInfo* pBuildInfo)
     mAnmCtrl->PlayAnimationByNameAndIndex(0, "warp_02_000");
 
     NwAnmCtrl* anmCtrl = mAnmCtrl;
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(pBuildInfo->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(pBuildInfo->mSceneID);
 
     anmCtrl->SetFullSortSceneModelWrapper(scene, 0);
     mAnmCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);

@@ -38,11 +38,11 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
         mPosition.x = 60.0f + mBuildInfoPtr->mPosition.x;
     }
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
 
     UpdateMatrix();
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneID);
     
     gfl::ResFileObject fileInfo;
     GetResFileObject(fileInfo, this);

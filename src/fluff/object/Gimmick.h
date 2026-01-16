@@ -52,8 +52,8 @@ public:
             , mPosition(0.0f, 0.0f, 0.0f)
             , mRotation(0.0f, 0.0f, 0.0f)
             , m_24(65)
-            , mFullSortSceneIndex(6) // game index
-            , m_2C(4)
+            , mSceneID(6) // game index
+            , mScenePriority(4)
             , m_30(0)
             , mGimmickInfo(nullptr)
         {
@@ -111,8 +111,8 @@ public:
         /* 0x1C */ char mCommonTag[8];
 
         /* 0x24 */ u8 m_24;
-        /* 0x28 */ uint mFullSortSceneIndex;
-        /* 0x2C */ uint m_2C;
+        /* 0x28 */ uint mSceneID;
+        /* 0x2C */ uint mScenePriority;
         /* 0x30 */ uint m_30;
         /* 0x34 */ int mIntParams[5];
         /* 0x48 */ float mFloatParams[5];

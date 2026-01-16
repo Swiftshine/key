@@ -40,8 +40,8 @@ void GmkVictoryStand::SpawnDecorativeBall(uint rank) {
     stand->mDecorativeBallBuildInfo.mPosition.x = vec3.x;
     stand->mDecorativeBallBuildInfo.mPosition.y = vec3.y;
     stand->mDecorativeBallBuildInfo.mPosition.z = vec3.z;
-    stand->mDecorativeBallBuildInfo.mFullSortSceneIndex = stand->mBuildInfoPtr->mFullSortSceneIndex;
-    stand->mDecorativeBallBuildInfo.m_2C = stand->mBuildInfoPtr->m_2C;
+    stand->mDecorativeBallBuildInfo.mSceneID = stand->mBuildInfoPtr->mSceneID;
+    stand->mDecorativeBallBuildInfo.mScenePriority = stand->mBuildInfoPtr->mScenePriority;
 
     int num;
     switch (rank) {
@@ -83,9 +83,9 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
 
     sInstance = this;
     GimmickBuildInfo* buildInfoPtr = mBuildInfoPtr;
-    int sceneID = buildInfoPtr->mFullSortSceneIndex;
+    int sceneID = buildInfoPtr->mSceneID;
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(sceneID, buildInfoPtr->m_2C);
+    mPosition.z = FullSortSceneUtil::GetZOrder(sceneID, buildInfoPtr->mScenePriority);
     UpdateMatrix();
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
 

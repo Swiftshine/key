@@ -45,12 +45,12 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
         lbl_808E5A00 = true;
     }
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
     UpdateMatrix();
 
     mState = 0;
 
-    uint sceneID = buildInfo->mFullSortSceneIndex;
+    uint sceneID = buildInfo->mSceneID;
     mCounter = 0;
     mAnimationPosition.x = gfl::Vec3::Zero.x;
     mAnimationPosition.y = gfl::Vec3::Zero.y;

@@ -76,11 +76,11 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
     mOffset = gfl::Vec3::Zero;
     mCompletionPercentage = 0.0f;
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
 
     UpdateMatrix();
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneID);
 
     {
         std::string resourceName = "gimmick/";

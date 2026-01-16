@@ -78,7 +78,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     mCompletionPercentage = zero;
     m_144 = 1.0f;
     mCollisionEnabled = true;
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mFullSortSceneIndex, buildInfo->m_2C);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
     
     UpdateMatrix();
 
@@ -96,7 +96,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     
     mCollisionEntry.Create(CollisionEntry::Get(&cTemplate, static_cast<IObjHitCB*>(this), nullptr, mMatrix, "GmkBeadPopItem"));
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneID);
 
     if (!m_138) {
         gfl::ResFileObject resFileInfo;

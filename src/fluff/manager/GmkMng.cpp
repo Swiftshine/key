@@ -303,7 +303,7 @@ void GmkMng::CreateGimmicksFromMapdata() {
 
 void GmkMng::AddEffect(Gimmick::GimmickBuildInfo* pBuildInfo) {
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(
-        pBuildInfo->mFullSortSceneIndex
+        pBuildInfo->mSceneID
     );
 
     const char* effectName = pBuildInfo->GetStringParam(0).c_str();
@@ -313,7 +313,7 @@ void GmkMng::AddEffect(Gimmick::GimmickBuildInfo* pBuildInfo) {
     pos.x = pBuildInfo->mPosition.x;
     pos.y = pBuildInfo->mPosition.y;
     pos.z = pBuildInfo->mPosition.z;
-    pos.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mFullSortSceneIndex, pBuildInfo->m_2C);
+    pos.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mSceneID, pBuildInfo->mScenePriority);
     effect->SetPosition(pos);
 
     nw4r::math::VEC3 unk(0.0f, 0.0f, 0.0f);

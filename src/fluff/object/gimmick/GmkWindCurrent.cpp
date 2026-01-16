@@ -63,9 +63,9 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
         mWindStrength = strength;
     }
 
-    uint sceneIndex = GetBuildInfo()->mFullSortSceneIndex;
+    uint sceneIndex = GetBuildInfo()->mSceneID;
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, GetBuildInfo()->m_2C);
+    mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, GetBuildInfo()->mScenePriority);
 
     float width = GetBuildInfo()->GetFloatParam(Parameter::Width);
 
@@ -294,7 +294,7 @@ WindCurrentWoolGroup::WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, G
     , mResFileObject(pResFileObject)
     , mWindCurrent(pWindCurrent)
 {
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mWindCurrent->GetBuildInfo()->mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mWindCurrent->GetBuildInfo()->mSceneID);
     scene->AddRenderObj(this);
 
     const char* name = "wool_00";
@@ -405,10 +405,10 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
     
     gfl::ResFileObject resFileObject = gfl::ResFileObject::FromArchive(resName);
 
-    uint sceneID = mWindCurrent->GetBuildInfo()->mFullSortSceneIndex;
+    uint sceneID = mWindCurrent->GetBuildInfo()->mSceneID;
 
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
-    float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->m_2C);
+    float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mScenePriority);
     
     // not done
 }

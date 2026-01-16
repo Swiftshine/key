@@ -125,7 +125,7 @@ void GmkCandleStick::UpdateGraphics(bool createEffect) {
 
     if (createEffect) {
         mFlfMdlDraw->ResetNURBSAnimation(0, true);
-        FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mBuildInfoPtr->mFullSortSceneIndex);
+        FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mBuildInfoPtr->mSceneID);
         EffectObj* effect = scene->CreateEffectObject("ef_gk_07a", 0, 0);
         UpdateMatrix();
         nw4r::math::MTX34 effectMtx = mMatrix;
