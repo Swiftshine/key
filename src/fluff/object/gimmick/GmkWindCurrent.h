@@ -11,6 +11,8 @@
 
 #include "graphics/FlfWoolDraw.h"
 #include "graphics/GimmickModelResource.h"
+#include "graphics/GmkPartsMdlSet.h"
+#include "graphics/NwAnm.h"
 #include "object/Gimmick.h"
 #include "object/collision/ColObj.h"
 #include "misc/ScopedPointers.h"
@@ -186,7 +188,9 @@ public:
     GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurrent);
     ~GmkWindCurrent_AnimWrapper();
 
-    STRUCT_FILL(0x1C);
+    /* 0x00 */ GmkWindCurrent* mWindCurrent;
+    /* 0x04 */ std::vector<GmkPartsMdlSet*> mParts;
+    /* 0x10 */ std::vector<NwAnm*> mAnims;
 };
 
 class GmkWindCurrent_SoundMng {

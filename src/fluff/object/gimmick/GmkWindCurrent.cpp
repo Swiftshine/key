@@ -341,7 +341,87 @@ void WindCurrentWoolGroup::DrawXlu() {
 
 /* GmkWindCurrent_AnimWrapper */
 
-// (not touching any of that right now)
+float GmkWindCurrent_AnimWrapper_WidthMult  = 7.0f;
+float GmkWindCurrent_AnimWrapper_HeightMult = 3.0f;
+
+GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurrent)
+    : mWindCurrent(pWindCurrent)
+    , mParts()
+    , mAnims()
+{
+    nw4r::math::VEC2 orientation(0.0f, 0.0f);
+
+    const char* startAnimName;
+    const char* loopAnimName;
+    const char* endAnimName;
+
+    switch (pWindCurrent->GetBuildInfo()->GetIntParam(GmkWindCurrent::Parameter::WindDirection)) {
+        case Orientation::Up: {
+            startAnimName   = "c_000_start";
+            loopAnimName    = "c_000_loop";
+            endAnimName     = "c_000_end";
+            orientation = nw4r::math::VEC2(0.0f, -1.0f);
+            break;
+        }
+
+        case Orientation::Down: {
+            startAnimName   = "c_180_start";
+            loopAnimName    = "c_180_loop";
+            endAnimName     = "c_180_end";
+            orientation = nw4r::math::VEC2(0.0f, 1.0f);
+            break;
+        }
+
+        case Orientation::Left: {
+            startAnimName   = "c_090_start";
+            loopAnimName    = "c_090_loop";
+            endAnimName     = "c_090_end";
+            orientation = nw4r::math::VEC2(1.0f, 0.0f);
+            break;
+        }
+
+        case Orientation::Right: {
+            startAnimName   = "c_270_start";
+            loopAnimName    = "c_270_loop";
+            endAnimName     = "c_270_end";
+            orientation = nw4r::math::VEC2(-1.0f, 0.0f);
+            break;
+        }
+    }
+
+    float width = pWindCurrent->mDimensions.x / GmkWindCurrent_AnimWrapper_WidthMult;
+
+    uint numUnits = static_cast<uint>(pWindCurrent->mDimensions.x / GmkWindCurrent_AnimWrapper_HeightMult) + 1;
+
+    if (numUnits < 3) {
+        numUnits = 3;
+    }
+
+    std::string resourceName = GmkWindCurrent::GetResourceName();
+
+    char resName[0x80];
+
+    snprintf(resName, sizeof(resName), "gimmick/%s/%s.brres", resourceName.c_str(), resourceName.c_str());
+    
+    gfl::ResFileObject resFileObject = gfl::ResFileObject::FromArchive(resName);
+
+    uint sceneID = mWindCurrent->GetBuildInfo()->mFullSortSceneIndex;
+
+    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
+    float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->m_2C);
+    
+    // not done
+}
+
+GmkWindCurrent_AnimWrapper::~GmkWindCurrent_AnimWrapper() {
+    for (size_t i = 0; i < mParts.size(); i++) {
+        delete mParts[i];
+    }
+
+    for (size_t i = 0; i < mAnims.size(); i++) {
+        delete mAnims[i];
+    }
+}
 
 /* GmkWindCurrent_SoundMng */
 
