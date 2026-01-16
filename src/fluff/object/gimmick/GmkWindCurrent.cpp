@@ -260,18 +260,13 @@ void GmkWindCurrentSwitch::Update() const {
 
 /* WoolGroupUnit */
 
-// https://decomp.me/scratch/3PnJc
 WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent)
-    : m_0(0.0f)
-    , m_4(0.0f)
-    , m_8()
+    : m_0()
     , m_B4(1.0f)
     , m_B8(0.0f)
     , m_BC(0.0f)
     , m_C0(0.0f)
     , m_C4(0.0f)
-    , m_C8(0.0f)
-    , m_CC(0.0f)
     , m_D0(0.0f)
     , m_D4(0.0f)
     , mWindCurrent(pWindCurrent)
@@ -286,6 +281,10 @@ WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWo
 }
 
 WoolGroupUnit::~WoolGroupUnit() { }
+
+void WoolGroupUnit::fn_805CBC48() {
+    
+}
 
 /* WindCurrentWoolGroup */
 
@@ -344,6 +343,7 @@ void WindCurrentWoolGroup::DrawXlu() {
 float GmkWindCurrent_AnimWrapper_WidthMult  = 7.0f;
 float GmkWindCurrent_AnimWrapper_HeightMult = 3.0f;
 
+// https://decomp.me/scratch/LzdHD
 GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurrent)
     : mWindCurrent(pWindCurrent)
     , mParts()
@@ -389,19 +389,25 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
         }
     }
 
-    float width = pWindCurrent->mDimensions.x / GmkWindCurrent_AnimWrapper_WidthMult;
+    const float widthMult = GmkWindCurrent_AnimWrapper_WidthMult;
+    const float heightMult = GmkWindCurrent_AnimWrapper_HeightMult;
+    
+    float width = pWindCurrent->mDimensions.x / widthMult;
 
-    uint numUnits = static_cast<uint>(pWindCurrent->mDimensions.x / GmkWindCurrent_AnimWrapper_HeightMult) + 1;
+    uint numUnits = static_cast<uint>(pWindCurrent->mDimensions.x / heightMult) + 1;
 
     if (numUnits < 3) {
         numUnits = 3;
     }
 
-    std::string resourceName = GmkWindCurrent::GetResourceName();
+    std::string gmkResName = GmkWindCurrent::GetResourceName();
 
+    // const char* archiveName = gmkResName.c_str();
+    // const char* resourceName = gmkResName.c_str();
+    
     char resName[0x80];
 
-    snprintf(resName, sizeof(resName), "gimmick/%s/%s.brres", resourceName.c_str(), resourceName.c_str());
+    snprintf(resName, sizeof(resName), "gimmick/%s/%s.brres", gmkResName.c_str(), gmkResName.c_str());
     
     gfl::ResFileObject resFileObject = gfl::ResFileObject::FromArchive(resName);
 
@@ -410,7 +416,71 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
     float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mScenePriority);
     
-    // not done
+    for (uint i = 0; i < numUnits; i++) {
+        GmkPartsMdlSet* part = new (gfl::HeapID::Work) GmkPartsMdlSet;
+
+        const char* modelName = endAnimName;
+        if (i != 0) {
+            modelName = loopAnimName;
+            if (i == numUnits - 1) {
+                modelName == startAnimName;
+            }
+        }
+
+        char animName[0x80];
+        snprintf(animName, sizeof(animName), "%s_000", modelName);
+
+        NwAnm* anim = new (gfl::HeapID::Work) NwAnm;
+
+        anim->Play(resFileObject, modelName, animName, nullptr);
+
+        part->RegisterResources(resFileObject, modelName, nullptr, scene, anim->mFlags);
+        anim->SetModelWrapper(part->mPrimaryModel, true);
+
+        gfl::Mtx34 mtx;
+        PSMTXIdentity(mtx);
+
+        switch (mWindCurrent->GetBuildInfo()->GetIntParam(GmkWindCurrent::Parameter::WindDirection)) {
+            case Orientation::Up:
+            case Orientation::Down: {
+                mtx[0][0] = width;
+                break;
+            };
+            
+            case Orientation::Left:
+            case Orientation::Right: {
+                mtx[1][1] = width;
+                break;
+            };
+        }
+        
+        nw4r::math::VEC2 partPos = mWindCurrent->mPosition;
+
+        // float unk1 = orientation.x * GmkWindCurrent_AnimWrapper_HeightMult;
+        // float unk2 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
+        // float unk3 = orientation.x * GmkWindCurrent_AnimWrapper_HeightMult;
+        // float unk4 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
+        
+        gfl::Vec2 vec2(
+            ((static_cast<int>(orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f,
+            ((static_cast<int>(orientation.y * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.y * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f
+        );
+
+        gfl::Vec3 vec3 = vec2;
+        vec3.z = zOrder;
+        mtx.SetTranslation(vec3);
+        part->SetMatrix(0.01f, mtx, true);
+
+        mParts.push_back(part);
+        mAnims.push_back(anim);
+    }
+
+    StageInfo sinfo = GameManager::GetCurrentStageInfo();
+    if (sinfo.GetResourceID() == ResourceIDs::WeirdWoods) {
+        for (size_t i = 0; i < mParts.size(); i++) {
+            mParts[i]->mPrimaryModel->SetUpdateRate(30.0f);
+        }
+    }
 }
 
 GmkWindCurrent_AnimWrapper::~GmkWindCurrent_AnimWrapper() {

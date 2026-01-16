@@ -115,20 +115,13 @@ public:
 class WoolGroupUnit {
 public:
     /* Structures */
-    /// @note Size: `0xAC`
-    struct Substruct {
-        Substruct() {
-            for (uint i = 0; i < ARRAY_LENGTH(m_0); i++) {
-                m_0[i] = nw4r::math::VEC2(0.0f, 0.0f);
-            }
+    
+    struct vec2 {
+        vec2() {
+            x = 0;
+            y = 0;
         }
-
-        nw4r::math::VEC2 m_0[19];
-        float m_98;
-        float m_9C;
-        float m_A0;
-        float m_A4;
-        float m_A8;
+        float x, y;
     };
 
     WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent);
@@ -142,16 +135,19 @@ public:
     void fn_805CBC48();
 
     /* Class Members */
-    /* 0x00 */ float m_0;
-    /* 0x04 */ float m_4;
-    /* 0x08 */ Substruct m_8;
+    /* 0x00 */ vec2 m_0[20];
+    /* 0xA0 */ float m_A0;
+    /* 0xA4 */ float m_A4;
+    /* 0xA8 */ float m_A8;
+    /* 0xAC */ float m_AC;
+    /* 0xB0 */ float m_B0;
     /* 0xB4 */ float m_B4;
     /* 0xB8 */ float m_B8;
     /* 0xBC */ float m_BC;
     /* 0xC0 */ float m_C0;
     /* 0xC4 */ float m_C4;
-    /* 0xC8 */ float m_C8;
-    /* 0xCC */ float m_CC;
+    /* 0xC8 */ int m_C8;
+    /* 0xCC */ int m_CC;
     /* 0xD0 */ float m_D0;
     /* 0xD4 */ float m_D4;
     /* 0xD8 */ GmkWindCurrent* mWindCurrent;
@@ -205,7 +201,6 @@ public:
     GmkWindCurrent_SoundMng();
     virtual ~GmkWindCurrent_SoundMng();
 
-    
     /* Class Methods */
     
     void AddWindCurrent(GmkWindCurrent* pWindCurrent);
