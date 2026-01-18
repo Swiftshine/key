@@ -1,3 +1,5 @@
+#include <rand.h>
+
 #include "object/gimmick/GmkPullWoolBtn.h"
 #include "object/gimmick/GmkWindCurrent.h"
 
@@ -6,7 +8,7 @@
 #include "object/collision/ColDataWrapper.h"
 #include "util/FullSortSceneUtil.h"
 
-float DIR_MULTIPLIER    = 1.0f;
+float GmkWindCurrent_DirectionMultiplier    = 1.0f;
 float DEFAULT_WIDTH     = 2.0f;
 float DEFAULT_HEIGHT    = 5.0f;
 
@@ -169,8 +171,8 @@ nw4r::math::VEC2 GmkWindCurrent::GetPushDirection() const {
     float mult = mPushSpeedMultiplier;
     float strength = mWindStrength;
 
-    float x = mPushDirection.x * DIR_MULTIPLIER * (1.0f / 60.0f) * mult * strength;
-    float y = mPushDirection.y * DIR_MULTIPLIER * (1.0f / 60.0f) * mult * strength;
+    float x = mPushDirection.x * GmkWindCurrent_DirectionMultiplier * (1.0f / 60.0f) * mult * strength;
+    float y = mPushDirection.y * GmkWindCurrent_DirectionMultiplier * (1.0f / 60.0f) * mult * strength;
 
     vec.x = x;
     vec.y = y;
@@ -266,7 +268,7 @@ WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWo
     , mWindCurrent(pWindCurrent)
     , mFlfWoolDraw(nullptr)
 {
-    fn_805CB85C();
+    Reset();
 
     mFlfWoolDraw.Create(gfl::HeapID::Work);
     int index = mFlfWoolDraw->Register(pResFileObject, pWoolName, nullptr);
@@ -275,6 +277,52 @@ WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWo
 }
 
 WoolGroupUnit::~WoolGroupUnit() { }
+
+#define SOME_CONST 0.000030518509f
+
+float lbl_808E3C44 = 15.0f;
+float lbl_808E3C48 = 0.25f;
+float lbl_808E3C4C = 2.0f;
+
+// https://decomp.me/scratch/7XnFf
+void WoolGroupUnit::Reset() {
+    float dimX = mWindCurrent->mDimensions.x;
+    float nDimX = -dimX * 0.5f;
+    
+    m_B8.x = (dimX * 0.5f * nDimX) * rand() * SOME_CONST + nDimX;
+
+    float dimY = -mWindCurrent->mDimensions.y;
+    m_C0 = 0.0f;
+
+    m_B8.y = ((dimY + 1.0f) - dimY) * rand() * SOME_CONST + dimY;
+
+
+    m_C0 = m_C0 * (1.0f / 60.0f);
+
+    float unk1 = lbl_808E3C44;
+    float unk2 = lbl_808E3C44 * 0.5f;
+    
+    m_C4 = ((unk1 - unk2) * rand() * SOME_CONST + unk2) * (1.0f / 60.0f);
+    m_D4 = 0.0f;
+
+    float unk3 = lbl_808E3C48;
+    float unk4 = -lbl_808E3C48;
+    
+    m_D0 = ((unk3 - unk4) * rand() * SOME_CONST + unk4) * (1.0f / 60.0f);
+
+    
+    m_AC = 0.0f;
+    m_B0 = 0.0f;
+    m_CC = 0;
+    m_A0 = 0;
+
+    float unk5 = lbl_808E3C4C;
+
+    m_C8 = (unk5 - 0.0f) * rand() * SOME_CONST + 0.0f;
+    
+    m_A4 = 0;
+    mMax = 0;
+}
 
 void WoolGroupUnit::fn_805CBA44(nw4r::math::MTX34* pMtx) {
     if (mMax < 2) {

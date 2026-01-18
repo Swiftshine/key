@@ -129,7 +129,7 @@ public:
     DECL_WEAK ~WoolGroupUnit() DONT_INLINE_CLASS;
 
     /* Class Methods */
-    void fn_805CB85C();
+    void Reset();
     void fn_805CBA40();
     void fn_805CBA44(nw4r::math::MTX34*);
     void fn_805CBB0C();
