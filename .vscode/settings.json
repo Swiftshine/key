@@ -71,7 +71,10 @@
         "osutf.h": "c",
         "wchar_def.h": "c",
         "compiler_macros.h": "c",
-        "gx.h": "c"
+        "gx.h": "c",
+        "ossync.h": "c",
+        "osthread.h": "c",
+        "oscache.h": "c"
     },
     "C_Cpp.default.compilerPath": ""
 }
