@@ -78,6 +78,15 @@ namespace std {
 
     template <typename T, typename Compare>
     void sort(T* begin, T* end, Compare comp);
+
+    template <typename It, typename T>
+    inline It find(It first, It last, const T& value) {
+        while (first != last && *first != value) {
+            first++;
+        }
+
+        return first;
+    }
 }
 
 #endif

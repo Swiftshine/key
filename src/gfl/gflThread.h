@@ -1,8 +1,8 @@
 #ifndef GFL_THREAD_H
 #define GFL_THREAD_H
 
-#include <revolution/OS.h>
 #include "gflAlloc.h"
+#include <revolution/OS.h>
 
 namespace gfl {
 
@@ -28,4 +28,5 @@ public:
 
 
 };
+
 #endif

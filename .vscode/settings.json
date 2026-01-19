@@ -74,7 +74,11 @@
         "gx.h": "c",
         "ossync.h": "c",
         "osthread.h": "c",
-        "oscache.h": "c"
+        "oscache.h": "c",
+        "list": "cpp",
+        "msl_smart_pointers": "cpp",
+        "msl_utility": "cpp",
+        "vector_old": "cpp"
     },
     "C_Cpp.default.compilerPath": ""
 }

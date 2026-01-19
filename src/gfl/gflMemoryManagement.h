@@ -1,9 +1,8 @@
 #ifndef GFL_MEMORYMANAGEMENT_H
 #define GFL_MEMORYMANAGEMENT_H
 
-
-#include <revolution/os.h>
 #include "types.h"
+#include <revolution/os.h>
 
 
 namespace gfl {
