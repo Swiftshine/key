@@ -246,6 +246,11 @@ fluff/object/gimmick/GmkTurtle.cpp:
 fluff/manager/GmkBeadManager.cpp:
 	.text       start:0x8051D524 end:0x8051D968
 
+fluff/save/SaveData.cpp:
+	.text       start:0x80545190 end:0x80545440
+	.ctors      start:0x807E36C8 end:0x807E36CC
+	.sbss       start:0x808E5AE8 end:0x808E5AF8
+
 fluff/env/EnvParts_PlayGuideIconLocator.cpp:
 	.text       start:0x8054ADD0 end:0x8054AE14
 	.rodata     start:0x8081FB20 end:0x8081FB48
