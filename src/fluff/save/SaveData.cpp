@@ -5,20 +5,24 @@
 #define CRC_POLYNOMIAL      0xEDB88320
 
 struct SaveDataInfo {
-    SaveDataInfo()
-        : mSaveDataSize(SAVEDATA_SIZE)
-        , m_4(43)
-        , m_8(61)
-        , m_C(1)
-    { }
-
-    int mSaveDataSize;
-    int m_4;
-    int m_8;
-    int m_C;
+    inline SaveDataInfo();
+    size_t mSaveDataSize;
 };
 
 static SaveDataInfo sSaveDataInfo;
+
+// none of the below fields are ever used
+static int lbl_808E5AEC;
+static int lbl_808E5AF0;
+static int lbl_808E5AF4;
+
+SaveDataInfo::SaveDataInfo()
+    : mSaveDataSize(SAVEDATA_SIZE)
+{
+    lbl_808E5AEC = 43;
+    lbl_808E5AF0 = 61;
+    lbl_808E5AF4 = 1;
+}
 
 uint SaveData::CalculateChecksum(int numBytes) {
     uint checksum = 0xFFFFFFFF;
@@ -80,9 +84,8 @@ void SaveData::InitSaveSlots() {
     mChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
 }
 
-// https://decomp.me/scratch/qGYnj
 bool SaveData::IsSizeValid(int size) {
-    return sSaveDataInfo.mSaveDataSize == size;
+    return size == sSaveDataInfo.mSaveDataSize;
 }
 
 bool SaveData::IsChecksumValid() {
@@ -92,5 +95,3 @@ bool SaveData::IsChecksumValid() {
     mChecksum = oldChecksum;
     return oldChecksum == newChecksum;
 }
-
-// sinit scratch: https://decomp.me/scratch/JLgpH

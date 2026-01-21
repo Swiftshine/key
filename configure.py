@@ -543,7 +543,7 @@ config.libs = [
             Object(NonMatching, "fluff/manager/GmkBeadManager.cpp"),
             Object(NonMatching, "fluff/manager/GmkMng.cpp"),
             Object(Matching,    "fluff/manager/LevelManager.cpp"),
-            Object(Equivalent,  "fluff/manager/StageResourceManager.cpp"),
+            Object(NonMatching,  "fluff/manager/StageResourceManager.cpp"),
         ],
     },
     {
@@ -553,7 +553,7 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects": [
-            Object(NonMatching, "fluff/save/SaveData.cpp"),
+            Object(Equivalent, "fluff/save/SaveData.cpp"),
         ]
     },
     {
