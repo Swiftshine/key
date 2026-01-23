@@ -607,7 +607,6 @@ void FlfSaveLoadSeq::Load() {
     }
 }
 
-// https://decomp.me/scratch/rg6E2
 void FlfSaveLoadSeq::Save() {
     switch (mSaveState) {
         case 0: {
@@ -647,11 +646,8 @@ void FlfSaveLoadSeq::Save() {
                 mBuffer.Destroy();
             }
             mBuffer.Create(gfl::Alloc(Game::Mem2Heap, mSaveSaveInfo.mSaveDataSize, 0x20));
-            
-            size_t size = mSaveSaveInfo.mSaveDataSize;
-            const char* s = mLoadSaveInfo.mSaveFileName.c_str();
-            
-            mNandManager.fn_80229340(s, mBuffer, size);
+            void* buf = mBuffer;
+            mNandManager.fn_80229340(mLoadSaveInfo.mSaveFileName.c_str(), buf, mSaveSaveInfo.mSaveDataSize);
             mSaveState = 3;
             break;
         }
