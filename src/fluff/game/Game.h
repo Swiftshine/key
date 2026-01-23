@@ -5,8 +5,8 @@
 #include "gfl/gflHeap.h"
 
 namespace Game {
-    gfl::Heap* Mem1Heap;
-    gfl::Heap* Mem2Heap;
+    extern "C" gfl::Heap* Mem1Heap;
+    extern "C" gfl::Heap* Mem2Heap;
 
     void OnReset();
     void Init();

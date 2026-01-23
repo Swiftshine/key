@@ -1,11 +1,10 @@
 #include "graphics/BGSTFile.h"
 #include "gfl/gflMemoryManagement.h"
-#include "game/Game.h"
 #include <cstring>
 
 extern "C" int lbl_808E0368; // actually in sdata
 extern "C" void* GetBgImageSquare(void*, u16 index);
-extern "C" gfl::Heap* Mem1Heap; // actually Game::Mem1Heap at 808e4d00 but it's not linked yet
+extern "C" gfl::Heap* Mem1Heap;
 
 BGST::File::File()
     : mLoadState(BGST::LoadState::BGST_LOADING_NOT_INITED)

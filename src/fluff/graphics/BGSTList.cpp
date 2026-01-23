@@ -1,7 +1,5 @@
 #include "graphics/BGSTList.h"
-
-extern "C" gfl::Heap* Mem2Heap;
-
+#include "game/Game.h"
 
 // https://decomp.me/scratch/ZKJkx - nonmatching due to gfl::LinkedList constructor
 BGST::List::List(StageGraphicResources* arg1, size_t count)
@@ -9,7 +7,7 @@ BGST::List::List(StageGraphicResources* arg1, size_t count)
     , mCount(count)
     , mResources(arg1)
 {
-    mImages.Create((BGST::Image*)gfl::Alloc(Mem2Heap, count * sizeof(BGST::Image), 0x20));
+    mImages.Create((BGST::Image*)gfl::Alloc(Game::Mem2Heap, count * sizeof(BGST::Image), 0x20));
     mBitset.reset();
     sInstance = this;
 }
