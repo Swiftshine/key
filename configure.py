@@ -553,6 +553,7 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects": [
+            Object(NonMatching, "fluff/save/FlfSaveLoadSeq.cpp"),
             Object(Equivalent, "fluff/save/SaveData.cpp"),
         ]
     },

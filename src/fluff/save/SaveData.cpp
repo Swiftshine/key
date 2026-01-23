@@ -44,33 +44,33 @@ uint SaveData::CalculateChecksum(int numBytes) {
 }
 
 void SaveData::Init() {
-    mRegionCode = Language::GetCurrentRegionCode();
-    mChecksum = 0;
-    mChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
+    mHeader.mRegionCode = Language::GetCurrentRegionCode();
+    mHeader.mChecksum = 0;
+    mHeader.mChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
 }
 
 #pragma push
 #pragma global_optimizer off
 
-bool SaveData::IsValid(int numBytes) {
+BOOL SaveData::IsValid(int numBytes) {
     if (!IsSizeValid(numBytes)) {
-        return false;
+        return FALSE;
     }
 
-    bool valid = mRegionCode == Language::GetCurrentRegionCode();
+    bool valid = mHeader.mRegionCode == Language::GetCurrentRegionCode();
     if (!valid) {
-        return false;
+        return FALSE;
     }
     
     if (!IsChecksumValid()) {
-        return false;
+        return FALSE;
     }
     
-    if (mVersion != SAVEDATA_VERSION) {
-        return false;
+    if (mHeader.mVersion != SAVEDATA_VERSION) {
+        return FALSE;
     }
 
-    return true;
+    return TRUE;
 }
 
 #pragma pop
@@ -80,8 +80,8 @@ void SaveData::InitSaveSlots() {
         mSaveSlots[i].fn_801FFDB8(i);
     }
 
-    mChecksum = 0;
-    mChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
+    mHeader.mChecksum = 0;
+    mHeader.mChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
 }
 
 bool SaveData::IsSizeValid(int size) {
@@ -89,9 +89,9 @@ bool SaveData::IsSizeValid(int size) {
 }
 
 bool SaveData::IsChecksumValid() {
-    uint oldChecksum = mChecksum;
-    mChecksum = 0;
+    uint oldChecksum = mHeader.mChecksum;
+    mHeader.mChecksum = 0;
     uint newChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
-    mChecksum = oldChecksum;
+    mHeader.mChecksum = oldChecksum;
     return oldChecksum == newChecksum;
 }

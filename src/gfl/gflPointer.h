@@ -34,10 +34,6 @@ namespace gfl {
             return mPointer != other;
         }
 
-        inline T& operator*() const {
-            return *mPointer;
-        }
-
         inline T* operator->() const {
             return mPointer;
         }

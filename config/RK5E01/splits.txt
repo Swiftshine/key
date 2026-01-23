@@ -155,6 +155,9 @@ fluff/object/gimmick/GmkWarpExit.cpp:
 fluff/work/InStageWork.cpp:
 	.text       start:0x801FED48 end:0x801FFAC0
 
+fluff/save/FlfSaveLoadSeq.cpp:
+	.text       start:0x8022C354 end:0x8022D594
+
 fluff/graphics/GmkPartsMdlSet.cpp:
 	.text       start:0x802370E4 end:0x802375C0
 
