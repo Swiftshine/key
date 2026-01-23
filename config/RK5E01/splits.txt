@@ -13,9 +13,6 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
-fluff/system/FlfNandMng.cpp:
-	.text 		start:0x80228c18 end:0x8022a4f8
-
 fluff/game/Game.cpp:
 	.text       start:0x80006B78 end:0x800080EC
 	.ctors      start:0x807E3424 end:0x807E3428
@@ -157,6 +154,10 @@ fluff/object/gimmick/GmkWarpExit.cpp:
 
 fluff/work/InStageWork.cpp:
 	.text       start:0x801FED48 end:0x801FFAC0
+
+fluff/system/FlfNandMng.cpp:
+	.text       start:0x80228C18 end:0x8022A4F8
+	.ctors      start:0x807E354C end:0x807E3550
 
 fluff/save/FlfSaveLoadSeq.cpp:
 	.text       start:0x8022C354 end:0x8022D594

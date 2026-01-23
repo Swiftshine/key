@@ -3,12 +3,24 @@
 
 #include "types.h"
 #include <string>
+#include <revolution/NAND.h>
 
-// unofficial name
+// unofficial names
 
 /// @note Size: `0x248`
 class FlfNandMng {
 public:
+    ENUM_CLASS(Result,
+        None        = 0,
+        Ok          = 1,
+        Invalid     = 2,
+        NoExist     = 3,
+        Corrupt     = 4
+    );
+    
+    /* Static Variables */
+    static NANDCommandBlock sCommandBlock;
+
     FlfNandMng();
     ~FlfNandMng();
 
@@ -24,7 +36,8 @@ public:
     void fn_80229340(const char* pFilename, void* pData, size_t dataSize);
     
     /* Static Methods */
-
+    
+    static void NandError(NANDResult result);
     static size_t GetNumChunks(size_t size);
 
     /* Class Members */
@@ -46,6 +59,35 @@ public:
     /* 0x234 */ int m_234;
     /* 0x238 */ std::string m_238;
     /* 0x244 */ u8 mFlags;
+};
+
+
+struct FlfNandCommandBlock : NANDCommandBlock {
+    DECL_WEAK void SetUserData(void* pUserData);
+};
+
+class FlfNandInfo {
+public:
+    static FlfNandInfo* sInstance;
+    static inline FlfNandInfo* Instance() {
+        return sInstance;
+    }
+
+    FlfNandInfo();
+    ~FlfNandInfo();
+
+    /* Class Methods */
+    void Init(NANDFileInfo* pFileInfo, FlfNandCommandBlock* pCommandBlock, bool open);
+    void SetUserData(NANDFileInfo* pFileInfo, FlfNandCommandBlock* pCommandBlock);
+    void ClearUserData();
+    void Invalidate();
+    void Update();
+    /* Class Members */
+    
+    bool mIsOpen;
+    int mResult;
+    NANDFileInfo* mFileInfo;
+    FlfNandCommandBlock* mCommandBlock;
 };
 
 #endif

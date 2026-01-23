@@ -123,6 +123,7 @@ typedef struct NANDCommandBlock {
     u32 workBlocks;             // at 0xAC
     u32 workInodes;             // at 0xB0
     const char** dir;           // at 0xB4
+    BOOL simple_flag;           // at 0xB8
 } NANDCommandBlock;
 
 typedef struct NANDBanner {
