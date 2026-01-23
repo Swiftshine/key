@@ -558,6 +558,16 @@ config.libs = [
         ]
     },
     {
+        "lib": "fluff/system",
+        "mw_version": config.linker_version,
+        "cflags": cflags_fluff,
+        "host": False,
+        "progress_category": "fluff",
+        "objects": [
+            Object(NonMatching, "fluff/system/FlfNandMng.cpp"),
+        ]
+    },
+    {
         "lib": "fluff/graphics/",
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff],

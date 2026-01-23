@@ -13,6 +13,9 @@ Sections:
 	.sbss2      type:bss align:4
 	.bss        type:bss align:64
 
+fluff/system/FlfNandMng.cpp:
+	.text 		start:0x80228c18 end:0x8022a4f8
+
 fluff/game/Game.cpp:
 	.text       start:0x80006B78 end:0x800080EC
 	.ctors      start:0x807E3424 end:0x807E3428
