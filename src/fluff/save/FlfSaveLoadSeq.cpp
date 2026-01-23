@@ -14,7 +14,6 @@ void FlfSaveLoadSeq::DestroyInstance() {
     delete sInstance;
 }
 
-// https://decomp.me/scratch/bAA90
 FlfSaveLoadSeq::FlfSaveLoadSeq()
     : mOperation(Operation::None)
     , mLoadState(0)
