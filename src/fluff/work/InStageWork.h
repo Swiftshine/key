@@ -114,7 +114,7 @@ public:
 
     /* 0x28 */ int m_28;
     /* 0x2C */ int m_2C;
-    /* 0x30 */ bool mTreasureObtained[3];
+    /* 0x30 */ bool mGoalRouletteSegmentUnlocked[3];
     /* 0x34 */ int m_34;
     /* 0x38 */ bool m_38;
     /* 0x3C */ int m_3C;

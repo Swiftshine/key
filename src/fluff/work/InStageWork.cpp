@@ -43,9 +43,9 @@ void InStageWork::Init() {
     mNumZekeFound = 0;
     mMaxZekeFound = 0;
     mTimeAttackStatus = -1;
-    mTreasureObtained[0] = false;
-    mTreasureObtained[1] = false;
-    mTreasureObtained[2] = false;
+    mGoalRouletteSegmentUnlocked[0] = false;
+    mGoalRouletteSegmentUnlocked[1] = false;
+    mGoalRouletteSegmentUnlocked[2] = false;
     m_50 = zero;
     m_54 = zero;
     m_58 = zero;

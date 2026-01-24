@@ -14,7 +14,7 @@
 
 #include "misc/ScopedPointers.h"
 
-/// @brief A treasure for the player to collect.
+/// @brief The items that unlock the segments on the goal roulette.
 /// @note Size: `0x184`
 class GmkTreasureItem : public Gimmick, public IObjHitCB {
 public:
