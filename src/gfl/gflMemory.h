@@ -43,6 +43,10 @@ namespace gfl {
             return TryGetInstance()->GetHeapByAddress(addr);
         }
 
+        static inline Heap* TryGetHeapByID(uint id) {
+            return TryGetInstance()->GetHeapByID(id);
+        }
+
         static inline bool IsInited() { return sIsInited; }
         static inline void SetInited(bool inited) { sIsInited = inited; }
         static OSMutex* ValidateHeapMutex(u8 searchID, OSMutex* mutex, u8 maxID);

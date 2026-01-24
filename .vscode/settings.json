@@ -78,7 +78,9 @@
         "list": "cpp",
         "msl_smart_pointers": "cpp",
         "msl_utility": "cpp",
-        "vector_old": "cpp"
+        "vector_old": "cpp",
+        "nwc24.h": "c",
+        "nandopenclose.h": "c"
     },
     "C_Cpp.default.compilerPath": ""
 }
