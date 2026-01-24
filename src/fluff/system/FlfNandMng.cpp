@@ -92,16 +92,16 @@ void FlfNandInfo::Reset() {
     mCommandBlock = nullptr;
 }
 
-void FlfNandMng::NandCallback(s32 result, void* arg) {
+void FlfNandMng::NandCallback(s32 result, NANDCommandBlock* pBlock) {
     lbl_808E51D4 = true;
     sNandResult = result;
-    FlfNandInfo* info = reinterpret_cast<FlfNandInfo*>(NANDGetUserData(reinterpret_cast<NANDCommandBlock*>(arg)));
+    FlfNandInfo* info = reinterpret_cast<FlfNandInfo*>(NANDGetUserData(pBlock));
 
     if (info == nullptr) {
         return;
     }
 
-    NANDSetUserData(reinterpret_cast<NANDCommandBlock*>(arg), nullptr);
+    NANDSetUserData(pBlock, nullptr);
 
     if (info->mResult == Result::Ok) {
         if (sNandResult == NAND_RESULT_OK) {
@@ -246,7 +246,7 @@ void FlfNandMng::fn_80229470() {
 
 void FlfNandMng::HandleNandError(s32 result) {
     CutFunction();
-    
+
     switch (result) {
         case NAND_RESULT_OK:
         case NAND_RESULT_CORRUPT: {
@@ -264,6 +264,55 @@ void FlfNandMng::HandleNandError(s32 result) {
 
         default: {
             GFL_HALT();
+            break;
+        }
+    }
+}
+
+void FlfNandMng::fn_80229524() {
+    switch (mState) {
+        case 1: {
+            mState = 2;
+            lbl_808E51D4 = false;
+            FlfNandInfo::Instance().Init(&sNandFileInfo, &sCommandBlock, false);
+
+            s32 result = NANDOpenAsync(mFilename, &sNandFileInfo, 1, NandCallback, &sCommandBlock);
+
+            if (result == NAND_RESULT_BUSY) {
+                FlfNandInfo::Instance().Reset();
+            }
+
+            fn_8022A48C(result, 1);
+            break;
+        }
+
+        case 2: {
+            if (lbl_808E51D4) {
+                switch (sNandResult) {
+                    case NAND_RESULT_OK: {
+                        mState = 3;
+                        break;
+                    }
+
+                    case NAND_RESULT_NOEXISTS: {
+                        mResult = Result::NoExist;
+                        Clear();
+                        break;
+                    }
+
+                    default: {
+                        HandleNandError(sNandResult);
+                        break;
+                    }
+                }
+            }
+            break;
+        }
+
+        case 3: {
+            mState = 4;
+            lbl_808E51D4 = false;
+            // s32 result = 
             break;
         }
     }

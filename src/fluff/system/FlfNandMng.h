@@ -28,6 +28,7 @@ public:
     static NANDCommandBlock sCommandBlock;
     static bool lbl_808E51D4;
     static s32 sNandResult;
+    static NANDFileInfo sNandFileInfo;
 
     FlfNandMng();
     ~FlfNandMng();
@@ -39,11 +40,13 @@ public:
     void fn_802292B8(const char* pFilename, void* pData, size_t dataSize);
     void fn_80229340(const char* pFilename, void* pData, size_t dataSize);
     void fn_80229470();
-
     void fn_80229524();
     void fn_80229788();
     void fn_8022987C();
     void fn_80229978();
+
+    void Clear();
+    void fn_8022A48C(s32 result, int arg2);
 
     void SetFlags(uint flag, bool set);
     DECL_WEAK int GetUnk8() const;
@@ -52,7 +55,7 @@ public:
     static void HandleNandError(s32 result);
     static void NandError(s32 result);
     static size_t GetNumChunks(size_t size);
-    static void NandCallback(s32 result, void* arg);
+    static void NandCallback(s32 result, NANDCommandBlock* pBlock);
     
     /* Class Members */
 
