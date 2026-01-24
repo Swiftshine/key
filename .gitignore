@@ -16,3 +16,4 @@ tools/mangle.py
 notes/
 compile_commands.json 
 .cache/ 
+settings.json
