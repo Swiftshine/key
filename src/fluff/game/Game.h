@@ -12,6 +12,8 @@ namespace Game {
     void Init();
     void Run();
     void Cleanup();
+
+    void fn_8064740C(bool);
 }
 
 #endif

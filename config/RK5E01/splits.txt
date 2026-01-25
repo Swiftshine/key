@@ -158,6 +158,8 @@ fluff/work/InStageWork.cpp:
 fluff/system/FlfNandMng.cpp:
 	.text       start:0x80228C18 end:0x8022A4F8
 	.ctors      start:0x807E354C end:0x807E3550
+	.sbss       start:0x808E51D0 end:0x808E51E0
+	.bss        start:0x808F4C70 end:0x808F4DD8
 
 fluff/save/FlfSaveLoadSeq.cpp:
 	.text       start:0x8022C354 end:0x8022D594

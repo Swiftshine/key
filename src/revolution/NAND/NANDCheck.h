@@ -14,6 +14,7 @@ typedef enum {
 } NANDCheckFlags;
 
 s32 NANDCheck(u32 neededBlocks, u32 neededFiles, u32* answer);
+s32 NANDCheckAsync(u32 nandBlocks, u32 inodeCount, u32* answer, NANDAsyncCallback callback, NANDCommandBlock* block);
 
 #ifdef __cplusplus
 }

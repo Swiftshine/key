@@ -21,14 +21,14 @@ public:
     );
     
     /* Static Variables */
+
+    static s32 sNandResult;
+    static bool sNandCallbackCalled;
+
     static FlfNandMng* sInstance;
     static FlfNandMng* Instance() {
         return sInstance;
     }
-    static NANDCommandBlock sCommandBlock;
-    static bool lbl_808E51D4;
-    static s32 sNandResult;
-    static NANDFileInfo sNandFileInfo;
 
     FlfNandMng();
     ~FlfNandMng();
@@ -44,26 +44,38 @@ public:
     void fn_80229788();
     void fn_8022987C();
     void fn_80229978();
-
     void Clear();
-    void fn_8022A48C(s32 result, int arg2);
 
-    void SetFlags(uint flag, bool set);
+    void SetStateIfBusy(s32 result, int state);
+
+    void SetFlags(uint flag, bool set) DONT_INLINE_CLASS;
     DECL_WEAK int GetUnk8() const;
     
+    /* Helper Inlines */
+    // s32 Delete() {
+    //     s32 result = NANDDelete(mTempFilename.c_str());
+    //     while (result == NAND_RESULT_BUSY) {
+    //         result = NANDDelete(mTempFilename.c_str());
+    //     }
+    //     return result;
+    // }
+
+    inline const char* GetTempFilename() const {
+        return mTempFilename.c_str();
+    }
     /* Static Methods */
-    static void HandleNandError(s32 result);
-    static void NandError(s32 result);
+    static void HandleNandError(s32 result) DONT_INLINE_CLASS;
+    static void NandError(s32 result) DONT_INLINE_CLASS;
     static size_t GetNumChunks(size_t size);
     static void NandCallback(s32 result, NANDCommandBlock* pBlock);
     
     /* Class Members */
 
     /* 0x000 */ int mState;
-    /* 0x004 */ int m_4;
+    /* 0x004 */ int mPhase;
     /* 0x008 */ int mResult;
-    /* 0x00C */ int m_C;
-    /* 0x010 */ int m_10;
+    /* 0x00C */ u32 mCheckAnswer;
+    /* 0x010 */ u32 mLength;
     /* 0x014 */ void* mData1;
     /* 0x018 */ size_t mData1Size;
     /* 0x01C */ void* mData2;
@@ -72,26 +84,21 @@ public:
     /* 0x028 */ size_t mData3Size;;
     /* 0x02C */ char mFilename[0x200];
     /* 0x22C */ size_t mFilesize;
-    /* 0x230 */ size_t mNumChunks;
-    /* 0x234 */ int m_234;
-    /* 0x238 */ std::string m_238;
+    /* 0x230 */ u32 mNandBlockCount;
+    /* 0x234 */ u32 mINodeCount;
+    /* 0x238 */ std::string mTempFilename;
     /* 0x244 */ u8 mFlags;
 };
 
 
 class FlfNandInfo {
 public:
-    static FlfNandInfo sInstance;
-    static inline FlfNandInfo& Instance() {
-        return sInstance;
-    }
-
-    FlfNandInfo();
+    FlfNandInfo() DONT_INLINE_CLASS;
     ~FlfNandInfo();
 
     /* Class Methods */
-    void Init(NANDFileInfo* pFileInfo, NANDCommandBlock* pCommandBlock, bool safe);
-    void SetUserData(NANDFileInfo* pFileInfo, NANDCommandBlock* pCommandBlock);
+    void Init(NANDFileInfo* pFileInfo, NANDCommandBlock* pCommandBlock, bool safe) DONT_INLINE_CLASS;
+    void SetUserData(NANDFileInfo* pFileInfo, NANDCommandBlock* pCommandBlock, bool safe) DONT_INLINE_CLASS;
     void ClearUserData() DONT_INLINE_CLASS;
     void Invalidate() DONT_INLINE_CLASS;
     void Update();

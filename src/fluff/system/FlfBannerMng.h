@@ -3,8 +3,6 @@
 
 #include "system/FlfNandMng.h"
 
-#define BANNER_SIZE 0xF0A0
-
 /// @note Size: `0x24`
 class FlfBannerMng {
 public:
@@ -28,8 +26,8 @@ public:
     int m_10;
     int m_14;
     FlfNandMng* mNandManager;
-    void* mBanner1;
-    void* mBanner2;
+    NANDBanner* mNANDBanner;
+    NANDBanner* mFileBanner;
 };
 
 #endif

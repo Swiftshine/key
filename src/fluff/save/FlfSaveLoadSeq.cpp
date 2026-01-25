@@ -91,7 +91,7 @@ void FlfSaveLoadSeq::CopyLoadSaveInfo(const LoadSaveInfo& rSaveInfo) {
     m_C = false;
     
     size_t num1 = FlfNandMng::GetNumChunks(rSaveInfo.mSaveDataSize);
-    size_t num2 = FlfNandMng::GetNumChunks(BANNER_SIZE);
+    size_t num2 = FlfNandMng::GetNumChunks(sizeof(NANDBanner));
     size_t num3 = fn_80634E2C();
     mNumSDChunks = num1 + num2 + num3;
     m_28 = fn_802B69B4() + 2;
