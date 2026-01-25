@@ -215,7 +215,7 @@ void FlfNandMng::fn_80229340(const char* pFilename, void* pData, size_t dataSize
     mResult = Result::Reset;
 }
 
-size_t FlfNandMng::GetNumChunks(size_t size) {
+size_t FlfNandMng::GetNumBlocks(size_t size) {
     return size + 0x3FFF >> 0xE;
 }
 
@@ -674,9 +674,9 @@ void FlfNandMng::fn_80229978() {
 
                     case NAND_RESULT_AUTHENTICATION:
                     case NAND_RESULT_ECC_CRIT: {
-                        s32 result = NANDDelete(GetTempFilename());
+                        s32 result = NANDDelete(mTempFilename.c_str());
                         while (result == NAND_RESULT_BUSY) {
-                            result = NANDDelete(GetTempFilename());
+                            result = NANDDelete(mTempFilename.c_str());
                         }
                         mState = 13;
                         break;

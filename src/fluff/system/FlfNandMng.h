@@ -51,22 +51,10 @@ public:
     void SetFlags(uint flag, bool set) DONT_INLINE_CLASS;
     DECL_WEAK int GetUnk8() const;
     
-    /* Helper Inlines */
-    // s32 Delete() {
-    //     s32 result = NANDDelete(mTempFilename.c_str());
-    //     while (result == NAND_RESULT_BUSY) {
-    //         result = NANDDelete(mTempFilename.c_str());
-    //     }
-    //     return result;
-    // }
-
-    inline const char* GetTempFilename() const {
-        return mTempFilename.c_str();
-    }
     /* Static Methods */
     static void HandleNandError(s32 result) DONT_INLINE_CLASS;
     static void NandError(s32 result) DONT_INLINE_CLASS;
-    static size_t GetNumChunks(size_t size);
+    static size_t GetNumBlocks(size_t size);
     static void NandCallback(s32 result, NANDCommandBlock* pBlock);
     
     /* Class Members */
