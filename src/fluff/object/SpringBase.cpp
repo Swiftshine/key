@@ -197,7 +197,8 @@ void SpringBase::SetParticleEffectPositionByIndex(uint index, gfl::Vec3& rVec, b
 }
 
 gfl::Vec3 SpringBase::GetParticleEffectPositionByIndex(uint index) {
-    gfl::Vec3 vec = mParticleArray1[index].mEffectPosition;
+    gfl::Vec3 vec;
+    vec = mParticleArray1[index].mEffectPosition;
     return vec;
 }
 
