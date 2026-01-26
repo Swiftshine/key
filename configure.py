@@ -578,6 +578,7 @@ config.libs = [
             Object(NonMatching, "fluff/graphics/Cam.cpp"),
             Object(NonMatching, "fluff/graphics/FbMem.cpp"),
             Object(NonMatching, "fluff/graphics/FlfMdlDraw.cpp"),
+            Object(Matching, "fluff/graphics/effect/FriendEffect.cpp"),
             Object(NonMatching, "fluff/graphics/HermiteCurveBase.cpp"),
             Object(NonMatching, "fluff/graphics/WoolBaseMdl.cpp"),
         ]

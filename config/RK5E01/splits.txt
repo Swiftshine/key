@@ -212,6 +212,11 @@ fluff/object/gimmick/GmkSunriseCurtain.cpp:
 	.data       start:0x8087AFF4 end:0x8087B0D8
 	.sdata      start:0x808E1E70 end:0x808E1E88
 
+fluff/graphics/effect/FriendEffect.cpp:
+	.text       start:0x803D3D34 end:0x803D4040
+	.rodata     start:0x8080AFA8 end:0x8080B010
+	.data       start:0x8087B8E0 end:0x8087B8F8
+
 fluff/object/gimmick/GmkTreasureItem.cpp:
 	.text       start:0x803D41F4 end:0x803D56EC
 

@@ -1,5 +1,9 @@
 #include "util/FullSortSceneUtil.h"
 
+float ZOrders[12];
+float PriorityOffsets[9];
+const char* SceneLabels[12];
+
 const char* FullSortSceneUtil::GetSceneLabelByIndex(uint index) {
     return SceneLabels[index];
 }

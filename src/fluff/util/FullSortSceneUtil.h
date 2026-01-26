@@ -22,10 +22,6 @@ namespace FullSortSceneUtil {
         Near_04 = 10,
         Near_05 = 11
     );
-
-    float ZOrders[12];
-    float PriorityOffsets[9];
-    const char* SceneLabels[12];
 }
 
 #endif
