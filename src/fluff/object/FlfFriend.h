@@ -162,9 +162,7 @@ public:
     /* 0x0C0 */ int m_C0;
     /* 0x0C4 */ StateObject mState;
     /* 0x0D8 */ std::tree<placeholder_t> m_D8;
-    /* 0x0E4 */ float m_E4;
-    /* 0x0E8 */ float m_E8;
-    /* 0x0EC */ float m_EC;
+    /* 0x0E4 */ gfl::Vec3 m_E4;
     /* 0x0F4 */ float m_F4;
     /* 0x0F8 */ float m_F8;
     /* 0x0FC */ float m_FC;
