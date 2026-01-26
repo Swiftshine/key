@@ -94,7 +94,7 @@ public:
         erase_at_end(size_);
     }
 
-    void erase_at_end(size_t n) {
+    void erase_at_end(const size_t n) {
         // erase_at_end(n, Metrowerks::int2type<1>());
         size_ -= n;
     }

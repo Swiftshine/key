@@ -10,6 +10,7 @@
 #include "misc/ScopedPointers.h"
 #include "gfl/gflScnMdlWrapper.h"
 #include "graphics/FullSortScene.h"
+#include "manager/FlfMsgMng.h"
 #include "manager/WaterRenderManager.h"
 
 #include <nw4r/math.h>
@@ -193,11 +194,6 @@ public:
     static void GetResFileObject(gfl::ResFileObject& rDest, Gimmick* pGimmick) DONT_INLINE_CLASS;
     static void GetResFileObject(gfl::ResFileObject& rDest, Gimmick* pGimmick, int gimmickID) DONT_INLINE_CLASS;
 
-    /// @brief Splits a formatted tag list into a vector of individual tags.
-    /// @param pTagList The formatted tag list. E.g. "tag1;tag2;tag3;"
-    /// @param rDest The destination vector.
-    static void SplitCommonTags(const char* pTagList, std::vector<std::string>& rDest);
-    
     /* Class Members */
 
     /* 0x080 */ int mGimmickID;

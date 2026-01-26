@@ -11,8 +11,8 @@ GmkAllGetSwitch::GmkAllGetSwitch(GimmickBuildInfo* buildInfo)
     , mState(State::NotActivated)
 {
     GimmickBuildInfo* bInfo = mBuildInfoPtr;
-    SplitCommonTags(bInfo->GetStringParam(ParameterID::FIRST).c_str(), mTags);
-    SplitCommonTags(bInfo->GetStringParam(ParameterID::SECOND).c_str(), mTags);
+    FlfMsgMng::SplitCommonTags(bInfo->GetStringParam(ParameterID::FIRST).c_str(), mTags);
+    FlfMsgMng::SplitCommonTags(bInfo->GetStringParam(ParameterID::SECOND).c_str(), mTags);
     SetCullThreshold(30.0f);
 }
 
