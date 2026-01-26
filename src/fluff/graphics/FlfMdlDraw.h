@@ -125,7 +125,7 @@ public:
     void ResetNURBSAnimation(int, bool);
     void SetWoolDrawMatrix(const nw4r::math::MTX34&);
     bool fn_800239CC();
-    void fn_80023D38();
+    void UpdateFrame();
     void SetUpdateRate(float rate);
     int SetScene(FullSortScene* pFullSortScene);
     void fn_80023B24(float);
