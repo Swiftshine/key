@@ -522,14 +522,15 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             # fluff/object/
-            Object(Matching,        "fluff/env/EnvParts_PlayGuideIconLocator.cpp"),
-            Object(NonMatching,     "fluff/object/FlfHandleObj.cpp"),
-            Object(NonMatching,     "fluff/object/FlfGameObj.cpp"),
-            Object(NonMatching,     "fluff/object/Gimmick.cpp"),
-            Object(Matching,        "fluff/object/FlfGameObjLocator.cpp"),
-            Object(NonMatching,     "fluff/object/PlayerBase.cpp"),
-            Object(NonMatching,     "fluff/object/SpringBase.cpp"),
-            Object(NonMatching,     "fluff/object/player/HenshinCtrl.cpp",)
+            Object(Matching,    "fluff/env/EnvParts_PlayGuideIconLocator.cpp"),
+            Object(NonMatching, "fluff/object/FlfFriend.cpp"),
+            Object(NonMatching, "fluff/object/FlfHandleObj.cpp"),
+            Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
+            Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
+            Object(NonMatching, "fluff/object/Gimmick.cpp"),
+            Object(NonMatching, "fluff/object/PlayerBase.cpp"),
+            Object(NonMatching, "fluff/object/SpringBase.cpp"),
+            Object(NonMatching, "fluff/object/player/HenshinCtrl.cpp",)
         ],
     },
     {
@@ -578,9 +579,9 @@ config.libs = [
             Object(NonMatching, "fluff/graphics/Cam.cpp"),
             Object(NonMatching, "fluff/graphics/FbMem.cpp"),
             Object(NonMatching, "fluff/graphics/FlfMdlDraw.cpp"),
-            Object(Matching, "fluff/graphics/effect/FriendEffect.cpp"),
             Object(NonMatching, "fluff/graphics/HermiteCurveBase.cpp"),
             Object(NonMatching, "fluff/graphics/WoolBaseMdl.cpp"),
+            Object(Matching,    "fluff/graphics/effect/FriendEffect.cpp"),
         ]
     },
     {

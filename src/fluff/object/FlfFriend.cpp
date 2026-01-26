@@ -1,0 +1,1 @@
+#include "object/FlfFriend.h"

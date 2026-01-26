@@ -203,6 +203,9 @@ fluff/object/FlfGameObjLocator.cpp:
 fluff/util/PathInfo.cpp:
 	.text       start:0x802FF7E8 end:0x803006F8
 
+fluff/object/FlfFriend.cpp:
+	.text       start:0x8033B708 end:0x80341BCC
+
 fluff/manager/FlfMsgMng.cpp:
 	.text       start:0x8035D3CC end:0x8035D780
 
