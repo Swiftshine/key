@@ -39,7 +39,7 @@ struct StateObject {
     }
 
     // v generally used together
-    /* 0x00 */ int mCurrentState;
+    /* 0x00 */ uint mCurrentState;
     /* 0x04 */ int mPreviousState;
 
     // v generally used together

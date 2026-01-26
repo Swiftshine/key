@@ -4,30 +4,45 @@
 #include <MSL_C++/memory>
 
 namespace std {
+    struct tree____ {
+        ~tree____();
+    };
+
+    struct tree___ : tree____ {
+        // ~tree___();
+    };
+    struct tree__ : tree___ {
+        // ~tree__();
+    };
+
+    struct tree_ : tree__ {
+        // ~tree_();
+    };
 
     template <typename T>
-    class tree {
+    class tree : tree_ {
     private:
-
-        // size: 0xC + sizeof(T)
         struct node_base {
-            node_base* m_Child1;
-            node_base* m_Child2;
-            node_base* m_Owner;
-            T mData;
+            node_base* mLeft;
+            node_base* mRight;
+            // node_base* m_Owner;
+            // T mData;
         };
     public:
-        inline tree();
-        ~tree();
+        inline tree() {
+            mCount = 0;
+            mNode.mLeft = nullptr;
+            mNode.mRight = &mNode;
+        }
+        ~tree() { }
 
         void clear();
         void destroy();
     private:
         void insert_node_at(/* args unk */);
     private:
-        size_t m_Count;     // @ 0x0
-        node_base* m_Node;  // @ 0x4
-        node_base* m_Root;  // @ 0x8
+        size_t mCount;
+        node_base mNode;
     };
 
 }

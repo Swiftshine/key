@@ -80,7 +80,6 @@ namespace gfl {
 
         static void SetDefaultUpdateRate(float rate);
 
-    private:
         /* 0x18 */ ByteCodeBuf mByteCodeXlu;
         /* 0x1C */ bool mOptionsSet;
         /* 0x20 */ gfl::Vec3 m_20;

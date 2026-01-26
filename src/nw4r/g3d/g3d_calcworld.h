@@ -39,7 +39,7 @@ void CalcSkinning(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
  ******************************************************************************/
 class ICalcWorldCallback {
 public:
-    virtual ~ICalcWorldCallback() = 0; // at 0x8
+    virtual ~ICalcWorldCallback() { }; // at 0x8
 
     virtual void ExecCallbackA(ChrAnmResult* pResult, ResMdl mdl,
                                FuncObjCalcWorld* pFuncObj) = 0; // at 0xC

@@ -14,24 +14,18 @@
 #include "util/StateObject.h"
 #include <tree>
 
+class PlayerBase;
+
 /// @brief Base class for friend objects.
 /// @note Size: `0x178`
 class FlfFriend : public FlfGameObj, public IObjHitCB, public nw4r::g3d::ICalcWorldCallback {
 public:
-    FlfFriend();
+    FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID, const char* pTaskName);
 
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~FlfFriend();
 
-    /* Overrides */
-
-    /* 0x70 */ virtual bool OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther) override;
-
-    /* 0x80 */ DECL_WEAK virtual void ExecCallbackA(nw4r::g3d::ChrAnmResult* pResult, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
-    /* 0x84 */ DECL_WEAK virtual void ExecCallbackB(nw4r::g3d::WorldMtxManip* pManip, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
-    /* 0x88 */ DECL_WEAK virtual void ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
-    
     /* New Virtuals */
 
     /* 0x08C */ virtual void vf8C();
@@ -51,7 +45,7 @@ public:
 	/* 0x0C4 */ virtual void vfC4();
 	/* 0x0C8 */ virtual void vfC8();
 	/* 0x0CC */ virtual void vfCC();
-	/* 0x0D0 */ virtual void vfD0();
+	/* 0x0D0 */ virtual void vfD0(PlayerBase* pPlayer, int) = 0;
 	/* 0x0D4 */ virtual void vfD4();
 	/* 0x0D8 */ virtual void vfD8();
 	/* 0x0DC */ virtual void vfDC();
@@ -59,7 +53,7 @@ public:
 	/* 0x0E4 */ virtual void vfE4();
 	/* 0x0E8 */ virtual void vfE8();
 	/* 0x0EC */ virtual void vfEC();
-	/* 0x0F0 */ virtual void vfF0();
+	/* 0x0F0 */ virtual void vfF0(FlfGameObj* pObj);
 	/* 0x0F4 */ virtual void vfF4();
 	/* 0x0F8 */ virtual void vfF8();
 	/* 0x0FC */ virtual void vfFC();
@@ -69,7 +63,7 @@ public:
 	/* 0x10C */ virtual void vf10C();
 	/* 0x110 */ virtual void vf110();
 	/* 0x114 */ virtual void vf114();
-	/* 0x118 */ virtual void vf118();
+	/* 0x118 */ virtual void vf118(int, int);
 	/* 0x11C */ virtual void vf11C();
 	/* 0x120 */ virtual void vf120();
 	/* 0x124 */ virtual void vf124();
@@ -88,7 +82,7 @@ public:
 	/* 0x158 */ virtual void vf158();
 	/* 0x15C */ virtual void vf15C();
 	/* 0x160 */ virtual void vf160();
-	/* 0x164 */ virtual void vf164();
+	/* 0x164 */ virtual void Update() const;
 	/* 0x168 */ virtual void vf168();
 	/* 0x16C */ virtual void vf16C();
 	/* 0x170 */ virtual void vf170();
@@ -148,6 +142,28 @@ public:
 	/* 0x248 */ virtual void vf248();
 	/* 0x24C */ virtual void vf24C();
 
+    /* Overrides */
+
+    /* 0x70 */ virtual bool OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther) override;
+
+    /* 0x80 */ DECL_WEAK virtual void ExecCallbackA(nw4r::g3d::ChrAnmResult* pResult, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
+    /* 0x84 */ DECL_WEAK virtual void ExecCallbackB(nw4r::g3d::WorldMtxManip* pManip, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
+    /* 0x88 */ DECL_WEAK virtual void ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
+    
+
+    /* Class Methods */
+
+    void SetCallbackTiming();
+
+    void fn_8033BF8C(int);
+    void fn_8033BFC8(int targetState, int currentState);
+    void ProcessCollision();
+
+    /* Static Methods */
+
+    static float Square(float val);
+    static float fn_8033B710();
+
     /* Class Members */
     
     /* 0x088 */ gfl::Task mTask;
@@ -158,11 +174,12 @@ public:
     /* 0x0B0 */ int m_B0;
     /* 0x0B4 */ int m_B4;
     /* 0x0B8 */ int m_B8;
-    /* 0x0BC */ gfl::Pointer<CollisionEntry> mCollisionEntry;
+    /* 0x0BC */ gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry;
     /* 0x0C0 */ int m_C0;
     /* 0x0C4 */ StateObject mState;
     /* 0x0D8 */ std::tree<placeholder_t> m_D8;
     /* 0x0E4 */ gfl::Vec3 m_E4;
+    /* 0x0F0 */ float m_F0;
     /* 0x0F4 */ float m_F4;
     /* 0x0F8 */ float m_F8;
     /* 0x0FC */ float m_FC;
