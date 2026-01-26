@@ -17,8 +17,6 @@
 // size: 0x24
 class FlfDemoNodeCtrl {
 public:
-    
-
     FlfDemoNodeCtrl(nw4r::g3d::ResNode resNode) DONT_INLINE_CLASS;
 
     /* Virtual Methods */
@@ -28,7 +26,7 @@ public:
     /* 0x10 */ DECL_WEAK virtual void vf10();
     /* 0x14 */ virtual void SetMatrix(nw4r::math::MTX34* matrices);
     /* 0x18 */ virtual void vf18(float);
-    /* 0x1C */ virtual void vf1C();
+    /* 0x1C */ virtual void UpdateFrame();
     /* 0x20 */ DECL_WEAK virtual uint vf20();
     /* 0x24 */ virtual void vf24(int);
     /* 0x28 */ virtual void SetCurrentFrame(int frame);
@@ -80,7 +78,7 @@ public:
 
     /* 0x08 */ virtual ~FlfDemoCharCtrl();
 
-    /* 0x1C */ virtual void vf1C() override;
+    /* 0x1C */ virtual void UpdateFrame() override;
     /* 0x20 */ virtual uint vf20() override;
     /* 0x24 */ virtual void vf24(int) override;
     /* 0x28 */ virtual void SetCurrentFrame(int frame) override;
@@ -105,7 +103,7 @@ public:
     /* 0x08 */ virtual ~FlfDemoPlayerCtrl();
 
     /* 0x18 */ virtual void vf18(float) override;
-    /* 0x1C */ virtual void vf1C() override;
+    /* 0x1C */ virtual void UpdateFrame() override;
     /* 0x20 */ virtual uint vf20() override;
     /* 0x24 */ virtual void vf24(int) override;
     /* 0x28 */ virtual void SetCurrentFrame(int frame) override;

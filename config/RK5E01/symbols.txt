@@ -11037,7 +11037,7 @@ GetCharaResFileObject__15FlfDemoNodeCtrlFRQ23gfl13ResFileObjectPQ34nw4r3g3d7ResN
 GetCharaResourceName__15FlfDemoNodeCtrlFRQ23std59basic_string<c,Q23std14char_traits<c>,Q23std12allocator<c>> = .text:0x802BA13C; // type:function size:0xCC
 __ct__15FlfDemoCharCtrlFQ34nw4r3g3d7ResNodeRQ23std59basic_string<c,Q23std14char_traits<c>,Q23std12allocator<c>> = .text:0x802BA208; // type:function size:0x12C
 __dt__15FlfDemoCharCtrlFv = .text:0x802BA334; // type:function size:0x98
-vf1C__15FlfDemoCharCtrlFv = .text:0x802BA3CC; // type:function size:0x14
+UpdateFrame__15FlfDemoCharCtrlFv = .text:0x802BA3CC; // type:function size:0x14
 vf20__15FlfDemoCharCtrlFv = .text:0x802BA3E0; // type:function size:0xC
 SetCurrentFrame__15FlfDemoCharCtrlFi = .text:0x802BA3EC; // type:function size:0xC
 SetUpdateRate__15FlfDemoCharCtrlFf = .text:0x802BA3F8; // type:function size:0x8
@@ -11047,7 +11047,7 @@ SetVisibility__15FlfDemoCharCtrlFb = .text:0x802BA454; // type:function size:0x8
 SetMatrix__15FlfDemoCharCtrlFRQ34nw4r4math5MTX34 = .text:0x802BA45C; // type:function size:0x8
 __ct__17FlfDemoPlayerCtrlFQ34nw4r3g3d7ResNodeRQ23std59basic_string<c,Q23std14char_traits<c>,Q23std12allocator<c>> = .text:0x802BA464; // type:function size:0x12C
 __dt__17FlfDemoPlayerCtrlFv = .text:0x802BA590; // type:function size:0xE4
-vf1C__17FlfDemoPlayerCtrlFv = .text:0x802BA674; // type:function size:0x18
+UpdateFrame__17FlfDemoPlayerCtrlFv = .text:0x802BA674; // type:function size:0x18
 vf18__17FlfDemoPlayerCtrlFf = .text:0x802BA68C; // type:function size:0x80
 vf20__17FlfDemoPlayerCtrlFv = .text:0x802BA70C; // type:function size:0x24
 vf24__17FlfDemoPlayerCtrlFi = .text:0x802BA730; // type:function size:0x94

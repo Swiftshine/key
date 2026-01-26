@@ -181,9 +181,9 @@ FlfDemoCharCtrl::FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name)
 
 FlfDemoCharCtrl::~FlfDemoCharCtrl() { }
 
-void FlfDemoCharCtrl::vf1C() {
+void FlfDemoCharCtrl::UpdateFrame() {
     if (mFlfMdlDraw.IsValid()) {
-        mFlfMdlDraw->fn_80023D38();
+        mFlfMdlDraw->UpdateFrame();
     }
 }
 
@@ -270,7 +270,7 @@ FlfDemoPlayerCtrl::~FlfDemoPlayerCtrl() {
     }
 }
 
-void FlfDemoPlayerCtrl::vf1C() {
+void FlfDemoPlayerCtrl::UpdateFrame() {
     if (mPlayer != nullptr) {
         mPlayer->mPlayerMdlMng->fn_800A0A84();
     }
@@ -733,7 +733,7 @@ void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
         SetMatrix(vec);
     }
 
-    mFlfMdlDraw->fn_80023D38();
+    mFlfMdlDraw->UpdateFrame();
     Update();
 }
 
