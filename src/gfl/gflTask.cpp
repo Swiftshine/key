@@ -36,7 +36,7 @@ uint Task::PollTask() {
     Task* childTask;
     
     // if the task is about to execute and it has the means to do so, it will
-    if (!(mFlags & ~m_14) && mFunctorBase != nullptr) {
+    if (!(mFlags & ~mSuspendFlags) && mFunctorBase != nullptr) {
         TaskInfo::SetCurrentTask(this);
         mFunctorBase->operator()();
         TaskInfo::ClearCurrentTask();

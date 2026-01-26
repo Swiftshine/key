@@ -23,7 +23,7 @@ namespace gfl {
         inline Task()
             : mFunctor()
             , mFlags(0)
-            , m_14(0)
+            , mSuspendFlags(0)
         { }
 
 
@@ -32,7 +32,7 @@ namespace gfl {
         inline Task(OwnerT owner, FunctionT function, const char* pTaskName)
             : mFunctor(CreateTaskFunctor<void, OwnerT, FunctionT>(owner, function))
             , mFlags(0)
-            , m_14(0)
+            , mSuspendFlags(0)
         {
             Init(pTaskName);
         }
@@ -67,11 +67,11 @@ namespace gfl {
         }
 
         inline void SetUnk14(uint value) {
-            m_14 = value;
+            mSuspendFlags = value;
         }
         
         inline void OrUnk14(int value) {
-            m_14 |= value;
+            mSuspendFlags |= value;
         }
         
         template <typename ReturnT, typename OwnerT, typename FunctionT>
@@ -97,8 +97,8 @@ namespace gfl {
         /* 0x04 */ TaskInfo* mTaskInfo;
         /* 0x08 */ Functor0<void> mFunctor;
         /* 0x0C */ FunctorBase0<void>* mFunctorBase;
-        /* 0x10 */ int mFlags;
-        /* 0x14 */ int m_14;
+        /* 0x10 */ uint mFlags;
+        /* 0x14 */ uint mSuspendFlags;
     };
 
     ASSERT_SIZE(Task, 0x18);

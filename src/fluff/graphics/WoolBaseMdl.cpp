@@ -309,7 +309,7 @@ void WoolBaseMdl::fn_8001B4DC() {
 }
 
 void WoolBaseMdl::fn_8001BCD0(nw4r::math::MTX34* pMtx) {
-    if (mWoolBaseTask->mTask.mFlags & ~mWoolBaseTask->mTask.m_14) {
+    if (mWoolBaseTask->mTask.mFlags & ~mWoolBaseTask->mTask.mSuspendFlags) {
         return;
     }
 

@@ -40,7 +40,7 @@ gfl::Task* DemoObject::InitTask(gfl::Task* pParentTask, u8 flags, const char* pT
     if (task != nullptr) {
         task->SetFlags(flags);
         pParentTask->MakeChild(task);
-        task->m_14 |= arg4;
+        task->mSuspendFlags |= arg4;
     }
 
     return task;

@@ -39,7 +39,7 @@ FlfSaveLoadSeq::FlfSaveLoadSeq()
     sInstance = this;
     Clear();
     mTask.SetFlags(0x50);
-    mTask.m_14 |= 0xFFFFFFFF;
+    mTask.mSuspendFlags |= 0xFFFFFFFF;
     gfl::GameRootTask::Instance()->MakeChild(&mTask);
 }
 
