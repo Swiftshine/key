@@ -66,7 +66,7 @@ public:
         mtx[2][3] = rSrc.z;
     }
 
-    inline gfl::Vec3 GetTranslation() {
+    inline gfl::Vec3 GetTranslation() const {
         gfl::Vec3 ret;
 
         ret.x = mtx[0][3];

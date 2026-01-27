@@ -136,7 +136,7 @@ public:
     gfl::ScnMdlWrapper* GetNURBSAnimWrapperModelWrapper();
     NURBSSet* GetNURBSAnimWrapperNURBSSet();
     void LoadWoolTextures();
-    bool fn_80023B1C();
+    bool IsVisible() const;
 
     inline void SetCurrentFrameInt(int value) {
         *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;
@@ -158,7 +158,7 @@ public:
     /* 0x01C */ FullSortScene* mFullSortScene;
     /* 0x020 */ int m_20;
     /* 0x024 */ float mUpdateRate;
-    /* 0x028 */ bool m_28;
+    /* 0x028 */ bool mIsVisible;
     /* 0x02C */ float m_2C;
     /* 0x030 */ nw4r::math::VEC3 m_30;
     /* 0x03C */ bool mShouldUpdate;

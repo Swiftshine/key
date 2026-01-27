@@ -112,23 +112,34 @@ bool FlfFriend::OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther) {
     return true;
 }
 
-DECL_WEAK DONT_INLINE void CutFunction(FlfGameObj*) { }
+DECL_WEAK DONT_INLINE PlayerBase* CutFunction(PlayerBase* p) { return p; }
 
-// https://decomp.me/scratch/ghZLB
 void FlfFriend::vfF0(FlfGameObj* pObj) {
     PlayerBase* player = static_cast<PlayerBase*>(pObj);
     if (pObj->mCategory == ObjectCategory::Player) {
-        
-        CutFunction(player);
-
-        if (player->GetPlayerID() == PlayerBase::PlayerID::Kirby) {
+        if (CutFunction(player)->GetPlayerID() == PlayerBase::PlayerID::Kirby) {
             vfD0(player, 0);
         }
 
-        mPosition.z = 0.0f;
+        mPosition.z = 10.0f;
     }
 }
 
+void FlfFriend::SetTaskFlags(bool set, bool arg2, uint flag) {
+    m_138 = arg2;
+    
+    uint f = 1 << flag;
+
+    if (set) {
+        mTask.mFlags |= f;
+    } else {
+        mTask.mFlags &= ~f;
+    }
+    
+    if (!set) {
+        fn_8033E570();
+    }
+}
 
 void FlfFriend::ProcessCollision() {
     if (mState.mCurrentState != 29) {
@@ -145,4 +156,108 @@ void FlfFriend::SetCallbackTiming() {
     mdl->DisableScnMdlCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_A);
     mdl->DisableScnMdlCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_B);
     mdl->EnableScnMdlCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
+}
+
+bool FlfFriend::fn_8033BD68(const gfl::Vec3& rV1, const gfl::Vec3& rV2, const gfl::Vec3& rV3) const {
+    // not decompiled
+    return false;
+}
+
+#pragma push
+#pragma global_optimizer off
+bool FlfFriend::fn_8033BE24(const gfl::Vec3& rV1, const gfl::Vec3& rV2) const {
+    float diff = rV2.x - rV1.x;
+    if (0.0f < diff) {
+        return false;
+    }
+
+    return true;
+}
+#pragma pop
+
+void FlfFriend::vf110(int arg1, bool arg2) {
+    m_A8 = arg1;
+    m_AC = arg2;
+}
+
+void FlfFriend::SetScene(FullSortScene* pScene) {
+    mScene = pScene;
+    mFlfMdlDraw->SetScene(pScene);
+}
+
+bool FlfFriend::fn_8033BE64() {
+    // not decompiled
+    return false;
+}
+
+int FlfFriend::fn_8033BEFC(std::tree<placeholder_t>& rTree, int*) {
+    // not decompiled
+    return 0;
+}
+
+void FlfFriend::fn_8033BF8C(int) {
+    // not decompiled
+}
+
+void FlfFriend::fn_8033BFC8(int targetState, int currentState) {
+    // not decompiled
+}
+
+bool FlfFriend::fn_8033C004(float arg1, const gfl::Vec2& rVec) const {
+    if (vf90(rVec)) {
+        // not decompiled
+        return false;
+    } else {
+        return false;
+    }
+}
+
+void FlfFriend::SetTransform(gfl::Mtx34& rMtx) {
+    mFlfMdlDraw->SetWoolDrawMatrix(rMtx);
+    gfl::Vec3 pos(0.0f);
+    gfl::Vec3 rot(0.0f);
+    gfl::Vec3 scale(0.0f);
+
+    GetTransform(rMtx, pos, rot, scale);
+    SetPosition(pos);
+    mRotation = rot;
+    mScale = scale;
+    mMatrix = rMtx;
+}
+
+void FlfFriend::GetTransform(gfl::Mtx34& rMtx, gfl::Vec3& rPos, gfl::Vec3& rRot, gfl::Vec3& rScale) const {
+    gfl::Mtx34 mtx = rMtx;
+    rPos = rMtx.GetTranslation();
+    
+    float* f = rMtx.m[0];
+    float* sf = &rScale.x;
+
+    for (uint i = 0; i < 3; i++) {
+        float f1 = Square(*f);
+        float f2 = Square(*(f + 1));
+        float f3 = Square(*(f + 3));
+
+        float root = sqrt(f1 + f2 + f3);
+        
+        sf[i] = root;
+
+        if (root != 0.0f) {
+            float unk = 1.0f / *sf;
+            *f = *f * unk;
+            *(f + 1) = unk;
+            *(f + 2) = unk;
+        }
+
+        f++;
+    }
+
+    // not decompiled/unfinished
+}
+
+void FlfFriend::SetVisibility(bool vis) {
+    mFlfMdlDraw->SetVisibility(vis);
+}
+
+bool FlfFriend::IsVisible() const {
+    return mFlfMdlDraw->IsVisible();
 }

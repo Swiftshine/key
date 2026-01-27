@@ -29,7 +29,7 @@ public:
     /* New Virtuals */
 
     /* 0x08C */ virtual void vf8C();
-	/* 0x090 */ virtual void vf90();
+	/* 0x090 */ virtual bool vf90(const gfl::Vec2& rVec) const;
 	/* 0x094 */ virtual void vf94();
 	/* 0x098 */ virtual void vf98();
 	/* 0x09C */ virtual void vf9C();
@@ -58,10 +58,10 @@ public:
 	/* 0x0F8 */ virtual void vfF8();
 	/* 0x0FC */ virtual void vfFC();
 	/* 0x100 */ virtual void vf100();
-	/* 0x104 */ virtual void vf104();
-	/* 0x108 */ virtual void vf108();
-	/* 0x10C */ virtual void vf10C();
-	/* 0x110 */ virtual void vf110();
+	/* 0x104 */ virtual void SetScene(FullSortScene* pScene);
+	/* 0x108 */ virtual void SetVisibility(bool vis);
+	/* 0x10C */ virtual bool IsVisible() const;
+	/* 0x110 */ virtual void vf110(int arg1, bool arg2);
 	/* 0x114 */ virtual void vf114();
 	/* 0x118 */ virtual void vf118(int, int);
 	/* 0x11C */ virtual void vf11C();
@@ -85,7 +85,7 @@ public:
 	/* 0x164 */ virtual void Update() const;
 	/* 0x168 */ virtual void vf168();
 	/* 0x16C */ virtual void vf16C();
-	/* 0x170 */ virtual void vf170();
+	/* 0x170 */ virtual void GetTransform(gfl::Mtx34& rMtx, gfl::Vec3& rPos, gfl::Vec3& rRot, gfl::Vec3& rScale) const;
 	/* 0x174 */ virtual void vf174();
 	/* 0x178 */ virtual void vf178();
 	/* 0x17C */ virtual void vf17C();
@@ -153,16 +153,24 @@ public:
 
     /* Class Methods */
 
+	void SetTaskFlags(bool set, bool arg2, uint flag);
+    void ProcessCollision();
     void SetCallbackTiming();
-
+	bool fn_8033BD68(const gfl::Vec3& rV1, const gfl::Vec3& rV2, const gfl::Vec3& rV3) const;
+	bool fn_8033BE24(const gfl::Vec3& rV1, const gfl::Vec3& rV2) const;
+	bool fn_8033BE64();
     void fn_8033BF8C(int);
     void fn_8033BFC8(int targetState, int currentState);
-    void ProcessCollision();
+	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const;
+	void SetTransform(gfl::Mtx34& rMtx);
+
+	void fn_8033E570();
 
     /* Static Methods */
-
+	
     static float Square(float val);
     static float fn_8033B710();
+	static int fn_8033BEFC(std::tree<placeholder_t>& rTree, int*);
 
     /* Class Members */
     

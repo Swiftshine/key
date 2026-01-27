@@ -22,9 +22,9 @@ namespace gfl {
         }
         /* 0x10 */ DECL_WEAK virtual nw4r::g3d::G3dObj* GetObject();
         /* 0x14 */ virtual void SetUpdate(bool shouldUpdate);
-        /* 0x18 */ virtual void vf18(bool arg1);
+        /* 0x18 */ virtual void SetVisibility(bool vis);
         /* 0x1C */ virtual bool vf1C() {
-            return m_C;
+            return mIsVisible;
         }
         /* 0x20 */ virtual void vf20(bool arg1);
         /* 0x24 */ virtual bool vf24() {
@@ -53,7 +53,7 @@ namespace gfl {
     public:
         /* 0x04 */ MEMAllocator* mAllocator;
         /* 0x08 */ Scene* mScene;
-        /* 0x0C */ bool m_C;
+        /* 0x0C */ bool mIsVisible;
         /* 0x0D */ bool m_D;
         /* 0x0E */ bool mShouldUpdate;
         /* 0x0F */ bool mIsActive;

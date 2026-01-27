@@ -58,7 +58,7 @@ namespace gfl {
         /* Overrides */
 
         /* 0x10 */ virtual nw4r::g3d::G3dObj* GetObject() override;
-        /* 0x18 */ virtual void vf18(bool arg1) override;
+        /* 0x18 */ virtual void SetVisibility(bool arg1) override;
         /* 0x20 */ virtual void vf20(bool arg1) override;
         /* 0x28 */ virtual gfl::Vec3 vf28() override;
         /* 0x38 */ virtual void Update(bool shouldUpdate) override;

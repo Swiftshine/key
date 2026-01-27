@@ -7,7 +7,7 @@ using namespace gfl;
 
 RenderObj::RenderObj()
     : mScene(nullptr)
-    , m_C(true)
+    , mIsVisible(true)
     , m_D(true)
     , mShouldUpdate(true)
     , mIsActive(false)
@@ -25,12 +25,12 @@ RenderObj::~RenderObj() {
 }
 
 void RenderObj::SetUpdate(bool arg1) {
-    vf18(arg1);
+    SetVisibility(arg1);
     Update(arg1);
 }
 
-void RenderObj::vf18(bool arg1) {
-    m_C = arg1;
+void RenderObj::SetVisibility(bool arg1) {
+    mIsVisible = arg1;
 
     if (mScene == nullptr) {
         return;

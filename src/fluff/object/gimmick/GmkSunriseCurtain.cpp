@@ -252,7 +252,7 @@ void GmkSunriseCurtain::Update() {
         }
 
         case State::Day: {
-            if (mFlfMdlDraw2->fn_80023B1C() && mFlfMdlDraw2->IsAnimationDone()) {
+            if (mFlfMdlDraw2->IsVisible() && mFlfMdlDraw2->IsAnimationDone()) {
                 mFlfMdlDraw2->SetVisibility(false);
             }
             break;

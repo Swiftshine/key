@@ -323,7 +323,7 @@ void EnemyMdlManager::SetVisibility(bool visible) {
 }
 
 bool EnemyMdlManager::fn_80112854() {
-    return mFlfMdlDraw->fn_80023B1C();
+    return mFlfMdlDraw->IsVisible();
 }
 
 void EnemyMdlManager::fn_8011285C(bool arg1) {

@@ -11,7 +11,7 @@ FlfMdlDraw::FlfMdlDraw(
     , mFullSortScene(pFullSortScene)
     , m_20(-1)
     , mUpdateRate(1.0f)
-    , m_28(true)
+    , mIsVisible(true)
     , m_2C(9.333333f)
     , m_30(0.0f, 0.0f, 0.0f)
     , mShouldUpdate(true)

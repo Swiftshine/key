@@ -34,8 +34,8 @@ ScnMdlWrapper::~ScnMdlWrapper() {
     }
 }
 
-void ScnMdlWrapper::vf18(bool arg1) {
-    RenderObj::vf18(arg1);
+void ScnMdlWrapper::SetVisibility(bool arg1) {
+    RenderObj::SetVisibility(arg1);
 
     bool set = false;
 

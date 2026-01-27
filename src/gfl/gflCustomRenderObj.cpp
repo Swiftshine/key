@@ -18,8 +18,8 @@ CustomRenderObj::CustomRenderObj(bool opa, bool xlu, const char* pName)
 
 CustomRenderObj::~CustomRenderObj() { }
 
-void CustomRenderObj::vf94(bool arg1) {
-    RenderObj::vf18(arg1);
+void CustomRenderObj::ToggleVisibility(bool vis) {
+    RenderObj::SetVisibility(vis);
 
     bool set = false;
 

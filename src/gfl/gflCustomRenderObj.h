@@ -22,7 +22,7 @@ namespace gfl {
         /* 0x90 */ virtual bool GetLocalMtx(nw4r::math::MTX34* pMtx) {
             return nw4r::g3d::ScnObj::GetMtx(MTX_LOCAL, pMtx);
         }
-        /* 0x94 */ virtual void vf94(bool arg1);
+        /* 0x94 */ virtual void ToggleVisibility(bool vis);
         /* 0x98 */ virtual void vf98(bool arg1);
         /* 0x9C */ virtual void ToggleUpdate(bool update);
         /* 0xA0 */ virtual gfl::Vec3 vfA0();
@@ -44,7 +44,7 @@ namespace gfl {
         /* gfl::RenderObj */
 
         virtual DECL_WEAK nw4r::g3d::G3dObj* GetObject() override;
-        virtual void vf18(bool arg1) override;
+        virtual void SetVisibility(bool arg1) override;
         virtual void vf20(bool arg1) override;
         virtual gfl::Vec3 vf28() override;
         virtual void Update(bool shouldUpdate) override;
