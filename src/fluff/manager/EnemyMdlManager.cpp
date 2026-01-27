@@ -280,7 +280,7 @@ void EnemyMdlManager::Reset() {
     mCurrentState = m_2C;
     m_2C = 0x244;
     
-    mFlfMdlDraw->ResetNURBSAnimation(old, mResetFrames);
+    mFlfMdlDraw->PlayNURBSAnimation(old, mResetFrames);
 }
 
 void EnemyMdlManager::Reset(int arg1, bool resetFrames) {
@@ -288,13 +288,13 @@ void EnemyMdlManager::Reset(int arg1, bool resetFrames) {
     mCurrentState = 0x243;
     m_1C = -1;
     m_18 = arg1;
-    mFlfMdlDraw->ResetNURBSAnimation(arg1, resetFrames);
+    mFlfMdlDraw->PlayNURBSAnimation(arg1, resetFrames);
 }
 
 bool EnemyMdlManager::fn_80112648() {
     bool ret = false;
 
-    if (mOwner->m_74 == 0 && mGraphicsSetup) {
+    if (mOwner->mDirection == 0 && mGraphicsSetup) {
         ret = true;
     }
 
@@ -302,7 +302,7 @@ bool EnemyMdlManager::fn_80112648() {
 }
 
 void EnemyMdlManager::fn_80112674(const nw4r::math::MTX34& rMtx) {
-    if (mOwner->m_74 == 0 && mGraphicsSetup) {
+    if (mOwner->mDirection == 0 && mGraphicsSetup) {
         nw4r::math::MTX34 mtx1 = rMtx;
         nw4r::math::MTX34 mtx2(
             -1.0f, 0.0f, 0.0f, 0.0f,

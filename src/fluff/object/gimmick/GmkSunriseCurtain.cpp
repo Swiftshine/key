@@ -111,7 +111,7 @@ void GmkSunriseCurtain::SetBGSTLayersBasedOnMission() {
 }
 
 void GmkSunriseCurtain::SwitchStates() {
-    mFlfMdlDraw1->ResetNURBSAnimation(1, true);
+    mFlfMdlDraw1->PlayNURBSAnimation(1, true);
     Game::Sound::PlaySoundEffect(0xB4, 0);
     mState = State::State_2;
 }
@@ -317,8 +317,8 @@ void GmkSunriseCurtain::DoTimeSwitch() {
         mFbAlpha->SetColor(0xFFFFFFFF);
     }
 
-    mFlfMdlDraw1->ResetNURBSAnimation(2, true);
-    mFlfMdlDraw2->ResetNURBSAnimation(3, true);
+    mFlfMdlDraw1->PlayNURBSAnimation(2, true);
+    mFlfMdlDraw2->PlayNURBSAnimation(3, true);
     mFlfMdlDraw2->SetVisibility(true);
 
     SetBGSTLayers(true);

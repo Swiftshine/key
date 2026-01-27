@@ -9,7 +9,7 @@ FlfMdlDraw::FlfMdlDraw(
 )
     : mResourcePath(pResourceName)
     , mFullSortScene(pFullSortScene)
-    , m_20(-1)
+    , mCurrentAnimationID(-1)
     , mUpdateRate(1.0f)
     , mIsVisible(true)
     , m_2C(9.333333f)

@@ -28,9 +28,9 @@ public:
 
     /* New Virtuals */
 
-    /* 0x08C */ virtual void vf8C();
-	/* 0x090 */ virtual bool vf90(const gfl::Vec2& rVec) const;
-	/* 0x094 */ virtual void vf94();
+    /* 0x08C */ virtual bool IsPlayerSavedPositionInFront() const;
+	/* 0x090 */ virtual bool IsPositionInFront(const gfl::Vec2& rPos) const;
+	/* 0x094 */ virtual bool vf94(const gfl::Vec2& rPos) const; // related to checking position against some camera bounds
 	/* 0x098 */ virtual void vf98();
 	/* 0x09C */ virtual void vf9C();
 	/* 0x0A0 */ virtual void vfA0();
@@ -61,11 +61,11 @@ public:
 	/* 0x104 */ virtual void SetScene(FullSortScene* pScene);
 	/* 0x108 */ virtual void SetVisibility(bool vis);
 	/* 0x10C */ virtual bool IsVisible() const;
-	/* 0x110 */ virtual void vf110(int arg1, bool arg2);
-	/* 0x114 */ virtual void vf114();
-	/* 0x118 */ virtual void vf118(int, int);
-	/* 0x11C */ virtual void vf11C();
-	/* 0x120 */ virtual void vf120();
+	/* 0x110 */ virtual void SetNURBSAnimationInfo(int id, bool isReset);
+	/* 0x114 */ virtual int GetCurrentNURBSAnimationID() const;
+	/* 0x118 */ virtual void PlayNURBSAnimation(int, bool);
+	/* 0x11C */ virtual void SetCurrentNURBSAnimationFrame(float frame);
+	/* 0x120 */ DECL_WEAK virtual int GetCurrentAnimationID() const;
 	/* 0x124 */ virtual void vf124();
 	/* 0x128 */ virtual void vf128();
 	/* 0x12C */ virtual void vf12C();
@@ -125,11 +125,11 @@ public:
 	/* 0x204 */ virtual void vf204();
 	/* 0x208 */ virtual void vf208();
 	/* 0x20C */ virtual void vf20C();
-	/* 0x210 */ virtual void vf210();
+	/* 0x210 */ virtual void vf210(int);
 	/* 0x214 */ virtual void vf214();
 	/* 0x218 */ virtual void vf218();
 	/* 0x21C */ virtual void vf21C();
-	/* 0x220 */ virtual void vf220();
+	/* 0x220 */ DECL_WEAK virtual void vf220(/* unk args (it's not void) */);
 	/* 0x224 */ virtual void vf224();
 	/* 0x228 */ virtual void vf228();
 	/* 0x22C */ virtual void vf22C();
@@ -138,7 +138,7 @@ public:
 	/* 0x238 */ virtual void vf238();
 	/* 0x23C */ virtual void vf23C();
 	/* 0x240 */ virtual void vf240();
-	/* 0x244 */ virtual void vf244();
+	/* 0x244 */ virtual bool IsAnimationDone() const;
 	/* 0x248 */ virtual void vf248();
 	/* 0x24C */ virtual void vf24C();
 
@@ -163,6 +163,9 @@ public:
     void fn_8033BFC8(int targetState, int currentState);
 	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const;
 	void SetTransform(gfl::Mtx34& rMtx);
+	void fn_8033C488();
+	void fn_8033C580(uint);
+	int fn_8033C5B4();
 
 	void fn_8033E570();
 
@@ -177,9 +180,9 @@ public:
     /* 0x088 */ gfl::Task mTask;
     /* 0x0A0 */ FullSortScene* mScene;
     /* 0x0A4 */ FlfMdlDraw* mFlfMdlDraw;
-    /* 0x0A8 */ int m_A8;
-    /* 0x0AC */ bool m_AC;
-    /* 0x0B0 */ int m_B0;
+    /* 0x0A8 */ int mAnimationID;
+    /* 0x0AC */ bool mIsAnimationReset;
+    /* 0x0B0 */ int mCurrentAnimationID;
     /* 0x0B4 */ int m_B4;
     /* 0x0B8 */ int m_B8;
     /* 0x0BC */ gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry;

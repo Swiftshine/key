@@ -82,7 +82,7 @@ void FriendEffect::Reset(int id) {
     if (id != -1) {
         if (mEffects[id] != nullptr) {
             mEffects[id]->SetVisibility(true);
-            mEffects[id]->ResetNURBSAnimation(1, true);
+            mEffects[id]->PlayNURBSAnimation(1, true);
             mEffects[id]->SetCurrentNURBSFrame(0.0f);
         }
     }

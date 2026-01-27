@@ -124,7 +124,7 @@ void GmkCandleStick::UpdateGraphics(bool createEffect) {
     mMoleLight->SetUpdate(createEffect);
 
     if (createEffect) {
-        mFlfMdlDraw->ResetNURBSAnimation(0, true);
+        mFlfMdlDraw->PlayNURBSAnimation(0, true);
         FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mBuildInfoPtr->mSceneID);
         EffectObj* effect = scene->CreateEffectObject("ef_gk_07a", 0, 0);
         UpdateMatrix();
@@ -135,7 +135,7 @@ void GmkCandleStick::UpdateGraphics(bool createEffect) {
         SetMTXTranslation(effectMtx, effectVec);
         effect->SetMatrix(effectMtx);
     } else {
-        mFlfMdlDraw->ResetNURBSAnimation(1, true);
+        mFlfMdlDraw->PlayNURBSAnimation(1, true);
     }
 
     m_138 = createEffect;

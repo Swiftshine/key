@@ -122,14 +122,14 @@ public:
     void LoadNURBSFromFileList();
     void LoadNURBSFromFileList(int* pIndices /* ? */, int count);
     void SetVisibility(bool visible);
-    void ResetNURBSAnimation(int, bool);
+    void PlayNURBSAnimation(int id, bool resetFrame);
     void SetWoolDrawMatrix(const nw4r::math::MTX34&);
     bool fn_800239CC();
     void UpdateFrame();
     void SetUpdateRate(float rate);
     int SetScene(FullSortScene* pFullSortScene);
     void fn_80023B24(float);
-    bool IsAnimationDone();
+    bool IsAnimationDone() const;
     float GetCurrentFrame();
     float GetEndFrame();
     void SetCurrentNURBSFrame(float);
@@ -156,7 +156,7 @@ public:
     /* 0x004 */ std::string mResourcePath;
     /* 0x010 */ std::string mRawFilepath;
     /* 0x01C */ FullSortScene* mFullSortScene;
-    /* 0x020 */ int m_20;
+    /* 0x020 */ int mCurrentAnimationID;
     /* 0x024 */ float mUpdateRate;
     /* 0x028 */ bool mIsVisible;
     /* 0x02C */ float m_2C;

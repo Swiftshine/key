@@ -4,6 +4,7 @@
 #include "types.h"
 #include "object/FlfHandleObj.h"
 #include "util/ScreenPosition.h"
+#include "util/Orientation.h"
 #include "gfl/gflVec2.h"
 #include "gfl/gflVec3.h"
 #include <nw4r/math.h>
@@ -107,7 +108,7 @@ public:
     /* 0x6E */ bool mShouldUpdateWater;
     /* 0x6F */ bool m_6F;
     /* 0x70 */ float mCullThreshold;
-    /* 0x74 */ u32 m_74;
+    /* 0x74 */ int mDirection;
     /* 0x78 */ u32 m_78;
     /* 0x7C */ bool m_7C;
     /* 0x7D */ bool m_7D;

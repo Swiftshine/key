@@ -29,7 +29,7 @@ FlfGameObj::FlfGameObj(uint category)
     mShouldUpdateWater = true;
     m_6F = false;
     mCullThreshold = 18.666666f;
-    m_74 = 0;
+    mDirection = 0;
     m_78 = 2;
     m_7C = false;
     m_7D = false;

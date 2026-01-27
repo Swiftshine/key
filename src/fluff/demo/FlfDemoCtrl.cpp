@@ -188,7 +188,7 @@ void FlfDemoCharCtrl::UpdateFrame() {
 }
 
 uint FlfDemoCharCtrl::vf20() {
-    return mFlfMdlDraw->m_20;
+    return mFlfMdlDraw->mCurrentAnimationID;
 }
 
 void FlfDemoCharCtrl::SetUpdateRate(float rate) {
@@ -200,7 +200,7 @@ void FlfDemoCharCtrl::SetCurrentFrame(int frame) {
 }
 
 void FlfDemoCharCtrl::vf24(int arg1) {
-    mFlfMdlDraw->ResetNURBSAnimation((int)arg1, mFlfMdlDraw->GetCurrentFrameInt() != 0);
+    mFlfMdlDraw->PlayNURBSAnimation((int)arg1, mFlfMdlDraw->GetCurrentFrameInt() != 0);
 }
 
 void FlfDemoCharCtrl::SetFullSortScene(uint sceneID) {
@@ -292,7 +292,7 @@ void FlfDemoPlayerCtrl::vf18(float arg0) {
 
 uint FlfDemoPlayerCtrl::vf20() {
     if (mPlayer != nullptr) {
-        return mPlayer->mPlayerMdlMng->GetFlfMdlDraw()->m_20;
+        return mPlayer->mPlayerMdlMng->GetFlfMdlDraw()->mCurrentAnimationID;
     }
 
     return 0;
@@ -703,7 +703,7 @@ void FlfDemoCtrl::fn_802BB920() {
 
 // fake match
 void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
-    mFlfMdlDraw->ResetNURBSAnimation(arg1, false);
+    mFlfMdlDraw->PlayNURBSAnimation(arg1, false);
     mFlfMdlDraw->SetUpdateRate(1.0f);
     
     gfl::ScnMdlWrapper* modelWrapper = mFlfMdlDraw->GetNURBSAnimWrapperModelWrapper();
@@ -738,7 +738,7 @@ void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
 }
 
 uint FlfDemoCtrl::fn_802BBB28() {
-    return mFlfMdlDraw->m_20;
+    return mFlfMdlDraw->mCurrentAnimationID;
 }
 
 float FlfDemoCtrl::GetCurrentFrame() {

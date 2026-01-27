@@ -10,4 +10,9 @@ ENUM_CLASS(Orientation,
     Right   = 3
 );
 
+ENUM_CLASS(Direction,
+    Forward     = 0,
+    Backward    = 1,
+);
+
 #endif

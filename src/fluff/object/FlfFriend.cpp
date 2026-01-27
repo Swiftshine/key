@@ -21,9 +21,9 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID
     : FlfGameObj(ObjectCategory::Friend)
     , mTask(this, Update, pTaskName)
     , mScene(pScene)
-    , m_A8(0)
-    , m_AC(true)
-    , m_B0(0)
+    , mAnimationID(0)
+    , mIsAnimationReset(true)
+    , mCurrentAnimationID(0)
     , m_B4(0)
     , m_B8(0)
     , mCollisionEntry(nullptr)
@@ -144,7 +144,7 @@ void FlfFriend::SetTaskFlags(bool set, bool arg2, uint flag) {
 void FlfFriend::ProcessCollision() {
     if (mState.mCurrentState != 29) {
         fn_8033BFC8(29, mState.mCurrentState);
-        vf118(400, 1);
+        PlayNURBSAnimation(400, true);
         mEffect->SetVisibility(false);
         mState.SetCurrentStateAndClearOthers(29);
     }
@@ -175,9 +175,9 @@ bool FlfFriend::fn_8033BE24(const gfl::Vec3& rV1, const gfl::Vec3& rV2) const {
 }
 #pragma pop
 
-void FlfFriend::vf110(int arg1, bool arg2) {
-    m_A8 = arg1;
-    m_AC = arg2;
+void FlfFriend::SetNURBSAnimationInfo(int id, bool isReset) {
+    mAnimationID = id;
+    mIsAnimationReset = isReset;
 }
 
 void FlfFriend::SetScene(FullSortScene* pScene) {
@@ -204,7 +204,7 @@ void FlfFriend::fn_8033BFC8(int targetState, int currentState) {
 }
 
 bool FlfFriend::fn_8033C004(float arg1, const gfl::Vec2& rVec) const {
-    if (vf90(rVec)) {
+    if (IsPositionInFront(rVec)) {
         // not decompiled
         return false;
     } else {
@@ -260,4 +260,97 @@ void FlfFriend::SetVisibility(bool vis) {
 
 bool FlfFriend::IsVisible() const {
     return mFlfMdlDraw->IsVisible();
+}
+
+void FlfFriend::fn_8033C488() {
+    vf210(0);
+    mState.SetCurrentStateAndClearOthers(1);
+}
+
+void FlfFriend::vf210(int) { }
+
+int FlfFriend::GetCurrentNURBSAnimationID() const {
+    return mFlfMdlDraw->mCurrentAnimationID;
+}
+
+int FlfFriend::GetCurrentAnimationID() const {
+    return mCurrentAnimationID;
+}
+
+void FlfFriend::PlayNURBSAnimation(int id, bool resetFrame) {
+    mCurrentAnimationID = GetCurrentNURBSAnimationID();
+    mFlfMdlDraw->PlayNURBSAnimation(id, resetFrame);
+    SetNURBSAnimationInfo(id, resetFrame);
+}
+
+void FlfFriend::SetCurrentNURBSAnimationFrame(float frame) {
+    mFlfMdlDraw->SetCurrentNURBSFrame(frame);
+}
+
+void FlfFriend::fn_8033C580(uint arg1) {
+    if (arg1 == 700) {
+        mEffect->Reset(3);
+    } else if (arg1 == 701) {
+        mEffect->Reset(2);
+    } else {
+        mEffect->Reset(-1);
+    }
+}
+
+int FlfFriend::fn_8033C5B4() {
+    int choice = rand() % 2;
+    
+    switch (choice) {
+        case 0: {
+            PlayNURBSAnimation(700, 1);
+            return 700;
+        }
+
+        case 1: {
+            PlayNURBSAnimation(701, 1);
+            return 701;
+        }
+
+        default: {
+            PlayNURBSAnimation(701, 1);
+            return 701;
+        }
+    }
+}
+
+void FlfFriend::vf220() {
+    // not decompiled
+}
+
+bool FlfFriend::IsAnimationDone() const {
+    return mFlfMdlDraw->IsAnimationDone();
+}
+
+// https://decomp.me/scratch/GLhnw
+bool FlfFriend::IsPlayerSavedPositionInFront() const {
+    gfl::Vec3 pos(0.0f);
+    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+    
+    if (player != nullptr) {
+        player->GetSavedPosition(pos);
+    }
+
+    if ((pos.x - mPosition.x > 0.0f && mDirection == Direction::Forward) || (pos.x - mPosition.x < 0.0f && mDirection == Direction::Backward)) {
+        return true;
+    }
+
+    return false;
+}
+
+// https://decomp.me/scratch/t6tab
+bool FlfFriend::IsPositionInFront(const gfl::Vec2& rPos) const {
+    if ((rPos.x - mPosition.x > 0.0f && mDirection == Direction::Forward) || (rPos.x - mPosition.x < 0.0f && mDirection == Direction::Backward)) {
+        return true;
+    }
+    return false;
+}
+
+bool FlfFriend::vf94(const gfl::Vec2& rPos) const {
+    // not decompiled
+    return false;
 }

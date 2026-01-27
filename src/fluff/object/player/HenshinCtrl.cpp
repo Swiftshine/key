@@ -38,7 +38,7 @@ HenshinCtrl::~HenshinCtrl() {
 
 // https://decomp.me/scratch/EH50Y
 void HenshinCtrl::vfDC(FlfMdlDraw* pFlfMdlDraw) {
-    pFlfMdlDraw->ResetNURBSAnimation(1, true);
+    pFlfMdlDraw->PlayNURBSAnimation(1, true);
 
     mFlfMdlCollision = new (gfl::HeapID::Work) FlfMdlCollision(pFlfMdlDraw, mPlayerHandle.TryGetHandleObj());
 

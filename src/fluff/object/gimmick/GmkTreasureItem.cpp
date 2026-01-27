@@ -161,7 +161,7 @@ void GmkTreasureItem::ProcessClothPull() {
             }
 
             if (mFlfMdlDraw != nullptr && patch == nullptr) {
-                mFlfMdlDraw->ResetNURBSAnimation(200, true);
+                mFlfMdlDraw->PlayNURBSAnimation(200, true);
             }
 
             mState.SetCurrentStateAndClearOthers(1);
