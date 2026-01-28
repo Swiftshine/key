@@ -5,6 +5,7 @@
 #include "object/FlfHandleObj.h"
 #include "util/ScreenPosition.h"
 #include "util/Orientation.h"
+#include "gfl/gflMtx34.h"
 #include "gfl/gflVec2.h"
 #include "gfl/gflVec3.h"
 #include <nw4r/math.h>
@@ -99,7 +100,7 @@ public:
     /* 0x0C */ gfl::Vec3 mPosition;
     /* 0x18 */ gfl::Vec3 mRotation;
     /* 0x24 */ gfl::Vec3 mScale;
-    /* 0x30 */ nw4r::math::MTX34 mMatrix;
+    /* 0x30 */ gfl::Mtx34 mMatrix;
     /* 0x60 */ u32 mFlags;
     /* 0x64 */ u32 m_64;
     /* 0x68 */ int mCategory;

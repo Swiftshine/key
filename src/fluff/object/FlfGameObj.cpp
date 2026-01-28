@@ -15,25 +15,23 @@ namespace nw4r {
 }
 
 FlfGameObj::FlfGameObj(uint category)
-    : mPosition(0.0f, 0.0f, 0.0f)
-    , mRotation(0.0f, 0.0f, 0.0f)
-    , mScale(1.0f, 1.0f, 1.0f) 
+    : mPosition(0.0f)
+    , mRotation(0.0f)
+    , mScale(1.0f)
+    , mMatrix()
+    , mFlags(0)
+    , m_64(0)
+    , mCategory(category)
+    , m_6C(false)
+    , mIsCulled(false)
+    , mShouldUpdateWater(true)
+    , m_6F(false)
+    , mCullThreshold(18.666666f)
+    , mDirection(Direction::Forward)
+    , m_78(2)
+    , m_7C(false)
+    , m_7D(false)
 {
-    ZERO_MTX_34(mMatrix);
-
-    mFlags = 0;
-    m_64 = 0;
-    mCategory = category;
-    m_6C = false;
-    mIsCulled = false;
-    mShouldUpdateWater = true;
-    m_6F = false;
-    mCullThreshold = 18.666666f;
-    mDirection = 0;
-    m_78 = 2;
-    m_7C = false;
-    m_7D = false;
-
     PSMTXIdentity(mMatrix);
 }
 
