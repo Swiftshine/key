@@ -326,7 +326,6 @@ bool FlfFriend::IsAnimationDone() const {
     return mFlfMdlDraw->IsAnimationDone();
 }
 
-// https://decomp.me/scratch/GLhnw
 bool FlfFriend::IsPlayerSavedPositionInFront() const {
     gfl::Vec3 pos(0.0f);
     PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
@@ -335,7 +334,9 @@ bool FlfFriend::IsPlayerSavedPositionInFront() const {
         player->GetSavedPosition(pos);
     }
 
-    if ((pos.x - mPosition.x > 0.0f && mDirection == Direction::Forward) || (pos.x - mPosition.x < 0.0f && mDirection == Direction::Backward)) {
+    gfl::Vec3 temp;
+    temp = mPosition;
+    if ((pos.x - temp.x > 0.0f && mDirection == Direction::Forward) || (pos.x - temp.x < 0.0f && mDirection == Direction::Backward)) {
         return true;
     }
 
@@ -344,7 +345,9 @@ bool FlfFriend::IsPlayerSavedPositionInFront() const {
 
 // https://decomp.me/scratch/t6tab
 bool FlfFriend::IsPositionInFront(const gfl::Vec2& rPos) const {
-    if ((rPos.x - mPosition.x > 0.0f && mDirection == Direction::Forward) || (rPos.x - mPosition.x < 0.0f && mDirection == Direction::Backward)) {
+    gfl::Vec3 temp(0.0f);
+    temp = mPosition;
+    if ((rPos.x - temp.x > 0.0f && mDirection == Direction::Forward) || (rPos.x - temp.x < 0.0f && mDirection == Direction::Backward)) {
         return true;
     }
     return false;
