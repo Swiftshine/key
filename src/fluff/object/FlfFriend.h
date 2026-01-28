@@ -10,6 +10,7 @@
 #include "graphics/FullSortScene.h"
 #include "graphics/MoguraLight.h"
 #include "graphics/effect/FriendEffect.h"
+#include "mapdata/Mapdata.h"
 #include "misc/ScopedPointers.h"
 #include "util/StateObject.h"
 #include <tree>
@@ -37,26 +38,26 @@ public:
 	/* 0x0A4 */ virtual void vfA4();
 	/* 0x0A8 */ virtual void vfA8();
 	/* 0x0AC */ virtual void vfAC();
-	/* 0x0B0 */ virtual void vfB0();
-	/* 0x0B4 */ virtual void vfB4();
-	/* 0x0B8 */ virtual void vfB8();
-	/* 0x0BC */ virtual void vfBC();
-	/* 0x0C0 */ virtual void vfC0();
+	/* 0x0B0 */ virtual void ResetScreen(const gfl::Vec2& rPos);
+	/* 0x0B4 */ virtual void ResetCollision();
+	/* 0x0B8 */ virtual void ResetRoomLocator();
+	/* 0x0BC */ virtual void vfBC(void* pArg1, bool arg2);
+	/* 0x0C0 */ virtual void vfC0(void* pArg1);
 	/* 0x0C4 */ virtual void vfC4();
 	/* 0x0C8 */ virtual void vfC8();
 	/* 0x0CC */ virtual void vfCC();
 	/* 0x0D0 */ virtual void vfD0(PlayerBase* pPlayer, int) = 0;
 	/* 0x0D4 */ virtual void vfD4(float, const gfl::Vec3&);
 	/* 0x0D8 */ virtual void vfD8();
-	/* 0x0DC */ virtual void vfDC();
-	/* 0x0E0 */ virtual void vfE0();
+	/* 0x0DC */ DECL_WEAK virtual int vfDC();
+	/* 0x0E0 */ virtual bool vfE0() const;
 	/* 0x0E4 */ virtual void vfE4();
-	/* 0x0E8 */ virtual void vfE8();
-	/* 0x0EC */ virtual void vfEC();
+	/* 0x0E8 */ DECL_WEAK virtual int vfE8();
+	/* 0x0EC */ DECL_WEAK virtual int vfEC();
 	/* 0x0F0 */ virtual void vfF0(FlfGameObj* pObj);
-	/* 0x0F4 */ virtual void vfF4();
-	/* 0x0F8 */ virtual void vfF8();
-	/* 0x0FC */ virtual void vfFC();
+	/* 0x0F4 */ virtual int** vfF4() const;
+	/* 0x0F8 */ virtual void vfF8(void* pArg1);
+	/* 0x0FC */ virtual gfl::Vec3 vfFC();
 	/* 0x100 */ virtual void vf100();
 	/* 0x104 */ virtual void SetScene(FullSortScene* pScene);
 	/* 0x108 */ virtual void SetVisibility(bool vis);
@@ -67,11 +68,11 @@ public:
 	/* 0x11C */ virtual void SetCurrentNURBSAnimationFrame(float frame);
 	/* 0x120 */ DECL_WEAK virtual int GetCurrentAnimationID() const;
 	/* 0x124 */ virtual void vf124();
-	/* 0x128 */ virtual void vf128();
-	/* 0x12C */ virtual void vf12C();
-	/* 0x130 */ virtual void vf130();
+	/* 0x128 */ virtual bool vf128() const;
+	/* 0x12C */ virtual void vf12C(int);
+	/* 0x130 */ virtual bool vf130() const;
 	/* 0x134 */ virtual void vf134();
-	/* 0x138 */ virtual void vf138();
+	/* 0x138 */ virtual bool vf138() const;
 	/* 0x13C */ virtual void vf13C();
 	/* 0x140 */ virtual void vf140();
 	/* 0x144 */ virtual void vf144();
@@ -127,7 +128,7 @@ public:
 	/* 0x20C */ virtual void vf20C();
 	/* 0x210 */ virtual void vf210(int);
 	/* 0x214 */ virtual void vf214();
-	/* 0x218 */ virtual void vf218();
+	/* 0x218 */ DECL_WEAK virtual int vf218();
 	/* 0x21C */ virtual void vf21C();
 	/* 0x220 */ DECL_WEAK virtual void vf220(/* unk args (it's not void) */);
 	/* 0x224 */ virtual void vf224(float arg1);
@@ -209,7 +210,7 @@ public:
     /* 0x134 */ int m_134;
     /* 0x138 */ bool mUpdateFrame;
     /* 0x139 */ bool m_139;
-    /* 0x13C */ int m_13C;
+    /* 0x13C */ Mapdata::MapdataGimmick* mMapdataGimmick;
     /* 0x140 */ int m_140;
     /* 0x144 */ int m_144;
     /* 0x148 */ bool m_148;
@@ -219,8 +220,8 @@ public:
     /* 0x154 */ bool m_154;
     /* 0x155 */ bool m_155;
     /* 0x158 */ MoguraLight* mMoleLight;
-    /* 0x15C */ int m_15C;
-    /* 0x160 */ int m_160;
+    /* 0x15C */ int*** m_15C;
+    /* 0x160 */ int* m_160;
     /* 0x164 */ gfl::Vec3 m_164;
     /* 0x170 */ FriendEffect* mEffect;
     /* 0x174 */ int mFriendID;

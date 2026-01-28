@@ -6,6 +6,7 @@
 
 #include "manager/CamMng.h"
 #include "manager/GameManager.h"
+#include "manager/Stage.h"
 #include "util/FullSortSceneUtil.h"
 
 const CollisionTemplate ColTemplate;
@@ -46,7 +47,7 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID
     , m_130(0.0f)
     , mUpdateFrame(false)
     , m_139(true)
-    , m_13C(0)
+    , mMapdataGimmick(nullptr)
     , m_140(0)
     , m_144(0)
     , m_148(false)
@@ -56,8 +57,8 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID
     , m_154(false)
     , m_155(false)
     , mMoleLight(nullptr)
-    , m_15C(0)
-    , m_160(0)
+    , m_15C(nullptr)
+    , m_160(nullptr)
     , m_164(0.0f)
     , mEffect(new (gfl::HeapID::Work) FriendEffect)
     , mFriendID(friendID)
@@ -520,4 +521,171 @@ void FlfFriend::vf20C() { }
 
 void FlfFriend::vf124() {
     mState.SetCurrentStateAndClearOthers(7);
+}
+
+gfl::Vec3 FlfFriend::vfFC() {
+    gfl::Vec3 v;
+    v = m_164;
+    return v;
+}
+
+void FlfFriend::vfF8(void* pArg1) {
+    if (pArg1 != nullptr) {
+        m_15C = ((int****)pArg1)[1];
+        m_160 = ((int**)pArg1)[2];
+    } else {
+        m_15C = 0;
+        m_160 = 0;
+    }
+}
+
+// https://decomp.me/scratch/7RGuQ
+int** FlfFriend::vfF4() const {
+    int** ret;
+    if (m_15C != nullptr) {
+        ret = *m_15C;
+        if (ret != nullptr) {
+            if (m_160 != ret[2]) {
+                
+            } else {
+                ret = nullptr;
+            }
+        }    
+    }
+
+    return ret;
+}
+
+int FlfFriend::vfEC() {
+    return 0;
+}
+
+int FlfFriend::vfE8() {
+    return 0;
+}
+
+int FlfFriend::vfDC() {
+    return 1;
+}
+
+void FlfFriend::vf204() { }
+
+void FlfFriend::vf208() { }
+
+int FlfFriend::vf218() {
+    return 1;
+}
+
+void FlfFriend::vfAC() {
+    vfF8(nullptr);
+    mState.SetCurrentStateAndClearOthers(0);
+}
+
+// sdata2
+float lbl_808E9D90 = 10.0f;
+
+// https://decomp.me/scratch/oqmLB
+void FlfFriend::ResetScreen(const gfl::Vec2& rPos) {
+    if (mEffect != nullptr) {
+        mEffect->Reset(-1);
+    }
+
+    vf210(0);
+    mScreenPosition.mPosition = rPos;
+    mScreenPosition.mCullThreshold = lbl_808E9D90;
+    mState.SetCurrentStateAndClearOthers(5);
+}
+
+void FlfFriend::ResetCollision() {
+    if (mEffect != nullptr) {
+        mEffect->Reset(-1);
+    }
+
+    vf210(1);
+
+    m_110 = 0.0f;
+
+    mCollisionEntry->ResetMatrix(true);
+    mState.SetCurrentStateAndClearOthers(23);
+}
+
+
+const char RoomLocatorName[] = "FriendRoomLocator";
+const char Blank[] = "";
+void FlfFriend::ResetRoomLocator() {
+    vf210(1);
+
+    Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
+
+    if (mapdata != nullptr) {
+        uint numGmk = mapdata->mNumGimmicks;
+        mapdata = Stage::Instance()->GetCurrentLevelSection();
+
+        Mapdata::MapdataGimmick* gmk = mapdata->mGimmicks;
+        for (uint i = 0; i < numGmk; i++) {
+            if (gmk[i].mName.compare("FriendRoomLocator") == 0) {
+                gmk[i].mParams.mStringParams[0] = Blank;
+            }
+        }
+    }
+
+    if (mMapdataGimmick != nullptr) {
+        mMapdataGimmick->mParams.mStringParams[0] = Blank;
+        mMapdataGimmick = nullptr;
+    }
+
+    vf224(0.5f);
+    vf234(0.5f);
+    vf22C(0.05f);
+    mState.SetCurrentStateAndClearOthers(26);
+}
+
+void FlfFriend::vfBC(void* pArg1, bool arg2) {
+    // not decompiled
+}
+
+void FlfFriend::vfC0(void* pArg1) {
+    // not decompiled
+}
+
+void FlfFriend::vfC4() {
+    ResetRoomLocator();
+}
+
+void FlfFriend::vfC8() {
+    vfAC();
+    PlayNURBSAnimation(200, true);
+    mEffect->Reset(0);
+    mState.SetCurrentStateAndClearOthers(2);
+}
+
+void FlfFriend::vfCC() {
+    mEffect->Reset(1);
+    PlayNURBSAnimation(201, 1);
+    mState.SetCurrentStateAndClearOthers(3);
+}
+
+bool FlfFriend::vfE0() const {
+    return mState.mCurrentState == 4;
+}
+
+bool FlfFriend::vf128() const {
+    return mState.mCurrentState == 8;
+}
+
+void FlfFriend::vf12C(int) {
+    // not decompiled
+}
+
+bool FlfFriend::vf130() const {
+    return mState.mCurrentState == 10;
+}
+
+void FlfFriend::vf134() {
+    PlayNURBSAnimation(300, 1);
+    mState.SetCurrentStateAndClearOthers(11);
+}
+
+bool FlfFriend::vf138() const {
+    return mState.mCurrentState == 12;
 }
