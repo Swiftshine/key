@@ -4,7 +4,9 @@
 #include "object/FlfFriend.h"
 #include "object/PlayerBase.h"
 
+#include "manager/CamMng.h"
 #include "manager/GameManager.h"
+#include "util/FullSortSceneUtil.h"
 
 const CollisionTemplate ColTemplate;
 
@@ -21,7 +23,7 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID
     : FlfGameObj(ObjectCategory::Friend)
     , mTask(this, Update, pTaskName)
     , mScene(pScene)
-    , mAnimationID(0)
+    , mNextAnimationID(0)
     , mIsAnimationReset(true)
     , mCurrentAnimationID(0)
     , m_B4(0)
@@ -32,21 +34,17 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID
     , m_D8()
     , m_E4(0.0f)
     , m_F0(0.0f)
-    , m_F4(0.0f)
-    , m_F8(0.0f)
-    , m_FC(0.0f)
+    , m_F4(0.0f, 0.0f, 0.0f)
     , m_100(0.0f)
     , m_104(0.0f)
     , m_108(0.0f)
     , m_10C(0.0f)
     , m_110(0.0f)
-    , m_118(0.0f)
-    , m_11C(0.0f)
-    , m_120(0.0f)
+    , mScreenPosition()
     , m_128(0.0f)
     , m_12C(0.0f)
     , m_130(0.0f)
-    , m_138(false)
+    , mUpdateFrame(false)
     , m_139(true)
     , m_13C(0)
     , m_140(0)
@@ -126,7 +124,7 @@ void FlfFriend::vfF0(FlfGameObj* pObj) {
 }
 
 void FlfFriend::SetTaskFlags(bool set, bool arg2, uint flag) {
-    m_138 = arg2;
+    mUpdateFrame = arg2;
     
     uint f = 1 << flag;
 
@@ -176,7 +174,7 @@ bool FlfFriend::fn_8033BE24(const gfl::Vec3& rV1, const gfl::Vec3& rV2) const {
 #pragma pop
 
 void FlfFriend::SetNURBSAnimationInfo(int id, bool isReset) {
-    mAnimationID = id;
+    mNextAnimationID = id;
     mIsAnimationReset = isReset;
 }
 
@@ -269,7 +267,7 @@ void FlfFriend::fn_8033C488() {
 
 void FlfFriend::vf210(int) { }
 
-int FlfFriend::GetCurrentNURBSAnimationID() const {
+uint FlfFriend::GetCurrentNURBSAnimationID() const {
     return mFlfMdlDraw->mCurrentAnimationID;
 }
 
@@ -356,4 +354,170 @@ bool FlfFriend::IsPositionInFront(const gfl::Vec2& rPos) const {
 bool FlfFriend::vf94(const gfl::Vec2& rPos) const {
     // not decompiled
     return false;
+}
+
+bool FlfFriend::vf98(float, float, const gfl::Vec2&) const {
+    // not decompiled
+    return false;
+}
+
+// https://decomp.me/scratch/UexL5
+bool FlfFriend::IsInRange(const gfl::Vec3& rTarget, float* pDistance) const {
+    return (rTarget - mPosition).Length() <= *pDistance;
+}
+
+void FlfFriend::SwitchDirection() {
+    if (mDirection == Direction::Backward) {
+        mDirection = Direction::Forward;
+    } else if (mDirection == Direction::Forward) {
+        mDirection = Direction::Backward;
+    }
+}
+
+void FlfFriend::vf168() {
+    if (mState.mCurrentState != 1) {
+        if (mFlfMdlDraw->fn_80023E2C()) {
+            uint id = mNextAnimationID;
+            uint cur = GetCurrentNURBSAnimationID();
+            if (id != cur) {
+                PlayNURBSAnimation(id, mIsAnimationReset);
+            }
+        } else if (IsAnimationDone()) {
+            uint id = mNextAnimationID;
+            uint cur = GetCurrentNURBSAnimationID();
+            if (id != cur) {
+                PlayNURBSAnimation(id, mIsAnimationReset);
+            }
+        }
+    }
+
+    if (mUpdateFrame) {
+        mFlfMdlDraw->UpdateFrame();
+        mEffect->UpdateFrame();
+    }
+}
+
+// https://decomp.me/scratch/xLTO8
+void FlfFriend::vf16C() {
+    gfl::Mtx34 mtx1;
+    PSMTXIdentity(mtx1);
+    MTX34_INIT(mtx1, mPosition, mScale, mRotation);
+
+    if (isnan(mtx1[1][3])) {
+        mtx1 = mMatrix;
+
+        if (mDirection == Direction::Forward) {
+            mtx1[0][3] = mMatrix[0][3] + 0.01f;
+        } else {
+            mtx1[0][3] = mMatrix[0][3] - 0.01f;
+        }
+    }
+
+    if (mDirection == Direction::Forward) {
+        gfl::Mtx34 mtx2 = mtx1;
+        nw4r::math::MTX34 mtx3(
+            -1.0f, 0.0f, 0.0f, 0.0f,
+            0.0f, 1.f, 0.0f, 0.0f,
+            0.0f, 0.0f, 1.0f, 0.0f
+        );
+        PSMTXConcat(mtx2, mtx3, mtx2);
+        mFlfMdlDraw->SetWoolDrawMatrix(mtx2);
+    } else {
+        mFlfMdlDraw->SetWoolDrawMatrix(mtx1);
+    }
+
+    mFlfMdlDraw->GetWoolDrawMatrix(mMatrix);
+    mEffect->SetWoolDrawMatrix(mtx1);
+
+    if (mMoleLight != nullptr) {
+        nw4r::math::VEC2 vec2 = mPosition;
+        mMoleLight->SetPosition(vec2);
+    }
+}
+
+void FlfFriend::ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) {
+    // not decompiled
+}
+
+// https://decomp.me/scratch/QqYhN
+void FlfFriend::SetScreenPosition(int* pDirection) {
+    float x, y, w, h;
+    CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::SceneID::Game);
+
+    if (*pDirection == Direction::Forward) {
+        mScreenPosition.mCullThreshold = mPosition.z;
+        mScreenPosition.mPosition.x = x + w + 3.0f;
+        mScreenPosition.mPosition.y = y + 3.0f;
+    } else if (*pDirection == Direction::Backward) {
+        mScreenPosition.mCullThreshold = mPosition.z;
+        mScreenPosition.mPosition.x = x - 3.0f;
+        mScreenPosition.mPosition.y = y + 3.0f;
+    }
+}
+
+PlayerBase* FlfFriend::GetClosestPlayer() const {
+    uint count = GameManager::GetPlayerCount();
+    
+    PlayerBase* ret = nullptr;
+    gfl::Vec3 pos;
+    pos = mPosition;
+
+    for (uint id = 0; id < count; id++) {
+        if (ret == nullptr) {
+            ret = GameManager::GetPlayerByID(id);
+        } else {
+            PlayerBase* player = GameManager::GetPlayerByID(id);
+            gfl::Vec3 retPos = gfl::Vec3::SubXY(ret->mPosition, pos);
+            gfl::Vec3 playerPos = gfl::Vec3::SubXY(player->mPosition, pos);
+
+            float retDist = retPos.Length();
+            float playerDist = playerPos.Length();
+
+            if (playerDist < retDist) {
+                ret = player;
+            }
+        }
+    }
+
+    return ret;
+}
+
+void FlfFriend::vfD4(float, const gfl::Vec3&) {
+    // not decompiled
+}
+
+void FlfFriend::vf23C(float arg1) {
+    m_108 = arg1;
+}
+
+float FlfFriend::vf238() const {
+    return m_108;
+}
+
+void FlfFriend::vf234(float arg1) {
+    m_104 = arg1;
+}
+
+float FlfFriend::vf230() const {
+    return m_104;
+}
+
+void FlfFriend::vf22C(float arg1) {
+    m_100 = arg1;
+}
+
+float FlfFriend::vf228() const {
+    return m_100;
+}
+
+void FlfFriend::vf224(float arg1) {
+    m_F0 = arg1;
+}
+
+void FlfFriend::vf214() { }
+
+void FlfFriend::vf20C() { }
+
+void FlfFriend::vf124() {
+    mState.SetCurrentStateAndClearOthers(7);
 }

@@ -21,7 +21,7 @@ public:
 
     void fn_80056974();
     void fn_800544B4(void*, float);
-    void fn_800548AC(float*,float*,float*,float*,int);
+    void GetScreenBounds(float* pX, float* pY, float* pWidth, float* pHeight, int sceneID);
     void fn_800545B4(int, int);
     void fn_800545D8(int);
     bool ShouldCull(ScreenPosition&);

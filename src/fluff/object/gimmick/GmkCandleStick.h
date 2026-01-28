@@ -36,8 +36,8 @@ public:
     
 
 private:
-    float m_134;
-    bool m_138;
+    float mRadius;
+    bool mEffectCreated;
     gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry; // @ 0x13C
     gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x140
     gfl::Pointer<MoguraLight> mMoleLight; // @ 0x144

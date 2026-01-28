@@ -103,7 +103,7 @@ void BgBackImage::DrawXlu() {
 
     // rect instead maybe?
 
-    CamMng::Instance()->fn_800548AC(&pos.x, &pos.y, &offs.x, &offs.y, 6);
+    CamMng::Instance()->GetScreenBounds(&pos.x, &pos.y, &offs.x, &offs.y, 6);
 
     float width = mWidth / SCALE_FACTOR;
     float height = mHeight / SCALE_FACTOR;

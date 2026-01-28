@@ -137,6 +137,8 @@ public:
     NURBSSet* GetNURBSAnimWrapperNURBSSet();
     void LoadWoolTextures();
     bool IsVisible() const;
+    bool fn_80023E2C() const;
+    void GetWoolDrawMatrix(nw4r::math::MTX34& rDst) const;
 
     inline void SetCurrentFrameInt(int value) {
         *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;
@@ -156,7 +158,7 @@ public:
     /* 0x004 */ std::string mResourcePath;
     /* 0x010 */ std::string mRawFilepath;
     /* 0x01C */ FullSortScene* mFullSortScene;
-    /* 0x020 */ int mCurrentAnimationID;
+    /* 0x020 */ uint mCurrentAnimationID;
     /* 0x024 */ float mUpdateRate;
     /* 0x028 */ bool mIsVisible;
     /* 0x02C */ float m_2C;

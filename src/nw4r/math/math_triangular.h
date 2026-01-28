@@ -116,6 +116,14 @@ inline f32 Atan2Rad(f32 y, f32 x) {
     return NW4R_MATH_FIDX_TO_RAD(Atan2FIdx(y, x));
 }
 
+
+inline float SinF(float value) {
+    return SinFIdx(NW4R_MATH_RAD_TO_FIDX(value));
+}
+inline float CosF(float value) {
+    return CosFIdx(NW4R_MATH_RAD_TO_FIDX(value));
+}
+
 } // namespace math
 } // namespace nw4r
 

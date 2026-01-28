@@ -107,6 +107,8 @@ namespace gfl {
             v.z = -z;
             return v;
         }
+
+        static inline Vec3 SubXY(const Vec3& lhs, const Vec3& rhs);
         
         
         void operator=(const Vec2& other);
@@ -217,6 +219,13 @@ namespace gfl {
     };
 
     // these need to be outside to match
+
+    inline Vec3 Vec3::SubXY(const Vec3& lhs, const Vec3& rhs) {
+        Vec3 v(0);
+        nw4r::math::VEC3Sub(&v, &lhs, &rhs);
+        v.z = 0;
+        return v;
+    }
 
     // inline Vec3 Vec3::operator+(const Base& rhs) const {
     //     Vec3 v(0);

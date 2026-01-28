@@ -31,8 +31,8 @@ public:
     /* 0x08C */ virtual bool IsPlayerSavedPositionInFront() const;
 	/* 0x090 */ virtual bool IsPositionInFront(const gfl::Vec2& rPos) const;
 	/* 0x094 */ virtual bool vf94(const gfl::Vec2& rPos) const; // related to checking position against some camera bounds
-	/* 0x098 */ virtual void vf98();
-	/* 0x09C */ virtual void vf9C();
+	/* 0x098 */ virtual bool vf98(float, float, const gfl::Vec2&) const;
+	/* 0x09C */ virtual bool IsInRange(const gfl::Vec3& rTarget, float* pDistance) const;
 	/* 0x0A0 */ virtual void vfA0();
 	/* 0x0A4 */ virtual void vfA4();
 	/* 0x0A8 */ virtual void vfA8();
@@ -46,7 +46,7 @@ public:
 	/* 0x0C8 */ virtual void vfC8();
 	/* 0x0CC */ virtual void vfCC();
 	/* 0x0D0 */ virtual void vfD0(PlayerBase* pPlayer, int) = 0;
-	/* 0x0D4 */ virtual void vfD4();
+	/* 0x0D4 */ virtual void vfD4(float, const gfl::Vec3&);
 	/* 0x0D8 */ virtual void vfD8();
 	/* 0x0DC */ virtual void vfDC();
 	/* 0x0E0 */ virtual void vfE0();
@@ -62,7 +62,7 @@ public:
 	/* 0x108 */ virtual void SetVisibility(bool vis);
 	/* 0x10C */ virtual bool IsVisible() const;
 	/* 0x110 */ virtual void SetNURBSAnimationInfo(int id, bool isReset);
-	/* 0x114 */ virtual int GetCurrentNURBSAnimationID() const;
+	/* 0x114 */ virtual uint GetCurrentNURBSAnimationID() const;
 	/* 0x118 */ virtual void PlayNURBSAnimation(int, bool);
 	/* 0x11C */ virtual void SetCurrentNURBSAnimationFrame(float frame);
 	/* 0x120 */ DECL_WEAK virtual int GetCurrentAnimationID() const;
@@ -130,17 +130,17 @@ public:
 	/* 0x218 */ virtual void vf218();
 	/* 0x21C */ virtual void vf21C();
 	/* 0x220 */ DECL_WEAK virtual void vf220(/* unk args (it's not void) */);
-	/* 0x224 */ virtual void vf224();
-	/* 0x228 */ virtual void vf228();
-	/* 0x22C */ virtual void vf22C();
-	/* 0x230 */ virtual void vf230();
-	/* 0x234 */ virtual void vf234();
-	/* 0x238 */ virtual void vf238();
-	/* 0x23C */ virtual void vf23C();
+	/* 0x224 */ virtual void vf224(float arg1);
+	/* 0x228 */ virtual float vf228() const;
+	/* 0x22C */ virtual void vf22C(float arg1);
+	/* 0x230 */ virtual float vf230() const;
+	/* 0x234 */ virtual void vf234(float arg1);
+	/* 0x238 */ virtual float vf238() const;
+	/* 0x23C */ virtual void vf23C(float arg1);
 	/* 0x240 */ virtual void vf240();
 	/* 0x244 */ virtual bool IsAnimationDone() const;
 	/* 0x248 */ virtual void vf248();
-	/* 0x24C */ virtual void vf24C();
+	/* 0x24C */ virtual void SwitchDirection();
 
     /* Overrides */
 
@@ -148,7 +148,7 @@ public:
 
     /* 0x80 */ DECL_WEAK virtual void ExecCallbackA(nw4r::g3d::ChrAnmResult* pResult, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
     /* 0x84 */ DECL_WEAK virtual void ExecCallbackB(nw4r::g3d::WorldMtxManip* pManip, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
-    /* 0x88 */ DECL_WEAK virtual void ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
+    /* 0x88 */ virtual void ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
     
 
     /* Class Methods */
@@ -166,6 +166,9 @@ public:
 	void fn_8033C488();
 	void fn_8033C580(uint);
 	int fn_8033C5B4();
+	void SetScreenPosition(int* pDirection);
+	PlayerBase* GetClosestPlayer() const;
+
 
 	void fn_8033E570();
 
@@ -180,7 +183,7 @@ public:
     /* 0x088 */ gfl::Task mTask;
     /* 0x0A0 */ FullSortScene* mScene;
     /* 0x0A4 */ FlfMdlDraw* mFlfMdlDraw;
-    /* 0x0A8 */ int mAnimationID;
+    /* 0x0A8 */ uint mNextAnimationID;
     /* 0x0AC */ bool mIsAnimationReset;
     /* 0x0B0 */ int mCurrentAnimationID;
     /* 0x0B4 */ int m_B4;
@@ -191,24 +194,20 @@ public:
     /* 0x0D8 */ std::tree<placeholder_t> m_D8;
     /* 0x0E4 */ gfl::Vec3 m_E4;
     /* 0x0F0 */ float m_F0;
-    /* 0x0F4 */ float m_F4;
-    /* 0x0F8 */ float m_F8;
-    /* 0x0FC */ float m_FC;
+    /* 0x0F4 */ gfl::Vec3 m_F4;
     /* 0x100 */ float m_100;
     /* 0x104 */ float m_104;
     /* 0x108 */ float m_108;
     /* 0x10C */ float m_10C;
     /* 0x110 */ float m_110;
     /* 0x114 */ float m_114;
-    /* 0x118 */ float m_118;
-    /* 0x11C */ float m_11C;
-    /* 0x120 */ float m_120;
+    /* 0x118 */ ScreenPosition mScreenPosition;
     /* 0x124 */ float m_124;
     /* 0x128 */ float m_128;
     /* 0x12C */ float m_12C;
     /* 0x130 */ float m_130;
     /* 0x134 */ int m_134;
-    /* 0x138 */ bool m_138;
+    /* 0x138 */ bool mUpdateFrame;
     /* 0x139 */ bool m_139;
     /* 0x13C */ int m_13C;
     /* 0x140 */ int m_140;

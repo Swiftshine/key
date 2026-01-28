@@ -7,6 +7,61 @@
 
 namespace gfl {
 
+#define MTX34_INIT(mtx, pos, rot, scale) \
+    do { \
+    float scaleZ;\
+    float scaleY;\
+    float scaleX;\
+    float sx;\
+    float cx;\
+    float sy;\
+    float cy;\
+    float cz;\
+    float sz;\
+    float posZ;\
+    float posY;\
+    float posX;\
+    float cx_cz;\
+    float sx_sz;\
+    float sx_cz;\
+    float cx_sz;\
+    \
+    scaleX = scale.x;\
+    scaleY = scale.y;\
+    scaleZ = scale.z;\
+    \
+    sx = nw4r::math::SinF(rot.x);\
+    cx = nw4r::math::CosF(rot.x);\
+    sy = nw4r::math::SinF(rot.y);\
+    cy = nw4r::math::CosF(rot.y);\
+    sz = nw4r::math::SinF(rot.z);\
+    cz = nw4r::math::CosF(rot.z);\
+    \
+    posX = pos.x;\
+    posY = pos.y;\
+    posZ = pos.z;\
+    \
+    cx_sz = cx * sz;\
+    sx_sz = sx * sz;\
+    sx_cz = sx * cz;\
+    cx_cz = cx * cz;\
+    \
+    mtx[0][0] = cz * cy * scaleX;\
+    mtx[0][1] = (sx_cz * sy - cx_sz) * scaleY;\
+    mtx[0][2] = (cx_cz * sy + sx_sz) * scaleZ;\
+    mtx[0][3] = posX;\
+    \
+    mtx[1][0] = (sz * cy) * scaleX;\
+    mtx[1][1] = ((sx_sz * sy) + cx_cz) * scaleY;\
+    mtx[1][2] = ((cx_sz * sy) - sx_cz) * scaleZ;\
+    mtx[1][3] = posY;\
+    \
+    mtx[2][0] = scaleX * -sy;\
+    mtx[2][1] = cy * sx * scaleY;\
+    mtx[2][2] = cy * cx * scaleZ;\
+    mtx[2][3] = posZ;\
+} while (0);\
+
 class Mtx34 : public nw4r::math::MTX34 {
     typedef float (*MtxRef)[4];
     typedef const float (*MtxRefConst)[4];
