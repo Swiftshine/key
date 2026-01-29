@@ -9,8 +9,6 @@ class FlfHandleObj;
 /// @note Size: `0x8`
 class FlfHandle {
 public:
-    
-
     inline FlfHandle()
         : mObject(nullptr)
         , mHandleID(0)
@@ -22,7 +20,8 @@ public:
     { }
 
     inline FlfHandle(const FlfHandleObj* pHandleObj);
-
+    inline void operator=(const FlfHandleObj* pHandleObj);
+    
     /* Helpful Inlines */
 
     inline void SetID(uint id) {
@@ -64,9 +63,6 @@ ASSERT_SIZE(FlfHandle, 0x8);
 /// @note Size: `0xC`
 class FlfHandleObj {
 public:
-    
-    
-
     FlfHandleObj();
 
     /* Virtual Methods */
@@ -106,6 +102,16 @@ inline FlfHandle::FlfHandle(const FlfHandleObj* pHandleObj) {
     mObject = nullptr;
     mHandleID = 0;
     
+    if (pHandleObj != nullptr) {
+        mObject = pHandleObj->mHandle.mObject;
+        mHandleID = pHandleObj->mHandle.mHandleID;
+    } else {
+        mObject = nullptr;
+        mHandleID = 0;
+    }
+}
+
+inline void FlfHandle::operator=(const FlfHandleObj* pHandleObj) {
     if (pHandleObj != nullptr) {
         mObject = pHandleObj->mHandle.mObject;
         mHandleID = pHandleObj->mHandle.mHandleID;

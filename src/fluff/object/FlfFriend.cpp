@@ -20,7 +20,7 @@ float FlfFriend::fn_8033B710() {
 }
 
 // https://decomp.me/scratch/gjGK0
-FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID, const char* pTaskName)
+FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendID, const char* pTaskName)
     : FlfGameObj(ObjectCategory::Friend)
     , mTask(this, Update, pTaskName)
     , mScene(pScene)
@@ -52,13 +52,11 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID
     , m_144(0)
     , m_148(false)
     , m_149(false)
-    , m_14C(0)
-    , m_150(0)
+    , mBackDoorHandle()
     , m_154(false)
-    , m_155(false)
+    , mMissionStarted(false)
     , mMoleLight(nullptr)
-    , m_15C(nullptr)
-    , m_160(nullptr)
+    , mPlayerHandle()
     , m_164(0.0f)
     , mEffect(new (gfl::HeapID::Work) FriendEffect)
     , mFriendID(friendID)
@@ -117,7 +115,7 @@ void FlfFriend::vfF0(FlfGameObj* pObj) {
     PlayerBase* player = static_cast<PlayerBase*>(pObj);
     if (pObj->mCategory == ObjectCategory::Player) {
         if (CutFunction(player)->GetPlayerID() == PlayerBase::PlayerID::Kirby) {
-            vfD0(player, 0);
+            StartMission(player, false);
         }
 
         mPosition.z = 10.0f;
@@ -529,31 +527,16 @@ gfl::Vec3 FlfFriend::vfFC() {
     return v;
 }
 
-void FlfFriend::vfF8(void* pArg1) {
-    if (pArg1 != nullptr) {
-        m_15C = ((int****)pArg1)[1];
-        m_160 = ((int**)pArg1)[2];
+void FlfFriend::SetPlayer(PlayerBase* pPlayer) {
+    if (pPlayer != nullptr) {
+        mPlayerHandle = pPlayer->mHandle;
     } else {
-        m_15C = 0;
-        m_160 = 0;
+        mPlayerHandle = FlfHandle();
     }
 }
 
-// https://decomp.me/scratch/7RGuQ
-int** FlfFriend::vfF4() const {
-    int** ret;
-    if (m_15C != nullptr) {
-        ret = *m_15C;
-        if (ret != nullptr) {
-            if (m_160 != ret[2]) {
-                
-            } else {
-                ret = nullptr;
-            }
-        }    
-    }
-
-    return ret;
+PlayerBase* FlfFriend::GetPlayer() const {
+    return static_cast<PlayerBase*>(mPlayerHandle.TryGetHandleObj());
 }
 
 int FlfFriend::vfEC() {
@@ -577,7 +560,7 @@ int FlfFriend::vf218() {
 }
 
 void FlfFriend::vfAC() {
-    vfF8(nullptr);
+    SetPlayer(nullptr);
     mState.SetCurrentStateAndClearOthers(0);
 }
 
@@ -688,4 +671,114 @@ void FlfFriend::vf134() {
 
 bool FlfFriend::vf138() const {
     return mState.mCurrentState == 12;
+}
+
+bool FlfFriend::vfE4() const {
+    if (mState.mCurrentState - 9 <= 5 || mState.mCurrentState - 3 <= 1 || mState.mCurrentState == 6) {
+        return true;
+    }
+    
+    return false;
+}
+
+bool FlfFriend::vfD8() const {
+    if (mState.mCurrentState == 25 && 2.0f <= m_110) {
+        return true;
+    }
+
+    return false;
+}
+
+// sdata
+int lbl_808E1810 = Direction::Forward;
+
+void FlfFriend::vf13C() {
+    SetScreenPosition(&lbl_808E1810);
+    PlayNURBSAnimation(301, true);
+    mState.SetCurrentStateAndClearOthers(13);
+}
+
+bool FlfFriend::vf140() const {
+    return mState.mCurrentState == 14;
+}
+
+void FlfFriend::vf150() {
+    mState.SetCurrentStateAndClearOthers(18);
+
+    if (mFlfMdlDraw != nullptr) {
+        PlayNURBSAnimation(100, true);
+    }
+}
+
+void FlfFriend::vf154() {
+    mState.SetCurrentStateAndClearOthers(19);
+    
+    if (mFlfMdlDraw != nullptr) {
+        PlayNURBSAnimation(110, true);
+    }
+}
+
+void FlfFriend::SetPositionToPlayerSavedPosition() {
+    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+
+    if (player != nullptr) {
+        int dir = player->mDirection;
+        gfl::Vec3 pos;
+        pos = player->mSavedPosition;
+
+        float xOffs = 1.5f;
+        float yOffs = 2.5f;
+        if (dir == Direction::Forward) {
+            pos.x -= xOffs;
+            pos.y += yOffs;
+        } else if (dir == Direction::Backward) {
+            pos.x += xOffs;
+            pos.y += yOffs;
+        }
+
+        pos.z = lbl_808E9D90;
+        mDirection = dir;
+        SetPosition(pos);
+    }
+
+    mState.SetCurrentStateAndClearOthers(1);
+}
+
+void FlfFriend::vf148() {
+    m_E4 = gfl::Vec3::Zero;
+    vf210(1);
+    mState.SetCurrentStateAndClearOthers(15);
+}
+
+bool FlfFriend::fn_8033E25C() const {
+    return mState.mCurrentState == 16;
+}
+
+void FlfFriend::StartMission() {
+    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+    mMissionStarted = true;
+    StartMission(player, false);
+}
+
+void FlfFriend::TryStartMission(GmkBackDoor* pDoor, bool arg2) {
+    if (!GameManager::IsInMission() || mFriendID - 1 > 2) {
+        if (mState.mCurrentState == 20) {
+            if (arg2 == vf54()) {
+                PlayerBase* player = GetPlayer();
+                StartMission(player, arg2);
+                if (!arg2) {
+                    mBackDoorHandle = FlfHandle();
+                }
+            }
+        } else {
+            mBackDoorHandle = pDoor;
+            m_154 = arg2;
+            mState.SetCurrentStateAndClearOthers(20);
+        }
+    }
+}
+
+void FlfFriend::fn_8033E3DC() {
+    m_154 = false;
+    mState.SetCurrentStateAndClearOthers(22);
 }

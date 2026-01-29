@@ -12,6 +12,7 @@
 #include "graphics/effect/FriendEffect.h"
 #include "mapdata/Mapdata.h"
 #include "misc/ScopedPointers.h"
+#include "object/gimmick/GmkBackDoor.h"
 #include "util/StateObject.h"
 #include <tree>
 
@@ -21,7 +22,7 @@ class PlayerBase;
 /// @note Size: `0x178`
 class FlfFriend : public FlfGameObj, public IObjHitCB, public nw4r::g3d::ICalcWorldCallback {
 public:
-    FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, int friendID, const char* pTaskName);
+    FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendID, const char* pTaskName);
 
     /* Virtual Methods */
 
@@ -46,17 +47,17 @@ public:
 	/* 0x0C4 */ virtual void vfC4();
 	/* 0x0C8 */ virtual void vfC8();
 	/* 0x0CC */ virtual void vfCC();
-	/* 0x0D0 */ virtual void vfD0(PlayerBase* pPlayer, int) = 0;
+	/* 0x0D0 */ virtual void StartMission(PlayerBase* pPlayer, bool) = 0;
 	/* 0x0D4 */ virtual void vfD4(float, const gfl::Vec3&);
-	/* 0x0D8 */ virtual void vfD8();
+	/* 0x0D8 */ virtual bool vfD8() const;
 	/* 0x0DC */ DECL_WEAK virtual int vfDC();
 	/* 0x0E0 */ virtual bool vfE0() const;
-	/* 0x0E4 */ virtual void vfE4();
+	/* 0x0E4 */ virtual bool vfE4() const;
 	/* 0x0E8 */ DECL_WEAK virtual int vfE8();
 	/* 0x0EC */ DECL_WEAK virtual int vfEC();
 	/* 0x0F0 */ virtual void vfF0(FlfGameObj* pObj);
-	/* 0x0F4 */ virtual int** vfF4() const;
-	/* 0x0F8 */ virtual void vfF8(void* pArg1);
+	/* 0x0F4 */ virtual PlayerBase* GetPlayer() const;
+	/* 0x0F8 */ virtual void SetPlayer(PlayerBase* pPlayer);
 	/* 0x0FC */ virtual gfl::Vec3 vfFC();
 	/* 0x100 */ virtual void vf100();
 	/* 0x104 */ virtual void SetScene(FullSortScene* pScene);
@@ -74,10 +75,10 @@ public:
 	/* 0x134 */ virtual void vf134();
 	/* 0x138 */ virtual bool vf138() const;
 	/* 0x13C */ virtual void vf13C();
-	/* 0x140 */ virtual void vf140();
-	/* 0x144 */ virtual void vf144();
+	/* 0x140 */ virtual bool vf140() const;
+	/* 0x144 */ virtual void SetPositionToPlayerSavedPosition();
 	/* 0x148 */ virtual void vf148();
-	/* 0x14C */ virtual void vf14C();
+	/* 0x14C */ virtual void StartMission();
 	/* 0x150 */ virtual void vf150();
 	/* 0x154 */ virtual void vf154();
 	/* 0x158 */ virtual void vf158();
@@ -167,9 +168,11 @@ public:
 	void fn_8033C488();
 	void fn_8033C580(uint);
 	int fn_8033C5B4();
-	void SetScreenPosition(int* pDirection);
+	void SetScreenPosition(int* pDirection) DONT_INLINE_CLASS;
 	PlayerBase* GetClosestPlayer() const;
-
+	bool fn_8033E25C() const;
+	void TryStartMission(GmkBackDoor* pDoor, bool arg2);
+	void fn_8033E3DC();
 
 	void fn_8033E570();
 
@@ -215,16 +218,14 @@ public:
     /* 0x144 */ int m_144;
     /* 0x148 */ bool m_148;
     /* 0x149 */ bool m_149;
-    /* 0x14C */ int m_14C;
-    /* 0x150 */ int m_150;
+    /* 0x14C */ FlfHandle mBackDoorHandle;
     /* 0x154 */ bool m_154;
-    /* 0x155 */ bool m_155;
+    /* 0x155 */ bool mMissionStarted;
     /* 0x158 */ MoguraLight* mMoleLight;
-    /* 0x15C */ int*** m_15C;
-    /* 0x160 */ int* m_160;
+    /* 0x15C */ FlfHandle mPlayerHandle;
     /* 0x164 */ gfl::Vec3 m_164;
     /* 0x170 */ FriendEffect* mEffect;
-    /* 0x174 */ int mFriendID;
+    /* 0x174 */ uint mFriendID;
 };
 
 #endif
