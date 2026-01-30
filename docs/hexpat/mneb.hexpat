@@ -3,62 +3,49 @@
 #include <std/string.pat>
 
 struct Header {
-    char magic[4]; // MNCH
-    u32 entryOffset;
-    u32 _8;
-    u32 entryCount;
-    u32 _10;
-    u32 _14;
+    char mMagic[4]; // MNCH
+    u32 mCurveEntryOffset;
+    u32 mFlags;
+    u32 mCurveEntryCount;
+    u32 m_10;
+    s16 m_14;
+    bool m_16;
+    padding[1];
 };
 
-struct S16Quad {
-    s16 first;
-    s16 second;
-    s16 third;
-    s16 fourth;
+struct ControlPoint {
+    s16 x;
+    s16 y;
+    s16 z;
+    s16 w;
 };
 
-struct SomeData1 {
-    u32 count;
-    S16Quad quads[count];    
+struct CurveBlock {
+    u32 m_0;
+    u32 m_4;
+    s32 m_8;
+    u32 mControlPointOffset;
+    u32 mKnotOffset;
+    u32 m_14;
+    float m_18[8]; // transforms?
+    u32 mNumControlPoints;
+    ControlPoint mControlPoints[mNumControlPoints];
+    u32 mNumKnots;
+    float mKnots[mNumKnots];
+    u32 m_unk_NextOffset;
+    u8 m_unk_data[(m_unk_NextOffset - $)]; // anim data?
+    u32 mUnk2;
+    u32 mUnkArray2[mUnk2];
 };
 
-struct SomeData2 {
-    u32 count;
-    float values[count];
-};
 
-struct SomeData3 {
-    u32 endOffs;
-    u8 data[endOffs - $];
-};
-
-struct SomeData4 {
-    u32 count;
-    u32 values[count];
-};
-
-struct Subheader {
-    u32 blockSize;
-    u32 _4;
-    s32 _8;
-    u32 offs1;
-    u32 offs2;
-    u32 offs3;
-    float _1C[8];
-};
-
-struct Entry {
-    char magic[4]; // MNCN
-    u32 entrySize;
-    char name[0x20];
+struct CurveEntry {
+    char mMagic[4]; // MNCN
+    u32 mEntrySize;
+    char mName[0x20];
     u8 buf1[0x68];
-    Subheader subheader;
-    SomeData1 sd1;
-    SomeData2 sd2;
-    SomeData3 sd3;
-    SomeData4 sd4;
+    CurveBlock mCurveBlock;
 };
 
 Header header @ 0;
-Entry entries[header.entryCount] @ header.entryOffset;
+CurveEntry entries[header.mCurveEntryCount] @ header.mCurveEntryOffset;
