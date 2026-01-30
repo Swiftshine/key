@@ -39,12 +39,34 @@ struct CurveBlock {
 };
 
 
+struct UnkStruct {
+    u32 mOffsetToNext;
+    u32 m_4;
+    u32 m_8;
+    u32 m_C;
+};
+
 struct CurveEntry {
     char mMagic[4]; // MNCN
     u32 mEntrySize;
     char mName[0x20];
-    u8 buf1[0x68];
-    CurveBlock mCurveBlock;
+    u8 m_28[0x68];
+    u32 m_90;
+    u32 m_94;
+    u32 m_98;
+    u32 mControlPointOffset;
+    u32 mKnotOffset;
+    u32 mUnkStructOffset;
+    float m_A8[4];
+    u32 m_B8[4];
+    u32 mNumControlPoints;
+    ControlPoint mControlPoints[mNumControlPoints];
+    u32 mNumKnots;
+    float mKnots[mNumKnots];
+    u32 m_unk_NextOffset;
+    u8 m_unk_data[(m_unk_NextOffset - $)]; // anim data?
+    u32 mUnk2;
+    u32 mUnkArray2[mUnk2];
 };
 
 Header header @ 0;
