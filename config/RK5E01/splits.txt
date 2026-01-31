@@ -44,6 +44,9 @@ gfl/gflResInfo.cpp:
 fluff/graphics/FB2Tex.cpp:
 	.text       start:0x80029434 end:0x80029B18
 
+fluff/graphics/MNEB.cpp:
+	.text       start:0x80029B44 end:0x80029F4C
+
 fluff/util/CollisionFlagUtil.cpp:
 	.text       start:0x8002BCEC end:0x8002BCF8
 

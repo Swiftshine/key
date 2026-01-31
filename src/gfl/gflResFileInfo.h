@@ -191,11 +191,13 @@ namespace gfl {
         static void FromArchive(ResFileObject& dst, const char* path);
         static void FromFolder(ResFileObject& dst, const char* path);
 
-        static inline ResFileObject FromArchive(const char* pFilepath) {
-            gfl::ResFileObject obj;
-            FromArchive(obj, pFilepath);
-            return obj;
-        }
+        // static inline ResFileObject FromArchive(const char* pFilepath) {
+        //     gfl::ResFileObject obj;
+        //     FromArchive(obj, pFilepath);
+        //     return obj;
+        // }
+
+        DECL_WEAK static ResFileObject FromArchive(const char* pFilepath);
 
         static inline ResFileObject FromFolder(const char* pFolderpath) {
             gfl::ResFileObject obj;
@@ -287,6 +289,16 @@ namespace gfl {
             
             return resFile;
         }
+
+        inline void* GetData() const {
+            if (mPointer != nullptr) {
+                return mPointer->GetGfArch();
+            }
+
+            return nullptr;
+        }
+
+        size_t GetFilesize() const;
     private:
         ResFileInfo* mPointer;
     };

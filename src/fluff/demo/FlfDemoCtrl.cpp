@@ -715,7 +715,7 @@ void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
     NURBSSet* set = mFlfMdlDraw->GetNURBSAnimWrapperNURBSSet();
 
     if (set != nullptr) {
-        NURBSStruct1* s1 = set->m_14;
+        NURBSStruct1* s1 = set->mEntry;
 
         if (s1 != nullptr) {
             NURBSStruct1* s = s1;
