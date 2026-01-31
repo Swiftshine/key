@@ -6,6 +6,7 @@ using namespace MNEB;
 // sdata
 const char* MNDD_Magic;
 
+// https://decomp.me/scratch/kKphG
 NURBSSet* File::Load(NURBSSet* pNURBSSet, const char* pFilepath) {
     gfl::ResFileObject res = gfl::ResFileObject::FromArchive(pFilepath);
 
