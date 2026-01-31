@@ -5,7 +5,7 @@ using namespace MNEB;
 
 // char MNEB::MNDD_Magic[] = "MNDD";
 
-const char* MNDD_Magic;
+const char* MNDD_Magic = "MNDD";
 
 NURBSSet* File::Load(NURBSSet* pNURBSSet, const char* pFilepath) {
     gfl::ResFileObject res = gfl::ResFileObject::FromArchive(pFilepath);
