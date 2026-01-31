@@ -253,7 +253,7 @@ public:
     void ClearNodeControls();
     void Update();
     void fn_802BB920();
-    void fn_802BBA4C(int, nw4r::math::VEC2* vec);
+    void fn_802BBA4C(int animID, nw4r::math::VEC2* vec);
     uint fn_802BBB28() DONT_INLINE_CLASS;
     float GetCurrentFrame();
     float GetEndFrame();

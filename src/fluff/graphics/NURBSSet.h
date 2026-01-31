@@ -2,16 +2,9 @@
 #define FLUFF_NURBSSET_H
 
 #include "types.h"
-#include "util/NURBSStructures.h"
 #include "gfl/gflResFileInfo.h"
-
-namespace MNEB {
-    struct CurveEntry;
-}
-
-class NURBSObject {
-
-};
+#include "graphics/MNEB.h"
+#include "util/NURBSStructures.h"
 
 // size unk
 class NURBSSet {
@@ -21,7 +14,7 @@ public:
     /* Class Members */
 
     /* 0x00 */ STRUCT_FILL(0x14);
-    /* 0x14 */ MNEB::CurveEntry* mEntry;
+    /* 0x14 */ MNEB::MNDDEntry* mEntry;
 };
 
 #endif

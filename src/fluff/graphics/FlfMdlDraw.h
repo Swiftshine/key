@@ -13,11 +13,7 @@
 
 class NURBSModelWrapper;
 class NURBSAnimWrapper;
-struct NURBSObject {
-    void* mEntry;
-    std::string mString;
-};
-
+class NURBSObject;
 class NURBSDrawObj;
 class NwBlendAnmWrapper;
 

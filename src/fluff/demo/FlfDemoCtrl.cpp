@@ -702,8 +702,8 @@ void FlfDemoCtrl::fn_802BB920() {
 }
 
 // fake match
-void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
-    mFlfMdlDraw->PlayNURBSAnimation(arg1, false);
+void FlfDemoCtrl::fn_802BBA4C(int animID, nw4r::math::VEC2* vec) {
+    mFlfMdlDraw->PlayNURBSAnimation(animID, false);
     mFlfMdlDraw->SetUpdateRate(1.0f);
     
     gfl::ScnMdlWrapper* modelWrapper = mFlfMdlDraw->GetNURBSAnimWrapperModelWrapper();
@@ -715,14 +715,14 @@ void FlfDemoCtrl::fn_802BBA4C(int arg1, nw4r::math::VEC2* vec) {
     NURBSSet* set = mFlfMdlDraw->GetNURBSAnimWrapperNURBSSet();
 
     if (set != nullptr) {
-        NURBSStruct1* s1 = set->mEntry;
+        MNEB::MNDDEntry* entry = set->mEntry;
 
-        if (s1 != nullptr) {
-            NURBSStruct1* s = s1;
+        if (entry != nullptr) {
+            u8* e = (u8*)entry;
 
-            for (uint i = 0; i < s1->m_8; i++) {
-                fn_802BBE08(s->m_C);
-                s = reinterpret_cast<NURBSStruct1*>(&s->m_4);
+            for (uint i = 0; i < entry->mCount; i++) {
+                fn_802BBE08((NURBSStruct2*)((MNEB::MNDDEntry*)(e))->m_C);
+                e += 4;
             }
         }   
     }

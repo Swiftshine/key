@@ -2,13 +2,30 @@
 #define FLUFF_MNEB_H
 
 #include "gfl/gflResFileInfo.h"
-#include "graphics/NURBSSet.h"
+
+class NURBSSet;
+class NURBSObject;
+
+// Data Definition?
+// sdata
 
 namespace MNEB {
+    struct EntryBase {
+        char mMagic[4];
+    };
+
     struct CurveEntry {
         char mMagic[4];
         // blah blah
     };
+
+    struct MNDDEntry {
+        void* m_0;
+        void* m_4;
+        uint mCount;
+        void* m_C;
+    };
+
 
     class File {
     public:
@@ -17,7 +34,16 @@ namespace MNEB {
         /// @return The number of curves in the file.
         uint CopyHeader(void* pData);
         void SetObjectData(NURBSObject* pObj, CurveEntry* pEntry);
-        CurveEntry* fn_80029ED8(CurveEntry* pEntry);
+        MNDDEntry* fn_80029ED8(MNDDEntry* pEntry);
+
+        bool CheckMagic(const char* pMagic, EntryBase* entry) {
+            return (
+                entry->mMagic[0] == pMagic[0] &&
+                entry->mMagic[1] == pMagic[1] &&
+                entry->mMagic[2] == pMagic[2] &&
+                entry->mMagic[3] == pMagic[3]
+            ) ? true : false;
+        }
 
         /* Class Members */
 
