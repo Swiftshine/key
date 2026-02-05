@@ -1,7 +1,6 @@
 #ifndef FLUFF_FLFDEMOCTRL_H
 #define FLUFF_FLFDEMOCTRL_H
 
-#include "graphics/MNEB.h"
 #include "types.h"
 #include <string>
 #include <nw4r/g3d/res/g3d_resnode.h>
@@ -10,8 +9,8 @@
 #include "gfl/gflScnMdlWrapper.h"
 #include "gfl/gflTask.h"
 #include "graphics/FlfMdlDraw.h"
+#include "graphics/MNEB.h"
 #include "misc/ScopedPointers.h"
-#include "util/NURBSOption.h"
 #include "object/PlayerBase.h"
 
 // size: 0x24

@@ -179,9 +179,6 @@ fluff/demo/DemoObject.cpp:
 	.data       start:0x80864280 end:0x808642C0
 	.sdata      start:0x808E1118 end:0x808E1128
 
-fluff/util/NURBSOption.cpp:
-	.text       start:0x802B96C0 end:0x802B99E0
-
 fluff/demo/FlfDemoCtrl.cpp:
 	.text       start:0x802B99E0 end:0x802BCBC8
 

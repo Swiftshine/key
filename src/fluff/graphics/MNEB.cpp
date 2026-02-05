@@ -57,39 +57,35 @@ uint File::CopyHeader(void* pData) {
     return header->mCurveBlockCount;
 }
 
-// https://decomp.me/scratch/LM25d
+// https://decomp.me/scratch/8Tfuy
 void File::SetCurveBlock(NURBSObject* pObj, CurveBlock* pBlock) {
     if (!mIsLocked) {
         pBlock->mControlPointOffset.SetPointer(mRawData);
         pBlock->mKnotOffset.SetPointer(mRawData);
-        pBlock->mKeyFrameInfoOffset.SetPointer(mRawData);
+        KeyFrameInfo* kfi = pBlock->mKeyFrameInfoOffset.SetPointer(mRawData);
 
-        KeyFrameInfo* kfi = pBlock->mKeyFrameInfoOffset.pointer();
+        if (kfi->mKeyFrameSetTableOffset.offset() != 0) {
+            kfi->mKeyFrameSetTableOffset.SetPointer(mRawData);
 
-        if (kfi != nullptr) {
-            if (kfi->mKeyFrameSetTableOffset.offset() != 0) {
-                kfi->mKeyFrameSetTableOffset.SetPointer(mRawData);
-
-                for (uint i = 0; i < kfi->mKeyFrameSetTableOffset->mNumKeyFrameSets; i++) {
-                    kfi->mKeyFrameSetTableOffset->mKeyFrameSetOffsets[i].SetPointer(mRawData);
-                }
+            for (uint i = 0; i < kfi->mKeyFrameSetTableOffset->mNumKeyFrameSets; i++) {
+                kfi->mKeyFrameSetTableOffset->mKeyFrameSetOffsets[i].SetPointer(mRawData);
             }
+        }
 
-            if (kfi->m_4.offset() != 0) {
-                kfi->m_4.SetPointer(mRawData);
+        if (kfi->m_4.offset() != 0) {
+            kfi->m_4.SetPointer(mRawData);
 
-                for (uint i = 0; i < kfi->m_4->mUnkCount; i++) {
-                    kfi->m_4->m_4[i].SetPointer(mRawData);
-                }
+            for (uint i = 0; i < kfi->m_4->mUnkCount; i++) {
+                kfi->m_4->m_4[i].SetPointer(mRawData);
             }
+        }
 
-            if (kfi->m_8.offset() != 0) {
-                kfi->m_8.SetPointer(mRawData);
-            }
+        if (kfi->m_8.offset() != 0) {
+            kfi->m_8.SetPointer(mRawData);
+        }
 
-            if (kfi->m_C.offset() != 0) {
-                kfi->m_C.SetPointer(mRawData);
-            }
+        if (kfi->m_C.offset() != 0) {
+            kfi->m_C.SetPointer(mRawData);
         }
     }
 

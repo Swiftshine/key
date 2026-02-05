@@ -202,7 +202,7 @@ cflags_base = [
     "-fp_contract on",
     # "-ipa file",
     # "-pool on",
-    #"-multibyte",  # For Wii compilers, replace with `-enc SJIS`
+    # "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-enc SJIS",
     # "-func_align 4",
     "-i src/",
@@ -287,7 +287,7 @@ cflags_fluff_base_no_inline_deferred = [
 cflags_fluff = [
     *cflags_fluff_base_no_inline_deferred,
     "-str reuse,readonly",
-    "-pragma \"merge_float_consts on\""
+    '-pragma "merge_float_consts on"',
 ]
 
 cflags_fluff_manager = [
@@ -315,15 +315,9 @@ cflags_NW4R = [
     "-RTTI off",
 ]
 
-cflags_NW4R_ut = [
-    *cflags_NW4R,
-    "-ipa file"
-]
+cflags_NW4R_ut = [*cflags_NW4R, "-ipa file"]
 
-cflags_NW4R_snd = [
-    *cflags_NW4R,
-    "-ipa file"
-]
+cflags_NW4R_snd = [*cflags_NW4R, "-ipa file"]
 
 # Metrowerks library flags
 cflags_runtime = [
@@ -334,7 +328,6 @@ cflags_runtime = [
     "-common off",
     "-inline auto",
     "-str reuse,pool,readonly",
-
     "-func_align 4",
 ]
 
@@ -370,9 +363,11 @@ def Rel(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     }
 
 
-Matching = True                   # Object matches and should be linked
-NonMatching = False               # Object does not match and should not be linked
-Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
+Matching = True  # Object matches and should be linked
+NonMatching = False  # Object does not match and should not be linked
+Equivalent = (
+    config.non_matching
+)  # Object should be linked when configured with --non-matching
 
 config.warn_missing_config = True
 config.warn_missing_source = False
@@ -389,41 +384,41 @@ config.libs = [
         ],
     },
     {
-        "lib" : "MSL_C",
-        "mw_version" : config.linker_version,
-        "cflags" : cflags_MSL_C,
+        "lib": "MSL_C",
+        "mw_version": config.linker_version,
+        "cflags": cflags_MSL_C,
         "host": False,
-        "objects" : [
+        "objects": [
             Object(Matching, "PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/rand.c"),
         ],
     },
     {
-        "lib" : "revolution",
-        "mw_version" : "Wii/1.0",
-        "cflags" : [
+        "lib": "revolution",
+        "mw_version": "Wii/1.0",
+        "cflags": [
             *cflags_rvl,
             "-DNDEBUG",
         ],
-        "host" : False,
+        "host": False,
         "progress_category": "sdk",
-        "objects" : [
+        "objects": [
             Object(Matching, "revolution/WPAD/WPAD.c"),
         ],
     },
     {
-        "lib" : "homebutton",
-        "mw_version" : config.linker_version,
-        "cflags" : [
+        "lib": "homebutton",
+        "mw_version": config.linker_version,
+        "cflags": [
             *cflags_rvl,
             "-DNDEBUG",
             "-sdata 0",
             "-sdata2 0",
             "-enc UTF-8",
-            "-DHBM_APP_TYPE=1"
+            "-DHBM_APP_TYPE=1",
         ],
-        "host" : False,
+        "host": False,
         "progress_category": "sdk",
-        "objects" : [
+        "objects": [
             Object(Matching, "hbm/homebutton/HBMAnmController.cpp"),
             Object(Matching, "hbm/homebutton/HBMFrameController.cpp"),
             Object(Matching, "hbm/homebutton/HBMGUIManager.cpp"),
@@ -432,23 +427,23 @@ config.libs = [
         ],
     },
     {
-        "lib" : "nw4r/snd",
-        "mw_version" : config.linker_version,
-        "cflags" : cflags_NW4R_snd,
-        "host" : "False",
-        "objects" : [
+        "lib": "nw4r/snd",
+        "mw_version": config.linker_version,
+        "cflags": cflags_NW4R_snd,
+        "host": "False",
+        "objects": [
             Object(Matching, "nw4r/snd/snd_SoundArchive.cpp"),
             Object(NonMatching, "nw4r/snd/snd_SoundArchiveFile.cpp"),
             Object(Matching, "nw4r/snd/snd_DvdSoundArchive.cpp"),
             Object(NonMatching, "nw4r/snd/snd_EnvGenerator.cpp"),
-        ]
+        ],
     },
     {
-        "lib" : "nw4r/ut",
-        "mw_version" : config.linker_version,
-        "cflags" : cflags_NW4R_ut,
-        "host" : False,
-        "objects" : [
+        "lib": "nw4r/ut",
+        "mw_version": config.linker_version,
+        "cflags": cflags_NW4R_ut,
+        "host": False,
+        "objects": [
             Object(Matching, "nw4r/ut/ut_IOStream.cpp"),
             Object(Matching, "nw4r/ut/ut_FileStream.cpp"),
             Object(Matching, "nw4r/ut/ut_DvdFileStream.cpp"),
@@ -463,32 +458,32 @@ config.libs = [
         "host": False,
         "progress_category": "gfl",
         "objects": [
-            Object(Matching,    "gfl/gflAlloc.cpp"),
+            Object(Matching, "gfl/gflAlloc.cpp"),
             Object(NonMatching, "gfl/gflAsyncFileStreamThread.cpp"),
             Object(NonMatching, "gfl/gflBpeDecoderFile.cpp"),
-            Object(Matching,    "gfl/gflChecksum.cpp"),
+            Object(Matching, "gfl/gflChecksum.cpp"),
             Object(NonMatching, "gfl/gflColor.cpp"),
             Object(NonMatching, "gfl/gflCustomRenderObj.cpp"),
             Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
-            Object(Matching,    "gfl/gflFixedString.cpp"),
+            Object(Matching, "gfl/gflFixedString.cpp"),
             Object(NonMatching, "gfl/gflGfCompression.cpp"),
-            Object(Matching,    "gfl/gflHeap.cpp"),
+            Object(Matching, "gfl/gflHeap.cpp"),
             Object(NonMatching, "gfl/gflMemory.cpp"),
-            Object(Matching,    "gfl/gflMemoryBase.cpp"),
-            Object(Matching,    "gfl/gflMemoryManagement.cpp"),
+            Object(Matching, "gfl/gflMemoryBase.cpp"),
+            Object(Matching, "gfl/gflMemoryManagement.cpp"),
             Object(NonMatching, "gfl/gflParamReader.cpp"),
             Object(NonMatching, "gfl/gflParamBase.cpp"),
             Object(NonMatching, "gfl/gflParamSingleValue.cpp"),
             Object(NonMatching, "gfl/gflRenderObj.cpp"),
             Object(NonMatching, "gfl/gflResArchivedFileInfo.cpp"),
-            Object(Matching,    "gfl/gflResInfo.cpp"),
-            Object(Matching,    "gfl/gflSD3DActor.cpp"),
+            Object(Matching, "gfl/gflResInfo.cpp"),
+            Object(Matching, "gfl/gflSD3DActor.cpp"),
             Object(NonMatching, "gfl/gflScnMdlWrapper.cpp"),
             Object(NonMatching, "gfl/gflSoundHandleInner.cpp"),
             Object(NonMatching, "gfl/gflSoundArchiveMng.cpp"),
             Object(NonMatching, "gfl/gflTask.cpp"),
-            Object(Matching,    "gfl/gflTaskInfo.cpp"),
-            Object(Matching,    "gfl/gflThread.cpp"),
+            Object(Matching, "gfl/gflTaskInfo.cpp"),
+            Object(Matching, "gfl/gflThread.cpp"),
             Object(NonMatching, "gfl/gflTimer.cpp"),
         ],
     },
@@ -513,7 +508,7 @@ config.libs = [
         ],
     },
     {
-        "lib" : "fluff/object/",
+        "lib": "fluff/object/",
         "mw_version": config.linker_version,
         "cflags": [
             *cflags_fluff,
@@ -522,19 +517,22 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             # fluff/object/
-            Object(Matching,    "fluff/env/EnvParts_PlayGuideIconLocator.cpp"),
+            Object(Matching, "fluff/env/EnvParts_PlayGuideIconLocator.cpp"),
             Object(NonMatching, "fluff/object/FlfFriend.cpp"),
             Object(NonMatching, "fluff/object/FlfHandleObj.cpp"),
             Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
-            Object(Matching,    "fluff/object/FlfGameObjLocator.cpp"),
+            Object(Matching, "fluff/object/FlfGameObjLocator.cpp"),
             Object(NonMatching, "fluff/object/Gimmick.cpp"),
             Object(NonMatching, "fluff/object/PlayerBase.cpp"),
             Object(NonMatching, "fluff/object/SpringBase.cpp"),
-            Object(NonMatching, "fluff/object/player/HenshinCtrl.cpp",)
+            Object(
+                NonMatching,
+                "fluff/object/player/HenshinCtrl.cpp",
+            ),
         ],
     },
     {
-        "lib" : "fluff/manager",
+        "lib": "fluff/manager",
         "mw_version": config.linker_version,
         "cflags": cflags_fluff,
         "host": False,
@@ -544,7 +542,7 @@ config.libs = [
             Object(NonMatching, "fluff/manager/FlfMsgMng.cpp"),
             Object(NonMatching, "fluff/manager/GmkBeadManager.cpp"),
             Object(NonMatching, "fluff/manager/GmkMng.cpp"),
-            Object(Matching,    "fluff/manager/LevelManager.cpp"),
+            Object(Matching, "fluff/manager/LevelManager.cpp"),
             Object(NonMatching, "fluff/manager/StageResourceManager.cpp"),
         ],
     },
@@ -557,7 +555,7 @@ config.libs = [
         "objects": [
             Object(NonMatching, "fluff/save/FlfSaveLoadSeq.cpp"),
             Object(Equivalent, "fluff/save/SaveData.cpp"),
-        ]
+        ],
     },
     {
         "lib": "fluff/system",
@@ -567,7 +565,7 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/system/FlfNandMng.cpp"),
-        ]
+        ],
     },
     {
         "lib": "fluff/graphics/",
@@ -582,18 +580,21 @@ config.libs = [
             Object(NonMatching, "fluff/graphics/HermiteCurveBase.cpp"),
             Object(NonMatching, "fluff/graphics/MNEB.cpp"),
             Object(NonMatching, "fluff/graphics/WoolBaseMdl.cpp"),
-            Object(Matching,    "fluff/graphics/effect/FriendEffect.cpp"),
-        ]
+            Object(Matching, "fluff/graphics/effect/FriendEffect.cpp"),
+        ],
     },
     {
         "lib": "fluff/graphics/",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_base_no_inline_deferred, "-pragma \"merge_float_consts on\""],
+        "cflags": [
+            *cflags_fluff_base_no_inline_deferred,
+            '-pragma "merge_float_consts on"',
+        ],
         "host": False,
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/graphics/BgBackImage.cpp"),
-            Object(Matching,    "fluff/graphics/BGSTFile.cpp"),
+            Object(Matching, "fluff/graphics/BGSTFile.cpp"),
             Object(NonMatching, "fluff/graphics/BGSTList.cpp"),
             Object(NonMatching, "fluff/graphics/BGSTReader.cpp"),
             Object(NonMatching, "fluff/graphics/FB2Tex.cpp"),
@@ -614,11 +615,12 @@ config.libs = [
         ],
     },
     {
-        "lib" : "fluff/object/gimmick/",
+        "lib": "fluff/object/gimmick/",
         "mw_version": config.linker_version,
         "cflags": [
             *cflags_fluff_base_no_inline_deferred,
-            "-pragma \"merge_float_consts on\""],
+            '-pragma "merge_float_consts on"',
+        ],
         "host": False,
         "progress_category": "fluff",
         "objects": [
@@ -644,40 +646,39 @@ config.libs = [
             Object(NonMatching, "fluff/object/gimmick/GmkWoolRope.cpp"),
         ],
     },
-
     {
-        "lib" : "fluff/object/collision/",
+        "lib": "fluff/object/collision/",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_util, "-pragma \"merge_float_consts on\""],
+        "cflags": [*cflags_fluff_util, '-pragma "merge_float_consts on"'],
         "host": False,
         "progress_category": "fluff",
-        "objects" : [
+        "objects": [
             Object(NonMatching, "fluff/object/collision/FlfRideHitBase.cpp"),
             Object(NonMatching, "fluff/object/collision/KdTree.cpp"),
             Object(NonMatching, "fluff/object/collision/ColObj.cpp"),
         ],
     },
     {
-        "lib" : "fluff/util",
+        "lib": "fluff/util",
         "mw_version": config.linker_version,
         "cflags": [
-            *cflags_fluff_util, 
-            "-pragma \"merge_float_consts on\"",
+            *cflags_fluff_util,
+            '-pragma "merge_float_consts on"',
         ],
         "host": False,
         "progress_category": "fluff",
-        "objects" : [
-            Object(Matching,    "fluff/object/FlfHandleList.cpp"),
+        "objects": [
+            Object(Matching, "fluff/object/FlfHandleList.cpp"),
             Object(NonMatching, "fluff/stage/mission/MissionUtil.cpp"),
-            Object(Matching,    "fluff/util/CollisionFlagUtil.cpp"),
+            Object(Matching, "fluff/util/CollisionFlagUtil.cpp"),
             Object(NonMatching, "fluff/util/FullSortSceneUtil.cpp"),
             Object(NonMatching, "fluff/util/GimmickResource.cpp"),
             Object(NonMatching, "fluff/util/GimmickUtil.cpp"),
-            Object(Matching,    "fluff/util/KdTreeUtil.cpp"),
+            Object(Matching, "fluff/util/KdTreeUtil.cpp"),
             Object(NonMatching, "fluff/util/MoveTarget.cpp"),
             Object(NonMatching, "fluff/util/PathInfo.cpp"),
             Object(NonMatching, "fluff/util/SignatureUtil.cpp"),
-            Object(Matching,    "fluff/util/SimpleMdlCommon.cpp"),
+            Object(Matching, "fluff/util/SimpleMdlCommon.cpp"),
         ],
     },
     {
@@ -691,8 +692,7 @@ config.libs = [
             Object(NonMatching, "fluff/demo/FlfDemoCtrl.cpp"),
         ],
     },
-
-        {
+    {
         "lib": "fluff/language",
         "mw_version": config.linker_version,
         "cflags": [*cflags_fluff_util],
@@ -700,46 +700,49 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/language/Language.cpp"),
-            Object(NonMatching, "fluff/util/NURBSOption.cpp"),
         ],
     },
-
     {
-        "lib" : "fluff/stage",
+        "lib": "fluff/stage",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_util,],
+        "cflags": [
+            *cflags_fluff_util,
+        ],
         "host": False,
         "progress_category": "fluff",
-        "objects" : [
+        "objects": [
             # fluff/stage
             Object(NonMatching, "fluff/stage/StageResources.cpp"),
-
         ],
     },
     {
-        "lib" : "fluff/stage/mission",
+        "lib": "fluff/stage/mission",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_util,],
+        "cflags": [
+            *cflags_fluff_util,
+        ],
         "host": False,
         "progress_category": "fluff",
-        "objects" : [
+        "objects": [
             # fluff/stage/mission/
             Object(NonMatching, "fluff/stage/mission/MissionClearChecker.cpp"),
-
         ],
     },
     {
-        "lib" : "fluff/stage/work",
+        "lib": "fluff/stage/work",
         "mw_version": config.linker_version,
-        "cflags": [*cflags_fluff_util,],
+        "cflags": [
+            *cflags_fluff_util,
+        ],
         "host": False,
         "progress_category": "fluff",
-        "objects" : [
+        "objects": [
             # fluff/work/
             Object(NonMatching, "fluff/work/InStageWork.cpp"),
         ],
     },
 ]
+
 
 # Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
 # This is called once per module, with the module ID and the current link order.
@@ -753,6 +756,7 @@ def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
     if module_id == 0:  # DOL
         return objects + ["dummy.c"]
     return objects
+
 
 # Uncomment to enable the link order callback.
 # config.link_order_callback = link_order_callback

@@ -24,10 +24,12 @@ public:
         ptr = reinterpret_cast<T*>(reinterpret_cast<u8*>(ptr) + 4);
     }
 
-    inline void SetPointer(void* pBase) {
+    inline T* SetPointer(void* pBase) {
         this->ptr = reinterpret_cast<T*>(
-            reinterpret_cast<u8*>(pBase) + offs
+            reinterpret_cast<u8*>(pBase) + offset()
         );
+
+        return pointer();
     }
 private:
     union {

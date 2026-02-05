@@ -7,9 +7,6 @@
 class NURBSSet;
 class NURBSObject;
 
-// Data Definition?
-// sdata
-
 namespace MNEB {
     ENUM_CLASS(LockState,
         Unlocked = 0,
@@ -68,6 +65,11 @@ namespace MNEB {
         gfl::Offset<placeholder_t> m_C;
     };
 
+    struct KnotTable {
+        u32 mNumKnots;
+        float mKnots[];
+    };
+
     struct CurveBlock {
         char mMagic[4];
         size_t mBlockSize;
@@ -78,7 +80,7 @@ namespace MNEB {
         bool m_94;
         int m_98;
         gfl::Offset<ControlPoint> mControlPointOffset;
-        gfl::Offset<float> mKnotOffset;
+        gfl::Offset<KnotTable> mKnotOffset;
         gfl::Offset<KeyFrameInfo> mKeyFrameInfoOffset;
         float m_A8[4];
 
@@ -86,6 +88,7 @@ namespace MNEB {
     };
 
     struct DemoOption {
+        ~DemoOption();
         s16 GetOption(float);
         char mName[0x10];
         size_t mOptionLength;
