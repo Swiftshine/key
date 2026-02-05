@@ -1,6 +1,7 @@
 #ifndef FLUFF_FLFDEMOCTRL_H
 #define FLUFF_FLFDEMOCTRL_H
 
+#include "graphics/MNEB.h"
 #include "types.h"
 #include <string>
 #include <nw4r/g3d/res/g3d_resnode.h>
@@ -12,7 +13,6 @@
 #include "misc/ScopedPointers.h"
 #include "util/NURBSOption.h"
 #include "object/PlayerBase.h"
-#include "util/NURBSStructures.h"
 
 // size: 0x24
 class FlfDemoNodeCtrl {
@@ -38,7 +38,7 @@ public:
     /* Class Members */
 
     const char* GetResName();
-    void ResetOptions(NURBSStruct2* arg1);
+    // void ResetOptions(NURBSStruct2* arg1);
 
     /* Static Methods */
 
@@ -50,7 +50,7 @@ public:
         mtx[1][3] = src.y;
         mtx[2][3] = src.z;
     }
-    
+
     static inline nw4r::math::VEC3 GetMTXTranslation(nw4r::math::MTX34& mtx) {
         return nw4r::math::VEC3(mtx[0][3], mtx[1][3], mtx[2][3]);
     }
@@ -58,19 +58,19 @@ public:
     /* Class Members */
 
     /* 0x04 */ int m_4;
-    /* 0x08 */ int mFullSortSceneID;                 
-    /* 0x0C */ nw4r::g3d::ResNode mResNode;          
-    /* 0x10 */ gfl::Pointer<NURBSOption> mAnimNo;    
-    /* 0x14 */ gfl::Pointer<NURBSOption> mBlendFrame;
-    /* 0x18 */ gfl::Pointer<NURBSOption> mUpdateRate;
-    /* 0x1C */ gfl::Pointer<NURBSOption> mLayer;     
-    /* 0x20 */ gfl::Pointer<NURBSOption> mVisibility;
+    /* 0x08 */ int mFullSortSceneID;
+    /* 0x0C */ nw4r::g3d::ResNode mResNode;
+    /* 0x10 */ gfl::Pointer<MNEB::DemoOption> mAnimNo;
+    /* 0x14 */ gfl::Pointer<MNEB::DemoOption> mBlendFrame;
+    /* 0x18 */ gfl::Pointer<MNEB::DemoOption> mUpdateRate;
+    /* 0x1C */ gfl::Pointer<MNEB::DemoOption> mLayer;
+    /* 0x20 */ gfl::Pointer<MNEB::DemoOption> mVisibility;
 };
 
 // size: 0x34
 class FlfDemoCharCtrl : public FlfDemoNodeCtrl {
 public:
-    
+
 
     FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name);
 
@@ -135,17 +135,17 @@ public:
 
     /* Class Members */
 
-    /* 0x24 */ int mBeadType;                 
-    /* 0x28 */ int mBeadColor;                
-    /* 0x2C */ FlfHandle mBeadHandle;         
+    /* 0x24 */ int mBeadType;
+    /* 0x28 */ int mBeadColor;
+    /* 0x2C */ FlfHandle mBeadHandle;
     /* 0x34 */ nw4r::math::VEC3 mBeadPosition;
-    /* 0x40 */ bool mBeadCreated;             
+    /* 0x40 */ bool mBeadCreated;
 };
 
 // size: 0x2C
 class FlfDemoGmkCtrl : public FlfDemoNodeCtrl {
 public:
-    
+
 
     FlfDemoGmkCtrl(nw4r::g3d::ResNode resNode, std::string& tag);
 
@@ -165,7 +165,7 @@ public:
 // size: 0x2C
 class FlfDemoFlgCtrl : public FlfDemoNodeCtrl {
 public:
-    
+
 
     FlfDemoFlgCtrl(nw4r::g3d::ResNode resNode, std::string& indexStr);
 
@@ -184,8 +184,8 @@ public:
 // size: 0x28
 class FlfDemoLoopCtrl : public FlfDemoNodeCtrl {
 public:
-    
-    
+
+
     FlfDemoLoopCtrl(nw4r::g3d::ResNode resNode);
 
     /* Virtual Methods */
@@ -202,7 +202,7 @@ public:
 // size: 0x8
 class FlfDemoCamCtrl {
 public:
-    
+
 
     FlfDemoCamCtrl(nw4r::g3d::ResNode resNode);
 
@@ -234,8 +234,6 @@ struct FlfDemoCtrlStruct {
 // size: 0x5C
 class FlfDemoCtrl {
 public:
-    
-
     FlfDemoCtrl();
 
     /* Virtual Methods */
@@ -261,8 +259,8 @@ public:
     void SetMatrix(nw4r::math::VEC2*);
     void SetScnMdlWrapper();
     void AddNwBlendAnmWrapperResFileObjects();
-    static void GetCount(NURBSOption* dst, const char* name);
-    void fn_802BBE08(NURBSStruct2*);
+    // static void GetCount(NURBSOption* dst, const char* name);
+    // void fn_802BBE08(NURBSStruct2*);
 
     /* Class Members */
 

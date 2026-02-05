@@ -29,71 +29,71 @@ const char* FlfDemoNodeCtrl::GetResName() {
 }
 
 // https://decomp.me/scratch/eCUhG
-void FlfDemoNodeCtrl::ResetOptions(NURBSStruct2* arg1) {
-    mAnimNo.Destroy();
-    mBlendFrame.Destroy();
-    mUpdateRate.Destroy();
-    mLayer.Destroy();
-    mVisibility.Destroy();
+// void FlfDemoNodeCtrl::ResetOptions(NURBSStruct2* arg1) {
+//     mAnimNo.Destroy();
+//     mBlendFrame.Destroy();
+//     mUpdateRate.Destroy();
+//     mLayer.Destroy();
+//     mVisibility.Destroy();
 
-    NURBSStruct2* s2 = arg1;
+//     NURBSStruct2* s2 = arg1;
 
-    for (int i = 0; i < arg1->mCount; i++) {
-        NURBSStruct3* s3 = s2->m_44;
+//     for (int i = 0; i < arg1->mCount; i++) {
+//         NURBSStruct3* s3 = s2->m_44;
 
-        if (strcmp(s3->mType, "anim_no") == 0) {
-            mAnimNo.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-        } else if (strcmp(s3->mType, "blend_frame") == 0) {
-            mBlendFrame.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-        } else if (strcmp(s3->mType, "update_rate") == 0) {
-            mUpdateRate.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-        } else if (strcmp(s3->mType, "layer") == 0) {
-            mLayer.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-        } else if (strcmp(s3->mType, "visibility") == 0) {
-            mVisibility.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-        } else {
-            // this was probably hastily cut from the final
-            strcmp(s3->mType, "option");
-        }
+//         if (strcmp(s3->mType, "anim_no") == 0) {
+//             mAnimNo.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
+//         } else if (strcmp(s3->mType, "blend_frame") == 0) {
+//             mBlendFrame.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
+//         } else if (strcmp(s3->mType, "update_rate") == 0) {
+//             mUpdateRate.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
+//         } else if (strcmp(s3->mType, "layer") == 0) {
+//             mLayer.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
+//         } else if (strcmp(s3->mType, "visibility") == 0) {
+//             mVisibility.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
+//         } else {
+//             // this was probably hastily cut from the final
+//             strcmp(s3->mType, "option");
+//         }
 
-        s2 = (NURBSStruct2*)(&s2->mName + 4);
-    }
-}
+//         s2 = (NURBSStruct2*)(&s2->mName + 4);
+//     }
+// }
 
-void FlfDemoNodeCtrl::vf18(float arg0) {
-    if (mBlendFrame.IsValid()) {
-        s16 opt = mBlendFrame->GetOption(arg0);
-        SetCurrentFrame(static_cast<int>(opt));
-    }
+// void FlfDemoNodeCtrl::vf18(float arg0) {
+//     if (mBlendFrame.IsValid()) {
+//         s16 opt = mBlendFrame->GetOption(arg0);
+//         SetCurrentFrame(static_cast<int>(opt));
+//     }
 
-    if (mUpdateRate.IsValid()) {
-        SetUpdateRate(0.01f * static_cast<float>(static_cast<int>(mUpdateRate->GetOption(arg0))));
-    }
+//     if (mUpdateRate.IsValid()) {
+//         SetUpdateRate(0.01f * static_cast<float>(static_cast<int>(mUpdateRate->GetOption(arg0))));
+//     }
 
-    if (mLayer.IsValid()) {
-        s16 layer = mLayer->GetOption(arg0);
-        int sceneID = layer + 6;
+//     if (mLayer.IsValid()) {
+//         s16 layer = mLayer->GetOption(arg0);
+//         int sceneID = layer + 6;
 
-        if (sceneID != mFullSortSceneID) {
-            SetFullSortScene(sceneID);
-            mFullSortSceneID = sceneID;
-        }
-    }
+//         if (sceneID != mFullSortSceneID) {
+//             SetFullSortScene(sceneID);
+//             mFullSortSceneID = sceneID;
+//         }
+//     }
 
-    if (mVisibility.IsValid()) {
-        s16 opt = mVisibility->GetOption(arg0);
-        SetVisibility(opt != 0);
-    }
+//     if (mVisibility.IsValid()) {
+//         s16 opt = mVisibility->GetOption(arg0);
+//         SetVisibility(opt != 0);
+//     }
 
-    if (mAnimNo.IsValid()) {
-        s16 opt = mAnimNo->GetOption(arg0);
-        uint unk = vf20();
-        
-        if (opt != unk) {
-            vf24(opt);
-        }
-    }
-}
+//     if (mAnimNo.IsValid()) {
+//         s16 opt = mAnimNo->GetOption(arg0);
+//         uint unk = vf20();
+
+//         if (opt != unk) {
+//             vf24(opt);
+//         }
+//     }
+// }
 
 void FlfDemoNodeCtrl::SetCurrentFrame(int frame) {
     return;
@@ -130,7 +130,7 @@ void FlfDemoNodeCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
     nw4r::math::MTX34 mtx2;
     memcpy(mtx2, matrices + mtxID, sizeof(nw4r::math::MTX34));
     mtx = mtx2;
-    
+
     f32 tmp = FullSortSceneUtil::GetZOrder(mFullSortSceneID, 4);
     nw4r::math::VEC3 vec = GetMTXTranslation(mtx);
     vec.z += tmp;
@@ -156,14 +156,14 @@ std::string FlfDemoNodeCtrl::GetCharaResourceName(std::string& name) {
             c[i] = '/';
         }
     }
-    
+
     return "chara/" + temp;
 }
 
 /* FlfDemoCharCtrl */
 
 FlfDemoCharCtrl::FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name)
-    : FlfDemoNodeCtrl(resNode) 
+    : FlfDemoNodeCtrl(resNode)
     , mResourcePath()
     , mFlfMdlDraw(nullptr)
 {
@@ -303,7 +303,7 @@ void FlfDemoPlayerCtrl::vf24(int arg0) {
     if (mPlayer == nullptr) {
         return;
     }
-    
+
     size_t offs = 0;
 
     int animationID = 0;
@@ -313,14 +313,14 @@ void FlfDemoPlayerCtrl::vf24(int arg0) {
             animationID = arg0;
             break;
         }
-    }   
+    }
 
     mPlayer->PlayAnimation(animationID);
 }
 
 void FlfDemoPlayerCtrl::SetCurrentFrame(int frame) {
     mCurrentFrame = frame;
-    
+
     if (mPlayer != nullptr) {
         mPlayer->mPlayerMdlMng->GetFlfMdlDraw()->SetCurrentFrameInt(frame);
     }
@@ -526,7 +526,7 @@ void FlfDemoCamCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
 
     nw4r::math::MTX34 mtx;
     ZERO_MTX_34(mtx);
-    
+
     nw4r::math::MTX34 mtx2;
     memcpy(mtx2, matrices + mtxID, sizeof(nw4r::math::MTX34));
     mtx = mtx2;
@@ -613,7 +613,7 @@ void FlfDemoCtrl::Update() {
     switch (mState) {
         case 1: {
             gfl::ResFileInfo* info = mResFileObject.Get();
-            
+
             bool create;
 
             if (info == nullptr) {
@@ -642,7 +642,7 @@ void FlfDemoCtrl::Update() {
 
         case 2: {
             gfl::LinkedList<gfl::ResFileObject>::NodeBase* node = 0;
-            
+
             bool loop;
 
             do {
@@ -671,7 +671,7 @@ void FlfDemoCtrl::Update() {
             fn_802BB920();
             break;
         }
-    }   
+    }
 }
 
 void FlfDemoCtrl::fn_802BB920() {
@@ -702,40 +702,40 @@ void FlfDemoCtrl::fn_802BB920() {
 }
 
 // fake match
-void FlfDemoCtrl::fn_802BBA4C(int animID, nw4r::math::VEC2* vec) {
-    mFlfMdlDraw->PlayNURBSAnimation(animID, false);
-    mFlfMdlDraw->SetUpdateRate(1.0f);
-    
-    gfl::ScnMdlWrapper* modelWrapper = mFlfMdlDraw->GetNURBSAnimWrapperModelWrapper();
+// void FlfDemoCtrl::fn_802BBA4C(int animID, nw4r::math::VEC2* vec) {
+//     mFlfMdlDraw->PlayNURBSAnimation(animID, false);
+//     mFlfMdlDraw->SetUpdateRate(1.0f);
 
-    if (modelWrapper != mScnMdlWrapper) {
-        SetScnMdlWrapper();
-    }
+//     gfl::ScnMdlWrapper* modelWrapper = mFlfMdlDraw->GetNURBSAnimWrapperModelWrapper();
 
-    NURBSSet* set = mFlfMdlDraw->GetNURBSAnimWrapperNURBSSet();
+//     if (modelWrapper != mScnMdlWrapper) {
+//         SetScnMdlWrapper();
+//     }
 
-    if (set != nullptr) {
-        MNEB::MNDDEntry* entry = set->mEntry;
+//     NURBSSet* set = mFlfMdlDraw->GetNURBSAnimWrapperNURBSSet();
 
-        if (entry != nullptr) {
-            u8* e = (u8*)entry;
+//     if (set != nullptr) {
+//         MNEB::DemoDataBlock* entry = set->mEntry;
 
-            for (uint i = 0; i < entry->mCount; i++) {
-                fn_802BBE08((NURBSStruct2*)((MNEB::MNDDEntry*)(e))->m_C);
-                e += 4;
-            }
-        }   
-    }
-    
-    mState = 4;
-    
-    if (vec != nullptr) {
-        SetMatrix(vec);
-    }
+//         if (entry != nullptr) {
+//             u8* e = (u8*)entry;
 
-    mFlfMdlDraw->UpdateFrame();
-    Update();
-}
+//             for (uint i = 0; i < entry->mCount; i++) {
+//                 fn_802BBE08((NURBSStruct2*)((MNEB::DemoDataBlock*)(e))->m_C);
+//                 e += 4;
+//             }
+//         }
+//     }
+
+//     mState = 4;
+
+//     if (vec != nullptr) {
+//         SetMatrix(vec);
+//     }
+
+//     mFlfMdlDraw->UpdateFrame();
+//     Update();
+// }
 
 uint FlfDemoCtrl::fn_802BBB28() {
     return mFlfMdlDraw->mCurrentAnimationID;

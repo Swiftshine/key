@@ -4,7 +4,6 @@
 #include "types.h"
 #include "gfl/gflResFileInfo.h"
 #include "graphics/MNEB.h"
-#include "util/NURBSStructures.h"
 
 // size unk
 class NURBSSet {
@@ -14,7 +13,7 @@ public:
     /* Class Members */
 
     /* 0x00 */ STRUCT_FILL(0x14);
-    /* 0x14 */ MNEB::MNDDEntry* mEntry;
+    /* 0x14 */ MNEB::DemoDataBlock* mEntry;
 };
 
 #endif
