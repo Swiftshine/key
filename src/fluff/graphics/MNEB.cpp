@@ -57,28 +57,63 @@ uint File::CopyHeader(void* pData) {
     return header->mCurveBlockCount;
 }
 
+// https://decomp.me/scratch/LM25d
 void File::SetCurveBlock(NURBSObject* pObj, CurveBlock* pBlock) {
     if (!mIsLocked) {
+        pBlock->mControlPointOffset.SetPointer(mRawData);
+        pBlock->mKnotOffset.SetPointer(mRawData);
+        pBlock->mKeyFrameInfoOffset.SetPointer(mRawData);
 
+        KeyFrameInfo* kfi = pBlock->mKeyFrameInfoOffset.pointer();
+
+        if (kfi != nullptr) {
+            if (kfi->mKeyFrameSetTableOffset.offset() != 0) {
+                kfi->mKeyFrameSetTableOffset.SetPointer(mRawData);
+
+                for (uint i = 0; i < kfi->mKeyFrameSetTableOffset->mNumKeyFrameSets; i++) {
+                    kfi->mKeyFrameSetTableOffset->mKeyFrameSetOffsets[i].SetPointer(mRawData);
+                }
+            }
+
+            if (kfi->m_4.offset() != 0) {
+                kfi->m_4.SetPointer(mRawData);
+
+                for (uint i = 0; i < kfi->m_4->mUnkCount; i++) {
+                    kfi->m_4->m_4[i].SetPointer(mRawData);
+                }
+            }
+
+            if (kfi->m_8.offset() != 0) {
+                kfi->m_8.SetPointer(mRawData);
+            }
+
+            if (kfi->m_C.offset() != 0) {
+                kfi->m_C.SetPointer(mRawData);
+            }
+        }
     }
 
     pObj->mCurveBlock = pBlock;
 }
 
 DemoDataBlock* File::GetDemoDataBlock(void* pData) {
-    DemoDataBlock* block = reinterpret_cast<DemoDataBlock*>(pData);
-
     if (!mIsLocked) {
-        for (uint i = 0; i < block->mDemoOptionSetCount; i++) {
-            DemoOptionSet* curSet = &block->mDemoOptionSets[i];
+        DemoDataBlock* block = reinterpret_cast<DemoDataBlock*>(pData);
+        DemoOptionSet* p;
+        DemoOptionSet* p1;
+        for (uint i = 0; i < reinterpret_cast<DemoDataBlock*>(pData)->mDemoOptionSetCount; i++) {
+            block->mDemoOptionSets.SetPointer(mRawData);
+            p = block->mDemoOptionSets.pointer();
+            p1 = block->mDemoOptionSets.pointer();
 
-            // block->mDemoOptionSets[i] = (DemoO((u32)curSet);
-            DemoOptionSet* set = &block->mDemoOptionSets[i];
-            for (uint j = 0; j < set->mNumDemoOptions; j++) {
-                set[j].mDemoOptions = (DemoOption*) ((u8*)set->mDemoOptions + (size_t)mRawData);
+            for (uint j = 0; j < p->mNumDemoOptions; j++) {
+                p1->mDemoOptions.SetPointer(mRawData);
+                p1 = reinterpret_cast<DemoOptionSet*>((char*)p1 + 4);
             }
+
+            block = reinterpret_cast<DemoDataBlock*>((char*)block + 4);
         }
     }
 
-    return block;
+    return reinterpret_cast<DemoDataBlock*>(pData);
 }
