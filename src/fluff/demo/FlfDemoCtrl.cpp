@@ -1,4 +1,9 @@
 #include "demo/FlfDemoCtrl.h"
+#include "gflHeap.h"
+#include "graphics/MNEB.h"
+#include "graphics/NURBSObject.h"
+#include "macros.h"
+#include "manager/PlayerMdlMng.h"
 #include "util/FullSortSceneUtil.h"
 #include "manager/Stage.h"
 #include "manager/GameManager.h"
@@ -7,6 +12,7 @@
 #include "manager/CamMng.h"
 #include "util/BeadUtil.h"
 #include "gfl/gflVec2.h"
+#include "util/NURBSOption.h"
 
 /* FlfDemoNodeCtrl */
 
@@ -25,75 +31,76 @@ FlfDemoNodeCtrl::~FlfDemoNodeCtrl() { }
 
 const char* FlfDemoNodeCtrl::GetResName() {
     NW4R_RESNODE_ASSERT(mResNode);
-    return mResNode.GetResName().GetName();
+    return mResNode.GetName();
 }
 
-// https://decomp.me/scratch/eCUhG
-// void FlfDemoNodeCtrl::ResetOptions(NURBSStruct2* arg1) {
-//     mAnimNo.Destroy();
-//     mBlendFrame.Destroy();
-//     mUpdateRate.Destroy();
-//     mLayer.Destroy();
-//     mVisibility.Destroy();
+// https://decomp.me/scratch/s44we
+// (old scratch: https://decomp.me/scratch/eCUhG)
+void FlfDemoNodeCtrl::ResetOptions(gfl::Offset<MNEB::DemoOptionSet>& rDemoOptionSet) {
+    mAnimNo.Destroy();
+    mBlendFrame.Destroy();
+    mUpdateRate.Destroy();
+    mLayer.Destroy();
+    mVisibility.Destroy();
 
-//     NURBSStruct2* s2 = arg1;
+    MNEB::DemoOptionSet* set = rDemoOptionSet.pointer();
 
-//     for (int i = 0; i < arg1->mCount; i++) {
-//         NURBSStruct3* s3 = s2->m_44;
+    for (uint i = 0; i < set->mNumDemoOptions; i++) {
+        MNEB::DemoOption* opt = set->mDemoOptions.pointer();
 
-//         if (strcmp(s3->mType, "anim_no") == 0) {
-//             mAnimNo.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-//         } else if (strcmp(s3->mType, "blend_frame") == 0) {
-//             mBlendFrame.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-//         } else if (strcmp(s3->mType, "update_rate") == 0) {
-//             mUpdateRate.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-//         } else if (strcmp(s3->mType, "layer") == 0) {
-//             mLayer.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-//         } else if (strcmp(s3->mType, "visibility") == 0) {
-//             mVisibility.Create(new (gfl::HeapID::Work) NURBSOption(s3->mName));
-//         } else {
-//             // this was probably hastily cut from the final
-//             strcmp(s3->mType, "option");
-//         }
+        if (strcmp(opt->mName, "anim_no") == 0) {
+            mAnimNo.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+        } else if (strcmp(opt->mName, "blend_frame") == 0) {
+            mBlendFrame.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+        } else if (strcmp(opt->mName, "update_rate") == 0) {
+            mUpdateRate.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+        } else if (strcmp(opt->mName, "layer") == 0) {
+            mLayer.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+        } else if (strcmp(opt->mName, "visibility") == 0) {
+            mVisibility.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+        } else {
+            // likely cut
+            strcmp(opt->mName, "option");
+        }
 
-//         s2 = (NURBSStruct2*)(&s2->mName + 4);
-//     }
-// }
+        set = reinterpret_cast<MNEB::DemoOptionSet*>(reinterpret_cast<u8*>(set) + 4);
+    }
+}
 
-// void FlfDemoNodeCtrl::vf18(float arg0) {
-//     if (mBlendFrame.IsValid()) {
-//         s16 opt = mBlendFrame->GetOption(arg0);
-//         SetCurrentFrame(static_cast<int>(opt));
-//     }
+void FlfDemoNodeCtrl::SetOptions(float arg0) {
+    if (mBlendFrame.IsValid()) {
+        s16 opt = mBlendFrame->GetOption(arg0);
+        SetCurrentFrame(static_cast<int>(opt));
+    }
 
-//     if (mUpdateRate.IsValid()) {
-//         SetUpdateRate(0.01f * static_cast<float>(static_cast<int>(mUpdateRate->GetOption(arg0))));
-//     }
+    if (mUpdateRate.IsValid()) {
+        SetUpdateRate(0.01f * static_cast<float>(static_cast<int>(mUpdateRate->GetOption(arg0))));
+    }
 
-//     if (mLayer.IsValid()) {
-//         s16 layer = mLayer->GetOption(arg0);
-//         int sceneID = layer + 6;
+    if (mLayer.IsValid()) {
+        s16 layer = mLayer->GetOption(arg0);
+        int sceneID = layer + 6;
 
-//         if (sceneID != mFullSortSceneID) {
-//             SetFullSortScene(sceneID);
-//             mFullSortSceneID = sceneID;
-//         }
-//     }
+        if (sceneID != mFullSortSceneID) {
+            SetFullSortScene(sceneID);
+            mFullSortSceneID = sceneID;
+        }
+    }
 
-//     if (mVisibility.IsValid()) {
-//         s16 opt = mVisibility->GetOption(arg0);
-//         SetVisibility(opt != 0);
-//     }
+    if (mVisibility.IsValid()) {
+        s16 opt = mVisibility->GetOption(arg0);
+        SetVisibility(opt != 0);
+    }
 
-//     if (mAnimNo.IsValid()) {
-//         s16 opt = mAnimNo->GetOption(arg0);
-//         uint unk = vf20();
+    if (mAnimNo.IsValid()) {
+        s16 opt = mAnimNo->GetOption(arg0);
+        uint unk = vf20();
 
-//         if (opt != unk) {
-//             vf24(opt);
-//         }
-//     }
-// }
+        if (opt != unk) {
+            vf24(opt);
+        }
+    }
+}
 
 void FlfDemoNodeCtrl::SetCurrentFrame(int frame) {
     return;
@@ -276,8 +283,8 @@ void FlfDemoPlayerCtrl::UpdateFrame() {
     }
 }
 
-void FlfDemoPlayerCtrl::vf18(float arg0) {
-    FlfDemoNodeCtrl::vf18(arg0);
+void FlfDemoPlayerCtrl::SetOptions(float arg0) {
+    FlfDemoNodeCtrl::SetOptions(arg0);
 
     if (mPlayer != nullptr && mPlayer->mFlfMdlCollision != nullptr) {
         if (!m_25) {
@@ -298,17 +305,15 @@ uint FlfDemoPlayerCtrl::vf20() {
     return 0;
 }
 
-// nonmatching
+// https://decomp.me/scratch/qCEL9
 void FlfDemoPlayerCtrl::vf24(int arg0) {
     if (mPlayer == nullptr) {
         return;
     }
 
-    size_t offs = 0;
+    uint animationID = 0;
 
-    int animationID = 0;
-
-    for (int i = 0; i < 101; i++) {
+    for (uint i = 0; i < ARRAY_LENGTH(PlayerMdlMng::PlayerAnimationIDs); i++) {
         if (arg0 == PlayerMdlMng::PlayerAnimationIDs[i]) {
             animationID = arg0;
             break;
@@ -317,6 +322,7 @@ void FlfDemoPlayerCtrl::vf24(int arg0) {
 
     mPlayer->PlayAnimation(animationID);
 }
+
 
 void FlfDemoPlayerCtrl::SetCurrentFrame(int frame) {
     mCurrentFrame = frame;
@@ -545,20 +551,23 @@ FlfDemoCtrl::FlfDemoCtrl()
     : mState(0)
     , mResourcePath()
     , m_14(false)
+    , mResFileObject(nullptr)
     , mResFileObjects()
     , mFlfMdlDraw(nullptr)
     , mScnMdlWrapper(nullptr)
     , mCamCtrl(nullptr)
     , m_34(nullptr)
+    , mTask(this, Update, "FlfDemoCtrl")
+    , mNodeControls()
 {
-    // not decompiled
+    mTask.SetFlags(5);
+    mTask.mSuspendFlags |= 0x80;
+    GameManager::Instance()->mTask.MakeChild(&mTask);
 }
 
-// https://decomp.me/scratch/LnpwP
 FlfDemoCtrl::~FlfDemoCtrl() {
     DestroyResources();
 }
-
 
 void FlfDemoCtrl::ResetFlfMdlDraw(const char* resourcePath) {
     DestroyResources();
@@ -569,7 +578,7 @@ void FlfDemoCtrl::ResetFlfMdlDraw(const char* resourcePath) {
     mFlfMdlDraw->LoadNURBSFromFileList();
     mFlfMdlDraw->SetCurrentFrameInt(0);
     mFlfMdlDraw->SetUpdateRate(0.0f);
-    mFlfMdlDraw->fn_80023B24(0.0f);
+    mFlfMdlDraw->SetBlendUpdateRate(0.0f);
     mState = 3;
 }
 
@@ -578,7 +587,6 @@ bool FlfDemoCtrl::CheckState() {
     return mState == 3 || mState == 4;
 }
 
-// https://decomp.me/scratch/3F7dB
 void FlfDemoCtrl::DestroyResources() {
     ClearNodeControls();
 
@@ -586,120 +594,120 @@ void FlfDemoCtrl::DestroyResources() {
     mScnMdlWrapper = nullptr;
     mResFileObject = gfl::ResFileObject(nullptr);
 
-    mResFileObjects.Clear();
-    // mNodeCtrls.Clear();
+    mResFileObjects.clear();
 
     mState = 0;
 }
 
-// nonmatching due to gfl::LinkedList::Clear()
+// https://decomp.me/scratch/vB3ML
 void FlfDemoCtrl::ClearNodeControls() {
-    gfl::LinkedList<FlfDemoNodeCtrl*>::NodeBase* node;
+    std::list<FlfDemoNodeCtrl*>::iterator it = mNodeControls.begin();
 
-    GFL_LINK_LIST_WHILE(mNodeCtrls, FlfDemoNodeCtrl*, node, {
-        FlfDemoNodeCtrl* ctrl = node->ToNode()->GetData();
-        delete ctrl;
-    });
+    while (it != mNodeControls.end()) {
+        delete *it;
+        it++;
+    }
+
 
     m_34 = nullptr;
 
-    mNodeCtrls.Clear();
+    mNodeControls.clear();
 
     mCamCtrl.Destroy();
 }
 
 // nonmatching
-void FlfDemoCtrl::Update() {
-    switch (mState) {
-        case 1: {
-            gfl::ResFileInfo* info = mResFileObject.Get();
+// void FlfDemoCtrl::Update() {
+//     switch (mState) {
+//         case 1: {
+//             gfl::ResFileInfo* info = mResFileObject.Get();
 
-            bool create;
+//             bool create;
 
-            if (info == nullptr) {
-                create = true;
-            } else if ((info->GetFlags() & gfl::ResFileInfo::Flags::UseGfArch) == 0) {
-                create = false;
-            } else {
-                create = true;
-            }
+//             if (info == nullptr) {
+//                 create = true;
+//             } else if ((info->GetFlags() & gfl::ResFileInfo::Flags::UseGfArch) == 0) {
+//                 create = false;
+//             } else {
+//                 create = true;
+//             }
 
-            if (create) {
-                FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+//             if (create) {
+//                 FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
 
-                mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
-            }
+//                 mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
+//             }
 
-            mFlfMdlDraw->LoadNURBSFromFileList();
-            mFlfMdlDraw->SetCurrentFrameInt(0);
-            mFlfMdlDraw->SetUpdateRate(0.0f);
-            mFlfMdlDraw->fn_80023B24(0.0f);
-            AddNwBlendAnmWrapperResFileObjects();
+//             mFlfMdlDraw->LoadNURBSFromFileList();
+//             mFlfMdlDraw->SetCurrentFrameInt(0);
+//             mFlfMdlDraw->SetUpdateRate(0.0f);
+//             mFlfMdlDraw->SetBlendUpdateRate(0.0f);
+//             AddNwBlendAnmWrapperResFileObjects();
 
-            mState = 2;
-            break;
-        }
+//             mState = 2;
+//             break;
+//         }
 
-        case 2: {
-            gfl::LinkedList<gfl::ResFileObject>::NodeBase* node = 0;
+//         case 2: {
+//             gfl::LinkedList<gfl::ResFileObject>::NodeBase* node = 0;
 
-            bool loop;
+//             bool loop;
 
-            do {
-                if (node == mResFileObjects.GetNode()) {
-                    mState = 3;
-                    return;
-                }
+//             do {
+//                 if (node == mResFileObjects.GetNode()) {
+//                     mState = 3;
+//                     return;
+//                 }
 
-                gfl::ResFileInfo* info = mResFileObject.Get();
+//                 gfl::ResFileInfo* info = mResFileObject.Get();
 
-                if (info == nullptr) {
-                    loop = true;
-                } else if (info->GetFlags() & gfl::ResFileInfo::Flags::UseGfArch == 0) {
-                    loop = false;
-                } else {
-                    loop = true;
-                }
+//                 if (info == nullptr) {
+//                     loop = true;
+//                 } else if (info->GetFlags() & gfl::ResFileInfo::Flags::UseGfArch == 0) {
+//                     loop = false;
+//                 } else {
+//                     loop = true;
+//                 }
 
-            } while (loop);
+//             } while (loop);
 
 
-            break;
-        }
+//             break;
+//         }
 
-        case 4: {
-            fn_802BB920();
-            break;
-        }
-    }
-}
+//         case 4: {
+//             fn_802BB920();
+//             break;
+//         }
+//     }
+// }
 
-void FlfDemoCtrl::fn_802BB920() {
-    if (mFlfMdlDraw->IsAnimationDone() && m_34 != nullptr) {
-        int someFrame = m_34->GetUnk24();
+// void FlfDemoCtrl::fn_802BB920() {
+//     if (mFlfMdlDraw->IsAnimationDone() && m_34 != nullptr) {
+//         int someFrame = m_34->GetUnk24();
 
-        if (someFrame != 0) {
-            float end = mFlfMdlDraw->GetEndFrame();
-            mFlfMdlDraw->SetCurrentNURBSFrame(end - static_cast<float>(someFrame));
-        }
-    }
+//         if (someFrame != 0) {
+//             float end = mFlfMdlDraw->GetEndFrame();
+//             mFlfMdlDraw->SetCurrentNURBSFrame(end - static_cast<float>(someFrame));
+//         }
+//     }
 
-    float current = mFlfMdlDraw->GetCurrentFrame();
+//     float current = mFlfMdlDraw->GetCurrentFrame();
 
-    FlfDemoNodeCtrl* nodeCtrl;
+//     FlfDemoNodeCtrl* nodeCtrl;
 
-    GFL_LINK_LIST_WHILE_3(mNodeCtrls, FlfDemoNodeCtrl*, nodeCtrl, {
-        nodeCtrl->vf18(current);
-    });
+//     GFL_LINK_LIST_WHILE_3(mNodeCtrls, FlfDemoNodeCtrl*, nodeCtrl, {
+//         nodeCtrl->SetOptions(current);
+//     });
 
-    if (mScnMdlWrapper != nullptr) {
-        *reinterpret_cast<void**>(reinterpret_cast<u8*>(mScnMdlWrapper->GetScnMdl()) + 0x11C) = this;
+//     if (mScnMdlWrapper != nullptr) {
+//         *reinterpret_cast<void**>(reinterpret_cast<u8*>(mScnMdlWrapper->GetScnMdl()) + 0x11C) = this;
 
-        mScnMdlWrapper->GetScnMdl()->EnableScnObjCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
-        mScnMdlWrapper->DoG3dProc(0);
-        mScnMdlWrapper->GetScnMdl()->DisableScnMdlCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
-    }
-}
+//         mScnMdlWrapper->GetScnMdl()->EnableScnObjCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
+//         mScnMdlWrapper->DoG3dProc(0);
+//         mScnMdlWrapper->GetScnMdl()->DisableScnMdlCallbackTiming(nw4r::g3d::ScnObj::CALLBACK_TIMING_C);
+//     }
+// }
 
 // fake match
 // void FlfDemoCtrl::fn_802BBA4C(int animID, nw4r::math::VEC2* vec) {

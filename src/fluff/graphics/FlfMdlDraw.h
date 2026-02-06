@@ -92,7 +92,7 @@ public:
         /* 0x34 */ int m_34;
     };
 
-    
+
 
     FlfMdlDraw(
         FullSortScene* pFullSortScene,
@@ -109,7 +109,7 @@ public:
     /* 0x14 */ virtual void vf14();
 
     /* Class Methods */
-    
+
     void Update(bool shouldUpdate);
     nw4r::g3d::G3dObj* GetBlendAnmMatCtrlAnim(uint index);
     void fn_80147C28(int, float);
@@ -124,7 +124,7 @@ public:
     void UpdateFrame();
     void SetUpdateRate(float rate);
     int SetScene(FullSortScene* pFullSortScene);
-    void fn_80023B24(float);
+    void SetBlendUpdateRate(float);
     bool IsAnimationDone() const;
     float GetCurrentFrame();
     float GetEndFrame();

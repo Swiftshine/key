@@ -20,8 +20,9 @@ public:
         return offs;
     }
 
-    inline void IncrementPointer() {
+    static inline T* IncrementPointer(T* ptr) {
         ptr = reinterpret_cast<T*>(reinterpret_cast<u8*>(ptr) + 4);
+        return ptr;
     }
 
     inline T* SetPointer(void* pBase) {
