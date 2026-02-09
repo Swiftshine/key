@@ -2,7 +2,6 @@
 #define FLUFF_KDTREE_H
 
 #include "types.h"
-
 #include "object/collision/ColData.h"
 #include "util/KdTreeUtil.h"
 
@@ -17,8 +16,8 @@ public:
         mParent = pParent;
         mChild1 = nullptr;
         mChild2 = nullptr;
-        mColDataSeg = nullptr;
-        mColDataSegCount = 0;
+        mColData = nullptr;
+        mColDataCount = 0;
         SetMinX(minX);
         SetMinY(minY);
         SetMaxX(pParent->GetMaxX());
@@ -31,8 +30,8 @@ public:
         mParent = nullptr;
         mChild1 = nullptr;
         mChild2 = nullptr;
-        mColDataSeg = nullptr;
-        mColDataSegCount = 0;
+        mColData = nullptr;
+        mColDataCount = 0;
         mBounds.mMinX = rMin.x;
         mBounds.mMinY = rMin.y;
         mBounds.mMaxX = rMax.x;
@@ -45,16 +44,16 @@ public:
 
     /* Class Methods */
 
-    void Propagate(ColDataSeg* pColDataSeg) DONT_INLINE_CLASS;
-    void Add(ColDataSeg* pColDataSeg);
+    void Propagate(ColData* pColData) DONT_INLINE_CLASS;
+    void Add(ColData* pColData);
     void ConsolidateNodes() DONT_INLINE_CLASS;
-    void TryPropagate(ColDataSeg* pColDataSeg) DONT_INLINE_CLASS;
+    void TryPropagate(ColData* pColData) DONT_INLINE_CLASS;
     void CreateChildren() DONT_INLINE_CLASS;
     void ClearAll() DONT_INLINE_CLASS;
 
     /* Static Methods */
-    static void AddColDataSeg(ColDataSeg* pColDataSeg);
-    static void RemoveColDataSeg(ColDataSeg* pColDataSeg);
+    static void AddColData(ColData* pColData);
+    static void RemoveColData(ColData* pColData);
 
     inline uint GetDepth() {
         return mDepth;
@@ -104,22 +103,22 @@ public:
         mBounds.mMaxY = val;
     }
 
-    inline ColDataSeg* GetColDataSeg() {
-        return mColDataSeg;
+    inline ColData* GetColData() {
+        return mColData;
     }
 
-    inline void SetColDataSeg(ColDataSeg* pColData) {
-        mColDataSeg = pColData;
+    inline void SetColData(ColData* pColData) {
+        mColData = pColData;
     }
 
-    inline uint GetColDataSegCount() {
-        return mColDataSegCount;
+    inline uint GetColDataCount() {
+        return mColDataCount;
     }
 
-    inline void SetColDataSegCount(uint val) {
-        mColDataSegCount = val;
+    inline void SetColDataCount(uint val) {
+        mColDataCount = val;
     }
-    
+
     /* Class Members */
 
     /* 0x04 */ KdTreeSplitInfo mSplitInfo;
@@ -128,8 +127,8 @@ public:
     /* 0x20 */ KdTreeNode* mParent;
     /* 0x24 */ KdTreeNode* mChild1;
     /* 0x28 */ KdTreeNode* mChild2;
-    /* 0x2C */ ColDataSeg* mColDataSeg;
-    /* 0x30 */ uint mColDataSegCount;
+    /* 0x2C */ ColData* mColData;
+    /* 0x30 */ uint mColDataCount;
 };
 
 #define KDTREE_HITRESULT_NODE_COUNT 400
@@ -144,8 +143,8 @@ public:
     public:
         inline HitResult()
             : mNumNodes(0)
-            , mCurrentColDataSeg(nullptr)
-            , mColDataSegCount(-1u)
+            , mCurrentColData(nullptr)
+            , mColDataCount(-1u)
         {
             for (uint i = 0; i < KDTREE_HITRESULT_NODE_COUNT; i++) {
                 mNodes[i] = nullptr;
@@ -157,14 +156,14 @@ public:
 
         /* Class Methods */
 
-        ColDataSeg* GetCurrentColDataSeg();
+        ColData* GetCurrentColData();
 
         /* Class Members */
 
         /* 0x004 */ int mNumNodes;
         /* 0x008 */ KdTreeNode* mNodes[KDTREE_HITRESULT_NODE_COUNT];
-        /* 0x648 */ ColDataSeg* mCurrentColDataSeg;
-        /* 0x64C */ int mColDataSegCount;
+        /* 0x648 */ ColData* mCurrentColData;
+        /* 0x64C */ int mColDataCount;
     };
 
     KdTree();
@@ -172,7 +171,7 @@ public:
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~KdTree();
-    
+
     /* Class Methods */
 
     void CreateRootNode(const nw4r::math::VEC2& rMin, const nw4r::math::VEC2& rMax);

@@ -6,6 +6,7 @@
 #include <nw4r/math.h>
 #include "object/collision/Colbin.h"
 #include "object/collision/ColData.h"
+#include "object/collision/ColDataWrapper.h"
 #include "object/Gimmick.h"
 #include "gfl/gflArray.h"
 

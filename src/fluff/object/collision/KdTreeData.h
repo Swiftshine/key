@@ -10,6 +10,9 @@ class KdTreeNode;
 
 class KdTreeData : public IHitSide {
 public:
+    KdTreeData()
+        : mTreeNode(nullptr)
+    { }
 
     inline void SetTreeNode(KdTreeNode* node) {
         mTreeNode = node;

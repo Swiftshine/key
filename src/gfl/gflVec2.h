@@ -36,7 +36,7 @@ namespace gfl {
             x = rOther.x;
             y = rOther.y;
         }
-        
+
 
         static bool Sanitize(nw4r::math::VEC2& rVec);
     };
