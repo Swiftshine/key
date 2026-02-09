@@ -37,9 +37,9 @@ public:
         CutAction4 = 4,
         ManageGimmickCulling = 5, // Spawn or cull gimmicks based on position relative to the camera.
     );
-    
 
-    
+
+
 
     GmkMng();
     ~GmkMng();
@@ -64,40 +64,33 @@ public:
     bool IsGimmickOnScreen(const nw4r::math::VEC2& pGmk, Gimmick* gimmick);
     // calls vf68 on every gimmick
     void fn_80051B3C();
-    
+
     bool fn_801C1A60();
 
     inline void CreateGimmickConditionally(const nw4r::math::VEC2& rPos, Gimmick::GimmickBuildInfo* pBuildInfo);
 
     inline Gimmick* GetGimmickByTag(const std::string& rTag) {
-        gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
-        gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
 
-        Gimmick* gimmick = nullptr;
+        Gimmick* gmk;
 
-        while (node != end) {
-            gimmick = node->ToNode()->GetData();
-    
-            if (gimmick->mBuildInfoPtr != nullptr &&
-                rTag == gimmick->mBuildInfoPtr->GetCommonTag()
-            ) {
-                break;
-            } 
-    
-            node = node->GetNext();
+        for (std::list<Gimmick*>::iterator it = mGimmicks.begin(); it != mGimmicks.end(); it++) {
+            gmk = *it;
+            if (gmk->mBuildInfoPtr != nullptr && rTag == gmk->mBuildInfoPtr->GetCommonTag()) {
+                return gmk;
+            }
         }
-    
-        return gimmick;
+
+        return nullptr;
     }
-    
+
 
     /* Class Members */
 
     /* 0x00 */ int mState;
     /* 0x04 */ uint mNumCommonGimmicks;
-    /* 0x08 */ gfl::LinkedList<Gimmick*> mGimmicks;
-    /* 0x14 */ gfl::LinkedList<FlfHandle> mEffects;
-    /* 0x20 */ gfl::LinkedList<GimmickResource*> mGimmickResources;
+    /* 0x08 */ std::list<Gimmick*> mGimmicks;
+    /* 0x14 */ std::list<FlfHandle> mEffects;
+    /* 0x20 */ std::list<GimmickResource*> mGimmickResources;
     /* 0x2C */ Mapdata* mMapdata;
     /* 0x30 */ gfl::Pointer<gfl::Task> mTask;
 };

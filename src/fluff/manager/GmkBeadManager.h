@@ -2,8 +2,8 @@
 #define FLUFF_GMKBEADMANAGER_H
 
 // #pragma inline off
-
 #include "types.h"
+#include <list>
 #include "object/FlfHandleObj.h"
 #include "gfl/gflTask.h"
 #include "gfl/gflLinkedList.h"
@@ -37,7 +37,7 @@ public:
 
     ASSERT_SIZE(GmkBeadManager_Info, 0x44C);
 
-    
+
 
     GmkBeadManager(gfl::Task* pParentTask);
 
@@ -62,7 +62,7 @@ public:
 
     /* 0x004 */ gfl::Task mTask;
     /* 00x1C */ GmkBeadManager_Info mInfo;
-    /* 0x468 */ gfl::LinkedList<placeholder_t> mList;
+    /* 0x468 */ std::list<placeholder_t> mList;
 };
 
 #endif

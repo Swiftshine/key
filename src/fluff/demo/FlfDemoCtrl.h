@@ -33,7 +33,7 @@ public:
     /* 0x2C */ virtual void SetUpdateRate(float rate);
     /* 0x30 */ virtual void SetFullSortScene(uint sceneID);
     /* 0x34 */ virtual void SetVisibility(bool visibility);
-    /* 0x38 */ virtual void SetMatrix(nw4r::math::MTX34& matrix);
+    /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& matrix);
 
     /* Class Members */
 
@@ -51,7 +51,7 @@ public:
         mtx[2][3] = src.z;
     }
 
-    static inline nw4r::math::VEC3 GetMTXTranslation(nw4r::math::MTX34& mtx) {
+    static inline nw4r::math::VEC3 GetMTXTranslation(const nw4r::math::MTX34& mtx) {
         return nw4r::math::VEC3(mtx[0][3], mtx[1][3], mtx[2][3]);
     }
 
@@ -70,8 +70,6 @@ public:
 // size: 0x34
 class FlfDemoCharCtrl : public FlfDemoNodeCtrl {
 public:
-
-
     FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name);
 
     /* Virtual Methods */
@@ -85,7 +83,7 @@ public:
     /* 0x2C */ virtual void SetUpdateRate(float rate) override;
     /* 0x30 */ virtual void SetFullSortScene(uint sceneID) override;
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
-    /* 0x38 */ virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
+    /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& mtx) override;
 
     /* Class Members */
 
@@ -110,7 +108,7 @@ public:
     /* 0x2C */ virtual void SetUpdateRate(float rate) override;
     /* 0x30 */ virtual void SetFullSortScene(uint sceneID) override;
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
-    /* 0x38 */ virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
+    /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& mtx) override;
 
     /* Class Members */
 
@@ -131,7 +129,7 @@ public:
     /* 0x08 */ virtual ~FlfDemoBeadCtrl();
 
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
-    /* 0x38 */ virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
+    /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& mtx) override;
 
     /* Class Members */
 
@@ -153,7 +151,7 @@ public:
 
     /* 0x24 */ virtual void vf24(int) override;
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
-    /* 0x38 */ virtual void SetMatrix(nw4r::math::MTX34& mtx) override;
+    /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& mtx) override;
 
     /* Class Members */
 

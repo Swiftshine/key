@@ -102,25 +102,26 @@ public:
         node* node_;
     };
 
-    inline __list_deleter()
-        : size_(0)
-        , end_(alloc())
-    {
-        node_base& t = tail();
-        t.next_ = (node_pointer)&t;
-        t.prev_ = (node_pointer)&t;
-    }
+    #ifndef DONT_INLINE_STL
+    inline __list_deleter();
+    #else
+    __list_deleter() DONT_INLINE_CLASS;
+    #endif
 
     typedef generic_iterator<false> iterator; // probably
     // then what is const_iterator?
 
+    #ifndef DONT_INLINE_STL
     ~__list_deleter() {
         iterator i;
         erase(i, this, begin(), end());
     }
+    #else
+    ~__list_deleter() DONT_INLINE_CLASS;
+    #endif
 
     iterator end() {
-        return iterator(&tail());
+        return iterator(&end_.second());
     }
 
     iterator begin() {
@@ -199,12 +200,12 @@ public:
     // the erase function from Food Network - Cook or Be Cooked! has this signature
     // iterator erase(iterator first, iterator last);
     // perhaps it changed after?
-    
+
     static iterator erase(iterator& dst, __list_deleter* list, iterator first, iterator last);
     static iterator erase(iterator& dst, __list_deleter* list, iterator position);
     static void insert(iterator& dst, __list_deleter* list, iterator position, const_reference x) DONT_INLINE_CLASS {
         Metrowerks::alloc_ptr<node, node_allocator_type&> ap (list->node_alloc().allocate(1), list->node_alloc());
-        
+
         list->alloc().construct(&ap->data_, x);
 
         node_pointer newnode = ap.release();
@@ -217,6 +218,24 @@ protected:
     Metrowerks::compressed_pair<Allocator, size_t> size_;
     Metrowerks::compressed_pair<node_allocator_type, node_base> end_;
 };
+
+template <typename T, typename Allocator>
+__list_deleter<T, Allocator>::__list_deleter()
+    : size_(0)
+    , end_(alloc())
+{
+    node_base& t = tail();
+    t.next_ = (node_pointer)&t;
+    t.prev_ = (node_pointer)&t;
+}
+
+#ifdef DONT_INLINE_STL
+template <typename T, typename Allocator>
+__list_deleter<T, Allocator>::~__list_deleter() {
+    iterator i;
+    erase(i, this, begin(), end());
+}
+#endif
 
 template <typename T, typename Allocator>
 class __list_imp : public __list_deleter<T, Allocator> {

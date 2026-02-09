@@ -1,9 +1,9 @@
+#define DONT_INLINE_STL
+
 #include "manager/GmkBeadManager.h"
 #include "manager/GmkMng.h"
 #include "object/gimmick/GmkBeadPopItem.h"
 #include "util/GimmickUtil.h"
-
-// #pragma inline off
 
 void GmkBeadManager::InitInstance(gfl::Task* pParentTask) {
     sInstance = new (gfl::HeapID::Work) GmkBeadManager(pParentTask);
@@ -33,6 +33,8 @@ void GmkBeadManager::vfC() {
     // mList.SomeFunction();
 }
 
+
+const char ON[] = "ON";
 void GmkBeadManager::EnableBeadPopSwitch(
     GmkBeadPopItem* pBeadPopItem,
     const char* pTags,
@@ -46,7 +48,7 @@ void GmkBeadManager::EnableBeadPopSwitch(
         }
     }
 
-    pBeadPopItem->SetStateForTaggedObjects("ON", pTags);
+    pBeadPopItem->SetStateForTaggedObjects(ON, pTags);
 }
 
 GmkBeadManager::GmkBeadManager_Info* GmkBeadManager::GetInfoIfHandlePresent(
@@ -59,32 +61,20 @@ GmkBeadManager::GmkBeadManager_Info* GmkBeadManager::GetInfoIfHandlePresent(
     return nullptr;
 }
 
-extern "C" void DefaultSwitchThreadCallback();
+extern "C" Gimmick* CutFunction(Gimmick*);
 
-inline void CutFunction() {
-    // a temporary workaround for code merging
-    DefaultSwitchThreadCallback();
-}
-
-// https://decomp.me/scratch/wZpkl
 void GmkBeadManager::fn_8051D854(bool arg1) {
     if (GmkMng::Instance() == nullptr) {
         return;
     }
 
-    gfl::LinkedList<Gimmick*>& gimmickList = GmkMng::Instance()->mGimmicks;
+    std::list<Gimmick*>& gmkList = GmkMng::Instance()->mGimmicks;
 
-    gfl::LinkedList<Gimmick*>::NodeBase* node = GmkMng::Instance()->mGimmicks.GetNode()->GetNext();
-    gfl::LinkedList<Gimmick*>::NodeBase* end = gimmickList.GetNode();
-
-    while (node != end) {
-        Gimmick* gmk = node->ToNode()->GetData();
+    for (std::list<Gimmick*>::iterator it = GmkMng::Instance()->mGimmicks.begin(); it != gmkList.end(); it++) {
+        Gimmick* gmk = *it;
 
         if (GimmickUtil::IsBead(gmk->GetGimmickID())) {
-            CutFunction();
-            gmk->vf50(arg1);
+            CutFunction(gmk)->vf50(arg1);
         }
-
-        node = node->GetNext();
     }
 }

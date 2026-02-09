@@ -145,7 +145,7 @@ void FlfDemoNodeCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
     SetMatrix(mtx);
 }
 
-void FlfDemoNodeCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+void FlfDemoNodeCtrl::SetMatrix(const nw4r::math::MTX34& mtx) {
     return;
 }
 
@@ -218,7 +218,7 @@ void FlfDemoCharCtrl::SetVisibility(bool visibility) {
     mFlfMdlDraw->SetVisibility(visibility);
 }
 
-void FlfDemoCharCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+void FlfDemoCharCtrl::SetMatrix(const nw4r::math::MTX34& mtx) {
     mFlfMdlDraw->SetWoolDrawMatrix(mtx);
 }
 
@@ -350,7 +350,7 @@ void FlfDemoPlayerCtrl::SetVisibility(bool visibility) {
     }
 }
 
-void FlfDemoPlayerCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+void FlfDemoPlayerCtrl::SetMatrix(const nw4r::math::MTX34& mtx) {
     // not decompiled
 }
 
@@ -409,7 +409,7 @@ void FlfDemoBeadCtrl::SetVisibility(bool visibility) {
 }
 
 // https://decomp.me/scratch/nV63b
-void FlfDemoBeadCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+void FlfDemoBeadCtrl::SetMatrix(const nw4r::math::MTX34& mtx) {
     mBeadPosition = GetMTXTranslation(mtx);
 
     FlfHandleObj** ptr;
@@ -422,29 +422,19 @@ void FlfDemoBeadCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
 
 /* FlfDemoGmkCtrl */
 
-// https://decomp.me/scratch/kB5Gg
-FlfDemoGmkCtrl::FlfDemoGmkCtrl(nw4r::g3d::ResNode resNode, std::string& tag)
+// https://decomp.me/scratch/3ONO1
+FlfDemoGmkCtrl::FlfDemoGmkCtrl(nw4r::g3d::ResNode resNode, std::string& rTag)
     : FlfDemoNodeCtrl(resNode)
 {
-    gfl::LinkedList<Gimmick*>::NodeBase* node = GmkMng::Instance()->mGimmicks.GetNode()->GetNext();
-    gfl::LinkedList<Gimmick*>::NodeBase* end = GmkMng::Instance()->mGimmicks.GetNode();
-
-    Gimmick* gmk = GmkMng::Instance()->GetGimmickByTag(tag);
-
-    if (gmk == nullptr) {
-        mGimmickHandle.SetObject(gmk->GetHandleObject());
-        mGimmickHandle.SetID(gmk->GetHandleID());
-    } else {
-        mGimmickHandle.SetObject(nullptr);
-        mGimmickHandle.SetID(0);
-    }
+    Gimmick* gmk = GmkMng::Instance()->GetGimmickByTag(rTag);
+    mGimmickHandle = gmk;
 }
 
 
 FlfDemoGmkCtrl::~FlfDemoGmkCtrl() { }
 
 // https://decomp.me/scratch/fMiQu
-void FlfDemoGmkCtrl::SetMatrix(nw4r::math::MTX34& mtx) {
+void FlfDemoGmkCtrl::SetMatrix(const nw4r::math::MTX34& mtx) {
     FlfHandleObj** ptr;
 
     FLFHANDLEOBJ_DO_IF_VALID(mGimmickHandle, ptr) {
