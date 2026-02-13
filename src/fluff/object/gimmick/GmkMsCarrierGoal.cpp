@@ -12,14 +12,12 @@ GmkMsCarrierGoal* GmkMsCarrierGoal::Build(GimmickBuildInfo* buildInfo) {
     return new (gfl::HeapID::Work) GmkMsCarrierGoal(buildInfo, "GmkMsCarrierGoal");
 }
 
-GmkMsCarrierGoal::GmkMsCarrierGoal(GimmickBuildInfo* buildInfo, const char* taskName)
-    : Gimmick(buildInfo, taskName)
+GmkMsCarrierGoal::GmkMsCarrierGoal(GimmickBuildInfo* pBuildInfo, const char* taskName)
+    : Gimmick(pBuildInfo, taskName)
+    , mAnimationPosition(0.0f)
+    , mAnimCtrl(nullptr)
 {
-    mAnimationPosition.x = 0.0f;
-    mAnimationPosition.y = 0.0f;
-    mAnimationPosition.z = 0.0f;
-    mAnimCtrl = nullptr;
-    Init(buildInfo);
+    Init(pBuildInfo);
 }
 
 GmkMsCarrierGoal::~GmkMsCarrierGoal() { }
@@ -81,7 +79,7 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
 
     mAnimCtrl->SetUpdateRate(1.0f);
     mShouldUpdateWater = false;
-    
+
     ToStated()->SetState(0);
 }
 
@@ -124,21 +122,8 @@ void GmkMsCarrierGoal::Interact(FlfGameObj* other) {
     return;
 }
 
-asm nw4r::math::VEC3 GmkMsCarrierGoal::GetEffectPosition() {
-    nofralloc
-    psq_l f3, 0x138(r4), 0, 0
-    lfs f0, ZeroFloat(r0)
-    psq_l f2, 0xc(r4), 0, 0
-    stfs f0, 0x0(r3)
-    ps_add f1, f3, f2
-    psq_l f3, 0x140(r4), 1, 0
-    stfs f0, 0x4(r3)
-    psq_l f2, 0x14(r4), 1, 0
-    psq_st f1, 0x0(r3), 0, 0
-    ps_add f1, f3, f2
-    stfs f0, 0x8(r3)
-    psq_st f1, 0x8(r3), 1, 0
-    blr
+gfl::Vec3 GmkMsCarrierGoal::GetEffectPosition() const {
+    return mAnimationPosition + mPosition;
 }
 
 bool FlfFriendManager::fn_804FA7D8() {
@@ -158,7 +143,7 @@ bool FlfFriendManager::fn_804FA7D8() {
 }
 
 void GmkMsCarrierGoal::PlayEffect() {
-    nw4r::math::VEC3 pos = GetEffectPosition();
+    gfl::Vec3 pos = GetEffectPosition();
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
     EffectObj* effectObj = scene->CreateEffectObject("ef_gk_09a", 0, 0);
 

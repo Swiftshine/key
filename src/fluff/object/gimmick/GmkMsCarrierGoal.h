@@ -12,7 +12,7 @@ public:
     static GmkMsCarrierGoal* Build(GimmickBuildInfo* buildInfo);
     GmkMsCarrierGoal(GimmickBuildInfo* buildInfo, const char* taskName) DONT_INLINE_CLASS;
     virtual ~GmkMsCarrierGoal();
-    
+
     void Init(GimmickBuildInfo* buildInfo);
 
     /* FlfGameObj */
@@ -21,13 +21,13 @@ public:
     /* Gimmick */
     virtual void Update() override;
 
-    nw4r::math::VEC3 GetEffectPosition();
+    gfl::Vec3 GetEffectPosition() const DONT_INLINE_CLASS;
     void PlayEffect();
     NwAnmCtrl* CreateAnimCtrl(const char* animName, gfl::ResFileObject& resFileObject);
 private:
     int mState;
     uint mCounter;
-    nw4r::math::VEC3 mAnimationPosition;
+    gfl::Vec3 mAnimationPosition;
     gfl::Pointer<NwAnmCtrl> mAnimCtrl;
 };
 
