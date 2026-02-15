@@ -14,8 +14,8 @@ class ColDataRect;
 class ColDataWrapper {
 public:
     inline ColDataWrapper()
-        : m_20(0.0f, 0.0f)
-        , m_28(0.0f, 0.0f)
+        : mBoundsMin(0.0f, 0.0f)
+        , mBoundsMax(0.0f, 0.0f)
     {
         mNumPoints = 0;
         mNumSegs = 0;
@@ -42,6 +42,12 @@ public:
     void RemoveAll();
 
     void SetFlags(u64 flags);
+    void AddFlags(u64 flags);
+    void ClearFlags(u64 flags);
+    u64 CalculateFlags() const;
+    void fn_800D080C(bool arg1);
+    void fn_800D0948(bool arg1);
+    void AdjustBounds();
 
     /* Class Members  */
 
@@ -53,17 +59,17 @@ public:
     ColDataCircle* mColDataCircles;
     uint mNumRects;
     ColDataRect* mColDataRects;
-    gfl::Vec2 m_20;
-    gfl::Vec2 m_28;
+    gfl::Vec2 mBoundsMin;
+    gfl::Vec2 mBoundsMax;
 };
 
 struct ColDataIdentity {
     ColDataIdentity()
         : mIndex(0)
-        , m_2(0)
+        , mEnableFlag(0)
     { }
     u16 mIndex;
-    u16 m_2;
+    u16 mEnableFlag;
 };
 
 /// @note Size: `0x30`
@@ -104,8 +110,8 @@ public:
 
     /* Class Members */
     ColDataIdentity mIdentity;
-    gfl::Vec2 m_24;
-    u32 m_2C;
+    gfl::Vec2 mPosition;
+    float mRadius;
 };
 
 class ColDataRect : public ColData {
