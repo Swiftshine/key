@@ -5,6 +5,7 @@
 #include "gfl/gflVec2.h"
 #include "object/collision/ColData.h"
 
+class ColObj;
 class ColDataPoint;
 class ColDataSeg;
 class ColDataCircle;
@@ -38,9 +39,16 @@ public:
     void CreateColDataSegs(uint count);
     void CreateColDataCircles(uint count);
     void CreateColDataRects(uint count);
-
-    void RemoveAll();
-
+    ColDataPoint* GetColDataPoint(uint index) const;
+    ColDataSeg* GetColDataSeg(uint index) const;
+    ColDataCircle* GetColDataCircle(uint index) const;
+    ColDataRect* GetColDataRect(uint index) const;
+    ColData* GetColData(uint index) const;
+    uint GetNumColData() const;
+    void SetOwner(ColObjTrans* pColObj);
+    void Update();
+    void fn_800CFD14(/* args unk */);
+    void NormalizeColDataSegs();
     void SetFlags(u64 flags);
     void AddFlags(u64 flags);
     void ClearFlags(u64 flags);
@@ -48,6 +56,9 @@ public:
     void fn_800D080C(bool arg1);
     void fn_800D0948(bool arg1);
     void AdjustBounds();
+    void RemoveAll();
+    void AddAll();
+    void Add(ColObj* pColObj);
 
     /* Class Members  */
 
@@ -106,6 +117,7 @@ public:
 
 class ColDataCircle : public ColData {
 public:
+    ColDataCircle();
     virtual ~ColDataCircle();
 
     /* Class Members */
@@ -116,6 +128,7 @@ public:
 
 class ColDataRect : public ColData {
 public:
+    ColDataRect();
     virtual ~ColDataRect();
 
     ColDataIdentity mIdentity;

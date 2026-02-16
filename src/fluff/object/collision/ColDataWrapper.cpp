@@ -1,8 +1,7 @@
 #include "object/collision/ColDataWrapper.h"
 #include "gfl/gflMemoryUtil.h"
 #include "object/collision/ColData.h"
-
-#define BOUND_DEFAULT 100000.0f
+#include "object/collision/ColObj.h"
 
 ColDataWrapper::ColDataWrapper(const ColDataWrapper* pOther)
     : mBoundsMin(0.0f, 0.0f)
@@ -153,6 +152,14 @@ void ColDataWrapper::CreateColDataCircles(uint count) {
     }
 }
 
+// unmatching due to ColData
+ColDataCircle::ColDataCircle()
+    : ColData()
+    , mIdentity()
+    , mPosition(0.0f, 0.0f)
+    , mRadius(0.0f)
+{ }
+
 void ColDataWrapper::CreateColDataRects(uint count) {
     if (count == 0) {
         return;
@@ -164,6 +171,94 @@ void ColDataWrapper::CreateColDataRects(uint count) {
     for (uint i = 0; i < count; i++) {
         mColDataRects[i].mIdentity.mIndex = i;
     }
+}
+
+// unmatching due to ColData
+ColDataRect::ColDataRect()
+    : ColData()
+    , mIdentity()
+    , mBoundsMin(0.0f, 0.0f)
+    , mBoundsMax(0.0f, 0.0f)
+    , m_34(0)
+{ }
+
+ColDataPoint* ColDataWrapper::GetColDataPoint(uint index) const {
+    return mColDataPoints + index;
+}
+
+ColDataSeg* ColDataWrapper::GetColDataSeg(uint index) const {
+    return mColDataSegs + index;
+}
+
+ColDataCircle* ColDataWrapper::GetColDataCircle(uint index) const {
+    return mColDataCircles + index;
+}
+
+ColDataRect* ColDataWrapper::GetColDataRect(uint index) const {
+    return mColDataRects + index;
+}
+
+// https://decomp.me/scratch/5po1h
+ColData* ColDataWrapper::GetColData(uint index) const {
+    uint numPoints = mNumPoints;
+    if (index < numPoints) {
+        return &mColDataPoints[index];
+    }
+
+    uint relativeIndex = index - numPoints;
+    uint numSegs = mNumSegs;
+    if (relativeIndex < numSegs) {
+        return &mColDataSegs[relativeIndex];
+    }
+
+    uint totalBeforeCircles = numPoints + numSegs;
+    uint numCircles = mNumCircles;
+    relativeIndex = index - totalBeforeCircles;
+    if (mNumCircles < relativeIndex) {
+        return &mColDataCircles[relativeIndex];
+    }
+
+    uint totalBeforeRects = totalBeforeCircles + numCircles;
+    relativeIndex = index - totalBeforeRects;
+    if (relativeIndex < mNumRects) {
+        return &mColDataRects[relativeIndex];
+    }
+
+    return nullptr;
+}
+
+uint ColDataWrapper::GetNumColData() const {
+    return mNumPoints + mNumSegs + mNumCircles + mNumRects;
+}
+
+void ColDataWrapper::SetOwner(ColObjTrans* pColObj) {
+    for (uint i = 0; i < mNumPoints; i++) {
+        mColDataPoints[i].mOwner = pColObj;
+    }
+
+    for (uint i = 0; i < mNumSegs; i++) {
+        mColDataSegs[i].mOwner = pColObj;
+    }
+
+    for (uint i = 0; i < mNumCircles; i++) {
+        mColDataCircles[i].mOwner = pColObj;
+    }
+
+    for (uint i = 0; i < mNumRects; i++) {
+        mColDataRects[i].mOwner = pColObj;
+    }
+}
+
+void ColDataWrapper::Update() {
+    // not decompiled
+}
+
+void ColDataWrapper::fn_800CFD14(/* args unk */) {
+    // not decompiled
+}
+
+void ColDataWrapper::NormalizeColDataSegs() {
+    // not decompiled
 }
 
 void ColDataWrapper::SetFlags(u64 flags) {
@@ -218,6 +313,29 @@ void ColDataWrapper::ClearFlags(u64 flags) {
     for (uint i = 0; i < mNumRects; i++) {
         mColDataRects[i].mFlags &= ~flags;
     }
+}
+
+// https://decomp.me/scratch/GwUwb
+u64 ColDataWrapper::CalculateFlags() const {
+    u64 flags = 0;
+
+    for (uint i = 0; i < mNumPoints; i++) {
+        flags |= mColDataPoints[i].mFlags;
+    }
+
+    for (uint i = 0; i < mNumSegs; i++) {
+        flags |= mColDataSegs[i].mFlags;
+    }
+
+    for (uint i = 0; i < mNumCircles; i++) {
+        flags |= mColDataCircles[i].mFlags;
+    }
+
+    for (uint i = 0; i < mNumRects; i++) {
+        flags |= mColDataRects[i].mFlags;
+    }
+
+    return flags;
 }
 
 // https://decomp.me/scratch/W13w9
@@ -310,6 +428,9 @@ void ColDataWrapper::fn_800D0948(bool arg1) {
     }
 }
 
+#define BOUND_DEFAULT 100000.0f
+
+// https://decomp.me/scratch/4lL1h
 void ColDataWrapper::AdjustBounds() {
     mBoundsMin = gfl::Vec2(BOUND_DEFAULT, BOUND_DEFAULT);
     mBoundsMax = gfl::Vec2(-BOUND_DEFAULT, -BOUND_DEFAULT);
@@ -370,7 +491,35 @@ void ColDataWrapper::AdjustBounds() {
         }
     }
 
-    // todo - ColDataCircle
+    for (uint i = 0; i < mNumCircles; i++) {
+        ColDataCircle* circle = &mColDataCircles[i];
+
+        float x = circle->mPosition.x;
+        float y = circle->mPosition.y;
+        float radius = circle->mRadius;
+
+        float left = x - radius;
+        float right = x + radius;
+
+        float top = y + radius;
+        float bottom = y - radius;
+
+        if (left < mBoundsMin.x) {
+            mBoundsMin.x = left;
+        }
+
+        if (bottom < mBoundsMin.y) {
+            mBoundsMin.y = bottom;
+        }
+
+        if (right > mBoundsMax.x) {
+            mBoundsMax.x = right;
+        }
+
+        if (top > mBoundsMax.y) {
+            mBoundsMax.y = top;
+        }
+    }
 
     for (uint i = 0; i < mNumRects; i++) {
         ColDataRect* rect = &mColDataRects[i];
@@ -407,6 +556,49 @@ void ColDataWrapper::AdjustBounds() {
             mBoundsMax.y = rect->mBoundsMax.y;
         }
     }
+}
 
+void ColDataWrapper::Add(ColObj* pColObj) {
+    for (uint i = 0; i < mNumPoints; i++) {
+        pColObj->mTreeNode->Propagate(&mColDataPoints[i]);
+    }
+    for (uint i = 0; i < mNumSegs; i++) {
+        pColObj->mTreeNode->Propagate(&mColDataSegs[i]);
+    }
+    for (uint i = 0; i < mNumCircles; i++) {
+        pColObj->mTreeNode->Propagate(&mColDataCircles[i]);
+    }
+    for (uint i = 0; i < mNumRects; i++) {
+        pColObj->mTreeNode->Propagate(&mColDataRects[i]);
+    }
+}
 
+void ColDataWrapper::RemoveAll() {
+    for (uint i = 0; i < mNumPoints; i++) {
+        KdTreeNode::RemoveColData(&mColDataPoints[i]);
+    }
+    for (uint i = 0; i < mNumSegs; i++) {
+        KdTreeNode::RemoveColData(&mColDataSegs[i]);
+    }
+    for (uint i = 0; i < mNumCircles; i++) {
+        KdTreeNode::RemoveColData(&mColDataCircles[i]);
+    }
+    for (uint i = 0; i < mNumRects; i++) {
+        KdTreeNode::RemoveColData(&mColDataRects[i]);
+    }
+}
+
+void ColDataWrapper::AddAll() {
+    for (uint i = 0; i < mNumPoints; i++) {
+        KdTreeNode::AddColData(&mColDataPoints[i]);
+    }
+    for (uint i = 0; i < mNumSegs; i++) {
+        KdTreeNode::AddColData(&mColDataSegs[i]);
+    }
+    for (uint i = 0; i < mNumCircles; i++) {
+        KdTreeNode::AddColData(&mColDataCircles[i]);
+    }
+    for (uint i = 0; i < mNumRects; i++) {
+        KdTreeNode::AddColData(&mColDataRects[i]);
+    }
 }

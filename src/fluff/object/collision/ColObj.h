@@ -12,7 +12,7 @@
 class ColObj {
 public:
     inline ColObj()
-        : m_4(0)
+        : mTreeNode(0)
         , mOwner(nullptr)
         , mTree(nullptr)
     { }
@@ -27,7 +27,7 @@ public:
 
     /* Class Members */
 
-    /* 0x04 */ uint m_4;
+    /* 0x04 */ KdTreeNode* mTreeNode;
     /* 0x08 */ FlfGameObj* mOwner;
     /* 0x0C */ KdTree* mTree;
     /* 0x10 */ gfl::Vec3 mPosition;
