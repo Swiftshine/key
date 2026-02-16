@@ -1,7 +1,6 @@
 #ifndef FLUFF_COLDATA_H
 #define FLUFF_COLDATA_H
 
-#include "null_def.h"
 #include "types.h"
 #include <utility>
 #include <string>
