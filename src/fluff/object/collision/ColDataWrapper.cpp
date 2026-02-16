@@ -156,8 +156,7 @@ void ColDataWrapper::CreateColDataCircles(uint count) {
 ColDataCircle::ColDataCircle()
     : ColData()
     , mIdentity()
-    , mPosition(0.0f, 0.0f)
-    , mRadius(0.0f)
+    , mInfo(0.0f)
 { }
 
 void ColDataWrapper::CreateColDataRects(uint count) {
@@ -430,10 +429,10 @@ void ColDataWrapper::fn_800D0948(bool arg1) {
 
 #define BOUND_DEFAULT 100000.0f
 
-// https://decomp.me/scratch/4lL1h
+// https://decomp.me/scratch/1w90C
 void ColDataWrapper::AdjustBounds() {
-    mBoundsMin = gfl::Vec2(BOUND_DEFAULT, BOUND_DEFAULT);
-    mBoundsMax = gfl::Vec2(-BOUND_DEFAULT, -BOUND_DEFAULT);
+    mBoundsMin.Set(BOUND_DEFAULT, BOUND_DEFAULT);
+    mBoundsMax.Set(-BOUND_DEFAULT, -BOUND_DEFAULT);
 
     for (uint i = 0; i < mNumPoints; i++) {
         ColDataPoint* point = &mColDataPoints[i];
@@ -494,9 +493,12 @@ void ColDataWrapper::AdjustBounds() {
     for (uint i = 0; i < mNumCircles; i++) {
         ColDataCircle* circle = &mColDataCircles[i];
 
-        float x = circle->mPosition.x;
-        float y = circle->mPosition.y;
-        float radius = circle->mRadius;
+        gfl::Vec3 info;
+        info = circle->mInfo;
+
+        float x = info.x;
+        float y = info.y;
+        float radius = info.z;
 
         float left = x - radius;
         float right = x + radius;

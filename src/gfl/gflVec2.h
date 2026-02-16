@@ -37,6 +37,10 @@ namespace gfl {
             y = rOther.y;
         }
 
+        inline void Set(float nx, float ny) {
+            x = nx;
+            y = ny;
+        }
 
         static bool Sanitize(nw4r::math::VEC2& rVec);
     };

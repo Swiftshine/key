@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "gfl/gflVec2.h"
+#include "gfl/gflVec3.h"
 #include "object/collision/ColData.h"
 
 class ColObj;
@@ -122,8 +123,7 @@ public:
 
     /* Class Members */
     ColDataIdentity mIdentity;
-    gfl::Vec2 mPosition;
-    float mRadius;
+    gfl::Vec3 mInfo; // position (x, y), radius (z)
 };
 
 class ColDataRect : public ColData {
