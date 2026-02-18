@@ -12,6 +12,7 @@
 #include "types.h"
 #include "util/FullSortSceneUtil.h"
 #include "util/Orientation.h"
+#include "util/ScreenPosition.h"
 
 const CollisionTemplate ColTemplate;
 
@@ -45,7 +46,7 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendI
     , m_108(0.0f)
     , m_10C(0.0f)
     , m_110(0.0f)
-    , mScreenPosition()
+    , mScreenPosition(0.0f, 0.0f, 0.0f)
     , m_128(0.0f)
     , m_12C(0.0f)
     , m_130(0.0f)
@@ -274,7 +275,7 @@ uint FlfFriend::GetCurrentNURBSAnimationID() const {
     return mFlfMdlDraw->mCurrentAnimationID;
 }
 
-int FlfFriend::GetCurrentAnimationID() const {
+uint FlfFriend::GetCurrentAnimationID() const {
     return mCurrentAnimationID;
 }
 
@@ -449,12 +450,12 @@ void FlfFriend::SetScreenPosition(int* pDirection) {
 
     if (*pDirection == Direction::Forward) {
         mScreenPosition.mCullThreshold = mPosition.z;
-        mScreenPosition.mPosition.x = x + w + 3.0f;
-        mScreenPosition.mPosition.y = y + 3.0f;
+        mScreenPosition.mX = x + w + 3.0f;
+        mScreenPosition.mY = y + 3.0f;
     } else if (*pDirection == Direction::Backward) {
         mScreenPosition.mCullThreshold = mPosition.z;
-        mScreenPosition.mPosition.x = x - 3.0f;
-        mScreenPosition.mPosition.y = y + 3.0f;
+        mScreenPosition.mX = x - 3.0f;
+        mScreenPosition.mY = y + 3.0f;
     }
 }
 
@@ -543,8 +544,8 @@ PlayerBase* FlfFriend::GetPlayer() const {
     return mPlayerHandle.TryGetHandleObj<PlayerBase>();
 }
 
-int FlfFriend::vfEC() {
-    return 0;
+bool FlfFriend::vfEC() {
+    return false;
 }
 
 int FlfFriend::vfE8() {
@@ -571,14 +572,17 @@ void FlfFriend::vfAC() {
 // sdata2
 float lbl_808E9D90 = 10.0f;
 
-// https://decomp.me/scratch/oqmLB
-void FlfFriend::ResetScreen(const gfl::Vec2& rPos) {
+// https://decomp.me/scratch/kBHxR
+// this matches if you swap x and y and make lbl_808E9D90 a const float,
+// but that's not correct
+void FlfFriend::ResetScreen(const ScreenPosition& rPos) {
     if (mEffect != nullptr) {
         mEffect->Reset(-1);
     }
 
     vf210(0);
-    mScreenPosition.mPosition = rPos;
+    mScreenPosition.mX = rPos.mX;
+    mScreenPosition.mY = rPos.mY;
     mScreenPosition.mCullThreshold = lbl_808E9D90;
     mState.SetCurrentStateAndClearOthers(5);
 }
@@ -911,15 +915,15 @@ gfl::Vec3 FlfFriend::fn_8033E940() const {
 }
 
 // https://decomp.me/scratch/nOx41
-void FlfFriend::LookAt(const gfl::Vec3& rPos) {
+void FlfFriend::LookAt(const ScreenPosition& rPos) {
     gfl::Vec3 pos;
     pos = mPosition;
 
-    if (fabsf(pos.x - rPos.x) < 0.03f) { // prevent "jittering"
+    if (fabsf(pos.x - rPos.mX) < 0.03f) { // prevent "jittering"
         return;
-    } else if (pos.x < rPos.x) {
+    } else if (pos.x < rPos.mX) {
         mDirection = Direction::Forward;
-    } else if (rPos.x < pos.x) {
+    } else if (rPos.mX < pos.x) {
         mDirection = Direction::Backward;
     }
 }
@@ -1059,5 +1063,103 @@ void FlfFriend::vf1BC() {
 
     if (player != nullptr) {
         StartMission(player, false);
+    }
+}
+
+void FlfFriend::vf1D4() {
+    // not decompiled
+}
+
+void FlfFriend::vf1D8() {
+    // not decompiled
+}
+
+void FlfFriend::vf1E8() {
+    if (!vfEC()) {
+        return;
+    } else if (!IsAnimationDone()) {
+        return;
+    }
+
+    ScreenPosition pos = mScreenPosition;
+    LookAt(pos);
+
+    vf210(0);
+    mState.SetCurrentStateAndClearOthers(31);
+}
+
+void FlfFriend::vf1EC() {
+    // not decompiled
+}
+
+void FlfFriend::vf1F0() {
+    if (m_110 < m_114) {
+        mEffect->ResetNURBSFrame();
+    }
+
+    mEffect->SetVisibility(true);
+
+    m_110 += 1.0f;
+
+    if (fn_8033E8A8()) {
+        ProcessCollision();
+    }
+
+    if (!(m_114 <= m_110)) {
+        return;
+    } else if (!mEffect->IsAnimationDone()) {
+        return;
+    }
+
+    int areaID = GameManager::GetCurrentAreaID();
+
+    if (areaID != 9) {
+        Mapdata::MapdataGimmick* gmk = mMapdataGimmick;
+        gmk->mParams.mStringParams[0].clear();
+        mMapdataGimmick->mParams.mStringParams[0] = Blank;
+    }
+
+    m_148 = true;
+    mEffect->SetVisibility(false);
+    mState.SetCurrentStateAndClearOthers(26);
+}
+
+void FlfFriend::vf1DC() {
+    if (!vfEC()) {
+        return;
+    } else if (!IsAnimationDone()) {
+        return;
+    }
+
+    ScreenPosition pos = mScreenPosition;
+    LookAt(pos);
+    vf210(0);
+    fn_8033BE64();
+}
+
+void FlfFriend::vf1E0() {
+    // not decompiled
+}
+
+void FlfFriend::vf1E4() {
+    // not decompiled
+}
+
+void FlfFriend::vf1B0() {
+    // not decompiled
+}
+
+void FlfFriend::vf1F4() {
+    if (GetCurrentNURBSAnimationID() != 300 && IsAnimationDone()) {
+        PlayNURBSAnimation(300, true);
+        mFlfMdlDraw->SetCurrentNURBSFrame(0.0f);
+    } else if (GetCurrentNURBSAnimationID() == 300 && IsAnimationDone()) {
+        if (m_144 >= 2) {
+            GetClosestPlayer(); // result unused
+            mState.SetCurrentStateAndClearOthers(31);
+        } else {
+            mFlfMdlDraw->SetCurrentNURBSFrame(0.0f);
+        }
+        m_144++;
     }
 }
