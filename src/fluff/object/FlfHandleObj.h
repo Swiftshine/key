@@ -21,7 +21,7 @@ public:
 
     inline FlfHandle(const FlfHandleObj* pHandleObj);
     inline void operator=(const FlfHandleObj* pHandleObj);
-    
+
     /* Helpful Inlines */
 
     inline void SetID(uint id) {
@@ -51,8 +51,13 @@ public:
         mHandleID = rOther.mHandleID;
     }
 
+    inline void Clear() {
+        mObject = nullptr;
+        mHandleID = 0;
+    }
+
     /* Class Members */
-    
+
     /* 0x0 */ FlfHandleObj** mObject;
     /* 0x4 */ uint mHandleID;
 };
@@ -90,7 +95,7 @@ public:
     inline void ClearHandleObject() {
         mHandle.ClearObject();
     }
-    
+
     /* Class Members */
 
     /* 0x4 */ FlfHandle mHandle;
@@ -101,7 +106,7 @@ ASSERT_SIZE(FlfHandleObj, 0xC);
 inline FlfHandle::FlfHandle(const FlfHandleObj* pHandleObj) {
     mObject = nullptr;
     mHandleID = 0;
-    
+
     if (pHandleObj != nullptr) {
         mObject = pHandleObj->mHandle.mObject;
         mHandleID = pHandleObj->mHandle.mHandleID;

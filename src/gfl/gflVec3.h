@@ -12,24 +12,24 @@ namespace gfl {
         static inline float DotProduct1(register const Vec3* pA, register const Vec3* pB) {
             register float dot;
             register float work0, work3, work2, work1;
-        
+
             // clang-format off
             asm {
                 // YZ product
                 psq_l  work0, Vec3.y(pA), 0, 0
                 psq_l  work1, Vec3.y(pB), 0, 0
                 ps_mul work0, work0, work1
-                
+
                 // X product + YZ product
                 psq_l   work3, Vec3.x(pA), 1, 0
                 psq_l   work2, Vec3.x(pB), 1, 0
                 ps_madd work1, work3, work2, work0
-                
+
                 // Dot product
                 ps_sum0 dot, work1, work0, work0
             }
             // clang-format on
-        
+
             return dot;
         }
 
@@ -37,24 +37,24 @@ namespace gfl {
         static inline float DotProduct2(register const Vec3* pA, register const Vec3* pB) {
             register float dot;
             register float work3, work2, work1, work0;
-            
+
             // clang-format off
             asm {
                 // YZ product
                 psq_l  work0, Vec3.y(pA), 0, 0
                 psq_l  work1, Vec3.y(pB), 0, 0
                 ps_mul work0, work0, work1
-                
+
                 // X product + YZ product
                 psq_l   work3, Vec3.x(pA), 1, 0
                 psq_l   work2, Vec3.x(pB), 1, 0
                 ps_madd work1, work3, work2, work0
-                
+
                 // Dot product
                 ps_sum0 dot, work1, work0, work0
             }
             // clang-format on
-        
+
             return dot;
         }
 
@@ -73,19 +73,19 @@ namespace gfl {
         Vec3(float, nw4r::math::VEC2&);
         Vec3(const nw4r::math::VEC2&);
         Vec3(const Vec2&);
-        
+
         inline Vec3(const Base& rOther) {
             x = rOther.x;
             y = rOther.y;
             z = rOther.z;
         }
-    
+
         inline Vec3(float val) {
             x = val;
             y = val;
             z = val;
         }
-        
+
         /* Operators */
 
         inline void operator=(const Base& rOther) {
@@ -93,7 +93,7 @@ namespace gfl {
             y = rOther.y;
             z = rOther.z;
         }
-        
+
         inline void operator=(float val) {
             x = val;
             y = val;
@@ -109,8 +109,13 @@ namespace gfl {
         }
 
         static inline Vec3 SubXY(const Vec3& lhs, const Vec3& rhs);
-        
-        
+
+        inline void Set(float nx, float ny, float nz) {
+            x = nx;
+            y = ny;
+            z = nz;
+        }
+
         void operator=(const Vec2& other);
 
         // Vec3 operator+(const Base& rhs) const;
@@ -164,7 +169,7 @@ namespace gfl {
         inline operator const Vec&() const {
             return *reinterpret_cast<const Vec*>(this);
         }
-        
+
 
         /* Class Methods */
 
@@ -199,7 +204,7 @@ namespace gfl {
 
             return false;
         }
-        
+
         inline float Length() const {
             return PSVECMag(*this);
         }
@@ -238,7 +243,7 @@ namespace gfl {
         VEC3Add(&v, this, &rhs);
         return v;
     }
-    
+
     // inline Vec3 Vec3::operator-(const Base& rhs) const {
     //     Vec3 v(0);
     //     const Base* r = &rhs;

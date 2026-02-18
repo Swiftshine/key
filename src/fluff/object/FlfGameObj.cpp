@@ -19,7 +19,7 @@ FlfGameObj::FlfGameObj(uint category)
     , mDirection(Direction::Forward)
     , m_78(2)
     , m_7C(false)
-    , m_7D(false)
+    , mIsInMission(false)
 {
     PSMTXIdentity(mMatrix);
 }

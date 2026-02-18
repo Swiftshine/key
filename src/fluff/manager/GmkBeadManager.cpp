@@ -74,7 +74,7 @@ void GmkBeadManager::fn_8051D854(bool arg1) {
         Gimmick* gmk = *it;
 
         if (GimmickUtil::IsBead(gmk->GetGimmickID())) {
-            CutFunction(gmk)->vf50(arg1);
+            CutFunction(gmk)->SetIsInMission(arg1);
         }
     }
 }

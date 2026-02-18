@@ -3,11 +3,15 @@
 
 #include "object/FlfFriend.h"
 #include "object/PlayerBase.h"
-
+#include "object/gimmick/GmkBackDoor.h"
+#include "object/gimmick/GmkBackDoorCancel.h"
+#include "object/gimmick/GmkFriendFactoryInStage.h"
 #include "manager/CamMng.h"
 #include "manager/GameManager.h"
 #include "manager/Stage.h"
+#include "types.h"
 #include "util/FullSortSceneUtil.h"
+#include "util/Orientation.h"
 
 const CollisionTemplate ColTemplate;
 
@@ -53,7 +57,7 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendI
     , m_148(false)
     , m_149(false)
     , mBackDoorHandle()
-    , m_154(false)
+    , mMissionState(false)
     , mMissionStarted(false)
     , mMoleLight(nullptr)
     , mPlayerHandle()
@@ -70,14 +74,14 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendI
     ct.m_C = nw4r::math::VEC3(0.0f, 0.4f, 0.0f);
 
     mCollisionEntry.Create(CollisionEntry::Get(&ct, this, this, mMatrix, nullptr));
-    
+
     mTask.SetFlags(0x19);
     pParentTask->MakeChild(&mTask);
 
     srand(time(nullptr));
 
     mPosition.z = 10.0f;
-    
+
     if (GameManager::IsInMission() && GameManager::GetCurrentStageInfo().GetStageID() == StageIDs::DarkManor) {
         mMoleLight = new (gfl::HeapID::Work) MoguraLight;
         mMoleLight->SetUpdate(true);
@@ -124,7 +128,7 @@ void FlfFriend::vfF0(FlfGameObj* pObj) {
 
 void FlfFriend::SetTaskFlags(bool set, bool arg2, uint flag) {
     mUpdateFrame = arg2;
-    
+
     uint f = 1 << flag;
 
     if (set) {
@@ -132,7 +136,7 @@ void FlfFriend::SetTaskFlags(bool set, bool arg2, uint flag) {
     } else {
         mTask.mFlags &= ~f;
     }
-    
+
     if (!set) {
         fn_8033E570();
     }
@@ -225,7 +229,7 @@ void FlfFriend::SetTransform(gfl::Mtx34& rMtx) {
 void FlfFriend::GetTransform(gfl::Mtx34& rMtx, gfl::Vec3& rPos, gfl::Vec3& rRot, gfl::Vec3& rScale) const {
     gfl::Mtx34 mtx = rMtx;
     rPos = rMtx.GetTranslation();
-    
+
     float* f = rMtx.m[0];
     float* sf = &rScale.x;
 
@@ -235,7 +239,7 @@ void FlfFriend::GetTransform(gfl::Mtx34& rMtx, gfl::Vec3& rPos, gfl::Vec3& rRot,
         float f3 = Square(*(f + 3));
 
         float root = sqrt(f1 + f2 + f3);
-        
+
         sf[i] = root;
 
         if (root != 0.0f) {
@@ -296,7 +300,7 @@ void FlfFriend::fn_8033C580(uint arg1) {
 
 int FlfFriend::fn_8033C5B4() {
     int choice = rand() % 2;
-    
+
     switch (choice) {
         case 0: {
             PlayNURBSAnimation(700, 1);
@@ -326,7 +330,7 @@ bool FlfFriend::IsAnimationDone() const {
 bool FlfFriend::IsPlayerSavedPositionInFront() const {
     gfl::Vec3 pos(0.0f);
     PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
-    
+
     if (player != nullptr) {
         player->GetSavedPosition(pos);
     }
@@ -456,7 +460,7 @@ void FlfFriend::SetScreenPosition(int* pDirection) {
 
 PlayerBase* FlfFriend::GetClosestPlayer() const {
     uint count = GameManager::GetPlayerCount();
-    
+
     PlayerBase* ret = nullptr;
     gfl::Vec3 pos;
     pos = mPosition;
@@ -531,7 +535,7 @@ void FlfFriend::SetPlayer(PlayerBase* pPlayer) {
     if (pPlayer != nullptr) {
         mPlayerHandle = pPlayer->mHandle;
     } else {
-        mPlayerHandle = FlfHandle();
+        mPlayerHandle.Clear();
     }
 }
 
@@ -677,7 +681,7 @@ bool FlfFriend::vfE4() const {
     if (mState.mCurrentState - 9 <= 5 || mState.mCurrentState - 3 <= 1 || mState.mCurrentState == 6) {
         return true;
     }
-    
+
     return false;
 }
 
@@ -712,7 +716,7 @@ void FlfFriend::vf150() {
 
 void FlfFriend::vf154() {
     mState.SetCurrentStateAndClearOthers(19);
-    
+
     if (mFlfMdlDraw != nullptr) {
         PlayNURBSAnimation(110, true);
     }
@@ -760,25 +764,252 @@ void FlfFriend::StartMission() {
     StartMission(player, false);
 }
 
-void FlfFriend::TryStartMission(GmkBackDoor* pDoor, bool arg2) {
+void FlfFriend::TryStartMission(GmkBackDoor* pDoor, bool missionState) {
     if (!GameManager::IsInMission() || mFriendID - 1 > 2) {
         if (mState.mCurrentState == 20) {
-            if (arg2 == vf54()) {
+            if (missionState == IsInMission()) {
                 PlayerBase* player = GetPlayer();
-                StartMission(player, arg2);
-                if (!arg2) {
-                    mBackDoorHandle = FlfHandle();
+                StartMission(player, missionState);
+                if (!missionState) {
+                    mBackDoorHandle.Clear();
                 }
             }
         } else {
             mBackDoorHandle = pDoor;
-            m_154 = arg2;
+            mMissionState = missionState;
             mState.SetCurrentStateAndClearOthers(20);
         }
     }
 }
 
 void FlfFriend::fn_8033E3DC() {
-    m_154 = false;
+    mMissionState = false;
     mState.SetCurrentStateAndClearOthers(22);
+}
+
+void FlfFriend::TryCancelMission(GmkBackDoorCancel* pDoorCancel, const gfl::Vec3& rPos) {
+    if (!GameManager::IsInMission() || mFriendID - 1 > 2) {
+        if (!IsInMission()) {
+            StartMission(GetPlayer(), false);
+            mBackDoorHandle.Clear();
+        } else {
+            if (GetPlayer() != nullptr) {
+                StartMission(GetPlayer(), GetPlayer()->IsInMission());
+            }
+
+            if (pDoorCancel != nullptr) {
+                pDoorCancel->CancelMission(this);
+                SetPosition(rPos);
+            }
+            mBackDoorHandle.Clear();
+        }
+    }
+}
+
+void FlfFriend::fn_8033E570() {
+    // not decompiled
+}
+
+float lbl_808E1814 = 1.8f;
+float lbl_808E1818 = 1.5f;
+
+bool FlfFriend::fn_8033E648() {
+    if (!fn_8033E84C()) {
+        return false;
+    }
+
+    std::list<Gimmick*>& list = GmkMng::Instance()->mGimmicks;
+    for (std::list<Gimmick*>::iterator it = list.begin(); it != list.end(); it++) {
+        Gimmick* gmk = *it;
+
+        if (gmk->GetGimmickID() != 0x105) {
+            continue;
+        }
+
+        GmkFriendFactoryInStage* factory = static_cast<GmkFriendFactoryInStage*>(gmk);
+
+        FlfFriend* fr = factory->GetFriend();
+
+        if (fr == this) {
+            continue;
+        } else if (mDirection == fr->mDirection) {
+            continue;
+        } else if (!fr->fn_8033E84C()) {
+            continue;
+        } else if (!fr->IsPositionInFront((const gfl::Vec2&) mPosition)) {
+            continue;
+        } else if (!IsPositionInFront((const gfl::Vec2&)fr->mPosition)) {
+            continue;
+        }
+
+        gfl::Vec3 pos;
+        pos = fr->mPosition;
+
+        if (IsInRange(pos, &lbl_808E1814) &&
+            !IsInRange(pos, &lbl_808E1818) &&
+            fn_8033C004(20.0f, (const gfl::Vec2&)pos)) {
+            mState.SetCurrentStateAndClearOthers(34);
+            PlayNURBSAnimation(201, true);
+            m_144 = 0;
+            m_148 = false;
+
+            fr->mState.SetCurrentStateAndClearOthers(34);
+            fr->PlayNURBSAnimation(201, true);
+            fr->m_144 = 0;
+            fr->m_148 = false;
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool FlfFriend::fn_8033E84C() const {
+    uint state = mState.mCurrentState;
+
+    if (state == 24 || state == 31) {
+        return true;
+    }
+
+    return false;
+}
+
+bool FlfFriend::fn_8033E870() const {
+    uint state = mState.mCurrentState;
+
+    if (state - 23 <= 1 || state - 26 <= 1 || state - 31 <= 1) {
+        return true;
+    }
+
+    return false;
+}
+
+bool FlfFriend::fn_8033E8A8() const {
+    uint count = GameManager::GetPlayerCount();
+
+    gfl::Vec3 pos; // cut logic
+    pos = mPosition;
+
+    for (uint id = PlayerBase::PlayerID::Kirby; id < count; id++) {
+        PlayerBase* player = GameManager::GetPlayerByID(id);
+
+        if ((int)player->mState.mCurrentState == 5 && player->mState.mDefaultState == 2) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+gfl::Vec3 FlfFriend::fn_8033E940() const {
+    float x, y, w, h;
+    CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::SceneID::Game);
+    gfl::Vec3 ret;
+    ret.Set(w * 0.5f + x, -(h * 0.5f - y), 0.0f);
+    return ret;
+}
+
+// https://decomp.me/scratch/xo85q
+void FlfFriend::LookAt(const gfl::Vec3& rPos) {
+    gfl::Vec3 pos;
+    pos = mPosition;
+
+    float x = pos.x;
+    float target = rPos.x;
+
+    if (fabsf(x - target) < 0.03f) { // prevent "jittering"
+        return;
+    }
+
+    if (target < x) {
+        mDirection = Direction::Forward;
+    } else if (x < target) {
+        mDirection = Direction::Backward;
+    }
+}
+
+void FlfFriend::vfA0(/* args unk */) {
+    // not decompiled
+}
+
+void FlfFriend::vfA4(/* args unk */) {
+    // not decompiled
+}
+
+void FlfFriend::vfA8(/* args unk */) {
+    // not decompiled
+}
+
+// https://decomp.me/scratch/YQFSs
+void FlfFriend::vf240() {
+    m_E4 *= vf230();
+
+    float thresh = 0.0001f;
+
+    if (__fabsf(m_E4.x) < thresh) {
+        m_E4.x = 0.0f;
+    }
+
+    if (__fabsf(m_E4.y) < thresh) {
+        m_E4.y = 0.0f;
+    }
+}
+
+void FlfFriend::vf248() {
+    // not decompiled
+}
+
+void FlfFriend::vf160() {
+    // not decompiled
+}
+
+void FlfFriend::Update() const {
+    GET_UNCONST(FlfFriend);
+
+    switch (mState.mCurrentState) {
+        case 2:  self->vf17C(); break;
+        case 3:  self->vf180(); break;
+        case 4:  self->vf184(); break;
+        case 7:  self->vf188(); break;
+        case 8:  self->vf18C(); break;
+        case 5:  self->vf190(); break;
+        case 6:  self->vf194(); break;
+        case 9:  self->vf1A0(); break;
+        case 10: self->vf198(); break;
+        case 11: self->vf19C(); break;
+        case 12: self->vf1A4(); break;
+        case 13: self->vf1A8(); break;
+        case 14: self->vf1AC(); break;
+        case 15: self->vf1B4(); break;
+        case 16: self->vf1B8(); break;
+        case 17: self->vf1BC(); break;
+        case 18: self->vf1C0(); break;
+        case 19: self->vf1C4(); break;
+        case 20: self->vf1C8(); break;
+        case 27: self->vf1B0(); break;
+        case 21: self->vf1CC(); break;
+        case 22: self->vf1D0(); break;
+        case 23: self->vf1D4(); break;
+        case 26: self->vf1D8(); break;
+        case 31: self->vf1EC(); break;
+        case 28: self->vf1E8(); break;
+        case 32: self->vf1F0(); break;
+        case 24: self->vf1E0(); break;
+        case 25: self->vf1E4(); break;
+        case 33: self->vf1DC(); break;
+        case 34: self->vf1F4(); break;
+        case 29: self->vf1F8(); break;
+        case 30: self->vf1FC(); break;
+        case 35: self->vf200(); break;
+        default: break;
+    }
+
+    self->vf168();
+    self->vf16C();
+}
+
+void FlfFriend::vf174() {
+    vf160();
+    vf204();
 }

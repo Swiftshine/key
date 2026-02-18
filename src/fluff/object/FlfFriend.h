@@ -12,11 +12,12 @@
 #include "graphics/effect/FriendEffect.h"
 #include "mapdata/Mapdata.h"
 #include "misc/ScopedPointers.h"
-#include "object/gimmick/GmkBackDoor.h"
 #include "util/StateObject.h"
 #include <tree>
 
 class PlayerBase;
+class GmkBackDoor;
+class GmkBackDoorCancel;
 
 /// @brief Base class for friend objects.
 /// @note Size: `0x178`
@@ -130,7 +131,8 @@ public:
 	/* 0x210 */ virtual void vf210(int);
 	/* 0x214 */ virtual void vf214();
 	/* 0x218 */ DECL_WEAK virtual int vf218();
-	/* 0x21C */ virtual void vf21C();
+	// Switch direction to face the target.
+	/* 0x21C */ virtual void LookAt(const gfl::Vec3& rPos);
 	/* 0x220 */ DECL_WEAK virtual void vf220(/* unk args (it's not void) */);
 	/* 0x224 */ virtual void vf224(float arg1);
 	/* 0x228 */ virtual float vf228() const;
@@ -151,7 +153,7 @@ public:
     /* 0x80 */ DECL_WEAK virtual void ExecCallbackA(nw4r::g3d::ChrAnmResult* pResult, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
     /* 0x84 */ DECL_WEAK virtual void ExecCallbackB(nw4r::g3d::WorldMtxManip* pManip, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
     /* 0x88 */ virtual void ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
-    
+
 
     /* Class Methods */
 
@@ -163,7 +165,7 @@ public:
 	bool fn_8033BE64();
     void fn_8033BF8C(int);
     void fn_8033BFC8(int targetState, int currentState);
-	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const;
+	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const DONT_INLINE_CLASS;
 	void SetTransform(gfl::Mtx34& rMtx);
 	void fn_8033C488();
 	void fn_8033C580(uint);
@@ -173,17 +175,22 @@ public:
 	bool fn_8033E25C() const;
 	void TryStartMission(GmkBackDoor* pDoor, bool arg2);
 	void fn_8033E3DC();
-
+	void TryCancelMission(GmkBackDoorCancel* pDoor, const gfl::Vec3& rPos);
 	void fn_8033E570();
+	bool fn_8033E648();
+	bool fn_8033E84C() const;
+	bool fn_8033E870() const;
+	bool fn_8033E8A8() const;
+	gfl::Vec3 fn_8033E940() const;
 
     /* Static Methods */
-	
+
     static float Square(float val);
     static float fn_8033B710();
 	static int fn_8033BEFC(std::tree<placeholder_t>& rTree, int*);
 
     /* Class Members */
-    
+
     /* 0x088 */ gfl::Task mTask;
     /* 0x0A0 */ FullSortScene* mScene;
     /* 0x0A4 */ FlfMdlDraw* mFlfMdlDraw;
@@ -219,7 +226,7 @@ public:
     /* 0x148 */ bool m_148;
     /* 0x149 */ bool m_149;
     /* 0x14C */ FlfHandle mBackDoorHandle;
-    /* 0x154 */ bool m_154;
+    /* 0x154 */ bool mMissionState;
     /* 0x155 */ bool mMissionStarted;
     /* 0x158 */ MoguraLight* mMoleLight;
     /* 0x15C */ FlfHandle mPlayerHandle;
