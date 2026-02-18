@@ -40,7 +40,7 @@ HenshinCtrl::~HenshinCtrl() {
 void HenshinCtrl::vfDC(FlfMdlDraw* pFlfMdlDraw) {
     pFlfMdlDraw->PlayNURBSAnimation(1, true);
 
-    mFlfMdlCollision = new (gfl::HeapID::Work) FlfMdlCollision(pFlfMdlDraw, mPlayerHandle.TryGetHandleObj());
+    mFlfMdlCollision = new (gfl::HeapID::Work) FlfMdlCollision(pFlfMdlDraw, mPlayerHandle.TryGetHandleObj<FlfHandleObj>());
 
     size_t index = mFlfMdlCollision->fn_800f09D8("cv_hitShape", 0, 0, -1, 1.0f);
 
@@ -75,10 +75,10 @@ void HenshinCtrl::vfB0() {
             m_30 = 0;
             break;
         }
-        
+
         case 2: {
             m_2C++;
-            
+
             if (m_2C >= 0x78) {
                 mPreviousState = mCurrentState;
                 mCurrentState = 3;
@@ -89,7 +89,7 @@ void HenshinCtrl::vfB0() {
 
             break;
         }
-        
+
         case 3: {
             mSoundFadeCtrl->vfC(1.0f, 0, 0x1E);
             mPreviousState = mCurrentState;
@@ -110,4 +110,3 @@ bool HenshinCtrl::vfD8(float arg1, PlayerBase* pPlayer, PlTransMdl* pPlTransMdl)
 }
 
 void HenshinCtrl::vf2C() { }
-

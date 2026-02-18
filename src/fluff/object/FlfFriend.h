@@ -130,7 +130,7 @@ public:
 	/* 0x20C */ virtual void vf20C();
 	/* 0x210 */ virtual void vf210(int);
 	/* 0x214 */ virtual void vf214();
-	/* 0x218 */ DECL_WEAK virtual int vf218();
+	/* 0x218 */ DECL_WEAK virtual bool vf218();
 	// Switch direction to face the target.
 	/* 0x21C */ virtual void LookAt(const gfl::Vec3& rPos);
 	/* 0x220 */ DECL_WEAK virtual void vf220(/* unk args (it's not void) */);

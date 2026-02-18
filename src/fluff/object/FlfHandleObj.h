@@ -44,7 +44,8 @@ public:
         *mObject = nullptr;
     }
 
-    inline FlfHandleObj* TryGetHandleObj() const;
+    template <typename T>
+    inline T* TryGetHandleObj() const;
 
     inline void operator=(const FlfHandle& rOther) {
         mObject = rOther.mObject;
@@ -126,13 +127,14 @@ inline void FlfHandle::operator=(const FlfHandleObj* pHandleObj) {
     }
 }
 
-inline FlfHandleObj* FlfHandle::TryGetHandleObj() const {
+template <typename T>
+inline T* FlfHandle::TryGetHandleObj() const {
     FlfHandleObj** objPtr = GetObject();
     if (objPtr != nullptr &&
         *objPtr != nullptr &&
         GetID() == (*objPtr)->GetHandleID())
     {
-        return *objPtr;
+        return static_cast<T*>(*objPtr);
     }
     return nullptr;
 }

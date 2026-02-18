@@ -540,7 +540,7 @@ void FlfFriend::SetPlayer(PlayerBase* pPlayer) {
 }
 
 PlayerBase* FlfFriend::GetPlayer() const {
-    return static_cast<PlayerBase*>(mPlayerHandle.TryGetHandleObj());
+    return mPlayerHandle.TryGetHandleObj<PlayerBase>();
 }
 
 int FlfFriend::vfEC() {
@@ -559,8 +559,8 @@ void FlfFriend::vf204() { }
 
 void FlfFriend::vf208() { }
 
-int FlfFriend::vf218() {
-    return 1;
+bool FlfFriend::vf218() {
+    return true;
 }
 
 void FlfFriend::vfAC() {
@@ -910,21 +910,16 @@ gfl::Vec3 FlfFriend::fn_8033E940() const {
     return ret;
 }
 
-// https://decomp.me/scratch/xo85q
+// https://decomp.me/scratch/nOx41
 void FlfFriend::LookAt(const gfl::Vec3& rPos) {
     gfl::Vec3 pos;
     pos = mPosition;
 
-    float x = pos.x;
-    float target = rPos.x;
-
-    if (fabsf(x - target) < 0.03f) { // prevent "jittering"
+    if (fabsf(pos.x - rPos.x) < 0.03f) { // prevent "jittering"
         return;
-    }
-
-    if (target < x) {
+    } else if (pos.x < rPos.x) {
         mDirection = Direction::Forward;
-    } else if (x < target) {
+    } else if (rPos.x < pos.x) {
         mDirection = Direction::Backward;
     }
 }
@@ -947,11 +942,11 @@ void FlfFriend::vf240() {
 
     float thresh = 0.0001f;
 
-    if (__fabsf(m_E4.x) < thresh) {
+    if (fabsf(m_E4.x) < thresh) {
         m_E4.x = 0.0f;
     }
 
-    if (__fabsf(m_E4.y) < thresh) {
+    if (fabsf(m_E4.y) < thresh) {
         m_E4.y = 0.0f;
     }
 }
@@ -1012,4 +1007,57 @@ void FlfFriend::Update() const {
 void FlfFriend::vf174() {
     vf160();
     vf204();
+}
+
+void FlfFriend::vf178() {
+    vf160();
+    vf204();
+
+    // not decompiled
+}
+
+void FlfFriend::vf1C0() {
+    vf160();
+    if (vf218()) {
+        uint id = GetCurrentNURBSAnimationID();
+
+        if (id != 100 && mFlfMdlDraw->HasNURBSAnimation(100)) {
+            PlayNURBSAnimation(100, true);
+        }
+
+        if (mEffect->IsAnimationDone()) {
+            mEffect->ResetNURBSFrame();
+        }
+    }
+    vf208();
+}
+
+void FlfFriend::vf1C4() {
+    vf160();
+    if (vf218()) {
+        uint id = GetCurrentNURBSAnimationID();
+
+        if (id != 110 && mFlfMdlDraw->HasNURBSAnimation(110)) {
+            PlayNURBSAnimation(110, true);
+        }
+
+        if (mEffect->IsAnimationDone()) {
+            mEffect->ResetNURBSFrame();
+        }
+    }
+    vf208();
+}
+
+void FlfFriend::vf1B4() {
+    mState.SetCurrentStateAndClearOthers(16);
+}
+
+void FlfFriend::vf1B8() { }
+
+void FlfFriend::vf1BC() {
+    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+
+    if (player != nullptr) {
+        StartMission(player, false);
+    }
 }

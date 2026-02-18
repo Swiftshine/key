@@ -135,6 +135,7 @@ public:
     bool IsVisible() const;
     bool fn_80023E2C() const;
     void GetWoolDrawMatrix(nw4r::math::MTX34& rDst) const;
+    bool HasNURBSAnimation(int id) const;
 
     inline void SetCurrentFrameInt(int value) {
         *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;
