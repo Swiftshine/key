@@ -128,7 +128,7 @@ public:
 	/* 0x200 */ virtual void vf200();
 	/* 0x204 */ virtual void vf204();
 	/* 0x208 */ virtual void vf208();
-	/* 0x20C */ virtual void vf20C();
+	/* 0x20C */ virtual void vf20C(bool);
 	/* 0x210 */ virtual void vf210(int);
 	/* 0x214 */ virtual void vf214();
 	/* 0x218 */ DECL_WEAK virtual bool vf218();

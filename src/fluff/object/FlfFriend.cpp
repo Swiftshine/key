@@ -520,7 +520,7 @@ void FlfFriend::vf224(float arg1) {
 
 void FlfFriend::vf214() { }
 
-void FlfFriend::vf20C() { }
+void FlfFriend::vf20C(bool) { }
 
 void FlfFriend::vf124() {
     mState.SetCurrentStateAndClearOthers(7);
@@ -1163,3 +1163,83 @@ void FlfFriend::vf1F4() {
         m_144++;
     }
 }
+
+void FlfFriend::vf1F8() {
+    if (!IsAnimationDone()) {
+        return;
+    }
+
+    if (!fn_8033BE64()) {
+        vfF0(GetClosestPlayer());
+    } else {
+        PlayNURBSAnimation(GetCurrentAnimationID(), true);
+        mFlfMdlDraw->SetCurrentNURBSFrame(0.0f);
+    }
+}
+
+void FlfFriend::vf1FC() { }
+
+void FlfFriend::vf200() {
+    // not decompiled
+}
+
+void FlfFriend::vf1C8() {
+    // not decompiled
+}
+
+void FlfFriend::vf1CC() {
+    if (!IsAnimationDone()) {
+        return;
+    }
+
+    (*mBackDoorHandle.GetObject<GmkBackDoor>())->fn_80329320(this, true);
+    SetIsInMission(true);
+    mPosition.z = m_10C;
+    StartMission(GetPlayer(), true);
+}
+
+void FlfFriend::vf1D0() {
+    // not decompiled
+}
+
+void FlfFriend::vf190() {
+    // not decompiled
+}
+
+void FlfFriend::vf17C() {
+    if (!IsPlayerSavedPositionInFront()) {
+        vf20C(true);
+    }
+
+    if (vfEC() && IsAnimationDone()) {
+        SwitchDirection();
+        PlayNURBSAnimation(200, false);
+    }
+}
+
+void FlfFriend::vf180() {
+    if (mFlfMdlDraw->HasNURBSAnimation(201)) {
+        mFlfMdlDraw->GetCurrentFrame(); // unused
+        mFlfMdlDraw->GetEndFrame(); // also unused
+
+        // there probably used to be a manual frame check before
+        // they decided to put it in a function
+
+        if (IsAnimationDone()) {
+            mEffect->Reset(-1);
+            vf210(1);
+            mState.SetCurrentStateAndClearOthers(4);
+        }
+    } else {
+        mState.SetCurrentStateAndClearOthers(4);
+    }
+}
+
+void FlfFriend::vf184() { }
+
+void FlfFriend::vf188() {
+    vf210(1);
+    mState.SetCurrentStateAndClearOthers(1);
+}
+
+void FlfFriend::vf18C() { }

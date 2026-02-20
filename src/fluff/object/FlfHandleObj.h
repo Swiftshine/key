@@ -40,6 +40,11 @@ public:
         return mObject;
     }
 
+    template <typename T>
+    inline T** GetObject() const {
+        return reinterpret_cast<T**>(mObject);
+    }
+
     inline void ClearObject() {
         *mObject = nullptr;
     }

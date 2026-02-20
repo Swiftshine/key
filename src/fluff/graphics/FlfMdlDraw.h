@@ -128,6 +128,7 @@ public:
     bool IsAnimationDone() const;
     float GetCurrentFrame();
     float GetEndFrame();
+    float GetEndFrame(int id);
     void SetCurrentNURBSFrame(float);
     gfl::ScnMdlWrapper* GetNURBSAnimWrapperModelWrapper();
     NURBSSet* GetNURBSAnimWrapperNURBSSet();
