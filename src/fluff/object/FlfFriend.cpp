@@ -1240,7 +1240,7 @@ void FlfFriend::vf184() { }
 
 void FlfFriend::vf188() {
     vf210(true);
-    mState.SetCurrentStateAndClearOthers(1);
+    mState.SetCurrentStateAndClearOthers(8);
 }
 
 void FlfFriend::vf18C() { }
