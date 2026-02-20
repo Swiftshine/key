@@ -37,7 +37,7 @@ public:
 	/* 0x094 */ virtual bool vf94(const gfl::Vec2& rPos) const; // related to checking position against some camera bounds
 	/* 0x098 */ virtual bool vf98(float, float, const gfl::Vec2&) const;
 	/* 0x09C */ virtual bool IsInRange(const gfl::Vec3& rTarget, float* pDistance) const;
-	/* 0x0A0 */ virtual void vfA0();
+	/* 0x0A0 */ virtual void vfA0(ScreenPosition& rPos);
 	/* 0x0A4 */ virtual void vfA4();
 	/* 0x0A8 */ virtual void vfA8();
 	/* 0x0AC */ virtual void vfAC();
@@ -129,7 +129,7 @@ public:
 	/* 0x204 */ virtual void vf204();
 	/* 0x208 */ virtual void vf208();
 	/* 0x20C */ virtual void vf20C(bool);
-	/* 0x210 */ virtual void vf210(int);
+	/* 0x210 */ virtual void vf210(bool);
 	/* 0x214 */ virtual void vf214();
 	/* 0x218 */ DECL_WEAK virtual bool vf218();
 	// Switch direction to face the target.
@@ -190,10 +190,6 @@ public:
     static float fn_8033B710();
 	static int fn_8033BEFC(std::tree<placeholder_t>& rTree, int*);
 
-	/* Inline Helper Methods */
-	inline const ScreenPosition& GetScreenPosition() const {
-	    return mScreenPosition;
-	}
     /* Class Members */
 
     /* 0x088 */ gfl::Task mTask;
@@ -217,11 +213,9 @@ public:
     /* 0x10C */ float m_10C;
     /* 0x110 */ float m_110;
     /* 0x114 */ float m_114;
-    /* 0x118 */ ScreenPosition mScreenPosition;
+    /* 0x118 */ ScreenPosition mScreenPosition1;
     /* 0x124 */ float m_124;
-    /* 0x128 */ float m_128;
-    /* 0x12C */ float m_12C;
-    /* 0x130 */ float m_130;
+    /* 0x128 */ ScreenPosition mScreenPosition2;
     /* 0x134 */ int m_134;
     /* 0x138 */ bool mUpdateFrame;
     /* 0x139 */ bool m_139;

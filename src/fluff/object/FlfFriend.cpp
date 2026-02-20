@@ -16,6 +16,8 @@
 
 const CollisionTemplate ColTemplate;
 
+float lbl_808E9D94 = 0.0001f;
+
 float FlfFriend::Square(float val) {
     return val * val;
 }
@@ -46,10 +48,9 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendI
     , m_108(0.0f)
     , m_10C(0.0f)
     , m_110(0.0f)
-    , mScreenPosition(0.0f, 0.0f, 0.0f)
-    , m_128(0.0f)
-    , m_12C(0.0f)
-    , m_130(0.0f)
+    , mScreenPosition1(0.0f, 0.0f, 0.0f)
+    , m_124(0.0f)
+    , mScreenPosition2(0.0f, 0.0f, 0.0f)
     , mUpdateFrame(false)
     , m_139(true)
     , mMapdataGimmick(nullptr)
@@ -265,11 +266,11 @@ bool FlfFriend::IsVisible() const {
 }
 
 void FlfFriend::fn_8033C488() {
-    vf210(0);
+    vf210(false);
     mState.SetCurrentStateAndClearOthers(1);
 }
 
-void FlfFriend::vf210(int) { }
+void FlfFriend::vf210(bool) { }
 
 uint FlfFriend::GetCurrentNURBSAnimationID() const {
     return mFlfMdlDraw->mCurrentAnimationID;
@@ -449,13 +450,13 @@ void FlfFriend::SetScreenPosition(int* pDirection) {
     CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::SceneID::Game);
 
     if (*pDirection == Direction::Forward) {
-        mScreenPosition.mCullThreshold = mPosition.z;
-        mScreenPosition.mX = x + w + 3.0f;
-        mScreenPosition.mY = y + 3.0f;
+        mScreenPosition1.mCullThreshold = mPosition.z;
+        mScreenPosition1.mX = x + w + 3.0f;
+        mScreenPosition1.mY = y + 3.0f;
     } else if (*pDirection == Direction::Backward) {
-        mScreenPosition.mCullThreshold = mPosition.z;
-        mScreenPosition.mX = x - 3.0f;
-        mScreenPosition.mY = y + 3.0f;
+        mScreenPosition1.mCullThreshold = mPosition.z;
+        mScreenPosition1.mX = x - 3.0f;
+        mScreenPosition1.mY = y + 3.0f;
     }
 }
 
@@ -580,10 +581,10 @@ void FlfFriend::ResetScreen(const ScreenPosition& rPos) {
         mEffect->Reset(-1);
     }
 
-    vf210(0);
-    mScreenPosition.mX = rPos.mX;
-    mScreenPosition.mY = rPos.mY;
-    mScreenPosition.mCullThreshold = lbl_808E9D90;
+    vf210(false);
+    mScreenPosition1.mX = rPos.mX;
+    mScreenPosition1.mY = rPos.mY;
+    mScreenPosition1.mCullThreshold = lbl_808E9D90;
     mState.SetCurrentStateAndClearOthers(5);
 }
 
@@ -592,7 +593,7 @@ void FlfFriend::ResetCollision() {
         mEffect->Reset(-1);
     }
 
-    vf210(1);
+    vf210(true);
 
     m_110 = 0.0f;
 
@@ -604,7 +605,7 @@ void FlfFriend::ResetCollision() {
 const char RoomLocatorName[] = "FriendRoomLocator";
 const char Blank[] = "";
 void FlfFriend::ResetRoomLocator() {
-    vf210(1);
+    vf210(true);
 
     Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
@@ -754,7 +755,7 @@ void FlfFriend::SetPositionToPlayerSavedPosition() {
 
 void FlfFriend::vf148() {
     m_E4 = gfl::Vec3::Zero;
-    vf210(1);
+    vf210(true);
     mState.SetCurrentStateAndClearOthers(15);
 }
 
@@ -928,7 +929,7 @@ void FlfFriend::LookAt(const ScreenPosition& rPos) {
     }
 }
 
-void FlfFriend::vfA0(/* args unk */) {
+void FlfFriend::vfA0(ScreenPosition& rPos) {
     // not decompiled
 }
 
@@ -1081,10 +1082,10 @@ void FlfFriend::vf1E8() {
         return;
     }
 
-    ScreenPosition pos = mScreenPosition;
+    ScreenPosition pos = mScreenPosition1;
     LookAt(pos);
 
-    vf210(0);
+    vf210(false);
     mState.SetCurrentStateAndClearOthers(31);
 }
 
@@ -1131,9 +1132,9 @@ void FlfFriend::vf1DC() {
         return;
     }
 
-    ScreenPosition pos = mScreenPosition;
+    ScreenPosition pos = mScreenPosition1;
     LookAt(pos);
-    vf210(0);
+    vf210(false);
     fn_8033BE64();
 }
 
@@ -1227,7 +1228,7 @@ void FlfFriend::vf180() {
 
         if (IsAnimationDone()) {
             mEffect->Reset(-1);
-            vf210(1);
+            vf210(true);
             mState.SetCurrentStateAndClearOthers(4);
         }
     } else {
@@ -1238,8 +1239,51 @@ void FlfFriend::vf180() {
 void FlfFriend::vf184() { }
 
 void FlfFriend::vf188() {
-    vf210(1);
+    vf210(true);
     mState.SetCurrentStateAndClearOthers(1);
 }
 
 void FlfFriend::vf18C() { }
+
+void FlfFriend::vf194() {
+    // not decompiled
+}
+
+void FlfFriend::vf1A0() {
+    if (!IsAnimationDone()) {
+        return;
+    }
+
+    ScreenPosition pos = mScreenPosition2;
+    LookAt(pos);
+    vf210(true);
+    mState.SetCurrentStateAndClearOthers(10);
+}
+
+void FlfFriend::vf198() { }
+
+void FlfFriend::vf19C() {
+    if (mFlfMdlDraw->HasNURBSAnimation(300)) {
+        mFlfMdlDraw->GetCurrentFrame(); // unused
+        mFlfMdlDraw->GetEndFrame(); // also unused
+
+        if (IsAnimationDone()) {
+            mState.SetCurrentStateAndClearOthers(12);
+        }
+    } else {
+        mState.SetCurrentStateAndClearOthers(12);
+    }
+}
+
+void FlfFriend::vf1A4() { }
+
+void FlfFriend::vf1A8() {
+    ScreenPosition pos = mScreenPosition1;
+    vfA0(pos);
+
+    if (m_E4.Length() < lbl_808E9D94) {
+        mState.SetCurrentStateAndClearOthers(14);
+    }
+}
+
+void FlfFriend::vf1AC() { }
