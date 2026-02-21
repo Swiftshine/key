@@ -209,6 +209,9 @@ fluff/util/PathInfo.cpp:
 fluff/object/FlfFriend.cpp:
 	.text       start:0x8033B708 end:0x80341BCC
 
+fluff/object/friend/Friend00.cpp:
+	.text       start:0x80341BCC end:0x80343A50
+
 fluff/manager/FlfMsgMng.cpp:
 	.text       start:0x8035D3CC end:0x8035D780
 
