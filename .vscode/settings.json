@@ -82,5 +82,6 @@
         "nwc24.h": "c",
         "nandopenclose.h": "c"
     },
-    "C_Cpp.default.compilerPath": ""
+    "C_Cpp.default.compilerPath": "",
+    "C_Cpp.intelliSenseEngine": "default"
 }

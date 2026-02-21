@@ -545,16 +545,16 @@ PlayerBase* FlfFriend::GetPlayer() const {
     return mPlayerHandle.TryGetHandleObj<PlayerBase>();
 }
 
-bool FlfFriend::vfEC() {
+bool FlfFriend::vfEC() const {
     return false;
 }
 
-int FlfFriend::vfE8() {
-    return 0;
+bool FlfFriend::vfE8() const {
+    return false;
 }
 
-int FlfFriend::vfDC() {
-    return 1;
+bool FlfFriend::vfDC() const {
+    return true;
 }
 
 void FlfFriend::vf204() { }

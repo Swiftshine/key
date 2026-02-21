@@ -69,7 +69,12 @@ namespace gfl {
 
         Vec3() { }
 
-        Vec3(float, float, float);
+        Vec3(float nx, float ny, float nz) {
+            x = nx;
+            y = ny;
+            z = nz;
+        }
+
         Vec3(float, nw4r::math::VEC2&);
         Vec3(const nw4r::math::VEC2&);
         Vec3(const Vec2&);
