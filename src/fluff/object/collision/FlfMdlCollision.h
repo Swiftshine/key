@@ -8,9 +8,6 @@
 // size: 0x4C
 class FlfMdlCollision {
 public:
-
-    
-
     FlfMdlCollision(FlfMdlDraw* pFlfMdlDraw, void* pOwner);
 
     /* Virtual Methods */

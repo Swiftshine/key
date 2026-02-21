@@ -12,11 +12,13 @@
 #include "graphics/effect/FriendEffect.h"
 #include "mapdata/Mapdata.h"
 #include "misc/ScopedPointers.h"
-#include "object/gimmick/GmkBackDoor.h"
+#include "util/ScreenPosition.h"
 #include "util/StateObject.h"
 #include <tree>
 
 class PlayerBase;
+class GmkBackDoor;
+class GmkBackDoorCancel;
 
 /// @brief Base class for friend objects.
 /// @note Size: `0x178`
@@ -35,11 +37,11 @@ public:
 	/* 0x094 */ virtual bool vf94(const gfl::Vec2& rPos) const; // related to checking position against some camera bounds
 	/* 0x098 */ virtual bool vf98(float, float, const gfl::Vec2&) const;
 	/* 0x09C */ virtual bool IsInRange(const gfl::Vec3& rTarget, float* pDistance) const;
-	/* 0x0A0 */ virtual void vfA0();
+	/* 0x0A0 */ virtual void vfA0(ScreenPosition& rPos);
 	/* 0x0A4 */ virtual void vfA4();
 	/* 0x0A8 */ virtual void vfA8();
 	/* 0x0AC */ virtual void vfAC();
-	/* 0x0B0 */ virtual void ResetScreen(const gfl::Vec2& rPos);
+	/* 0x0B0 */ virtual void ResetScreen(const ScreenPosition& rPos);
 	/* 0x0B4 */ virtual void ResetCollision();
 	/* 0x0B8 */ virtual void ResetRoomLocator();
 	/* 0x0BC */ virtual void vfBC(void* pArg1, bool arg2);
@@ -54,7 +56,7 @@ public:
 	/* 0x0E0 */ virtual bool vfE0() const;
 	/* 0x0E4 */ virtual bool vfE4() const;
 	/* 0x0E8 */ DECL_WEAK virtual int vfE8();
-	/* 0x0EC */ DECL_WEAK virtual int vfEC();
+	/* 0x0EC */ DECL_WEAK virtual bool vfEC();
 	/* 0x0F0 */ virtual void vfF0(FlfGameObj* pObj);
 	/* 0x0F4 */ virtual PlayerBase* GetPlayer() const;
 	/* 0x0F8 */ virtual void SetPlayer(PlayerBase* pPlayer);
@@ -67,7 +69,7 @@ public:
 	/* 0x114 */ virtual uint GetCurrentNURBSAnimationID() const;
 	/* 0x118 */ virtual void PlayNURBSAnimation(int, bool);
 	/* 0x11C */ virtual void SetCurrentNURBSAnimationFrame(float frame);
-	/* 0x120 */ DECL_WEAK virtual int GetCurrentAnimationID() const;
+	/* 0x120 */ DECL_WEAK virtual uint GetCurrentAnimationID() const;
 	/* 0x124 */ virtual void vf124();
 	/* 0x128 */ virtual bool vf128() const;
 	/* 0x12C */ virtual void vf12C(int);
@@ -126,11 +128,12 @@ public:
 	/* 0x200 */ virtual void vf200();
 	/* 0x204 */ virtual void vf204();
 	/* 0x208 */ virtual void vf208();
-	/* 0x20C */ virtual void vf20C();
-	/* 0x210 */ virtual void vf210(int);
+	/* 0x20C */ virtual void vf20C(bool);
+	/* 0x210 */ virtual void vf210(bool);
 	/* 0x214 */ virtual void vf214();
-	/* 0x218 */ DECL_WEAK virtual int vf218();
-	/* 0x21C */ virtual void vf21C();
+	/* 0x218 */ DECL_WEAK virtual bool vf218();
+	// Switch direction to face the target.
+	/* 0x21C */ virtual void LookAt(const ScreenPosition& rPos);
 	/* 0x220 */ DECL_WEAK virtual void vf220(/* unk args (it's not void) */);
 	/* 0x224 */ virtual void vf224(float arg1);
 	/* 0x228 */ virtual float vf228() const;
@@ -151,19 +154,19 @@ public:
     /* 0x80 */ DECL_WEAK virtual void ExecCallbackA(nw4r::g3d::ChrAnmResult* pResult, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
     /* 0x84 */ DECL_WEAK virtual void ExecCallbackB(nw4r::g3d::WorldMtxManip* pManip, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
     /* 0x88 */ virtual void ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl mdl, nw4r::g3d::FuncObjCalcWorld* pFuncObj) override;
-    
+
 
     /* Class Methods */
 
 	void SetTaskFlags(bool set, bool arg2, uint flag);
-    void ProcessCollision();
+    void ProcessCollision() DONT_INLINE_CLASS;
     void SetCallbackTiming();
 	bool fn_8033BD68(const gfl::Vec3& rV1, const gfl::Vec3& rV2, const gfl::Vec3& rV3) const;
 	bool fn_8033BE24(const gfl::Vec3& rV1, const gfl::Vec3& rV2) const;
-	bool fn_8033BE64();
+	bool fn_8033BE64() DONT_INLINE_CLASS;
     void fn_8033BF8C(int);
     void fn_8033BFC8(int targetState, int currentState);
-	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const;
+	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const DONT_INLINE_CLASS;
 	void SetTransform(gfl::Mtx34& rMtx);
 	void fn_8033C488();
 	void fn_8033C580(uint);
@@ -173,23 +176,28 @@ public:
 	bool fn_8033E25C() const;
 	void TryStartMission(GmkBackDoor* pDoor, bool arg2);
 	void fn_8033E3DC();
-
+	void TryCancelMission(GmkBackDoorCancel* pDoor, const gfl::Vec3& rPos);
 	void fn_8033E570();
+	bool fn_8033E648();
+	bool fn_8033E84C() const;
+	bool fn_8033E870() const;
+	bool fn_8033E8A8() const DONT_INLINE_CLASS;
+	gfl::Vec3 fn_8033E940() const;
 
     /* Static Methods */
-	
+
     static float Square(float val);
     static float fn_8033B710();
 	static int fn_8033BEFC(std::tree<placeholder_t>& rTree, int*);
 
     /* Class Members */
-    
+
     /* 0x088 */ gfl::Task mTask;
     /* 0x0A0 */ FullSortScene* mScene;
     /* 0x0A4 */ FlfMdlDraw* mFlfMdlDraw;
     /* 0x0A8 */ uint mNextAnimationID;
     /* 0x0AC */ bool mIsAnimationReset;
-    /* 0x0B0 */ int mCurrentAnimationID;
+    /* 0x0B0 */ uint mCurrentAnimationID;
     /* 0x0B4 */ int m_B4;
     /* 0x0B8 */ int m_B8;
     /* 0x0BC */ gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry;
@@ -205,21 +213,19 @@ public:
     /* 0x10C */ float m_10C;
     /* 0x110 */ float m_110;
     /* 0x114 */ float m_114;
-    /* 0x118 */ ScreenPosition mScreenPosition;
+    /* 0x118 */ ScreenPosition mScreenPosition1;
     /* 0x124 */ float m_124;
-    /* 0x128 */ float m_128;
-    /* 0x12C */ float m_12C;
-    /* 0x130 */ float m_130;
+    /* 0x128 */ ScreenPosition mScreenPosition2;
     /* 0x134 */ int m_134;
     /* 0x138 */ bool mUpdateFrame;
     /* 0x139 */ bool m_139;
     /* 0x13C */ Mapdata::MapdataGimmick* mMapdataGimmick;
     /* 0x140 */ int m_140;
-    /* 0x144 */ int m_144;
+    /* 0x144 */ uint m_144;
     /* 0x148 */ bool m_148;
     /* 0x149 */ bool m_149;
     /* 0x14C */ FlfHandle mBackDoorHandle;
-    /* 0x154 */ bool m_154;
+    /* 0x154 */ bool mMissionState;
     /* 0x155 */ bool mMissionStarted;
     /* 0x158 */ MoguraLight* mMoleLight;
     /* 0x15C */ FlfHandle mPlayerHandle;

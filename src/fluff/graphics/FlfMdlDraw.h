@@ -128,6 +128,7 @@ public:
     bool IsAnimationDone() const;
     float GetCurrentFrame();
     float GetEndFrame();
+    float GetEndFrame(int id);
     void SetCurrentNURBSFrame(float);
     gfl::ScnMdlWrapper* GetNURBSAnimWrapperModelWrapper();
     NURBSSet* GetNURBSAnimWrapperNURBSSet();
@@ -135,6 +136,7 @@ public:
     bool IsVisible() const;
     bool fn_80023E2C() const;
     void GetWoolDrawMatrix(nw4r::math::MTX34& rDst) const;
+    bool HasNURBSAnimation(int id) const;
 
     inline void SetCurrentFrameInt(int value) {
         *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;

@@ -51,10 +51,10 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     }
 
     bool param0 = buildInfo->GetBoolParam(ParameterID::FIRST);
-    
+
     int param4 = buildInfo->GetIntParam(ParameterID::FIFTH);
     if (param4 == 1) {
-        vf50(true);
+        SetIsInMission(true);
     }
 
     m_149 = buildInfo->GetBoolParam(ParameterID::FIFTH);
@@ -69,17 +69,17 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         if (gmkID == 0x14C) {
             // BeadPopSwitch
             m_134 = 2;
-        } 
+        }
     }
 
     const float zero = 0.0f;
-    
+
     mState = State::Init;
     mCompletionPercentage = zero;
     m_144 = 1.0f;
     mCollisionEnabled = true;
     mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
-    
+
     UpdateMatrix();
 
     // todo: create inlined ctor for this
@@ -93,7 +93,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     cTemplate.mDimensions.y = zero;
     cTemplate.m_C.x = zero;
     cTemplate.m_C.y = zero;
-    
+
     mCollisionEntry.Create(CollisionEntry::Get(&cTemplate, static_cast<IObjHitCB*>(this), nullptr, mMatrix, "GmkBeadPopItem"));
 
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneID);
@@ -106,7 +106,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         char animNameBuf[0x40];
         snprintf(animNameBuf, sizeof(animNameBuf), "%s__%02d", "make this correct as well", 1);
         animNameBuf[0x3F] = 0;
-        
+
         anmCtrl->PlayAnimationByNameAndIndex(0, animNameBuf);
         anmCtrl->SetupModelWrapper(8);
         anmCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
@@ -219,18 +219,18 @@ void GmkBeadPopItem::SetState(FlfGameObj* setter, const std::string& state) {
         mPopItemInfo.IsValid() &&
         !enabled &&
         mCollisionEnabled &&
-        setter != nullptr && 
+        setter != nullptr &&
         setter->mCategory == 1
     ) {
         CutFunction();
-        
+
         int gimmickID = static_cast<Gimmick*>(setter)->GetGimmickID();
         bool isClothTurnGimmick = GimmickUtil::IsClothTurnGimmick(gimmickID);
         if (isClothTurnGimmick && mState == State::Init) {
             SetState(State::Idle);
             mCompletionPercentage = 0.25f;
         }
-    } 
+    }
 }
 
 void GmkBeadPopItem::SetCollisionEnabled(bool enabled) {
@@ -276,7 +276,7 @@ void GmkBeadPopItem::SetupCollisionMatrix() {
     }
 
     CollisionEntry* entry = mCollisionEntry.Get();
-    
+
     entry->ResetMatrixIf(enabled);
 
     GmkBeadPopItem_Info* info = mPopItemInfo.Get();

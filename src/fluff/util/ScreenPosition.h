@@ -1,17 +1,18 @@
 #ifndef FLUFF_SCREENPOSITION_H
 #define FLUFF_SCREENPOSITION_H
 
-#include "gfl/gflVec2.h"
-
 struct ScreenPosition {
-    ScreenPosition() {
-        mPosition.x = 0;
-        mPosition.y = 0;
-        mCullThreshold = 0;
-    }
-    gfl::Vec2 mPosition;
-    float mCullThreshold;
-};
+    ScreenPosition(float x, float y, float c)
+        : mX(x)
+        , mY(y)
+        , mCullThreshold(c)
+    { }
 
+    struct {
+        float mX;
+        float mY;
+        float mCullThreshold;
+    };
+};
 
 #endif

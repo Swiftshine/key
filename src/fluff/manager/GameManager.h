@@ -21,7 +21,7 @@
 
 class PointerManagerWrapper {
 public:
-    
+
 
     PointerManagerWrapper();
     ~PointerManagerWrapper();
@@ -74,8 +74,8 @@ public:
         return sInstance;
     }
 
-    
-    
+
+
     GameManager();
 
     /* Virtual Methods */
@@ -107,7 +107,7 @@ public:
     void    StartLoadPhase7();
     void    StartLoadPhase13();
 
-    
+
     /* Static Methods */
     static uint  GetPlayerCount();
     static PlayerBase*  GetPlayerByID(uint playerID);
@@ -170,11 +170,12 @@ public:
     // Mission related.
     static void fn_800123D8(int, int, int, int);
     static StageInfo GetCurrentStageInfo();
-    
+    static int GetCurrentAreaID();
+
     inline gfl::FixedString* GetUnk8() { return m_8; }
-    
+
     /* Class Members */
-    
+
     /* 0x04 */ bool m_4;
     /* 0x08 */ gfl::FixedString* m_8;
     /* 0x0C */ uint m_C;

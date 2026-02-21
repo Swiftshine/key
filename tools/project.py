@@ -220,11 +220,11 @@ class ProjectConfig:
         )
 
         # Progress fancy printing
-        self.progress_use_fancy: bool = False
-        self.progress_code_fancy_frac: int = 0
-        self.progress_code_fancy_item: str = ""
-        self.progress_data_fancy_frac: int = 0
-        self.progress_data_fancy_item: str = ""
+        self.progress_use_fancy: bool = True
+        self.progress_code_fancy_frac: int = 180
+        self.progress_code_fancy_item: str = "fabrics"
+        self.progress_data_fancy_frac: int = 168
+        self.progress_data_fancy_item: str = "pieces of furniture"
 
     def validate(self) -> None:
         required_attrs = [
