@@ -1,10 +1,12 @@
 #include "object/friend/Friend00.h"
-#include "manager/GameManager.h"
 #include "object/PlayerBase.h"
-#include "stage/StageResources.h"
+#include "object/gimmick/GmkBead.h"
+#include "manager/GameManager.h"
 #include "manager/WorkManager.h"
+#include "stage/StageResources.h"
 #include "stage/mission/MissionUtil.h"
 #include "work/InStageWork.h"
+#include "gfl/gflParam.h"
 
 const char* Friend00::ResourceName = "chara/friend/FRIEND01";
 const char* Friend00::GetResourceName() {
@@ -24,12 +26,8 @@ Friend00::Friend00(gfl::Task* pParentTask, FullSortScene* pScene, const char* pT
     , mBeadCount(0)
     , mGathers()
     , m_188(false)
-    , m_18C(0.0f)
-    , m_190(0.0f)
-    , m_194(0.0f)
-    , m_198(0.0f)
-    , m_19C(0.0f)
-    , m_1A0(0.0f)
+    , m_18C(0.0f, 0.0f, 0.0f)
+    , m_198(0.0f, 0.0f, 0.0f)
     , mBeadCount1(0)
     , mBeadCount2(0)
     , mCollisionEntry1(nullptr)
@@ -184,4 +182,110 @@ void Friend00::vf204() {
     }
 
     vf208();
+}
+
+void Friend00::fn_80342DE4(PlayerBase* pPlayer, bool isReset) {
+    // not decompiled   
+}
+
+void Friend00::fn_803431E4() {
+    if (!vf218()) {
+        SetNURBSAnimationInfo(12, true);
+    } else {
+        gfl::Vec3 unused;
+        unused = m_E4;
+        if (GetPlayer() != nullptr && GetPlayer()->mCategory == ObjectCategory::Player) {
+            unused = CutFunction(GetPlayer())->m_5DC;
+        }
+
+        bool reset = true;
+        if (GetCurrentAnimationID()== 12) {
+            reset = false;
+        }
+
+        SetNURBSAnimationInfo(20, reset);
+    }
+
+    if (GetPlayer() != nullptr && GetPlayer()->mCategory == ObjectCategory::Player) {
+        CutFunction(GetPlayer());
+        vf208();
+    } else {
+        vf208();
+    }
+}
+
+void Friend00::vf208() {
+    if (!IsPlayerSavedPositionInFront()) {
+        SetNURBSAnimationInfo(12, true);
+    }
+}
+
+void Friend00::vf20C(bool isReset) {
+    if (GetCurrentNURBSAnimationID() != 12) {
+        PlayNURBSAnimation(12, isReset);
+    }
+}
+
+void Friend00::vf210(bool isReset) {
+    PlayNURBSAnimation(1, isReset);
+}
+
+void Friend00::vf214(bool isReset) {
+    PlayNURBSAnimation(35, isReset);
+}
+
+bool Friend00::vf218() {
+    if (GetCurrentNURBSAnimationID() == 12) {
+        if (IsAnimationDone()) {
+            switch (mDirection) {
+                case Direction::Forward: {
+                    mDirection = Direction::Backward;
+                    break;
+                }
+                case Direction::Backward: {
+                    mDirection = Direction::Forward;
+                    break;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+    return true;
+}
+
+int Friend00::GetBeadGimmickID(GmkBead* pBead) const {
+    return pBead->GetGimmickID();
+}
+
+void Friend00::fn_80343534() {
+    gfl::Vec3 temp;
+    temp = m_18C;
+    m_198 = temp - mPosition;
+
+    if (gfl::ParamGroup::GetGlobalParamS32("player/test/FRIEND_GATHER_TYPE")->mValue == 0) {
+        vfA4(0.4f, temp, false);
+    } else if (gfl::ParamGroup::GetGlobalParamS32("player/test/FRIEND_GATHER_TYPE")->mValue == 1) {
+        vfA8(0.6f, 0.3f, temp, true);
+    }
+
+    fn_803431E4();
+
+    m_188 = false;
+
+    if (mBeadCount > 0) {
+        mState.SetCurrentStateAndClearOthers(105);
+    } else {
+        mState.SetCurrentStateAndClearOthers(102);
+    }
+}
+
+void Friend00::fn_803436C8() {
+    // not decompiled
+}
+
+void Friend00::vf1BC() {
+    if (IsAnimationDone()) {
+        FlfFriend::vf1BC();
+    }
 }

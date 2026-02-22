@@ -519,9 +519,9 @@ void FlfFriend::vf224(float arg1) {
     m_F0 = arg1;
 }
 
-void FlfFriend::vf214() { }
+void FlfFriend::vf214(bool isReset) { }
 
-void FlfFriend::vf20C(bool) { }
+void FlfFriend::vf20C(bool isReset) { }
 
 void FlfFriend::vf124() {
     mState.SetCurrentStateAndClearOthers(7);
@@ -601,8 +601,6 @@ void FlfFriend::ResetCollision() {
     mState.SetCurrentStateAndClearOthers(23);
 }
 
-
-const char RoomLocatorName[] = "FriendRoomLocator";
 const char Blank[] = "";
 void FlfFriend::ResetRoomLocator() {
     vf210(true);
@@ -933,11 +931,11 @@ void FlfFriend::vfA0(ScreenPosition& rPos) {
     // not decompiled
 }
 
-void FlfFriend::vfA4(/* args unk */) {
+void FlfFriend::vfA4(float, gfl::Vec3, bool) {
     // not decompiled
 }
 
-void FlfFriend::vfA8(/* args unk */) {
+void FlfFriend::vfA8(float, float, gfl::Vec3, bool) {
     // not decompiled
 }
 

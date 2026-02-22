@@ -38,8 +38,8 @@ public:
 	/* 0x098 */ virtual bool vf98(float, float, const gfl::Vec2&) const;
 	/* 0x09C */ virtual bool IsInRange(const gfl::Vec3& rTarget, float* pDistance) const;
 	/* 0x0A0 */ virtual void vfA0(ScreenPosition& rPos);
-	/* 0x0A4 */ virtual void vfA4();
-	/* 0x0A8 */ virtual void vfA8();
+	/* 0x0A4 */ virtual void vfA4(float, gfl::Vec3, bool);
+	/* 0x0A8 */ virtual void vfA8(float, float, gfl::Vec3, bool);
 	/* 0x0AC */ virtual void vfAC();
 	/* 0x0B0 */ virtual void ResetScreen(const ScreenPosition& rPos);
 	/* 0x0B4 */ virtual void ResetCollision();
@@ -128,9 +128,9 @@ public:
 	/* 0x200 */ virtual void vf200();
 	/* 0x204 */ virtual void vf204();
 	/* 0x208 */ virtual void vf208();
-	/* 0x20C */ virtual void vf20C(bool);
-	/* 0x210 */ virtual void vf210(bool);
-	/* 0x214 */ virtual void vf214();
+	/* 0x20C */ virtual void vf20C(bool isReset);
+	/* 0x210 */ virtual void vf210(bool isReset);
+	/* 0x214 */ virtual void vf214(bool isReset);
 	/* 0x218 */ DECL_WEAK virtual bool vf218();
 	// Switch direction to face the target.
 	/* 0x21C */ virtual void LookAt(const ScreenPosition& rPos);

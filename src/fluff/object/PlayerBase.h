@@ -152,7 +152,9 @@ public:
     /* 0x560 */ STRUCT_FILL(0x48);
     /// Used for determining where the player gets placed should they, e.g., fall into a hole.
     /* 0x5A8 */ gfl::Vec3 mSavedPosition;
-    /* 0x5B4 */ STRUCT_FILL(0x4C);
+    /* 0x5B4 */ STRUCT_FILL(0x28);
+    /* 0x5DC */ gfl::Vec3 m_5DC;
+    /* 0x5E8 */ STRUCT_FILL(0x18);
     /* 0x600 */ float mGravityMultiplier;
     /* 0x604 */ float mModifiedGravity;
     /* 0x608 */ float mBaseGravity;

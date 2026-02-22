@@ -110,6 +110,11 @@ namespace gfl {
 
         ParamS32* GetS32Param(const char*);
         ParamF32* GetF32Param(const char*);
+
+        /* Helper Inlines */
+        static ParamS32* GetGlobalParamS32(const char* pName) {
+            return static_cast<ParamS32*>(GetGlobalParam(pName));
+        }
     };
 }
 

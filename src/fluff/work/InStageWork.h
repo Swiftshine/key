@@ -88,6 +88,8 @@ public:
     void fn_801FFA84(int resourceID);
     bool fn_801FFAA0(int stageID);
 
+    DECL_WEAK int GetUnk3C() const;
+
     /* Class Members */
 
     /* 0x04 */ StageInfo mStage;
