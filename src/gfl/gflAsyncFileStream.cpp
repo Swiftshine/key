@@ -95,11 +95,10 @@ void AsyncFileStream::Init() {
     mBlockSize = blockSize;
     mCurrentStreamPos += blockSize;
 }
-
 void AsyncFileStream::Update() {
     size_t blockSize;
     bool loop = true;
-
+    
     while (loop) {
         if (mFile->GetFileStatus() == 2) {
             loop = false;
@@ -115,7 +114,6 @@ void AsyncFileStream::Update() {
 
     AsyncFileStreamManager* mgr = AsyncFileStreamManager::Instance();
     Mutex& mutex = mgr->GetMutex();
-    Mutex& mutex = mgr->GetMutex();
     mutex.Lock();
     void* buf = reinterpret_cast<char**>(&mgr->mCompressedBuffer)[num];
     mutex.Unlock();
@@ -125,7 +123,6 @@ void AsyncFileStream::Update() {
     blockSize = 0;
     if (static_cast<int>(remaining) > 0) {
         blockSize = BPE_BLOCK_SIZE;
-        if (remaining < BPE_BLOCK_SIZE) {
         if (remaining < BPE_BLOCK_SIZE) {
             blockSize = ROUND_UP(remaining, 0x20);
         }
