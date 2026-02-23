@@ -48,8 +48,8 @@ LAB_80645298:
 	{
       	AsyncFileStream* stream = mInputStream;
 
-		if (stream->m_28 < stream->mCompressedSize) {
-			if (stream->m_1C == 0) {
+		if (stream->mNumBytesRead < stream->mCompressedSize) {
+			if (stream->mNumBytesRemaining == 0) {
 				stream->Update();
 			}
 		} else {

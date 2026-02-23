@@ -3,16 +3,10 @@
 
 #include <list>
 #include "gflThread.h"
-
+#include "gflMutex.h"
 
 namespace gfl {
 class BgArchiveLoadTask;
-
-struct Mutex : OSMutex {
-    Mutex() {
-        OSInitMutex(this);
-    }
-};
 
 /// @note Size: `0x24`
 class AsyncFileStreamThread {

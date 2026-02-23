@@ -306,6 +306,13 @@ gfl/gflResArchivedFileInfo.cpp:
 gfl/gflColor.cpp:
 	.text       start:0x806400F8 end:0x80640370
 
+gfl/gflAsyncFileStream.cpp:
+	.text       start:0x80641230 end:0x806416C4
+	.rodata     start:0x8082C3E8 end:0x8082C400
+	.data       start:0x808B7F10 end:0x808B7F20
+	.sdata      start:0x808E4388 end:0x808E4390
+	.sbss       start:0x808E5D40 end:0x808E5D48
+
 gfl/gflFixedString.cpp:
 	.text       start:0x80642B00 end:0x80642CB0
 
