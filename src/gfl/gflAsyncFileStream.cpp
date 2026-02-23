@@ -63,7 +63,7 @@ void AsyncFileStream::Init() {
 
     AsyncFileStreamManager* mgr = AsyncFileStreamManager::Instance();
 
-    
+
     bool claimed;
     do {
         Mutex& mutex = mgr->mMutex;
@@ -80,7 +80,7 @@ void AsyncFileStream::Init() {
             claimed = true;
         }
     } while (!claimed);
-    
+
     Mutex& mutex = mgr->mMutex;
     mutex.Lock();
     void* buf = mgr->mCompressedBuffer;
@@ -100,7 +100,7 @@ void AsyncFileStream::Init() {
 // regswaps
 void AsyncFileStream::Update() {
     bool loop = true;
-    
+
     while (loop) {
         if (mFile->GetFileStatus() == 2) {
             loop = false;
@@ -110,22 +110,23 @@ void AsyncFileStream::Update() {
     }
 
     mDecompressedBuffer = mCompressedBuffer;
-    size_t num = mNumBlocksRead + 1;
-    num = (num & 1 ^ (num >> 0x1F)) - (num >> 0x1F);
-    mNumBlocksRead = num;
+    mNumBlocksRead++;
+    mNumBlocksRead = (mNumBlocksRead & 1 ^ (mNumBlocksRead >> 0x1F)) - (mNumBlocksRead >> 0x1F);
+
+    size_t num = mNumBlocksRead;
 
     AsyncFileStreamManager* mgr = AsyncFileStreamManager::Instance();
-    Mutex& mutex = mgr->mMutex;
+    Mutex& mutex = mgr->GetMutex();
     mutex.Lock();
     void* buf = reinterpret_cast<char**>(&mgr->mCompressedBuffer)[num];
     mutex.Unlock();
     mCompressedBuffer = buf;
 
-    int remaining = mCompressedSize - mCurrentStreamPos;
     size_t blockSize = 0;
-    if (remaining > 0) {
+    size_t remaining = mCompressedSize - mCurrentStreamPos;
+    if ((int)remaining > 0) {
         blockSize = BPE_BLOCK_SIZE;
-        if ((unsigned)remaining < BPE_BLOCK_SIZE) {
+        if (remaining < BPE_BLOCK_SIZE) {
             blockSize = ROUND_UP(remaining, 0x20);
         }
 
