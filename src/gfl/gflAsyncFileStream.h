@@ -76,6 +76,10 @@ public:
     static void InitInstance();
     static void DestroyInstance();
 
+    inline Mutex& GetMutex() {
+        return mMutex;
+    }
+    
     /* Class Members */
 
     /* 0x0 */ void* mCompressedBuffer;
