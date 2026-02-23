@@ -14,9 +14,9 @@ class AsyncFileStream {
 public:
     AsyncFileStream(File* pFile, size_t compressedSize, size_t streamPos);
     virtual ~AsyncFileStream();
-    
+
     /* Class Methods */
-    
+
     void Init();
     void Update();
 
