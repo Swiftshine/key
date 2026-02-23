@@ -96,6 +96,8 @@ void AsyncFileStream::Init() {
     mCurrentStreamPos += blockSize;
 }
 
+// https://decomp.me/scratch/TmSEr
+// regswaps
 void AsyncFileStream::Update() {
     bool loop = true;
     
@@ -108,7 +110,30 @@ void AsyncFileStream::Update() {
     }
 
     mDecompressedBuffer = mCompressedBuffer;
-    mNumBlocksRead++;
+    size_t num = mNumBlocksRead + 1;
+    num = (num & 1 ^ (num >> 0x1F)) - (num >> 0x1F);
+    mNumBlocksRead = num;
 
-    // not finished
+    AsyncFileStreamManager* mgr = AsyncFileStreamManager::Instance();
+    Mutex& mutex = mgr->mMutex;
+    mutex.Lock();
+    void* buf = reinterpret_cast<char**>(&mgr->mCompressedBuffer)[num];
+    mutex.Unlock();
+    mCompressedBuffer = buf;
+
+    int remaining = mCompressedSize - mCurrentStreamPos;
+    size_t blockSize = 0;
+    if (remaining > 0) {
+        blockSize = BPE_BLOCK_SIZE;
+        if ((unsigned)remaining < BPE_BLOCK_SIZE) {
+            blockSize = ROUND_UP(remaining, 0x20);
+        }
+
+        mFile->ReadAsync(mCompressedBuffer, blockSize, mStartStreamPos + mCurrentStreamPos, 2);
+        mCurrentStreamPos += blockSize;
+    }
+
+    mByteCursor = reinterpret_cast<char*>(mDecompressedBuffer);
+    mNumBytesRemaining = mBlockSize;
+    mBlockSize = blockSize;
 }
