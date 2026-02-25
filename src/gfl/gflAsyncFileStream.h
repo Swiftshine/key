@@ -27,6 +27,8 @@ public:
         return result;
     }
 
+    bool Claimed(class AsyncFileStreamManager* pMgr);
+
     /* Class Members */
 
     /* 0x04 */ File* mFile;
@@ -79,7 +81,7 @@ public:
     inline Mutex& GetMutex() {
         return mMutex;
     }
-    
+
     /* Class Members */
 
     /* 0x0 */ void* mCompressedBuffer;
