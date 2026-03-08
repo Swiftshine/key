@@ -406,7 +406,9 @@ config.libs = [
         "progress_category": "sdk",
         "objects": [
             Object(Matching, "revolution/WPAD/WPAD.c"),
-            Object(NonMatching, "revolution/OS/OSThread.c"),
+            Object(Matching, "revolution/OS/OSThread.c"),
+            Object(NonMatching, "revolution/OS/OSTime.c"),
+            Object(NonMatching, "revolution/OS/OSStateTM.c"),
         ],
     },
     {

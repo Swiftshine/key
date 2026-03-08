@@ -2,7 +2,7 @@
 #include "OS/OSAlarm.h"
 #include <revolution/OS.h>
 
-static void DefaultSwitchThreadCallback(OSThread* currThread,
+extern void DefaultSwitchThreadCallback(OSThread* currThread,
                                         OSThread* newThread);
 
 static OSSwitchThreadCallback SwitchThreadCallback =
@@ -17,7 +17,8 @@ volatile static s32 Reschedule = 0;
 volatile static BOOL RunQueueHint = FALSE;
 volatile static u32 RunQueueBits = 0;
 
-static void DefaultSwitchThreadCallback(OSThread* currThread,
+// had to change from static -> extern
+extern void DefaultSwitchThreadCallback(OSThread* currThread,
                                         OSThread* newThread) {
 #pragma unused(currThread)
 #pragma unused(newThread)
