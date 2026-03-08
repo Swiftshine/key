@@ -1,3 +1,5 @@
+#include "OS/OSThread.h"
+#include "OS/OSAlarm.h"
 #include <revolution/OS.h>
 
 static void DefaultSwitchThreadCallback(OSThread* currThread,
@@ -16,7 +18,7 @@ volatile static BOOL RunQueueHint = FALSE;
 volatile static u32 RunQueueBits = 0;
 
 static void DefaultSwitchThreadCallback(OSThread* currThread,
-                                        OSThread* newThread){
+                                        OSThread* newThread) {
 #pragma unused(currThread)
 #pragma unused(newThread)
 }
@@ -186,7 +188,7 @@ static void SetRun(OSThread* thread) {
     thread->next = NULL;
     thread->queue->tail = thread;
 
-    RunQueueBits |= (1 << OS_PRIORITY_MAX - thread->priority);
+    RunQueueBits |= (1 << (OS_PRIORITY_MAX - thread->priority));
     RunQueueHint = TRUE;
 }
 
@@ -212,7 +214,7 @@ static void UnsetRun(OSThread* thread) DECOMP_DONT_INLINE {
     }
 
     if (queue->head == NULL) {
-        RunQueueBits &= ~(1 << OS_PRIORITY_MAX - thread->priority);
+        RunQueueBits &= ~(1 << (OS_PRIORITY_MAX - thread->priority));
     }
 
     thread->queue = NULL;
@@ -412,7 +414,7 @@ static OSThread* SelectThread(BOOL b) {
 
     queue->head = next;
     if (next == NULL) {
-        RunQueueBits &= ~(1 << OS_PRIORITY_MAX - prio);
+        RunQueueBits &= ~(1 << (OS_PRIORITY_MAX - prio));
     }
 
     head->queue = NULL;
@@ -440,7 +442,7 @@ BOOL OSCreateThread(OSThread* thread, OSThreadFunc func, void* funcArg,
     OSThread* tail;
     void* sp;
 
-    if (prio < OS_PRIORITY_MIN || prio > OS_PRIORITY_MAX) {
+    if (prio < 0 || 31 < prio) {
         return FALSE;
     }
 
@@ -545,6 +547,7 @@ void OSCancelThread(OSThread* thread) {
     OSThread* prev;
 
     enabled = OSDisableInterrupts();
+    __OSCancelInternalAlarms(thread);
 
     switch (thread->state) {
     case OS_THREAD_STATE_READY:
@@ -903,6 +906,10 @@ void OSWakeupThread(OSThreadQueue* queue) {
     OSRestoreInterrupts(enabled);
 }
 
+s32 OSGetThreadPriority(OSThread* thread) {
+    return thread->base;
+}
+
 BOOL OSSetThreadPriority(OSThread* thread, s32 prio) {
     BOOL enabled;
 
@@ -924,8 +931,24 @@ BOOL OSSetThreadPriority(OSThread* thread, s32 prio) {
 
 static void SleepAlarmHandler(OSAlarm* alarm, OSContext* ctx) {
 #pragma unused(ctx)
+    OSThread* thread = (OSThread*)OSGetAlarmUserData(alarm);
+    BOOL found;
 
-    OSResumeThread((OSThread*)OSGetAlarmUserData(alarm));
+    if (thread->state == 0) {
+        found = FALSE;
+    } else {
+        for (OSThread* t = OS_THREAD_QUEUE.head; t != NULL; t = t->nextActive) {
+            if (thread == t) {
+                found = TRUE;
+                goto foundThread;
+            }
+        }
+        found = FALSE;
+    }
+foundThread:
+    if (found) {
+        OSResumeThread((OSThread*)OSGetAlarmUserData(alarm));
+    }
 }
 
 void OSSleepTicks(s64 ticks) {
@@ -942,8 +965,9 @@ void OSSleepTicks(s64 ticks) {
     }
 
     OSCreateAlarm(&alarm);
-    OSSetAlarmTag(&alarm, (u32)thread);
-    OSSetAlarmUserData(&alarm, thread);
+    // OSSetAlarmTag(&alarm, (u32)thread);
+    OSSetInternalAlarmUserData(&alarm, (u32)thread);
+    // OSSetAlarmUserData(&alarm, thread);
     OSSetAlarm(&alarm, ticks, SleepAlarmHandler);
 
     OSSuspendThread(thread);
