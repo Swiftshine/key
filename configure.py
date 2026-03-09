@@ -472,7 +472,7 @@ config.libs = [
             Object(Matching, "gfl/gflChecksum.cpp"),
             Object(NonMatching, "gfl/gflColor.cpp"),
             Object(NonMatching, "gfl/gflCustomRenderObj.cpp"),
-            Object(NonMatching, "gfl/gflFixedMemoryStream.cpp"),
+            Object(Matching, "gfl/gflFixedMemoryStream.cpp"),
             Object(Matching, "gfl/gflFixedString.cpp"),
             Object(NonMatching, "gfl/gflGfCompression.cpp"),
             Object(Matching, "gfl/gflHeap.cpp"),
