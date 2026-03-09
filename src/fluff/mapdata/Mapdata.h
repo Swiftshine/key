@@ -6,14 +6,20 @@
 #include <nw4r/math.h>
 #include "object/collision/Colbin.h"
 #include "object/collision/ColData.h"
-#include "object/collision/ColDataWrapper.h"
 #include "object/Gimmick.h"
 #include "gfl/gflArray.h"
+
+class ColDataSeg;
+class ColDataSegLabel;
 
 /// @brief A representation of stage entity data used in game for parsing and processing.
 /// @note Size: `0x4C`
 class Mapdata {
 public:
+    inline Mapdata()
+        : mBoundsMin(0.0f, 0.0f)
+        , mBoundsMax(0.0f, 0.0f)
+    { }
 
     /* Structures */
 
@@ -91,13 +97,38 @@ public:
         /* 0x48 */ nw4r::math::VEC3 mPosition;
     };
 
+
+    /// @note Size: `0x20`
+    struct MapdataWall {
+        nw4r::math::VEC2 mStartPosition;
+        nw4r::math::VEC2 mEndPosition;
+        nw4r::math::VEC2 mNormalizedVector;
+        uint mIndex;
+        uint mCollisionTypeIndex;
+    };
+
+    /// @note Size: `0x24`
+    struct MapdataLabeledWall : MapdataWall {
+        uint mLabelIndex;
+    };
+
+    struct StringTable {
+        uint mCount;
+        string32 mStrings[];
+    };
+
+    class CommonGimmickBuildInfo : public Gimmick::GimmickBuildInfo {
+    public:
+        CommonGimmickBuildInfo();
+        ~CommonGimmickBuildInfo();
+    };
     /* Class Methods */
 
     void RegisterStageResources();
     void ConstructObjects();
     void ConstructMoleBlocks();
 
-    inline Gimmick::GimmickBuildInfo* GetCommonGimmickBuildInfo(uint index) {
+    inline CommonGimmickBuildInfo* GetCommonGimmickBuildInfo(uint index) {
         return &mCommonGimmickBuildInfos[index];
     }
 
@@ -115,7 +146,7 @@ public:
     /* 0x18 */ uint mNumLabeledWalls;
     /* 0x1C */ ColDataSegLabel* mLabeledWalls;
     /* 0x20 */ uint mNumCommonGimmicks;
-    /* 0x24 */ gfl::Array<Gimmick::GimmickBuildInfo> mCommonGimmickBuildInfos;
+    /* 0x24 */ gfl::Array<CommonGimmickBuildInfo> mCommonGimmickBuildInfos;
     /* 0x28 */ MapdataCommonGimmick* mCommonGimmicks;
     /* 0x2C */ uint mNumGimmicks;
     /* 0x30 */ MapdataGimmick* mGimmicks;

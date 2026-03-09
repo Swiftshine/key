@@ -5,6 +5,7 @@
 #include "gfl/gflVec2.h"
 #include "gfl/gflVec3.h"
 #include "object/collision/ColData.h"
+#include "mapdata/Mapdata.h"
 
 class ColObj;
 class ColDataPoint;
@@ -100,6 +101,9 @@ public:
     ColDataSeg();
     DECL_WEAK virtual ~ColDataSeg();
 
+    /// Returns the address of the wall indices.
+    static size_t* CopyFromBinary(void*, Mapdata::MapdataWall* pSrc);
+
     /* Class Members */
 
     ColDataIdentity mIdentity;
@@ -114,6 +118,12 @@ class ColDataSegLabel : public ColData {
 public:
     ColDataSegLabel();
     virtual ~ColDataSegLabel();
+
+    ColDataIdentity mIdentity;
+    nw4r::math::VEC2 mStart;
+    nw4r::math::VEC2 mEnd;
+    nw4r::math::VEC2 mNormalizedVector;
+    std::string mLabel;
 };
 
 class ColDataCircle : public ColData {

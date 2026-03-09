@@ -564,6 +564,16 @@ config.libs = [
         ],
     },
     {
+        "lib": "fluff/mapdata",
+        "mw_version": config.linker_version,
+        "cflags": cflags_fluff,
+        "host": False,
+        "progress_category": "fluff",
+        "objects": [
+            Object(NonMatching, "fluff/mapdata/Mapdata.cpp"),
+        ],
+    },
+    {
         "lib": "fluff/save",
         "mw_version": config.linker_version,
         "cflags": cflags_fluff,

@@ -293,6 +293,15 @@ namespace gfl {
             return resFile;
         }
 
+        template <typename T>
+        inline T* GetData() const {
+            if (mPointer != nullptr) {
+                return (T*)mPointer->GetGfArch();
+            }
+
+            return nullptr;
+        }
+
         inline void* GetData() const {
             if (mPointer != nullptr) {
                 return mPointer->GetGfArch();
