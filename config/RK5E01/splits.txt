@@ -121,6 +121,7 @@ fluff/graphics/NwAnmCtrl.cpp:
 
 fluff/util/FullSortSceneUtil.cpp:
 	.text       start:0x800EA874 end:0x800EA8C8
+	.rodata     start:0x807EDDF8 end:0x807EDED0
 	.data       start:0x80842188 end:0x80842210
 
 fluff/manager/EnemyMdlManager.cpp:

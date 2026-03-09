@@ -693,7 +693,7 @@ config.libs = [
             Object(Matching, "fluff/object/FlfHandleList.cpp"),
             Object(NonMatching, "fluff/stage/mission/MissionUtil.cpp"),
             Object(Matching, "fluff/util/CollisionFlagUtil.cpp"),
-            Object(NonMatching, "fluff/util/FullSortSceneUtil.cpp"),
+            Object(Matching, "fluff/util/FullSortSceneUtil.cpp"),
             Object(NonMatching, "fluff/util/GimmickResource.cpp"),
             Object(NonMatching, "fluff/util/GimmickUtil.cpp"),
             Object(Matching, "fluff/util/KdTreeUtil.cpp"),
