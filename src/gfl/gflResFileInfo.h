@@ -45,7 +45,7 @@ namespace gfl {
          * @note Size: 0x7C
          */
         static bool OpenArchive(const char* path);
-        
+
         /**
          * @note Address: 0x8063C718
          * @note Size: 0x6C
@@ -99,7 +99,7 @@ namespace gfl {
          * @param fs The fact that this function is only called during the game init process may have something to do with this.
          * @param path This path can be structured as if the target was either a folder or an archive.
          * A distinction is made between folder and archive when configuring the file info.
-         */        
+         */
         static void Configure(FileSystemWii* fs, ResFileInfo* dest, const char* path);
 
         /**
@@ -168,14 +168,14 @@ namespace gfl {
          * @note Size: 0x20
          */
         ResFileInfo();
-    
+
         /**
          * @note Address: 0x8063E388
          * @note Size: 0x4
          */
         DECL_WEAK ~ResFileInfo();
 
-    
+
     private:
         uint mChecksum;
         const char* mDirectory;
@@ -191,20 +191,23 @@ namespace gfl {
         static void FromArchive(ResFileObject& dst, const char* path);
         static void FromFolder(ResFileObject& dst, const char* path);
 
+        static ResFileObject FromArchive(const char* pFilepath);
+        static ResFileObject FromFolder(const char* pFilepath);
+
         // static inline ResFileObject FromArchive(const char* pFilepath) {
         //     gfl::ResFileObject obj;
         //     FromArchive(obj, pFilepath);
         //     return obj;
         // }
 
-        DECL_WEAK static ResFileObject FromArchive(const char* pFilepath);
+        // DECL_WEAK static ResFileObject FromArchive(const char* pFilepath);
 
-        static inline ResFileObject FromFolder(const char* pFolderpath) {
-            gfl::ResFileObject obj;
-            FromFolder(obj, pFolderpath);
-            return obj;
-        }
-        
+        // static inline ResFileObject FromFolder(const char* pFolderpath) {
+        //     gfl::ResFileObject obj;
+        //     FromFolder(obj, pFolderpath);
+        //     return obj;
+        // }
+
         inline ResFileObject() { }
 
         ResFileObject(ResFileInfo* info)
@@ -286,7 +289,7 @@ namespace gfl {
             );
 
             NW4R_G3D_RESFILE_AC_ASSERT(resFile);
-            
+
             return resFile;
         }
 

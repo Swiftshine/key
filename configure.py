@@ -551,7 +551,16 @@ config.libs = [
             Object(NonMatching, "fluff/manager/GmkBeadManager.cpp"),
             Object(NonMatching, "fluff/manager/GmkMng.cpp"),
             Object(Matching, "fluff/manager/LevelManager.cpp"),
-            Object(NonMatching, "fluff/manager/StageResourceManager.cpp"),
+        ],
+    },
+    {
+        "lib": "fluff/manager (2)",
+        "mw_version": config.linker_version,
+        "cflags": cflags_fluff_manager,
+        "host": False,
+        "progress_category": "fluff",
+        "objects": [
+            Object(Matching, "fluff/manager/StageResourceManager.cpp"),
         ],
     },
     {

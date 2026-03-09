@@ -1,5 +1,4 @@
 "File","Functions","Issue",
 "fluff/util/GimmickUtil.cpp","100%","cyclic dependency",
 "fluff/stage/mission/MissionUtil.cpp","100%","standard library functions included in TU",
-"fluff/manager/StageResourceManager.cpp","100%","cyclic dependency/string data",
 "fluff/language/Language.cpp","100%","incorrect address (CurrentRegionType), cyclic dependency (CurrentLanguageType)",

@@ -65,6 +65,8 @@ fluff/manager/LevelManager.cpp:
 
 fluff/manager/StageResourceManager.cpp:
 	.text       start:0x80045310 end:0x80045ED4
+	.rodata     start:0x807E4E98 end:0x807E4F18
+	.sdata2     start:0x808E6BD8 end:0x808E6BF0
 
 fluff/util/KdTreeUtil.cpp:
 	.text       start:0x80048354 end:0x8004855C
