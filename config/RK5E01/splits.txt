@@ -377,6 +377,9 @@ gfl/gflRenderObj.cpp:
 
 gfl/gflSoundHandleInner.cpp:
 	.text       start:0x8064BC78 end:0x8064BCF8
+	.rodata     start:0x8082C734 end:0x8082C74C
+	.data       start:0x808B82B8 end:0x808B82C8
+	.sdata      start:0x808E4448 end:0x808E4450
 
 gfl/gflSoundArchiveMng.cpp:
 	.text       start:0x8064BCF8 end:0x8064BFA4
