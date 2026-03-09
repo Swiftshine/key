@@ -1,5 +1,5 @@
 #pragma pool_strings on
-
+#pragma readonly_strings on
 #include <nw4r/g3d/g3d_obj.h>
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_scnobj.h>

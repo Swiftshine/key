@@ -406,6 +406,7 @@ gfl/gflParamBase.cpp:
 
 gfl/gflCustomRenderObj.cpp:
 	.text       start:0x8065CF98 end:0x8065D5C4
+	.rodata     start:0x8082CEB0 end:0x8082CEF0
 	.data       start:0x808B87D8 end:0x808B88A0
 	.sdata2     start:0x808EC9A8 end:0x808EC9B0
 
