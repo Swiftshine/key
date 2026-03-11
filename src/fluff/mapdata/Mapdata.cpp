@@ -103,7 +103,7 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
     }
 
     // wall labels
-    GET_AT_OFFSET(StringTable, mapbin, wallLabelOffset);
+    table = GET_AT_OFFSET(StringTable, mapbin, wallLabelOffset);
     for (uint i = 0; i < table->mCount; i++) {
         string32 buf;
 
