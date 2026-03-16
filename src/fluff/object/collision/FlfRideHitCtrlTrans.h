@@ -8,7 +8,7 @@ class GmkBead;
 
 class FlfRideHitCtrlTrans : public FlfRideHitBase {
 public:
-    
+
 
     FlfRideHitCtrlTrans(ColObj* pColObj, FlfGameObj* pOwner);
 
@@ -18,7 +18,7 @@ public:
 
     /* Class Methods */
     void fn_80185DB8();
-    void AddBead(GmkBead* pBead);
+    void AddObject(FlfGameObj* pObject);
 
 
     inline void SetUnk34(uint value) {

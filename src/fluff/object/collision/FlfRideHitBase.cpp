@@ -14,7 +14,7 @@ FlfRideHitBase::FlfRideHitBase(FlfGameObj* pOwner)
 
 FlfRideHitBase::~FlfRideHitBase() { }
 
-void FlfRideHitBase::AddBead(FlfGameObj* pObject) {
+void FlfRideHitBase::AddObject(FlfGameObj* pObject) {
     if (
         m_18 ||
         pObject->mCategory != FlfGameObj::ObjectCategory::Gimmick ||
@@ -46,7 +46,7 @@ void FlfRideHitBase::AddBead(FlfGameObj* pObject) {
             mHandles.push_back(handle);
         }
         mNumHandles++;
-    }    
+    }
 }
 
 bool FlfRideHitBase::HasObject(FlfHandleObj* pObject) {
@@ -54,7 +54,7 @@ bool FlfRideHitBase::HasObject(FlfHandleObj* pObject) {
     FlfHandleObj* toCompare;
     for (uint i = 0; i < mNumHandles; i++) {
         obj = mHandles[i].GetObject();
-        
+
         if (
             mHandles[i].GetObject() != nullptr
             && *obj != nullptr
@@ -64,7 +64,7 @@ bool FlfRideHitBase::HasObject(FlfHandleObj* pObject) {
         } else {
             toCompare = nullptr;
         }
-    
+
         if (toCompare == pObject) {
             return true;
         }
