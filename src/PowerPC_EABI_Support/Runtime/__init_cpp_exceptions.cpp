@@ -2,7 +2,6 @@
 
 #include "__init_cpp_exceptions.h"
 
-#include "decomp.h"
 #include "MWCPlusLib.h"
 #include "NMWException.h"
 #include "__ppc_eabi_linker.h"
@@ -12,7 +11,9 @@ static int fragmentID = -2;
 void __init_cpp_exceptions() {
     if (fragmentID == -2) {
         register char *R2;
-        ASM_BLOCK(mr R2, r2)
+        asm {
+            mr R2, r2
+        }
         fragmentID = __register_fragment(_eti_init_info, R2);
     }
 }

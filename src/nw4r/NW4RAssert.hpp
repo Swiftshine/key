@@ -162,8 +162,10 @@
 
 namespace nw4r { namespace db
 {
-	__attribute__((weak)) extern void Panic(char const *file, int line, char const *msg, ...);
-	__attribute__((weak)) extern void Warning(char const *file, int line, char const *msg, ...);
+    __attribute__((weak)) extern void Panic(...);
+    __attribute__((weak)) extern void Warning(...);
+	// __attribute__((weak)) extern void Panic(char const *file, int line, char const *msg, ...);
+	// __attribute__((weak)) extern void Warning(char const *file, int line, char const *msg, ...);
 }} // namespace nw4r::db
 
 // clang-format on

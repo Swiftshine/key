@@ -3,20 +3,20 @@
 
 #include "types.h"
 
-const char g3d_resfile_ac_h[] = "g3d_resfile_ac.h";
-const char g3d_resmdl_ac_h[] = "g3d_resmdl_ac.h";
-const char NW4R_Failed_assertion_p_and_0x1f[] = "NW4R:Failed assertion !((u32)p & 0x1f)";
-const char NW4R_Failed_assertion_IsValid[] = "NW4R:Failed assertion IsValid()";
-const char LinkList_h[] = "LinkList.h";
-const char NW4R_Pointer_must_not_be_NULL[] = "NW4R:Pointer must not be NULL (p)";
-const char ObjectNotValid[] = "%s::%s: Object not valid.";
-const char ref[] = "ref";
-const char ResNode[] = "ResNode";
+// const char g3d_resfile_ac_h[] = "g3d_resfile_ac.h";
+// const char g3d_resmdl_ac_h[] = "g3d_resmdl_ac.h";
+// const char NW4R_Failed_assertion_p_and_0x1f[] = "NW4R:Failed assertion !((u32)p & 0x1f)";
+// const char NW4R_Failed_assertion_IsValid[] = "NW4R:Failed assertion IsValid()";
+// const char LinkList_h[] = "LinkList.h";
+// const char NW4R_Pointer_must_not_be_NULL[] = "NW4R:Pointer must not be NULL (p)";
+// const char ObjectNotValid[] = "%s::%s: Object not valid.";
+// const char ref[] = "ref";
+// const char ResNode[] = "ResNode";
 
 #define NW4R_G3D_RESFILE_AC_ASSERT(resfile) \
     do { \
         if (((u32)resfile.ptr() & 0x1F) != 0) { \
-            nw4r::db::Panic(g3d_resfile_ac_h, 0x3C, NW4R_Failed_assertion_p_and_0x1f); \
+            nw4r::db::Panic("g3d_resfile_ac.h", 0x3C, "NW4R:Failed assertion !((u32)p & 0x1f)"); \
         } \
     } while (0);
 
@@ -31,21 +31,21 @@ const char ResNode[] = "ResNode";
 #define NW4R_LINKLIST_ASSERT(self) \
     do { \
         if ((u32)self == 0xFFFFFD58) { \
-            nw4r::db::Panic(LinkList_h, 0x233, NW4R_Pointer_must_not_be_NULL); \
+            nw4r::db::Panic("LinkList.h", 0x233, "NW4R:Pointer must not be NULL (p)"); \
         } \
     } while (0); \
 
 #define NW4R_RESNODE_ASSERT(resnode) \
     do { \
         if (resnode.ptr() == nullptr) { \
-            nw4r::db::Panic(g3d_resfile_ac_h, 0x2C, ObjectNotValid, ResNode, ref); \
+            nw4r::db::Panic("g3d_resfile_ac.h", 0x2C, "ObjectNotValid", "ResNode", "ref"); \
         } \
     } while(0); \
 
 #define NW4R_RESNODE_ASSERT_VALID(resnode) \
     do { \
         if (resnode.ptr() == nullptr) { \
-            nw4r::db::Panic(g3d_resfile_ac_h, 0x53, NW4R_Failed_assertion_IsValid); \
+            nw4r::db::Panic("g3d_resfile_ac.h", 0x53, "NW4R:Failed assertion IsValid()"); \
         } \
     } while(0); \
 

@@ -1,3 +1,5 @@
+#pragma pool_strings on
+#pragma readonly_strings on
 #include <nw4r/g3d/g3d_obj.h>
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_scnobj.h>
@@ -14,7 +16,7 @@ CustomRenderObj::CustomRenderObj(bool opa, bool xlu, const char* pName)
     mOpa = opa;
     mXlu = xlu;
     mOptionsSet = true;
-} 
+}
 
 CustomRenderObj::~CustomRenderObj() { }
 
@@ -95,12 +97,12 @@ void CustomRenderObj::G3dProc(u32 task, u32 param, void* pInfo) {
             DoFrameUpdate();
             break;
         }
-        
+
         case G3DPROC_GATHER_SCNOBJ: {
             ((nw4r::g3d::IScnObjGather*)(pInfo))->Add(this, mOpa, mXlu);
             break;
         }
-    
+
         case G3DPROC_CALC_WORLD: {
             BeforeCalcWorld(pInfo, &param);
             CalcWorldMtx((const nw4r::math::MTX34*)pInfo, &param);
@@ -126,12 +128,12 @@ void CustomRenderObj::G3dProc(u32 task, u32 param, void* pInfo) {
             DrawXlu();
             break;
         }
-        
+
         case G3DPROC_DETACH_PARENT: {
             SetParent(nullptr);
             break;
         }
-        
+
         case G3DPROC_ATTACH_PARENT: {
             if (GetParent() != nullptr) {
                 nw4r::db::Panic(__FILE__, 0xEC, "NW4R:Failed assertion !GetParent()");

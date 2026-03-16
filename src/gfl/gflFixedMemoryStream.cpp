@@ -1,3 +1,5 @@
+#pragma readonly_strings on
+
 #include "gflFixedMemoryStream.h"
 #include <cstring>
 
@@ -16,11 +18,11 @@ FixedMemoryStream::~FixedMemoryStream(void) {
 size_t FixedMemoryStream::Read(void* dst, size_t count) {
     size_t remain;
     void* offs;
-    
+
     if (this->mStreamPos == this->mSize) {
         return 0;
     }
-        
+
     offs = (void*)((u8*)this->mData + this->mStreamPos);
     remain = this->mSize - this->mStreamPos;
     count = (remain < count) ? remain : count;
@@ -34,11 +36,11 @@ size_t FixedMemoryStream::Read(void* dst, size_t count) {
 size_t FixedMemoryStream::Write(void* src, size_t count) {
     size_t remain;
     void* offs;
-    
+
     if (this->mStreamPos >= this->mSize) {
         return 0;
     }
-        
+
     offs = (void*)((u8*)this->mData + this->mStreamPos);
     remain = this->mSize - this->mStreamPos;
     count = (remain < count) ? remain : count;
@@ -76,7 +78,7 @@ bool FixedMemoryStream::Seek(size_t pos, int seekType) {
     return true;
 }
 
-size_t FixedMemoryStream::GetStreamPos() {
+size_t FixedMemoryStream::GetStreamPos() const {
     return mStreamPos;
 }
 

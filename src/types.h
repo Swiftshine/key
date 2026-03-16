@@ -39,6 +39,8 @@ typedef uint64_t u64;
 // typedef uint8_t u8;
 // typedef int8_t s8;
 
+#define BYTE_PTR(p) ((u8*)(p))
+
 #define ZERO_MTX_34(mtx) { \
     mtx[0][0] = 0.0f; \
     mtx[0][1] = 0.0f; \

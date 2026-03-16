@@ -34,6 +34,7 @@ fluff/graphics/Cam.cpp:
 
 fluff/graphics/WoolBaseMdl.cpp:
 	.text       start:0x8001A530 end:0x8001C0CC
+	.sdata      start:0x808DF4F8 end:0x808DF530
 
 fluff/graphics/FlfMdlDraw.cpp:
 	.text       start:0x80021910 end:0x80026494
@@ -65,6 +66,11 @@ fluff/manager/LevelManager.cpp:
 
 fluff/manager/StageResourceManager.cpp:
 	.text       start:0x80045310 end:0x80045ED4
+	.rodata     start:0x807E4E98 end:0x807E4F18
+	.sdata2     start:0x808E6BD8 end:0x808E6BF0
+
+fluff/mapdata/Mapdata.cpp:
+	.text       start:0x80045ED4 end:0x800479B0
 
 fluff/util/KdTreeUtil.cpp:
 	.text       start:0x80048354 end:0x8004855C
@@ -121,6 +127,7 @@ fluff/graphics/NwAnmCtrl.cpp:
 
 fluff/util/FullSortSceneUtil.cpp:
 	.text       start:0x800EA874 end:0x800EA8C8
+	.rodata     start:0x807EDDF8 end:0x807EDED0
 	.data       start:0x80842188 end:0x80842210
 
 fluff/manager/EnemyMdlManager.cpp:
@@ -373,6 +380,9 @@ gfl/gflRenderObj.cpp:
 
 gfl/gflSoundHandleInner.cpp:
 	.text       start:0x8064BC78 end:0x8064BCF8
+	.rodata     start:0x8082C734 end:0x8082C74C
+	.data       start:0x808B82B8 end:0x808B82C8
+	.sdata      start:0x808E4448 end:0x808E4450
 
 gfl/gflSoundArchiveMng.cpp:
 	.text       start:0x8064BCF8 end:0x8064BFA4
@@ -399,6 +409,7 @@ gfl/gflParamBase.cpp:
 
 gfl/gflCustomRenderObj.cpp:
 	.text       start:0x8065CF98 end:0x8065D5C4
+	.rodata     start:0x8082CEB0 end:0x8082CEF0
 	.data       start:0x808B87D8 end:0x808B88A0
 	.sdata2     start:0x808EC9A8 end:0x808EC9B0
 
@@ -412,6 +423,19 @@ fluff/util/MoveTarget.cpp:
 
 fluff/graphics/HermiteCurveBase.cpp:
 	.text       start:0x8065FE74 end:0x806610FC
+
+revolution/OS/OSThread.c:
+	.text       start:0x8066AC00 end:0x8066C290 align:16
+	.sdata      start:0x808E4590 end:0x808E4598
+	.sbss       start:0x808E5F38 end:0x808E5F48
+	.bss        start:0x808FE0F8 end:0x808FEB00
+
+revolution/OS/OSTime.c:
+	.text       start:0x8066C290 end:0x8066C6C0 align:16
+
+revolution/OS/OSStateTM.c:
+	.text       start:0x8066C950 end:0x8066D060
+	.bss        start:0x808FEB00 end:0x808FEBC0 align:32
 
 PowerPC_EABI_Support/Runtime/runtime.c:
 	.text       start:0x8068D448 end:0x8068DD08

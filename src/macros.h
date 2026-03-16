@@ -3,11 +3,6 @@
 
 #include "compiler_macros.h"
 
-#define STR_(x)					#x
-#define STR(x)					STR_(x)
-#define CAT_(a, b) a ## b
-#define CAT(a, b) CAT_(a, b)
-
 #define IS_ALIGNED(x, align)	(((u32)(x) & ((align) - 1)) == 0)
 
 // Useful macros

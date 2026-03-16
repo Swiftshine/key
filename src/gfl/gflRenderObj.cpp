@@ -1,3 +1,5 @@
+#pragma readonly_strings on
+
 #include "gflRenderObj.h"
 #include "gflMemoryUtil.h"
 #include "gflMemory.h"
@@ -55,13 +57,13 @@ bool RenderObj::vf34(float arg0, float arg1, float arg2, float arg3) {
     if (!vf1C()) {
         return true;
     }
-    
+
     float updateRate = GetUpdateRate();
 
     if (updateRate <= 0.0f) {
         return false;
     }
-    
+
     gfl::Vec3 vec = vf28();
 
     float temp = (arg0 - vec.x);
@@ -73,7 +75,7 @@ bool RenderObj::vf34(float arg0, float arg1, float arg2, float arg3) {
 
     float temp3 = (arg1 - vec.y);
     float temp4 = (arg3 + updateRate);
-    
+
     return temp3 * temp3 > temp4 * temp4;
 }
 

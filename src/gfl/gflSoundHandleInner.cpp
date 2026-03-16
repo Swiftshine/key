@@ -1,3 +1,7 @@
+// not linking due to random empty string being emitted?
+
+#pragma readonly_strings on
+
 #include "gflSoundHandleInner.h"
 
 using namespace gfl;

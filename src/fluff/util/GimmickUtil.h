@@ -19,7 +19,6 @@ namespace GimmickUtil {
 
     ASSERT_SIZE(GimmickEntry, 0x10);
 
-    int GetGimmickIDByDescription(const char* pDescription);
     const char* GetResourceNameByGimmickID(int id) DONT_INLINE_CLASS;
     std::string GetResourcePathByGimmickID(int id) DONT_INLINE_CLASS;
     GimmickBuildFunction GetBuildFunctionByGimmickID(int id) DONT_INLINE_CLASS;
@@ -30,12 +29,12 @@ namespace GimmickUtil {
     bool IsClothTurnGimmick(int id) DONT_INLINE_CLASS;
     bool fn_800507C8(int id) DONT_INLINE_CLASS;
     void GetButtonBRRES(gfl::ResFileObject& rDest) DONT_INLINE_CLASS;
-
+    int GetGimmickIDByCommonGimmickName(const char* pName);
     // these are probably actually just defined on a TU by TU basis
     // rather than being part of the GimmickUtil namespace
     bool CheckString_hide(Gimmick::GimmickBuildInfo* pBuildInfo);
     bool CheckString_goal(Gimmick::GimmickBuildInfo* pBuildInfo);
-    
+
     void SetString_gate_03(std::string& rString) {
         rString = "gate_03";
     }
