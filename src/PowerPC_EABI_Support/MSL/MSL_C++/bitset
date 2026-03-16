@@ -13,7 +13,7 @@ namespace std {
         static const int NUM_WORDS = (N + BITS_PER_WORD - 1) / BITS_PER_WORD;
     public:
         bitset();
-        ~bitset();
+        ~bitset() { }
 
         void reset();
         void set();
@@ -35,7 +35,7 @@ namespace std {
 
             do_set(index);
         }
-        
+
         bool test(size_t index);
     private:
         void do_reset(size_t index);
