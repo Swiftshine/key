@@ -28,8 +28,7 @@ Friend00::Friend00(gfl::Task* pParentTask, FullSortScene* pScene, const char* pT
     , m_188(false)
     , m_18C(0.0f, 0.0f, 0.0f)
     , m_198(0.0f, 0.0f, 0.0f)
-    , mBeadCount1(0)
-    , mBeadCount2(0)
+    , mBeadsCollected()
     , mCollisionEntry1(nullptr)
     , mCollisionEntry2(nullptr)
     , mCollisionEntry3(nullptr)
@@ -97,9 +96,9 @@ void Friend00::StartMission(PlayerBase* pPlayer, bool arg2) {
         CutFunction(pPlayer);
         SetPlayer(pPlayer);
         InStageWork* work = WorkManager::GetInStageWork();
-        uint count = work->mNumBeadsCollected + work->m_24;
-        mBeadCount2 = count;
-        mBeadCount1 = count;
+        uint count = work->mBeadsCollected[0] + work->mBeadsCollected[1];
+        mBeadsCollected[0] = count;
+        mBeadsCollected[1] = count;
     } else {
         SetPlayer(pPlayer);
     }

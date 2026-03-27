@@ -42,16 +42,16 @@ public:
     void Reset();
     void CopyStage(const StageInfo& rStage, void* pArg2);
     void Init();
-    void fn_801FEEB8(int arg1);
+    void SetTimeElapsed(int elapsed);
     void SetTimeLimit(int limit);
     void SetTimeRemaining(int time);
-    void SetBeadCount(int index, int max);
+    void SetBeadCount(int index, int amt);
     void fn_801FEF74(int arg1, int arg2, int arg3);
     void fn_801FF0A4(int arg1, int arg2);
-    void fn_801FF194(int arg1);
+    void SetDefaultBeadThresholds(int arg1);
     void fn_801FF294(int arg1);
     void fn_801FF3B0(int arg1);
-    void fn_801FF3B8(int arg1);
+    void fn_801FF3B8();
     int GetTimeElapsed(int arg1);
     void AddNumEnemiesDefeated(int num);
     void SetNumEnemiesDefeated(int num);
@@ -66,9 +66,9 @@ public:
     int fn_801FF46C(int arg1);
     void SetTimeAttackStatus(int status);
     int GetTimeAttackStatus();
-    /// @brief Sets the wood, bronze, silver, and gold thresholds
+    /// @brief Sets medals and the wood, bronze, silver, and gold thresholds
     /// to 0, 300, 600, and 900 respectively.
-    void SetDefaultBeadThresholds();
+    void SetDefaultBeadMedals();
     void fn_801FF544(int arg1, int arg2);
     void fn_801FF55C(int arg1);
     /// @return The type of bead medal the player has earned.
@@ -78,15 +78,12 @@ public:
     void fn_801FF6B0(int arg1, int arg2, int arg3);
     void fn_801FF6CC();
     void fn_801FF7B0(int arg1);
-    int fn_801FF7C0();
+    int GetHighestStreak();
     void fn_801FF7DC();
     int fn_801FF83C();
     void fn_801FF964();
     void fn_801FF9A4();
     int fn_801FFA24();
-    void ResetMission(int arg1);
-    void fn_801FFA84(int resourceID);
-    bool fn_801FFAA0(int stageID);
 
     DECL_WEAK int GetUnk3C() const;
 
@@ -94,26 +91,10 @@ public:
 
     /* 0x04 */ StageInfo mStage;
     /* 0x10 */ void* m_10;
-    /* 0x14 */ uint mTimeSpent;
+    /* 0x14 */ int mTimeElapsed; // milliseconds
     /* 0x18 */ int mTimeLimit; // milliseconds
     /* 0x1C */ int mTimeRemaining; // milliseconds
-
-    /* 0x20 */ union {
-        struct {
-            int mNumBeadsCollected;
-            int m_24;
-        };
-
-        struct {
-            int mBeadCollection_2[2];
-        };
-
-        struct {
-            bool mBeadsCounted;
-            int mBeadsCollected_3;
-        };
-    };
-
+    /* 0x20 */ int mBeadsCollected[2]; // player 1, player 2
     /* 0x28 */ int m_28;
     /* 0x2C */ int mCurrentFriendChallengeType;
     /* 0x30 */ bool mGoalRouletteSegmentUnlocked[3];
@@ -124,9 +105,7 @@ public:
     /* 0x44 */ int mNumEnemiesDefeated;
     /* 0x48 */ int mNumZekeFound;
     /* 0x4C */ int mMaxZekeFound;
-    /* 0x50 */ float m_50;
-    /* 0x54 */ float m_54;
-    /* 0x58 */ float m_58;
+    /* 0x50 */ float m_50[3];
     /* 0x5C */ int mTimeAttackStatus;
     /// @brief The number of beads required to get a
     /// wood, bronze, silver, or gold medal, in that order.
@@ -134,13 +113,13 @@ public:
     /* 0x70 */ int mBeadMedal;
     /* 0x74 */ int m_74;
     /* 0x78 */ int m_78;
-    /* 0x7C */ uint mCurrentStreak;
-    /* 0x80 */ uint mHighestStreak; // shown at the results screen
+    /* 0x7C */ int mCurrentStreak;
+    /* 0x80 */ int mHighestStreak; // shown at the results screen
     /* 0x84 */ int m_84;
     /* 0x88 */ int m_88;
     /* 0x8C */ int m_8C;
     /* 0x90 */ bool m_90;
-    /* 0x91 */ bool m_91;
+    /* 0x91 */ bool mHighestStreakUpdated;
     /* 0x92 */ bool m_92;
     /* 0x93 */ bool m_93;
 

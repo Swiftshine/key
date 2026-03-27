@@ -41,11 +41,11 @@ bool MissionClearCheckerBase::TimeRanOut(InStageWork* pStageWork) {
     int remain = pStageWork->mTimeRemaining;
 
     bool ret = false;
-    
+
     if (remain <= 0) {
         ret = true;
     }
-    
+
     return ret;
 }
 
@@ -76,7 +76,7 @@ MissionBeadClearChecker::~MissionBeadClearChecker() { }
 void MissionClearCheckerBase::InitChecker(
     MissionClearCheckerBase* pChecker,
     MissionGameCtrl* pMissionGameCtrl
-) {    
+) {
     pChecker->SetMissionGameCtrl(pMissionGameCtrl);
     MissionInfo* missionInfo = pMissionGameCtrl->GetMissionInfo();
     int threshold = missionInfo->GetCompletionThreshold();
@@ -86,7 +86,7 @@ void MissionClearCheckerBase::InitChecker(
 int MissionBeadClearChecker::Process() {
     InStageWork* work = WorkManager::GetInStageWork();
 
-    if (work->mNumBeadsCollected + work->m_24 >= mBeadThreshold) {
+    if (work->mBeadsCollected[0] + work->mBeadsCollected[1] >= mBeadThreshold) {
         // we have succeeded
         EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
     } else {
