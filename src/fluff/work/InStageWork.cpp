@@ -26,7 +26,7 @@ void InStageWork::CopyStage(const StageInfo& stage, void* arg2) {
 }
 
 void InStageWork::Init() {
-    m_2C = -1;
+    mCurrentFriendChallengeType = -1;
     fn_801FEEB8(0);
     SetTimeLimit(0);
     SetBeadCount(0, 0);
@@ -34,10 +34,10 @@ void InStageWork::Init() {
     fn_801FF194(0);
 
     float zero = 0.0f;
-    m_34 = 0;
-    m_38 = false;
+    mTreasuresCollected = 0;
+    mStageClear = false;
     m_93 = false;
-    m_3C = 0;
+    mChallengeProgressFlags = 0;
     m_40 = 0;
     mNumEnemiesDefeated = 0;
     mNumZekeFound = 0;
@@ -49,7 +49,7 @@ void InStageWork::Init() {
     m_50 = zero;
     m_54 = zero;
     m_58 = zero;
-    
+
     SetDefaultBeadThresholds();
     fn_801FF600();
 
@@ -108,7 +108,7 @@ void InStageWork::SetBeadCount(int index, int max) {
 
 int InStageWork::GetTimeElapsed(int arg1) {
     if (2 == arg1) {
-        return m_14;
+        return mTimeSpent;
     }
 
     int elapsed = mTimeLimit - mTimeRemaining;
@@ -135,7 +135,7 @@ int InStageWork::GetMaxZekeFound() {
 
 void InStageWork::ResetMission(int arg1) {
     fn_801FFA84(arg1);
-    m_14 = -1;
+    mTimeSpent = -1;
     mTimeLimit = -1;
     mStage.SetSectionID(-1);
     m_10 = (void*)-1u;

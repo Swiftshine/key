@@ -29,7 +29,7 @@ public:
         Gold    = 3,
     );
 
-    
+
 
     InStageWork();
 
@@ -94,7 +94,7 @@ public:
 
     /* 0x04 */ StageInfo mStage;
     /* 0x10 */ void* m_10;
-    /* 0x14 */ int m_14;
+    /* 0x14 */ uint mTimeSpent;
     /* 0x18 */ int mTimeLimit; // milliseconds
     /* 0x1C */ int mTimeRemaining; // milliseconds
 
@@ -115,11 +115,11 @@ public:
     };
 
     /* 0x28 */ int m_28;
-    /* 0x2C */ int m_2C;
+    /* 0x2C */ int mCurrentFriendChallengeType;
     /* 0x30 */ bool mGoalRouletteSegmentUnlocked[3];
-    /* 0x34 */ int m_34;
-    /* 0x38 */ bool m_38;
-    /* 0x3C */ int m_3C;
+    /* 0x34 */ uint mTreasuresCollected; // bitflags, 0-2
+    /* 0x38 */ bool mStageClear; // doesn't count for bosses
+    /* 0x3C */ uint mChallengeProgressFlags; // bit 0, "Flips when victory music begins", bit 1 = "Flips when you fail the challenge"
     /* 0x40 */ int m_40;
     /* 0x44 */ int mNumEnemiesDefeated;
     /* 0x48 */ int mNumZekeFound;
@@ -133,12 +133,17 @@ public:
     /* 0x60 */ int mBeadThresholds[4];
     /* 0x70 */ int mBeadMedal;
     /* 0x74 */ int m_74;
-    /* 0x78 */ u8 m_78[0x18];
+    /* 0x78 */ int m_78;
+    /* 0x7C */ uint mCurrentStreak;
+    /* 0x80 */ uint mHighestStreak; // shown at the results screen
+    /* 0x84 */ int m_84;
+    /* 0x88 */ int m_88;
+    /* 0x8C */ int m_8C;
     /* 0x90 */ bool m_90;
     /* 0x91 */ bool m_91;
     /* 0x92 */ bool m_92;
     /* 0x93 */ bool m_93;
-    
+
     // todo: the rest of this struct
     /* 0x94 */ STRUCT_FILL(0x1E4 - 0x94);
 };
