@@ -204,7 +204,7 @@ public:
     /* 0x0C0 */ int m_C0;
     /* 0x0C4 */ StateObject mState;
     /* 0x0D8 */ std::tree<placeholder_t> m_D8;
-    /* 0x0E4 */ gfl::Vec3 m_E4;
+    /* 0x0E4 */ gfl::Vec3 mSpeed;
     /* 0x0F0 */ float m_F0;
     /* 0x0F4 */ gfl::Vec3 m_F4;
     /* 0x100 */ float m_100;
