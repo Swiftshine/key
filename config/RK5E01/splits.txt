@@ -170,6 +170,9 @@ fluff/object/gimmick/GmkWarpExit.cpp:
 
 fluff/work/InStageWork.cpp:
 	.text       start:0x801FED48 end:0x801FFA38
+	.rodata     start:0x807F81B8 end:0x807F81C8
+	.data       start:0x80857140 end:0x80857150
+	.sdata      start:0x808E0AC8 end:0x808E0AD0
 
 fluff/system/FlfNandMng.cpp:
 	.text       start:0x80228C18 end:0x8022A4F8
