@@ -51,6 +51,20 @@ AsyncFileStream::~AsyncFileStream() {
 }
 
 // https://decomp.me/scratch/MPna5
+inline bool AsyncFileStream::Claimed(AsyncFileStreamManager* mgr) {
+    Mutex& mutex = mgr->mMutex;
+    mutex.Lock();
+
+    if (mgr->mFileStream != nullptr) {
+        mutex.Unlock();
+        return false;
+    } else {
+        mgr->mFileStream = this;
+        mutex.Unlock();
+        return true;
+    }
+}
+
 void AsyncFileStream::Init() {
     size_t blockSize = BPE_BLOCK_SIZE;
     size_t temp = mCompressedSize - mCurrentStreamPos;
@@ -60,26 +74,11 @@ void AsyncFileStream::Init() {
     }
 
     mNumBlocksRead = 0;
-
     AsyncFileStreamManager* mgr = AsyncFileStreamManager::Instance();
 
-
-    bool claimed;
-    do {
-        Mutex& mutex = mgr->mMutex;
-        OSSleepTicks(OS_MSEC_TO_TICKS(10)); // ?
-        // ghidra: OSSleepTicks(0,(OS_BUS_CLOCK / 4000) * 10);
-        mutex.Lock();
-
-        if (mgr->mFileStream != nullptr) {
-            mutex.Unlock();
-            claimed = false;
-        } else {
-            mgr->mFileStream = this;
-            mutex.Unlock();
-            claimed = true;
-        }
-    } while (!claimed);
+    while (!Claimed(mgr)) {
+        OSSleepTicks(OS_MSEC_TO_TICKS(10));
+    }
 
     Mutex& mutex = mgr->mMutex;
     mutex.Lock();
@@ -95,10 +94,11 @@ void AsyncFileStream::Init() {
     mBlockSize = blockSize;
     mCurrentStreamPos += blockSize;
 }
+
 void AsyncFileStream::Update() {
     size_t blockSize;
     bool loop = true;
-    
+
     while (loop) {
         if (mFile->GetFileStatus() == 2) {
             loop = false;

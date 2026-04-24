@@ -98,10 +98,12 @@ public:
         Digger      = 13, // "BrightRobot"
     );
 
-    
+    ENUM_CLASS(Flags,
+        Invincible = 1 << 3
+    );
 
     PlayerBase(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, int arg4, bool isCloned);
-    
+
     /* Virtual Methods */
 
     /* 0x008 */ virtual ~PlayerBase();
@@ -125,16 +127,16 @@ public:
     void Reset(uint arg1, int playerState, int arg3, int arg4);
     uint GetPlayerID();
     void PlayAnimation(int id);
-    /// @return The previous scene. 
+    /// @return The previous scene.
     FullSortScene* ResetScene(FullSortScene* pScene, bool resetPosition);
 
     /* Static Methods */
 
     static PlayerBase* Build(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, int);
     static PlayerBase* BuildCloned(gfl::Task* pParentTask, FullSortScene* pScene, uint flags, int);
-    
+
     /* Class Members */
-    
+
     /* 0x084 */ PTMF mCallbackMethods[93]; // not actually an array
     /* 0x4E0 */ gfl::Task mTask;
     /* 0x4F8 */ PlayerBaseCallbacks2* mCallbacks2;
@@ -153,7 +155,7 @@ public:
     /// Used for determining where the player gets placed should they, e.g., fall into a hole.
     /* 0x5A8 */ gfl::Vec3 mSavedPosition;
     /* 0x5B4 */ STRUCT_FILL(0x28);
-    /* 0x5DC */ gfl::Vec3 m_5DC;
+    /* 0x5DC */ gfl::Vec3 mSpeed;
     /* 0x5E8 */ STRUCT_FILL(0x18);
     /* 0x600 */ float mGravityMultiplier;
     /* 0x604 */ float mModifiedGravity;
@@ -231,7 +233,9 @@ public:
     /* 0x814 */ bool mAutoAttack;
     /* 0x818 */ CollisionEntry* mAutoAttackCollision1;
     /* 0x81C */ CollisionEntry* mAutoAttackCollision2;
-    /* 0x820 */ STRUCT_FILL(0x388);
+    /* 0x820 */ STRUCT_FILL(0x14);
+    /* 0x834 */ uint mInvincibilityFrameTimer;
+    /* 0x838 */ STRUCT_FILL(0x370);
     /* 0xBA8 */ float m_BA8[25];
     /* 0xC0C */ int mCurrentTransformationType;
     /* 0xC10 */ StateObject mState;

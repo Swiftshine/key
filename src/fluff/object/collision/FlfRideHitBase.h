@@ -8,7 +8,7 @@
 class FlfRideHitBase {
 public:
 
-    
+
 
     FlfRideHitBase(FlfGameObj* pOwner);
 
@@ -18,7 +18,7 @@ public:
 
     /* Class Methods */
 
-    void AddBead(FlfGameObj* pObject);
+    void AddObject(FlfGameObj* pObject);
     bool HasObject(FlfHandleObj* pObject);
     void fn_80183F80(FlfHandleObj* pObject);
     FlfHandleObj* GetHandleObj(uint index);

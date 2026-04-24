@@ -130,6 +130,9 @@ fluff/util/FullSortSceneUtil.cpp:
 	.rodata     start:0x807EDDF8 end:0x807EDED0
 	.data       start:0x80842188 end:0x80842210
 
+fluff/object/collision/ColNurbsInfo.cpp:
+	.text       start:0x800F1344 end:0x800F3A70
+
 fluff/manager/EnemyMdlManager.cpp:
 	.text       start:0x80111B7C end:0x801129BC
 
@@ -166,7 +169,10 @@ fluff/object/gimmick/GmkWarpExit.cpp:
 	.text       start:0x801B5164 end:0x801B5480
 
 fluff/work/InStageWork.cpp:
-	.text       start:0x801FED48 end:0x801FFAC0
+	.text       start:0x801FED48 end:0x801FFA38
+	.rodata     start:0x807F81B8 end:0x807F81C8
+	.data       start:0x80857140 end:0x80857150
+	.sdata      start:0x808E0AC8 end:0x808E0AD0
 
 fluff/system/FlfNandMng.cpp:
 	.text       start:0x80228C18 end:0x8022A4F8

@@ -28,8 +28,7 @@ Friend00::Friend00(gfl::Task* pParentTask, FullSortScene* pScene, const char* pT
     , m_188(false)
     , m_18C(0.0f, 0.0f, 0.0f)
     , m_198(0.0f, 0.0f, 0.0f)
-    , mBeadCount1(0)
-    , mBeadCount2(0)
+    , mBeadsCollected()
     , mCollisionEntry1(nullptr)
     , mCollisionEntry2(nullptr)
     , mCollisionEntry3(nullptr)
@@ -97,9 +96,9 @@ void Friend00::StartMission(PlayerBase* pPlayer, bool arg2) {
         CutFunction(pPlayer);
         SetPlayer(pPlayer);
         InStageWork* work = WorkManager::GetInStageWork();
-        uint count = work->mNumBeadsCollected + work->m_24;
-        mBeadCount2 = count;
-        mBeadCount1 = count;
+        uint count = work->mBeadsCollected[0] + work->mBeadsCollected[1];
+        mBeadsCollected[0] = count;
+        mBeadsCollected[1] = count;
     } else {
         SetPlayer(pPlayer);
     }
@@ -122,7 +121,7 @@ void Friend00::StartMission() {
     mMissionStarted = true;
     mCollisionEntry->mInfo.mPendingCollision = false;
     PlayNURBSAnimation(201, true);
-    
+
     if (GameManager::GetCurrentMissionID() == MissionUtil::MissionID::MB_MtSlide) {
         vf22C(0.085f);
     }
@@ -175,7 +174,7 @@ void Friend00::vf204() {
         if (GetCurrentAnimationID() == 12) {
             unk = false;
         }
-        
+
         if (GetPlayer() != nullptr && GetPlayer()->mCategory == ObjectCategory::Player) {
             fn_80342DE4(CutFunction(GetPlayer()), unk);
         }
@@ -185,7 +184,7 @@ void Friend00::vf204() {
 }
 
 void Friend00::fn_80342DE4(PlayerBase* pPlayer, bool isReset) {
-    // not decompiled   
+    // not decompiled
 }
 
 void Friend00::fn_803431E4() {
@@ -193,9 +192,9 @@ void Friend00::fn_803431E4() {
         SetNURBSAnimationInfo(12, true);
     } else {
         gfl::Vec3 unused;
-        unused = m_E4;
+        unused = mSpeed;
         if (GetPlayer() != nullptr && GetPlayer()->mCategory == ObjectCategory::Player) {
-            unused = CutFunction(GetPlayer())->m_5DC;
+            unused = CutFunction(GetPlayer())->mSpeed;
         }
 
         bool reset = true;

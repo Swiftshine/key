@@ -43,10 +43,10 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     UpdateMatrix();
 
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneID);
-    
+
     gfl::ResFileObject fileInfo;
     GetResFileObject(fileInfo, this);
-    
+
     mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, fileInfo, resourceName));
 
     for (uint i = 0; i < 8; i++) {
@@ -222,13 +222,13 @@ int GmkTurtle::vf88(FlfGameObj* player, uint arg2) {
         } else if (State::MoveRight == mCurrentState) {
             Turn(TurnDirection::Left);
         }
-    } 
+    }
 
     return 1;
 }
 
 void GmkTurtle::Interact(FlfGameObj* other) {
-    mRideHitCtrlTrans->AddBead(static_cast<GmkBead*>(other));
+    mRideHitCtrlTrans->AddObject(other);
 }
 
 // this function is called by `GmkSunriseCurtain::DoTimeSwitch()`

@@ -58,6 +58,9 @@ public:
 
 ASSERT_SIZE(ColObjTrans, 0x24)
 
-class ColObjMod;
+class ColObjMod {
+public:
+    virtual ~ColObjMod();
+};
 
 #endif

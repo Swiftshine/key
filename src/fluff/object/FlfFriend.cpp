@@ -40,7 +40,7 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendI
     , m_C0(0)
     , mState(0)
     , m_D8()
-    , m_E4(0.0f)
+    , mSpeed(0.0f)
     , m_F0(0.0f)
     , m_F4(0.0f, 0.0f, 0.0f)
     , m_100(0.0f)
@@ -752,7 +752,7 @@ void FlfFriend::SetPositionToPlayerSavedPosition() {
 }
 
 void FlfFriend::vf148() {
-    m_E4 = gfl::Vec3::Zero;
+    mSpeed = gfl::Vec3::Zero;
     vf210(true);
     mState.SetCurrentStateAndClearOthers(15);
 }
@@ -941,16 +941,16 @@ void FlfFriend::vfA8(float, float, gfl::Vec3, bool) {
 
 // https://decomp.me/scratch/YQFSs
 void FlfFriend::vf240() {
-    m_E4 *= vf230();
+    mSpeed *= vf230();
 
     float thresh = 0.0001f;
 
-    if (fabsf(m_E4.x) < thresh) {
-        m_E4.x = 0.0f;
+    if (fabsf(mSpeed.x) < thresh) {
+        mSpeed.x = 0.0f;
     }
 
-    if (fabsf(m_E4.y) < thresh) {
-        m_E4.y = 0.0f;
+    if (fabsf(mSpeed.y) < thresh) {
+        mSpeed.y = 0.0f;
     }
 }
 
@@ -1279,7 +1279,7 @@ void FlfFriend::vf1A8() {
     ScreenPosition pos = mScreenPosition1;
     vfA0(pos);
 
-    if (m_E4.Length() < lbl_808E9D94) {
+    if (mSpeed.Length() < lbl_808E9D94) {
         mState.SetCurrentStateAndClearOthers(14);
     }
 }
