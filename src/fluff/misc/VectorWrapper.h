@@ -23,26 +23,22 @@ struct vec : _vec{
 template <typename T>
 struct VectorWrapper : vec {
     ~VectorWrapper() { }
-    
-    inline std::vector<T>& AsVector() const {
-        return *(std::vector<T>*)(this);
-    }
-    
+
     // inline const std::vector<T>& AsVector() const {
     //     return *reinterpret_cast<const std::vector<T>*>(this);
     // }
-    
+
     inline size_t size() {
-        return AsVector().size();
+        return ((std::vector<T>*)(this))->size();
     }
     inline void clear() {
-        AsVector().clear();
+        ((std::vector<T>*)(this))->clear();
     }
     inline T& operator[](size_t i) const {
-        return AsVector().operator[](i);
+        return ((std::vector<T>*)(this))->operator[](i);
     }
     inline T& back() {
-        return AsVector().back();
+        return ((std::vector<T>*)(this))->back();
     }
 };
 

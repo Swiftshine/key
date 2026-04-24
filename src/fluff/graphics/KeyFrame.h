@@ -14,22 +14,20 @@ template <typename T>
 class KeyFrame {
 public:
     /* Structures */
-    
+
     struct InnerKeyFrame {
         inline InnerKeyFrame() { }
-        
+
         inline InnerKeyFrame(T start, T end, const std::string& rName)
             : mStart(start)
             , mEnd(end)
             , mName(rName)
         { }
-        
+
         T mStart;
         T mEnd;
         std::string mName;
     };
-
-    
 
     struct FrameTemplate {
         int mCount; // the number of start/end frames the structure uses
@@ -37,8 +35,6 @@ public:
         T mEndFrames[8];
         T mDefaultFrame;
     };
-    
-    
 
     inline KeyFrame()
         : mInnerKeyFrames()
@@ -99,7 +95,7 @@ public:
         // }
 
         // if (pName != nullptr) {
-            
+
         // }
 
         return 0;
@@ -112,7 +108,7 @@ public:
     T GetFrame(std::string* pName) DONT_INLINE_CLASS {
         return CalculateFrame(mCurrentFrame, pName);
     }
-    
+
     inline void Reset() {
         mInnerKeyFrames.clear();
         mCurrentFrame = 0;
@@ -149,7 +145,7 @@ public:
         // inner.mStart = start;
         // inner.mEnd = end;
         // inner.mName = std::string(name);
-        
+
         // mInnerKeyFrames.push_back(inner);
     }
 

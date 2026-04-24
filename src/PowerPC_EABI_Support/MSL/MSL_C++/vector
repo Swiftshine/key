@@ -10,6 +10,7 @@
 #include <MSL_C++/stdexcept>
 #include <MSL_C++/Metrowerks/compressed_pair.h>
 #include <MSL_C++/Metrowerks/int2type.h>
+#include <MSL_C++/iterator>
 
 namespace std {
 
@@ -59,11 +60,11 @@ public:
     const_reference operator[](size_t n) const {
         return data_[n];
     }
-    
+
     pointer data() {
         return data_;
     }
-    
+
     iterator begin() {
         return data_;
     }
@@ -79,7 +80,7 @@ public:
     const_reference front() const {
         return data_[0];
     }
-    
+
     reference back() {
         return data_[size_ - 1];
     }
@@ -90,14 +91,24 @@ public:
 
     void throw_length_error();
 
+    #if DONT_INLINE_STD
     void clear() {
-        erase_at_end(size_);
+        bool _b[4];
+        size_t size = size_;
+        _b[0] = false;
+        erase_at_end(size, _b[0]);
     }
-
+    void erase_at_end(size_t, bool&);
+    #else
     void erase_at_end(const size_t n) {
         // erase_at_end(n, Metrowerks::int2type<1>());
         size_ -= n;
     }
+    void clear() {
+        erase_at_end(size_);
+    }
+    #endif
+
 
     // void erase_at_end(size_t n, Metrowerks::int2type<1>) DONT_INLINE_CLASS {
     //     T* e = end();
@@ -113,7 +124,7 @@ public:
     size_t& cap() {
         return capacity_.first();
     }
-    
+
     Allocator alloc() const {
         return capacity_.second();
     }
@@ -162,7 +173,7 @@ public:
 
     void append_realloc(size_t n, const_reference x) DONT_INLINE_CLASS {
         __vec_deleter_helper<T, Allocator> tmp(alloc());
-        
+
         size_t max = tmp.grow_by((size_ + n) - cap());
         tmp.allocate(size_ + n, max);
         tmp.start_ = size_;
