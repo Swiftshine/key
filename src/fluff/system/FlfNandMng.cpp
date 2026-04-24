@@ -20,7 +20,7 @@ extern "C" s32 fn_806AD4A0(NANDFileInfo*);
 DECL_WEAK DONT_INLINE void CutFunction() { }
 DECL_WEAK DONT_INLINE void CutFunction2(int) { }
 
-void FlfNandMng::NandError(s32 result) {    
+void FlfNandMng::NandError(s32 result) {
     if (result != NAND_RESULT_OK) {
         CutFunction(); // probably some logging
         GFL_HALT();
@@ -248,7 +248,7 @@ void FlfNandMng::fn_80229470() {
             break;
         }
 
-        case 4: 
+        case 4:
         case 5: {
             fn_80229978();
             break;
@@ -370,7 +370,7 @@ void FlfNandMng::fn_80229524() {
                     case NAND_RESULT_CORRUPT: {
                         mResult = Result::Corrupt;
                         Clear();
-                        break;   
+                        break;
                     }
 
                     default: {
@@ -464,7 +464,7 @@ void FlfNandMng::fn_8022987C() {
 
 const char tmp[] = "/tmp/";
 
-// https://decomp.me/scratch/6ncKJ
+// https://decomp.me/scratch/BUVEo
 void FlfNandMng::fn_80229978() {
     switch (mState) {
         case 11: {
@@ -572,7 +572,7 @@ void FlfNandMng::fn_80229978() {
                         mState = 15;
                         break;
                     }
-                    
+
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
                         mResult = Result::NoExist;
@@ -664,7 +664,7 @@ void FlfNandMng::fn_80229978() {
                         }
                         break;
                     }
-                    
+
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
                         mResult = Result::NoExist;
@@ -675,9 +675,10 @@ void FlfNandMng::fn_80229978() {
                     case NAND_RESULT_AUTHENTICATION:
                     case NAND_RESULT_ECC_CRIT: {
                         s32 result = NANDDelete(mTempFilename.c_str());
-                        while (result == NAND_RESULT_BUSY) {
-                            result = NANDDelete(mTempFilename.c_str());
-                        }
+
+                        do {}
+                        while (NANDDelete(mTempFilename.c_str()) == NAND_RESULT_BUSY);
+
                         mState = 13;
                         break;
                     }
@@ -803,7 +804,7 @@ void FlfNandMng::fn_80229978() {
                     case NAND_RESULT_ECC_CRIT: {
                         if (mPhase == 4) {
                             s32 result = fn_806AD4A0(&NandFileInfo);
-                            
+
                             while (result == NAND_RESULT_BUSY) {
                                 result = fn_806AD4A0(&NandFileInfo);
                             }
@@ -836,7 +837,7 @@ void FlfNandMng::fn_80229978() {
             if (sNandCallbackCalled) {
                 SetFlags(0, false);
                 s32 result;
-                
+
                 switch (sNandResult) {
                     default: {
                         if (sNandResult >= NAND_RESULT_OK) {
@@ -869,7 +870,7 @@ void FlfNandMng::fn_80229978() {
                                 Clear();
                                 break;
                             }
-                            
+
                             case NAND_RESULT_CORRUPT: {
                                 mResult = Result::NoExist;
                                 Clear();
