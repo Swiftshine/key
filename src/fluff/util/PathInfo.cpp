@@ -4,7 +4,8 @@ PathInfo::PathInfo(Mapdata::MapdataPath* pPath, bool looped)
     : mPath(pPath)
     , mPathLength(0.0f)
     , mSegments()
-    , m_14(0.0f, 0.0f)
+    , m_14(0.0f)
+    , m_18(0.0f)
     , mNumSegments(0)
     , mIsLooped(looped)
 {
@@ -55,6 +56,42 @@ gfl::Vec2 PathInfo::fn_802FF9B8(float arg1) const {
     // const gfl::Vec2& vec = fn_802FF9FC(arg1);
     // return gfl::Vec2(vec.x, -vec.y);
     return gfl::Vec2();
+}
+
+float PathInfo::GetPathLength() const {
+    return mPathLength;
+}
+
+void PathInfo::fn_802FFC04() {
+    m_14 = 0.0f;
+    m_18 = 0.0f;
+}
+
+bool PathInfo::fn_802FFC14() const {
+    if (IsLooped()) {
+        return false;
+    }
+
+    return m_14 <= 0.0f;
+}
+
+
+bool PathInfo::fn_802FFC68() const {
+    if (IsLooped()) {
+        return false;
+    }
+
+    return m_14 >= 1.0f;
+}
+
+bool PathInfo::IsLooped() const {
+    return mIsLooped;
+}
+
+void PathInfo::fn_80300214(float arg1) {
+    float val = (float)mPathLength * (float)(double)arg1;
+    m_14 = arg1;
+    m_18 = val;
 }
 
 const nw4r::math::VEC2& PathInfo::GetPoint(int index) const {
