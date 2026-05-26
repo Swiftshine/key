@@ -492,7 +492,7 @@ config.libs = [
             Object(NonMatching, "gfl/gflTask.cpp"),
             Object(Matching, "gfl/gflTaskInfo.cpp"),
             Object(Matching, "gfl/gflThread.cpp"),
-            Object(NonMatching, "gfl/gflTimer.cpp"),
+            Object(Matching, "gfl/gflTimer.cpp"),
         ],
     },
     {

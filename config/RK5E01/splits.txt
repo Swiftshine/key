@@ -371,6 +371,9 @@ gfl/gflThread.cpp:
 
 gfl/gflTimer.cpp:
 	.text       start:0x80646E78 end:0x80646FE8
+	.rodata     start:0x8082C630 end:0x8082C640
+	.data       start:0x808B8110 end:0x808B8120
+	.sdata      start:0x808E4418 end:0x808E4420
 
 fluff/main.cpp:
 	.text       start:0x80647640 end:0x80647690

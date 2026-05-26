@@ -1,49 +1,57 @@
+#pragma readonly_strings on
+
 #include "gflTimer.h"
+#include "OS/OSTime.h"
 
 using namespace gfl;
 
 Timer::Timer()
-    : mOSTime(0)
-    , m_10(0)
-    , m_18(0)
+    : mStartTime(0)
+    , mEndTime(0)
+    , mDelta(0)
 { }
 
 Timer::~Timer() { }
 
-void Timer::SetOSTime() {
-    mOSTime = OSGetTime();
+void Timer::Start() {
+    mStartTime = OSGetTime();
 }
 
-void Timer::fn_80646EDC() {
-    // not decompiled
+void Timer::End() {
+    if (mStartTime == 0) {
+        return;
+    }
 
+    s64 delta = 0;
+    s64 time = OSGetTime();
+    mEndTime = time;
     
-    // if (mOSTime != 0) {
-    //     u64 time = OSGetTime();
-    //     m_10 = time;
+    if (mEndTime <= mStartTime) {
+        delta = 0;
+    } else {
+        delta = mEndTime - mStartTime;
+    }
 
-    //     u64 temp;
-
-    //     if (time >= mOSTime) {
-    //         temp = 0;
-    //     } else {
-    //         temp = time - mOSTime;
-    //     }
-
-    //     m_18 = temp;
-    //     mOSTime = 0;
-    //     m_10 = 0;
-    // }
+    mDelta += delta;
+    mStartTime = 0;
+    mEndTime = 0;
 }
 
 
-void Timer::ResetTime() {
-    mOSTime = 0;
-    m_10 = 0;
-    m_18 = 0;
+void Timer::Reset() {
+    mStartTime = 0;
+    mEndTime = 0;
+    mDelta = 0;
 }
 
-u64 Timer::fn_80646FA4(u64* first, u64* second) {
-    // not decompiled
-    return 0;
+s64 Timer::GetDelta(s64* pFirst, s64* pSecond) {
+    s64 second = *pSecond;
+    s64 first = *pFirst;
+
+    if (first <= second) {
+        return 0;
+    }
+
+
+    return first - second;
 }
