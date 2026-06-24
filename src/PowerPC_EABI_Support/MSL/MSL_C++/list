@@ -164,6 +164,10 @@ public:
         return size_.second();
     }
 
+    bool empty() const {
+        return size() == 0;
+    }
+
     void clear() {
         iterator i;
         erase(i, this, begin(), end());

@@ -60,6 +60,7 @@ public:
 
     void GatherDrawScnObj();
     void ZSort();
+    void Sort(void* pOpaFunc, void* pXluFunc);
     void DrawOpa();
     void DrawXlu();
 
