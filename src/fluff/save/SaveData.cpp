@@ -1,4 +1,6 @@
 #include "save/SaveData.h"
+#include "language/Language.h"
+
 
 #define SAVEDATA_SIZE       0xA9C0
 #define SAVEDATA_VERSION    0x15
