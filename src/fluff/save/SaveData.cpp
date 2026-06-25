@@ -1,4 +1,5 @@
 #include "save/SaveData.h"
+#include "SaveData.h"
 #include "language/Language.h"
 
 
@@ -78,7 +79,7 @@ BOOL SaveData::IsValid(int numBytes) {
 #pragma pop
 
 void SaveData::InitSaveSlots() {
-    for (uint i = 0; i < 3; i++) {
+    for (uint i = 0; i < NUM_SAVE_SLOTS; i++) {
         mSaveSlots[i].fn_801FFDB8(i);
     }
 
