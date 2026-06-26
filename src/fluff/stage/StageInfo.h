@@ -76,9 +76,6 @@ private:
 };
 
 ENUM_CLASS(StageIDs,
-    // Misc.
-    WorldMap = 50,
-
     // Grass Land
     FountainGardens   = 1,
     FlowerFields      = 2,
@@ -134,6 +131,19 @@ ENUM_CLASS(StageIDs,
     CastleDedede      = 40,
     MetaMelonIsle     = 41,
     BattleshipHalberd = 42,
+
+    // Bossfights
+    Fangora           = 43,
+    HotWings          = 44,
+    Squashini         = 45,
+    Capamari          = 46,
+    KingDedede        = 47,
+    MetaKnight        = 48,
+    YinYarn           = 49,
+    
+    // Misc.
+    WorldMap          = 50,
+
 );
 
 ENUM_CLASS(ResourceIDs,
