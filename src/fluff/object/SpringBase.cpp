@@ -92,7 +92,7 @@ SpringBase::Particle::Particle()
     mEffectPosition = gfl::Vec3(0.0f);
     mPosition = gfl::Vec3(0.0f);
     m_34 = gfl::Vec3(0.0f);
-    mInvalid = false;
+    mIsInvalid = false;
     m_44 = nullptr;
     m_48 = gfl::Vec3(0.0f);
     m_54 = gfl::Vec3(0.0f);
@@ -178,7 +178,7 @@ uint SpringBase::GetParticleCount() {
 }
 
 void SpringBase::SetParticleInvalid(uint index, bool val) {
-    mParticleArray1[index].mInvalid = val;
+    mParticleArray1[index].mIsInvalid = val;
 }
 
 void SpringBase::SetParticlesInvalid(bool val) {
@@ -188,7 +188,7 @@ void SpringBase::SetParticlesInvalid(bool val) {
 }
 
 bool SpringBase::IsParticleInvalid(uint index) {
-    return mParticleArray1[index].mInvalid;
+    return mParticleArray1[index].mIsInvalid;
 }
 
 void SpringBase::SetParticleEffectPositionByIndex(uint index, gfl::Vec3& rVec, bool syncPos) {
@@ -462,7 +462,7 @@ void SpringBase::fn_800092AC(float scale) {
     for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
 
-        if (!particle->mInvalid) {
+        if (!particle->mIsInvalid) {
             vf78(scale, particle, particle->m_60);
 
             if (mSpringTemplate->m_28) {
@@ -495,13 +495,13 @@ void SpringBase::Update() const {
     }
 }
 
-// https://decomp.me/scratch/mPqdv
+
+// https://decomp.me/scratch/JZ88z
 void SpringBase::fn_80009678(float scale) {
     SpringTemplate* st = mSpringTemplate;
 
     CopyParticles(mParticleArray1, mParticleArray2, st);
-
-    fn_8000A748(mParticleArray2);
+    SetupParticles(mParticleArray2);
 
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray2[i];
@@ -510,17 +510,16 @@ void SpringBase::fn_80009678(float scale) {
     }
 
     CopyParticles(mParticleArray2, mParticleArray3, st);
-
+    
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* pa = &mParticleArray2[i];
         Particle* pb = &mParticleArray3[i];
 
-        pb->m_4 += pa->m_48 * scale * 0.5f;
+        pb->m_4 += pa->m_48 * 0.5f;
         pb->mEffectPosition += pb->m_4 * scale * 0.5f;
     }
 
-
-    fn_8000A748(mParticleArray3);
+    SetupParticles(mParticleArray3);
 
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray3[i];
@@ -530,18 +529,17 @@ void SpringBase::fn_80009678(float scale) {
 
     CopyParticles(mParticleArray2, mParticleArray4, st);
 
-
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* pa = &mParticleArray3[i];
         Particle* pb = &mParticleArray4[i];
 
-        pb->m_4 += pa->m_48 * scale * 0.5f;
+        pb->m_4 += pa->m_48 * 0.5f;
         pb->mEffectPosition += pb->m_4 * scale * 0.5f;
     }
 
-    fn_8000A748(mParticleArray4);
+    SetupParticles(mParticleArray4);
 
-    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+    for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray4[i];
         float rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
@@ -553,12 +551,11 @@ void SpringBase::fn_80009678(float scale) {
         Particle* pa = &mParticleArray4[i];
         Particle* pb = &mParticleArray5[i];
 
-        pb->m_4 += pa->m_48 * scale;
+        pb->m_4 += pa->m_48;
         pb->mEffectPosition += pb->m_4 * scale;
     }
 
-    fn_8000A748(mParticleArray5);
-
+    SetupParticles(mParticleArray5);
 
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray5[i];
@@ -570,7 +567,7 @@ void SpringBase::fn_80009678(float scale) {
         float one = 1.0f;
         Particle* p1 = &mParticleArray1[i];
 
-        if (p1->mInvalid) {
+        if (p1->mIsInvalid) {
             continue;
         }
 
@@ -579,22 +576,34 @@ void SpringBase::fn_80009678(float scale) {
         Particle* p4 = &mParticleArray4[i];
         Particle* p5 = &mParticleArray5[i];
 
-        float rate = one / 6.0f; // this has to be calculated dynamically
-        p1->m_4 += (p2->m_48 + p3->m_48 * 2.0f + p4->m_48 * 2.0f + p5->m_48) * rate;
-        p1->m_60 = p1->m_4 * scale;
+        const float rate = one / 6.0f;
+        gfl::Vec3 temp(0);
+        temp = temp + p2->m_48;
+        temp = temp + p3->m_48 * 2.0f;
+        temp = temp + p4->m_48 * 2.0f;
+        temp += p5->m_48;
+        temp *= rate;
+        p1->m_4 += temp;
+        gfl::Vec3 temp2 = p1->m_4 * scale;
+        p1->m_60 = temp2;
+
+        // p1->m_4 += (p2->m_48 + p3->m_48 * 2.0f + p4->m_48 * 2.0f + p5->m_48) * rate;
+        // p1->m_60 = p1->m_4 * scale;
+
+        // p1->m_60 = p1->m_4 * scale;
     }
 }
 
 void SpringBase::fn_80009E28(float scale) {
     SpringTemplate* springTemplate = mSpringTemplate;
 
-    fn_8000A748(mParticleArray1);
+    SetupParticles(mParticleArray1);
 
 
     for (uint i = 0; i < springTemplate->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
 
-        if (particle->mInvalid) {
+        if (particle->mIsInvalid) {
             continue;
         }
 
@@ -606,6 +615,13 @@ void SpringBase::fn_80009E28(float scale) {
     }
 }
 
+
+
+inline void ClearVec(nw4r::math::VEC3& v) {
+    v.x = 0.0f;
+    v.y = 0.0f;
+    v.z = 0.0f;
+}
 
 // remove later
 using nw4r::math::VEC3;
@@ -632,18 +648,13 @@ inline VEC3* VEC3Scale_(register VEC3* pOut, register const VEC3* pIn,
     return pOut;
 }
 
-inline void ClearVec(nw4r::math::VEC3& v) {
-    v.x = 0.0f;
-    v.y = 0.0f;
-    v.z = 0.0f;
-}
 
 // matching, but fakematch
 // todo - use this instead: https://decomp.me/scratch/m730M
 void SpringBase::fn_80009F64(float scale) {
     SpringTemplate* st = mSpringTemplate;
 
-    fn_8000A748(mParticleArray1);
+    SetupParticles(mParticleArray1);
 
     nw4r::math::VEC3 vec_50; // 0x50
     nw4r::math::VEC3 vec_44; // 0x44
@@ -657,7 +668,7 @@ void SpringBase::fn_80009F64(float scale) {
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
 
-        if (particle->mInvalid) {
+        if (particle->mIsInvalid) {
             continue;
         }
 
@@ -701,7 +712,7 @@ void SpringBase::fn_8000A148(float scale) {
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
 
-        if (particle->mInvalid) {
+        if (particle->mIsInvalid) {
             continue;
         }
 
@@ -723,7 +734,7 @@ void SpringBase::fn_8000A148(float scale) {
         Particle* p1 = &mParticleArray1[spring->mParticleIndex1];
         Particle* p2 = &mParticleArray1[spring->mParticleIndex2];
 
-        if (!p1->mInvalid || !p2->mInvalid) {
+        if (!p1->mIsInvalid || !p2->mIsInvalid) {
             gfl::Vec3 temp = (p2->mEffectPosition + p2->m_60) - (p1->mEffectPosition + p1->m_60);
 
             float unk2;
@@ -749,17 +760,17 @@ void SpringBase::fn_8000A148(float scale) {
                 gfl::Vec3(0.0f);
                 gfl::Vec3 temp2 = temp * unk3 * 0.5f;
 
-                if (p1->mInvalid || p2->mInvalid) {
+                if (p1->mIsInvalid || p2->mIsInvalid) {
                     temp2 *= 2.0f;
                 }
 
 
-                if (!p1->mInvalid) {
+                if (!p1->mIsInvalid) {
                     gfl::Vec3 a = p1->mEffectPosition + p1->m_60 + temp2;
                     p1->m_60 = a - p1->mEffectPosition;
                 }
 
-                if (!p2->mInvalid) {
+                if (!p2->mIsInvalid) {
                     p2->m_60 = (p2->mEffectPosition + p2->m_60 + temp2) - p2->mEffectPosition;
                 }
             }
@@ -768,13 +779,13 @@ void SpringBase::fn_8000A148(float scale) {
 }
 
 // https://decomp.me/scratch/jpA3V
-void SpringBase::fn_8000A748(Particle* pParticles) {
+void SpringBase::SetupParticles(Particle* pParticles) {
     SpringTemplate* st = mSpringTemplate;
 
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &pParticles[i];
 
-        if (particle->mInvalid) {
+        if (particle->mIsInvalid) {
             continue;
         }
 
@@ -837,11 +848,11 @@ void SpringBase::fn_8000A748(Particle* pParticles) {
 
             gfl::Vec3 temp3 = diff * unk * rate;
 
-            if (!p1->mInvalid) {
+            if (!p1->mIsInvalid) {
                 p1->m_34 += temp3;
             }
 
-            if (!p2->mInvalid) {
+            if (!p2->mIsInvalid) {
                 p2->m_34 += -temp3;
             }
         }
@@ -855,7 +866,7 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &pParticles[i];
 
-        if (particle->mInvalid) {
+        if (particle->mIsInvalid) {
             continue;
         }
 
@@ -896,7 +907,7 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
         Particle* p1 = &pParticles[spring->mParticleIndex1];
         Particle* p2 = &pParticles[spring->mParticleIndex2];
 
-        if (!p1->mInvalid || !p2->mInvalid) {
+        if (!p1->mIsInvalid || !p2->mIsInvalid) {
             gfl::Vec3 diff = p1->mEffectPosition - p2->mEffectPosition;
 
             gfl::Vec3(0.0f); // not used?
@@ -918,11 +929,11 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
 
             gfl::Vec3 temp = diff * unk * rate;
 
-            if (!p1->mInvalid) {
+            if (!p1->mIsInvalid) {
                 p1->m_34 += temp;
             }
 
-            if (!p2->mInvalid) {
+            if (!p2->mIsInvalid) {
                 p2->m_34 += -temp;
             }
         }

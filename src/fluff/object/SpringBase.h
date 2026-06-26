@@ -27,16 +27,14 @@ public:
         /* 0x1C */ gfl::Vec3 mPosition;
         /* 0x28 */ gfl::Vec3 m_28;
         /* 0x34 */ gfl::Vec3 m_34;
-        /* 0x40 */ bool mInvalid;
+        /* 0x40 */ bool mIsInvalid;
         /* 0x44 */ nw4r::g3d::G3dObj* m_44;
         /* 0x48 */ gfl::Vec3 m_48;
         /* 0x54 */ gfl::Vec3 m_54;
         /* 0x60 */ gfl::Vec3 m_60;
         /* 0x6C */ bool m_6C;
         /* 0x6D */ bool m_6D;
-
         
-
         Particle();
         
         /* Virtual Methods */
@@ -145,7 +143,7 @@ public:
     void fn_80009E28(float scale);
     void fn_80009F64(float scale);
     void fn_8000A148(float scale);
-    void fn_8000A748(Particle* pParticles) DONT_INLINE_CLASS;
+    void SetupParticles(Particle* pParticles) DONT_INLINE_CLASS;
     void fn_8000AC6C(Particle* pParticle) DONT_INLINE_CLASS;
     void CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* pSpringTemplate) DONT_INLINE_CLASS;
     void fn_8000B270() DONT_INLINE_CLASS;
