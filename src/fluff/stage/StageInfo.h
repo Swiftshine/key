@@ -143,7 +143,6 @@ ENUM_CLASS(StageIDs,
     
     // Misc.
     WorldMap          = 50,
-
 );
 
 ENUM_CLASS(ResourceIDs,
