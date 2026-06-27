@@ -75,7 +75,7 @@ const char* PlTransResMng::GetPlayerResourceName(uint id) {
         case 52: return "chara/new_player/FORM14/1P_eye";
         case 53: return "chara/new_player/FORM14/2P_eye";
         case 54: return "chara/env/PlayGuideIcon";
-        default: return (const char*)id; // ...why?
+        // bug: no default case
     }
 }
 
