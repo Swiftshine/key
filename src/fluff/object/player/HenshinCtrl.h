@@ -5,7 +5,7 @@
 #include "env/EnvParts_PlayGuideIconLocator.h"
 
 #include "graphics/FlfMdlDraw.h"
-#include "graphics/PlTransMdl.h"
+#include "graphics/PlTransRes.h"
 
 #include "object/FlfHandleObj.h"
 #include "object/collision/FlfMdlCollision.h"

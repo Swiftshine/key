@@ -76,6 +76,14 @@ namespace gfl {
         void fn_8065DCDC(float);
         nw4r::g3d::ResMdl GetResMdl(const char* modelName);
         
+        void SetCullMode(GXCullMode mode) {
+            u32 numEntries = GetScnMdl()->GetResMdl().GetResMatNumEntries();
+            for (u32 i = 0; i < numEntries; i++) {
+                nw4r::g3d::ScnMdl::CopiedMatAccess mat(GetScnMdl(), i);
+                mat.GetResGenMode(false).GXSetCullMode(mode);
+            }
+        }
+        
         /* Static Methods */
 
         static void SetDefaultUpdateRate(float rate);

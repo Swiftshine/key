@@ -89,9 +89,14 @@ public:
     /* 0x108 */ bool m_108;
     /* 0x10C */ int m_10C;
     /* 0x110 */ HermiteCurve mHermiteCurve;
-    /* 0x124 */ FlfWoolDraw* mFlfWoolDraw;
+    /* 0x124 */ union { // ?? why
+        FlfWoolDraw* mFlfWoolDraw;
+        GXColor mColor;
+    };
     /* 0x128 */ gfl::Vec3 m_128;
-    /* 0x134 */ gfl::Vec3 m_134;
+    /* 0x134 */ float m_134;
+    /* 0x138 */ GXColor mColor2;
+    /* 0x13C */ float m_13C;
     /* 0x140 */ float m_140;
     /* 0x144 */ std::vector<BackupBuff*> mBackupBuffs;
     /* 0x150 */ int m_150;

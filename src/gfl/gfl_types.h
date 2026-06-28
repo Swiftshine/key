@@ -42,10 +42,10 @@
         } \
     } while(0); \
 
-#define NW4R_RESNODE_ASSERT_VALID(resnode) \
+#define NW4R_RESNODE_ASSERT_VALID(resnode, line) \
     do { \
         if (resnode.ptr() == nullptr) { \
-            nw4r::db::Panic("g3d_resfile_ac.h", 0x53, "NW4R:Failed assertion IsValid()"); \
+            nw4r::db::Panic("g3d_resfile_ac.h", line, "NW4R:Failed assertion IsValid()"); \
         } \
     } while(0); \
 

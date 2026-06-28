@@ -10,6 +10,7 @@
 #include "graphics/FullSortScene.h"
 #include "graphics/NURBSSet.h"
 #include "graphics/NwAnm.h"
+#include "graphics/NwBlendAnm.h"
 
 class NURBSModelWrapper;
 class NURBSAnimWrapper;
@@ -81,7 +82,7 @@ public:
         /* 0x13 */ bool m_13;
         /* 0x14 */ bool m_14;
         /* 0x18 */ int m_18;
-        /* 0x1C */ float m_1C;
+        /* 0x1C */ float mStartFrame;
         /* 0x20 */ bool m_20;
         /* 0x21 */ bool m_21;
         /* 0x22 */ bool m_22;
@@ -113,7 +114,7 @@ public:
     void Update(bool shouldUpdate);
     nw4r::g3d::G3dObj* GetBlendAnmMatCtrlAnim(uint index);
     void fn_80147C28(int, float);
-    void fn_80025204(float);
+    void SetOpacity(float);
     float fn_800252AC();
     void LoadNURBSFromFileList();
     void LoadNURBSFromFileList(int* pIndices /* ? */, int count);
@@ -137,6 +138,7 @@ public:
     bool fn_80023E2C() const;
     void GetWoolDrawMatrix(nw4r::math::MTX34& rDst) const;
     bool HasNURBSAnimation(int id) const;
+    NwBlendAnm* GetBlendAnm(int id) const;
 
     inline void SetCurrentFrameInt(int value) {
         *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;
@@ -144,6 +146,10 @@ public:
 
     inline int GetCurrentFrameInt() {
         return *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60);
+    }
+
+    inline float GetUpdateRate() const {
+        return mUpdateRate;
     }
 
     /* Static Methods */

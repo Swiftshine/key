@@ -141,7 +141,7 @@ void EnemyMdlManager::fn_8011224C() {
 
     float f = clamp(unk, 0, 1.0f);
 
-    draw->fn_80025204(f);
+    draw->SetOpacity(f);
 }
 
 void EnemyMdlManager::fn_801122D4(bool arg1, int arg2, int arg3) {

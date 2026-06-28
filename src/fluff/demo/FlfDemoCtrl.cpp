@@ -127,7 +127,7 @@ uint FlfDemoNodeCtrl::vf20() {
 }
 
 void FlfDemoNodeCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
-    NW4R_RESNODE_ASSERT_VALID(mResNode);
+    NW4R_RESNODE_ASSERT_VALID(mResNode, 0x53);
 
     u32 mtxID = mResNode.GetMtxID();
 
@@ -516,7 +516,7 @@ void FlfDemoCamCtrl::vf10() {
 
 // https://decomp.me/scratch/kEqwc
 void FlfDemoCamCtrl::SetMatrix(nw4r::math::MTX34* matrices) {
-    NW4R_RESNODE_ASSERT_VALID(mResNode);
+    NW4R_RESNODE_ASSERT_VALID(mResNode, 0x53);
 
     u32 mtxID = mResNode.GetMtxID();
 

@@ -194,8 +194,8 @@ void WoolBaseMdl::fn_8001AB58() {
         }
     }
 
-    m_134 = (vec2 - vec1) * 0.5f + vec1;
-    m_134.z = 0.0f;
+    // m_134 = (vec2 - vec1) * 0.5f + vec1;
+    // m_134.z = 0.0f;
 
     float f1 = (vec2.x - vec1.x) * (vec2.x - vec1.x) + (vec2.y - vec1.y) * (vec2.y - vec1.y);
 

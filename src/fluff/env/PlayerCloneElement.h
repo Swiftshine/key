@@ -2,7 +2,7 @@
 #define FLUFF_ENVPLAYERCLONEELEMENT_H
 
 #include "util/Player.h"
-#include "graphics/PlTransMdl.h"
+#include "graphics/PlTransRes.h"
 
 namespace env {
     class PlayerCloneElement {
