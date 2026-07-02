@@ -31,7 +31,7 @@ public:
     void fn_801FFDB8(uint id);
 
     /* 0x0000 */ uint mIndex;
-    /* 0x0004 */ uint m_4;
+    /* 0x0004 */ uint mPlaytime; // in ticks; 1 tick * 60 = 1 second
     /* 0x0008 */ uint mBeadCount;
     /* 0x000C */ uint m_C;
     /* 0x0010 */ uint m_10;
