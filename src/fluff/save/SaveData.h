@@ -45,7 +45,7 @@ public:
     /* 0x0030 */ void* m_30[15];
     /* 0x006C */ SaveData_StageInfo mStageInfo[STAGE_COUNT];
 
-    STRUCT_FILL(0x3884);
+    STRUCT_FILL(0x3884 - 0x798);
 };
 
 struct SaveData_Header {
