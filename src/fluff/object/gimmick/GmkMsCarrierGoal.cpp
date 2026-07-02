@@ -43,7 +43,7 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
         lbl_808E5A00 = true;
     }
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mSceneOrder);
     UpdateMatrix();
 
     mState = 0;

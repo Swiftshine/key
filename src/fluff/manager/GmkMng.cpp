@@ -332,7 +332,7 @@ void GmkMng::AddEffect(Gimmick::GimmickBuildInfo* pBuildInfo) {
     // pos.x = pBuildInfo->mPosition.x;
     // pos.y = pBuildInfo->mPosition.y;
     // pos.z = pBuildInfo->mPosition.z;
-    // pos.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mSceneID, pBuildInfo->mScenePriority);
+    // pos.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mSceneID, pBuildInfo->mSceneOrder);
     // effect->SetPosition(pos);
 
     // nw4r::math::VEC3 unk(0.0f, 0.0f, 0.0f);

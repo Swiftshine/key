@@ -78,7 +78,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     mCompletionPercentage = zero;
     m_144 = 1.0f;
     mCollisionEnabled = true;
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mSceneOrder);
 
     UpdateMatrix();
 

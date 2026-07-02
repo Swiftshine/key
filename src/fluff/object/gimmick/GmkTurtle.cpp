@@ -38,7 +38,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
         mPosition.x = 60.0f + mBuildInfoPtr->mPosition.x;
     }
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mSceneOrder);
 
     UpdateMatrix();
 

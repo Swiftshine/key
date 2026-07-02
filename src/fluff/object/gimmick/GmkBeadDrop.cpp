@@ -76,7 +76,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
     mOffset = gfl::Vec3::Zero;
     mCompletionPercentage = 0.0f;
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mSceneOrder);
 
     UpdateMatrix();
 

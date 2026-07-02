@@ -6,7 +6,7 @@
 namespace FullSortSceneUtil {
     const char* GetSceneLabelByIndex(uint index);
     const char* GetNearSceneLabelByIndex(uint index);
-    float GetZOrder(uint sceneIndex, uint priority);
+    float GetZOrder(uint sceneIndex, uint order);
 
     ENUM_CLASS(SceneID,
         Far_05  = 0,
@@ -21,6 +21,18 @@ namespace FullSortSceneUtil {
         Near_03 = 9,
         Near_04 = 10,
         Near_05 = 11
+    );
+
+    ENUM_CLASS(Order,
+        Far_04  = 0,
+        Far_03  = 1,
+        Far_02  = 2,
+        Far_01  = 3,
+        Center  = 4,
+        Near_01 = 5,
+        Near_02 = 6,
+        Near_03 = 7,
+        Near_04 = 8
     );
 }
 

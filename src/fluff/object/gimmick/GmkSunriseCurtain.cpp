@@ -44,7 +44,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     
     mFlfMdlDraw1->LoadNURBSFromFileList(indices, ARRAY_LENGTH(indices));
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mSceneID, pBuildInfo->mScenePriority);
+    mPosition.z = FullSortSceneUtil::GetZOrder(pBuildInfo->mSceneID, pBuildInfo->mSceneOrder);
     UpdateMatrix();
     mFlfMdlDraw1->SetWoolDrawMatrix(mMatrix);
 

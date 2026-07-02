@@ -54,7 +54,7 @@ public:
             , mRotation(0.0f, 0.0f, 0.0f)
             , m_24(65)
             , mSceneID(6) // game index
-            , mScenePriority(4)
+            , mSceneOrder(4)
             , m_30(0)
             , mGimmickInfo(nullptr)
         {
@@ -113,7 +113,7 @@ public:
 
         /* 0x24 */ u8 m_24;
         /* 0x28 */ uint mSceneID;
-        /* 0x2C */ uint mScenePriority;
+        /* 0x2C */ uint mSceneOrder;
         /* 0x30 */ uint m_30;
         /* 0x34 */ int mIntParams[5];
         /* 0x48 */ float mFloatParams[5];

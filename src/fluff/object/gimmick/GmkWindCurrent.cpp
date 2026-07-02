@@ -66,7 +66,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
 
     uint sceneIndex = GetBuildInfo()->mSceneID;
 
-    mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, GetBuildInfo()->mScenePriority);
+    mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, GetBuildInfo()->mSceneOrder);
 
     float width = GetBuildInfo()->GetFloatParam(Parameter::Width);
 
@@ -490,7 +490,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
     uint sceneID = mWindCurrent->GetBuildInfo()->mSceneID;
 
     FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
-    float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mScenePriority);
+    float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mSceneOrder);
     
     for (uint i = 0; i < numUnits; i++) {
         GmkPartsMdlSet* part = new (gfl::HeapID::Work) GmkPartsMdlSet;

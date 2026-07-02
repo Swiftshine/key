@@ -28,7 +28,7 @@ void GmkUnderseaSound::Init(GimmickBuildInfo* buildInfo) {
     const int unk = buildInfo->GetIntParam(ParameterID::FIRST);
     m_130 = dumb_clamp(unk, 0, 0);
     mSoundPlayed = false;
-    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mScenePriority);
+    mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mSceneOrder);
     UpdateMatrix();
     mShouldUpdateWater = false;
 }
