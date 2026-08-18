@@ -302,6 +302,9 @@ fluff/env/EnvParts_PlayGuideIconLocator.cpp:
 	.data       start:0x8089B590 end:0x8089B610
 	.sdata      start:0x808E3598 end:0x808E35A0
 
+fluff/object/gimmick/GmkBallRelease.cpp:
+	.text       start:0x80591B08 end:0x80591CBC
+
 fluff/util/GimmickResource.cpp:
 	.text       start:0x8059540C end:0x80595724
 
