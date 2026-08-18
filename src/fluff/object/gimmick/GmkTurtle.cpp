@@ -3,6 +3,7 @@
 #include "object/gimmick/GmkTurtle.h"
 #include "object/gimmick/GmkUpdownWater.h"
 #include "manager/GmkMng.h"
+
 const char GmkTurtle_Name[] = "GmkTurtle";
 const char GmkTurtle_Empty[] = "";
 const char GmkTurtle_AnimationIndexTemplate[] = "%s__%02d";
@@ -101,8 +102,8 @@ void GmkTurtle::Update() {
 
         case State::InWater: {
             if (GmkTurtle_Empty != mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick)) {
-                Gimmick* gimmick = GmkMng::Instance()->GetGimmickByCommonTag(mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick));
-                if (nullptr != gimmick) {
+                Gimmick* gimmick = GmkMng::Instance()->GetGimmickByIdentifier(mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick));
+                if (gimmick != nullptr) {
                     mWater = dynamic_cast<GmkUpdownWater*>(gimmick);
                 }
             }

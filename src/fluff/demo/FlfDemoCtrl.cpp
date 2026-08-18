@@ -426,7 +426,7 @@ void FlfDemoBeadCtrl::SetMatrix(const nw4r::math::MTX34& mtx) {
 FlfDemoGmkCtrl::FlfDemoGmkCtrl(nw4r::g3d::ResNode resNode, std::string& rTag)
     : FlfDemoNodeCtrl(resNode)
 {
-    Gimmick* gmk = GmkMng::Instance()->GetGimmickByTag(rTag);
+    Gimmick* gmk = GmkMng::Instance()->GetGimmickByIdentifier(rTag);
     mGimmickHandle = gmk;
 }
 

@@ -9,7 +9,7 @@
 /// most of the functionality of this class may have been cut.
 class FlfMsgMng {
 public:
-    static FlfMsgMng* sInstance;    
+    static FlfMsgMng* sInstance;
 
     FlfMsgMng();
     virtual ~FlfMsgMng();
@@ -19,10 +19,10 @@ public:
     static void InitInstance();
     static void DestroyInstance();
     static void ReleaseAll() DONT_INLINE_CLASS;
-    /// @brief Splits a formatted tag list into a vector of individual tags.
-    /// @param pTagList The formatted tag list. E.g. "tag1;tag2;tag3;"
+    /// @brief Splits a formatted identifier list into a vector of individual identifiers.
+    /// @param pIdentifierList The formatted identifier list. E.g. "ident1;ident2;ident3;"
     /// @param rDest The destination vector.
-    static void SplitCommonTags(const char* pTaglist, std::vector<std::string>& rDst);
+    static void SplitIdentifiers(const char* pIdentifierList, std::vector<std::string>& rDst);
 
     /* Class Members */
 

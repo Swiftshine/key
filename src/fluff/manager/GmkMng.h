@@ -38,9 +38,6 @@ public:
         ManageGimmickCulling = 5, // Spawn or cull gimmicks based on position relative to the camera.
     );
 
-
-
-
     GmkMng();
     ~GmkMng();
 
@@ -53,8 +50,8 @@ public:
     void ClearAll(bool arg1);
     void GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& rDest);
     void GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest);
-    Gimmick* GetGimmickByCommonTag(const std::string& rQuery);
-    Gimmick::GimmickBuildInfo* GetCommonGimmickBuildInfoByCommonTag(const char* pQuery);
+    Gimmick* GetGimmickByIdentifier(const std::string& rQuery);
+    Gimmick::GimmickBuildInfo* GetCommonGimmickBuildInfoByIdentifier(const char* pQuery);
     void RegisterResources(const char* pName, Gimmick* pGmk);
     void CreateGimmick(Gimmick::GimmickBuildInfo* pBuildInfo) DONT_INLINE_CLASS;
     void CreateGimmicksFromMapdata();
@@ -68,21 +65,6 @@ public:
     bool fn_801C1A60();
 
     inline void CreateGimmickConditionally(const nw4r::math::VEC2& rPos, Gimmick::GimmickBuildInfo* pBuildInfo);
-
-    inline Gimmick* GetGimmickByTag(const std::string& rTag) {
-
-        Gimmick* gmk;
-
-        for (std::list<Gimmick*>::iterator it = mGimmicks.begin(); it != mGimmicks.end(); it++) {
-            gmk = *it;
-            if (gmk->mBuildInfoPtr != nullptr && rTag == gmk->mBuildInfoPtr->GetCommonTag()) {
-                return gmk;
-            }
-        }
-
-        return nullptr;
-    }
-
 
     /* Class Members */
 

@@ -58,7 +58,7 @@ public:
             , m_30(0)
             , mGimmickInfo(nullptr)
         {
-            mCommonTag[0] = 0;
+            mIdentifier[0] = 0;
 
             for (int i = 0; i < 5; i++) {
                 mIntParams[i] = 0;
@@ -99,17 +99,13 @@ public:
             return mIntParams[index] == true;
         }
 
-        inline const char* GetCommonTag() {
-            return mCommonTag;
-        }
-
         /* Class Members */
 
         /* 0x00 */ int mGimmickID;
         /* 0x04 */ nw4r::math::VEC3 mPosition;
         /* 0x10 */ nw4r::math::VEC3 mRotation;
 
-        /* 0x1C */ char mCommonTag[8];
+        /* 0x1C */ char mIdentifier[8];
 
         /* 0x24 */ u8 m_24;
         /* 0x28 */ uint mSceneID;
@@ -122,7 +118,7 @@ public:
     };
     // ASSERT_SIZE(GimmickBuildInfo, 0x9C);
 
-    
+
     /// @brief  For the most basic gimmicks.
     Gimmick(int gimmickID);
     /// @brief For gimmicks that control things in-level
@@ -135,7 +131,7 @@ public:
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~Gimmick();
-    
+
     /* 0x68 */ virtual void vf68();
     /* 0x6C */ virtual nw4r::math::VEC3 vf6C();
     /* 0x70 */ virtual int GetGimmickID();
@@ -144,7 +140,7 @@ public:
     /* 0x7C */ virtual int vf7C(IObjHitCB* pOther, int);
     /* 0x80 */ virtual int vf80();
     /* 0x84 */ virtual int vf84();
-    /* 0x88 */ virtual int vf88(FlfGameObj*, uint arg2);     
+    /* 0x88 */ virtual int vf88(FlfGameObj*, uint arg2);
     /* 0x8C */ virtual int vf8C(IObjHitCB* pOther, int);
     /* 0x90 */ virtual int vf90();
     /* 0x94 */ virtual int vf94();

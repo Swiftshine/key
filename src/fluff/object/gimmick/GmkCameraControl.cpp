@@ -34,18 +34,18 @@ GmkCameraControl::~GmkCameraControl() { }
 void GmkCameraControl::Init(GimmickBuildInfo* buildInfo) {
     uint type = buildInfo->GetIntParam(Parameter::CameraType);
     mCameraType = type;
-    
+
     if (type > CameraType::Horizontal) {
         mCameraType = CameraType::Both;
-    } 
+    }
 
-    mCameraInfo.fn_803CB458(0, buildInfo->mCommonTag, 0);
+    mCameraInfo.fn_803CB458(0, buildInfo->mIdentifier, 0);
 
     const nw4r::math::VEC2 cam(buildInfo->mFloatParams[0], buildInfo->mFloatParams[1]);
-    
+
     mCameraMaxX = cam.x;
     mCameraMaxY = cam.y;
-    
+
     if (mCameraType == CameraType::Vertical) {
         mCameraMaxX = LOCKED_CAMERA_MAX;
     } else if (mCameraType == CameraType::Horizontal) {

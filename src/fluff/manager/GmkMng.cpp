@@ -116,13 +116,13 @@ void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBu
     }
 }
 
-Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& rTag) {
+Gimmick* GmkMng::GetGimmickByIdentifier(const std::string& rTag) {
     Gimmick* result = nullptr;
 
     for (std::list<Gimmick*>::iterator it = mGimmicks.begin(); it != mGimmicks.end(); it++) {
         Gimmick* gmk = *it;
 
-        if (gmk->mBuildInfoPtr != nullptr && rTag == gmk->mBuildInfoPtr->GetCommonTag()) {
+        if (gmk->mBuildInfoPtr != nullptr && rTag == gmk->mBuildInfoPtr->mIdentifier) {
             result = gmk;
             break;
         }
@@ -147,7 +147,7 @@ Gimmick* GmkMng::GetGimmickByCommonTag(const std::string& rTag) {
 }
 
 // https://decomp.me/scratch/VH6w7 - regswaps
-Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const char* pTag) {
+Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByIdentifier(const char* pTag) {
     Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
     uint i = 0;
@@ -155,7 +155,7 @@ Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByCommonTag(const ch
 
     while (i < count) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
-        if (strcmp(buildInfo->GetCommonTag(), pTag) == 0) {
+        if (strcmp(buildInfo->mIdentifier, pTag) == 0) {
             return buildInfo;
         }
         i++;

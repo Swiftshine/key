@@ -93,9 +93,9 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
         mdlDraw->SetWoolDrawMatrix(mMatrix);
         mFlfMdlDraw.Create(mdlDraw);
     }
-    
+
     mCompletionPercentage = fn_802C1EA4(this);
-    mGeneratorInfo.fn_803CB458(1, buildInfo->GetCommonTag(), 0);
+    mGeneratorInfo.fn_803CB458(1, buildInfo->mIdentifier, 0);
     SetState(1);
 }
 
@@ -104,7 +104,7 @@ void GmkBeadDrop::Update() {
         SetSpawnState();
         mGeneratorInfo.ResetCounter();
     }
-    
+
     UpdateFlfMdl();
 
     switch (mState) {
@@ -220,4 +220,4 @@ void GmkBeadDrop::SetSpawnState() {
 
 void GmkBeadDrop::SetState(FlfGameObj* setter, const std::string& state) {
     mGeneratorInfo.SetState(setter, state);
-} 
+}
