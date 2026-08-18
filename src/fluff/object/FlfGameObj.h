@@ -51,7 +51,7 @@ public:
     /* 0x1C */ virtual nw4r::math::VEC3 GetPosition();
     /* 0x20 */ virtual void SetSecondaryPosition(const nw4r::math::VEC3& rPosition);
     /* 0x24 */ virtual void Interact(FlfGameObj* pOther);
-    /* 0x28 */ virtual void vf28();
+    /* 0x28 */ virtual void Interact();
     /* 0x2C */ virtual void vf2C(
         nw4r::math::VEC3& rArg1,
         const nw4r::math::VEC3& rOffset,

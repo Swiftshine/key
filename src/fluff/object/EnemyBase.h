@@ -2,27 +2,27 @@
 #define FLUFF_ENEMYBASE_H
 
 #include "types.h"
-#include "object/FlfGameObj.h"
 #include "demo/EventDemoAttachment.h"
+#include "object/FlfGameObj.h"
 #include "object/collision/IObjHitCB.h"
 #include "object/MoveTarget.h"
+#include "manager/EnemyMdlManager.h"
 #include "gfl/gflTask.h"
+#include "gfl/gflParam.h"
+
+#include <vector>
 
 /// @brief Base class for enemies and similar entities.
 /// @note Size: `0x1774`
 class EnemyBase : public FlfGameObj, public IObjHitCB, public demo::EventDemoAttachment {
 public:
-
-    
-
     EnemyBase(gfl::Task* pParentTask, uint arg2, uint arg3, const char* pArg4);
-
 
     /* EnemyBase */
 
     /* 0x094 */ virtual void vf094();
     /* 0x098 */ virtual void vf098();
-    /* 0x09C */ virtual void vf09C();
+    /* 0x09C */ virtual void SetVisibility(bool visible);
     /* 0x0A0 */ virtual void vf0A0();
     /* 0x0A4 */ virtual void vf0A4();
     /* 0x0A8 */ virtual void vf0A8();
@@ -175,7 +175,7 @@ public:
     /* 0x2F4 */ virtual void vf2F4();
     /* 0x2F8 */ virtual void vf2F8();
     /* 0x2FC */ virtual void vf2FC();
-    /* 0x300 */ virtual void vf300();
+    /* 0x300 */ virtual const char* GetResourcePath() const;
     /* 0x304 */ virtual void vf304();
     /* 0x308 */ virtual void vf308();
     /* 0x30C */ virtual void vf30C();
@@ -316,7 +316,7 @@ public:
     /* 0x528 */ virtual void vf528();
     /* 0x52C */ virtual void vf52C();
     /* 0x530 */ virtual void vf530();
-    /* 0x534 */ virtual void vf534();
+    /* 0x534 */ virtual void ResetModelManager(int, bool resetFrames, EnemyMdlManager* pMdlManager);
     /* 0x538 */ virtual void vf538();
     /* 0x53C */ virtual void vf53C();
     /* 0x540 */ virtual void vf540();
@@ -355,7 +355,7 @@ public:
     /* 0x010 */ virtual void vf10(bool arg1) override;
     /* 0x014 */ virtual nw4r::math::VEC3 GetPosition() override;
     /* 0x020 */ virtual void SetSecondaryPosition(nw4r::math::VEC3& rPos) override;
-    /* 0x028 */ virtual void vf28() override;
+    /* 0x028 */ virtual void Interact() override;
     /* 0x02C */ virtual void vf2C(nw4r::math::VEC3& rArg1, nw4r::math::VEC3& rArg2, nw4r::math::VEC3& rArg3) override;
     /* 0x034 */ virtual bool ShouldCull(CamMng* pCamMgr) override;
     /* 0x03C */ virtual int vf3C() override;
@@ -375,38 +375,83 @@ public:
 
 
     /* Class Members */
-    
-    /* 0x090 */ int m_90;
-    /* 0x094 */ int m_94;
-    /* 0x098 */ int m_98;
-    /* 0x09C */ int m_9C;
-    /* 0x0A0 */ int m_A0;
-    /* 0x0A4 */ int m_A4;
-    /* 0x0A8 */ int m_A8;
-    /* 0x0AC */ int m_AC;
-    /* 0x0B0 */ int m_B0;
-    /* 0x0B4 */ nw4r::math::VEC3 m_B4;
-    /* 0x0C0 */ int m_C0;
-    /* 0x0C4 */ int m_C4;
-    /* 0x0C8 */ int m_C8;
-    /* 0x0CC */ int m_CC;
-    /* 0x0D0 */ int m_D0;
-    /* 0x0D4 */ int m_D4;
-    /* 0x0D8 */ int m_D8;
-    /* 0x0DC */ int m_DC;
-    /* 0x0E0 */ int m_E0;
-    /* 0x0E4 */ int m_E4;
-    /* 0x0E8 */ int m_E8;
-    /* 0x0EC */ int m_EC;
-    /* 0x0F0 */ MoveTarget mMoveTargets[2]; // @ 0xF0
-    /* 0x180 */ int m_180;
-    /* 0x184 */ int m_184;
-    /* 0x18C */ int m_18C;
-    /* 0x190 */ int m_190;
-    /* 0x194 */ nw4r::math::MTX44 m_194;
-    /* 0x1D4 */ nw4r::math::VEC2 m_1D4;
-    /* 0x1DC */ nw4r::math::VEC2 m_1DC;
-    /* 0x1E4 */ STRUCT_FILL(0x1774 - 464);
+
+    /* 0x0090 */ int m_90;
+    /* 0x0094 */ int m_94;
+    /* 0x0098 */ int m_98;
+    /* 0x009C */ int m_9C;
+    /* 0x00A0 */ int m_A0;
+    /* 0x00A4 */ int m_A4;
+    /* 0x00A8 */ int m_A8;
+    /* 0x00AC */ int m_AC;
+    /* 0x00B0 */ int m_B0;
+    /* 0x00B4 */ nw4r::math::VEC3 m_B4;
+    /* 0x00C0 */ int m_C0;
+    /* 0x00C4 */ int m_C4;
+    /* 0x00C8 */ int m_C8;
+    /* 0x00CC */ int m_CC;
+    /* 0x00D0 */ int m_D0;
+    /* 0x00D4 */ int m_D4;
+    /* 0x00D8 */ int m_D8;
+    /* 0x00DC */ int m_DC;
+    /* 0x00E0 */ int m_E0;
+    /* 0x00E4 */ int m_E4;
+    /* 0x00E8 */ int mNumMoveTargets;
+    /* 0x00EC */ MoveTarget* mCurrentMoveTarget;
+    /* 0x00F0 */ MoveTarget mMoveTargets[2];
+    /* 0x0180 */ int m_180;
+    /* 0x0184 */ int m_184;
+    /* 0x018C */ int m_18C;
+    /* 0x0190 */ int m_190;
+    /* 0x0194 */ nw4r::math::MTX44 m_194;
+    /* 0x01D4 */ nw4r::math::VEC2 m_1D4;
+    /* 0x01DC */ nw4r::math::VEC2 m_1DC;
+    /* 0x01E4 */ STRUCT_FILL(0x50C - 0x1E4);
+    /* 0x050C */ gfl::ParamF32* mWalkSpeed;
+    /* 0x0510 */ gfl::ParamF32* mDashSpeed;
+    /* 0x0514 */ gfl::ParamF32* mAttackRangeX;
+    /* 0x0518 */ gfl::ParamF32* mAttackRangeY;
+    /* 0x051C */ gfl::ParamF32* mFaintTime;
+    /* 0x0520 */ gfl::ParamF32* mTiredTime;
+    /* 0x0524 */ gfl::ParamS32* mWeight;
+    /* 0x0528 */ gfl::ParamS32* mDragPower;
+    /* 0x052C */ gfl::ParamF32* mEyeMoveLen;
+    /* 0x0530 */ gfl::ParamF32* mModelScale;
+    /* 0x0534 */ gfl::ParamF32* mStageModWidth;
+    /* 0x0538 */ gfl::ParamS32* mBeadDropCount;
+    /* 0x053C */ gfl::ParamF32* mTurnPlayerRangeX;
+    /* 0x0540 */ gfl::ParamF32* mTurnPlayerRangeY;
+    /* 0x0544 */ gfl::ParamF32* mShadowOffsetX;
+    /* 0x0548 */ gfl::ParamF32* mShadowOffsetY;
+    /* 0x054C */ gfl::ParamF32* mComplementAngle;
+    /* 0x0550 */ gfl::ParamF32* mLookEyeInclination;
+    /* 0x0554 */ gfl::ParamS32* mHitPoints;
+    /* 0x0558 */ gfl::ParamS32* mBallKind;
+    /* 0x055C */ gfl::ParamS32* mBouncingBall;
+    /* 0x0560 */ gfl::ParamF32* mFriendCatchReleaseTime;
+    /* 0x0564 */ gfl::ParamF32* mSmallPlayerWindResistTime;
+    /* 0x0568 */ gfl::ParamF32* mLargePlayerWindResistTime;
+    /* 0x056C */ gfl::ParamF32* mWindResistSpeed;
+    /* 0x0570 */ gfl::ParamF32* mWindResistBreakSpeed;
+    /* 0x0574 */ gfl::ParamF32* mPlayerHitbackPower;
+    /* 0x0578 */ gfl::ParamF32* mPlayerHitbackPowerWater;
+    /* 0x057C */ gfl::ParamF32* mEnemyHitbackPower;
+    /* 0x0580 */ gfl::ParamF32* mQuicksandSpeedDiv;
+    /* 0x0584 */ gfl::ParamF32* TurnWaitTime;
+    /* 0x0588 */ EnemyMdlManager* mModelManager;
+    /* 0x058C */ u32 m_58C;
+    /* 0x0590 */ gfl::Task mTask;
+    /* 0x05A8 */ STRUCT_FILL(0x1C);
+    /* 0x05C4 */ STRUCT_FILL(0xAB0);
+    /* 0x1074 */ std::vector<placeholder_t> m_1074;
+    /* 0x1080 */ gfl::Vec3 m_1080;
+    /* 0x108C */ gfl::Vec3 m_108C;
+    /* 0x1098 */ gfl::Vec3 m_1098;
+    /* 0x10A4 */ u32 m_10A4;
+    /* 0x10A8 */ uint mEnemyID;
+    /* 0x10AC */ STRUCT_FILL(0x10);
+    /* 0x10BC */ const char* mName;
+    /* 0x10C0 */ STRUCT_FILL(0x1774 - 0x10C0);
 };
 
 // ASSERT_SIZE(EnemyBase, 0x1774);
