@@ -531,6 +531,7 @@ config.libs = [
             Object(NonMatching, "fluff/object/FlfHandleObj.cpp"),
             Object(NonMatching, "fluff/object/FlfGameObj.cpp"),
             Object(Matching, "fluff/object/FlfGameObjLocator.cpp"),
+            Object(NonMatching, "fluff/object/EnemyBase.cpp"),
             Object(NonMatching, "fluff/object/Gimmick.cpp"),
             Object(NonMatching, "fluff/object/PlayerBase.cpp"),
             Object(NonMatching, "fluff/object/SpringBase.cpp"),

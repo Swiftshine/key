@@ -7,9 +7,6 @@
 namespace demo {
     class EventDemoAttachment {
     public:
-
-        
-
         EventDemoAttachment();
 
         /* Virtual Methods */

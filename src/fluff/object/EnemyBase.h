@@ -351,33 +351,39 @@ public:
     /* 0x08 */ virtual ~EnemyBase();
 
     /* -> FlfGameObj */
-    /* 0x00C */ virtual void SetPosition(nw4r::math::VEC3& rPos) override;
-    /* 0x010 */ virtual void vf10(bool arg1) override;
-    /* 0x014 */ virtual nw4r::math::VEC3 GetPosition() override;
-    /* 0x020 */ virtual void SetSecondaryPosition(nw4r::math::VEC3& rPos) override;
-    /* 0x028 */ virtual void Interact() override;
-    /* 0x02C */ virtual void vf2C(nw4r::math::VEC3& rArg1, nw4r::math::VEC3& rArg2, nw4r::math::VEC3& rArg3) override;
-    /* 0x034 */ virtual bool ShouldCull(CamMng* pCamMgr) override;
-    /* 0x03C */ virtual int vf3C() override;
-    /* 0x04C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
-    /* 0x064 */ virtual void UpdateWater(bool) override;
+
+    /* 0x00C */ void SetPosition(nw4r::math::VEC3& rPos) override;
+    /* 0x010 */ void vf10(bool arg1) override;
+    /* 0x014 */ nw4r::math::VEC3 GetPosition() override;
+    /* 0x020 */ void SetSecondaryPosition(nw4r::math::VEC3& rPos) override;
+    /* 0x028 */ void Interact() override;
+    /* 0x02C */ void vf2C(nw4r::math::VEC3& rArg1, nw4r::math::VEC3& rArg2, nw4r::math::VEC3& rArg3) override;
+    /* 0x034 */ bool ShouldCull(CamMng* pCamMgr) override;
+    /* 0x03C */ int vf3C() override;
+    /* 0x04C */ void SetState(FlfGameObj* pSetter, const std::string& rState) override;
+    /* 0x064 */ void UpdateWater(bool) override;
 
     /* -> IObjHitCB */
-    /* 0x70 */ virtual int vf8() override;
+
+    /* 0x70 */ int vf8() override;
 
     /* -> demo::EventDemoAttachment */
 
-    /* 0x080 */ virtual void vfC() override;
-    /* 0x084 */ virtual void vf10() override;
-    /* 0x088 */ virtual int  vf14_() override;
-    /* 0x08C */ virtual void vf18() override;
-    /* 0x090 */ virtual void vf1C() override;
+    /* 0x080 */ void vfC() override;
+    /* 0x084 */ void vf10() override;
+    /* 0x088 */ int  vf14_() override;
+    /* 0x08C */ void vf18() override;
+    /* 0x090 */ void vf1C() override;
 
+
+    /* Class Methods */
+
+    void fn_8011EBB8();
+    void StateDispatch();
+    bool fn_80124538() const;
 
     /* Class Members */
 
-    /* 0x0090 */ int m_90;
-    /* 0x0094 */ int m_94;
     /* 0x0098 */ int m_98;
     /* 0x009C */ int m_9C;
     /* 0x00A0 */ int m_A0;
@@ -399,9 +405,10 @@ public:
     /* 0x00E8 */ int mNumMoveTargets;
     /* 0x00EC */ MoveTarget* mCurrentMoveTarget;
     /* 0x00F0 */ MoveTarget mMoveTargets[2];
-    /* 0x0180 */ int m_180;
+    /* 0x0180 */ int mState;
     /* 0x0184 */ int m_184;
-    /* 0x018C */ int m_18C;
+    /* 0x0188 */ int m_188;
+    /* 0x018C */ uint m_18C; // a count of some kind
     /* 0x0190 */ int m_190;
     /* 0x0194 */ nw4r::math::MTX44 m_194;
     /* 0x01D4 */ nw4r::math::VEC2 m_1D4;

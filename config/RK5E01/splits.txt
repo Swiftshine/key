@@ -136,6 +136,10 @@ fluff/object/collision/ColNurbsInfo.cpp:
 fluff/manager/EnemyMdlManager.cpp:
 	.text       start:0x80111B7C end:0x801129BC
 
+fluff/object/EnemyBase.cpp:
+	.text       start:0x801129BC end:0x8012D48C
+	.ctors      start:0x807E34B4 end:0x807E34B8
+
 fluff/object/gimmick/GmkWarpOut.cpp:
 	.text       start:0x80146B6C end:0x80146D8C
 	.rodata     start:0x807F22E8 end:0x807F2300
