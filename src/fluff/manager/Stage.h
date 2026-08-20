@@ -20,23 +20,21 @@ public:
     }
 
     static gfl::Task* sDrawRootTask;
-    
-    
 
     Stage();
     ~Stage();
-    
+
     /* Class Methods */
 
-    uint GetFullSortSceneIndex(FullSortScene* pScene);
-    FullSortScene* GetFullSortSceneByID(uint sceneID);
+    uint GetSceneIndex(FullSortScene* pScene);
+    FullSortScene* GetSceneByID(uint sceneID);
 
     Mapdata* GetLevelSection(int section);
 
     inline Mapdata* GetCurrentLevelSection() {
         return GetLevelSection(mStageInfo.GetSectionID());
     }
-    
+
     void fn_8024F630();
 
     inline StageResourceManager& GetStageResourceManager() {
@@ -48,11 +46,11 @@ public:
     }
 
     bool fn_80044C6C();
-    
+
     bool fn_80044C88(); // related to checking BGST layers
-    
+
     /* Class Members */
-    
+
     /* 0x000 */ gfl::Task m_0;
     /* 0x018 */ gfl::Task mStageTask;
     /* 0x030 */ StageInfo mStageInfo;

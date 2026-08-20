@@ -80,7 +80,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
 
     UpdateMatrix();
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneID);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(buildInfo->mSceneID);
 
     {
         std::string resourceName = "gimmick/";

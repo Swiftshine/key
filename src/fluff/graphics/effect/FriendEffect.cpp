@@ -12,8 +12,8 @@ const char* FriendResourceNames[NUM_FRIEND_TYPES] = {
 };
 
 FriendEffect::FriendEffect() {
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Near_05);
-    
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
+
     for (uint i = 0; i < NUM_FRIEND_TYPES; i++) {
         mEffects[i] = new (gfl::HeapID::Work) FlfMdlDraw(scene, FriendResourceNames[i], nullptr, true);
         mEffects[i]->LoadNURBSFromFileList();
@@ -78,7 +78,7 @@ void FriendEffect::Reset(int id) {
     }
 
     mFriendID = id;
-    
+
     if (id != -1) {
         if (mEffects[id] != nullptr) {
             mEffects[id]->SetVisibility(true);

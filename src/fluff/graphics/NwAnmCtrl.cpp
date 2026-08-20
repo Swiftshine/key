@@ -30,7 +30,7 @@ gfl::ScnMdlWrapper* NwAnmCtrl::SetupModelWrapper(uint flags) {
 
     const char* name = mResMdlName.c_str();
     nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(name);
-    
+
     gfl::ScnMdlWrapper* wrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl.ptr(), flags | CalculateFlags(), name);
     wrapper->SetUpdate(true);
     mScnMdlWrapper.Create(wrapper);
@@ -49,7 +49,7 @@ gfl::ScnMdlWrapper* NwAnmCtrl::SetFullSortSceneModelWrapper(FullSortScene* pScen
 }
 
 void NwAnmCtrl::SetStageFullSortSceneModelWrapper(uint flags) {
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(6);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(6);
     SetFullSortSceneModelWrapper(scene, flags);
 }
 
@@ -62,7 +62,7 @@ uint NwAnmCtrl::CalculateFlags() {
         result |= mAnimations[i].GetFlags();
         i++;
     }
-    
+
     return result;
 }
 

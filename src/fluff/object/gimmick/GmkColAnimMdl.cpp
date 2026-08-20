@@ -36,7 +36,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
 {
     Stage* stageMgr = Stage::Instance();
     int sceneIndex = mBuildInfo.GetIntParam(Parameter::SortSceneIndex) + 6;
-    FullSortScene* scene = stageMgr->GetFullSortSceneByID(sceneIndex);
+    FullSortScene* scene = stageMgr->GetSceneByID(sceneIndex);
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, 4);
 
     char animName[0x200];
@@ -64,7 +64,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
 
     char shadowAnimName[0x200];
     snprintf(shadowAnimName, sizeof(shadowAnimName), ShadowAnimNameTemplate, name);
-    
+
     if (resFile.GetResMdl(shadowAnimName).ptr() != nullptr) {
         mShadowAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, shadowAnimName));
 

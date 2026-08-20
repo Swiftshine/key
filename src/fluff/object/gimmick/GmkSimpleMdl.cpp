@@ -51,7 +51,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 
     char brresPath[0x200];
     char resMdlName[0x200];
-    
+
     if (gmkID - 2U <= 2) {
         const char* resourceName = mBuildInfo.GetStringParam(Parameter::ResourceName).begin();
         snprintf(brresPath, sizeof(brresPath), "bggimmick/%s/%s.brres", resourceName, resourceName);
@@ -100,7 +100,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 GmkSimpleMdl::~GmkSimpleMdl() { }
 
 void GmkSimpleMdl::SetModelWrapperByFullSortSceneIndex(int index) {
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(index);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(index);
     scene->AddRenderObj(mModelWrapper.Get());
 
     if (mShadowModelWrapper.IsValid()) {
@@ -252,11 +252,11 @@ void GmkSimpleMdl::SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool
     }
 
     mShadowModelWrapper.Create(CreateModelWrapper(resFile, name, flags));
-    
+
     if (createAnim && mShadowAnim.IsValid()) {
         mShadowAnim->SetModelWrapper(mShadowModelWrapper.Get(), true);
     }
-    
+
 
     mShadowModelWrapper->SetActive(true);
     mShadowModelWrapper->fn_8004DB94(mModelScale);

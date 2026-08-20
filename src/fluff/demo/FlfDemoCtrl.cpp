@@ -174,7 +174,7 @@ FlfDemoCharCtrl::FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name)
     , mResourcePath()
     , mFlfMdlDraw(nullptr)
 {
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mFullSortSceneID);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(mFullSortSceneID);
     {
         std::string n = GetCharaResourceName(name);
         mResourcePath += n;
@@ -211,7 +211,7 @@ void FlfDemoCharCtrl::vf24(int arg1) {
 }
 
 void FlfDemoCharCtrl::SetFullSortScene(uint sceneID) {
-    mFlfMdlDraw->SetScene(Stage::Instance()->GetFullSortSceneByID(sceneID));
+    mFlfMdlDraw->SetScene(Stage::Instance()->GetSceneByID(sceneID));
 }
 
 void FlfDemoCharCtrl::SetVisibility(bool visibility) {
@@ -340,7 +340,7 @@ void FlfDemoPlayerCtrl::SetUpdateRate(float rate) {
 
 void FlfDemoPlayerCtrl::SetFullSortScene(uint sceneID) {
     if (mPlayer != nullptr) {
-        mPlayer->ResetScene(Stage::Instance()->GetFullSortSceneByID(sceneID), 0);
+        mPlayer->ResetScene(Stage::Instance()->GetSceneByID(sceneID), 0);
     }
 }
 
@@ -562,7 +562,7 @@ FlfDemoCtrl::~FlfDemoCtrl() {
 void FlfDemoCtrl::ResetFlfMdlDraw(const char* resourcePath) {
     DestroyResources();
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Game);
 
     mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, resourcePath, 0, 0));
     mFlfMdlDraw->LoadNURBSFromFileList();

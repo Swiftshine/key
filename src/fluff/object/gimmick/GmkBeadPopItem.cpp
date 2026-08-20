@@ -96,7 +96,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     mCollisionEntry.Create(CollisionEntry::Get(&cTemplate, static_cast<IObjHitCB*>(this), nullptr, mMatrix, "GmkBeadPopItem"));
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneID);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(buildInfo->mSceneID);
 
     if (!m_138) {
         gfl::ResFileObject resFileInfo;

@@ -41,15 +41,15 @@ BgBackImage::BgBackImage()
     PSMTXIdentity(matrix);
 
     float zOrder = FullSortSceneUtil::GetZOrder(0, 1) - 105.0f - 100.0f;
-    
+
     gfl::Vec3 vec(0.0f);
     vec.z = zOrder;
-    
+
     matrix[0][3] = vec.x;
     matrix[1][3] = vec.y;
     matrix[2][3] = vec.z;
 
-    FullSortScene* fss = Stage::Instance()->GetFullSortSceneByID(0);
+    FullSortScene* fss = Stage::Instance()->GetSceneByID(0);
     fss->AddRenderObj(static_cast<gfl::RenderObj*>(this));
 }
 
@@ -97,7 +97,7 @@ void BgBackImage::DrawXlu() {
         float y;
         float x;
     };
-    
+
     Vec2f_swapped pos;
     Vec2f_swapped offs;
 
@@ -127,6 +127,6 @@ void BgBackImage::DrawXlu() {
 
     GXPosition3f32(pos.x, pos.y - offs.y, 0.0f);
     GXTexCoord2f32(minX, minY + h); // bottom left?
-    
+
     GXEnd();
 }

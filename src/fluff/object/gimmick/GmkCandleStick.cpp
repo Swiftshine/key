@@ -23,7 +23,7 @@ GmkCandleStick::~GmkCandleStick() { }
 void GmkCandleStick::UpdateModelMatrices(nw4r::math::VEC2& vec) {
     gfl::Vec3 vec3(mPosition.z, vec);
     mPosition = vec3;
-    
+
     UpdateMatrix();
 
     nw4r::math::VEC2 vec2 = mPosition;
@@ -54,14 +54,14 @@ void GmkCandleStick::SetState(FlfGameObj* setter, const std::string& state) {
 
 void GmkCandleStick::UpdateGraphics(bool createEffect) {
     CollisionEntry* entry = mCollisionEntry.Get();
-    
+
     entry->ResetMatrixIf(createEffect);
 
     mMoleLight->SetUpdate(createEffect);
 
     if (createEffect) {
         mFlfMdlDraw->PlayNURBSAnimation(0, true);
-        FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mBuildInfoPtr->mSceneID);
+        FullSortScene* scene = Stage::Instance()->GetSceneByID(mBuildInfoPtr->mSceneID);
         EffectObj* effect = scene->CreateEffectObject("ef_gk_07a", 0, 0);
         UpdateMatrix();
         nw4r::math::MTX34 effectMtx = mMatrix;

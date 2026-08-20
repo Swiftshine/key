@@ -10,7 +10,7 @@ GmkWarpExit* GmkWarpExit::Build(GimmickBuildInfo* buildInfo) {
     return new (gfl::HeapID::Work) GmkWarpExit(buildInfo);
 }
 
-GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo) 
+GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     : Gimmick(buildInfo, "GmkWarpExit")
     , mAnimCtrl(nullptr)
     , mFbMokoMoko(nullptr)
@@ -29,7 +29,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     mAnimCtrl.Create(animCtrl);
     animCtrl = mAnimCtrl.Get();
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mFullSortSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(mFullSortSceneIndex);
     animCtrl->SetFullSortSceneModelWrapper(scene, 0x204);
     mAnimCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
     mAnimCtrl->mScnMdlWrapper->SetUpdateRate(5.0f);

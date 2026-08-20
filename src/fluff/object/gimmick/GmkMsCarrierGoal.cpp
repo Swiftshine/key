@@ -54,7 +54,7 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
     mAnimationPosition.y = gfl::Vec3::Zero.y;
     mAnimationPosition.z = gfl::Vec3::Zero.z;
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(sceneID);
 
     // this scope must be here because the ResFileObject destructs
     // before the end of the ctor.
@@ -144,7 +144,7 @@ bool FlfFriendManager::fn_804FA7D8() {
 
 void GmkMsCarrierGoal::PlayEffect() {
     gfl::Vec3 pos = GetEffectPosition();
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Game);
     EffectObj* effectObj = scene->CreateEffectObject("ef_gk_09a", 0, 0);
 
     if (effectObj != nullptr) {

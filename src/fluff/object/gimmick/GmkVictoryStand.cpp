@@ -22,7 +22,7 @@ void GmkVictoryStand::SetRankingInfo(uint playerRanking, nw4r::math::VEC2& posit
     GmkVictoryStand* stand = Instance();
     Instance()->mPlayerRanking = playerRanking;
     stand->mBeadAwardPosition = position;
-    
+
     stand->mBeadAwardState.SetCurrentStateAndClearOthers(1);
 }
 
@@ -87,7 +87,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
 
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneID, buildInfoPtr->mSceneOrder);
     UpdateMatrix();
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(sceneID);
 
     gfl::ResFileObject fileInfo;
     GetResFileObject(fileInfo, this);

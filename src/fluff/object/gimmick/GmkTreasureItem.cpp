@@ -24,7 +24,7 @@ void GmkTreasureItem::CreateEffect() {
         return;
     }
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Near_05);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
     EffectObj* effect = scene->CreateEffectObject("ef_dm_01a", 0, 0);
 
     if (effect != nullptr) {
@@ -34,7 +34,7 @@ void GmkTreasureItem::CreateEffect() {
 
 bool GmkTreasureItem::OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOther, const gfl::Vec3& rPosition) {
     HenshinUFO* ufo = dynamic_cast<HenshinUFO*>(pColOther->mOwnerCallbacks);
-    
+
     if (ufo != nullptr) {
         return true;
     }
@@ -46,13 +46,13 @@ bool GmkTreasureItem::OnCollision(CollisionInfo* pColSelf, CollisionInfo* pColOt
     if (mCollisionEntry != nullptr) {
         mCollisionEntry->mInfo.mPendingCollision = false;
     }
-    
+
     if (GimmickUtil::CheckString_goal(mBuildInfoPtr)) {
         Game::Sound::PlaySoundEffect(mPosition, 0x12F, 0, 0);
     }
 
     mState.SetCurrentStateAndClearOthers(1);
-    
+
     return true;
 }
 
@@ -88,7 +88,7 @@ void GmkTreasureItem::Update() {
             }
             break;
         }
-        
+
         case 1: {
             fn_803D4E4C();
             break;
@@ -122,14 +122,13 @@ void GmkTreasureItem::ProcessClothPull() {
     GmkMekuri2* patch = dynamic_cast<GmkMekuri2*>(mClothPatch);
 
     if (mClothPatchState == "ON") {
-        FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Near_05);
+        FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
         StageInfo stageInfo = GameManager::GetCurrentStageInfo();
-    
+
         if (stageInfo.GetResourceID() == ResourceIDs::DarkManor) {
-            scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+            scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Game);
         } else if (patch == nullptr && mFlfMdlDraw != nullptr) {
-            //FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Near_05);
-            mFlfMdlDraw->SetScene(Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Near_05));
+            mFlfMdlDraw->SetScene(Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05));
         }
 
         if (mPlayAnimation) {
@@ -137,20 +136,20 @@ void GmkTreasureItem::ProcessClothPull() {
         } else {
             if (patch != nullptr) {
                 int sceneID = patch->mSceneID;
-                
+
                 mPosition.z = FullSortSceneUtil::GetZOrder(sceneID, patch->m_1A8) - 0.5f;
-                
+
                 FlfMdlDraw* draw = mFlfMdlDraw;
 
                 if (draw != nullptr) {
-                    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
+                    FullSortScene* scene = Stage::Instance()->GetSceneByID(sceneID);
                     draw->SetScene(scene);
                 }
-                
+
                 GmkPartsMdlSet* set = mGmkPartsMdlSet;
 
                 if (set != nullptr) {
-                    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
+                    FullSortScene* scene = Stage::Instance()->GetSceneByID(sceneID);
                     set->SetScene(scene);
                 }
             }

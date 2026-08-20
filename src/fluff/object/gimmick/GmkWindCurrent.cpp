@@ -88,10 +88,10 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
 
     {
         ColDataWrapper cdw;
-        
+
         cdw.CreateColDataRects(1);
         cdw.SetFlags(0x20000000);
-        
+
         mColObjTrans->SetColDataWrapper(&cdw);
         mColObjTrans->mOwner = this;
         mColObjTrans->SetEnabled(true);
@@ -101,7 +101,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
     SetCollisionBounds(GetBuildInfo()->GetIntParam(Parameter::WindDirection));
 
     // nothing is ever done with this result
-    Stage::Instance()->GetFullSortSceneByID(sceneIndex);
+    Stage::Instance()->GetSceneByID(sceneIndex);
 
     mAnimWrapper.Create(new (gfl::HeapID::Work) GmkWindCurrent_AnimWrapper(this));
 
@@ -214,7 +214,7 @@ GmkWindCurrentSwitch::GmkWindCurrentSwitch(GimmickBuildInfo* pBuildInfo)
     res.m_30 = true;
     res.m_10.x = 1.5f;
     res.m_10.y = 3.0f;
-    
+
     mButton->SetModelResource(res);
 }
 
@@ -227,7 +227,7 @@ void GmkWindCurrentSwitch::Update() const {
         case 0: {
             if (mButton->mIsPulled) {
                 self->SetStateForTaggedObjects("switch", GetBuildInfo()->GetStringParam(Parameter::TagList).c_str());
-                self->mState.SetCurrentStateAndClearOthers(1);   
+                self->mState.SetCurrentStateAndClearOthers(1);
             }
             break;
         }
@@ -288,7 +288,7 @@ float lbl_808E3C4C = 2.0f;
 void WoolGroupUnit::Reset() {
     float dimX = mWindCurrent->mDimensions.x;
     float nDimX = -dimX * 0.5f;
-    
+
     m_B8.x = (dimX * 0.5f * nDimX) * rand() * SOME_CONST + nDimX;
 
     float dimY = -mWindCurrent->mDimensions.y;
@@ -301,16 +301,16 @@ void WoolGroupUnit::Reset() {
 
     float unk1 = lbl_808E3C44;
     float unk2 = lbl_808E3C44 * 0.5f;
-    
+
     m_C4 = ((unk1 - unk2) * rand() * SOME_CONST + unk2) * (1.0f / 60.0f);
     m_D4 = 0.0f;
 
     float unk3 = lbl_808E3C48;
     float unk4 = -lbl_808E3C48;
-    
+
     m_D0 = ((unk3 - unk4) * rand() * SOME_CONST + unk4) * (1.0f / 60.0f);
 
-    
+
     m_AC = 0.0f;
     m_B0 = 0.0f;
     m_CC = 0;
@@ -319,7 +319,7 @@ void WoolGroupUnit::Reset() {
     float unk5 = lbl_808E3C4C;
 
     m_C8 = (unk5 - 0.0f) * rand() * SOME_CONST + 0.0f;
-    
+
     m_A4 = 0;
     mMax = 0;
 }
@@ -369,7 +369,7 @@ WindCurrentWoolGroup::WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, G
     , mResFileObject(pResFileObject)
     , mWindCurrent(pWindCurrent)
 {
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(mWindCurrent->GetBuildInfo()->mSceneID);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(mWindCurrent->GetBuildInfo()->mSceneID);
     scene->AddRenderObj(this);
 
     const char* name = "wool_00";
@@ -467,7 +467,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
 
     const float widthMult = GmkWindCurrent_AnimWrapper_WidthMult;
     const float heightMult = GmkWindCurrent_AnimWrapper_HeightMult;
-    
+
     float width = pWindCurrent->mDimensions.x / widthMult;
 
     uint numUnits = static_cast<uint>(pWindCurrent->mDimensions.x / heightMult) + 1;
@@ -480,18 +480,18 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
 
     // const char* archiveName = gmkResName.c_str();
     // const char* resourceName = gmkResName.c_str();
-    
+
     char resName[0x80];
 
     snprintf(resName, sizeof(resName), "gimmick/%s/%s.brres", gmkResName.c_str(), gmkResName.c_str());
-    
+
     gfl::ResFileObject resFileObject = gfl::ResFileObject::FromArchive(resName);
 
     uint sceneID = mWindCurrent->GetBuildInfo()->mSceneID;
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(sceneID);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(sceneID);
     float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mSceneOrder);
-    
+
     for (uint i = 0; i < numUnits; i++) {
         GmkPartsMdlSet* part = new (gfl::HeapID::Work) GmkPartsMdlSet;
 
@@ -522,21 +522,21 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
                 mtx[0][0] = width;
                 break;
             };
-            
+
             case Orientation::Left:
             case Orientation::Right: {
                 mtx[1][1] = width;
                 break;
             };
         }
-        
+
         nw4r::math::VEC2 partPos = mWindCurrent->mPosition;
 
         // float unk1 = orientation.x * GmkWindCurrent_AnimWrapper_HeightMult;
         // float unk2 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
         // float unk3 = orientation.x * GmkWindCurrent_AnimWrapper_HeightMult;
         // float unk4 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
-        
+
         gfl::Vec2 vec2(
             ((static_cast<int>(orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f,
             ((static_cast<int>(orientation.y * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.y * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f
@@ -597,7 +597,7 @@ bool GmkWindCurrent_SoundMng::IsClosestWindCurrent(GmkWindCurrent* pWindCurrent)
     if (mClosestWindCurrent == pWindCurrent) {
         return true;
     }
-    
+
     return false;
 }
 
@@ -632,7 +632,7 @@ void GmkWindCurrent_SoundMng::CheckClosestWindCurrent() const {
     float lastFloat;
 
     bool unk = false;
-    
+
     for (size_t i = 0; i < mWindCurrents.size(); i++) {
         if (mWindCurrents[i] == mClosestWindCurrent) {
             unk = true;
@@ -643,47 +643,47 @@ void GmkWindCurrent_SoundMng::CheckClosestWindCurrent() const {
             camPos.x = cameraPos.x;
             camPos.y = cameraPos.y;
             camPos.z = cameraPos.z;
-    
+
             nw4r::math::VEC2 windPos = mWindCurrents[i]->mPosition;
-    
+
             GmkWindCurrent* wind = mWindCurrents[i];
-    
+
             // ?
             gfl::Vec3 windSearchPos;
-    
+
             gfl::Vec2 rectH(wind->mRect.mLeft, wind->mRect.mRight);
-        
+
             windSearchPos.x = rectH.x + windPos.x;
             gfl::Vec2 rectV(wind->mRect.mTop, wind->mRect.mBottom);
-    
+
             if (windSearchPos.x < camPos.x) {
                 windSearchPos.x = camPos.x;
                 if (rectH.y + windPos.x > camPos.x) {
                     windSearchPos.x = rectH.y + windPos.x;
                 }
             }
-    
+
             windSearchPos.y = rectV.x + windPos.y;
-    
+
             if (windSearchPos.y < camPos.y) {
                 windSearchPos.y = camPos.y;
                 if (rectV.y + windPos.y > camPos.y) {
                     windSearchPos.y = rectV.y + windPos.y;
                 }
             }
-    
+
             windSearchPos.z = cameraPos.z;
-    
+
             gfl::Vec3 vec3 = cameraPos - windSearchPos;
-    
+
             float len = 0.0f;
-    
+
             nw4r::math::VEC2 vec2 = vec3;
-    
+
             if (!fn_8064A518(vec3)) {
                 len = nw4r::math::VEC2Len(&vec2);
             }
-    
+
             if (!(len > 20.0f)) {
                 if (!found || lastFloat < len) {
                     found = true;
@@ -691,9 +691,9 @@ void GmkWindCurrent_SoundMng::CheckClosestWindCurrent() const {
                     lastFloat = len;
                 }
             }
-        }        
+        }
     }
-    
+
     if (found) {
         self->mClosestWindCurrent = mWindCurrents[index];
     }

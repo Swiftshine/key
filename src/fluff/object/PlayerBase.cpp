@@ -49,7 +49,7 @@ void PlayerBase::SetPlayerState(int newState) {
     if (mState.mCurrentState == newState) {
         return;
     }
-    
+
     mState.SetCurrentState(newState);
 }
 
@@ -60,7 +60,7 @@ void PlayerBase::fn_80081158() {
             mSpringFlf->fn_800B4FE0(5);
             break;
         }
-        
+
         case Transformation::None: {
             if (mState.mCurrentState != PlayerState::YarnWhipLockOn) {
                 mSpringFlf->fn_800B4FE0(5);
@@ -72,7 +72,7 @@ void PlayerBase::fn_80081158() {
         case Transformation::Submarine: {
             if (mTransformSubmarine != nullptr) {
                 HenshinSubmarine::Substruct1 s = mTransformSubmarine->m_60;
-                
+
                 if (s.m_0 == 7 && s.m_8 == 3) {
                     return;
                 }
@@ -125,7 +125,7 @@ PlayerBase* PlayerBase::BuildCloned(
         arg4,
         true
     );
-    
+
     player->SetStartPosition(gfl::Vec3(0.0f));
     player->fn_8009CA20(true);
     player->mPlayerMdlMng->fn_800A0A84();
@@ -154,7 +154,7 @@ FullSortScene* PlayerBase::ResetScene(FullSortScene* pScene, bool resetPosition)
     mFullSortScene = pScene;
 
     if (resetPosition) {
-        uint index = Stage::Instance()->GetFullSortSceneIndex(pScene);
+        uint index = Stage::Instance()->GetSceneIndex(pScene);
         float z = FullSortSceneUtil::GetZOrder(index, 4);
 
         gfl::Vec3 pos(0.0f);

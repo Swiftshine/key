@@ -36,7 +36,7 @@ void GmkCartBtn::Init(ButtonBuildInfo* buildInfo) {
     colTemplate.m_8 = 2;
     colTemplate.m_C.x = gfl::Vec2::Zero.x;
     colTemplate.m_C.y = gfl::Vec2::Zero.y;
-    
+
     CollisionEntry* entry = CollisionEntry::Get(&colTemplate, this, nullptr, mMatrix, "GmkCartBtn");
     mCollisionEntry.Create(entry);
 
@@ -52,7 +52,7 @@ void GmkCartBtn::Init(ButtonBuildInfo* buildInfo) {
         mResFileObject = obj;
     }
 
-    FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(buildInfo->mSceneIndex);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(buildInfo->mSceneIndex);
     mPartsModelSet.Create(gfl::HeapID::Work);
     mPartsModelSet->RegisterResources(mResFileObject, "pull", "button_shadow", scene, 0);
     mPartsModelSet->SetMatrix(0.01f, mMatrix, true);
@@ -71,13 +71,13 @@ bool GmkCartBtn::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gf
     bool ret = true;
 
     m_134 = true;
-    
+
     if (mCartCollision != nullptr) {
         ret = mCartCollision->OnCollision(colSelf, colOther, pos);
     }
-    
+
     m_134 = false;
-    return ret;   
+    return ret;
 }
 
 int GmkCartBtn::vf74(IObjHitCB* other) {
@@ -88,7 +88,7 @@ int GmkCartBtn::vf74(IObjHitCB* other) {
     if (mCart != nullptr) {
         ret = mCart->vf74(other);
     }
-    
+
     m_134 = false;
     return ret;
 }
@@ -102,7 +102,7 @@ int GmkCartBtn::vf78(IObjHitCB* other) {
     if (mCart != nullptr) {
         ret = mCart->vf78(other);
     }
-    
+
     m_134 = false;
     return ret;
 }
@@ -116,7 +116,7 @@ int GmkCartBtn::vf7C(IObjHitCB* other, int arg2) {
     if (mCart != nullptr) {
         ret = mCart->vf7C(other, arg2);
     }
-    
+
     m_134 = false;
     return ret;
 }
@@ -130,7 +130,7 @@ int GmkCartBtn::vf8C(IObjHitCB* other, int arg2) {
     if (mCart != nullptr) {
         ret = mCart->vf8C(other, arg2);
     }
-    
+
     m_134 = false;
     return ret;
 }

@@ -128,7 +128,7 @@ const char BRRES[] = ".brres";
 
 void Gimmick::GetResFileObject(gfl::ResFileObject& rDst, Gimmick* pGimmick, int gimmickID) {
     std::string path = "gimmick/";
-    
+
     path += GimmickUtil::GetResourceNameByGimmickID(gimmickID);
     path += Slash;
     path += GimmickUtil::GetResourceNameByGimmickID(gimmickID);
@@ -160,9 +160,9 @@ gfl::ScnMdlWrapper* Gimmick::CreateScnMdlWrapper(
     scnMdlWrapper->SetUpdate(true);
 
     if (pScene == nullptr) {
-        pScene = Stage::Instance()->GetFullSortSceneByID(6); // game
+        pScene = Stage::Instance()->GetSceneByID(6); // game
     }
-    
+
     pScene->AddRenderObj(scnMdlWrapper);
     FlfGameObj::UpdateMatrix();
     scnMdlWrapper->SetMatrix_thunk(mMatrix);
