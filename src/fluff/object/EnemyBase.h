@@ -3,10 +3,12 @@
 
 #include "types.h"
 #include "demo/EventDemoAttachment.h"
+#include "graphics/FullSortScene.h"
 #include "object/FlfGameObj.h"
 #include "object/collision/IObjHitCB.h"
 #include "object/MoveTarget.h"
 #include "manager/EnemyMdlManager.h"
+
 #include "gfl/gflTask.h"
 #include "gfl/gflParam.h"
 
@@ -342,9 +344,9 @@ public:
     /* 0x590 */ virtual void vf590();
     /* 0x594 */ virtual void vf594();
     /* 0x598 */ virtual void vf598();
-    /* 0x59C */ virtual void vf59C();
-    /* 0x5A0 */ virtual void vf5A0();
-    /* 0x5A4 */ virtual void vf5A4();
+    /* 0x59C */ virtual void SetScene(int sceneIndex);
+    /* 0x5A0 */ virtual int GetSceneIndex() const;
+    /* 0x5A4 */ virtual void SetZOrder(int);
 
     /* overrides */
 
@@ -375,13 +377,16 @@ public:
     /* 0x08C */ void vf18() override;
     /* 0x090 */ void vf1C() override;
 
-
     /* Class Methods */
 
     void fn_8011EBB8();
     void StateDispatch();
     bool fn_80124538() const;
 
+    float GetZOrder() const;
+    void fn_80123B90();
+
+    void SetScene(int selectType, int sceneIndex, float zPos);
     /* Class Members */
 
     /* 0x0098 */ int m_98;
@@ -410,7 +415,11 @@ public:
     /* 0x0188 */ int m_188;
     /* 0x018C */ uint m_18C; // a count of some kind
     /* 0x0190 */ int m_190;
-    /* 0x0194 */ nw4r::math::MTX44 m_194;
+    /* 0x0194 */ u32 m_194;
+    /* 0x0198 */ u32 m_198;
+    /* 0x019C */ u32 m_19C;
+    /* 0x01A0 */ gfl::Vec3 mSavedPosition;
+    /* 0x01AC */ STRUCT_FILL(0x1D4 - 0x1AC);
     /* 0x01D4 */ nw4r::math::VEC2 m_1D4;
     /* 0x01DC */ nw4r::math::VEC2 m_1DC;
     /* 0x01E4 */ STRUCT_FILL(0x50C - 0x1E4);
@@ -448,7 +457,13 @@ public:
     /* 0x0588 */ EnemyMdlManager* mModelManager;
     /* 0x058C */ u32 m_58C;
     /* 0x0590 */ gfl::Task mTask;
-    /* 0x05A8 */ STRUCT_FILL(0x1C);
+    /* 0x05A8 */ u32 m_5A8;
+    /* 0x05AC */ u32 m_5AC;
+    /* 0x05B0 */ FullSortScene* mScene;
+    /* 0x05B4 */ u32 m_5B4;
+    /* 0x05B8 */ u32 m_5B8;
+    /* 0x05BC */ u32 m_5BC;
+    /* 0x05C0 */ u32 m_5C0;
     /* 0x05C4 */ STRUCT_FILL(0xAB0);
     /* 0x1074 */ std::vector<placeholder_t> m_1074;
     /* 0x1080 */ gfl::Vec3 m_1080;
@@ -458,7 +473,8 @@ public:
     /* 0x10A8 */ uint mEnemyID;
     /* 0x10AC */ STRUCT_FILL(0x10);
     /* 0x10BC */ const char* mName;
-    /* 0x10C0 */ STRUCT_FILL(0x1774 - 0x10C0);
+    /* 0x10C0 */ STRUCT_FILL(0x1770 - 0x10C0);
+    /* 0x1770 */ int mSceneZOrder;
 };
 
 // ASSERT_SIZE(EnemyBase, 0x1774);

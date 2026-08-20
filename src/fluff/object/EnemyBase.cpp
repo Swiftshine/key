@@ -1,27 +1,71 @@
 #include "object/EnemyBase.h"
 #include "game/Game.h"
+#include "manager/Stage.h"
+#include "util/FullSortSceneUtil.h"
 
-void EnemyBase::vf420() {
-    switch (m_18C) {
-        case 0: {
-            Game::DisableController(0);
-            Game::fn_8063C450(0, 8);
-            fn_8011EBB8();
-            break;
+void EnemyBase::SetScene(int sceneIndex) {
+    if (GetSceneIndex() != sceneIndex) {
+        EnemyMdlManager* mgr = mModelManager;
+        Stage* stage = Stage::Instance();
+
+        if (mgr != nullptr && stage != nullptr) {
+            FullSortScene* scene = stage->GetSceneByID(sceneIndex);
+            mgr->SetScene(scene);
+            mScene = scene;
         }
 
-        case 1: {
-            fn_8011EBB8();
-            break;
-        }
-
-        case 998: {
-            fn_8011EBB8();
-            break;
-        }
+        SetZOrder(mSceneZOrder);
     }
 }
 
+int EnemyBase::GetSceneIndex() const {
+    Stage* stage = Stage::Instance();
+
+    if (stage != nullptr) {
+        return stage->GetSceneIndex(mScene);
+    }
+
+    return -1;
+}
+
+void EnemyBase::SetZOrder(int zOrder) {
+    mSceneZOrder = zOrder;
+    gfl::Vec3 pos;
+    pos = mSavedPosition;
+    pos.z = GetZOrder();
+    static_cast<FlfGameObj*>(this)->SetPosition(pos);
+}
+
+float EnemyBase::GetZOrder() const {
+    int sceneIndex = GetSceneIndex();
+    return FullSortSceneUtil::GetZOrder(sceneIndex, mSceneZOrder);
+}
+
+void EnemyBase::fn_80123B90() {
+    mFlags &= 0xFFFF0000;
+    mFlags &= ~0x60000;
+}
+
+void EnemyBase::SetScene(int selectType, int sceneIndex, float zPos) {
+    switch (selectType) {
+        case 1: { // custom
+            SetScene(sceneIndex);
+            gfl::Vec3 pos;
+            pos = mSavedPosition;
+            pos.z = zPos;
+            static_cast<FlfGameObj*>(this)->SetPosition(pos);
+            break;
+        }
+
+        case 0: { // default
+            SetScene(FullSortSceneUtil::SceneID::Game);
+            mSavedPosition.z = 0.0f;
+            static_cast<FlfGameObj*>(this)->SetPosition(mSavedPosition);
+            break;
+        }
+
+    }
+}
 void EnemyBase::StateDispatch() {
     switch (mState) {
         case  1: vf404(); break;
@@ -124,3 +168,25 @@ bool EnemyBase::fn_80124538() const {
     return true;
 }
 #pragma pop
+
+
+void EnemyBase::vf420() {
+    switch (m_18C) {
+        case 0: {
+            Game::DisableController(0);
+            Game::fn_8063C450(0, 8);
+            fn_8011EBB8();
+            break;
+        }
+
+        case 1: {
+            fn_8011EBB8();
+            break;
+        }
+
+        case 998: {
+            fn_8011EBB8();
+            break;
+        }
+    }
+}
