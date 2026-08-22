@@ -60,7 +60,9 @@ class Object:
             "extab_padding": None,
             "extra_asflags": [],
             "extra_cflags": [],
-            "extra_clang_flags": [],
+            "extra_clang_flags": [
+                "-ferror-limit=0"
+            ],
             "lib": None,
             "mw_version": None,
             "progress_category": None,

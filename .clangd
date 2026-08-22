@@ -1,0 +1,7 @@
+CompileFlags:
+  Compiler: clang++
+  Remove:
+    - -W*
+    - -Werror
+Diagnostics:
+  Suppress: ["*"]
