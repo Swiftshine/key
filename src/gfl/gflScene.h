@@ -21,14 +21,16 @@ class Scene {
         virtual ~Scene();
         virtual bool AreListsEmpty() const;
         virtual void Insert(nw4r::g3d::ScnObj* object);
-        virtual void Remove(nw4r::g3d::ScnObj* object);
+        virtual bool Remove(nw4r::g3d::ScnObj* object);
         virtual void DrawOpa() const;
         virtual void DrawXlu() const;
         virtual bool IsScnRootSizeValid() const;
 
         void Init(const char* pSceneLabel, u8 gameTaskFlags, u8 worldMtxTaskFlags, u8 drawTaskFlags, Task* pParentGameTask, Task* pParentWorldMtxTask, Task* pParentDrawTask);
         void AddRenderObj(RenderObj* pRenderObj);
-        void RemoveRenderObj(RenderObj* pRenderObj);
+        bool RemoveRenderObj(RenderObj* pRenderObj);
+        void AddScnObj(nw4r::g3d::ScnObj* pObject);
+        void RemoveScnObj(nw4r::g3d::ScnObj* pObject);
         void HandleRenderObj(RenderObj* pRenderObj);
         
         void GameUpdate() const;
@@ -45,7 +47,7 @@ class Scene {
         /* 0x05 */ bool m_5; // debug related?
         /* 0x06 */ bool mIsWorldCalculated;
         /* 0x08 */ std::list<RenderObj*> mRenderObjs;
-        /* 0x14 */ std::list<placeholder_t> m_14;
+        /* 0x14 */ std::list<nw4r::g3d::ScnObj*> mScnObjs;
         /* 0x20 */ nw4r::g3d::ScnRoot* mScnRoot;
         /* 0x24 */ Pointer<Task> mGameTask;
         /* 0x28 */ Pointer<Task> mWorldMtxTask;

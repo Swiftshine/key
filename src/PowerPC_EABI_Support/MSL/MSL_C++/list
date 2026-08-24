@@ -218,6 +218,9 @@ public:
         list->sz()++;
         dst = __pointer2iterator(newnode);
     }
+    
+    void insert(const T&) { } // todo
+    void remove(const T&) { } // todo
 protected:
     Metrowerks::compressed_pair<Allocator, size_t> size_;
     Metrowerks::compressed_pair<node_allocator_type, node_base> end_;

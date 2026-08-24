@@ -19,8 +19,8 @@ void FullSortScene::Insert(nw4r::g3d::ScnObj* pObject) {
     mFullSortGroup->Insert(mFullSortGroup->Size(), pObject);
 }
 
-void FullSortScene::Remove(nw4r::g3d::ScnObj* object) {
-    mFullSortGroup->Remove(object);
+bool FullSortScene::Remove(nw4r::g3d::ScnObj* object) {
+    return mFullSortGroup->Remove(object);
 }
 
 void FullSortScene::DrawOpa() {

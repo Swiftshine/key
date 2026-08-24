@@ -58,7 +58,7 @@ Scene::Scene(u8 heapID, uint maxNumChildren, uint maxNumScnObj)
     , m_5(false)
     , mIsWorldCalculated(false)
     , mRenderObjs()
-    , m_14()
+    , mScnObjs()
     , mGameTask(nullptr)
     , mWorldMtxTask(nullptr)
     , mDrawTask(nullptr)
@@ -188,6 +188,31 @@ void Scene::AddRenderObj(RenderObj* pRenderObj) {
     }
 }
 
+// nonmatching due to stl
+bool Scene::RemoveRenderObj(RenderObj* pRenderObj) {
+    mRenderObjs.remove(pRenderObj);
+
+    pRenderObj->SetScene(nullptr);
+
+    if (pRenderObj->GetObject() == nullptr || pRenderObj->GetObject()->GetParent() == nullptr) {
+        return true;
+    }
+    
+    return Remove(static_cast<nw4r::g3d::ScnObj*>(pRenderObj->GetObject()));
+}
+
+// nonmatching due to stl
+void Scene::AddScnObj(nw4r::g3d::ScnObj* pScnObj) {
+    Insert(pScnObj);
+    mScnObjs.insert(pScnObj);
+}
+
+// nonmatching due to stl
+void Scene::RemoveScnObj(nw4r::g3d::ScnObj* pScnObj) {
+    Remove(pScnObj);
+    mScnObjs.remove(pScnObj);
+}
+
 void Scene::HandleRenderObj(RenderObj* pRenderObj) {
     bool doInsert = true;
 
@@ -210,8 +235,8 @@ void Scene::Insert(nw4r::g3d::ScnObj* pObj) {
     mScnRoot->Insert(mScnRoot->Size(), pObj);
 }
 
-void Scene::Remove(nw4r::g3d::ScnObj* pObj) {
-    mScnRoot->Remove(pObj);
+bool Scene::Remove(nw4r::g3d::ScnObj* pObj) {
+    return mScnRoot->Remove(pObj);
 }
 
 void Scene::DrawOpa() const {
@@ -223,7 +248,7 @@ void Scene::DrawXlu() const {
 }
 
 bool Scene::AreListsEmpty() const {
-    return mRenderObjs.empty() && m_14.empty();
+    return mRenderObjs.empty() && mScnObjs.empty();
 }
 
 bool Scene::IsScnRootSizeValid() const {
