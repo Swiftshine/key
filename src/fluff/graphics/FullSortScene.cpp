@@ -1,3 +1,5 @@
+#pragma readonly_strings on
+
 #include "graphics/FullSortScene.h"
 #include "gfl/gflMemory.h"
 #include <nw4r/g3d/g3d_state.h>

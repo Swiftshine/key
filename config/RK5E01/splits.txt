@@ -57,6 +57,9 @@ fluff/object/FlfGameObj.cpp:
 
 fluff/graphics/FullSortScene.cpp:
 	.text       start:0x8002F9B4 end:0x8002FBF4
+	.rodata     start:0x807E4730 end:0x807E4750
+	.data       start:0x8083A4A0 end:0x8083A4D0
+	.sdata      start:0x808DF6A8 end:0x808DF6B8
 
 gfl/gflChecksum.cpp:
 	.text       start:0x8003D1A0 end:0x8003D1DC
