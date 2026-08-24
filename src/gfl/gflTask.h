@@ -60,7 +60,7 @@ namespace gfl {
         u8    GetFlags();
         void  SetTaskName(const char* newName);
         void  CreateSubtask(u8 groupID);
-
+        void  SetDescendantFlags(bool set, uint flag);
 
         inline TaskInfo* GetTaskInfo() {
             return mTaskInfo;
