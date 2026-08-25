@@ -15,7 +15,7 @@ void FlfSaveLoadSeq::DestroyInstance() {
 }
 
 FlfSaveLoadSeq::FlfSaveLoadSeq()
-    : mOperation(Operation::None)
+    : mOperation(FlfSaveLoadSeq::eOperation_None)
     , mLoadState(0)
     , m_C(false)
     , m_18(0)
@@ -49,7 +49,7 @@ FlfSaveLoadSeq::~FlfSaveLoadSeq() {
 
 void FlfSaveLoadSeq::Clear() {
     void* buf = mBuffer;
-    mOperation = Operation::None;
+    mOperation = FlfSaveLoadSeq::eOperation_None;
     mLoadState = 0;
     m_18 = 0;
     m_1C = 0;
@@ -68,7 +68,7 @@ void FlfSaveLoadSeq::Clear() {
     mLoadSaveInfo.mSaveDataSize = 0;
     mSaveSaveInfo.mSaveData = nullptr;
     mSaveSaveInfo.mSaveDataSize = 0;
-    
+
     if (buf != nullptr) {
         gfl::Free(buf);
         mBuffer = nullptr;
@@ -82,14 +82,14 @@ extern "C" {
 
 void FlfSaveLoadSeq::CopyLoadSaveInfo(const LoadSaveInfo& rSaveInfo) {
     mLoadSaveInfo = rSaveInfo;
-    mOperation = Operation::Load;
+    mOperation = FlfSaveLoadSeq::eOperation_Load;
     mLoadState = 0;
     m_18 = 0;
     m_1C = 0;
     m_20 = false;
     m_21 = false;
     m_C = false;
-    
+
     size_t num1 = FlfNandMng::GetNumBlocks(rSaveInfo.mSaveDataSize);
     size_t num2 = FlfNandMng::GetNumBlocks(sizeof(NANDBanner));
     size_t num3 = fn_80634E2C();
@@ -109,7 +109,7 @@ size_t FlfSaveLoadSeq::GetNumNANDBytes() {
 
 void FlfSaveLoadSeq::CopySaveSaveInfo(const SaveSaveInfo& rSaveInfo) {
     mSaveSaveInfo = rSaveInfo;
-    mOperation = Operation::Save;
+    mOperation = FlfSaveLoadSeq::eOperation_Save;
     mSaveState = 0;
     mWaitTime1 = 3;
     mWaitTime2 = 0;
@@ -120,12 +120,12 @@ void FlfSaveLoadSeq::Update() const {
     GET_UNCONST(FlfSaveLoadSeq);
 
     switch (mOperation) {
-        case Operation::Load: {
+        case FlfSaveLoadSeq::eOperation_Load: {
             self->Load();
             break;
         }
 
-        case Operation::Save: {
+        case FlfSaveLoadSeq::eOperation_Save: {
             self->Save();
             break;
         }
@@ -152,7 +152,7 @@ void FlfSaveLoadSeq::Load() {
                     mLoadState = 2;
                     break;
                 }
-                
+
                 case 2: {
                     m_C = true;
                     mBannerManager.fn_802A4300();
@@ -175,7 +175,7 @@ void FlfSaveLoadSeq::Load() {
                     mLoadState = 16;
                     break;
                 }
-                
+
                 case 2: {
                     fn_8022D430(8);
                     mLoadState = 3;
@@ -249,7 +249,7 @@ void FlfSaveLoadSeq::Load() {
             }
             break;
         }
-        
+
         case 5: {
             switch (mNandManager.GetUnk8()) {
                 case 1:
@@ -269,7 +269,7 @@ void FlfSaveLoadSeq::Load() {
                     break;
                 }
             }
-            
+
             break;
         }
 
@@ -296,13 +296,13 @@ void FlfSaveLoadSeq::Load() {
                     mLoadState = 12;
                     break;
                 }
-                
+
                 case 2: {
                     fn_8022D430(11);
                     mLoadState = 11;
                     break;
                 }
-                
+
                 case 3: {
                     fn_8022D430(12);
                     mLoadState = 11;
@@ -318,7 +318,7 @@ void FlfSaveLoadSeq::Load() {
                     InitSaveData();
                     fn_8022D430(1);
                     mSaveDataLoaded = true;
-                    mOperation = Operation::None;
+                    mOperation = FlfSaveLoadSeq::eOperation_None;
                     break;
                 }
 
@@ -362,7 +362,7 @@ void FlfSaveLoadSeq::Load() {
                 case 5: {
                     mNandManager.SetFlags(2, false);
                     fn_8022D430(2);
-                    mOperation = Operation::Op_3;
+                    mOperation = FlfSaveLoadSeq::eOperation_Op_3;
                     break;
                 }
             }
@@ -386,7 +386,7 @@ void FlfSaveLoadSeq::Load() {
                 mWaitTime1--;
                 InitSaveData();
                 mNandManager.fn_802292B8(
-                    mLoadSaveInfo.mSaveFileName.c_str(), 
+                    mLoadSaveInfo.mSaveFileName.c_str(),
                     mLoadSaveInfo.mSaveData,
                     mLoadSaveInfo.mSaveDataSize
                 );
@@ -504,7 +504,7 @@ void FlfSaveLoadSeq::Load() {
                     mLoadState = 23;
                     break;
                 }
-                
+
                 case 3: {
                     fn_8022D430(14);
                     mLoadState = 23;
@@ -513,7 +513,7 @@ void FlfSaveLoadSeq::Load() {
             }
             break;
         }
-        
+
         case 23: {
             switch (m_1C) {
                 case 3: {
@@ -526,20 +526,20 @@ void FlfSaveLoadSeq::Load() {
                 case 5: {
                     mNandManager.SetFlags(2, false);
                     fn_8022D430(2);
-                    mOperation = Operation::Op_3;
+                    mOperation = FlfSaveLoadSeq::eOperation_Op_3;
                     break;
                 }
             }
             break;
         }
-        
+
         case 22: {
             switch (m_1C) {
                 case 1: {
                     InitSaveData();
                     fn_8022D430(1);
                     mSaveDataLoaded = true;
-                    mOperation = Operation::None;
+                    mOperation = FlfSaveLoadSeq::eOperation_None;
                     break;
                 }
 
@@ -593,7 +593,7 @@ void FlfSaveLoadSeq::Load() {
                     mNandManager.SetFlags(2, false);
                     mSaveDataLoaded = false;
                     fn_8022D430(1);
-                    mOperation = Operation::None;
+                    mOperation = FlfSaveLoadSeq::eOperation_None;
                     break;
                 }
 
@@ -627,7 +627,7 @@ void FlfSaveLoadSeq::Save() {
                     mSaveState = 2;
                     break;
                 }
-                
+
                 case 2: {
                     mSaveState = 0;
                     break;
@@ -657,7 +657,7 @@ void FlfSaveLoadSeq::Save() {
                 case 1: {
                     size_t numBytes = mSaveSaveInfo.mSaveDataSize;
                     SaveData* sd = reinterpret_cast<SaveData*>(mBuffer.Get());
-                    
+
                     if (memcmp(sd, mSaveSaveInfo.mSaveData, numBytes) == 0 && IsSaveDataValid(sd, numBytes)) {
                         if (mBuffer != nullptr) {
                             mBuffer.Destroy();
@@ -703,7 +703,7 @@ void FlfSaveLoadSeq::Save() {
             switch (mBannerManager.GetUnk10()) {
                 case 1: {
                     fn_8022D430(1);
-                    mOperation = Operation::None;
+                    mOperation = FlfSaveLoadSeq::eOperation_None;
                     mNandManager.SetFlags(2, false);
                     break;
                 }
@@ -736,7 +736,7 @@ void FlfSaveLoadSeq::fn_8022D430(int arg1) {
 
 void FlfSaveLoadSeq::fn_8022D440(int arg1) {
     fn_8022D430(arg1);
-    mOperation = Operation::Op_4;
+    mOperation = FlfSaveLoadSeq::eOperation_Op_4;
 }
 
 bool FlfSaveLoadSeq::IsSaveDataValid(SaveData* pSaveData, size_t numBytes) {

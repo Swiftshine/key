@@ -6,11 +6,11 @@
 
 #include "types.h"
 
-ENUM_CLASS(ObtainedTreasureFlags,
-    Treasure1 = 1 << 0,
-    Treasure2 = 1 << 1,
-    Treasure3 = 1 << 2,
-);
+enum ObtainedTreasureFlags {
+    eObtainedTreasure_Treasure1 = 1 << 0,
+    eObtainedTreasure_Treasure2 = 1 << 1,
+    eObtainedTreasure_Treasure3 = 1 << 2,
+};
 
 /// @note Size: `0x24`
 struct SaveData_StageInfo {
@@ -67,7 +67,7 @@ public:
     void InitSaveSlots();
     bool IsSizeValid(int size);
     bool IsChecksumValid();
-    
+
     /* Class Members */
 
     /* 0x0000 */ SaveData_Header mHeader;

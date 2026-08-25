@@ -28,23 +28,22 @@ struct FlfSaveLoadSeq_Substruct {
 /// @note Size: `0x2E4`
 class FlfSaveLoadSeq {
 public:
-    /* Structures */
-    
-    ENUM_CLASS(Operation,
-        None = 0,
-        Load = 1,
-        Save = 2,
-        Op_3 = 3,
-        Op_4 = 4,
-    );
-
+    // op 3 and 4 are either copy or delete, but it's not yet clear which one is which
+    enum Operation {
+        eOperation_None = 0,
+        eOperation_Load = 1,
+        eOperation_Save = 2,
+        eOperation_Op_3 = 3,
+        eOperation_Op_4 = 4,
+    };
+public:
     /* Static Variables */
 
     static FlfSaveLoadSeq* sInstance;
 
     FlfSaveLoadSeq();
     ~FlfSaveLoadSeq();
-    
+
     /* Class Methods */
 
     void Clear();
@@ -62,7 +61,7 @@ public:
     bool IsSaveDataValid(SaveData* pSaveData, size_t numBytes);
     void InitSaveData();
     bool IsSaveDataLoaded() const;
-    
+
     DECL_WEAK int GetUnk18() const;
 
     /* Static Methods */
