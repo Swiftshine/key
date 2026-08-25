@@ -7,19 +7,20 @@ class IObjHitCB;
 class FlfGameObj;
 
 struct CollisionInfo {
-    ENUM_CLASS(CollisionFlags,
-        None        = 0x0,
-        Normal      = 0x1,
-        Bead        = 0x2,
-        InstantKill = 0x4,
+    enum CollisionFlags {
+        eCollisionFlags_None        = 0x0,
+        eCollisionFlags_Normal      = 0x1,
+        eCollisionFlags_Bead        = 0x2,
+        eCollisionFlags_InstantKill = 0x4,
 
-        SolidOnTop  = 0x10,
-    );
+        eCollisionFlags_SolidOnTop  = 0x10,
+    };
 
-    ENUM_CLASS(Interaction,
-        Bead = 25,
-        Player = 27,
-    );
+    enum CollisionInteraction {
+        eCollisionInteraction_Bead      = 25,
+
+        eCollisionInteraction_Player    = 27,
+    };
 
     /* 0x00 */ bool mPendingCollision;
     /* 0x01 */ bool m_1;
@@ -27,7 +28,7 @@ struct CollisionInfo {
     /* 0x03 */ bool mBoundsInited;
     /* 0x04 */ int m_4;
     /* 0x08 */ int mBoundsType;
-    /* 0x0C */ int mInteractionType;
+    /* 0x0C */ s32 mInteractionType;
     /* 0x10 */ int m_10;
     /* 0x14 */ nw4r::math::VEC3 mPosition;
     /* 0x20 */ nw4r::math::VEC2 mDimensions;
