@@ -6,19 +6,19 @@
 namespace gfl {
     class ResInfo {
     public:
-        ENUM_CLASS(Flags,
-            File        = 1,
-            Folder      = 2,
-            GfArch      = 4,
-            UseFolder = 0x80,
-            UseGfArch = 0x100,
-        );
+        enum Flags {
+            eFlags_File        = 1,
+            eFlags_Folder      = 2,
+            eFlags_GfArch      = 4,
+            eFlags_UseFolder = 0x80,
+            eFlags_UseGfArch = 0x100,
+        };
     public:
         ResInfo() { }
         ~ResInfo() { }
-        
+
         virtual void IncrementRefCount();
-        
+
         inline u16 GetFlags() {
             return mFlags;
         }

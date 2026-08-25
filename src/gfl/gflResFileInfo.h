@@ -15,10 +15,10 @@ namespace gfl {
 
     class ResFileInfo : public ResInfo {
     public:
-        // ENUM_CLASS(Type,
-        //     File = 0,
-        //     Folder = 1,
-        // );
+        enum Type {
+            eType_File = 0,
+            eType_Folder = 1,
+        };
     public:
         /**
          * @note Address: 0x8063C624

@@ -13,7 +13,7 @@ GfArch* ResArchivedFileInfo::TryGetGfArch() {
 }
 
 GfArch* ResFileInfo::TryGetGfArch() {
-    if (0 != GetFlags() & Flags::GfArch) {
+    if (0 != GetFlags() & ResInfo::eFlags_GfArch) {
         return mArchive;
     }
 
@@ -43,7 +43,7 @@ void* ResArchivedFileInfo::GetData() {
 size_t ResFileInfo::GetFilesize() {
     DVDFileInfo fileinfo;
 
-    if (0 == GetFlags() & Flags::GfArch) {
+    if (GetFlags() & ResInfo::eFlags_GfArch == 0) {
         if (DVDFastOpen(mEntrynum, &fileinfo)) {
             DVDClose(&fileinfo);
         } else {

@@ -16,16 +16,14 @@ namespace gfl {
     class DirEntryGfArch;
     class BgArchiveLoadTask;
 
-    
-
     class GfArch {
     public:
-        ENUM_CLASS(CompressionType,
-            None = 0,
-            BytePairEncoding = 1,
-            // supposedly values 2 and 3 are the same but there is no such confirmation
-            LZ77 = 3,
-        );
+        enum CompressionType {
+            eCompressionType_None = 0,
+            eCompressionType_BytePairEncoding = 1,
+            // eCompressionType_LZ77 = 3, // not applicable here, but it's good to document nonetheless
+        };
+
         /* General GfArch overview by section */
 
         /*
@@ -47,7 +45,7 @@ namespace gfl {
             u8    pad[4]; // explicit padding -- this is part of the structure
         };
 
-        
+
         // ASSERT_SIZE(ArchiveHeader, 0x20);
 
         struct FileEntry {
@@ -68,7 +66,7 @@ namespace gfl {
         // ASSERT_SIZE(FileEntryEx, 0x14);
 
         struct CompressionHeader {
-            char mMagic[4];      // "GFCP" - GoodFeel ComPression?
+            char mMagic[4];      // "GFCP" - GoodFeel ComPression
             uint mVersion;
             int  mCompressionType;
             uint mDecompressedDataSize;
@@ -93,7 +91,7 @@ namespace gfl {
         virtual void DeleteDirEntryGfArch(DirEntryGfArch* dirEntry);
         bool SetHeader(GfArch::CompressionHeader* header);
         bool CheckEntryName(const char* filename, GfArch::FileEntryEx* entry) DONT_INLINE_CLASS;
-    
+
     public:
         inline size_t GetDataSize() {
             return mCurrentDataSize;

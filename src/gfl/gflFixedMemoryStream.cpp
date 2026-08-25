@@ -54,17 +54,17 @@ bool FixedMemoryStream::Seek(size_t pos, int seekType) {
     signed long finalPos = 0;
 
     switch (seekType) {
-        case SeekType::Begin: {
+        case FixedMemoryStream::eSeekType_Begin: {
             finalPos = pos;
             break;
         }
 
-        case SeekType::Current: {
+        case FixedMemoryStream::eSeekType_Current: {
             finalPos = pos + this->mStreamPos;
             break;
         }
 
-        case SeekType::End: {
+        case FixedMemoryStream::eSeekType_End: {
             finalPos = (pos + this->mSize) - 1;
             break;
         }

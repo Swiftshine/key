@@ -7,13 +7,13 @@ extern "C" void GFL_HALT();
 
 const char* TokenTypes[] = {
     "TOKEN_INVALID",
-    
+
 };
 
 ParamReader::~ParamReader() { }
 
 // https://decomp.me/scratch/FtDVG
-int ParamReader::ParseToken() {    
+int ParamReader::ParseToken() {
     mWorkingBufferLength = 0;
     mWorkingBuffer[0] = '\0';
 
@@ -26,52 +26,52 @@ int ParamReader::ParseToken() {
     int lastRead = mLastReadCharacter;
 
     if (lastRead < 0) {
-        return TokenType::End;
+        return ParamReader::eTokenType_End;
     }
 
     if (lastRead == '[') {
         ReadCharacter();
-        return TokenType::LeftBracket;
+        return ParamReader::eTokenType_LeftBracket;
     }
 
     if (lastRead == ',') {
         ReadCharacter();
-        return TokenType::Comma;
+        return ParamReader::eTokenType_Comma;
     }
 
     if (lastRead == ')') {
         ReadCharacter();
-        return TokenType::RightParen;
+        return ParamReader::eTokenType_RightParen;
     }
 
     if (lastRead == '(') {
         ReadCharacter();
-        return TokenType::LeftParen;
+        return ParamReader::eTokenType_LeftParen;
     }
 
     if (lastRead == '=') {
         ReadCharacter();
-        return TokenType::Assignment;
+        return ParamReader::eTokenType_Assignment;
     }
 
     if (lastRead == '-') {
         ReadCharacter();
-        return TokenType::Minus;
+        return ParamReader::eTokenType_Minus;
     }
 
     if (lastRead == '{') {
         ReadCharacter();
-        return TokenType::LeftBrace;
+        return ParamReader::eTokenType_LeftBrace;
     }
 
     if (lastRead == ']') {
         ReadCharacter();
-        return TokenType::RightBracket;
+        return ParamReader::eTokenType_RightBracket;
     }
 
     if (lastRead == '}') {
         ReadCharacter();
-        return TokenType::RightBracket;
+        return ParamReader::eTokenType_RightBracket;
     }
 
 
@@ -81,7 +81,7 @@ int ParamReader::ParseToken() {
 
         if (isAlphabetic) {
             ReadCharacter();
-            
+
             while (true) {
                 lastRead = mLastReadCharacter;
 
@@ -91,30 +91,30 @@ int ParamReader::ParseToken() {
                     UpdateWorkingBuffer('\0');
 
                     if (strcmp(mWorkingBuffer, "true") == 0 || strcmp(mWorkingBuffer, "TRUE") == 0) {
-                        return TokenType::ValueTrue;
+                        return ParamReader::eTokenType_ValueTrue;
                     }
 
                     if (strcmp(mWorkingBuffer, "false") == 0 || strcmp(mWorkingBuffer, "FALSE") == 0) {
-                        return TokenType::ValueFalse;
+                        return ParamReader::eTokenType_ValueFalse;
                     }
 
                     if (strcmp(mWorkingBuffer, "s32") == 0) {
-                        return TokenType::TypeS32;
+                        return ParamReader::eTokenType_TypeS32;
                     }
 
                     if (strcmp(mWorkingBuffer, "f32") == 0) {
-                        return TokenType::TypeF32;
+                        return ParamReader::eTokenType_TypeF32;
                     }
 
                     if (strcmp(mWorkingBuffer, "str") == 0) {
-                        return TokenType::TypeString;
+                        return ParamReader::eTokenType_TypeString;
                     }
 
                     if (strcmp(mWorkingBuffer, "bool") == 0) {
-                        return TokenType::TypeBool;
+                        return ParamReader::eTokenType_TypeBool;
                     }
 
-                    return TokenType::Identifier;
+                    return ParamReader::eTokenType_Identifier;
                 }
 
                 UpdateWorkingBuffer(lastRead);
@@ -125,7 +125,7 @@ int ParamReader::ParseToken() {
 
         if (lastRead != '\"') {
             if (lastRead != '#') {
-                return TokenType::Invalid;
+                return ParamReader::eTokenType_Invalid;
             }
 
             ReadCharacter();
@@ -136,7 +136,7 @@ int ParamReader::ParseToken() {
 
                 if (isNewline || lastRead < 0) {
                     UpdateWorkingBuffer('\0');
-                    return TokenType::Description;
+                    return ParamReader::eTokenType_Description;
                 }
 
                 UpdateWorkingBuffer(lastRead);
@@ -162,7 +162,7 @@ int ParamReader::ParseToken() {
         }
 
         UpdateWorkingBuffer('\0');
-        return TokenType::ValueString;
+        return ParamReader::eTokenType_ValueString;
     } else {
         // maybe numeric
 
@@ -196,39 +196,39 @@ END:
 
         if (isFloat) {
             mFloatValue = static_cast<float>(strtod(mWorkingBuffer, nullptr));
-            return TokenType::ValueF32;
+            return ParamReader::eTokenType_ValueF32;
         }
 
         mFloatValue = static_cast<float>(strtol(mWorkingBuffer, nullptr, 10));
-        return TokenType::ValueS32;
+        return ParamReader::eTokenType_ValueS32;
     }
 }
 
 const char* ParamReader::GetTokenString(int tokenType) {
     switch (tokenType) {
-        case TokenType::Invalid:        return "INVALID TOKEN";
-        case TokenType::LeftBrace:      return "{";
-        case TokenType::RightBrace:     return "}";
-        case TokenType::LeftParen:      return "(";
-        case TokenType::RightParen:     return ")";
-        case TokenType::LeftBracket:    return "[";
-        case TokenType::RightBracket:   return "]";
-        case TokenType::Comma:          return ",";
-        case TokenType::Assignment:     return "=";
-        case TokenType::Minus:          return "-";
-        case TokenType::TypeS32:        return "s32";
-        case TokenType::TypeF32:        return "f32";
-        case TokenType::TypeString:     return "str";
-        case TokenType::TypeBool:       return "bool";
-        case TokenType::ValueS32:       return "s32 number";
-        case TokenType::ValueF32:       return "f32 number";
-        case TokenType::ValueTrue:      return "true";
-        case TokenType::ValueFalse:     return "false";
-        case TokenType::Identifier:     return "identifier";
-        case TokenType::ValueString:    return "string";
-        case TokenType::Description:    return "#description";
-        case TokenType::End:            return "END";
-        
+        case ParamReader::eTokenType_Invalid:        return "INVALID TOKEN";
+        case ParamReader::eTokenType_LeftBrace:      return "{";
+        case ParamReader::eTokenType_RightBrace:     return "}";
+        case ParamReader::eTokenType_LeftParen:      return "(";
+        case ParamReader::eTokenType_RightParen:     return ")";
+        case ParamReader::eTokenType_LeftBracket:    return "[";
+        case ParamReader::eTokenType_RightBracket:   return "]";
+        case ParamReader::eTokenType_Comma:          return ",";
+        case ParamReader::eTokenType_Assignment:     return "=";
+        case ParamReader::eTokenType_Minus:          return "-";
+        case ParamReader::eTokenType_TypeS32:        return "s32";
+        case ParamReader::eTokenType_TypeF32:        return "f32";
+        case ParamReader::eTokenType_TypeString:     return "str";
+        case ParamReader::eTokenType_TypeBool:       return "bool";
+        case ParamReader::eTokenType_ValueS32:       return "s32 number";
+        case ParamReader::eTokenType_ValueF32:       return "f32 number";
+        case ParamReader::eTokenType_ValueTrue:      return "true";
+        case ParamReader::eTokenType_ValueFalse:     return "false";
+        case ParamReader::eTokenType_Identifier:     return "identifier";
+        case ParamReader::eTokenType_ValueString:    return "string";
+        case ParamReader::eTokenType_Description:    return "#description";
+        case ParamReader::eTokenType_End:            return "END";
+
         default:                        return "UNKNOWN TOKEN";
     }
 }

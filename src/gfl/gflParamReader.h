@@ -12,7 +12,7 @@ public:
     // required to use because the std::string destructor is both
     // non-inline and non-matching
     struct String {
-        String() 
+        String()
             : m_0(0)
             , m_4(0)
             , mString(nullptr)
@@ -36,33 +36,33 @@ public:
 
     /* Structures */
 
-    ENUM_CLASS(TokenType,
-        End             = -1,
-        Invalid         = 0,
-        LeftBrace       = 1, // {
-        RightBrace      = 2, // }
-        LeftParen       = 3, // (
-        RightParen      = 4, // )
-        LeftBracket     = 5, // [
-        RightBracket    = 6, // ]
-        Comma           = 7, // ,
-        Assignment      = 8, // =
-        Minus           = 9, // -
-        TypeS32         = 10, // the data type "s32"
-        TypeF32         = 11, // the data type "f32"
-        TypeString      = 12, // the data type "str"
-        TypeBool        = 13, // the data type "bool"
-        ValueS32        = 14, // the value of an s32
-        ValueF32        = 15, // the value of an f32
-        ValueTrue       = 16, // the value "true"
-        ValueFalse      = 17, // the value "false"
-        Identifier      = 18, // the parameter name
-        ValueString     = 19, // the value of a string
-        Description     = 20, // the parameter description (indicated by a '#')
-    );
+    enum TokenType {
+        eTokenType_End             = -1,
+        eTokenType_Invalid         = 0,
+        eTokenType_LeftBrace       = 1, // {
+        eTokenType_RightBrace      = 2, // }
+        eTokenType_LeftParen       = 3, // (
+        eTokenType_RightParen      = 4, // )
+        eTokenType_LeftBracket     = 5, // [
+        eTokenType_RightBracket    = 6, // ]
+        eTokenType_Comma           = 7, // ,
+        eTokenType_Assignment      = 8, // =
+        eTokenType_Minus           = 9, // -
+        eTokenType_TypeS32         = 10, // the data type "s32"
+        eTokenType_TypeF32         = 11, // the data type "f32"
+        eTokenType_TypeString      = 12, // the data type "str"
+        eTokenType_TypeBool        = 13, // the data type "bool"
+        eTokenType_ValueS32        = 14, // the value of an s32
+        eTokenType_ValueF32        = 15, // the value of an f32
+        eTokenType_ValueTrue       = 16, // the value "true"
+        eTokenType_ValueFalse      = 17, // the value "false"
+        eTokenType_Identifier      = 18, // the parameter name
+        eTokenType_ValueString     = 19, // the value of a string
+        eTokenType_Description     = 20, // the parameter description (indicated by a '#')
+    };
 
 
-    
+
     ParamReader(FixedMemoryStream* pMemoryStream);
     ~ParamReader();
 
@@ -84,7 +84,7 @@ public:
     ParamBoolA* GetParamBoolA(ParamGroup* pParamGroup);
 
     // the below inline functions are not inline in YWW
-    
+
     inline bool Read() {
         size_t len = mFixedMemoryStream->Read(mBuffer, sizeof(mBuffer));
 
@@ -96,13 +96,13 @@ public:
         mBufferSeekPosition = 0;
         return true;
     }
-    
+
     inline int ReadCharacter() {
-        if (mBufferSeekPosition == mBufferLength) {            
+        if (mBufferSeekPosition == mBufferLength) {
             if (!Read()) {
                 return -1;
             }
-        } 
+        }
 
         u8 chr = mBuffer[mBufferSeekPosition];
         mBufferSeekPosition++;
@@ -111,7 +111,7 @@ public:
 
         return chr;
     }
-    
+
 
     bool IsAlphabetic(int character) {
         if (character - 'A' < 26 || character - 'a' < 26) {
@@ -136,7 +136,7 @@ public:
 
         return false;
     }
-    
+
     bool IsWhitespace(int character) {
         if (character == ' ' || character == '\t') {
             return true;

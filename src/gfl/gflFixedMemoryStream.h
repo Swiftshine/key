@@ -10,11 +10,11 @@ namespace gfl {
             return mStreamPos < mSize;
         }
     public:
-        ENUM_CLASS(SeekType,
-            Begin = 0,
-            Current = 1,
-            End = 2
-        );
+        enum SeekType {
+            eSeekType_Begin = 0,
+            eSeekType_Current = 1,
+            eSeekType_End = 2
+        };
     public:
         FixedMemoryStream(void* addr, size_t newSize);
 

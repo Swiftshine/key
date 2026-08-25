@@ -44,7 +44,7 @@ uint Task::PollTask() {
         // after executing, check the task's information to see if the task still exists
         if (nullptr == myTaskInfo->GetOwner()) {
             // if it doesn't, it was destroyed and has successfully completed its task
-            return Task::PollStatus::TaskExecuted;
+            return Task::Task::ePollStatus_TaskExecuted;
         }
         // if it does, there are child tasks that must be executed as well
     }
@@ -58,11 +58,11 @@ uint Task::PollTask() {
 
         uint x = childTask->PollTask();
         if (nullptr == myTaskInfo->GetOwner()) {
-            return Task::PollStatus::ChildrenExecuted;
+            return Task::Task::ePollStatus_ChildrenExecuted;
         }
 
         if (x - 1 > 1) {
-            if (x == Task::PollStatus::StillProcessing) {
+            if (x == Task::Task::ePollStatus_StillProcessing) {
                 childTask = childTask->GetTaskInfo()->GetNextSiblingTask();
             }
         }
@@ -71,7 +71,7 @@ uint Task::PollTask() {
         }
     }
 
-    return Task::PollStatus::StillProcessing;
+    return Task::Task::ePollStatus_StillProcessing;
 }
 
 Task* Task::GetParent() {

@@ -8,17 +8,16 @@
 namespace gfl {
     class Task {
     public:
-        ENUM_CLASS(PollStatus,
-            StillProcessing = 0,
-            TaskExecuted = 1,
-            ChildrenExecuted = 2
-        );
+        enum PollStatus {
+            ePollStatus_StillProcessing = 0,
+            ePollStatus_TaskExecuted = 1,
+            ePollStatus_ChildrenExecuted = 2
+        };
 
-        ENUM_CLASS(Flags,
-            Inactive = 0,
-            Active = 1
-        );
-
+        enum Flags {
+            eFlags_Inactive = 0,
+            eFlags_Active = 1
+        };
     public:
         inline Task()
             : mFunctor()
