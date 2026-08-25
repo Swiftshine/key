@@ -50,14 +50,14 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         m_138 = true;
     }
 
-    bool param0 = buildInfo->GetBoolParam(ParameterID::FIRST);
+    bool param0 = buildInfo->GetBoolParam(Gimmick::eParameterID_Param0);
 
-    int param4 = buildInfo->GetIntParam(ParameterID::FIFTH);
+    int param4 = buildInfo->GetIntParam(Gimmick::eParameterID_Param4);
     if (param4 == 1) {
         SetIsInMission(true);
     }
 
-    m_149 = buildInfo->GetBoolParam(ParameterID::FIFTH);
+    m_149 = buildInfo->GetBoolParam(Gimmick::eParameterID_Param4);
 
     m_134 = 0;
     int gmkID = GetGimmickID();

@@ -3,7 +3,7 @@
 using namespace env;
 
 EnvParts_PlayGuideIconLocator::EnvParts_PlayGuideIconLocator()
-    : FlfGameObj(ObjectCategory::Misc)
+    : FlfGameObj(FlfGameObj::eObjectCategory_Misc)
 { }
 
 EnvParts_PlayGuideIconLocator::~EnvParts_PlayGuideIconLocator() { }

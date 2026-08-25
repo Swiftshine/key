@@ -144,11 +144,11 @@ void GmkSunriseCurtain::Update() {
                 } else {
                     SetStateForTaggedObjects(
                         "ON",
-                        mBuildInfoPtr->GetStringParam(ParameterID::FIRST).c_str()
+                        mBuildInfoPtr->GetStringParam(Gimmick::eParameterID_Param0).c_str()
                     );
                     SetStateForTaggedObjects(
                         "OFF",
-                        mBuildInfoPtr->GetStringParam(ParameterID::SECOND).c_str()
+                        mBuildInfoPtr->GetStringParam(Gimmick::eParameterID_Param1).c_str()
                     );
                     mState = State::State_1;
                 }
@@ -267,7 +267,7 @@ const char* star07 = "star07";
 
 void GmkSunriseCurtain::DoTimeSwitch() {
     std::vector<Gimmick*> gimmicks;
-    GmkMng::Instance()->GetGimmicksByGimmickID(GimmickID::GmkTurtle, gimmicks);
+    GmkMng::Instance()->GetGimmicksByGimmickID(eGimmickID_GmkTurtle, gimmicks);
 
     for (std::vector<Gimmick*>::iterator it = gimmicks.begin(); it != gimmicks.end(); it++) {
         GmkTurtle* turtle = dynamic_cast<GmkTurtle*>(*it);
@@ -278,7 +278,7 @@ void GmkSunriseCurtain::DoTimeSwitch() {
     }
 
     gimmicks.clear();
-    GmkMng::Instance()->GetGimmicksByGimmickID(GimmickID::GmkUpdownWater, gimmicks);
+    GmkMng::Instance()->GetGimmicksByGimmickID(eGimmickID_GmkUpdownWater, gimmicks);
 
     for (std::vector<Gimmick*>::iterator it = gimmicks.begin(); it != gimmicks.end(); it++) {
         GmkUpdownWater* water = dynamic_cast<GmkUpdownWater*>(*it);
@@ -289,13 +289,13 @@ void GmkSunriseCurtain::DoTimeSwitch() {
     }
 
     std::vector<GimmickBuildInfo*> stars;
-    GmkMng::Instance()->GetCommonGimmicksByID(GimmickID::GmkSimpleMdl, stars);
+    GmkMng::Instance()->GetCommonGimmicksByID(eGimmickID_GmkSimpleMdl, stars);
 
     for (std::vector<GimmickBuildInfo*>::iterator it = stars.begin(); it != stars.end(); it++) {
         GimmickBuildInfo* buildInfo = *it;
 
         if (
-            buildInfo->GetStringParam(ParameterID::FIRST) == star07
+            buildInfo->GetStringParam(Gimmick::eParameterID_Param0) == star07
             && buildInfo->mGimmickInfo != nullptr
         ) {
             Gimmick* gmk = buildInfo->mGimmickInfo->mGimmick;
@@ -308,8 +308,8 @@ void GmkSunriseCurtain::DoTimeSwitch() {
         }
     }
 
-    SetStateForTaggedObjects("OFF", mBuildInfoPtr->GetStringParam(ParameterID::FIRST).c_str());
-    SetStateForTaggedObjects("ON", mBuildInfoPtr->GetStringParam(ParameterID::SECOND).c_str());
+    SetStateForTaggedObjects("OFF", mBuildInfoPtr->GetStringParam(Gimmick::eParameterID_Param0).c_str());
+    SetStateForTaggedObjects("ON", mBuildInfoPtr->GetStringParam(Gimmick::eParameterID_Param1).c_str());
 
     if (GameManager::IsInMission()) {
         mFbAlpha->SetUpdate(false);

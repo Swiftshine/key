@@ -5,7 +5,7 @@ int GimmickUtil::GetGimmickIDByDescription(const char* pDescription) {
     GimmickEntry* entry = GimmickTable;
     uint id = 0;
 
-    while (id < GimmickID::GimmickTypeCount) {
+    while (id < eGimmickID_GimmickTypeCount) {
         if (entry->mDescription != nullptr && strcmp(entry->mDescription, pDescription) == 0) {
             return id;
         }

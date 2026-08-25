@@ -21,23 +21,22 @@ class FlfGameObj : public FlfHandleObj {
 public:
     /* Structures */
 
-    ENUM_CLASS(ObjectCategory,
-        Player          = 0,
-        Gimmick         = 1,
-        Cat2            = 2,
-        Cat3            = 3,
-        Cat4            = 4,
-        Cat5            = 5,
-        Cat6            = 6,
-        Spring          = 7,
-        Cat8            = 8,
-        Cat9            = 9,
-        Friend          = 10,
-        Cat11           = 11,
-        PlayerBullet    = 12,
-        Misc            = 13, // for anything that doesn't fit in the prior categories
-
-    );
+    enum ObjectCategory {
+        eObjectCategory_Player          = 0,
+        eObjectCategory_Gimmick         = 1,
+        eObjectCategory_Cat2            = 2,
+        eObjectCategory_Cat3            = 3,
+        eObjectCategory_Cat4            = 4,
+        eObjectCategory_Cat5            = 5,
+        eObjectCategory_Cat6            = 6,
+        eObjectCategory_Spring          = 7,
+        eObjectCategory_Cat8            = 8,
+        eObjectCategory_Cat9            = 9,
+        eObjectCategory_Friend          = 10,
+        eObjectCategory_Cat11           = 11,
+        eObjectCategory_PlayerBullet    = 12,
+        eObjectCategory_Misc            = 13, // for anything that doesn't fit in the prior categories
+    };
 
     FlfGameObj(uint);
 
@@ -103,7 +102,7 @@ public:
     /* 0x30 */ gfl::Mtx34 mMatrix;
     /* 0x60 */ u32 mFlags;
     /* 0x64 */ u32 m_64;
-    /* 0x68 */ int mCategory;
+    /* 0x68 */ s32 mCategory;
     /* 0x6C */ bool m_6C;
     /* 0x6D */ bool mIsCulled;
     /* 0x6E */ bool mShouldUpdateWater;

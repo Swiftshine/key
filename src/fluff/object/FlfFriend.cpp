@@ -28,7 +28,7 @@ float FlfFriend::fn_8033B710() {
 
 // https://decomp.me/scratch/gjGK0
 FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendID, const char* pTaskName)
-    : FlfGameObj(ObjectCategory::Friend)
+    : FlfGameObj(FlfGameObj::eObjectCategory_Friend)
     , mTask(this, Update, pTaskName)
     , mScene(pScene)
     , mNextAnimationID(0)
@@ -119,7 +119,7 @@ DECL_WEAK DONT_INLINE PlayerBase* CutFunction(PlayerBase* p) { return p; }
 
 void FlfFriend::vfF0(FlfGameObj* pObj) {
     PlayerBase* player = static_cast<PlayerBase*>(pObj);
-    if (pObj->mCategory == ObjectCategory::Player) {
+    if (pObj->mCategory == FlfGameObj::eObjectCategory_Player) {
         if (CutFunction(player)->GetPlayerID() == PlayerBase::ePlayerID_Kirby) {
             StartMission(player, false);
         }

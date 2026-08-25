@@ -17,13 +17,13 @@ GmkBallRelease::GmkBallRelease(GimmickBuildInfo* pBuildInfo)
 
     gfl::Vec2& min = cdw.GetColDataRect(0)->mBoundsMin;
 
-    min.x = pBuildInfo->GetFloatParam(ParameterID::FIRST);
-    min.y = pBuildInfo->GetFloatParam(ParameterID::SECOND);
+    min.x = pBuildInfo->GetFloatParam(Gimmick::eParameterID_Param0);
+    min.y = pBuildInfo->GetFloatParam(Gimmick::eParameterID_Param1);
 
     gfl::Vec2& max = cdw.GetColDataRect(0)->mBoundsMax;
 
-    max.x = pBuildInfo->GetFloatParam(ParameterID::THIRD);
-    max.y = pBuildInfo->GetFloatParam(ParameterID::FOURTH);
+    max.x = pBuildInfo->GetFloatParam(Gimmick::eParameterID_Param2);
+    max.y = pBuildInfo->GetFloatParam(Gimmick::eParameterID_Param3);
 
     cdw.SetFlags(0x20000000);
 

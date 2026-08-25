@@ -11,8 +11,8 @@ GmkAllGetSwitch::GmkAllGetSwitch(GimmickBuildInfo* buildInfo)
     , mState(State::NotActivated)
 {
     GimmickBuildInfo* bInfo = mBuildInfoPtr;
-    FlfMsgMng::SplitIdentifiers(bInfo->GetStringParam(ParameterID::FIRST).c_str(), mTags);
-    FlfMsgMng::SplitIdentifiers(bInfo->GetStringParam(ParameterID::SECOND).c_str(), mTags);
+    FlfMsgMng::SplitIdentifiers(bInfo->GetStringParam(Gimmick::eParameterID_Param0).c_str(), mTags);
+    FlfMsgMng::SplitIdentifiers(bInfo->GetStringParam(Gimmick::eParameterID_Param1).c_str(), mTags);
     SetCullThreshold(30.0f);
 }
 

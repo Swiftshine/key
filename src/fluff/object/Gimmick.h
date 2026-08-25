@@ -27,13 +27,13 @@ class Gimmick : public FlfGameObj {
 public:
     /* Structures */
 
-    ENUM_CLASS(ParameterID,
-        FIRST   = 0,
-        SECOND  = 1,
-        THIRD   = 2,
-        FOURTH  = 3,
-        FIFTH   = 4
-    );
+    enum ParameterID {
+        eParameterID_Param0 = 0,
+        eParameterID_Param1 = 1,
+        eParameterID_Param2 = 2,
+        eParameterID_Param3 = 3,
+        eParameterID_Param4 = 4
+    };
 
     /// @note Size: `0x8`
     struct GimmickInfo {

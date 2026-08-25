@@ -24,7 +24,7 @@ extern "C" float ZeroFloat;
 
 
 GmkSimpleMdl::GmkSimpleMdl()
-    : Gimmick(GimmickID::GMK_TYPE_SIMPLE_MDL)
+    : Gimmick(eGimmickID_GMK_TYPE_SIMPLE_MDL)
     , mModelWrapper(nullptr)
     , mAnim(nullptr)
     , mShadowModelWrapper(nullptr)
@@ -46,7 +46,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     , mResFileObject(nullptr)
     , mModelScale(0.0f, 0.0f, 0.0f)
 {
-    int secondVal = mBuildInfo.GetIntParam(ParameterID::SECOND);
+    int secondVal = mBuildInfo.GetIntParam(Gimmick::eParameterID_Param1);
     int gmkID = GetGimmickID();
 
     char brresPath[0x200];

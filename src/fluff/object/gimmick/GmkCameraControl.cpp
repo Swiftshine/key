@@ -52,11 +52,11 @@ void GmkCameraControl::Init(GimmickBuildInfo* buildInfo) {
         mCameraMaxY = LOCKED_CAMERA_MAX;
     }
 
-    m_13C = MAXEQ(buildInfo->GetFloatParam(ParameterID::THIRD), 0.0f);
+    m_13C = MAXEQ(buildInfo->GetFloatParam(Gimmick::eParameterID_Param2), 0.0f);
 
     float temp;
-    if (buildInfo->GetFloatParam(ParameterID::FOURTH) > 0.0f) {
-        temp = buildInfo->GetFloatParam(ParameterID::FOURTH);
+    if (buildInfo->GetFloatParam(Gimmick::eParameterID_Param3) > 0.0f) {
+        temp = buildInfo->GetFloatParam(Gimmick::eParameterID_Param3);
     } else {
         temp = 9.0f;
     }

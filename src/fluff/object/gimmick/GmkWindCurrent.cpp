@@ -237,7 +237,7 @@ void GmkWindCurrentSwitch::Update() const {
 
             float frame = mState.mCounter * (1.0f / 60.0f);
 
-            if (frame > GetBuildInfo()->mFloatParams[ParameterID::FIRST]) {
+            if (frame > GetBuildInfo()->mFloatParams[Gimmick::eParameterID_Param0]) {
                 self->mButton->fn_80143A58(true, 3.0f);
                 self->mState.SetCurrentStateAndClearOthers(2);
             }

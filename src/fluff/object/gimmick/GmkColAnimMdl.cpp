@@ -95,7 +95,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
         }
     }
 
-    mColAnimCtrlGmk.Create(new (gfl::HeapID::Work) GmkColAnimCtrl(this, mBuildInfo.GetIntParam(ParameterID::SECOND), buildInfo));
+    mColAnimCtrlGmk.Create(new (gfl::HeapID::Work) GmkColAnimCtrl(this, mBuildInfo.GetIntParam(Gimmick::eParameterID_Param1), buildInfo));
     mColAnimCtrlGmk->fn_800D5130((void*)mBuildInfo.GetStringParam(0).c_str());
 
     float rate = mBuildInfo.GetFloatParam(Parameter::AnimationSpeed);

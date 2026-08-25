@@ -8,7 +8,7 @@ GmkCamRectCtrl* GmkCamRectCtrl::Build(GimmickBuildInfo* buildInfo) {
 }
 
 Gimmick* GmkCamRectCtrl::SetCameraZoom(GimmickBuildInfo* buildInfo) {
-    CamMng::Instance()->fn_800544B4(buildInfo, buildInfo->GetFloatParam(ParameterID::FIRST));
+    CamMng::Instance()->fn_800544B4(buildInfo, buildInfo->GetFloatParam(Gimmick::eParameterID_Param0));
     return nullptr;
 }
 

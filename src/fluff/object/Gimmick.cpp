@@ -12,7 +12,7 @@
 typedef gfl::FunctorClassMethod0<void, Gimmick*, void (Gimmick::*)() const> FunctorType;
 
 Gimmick::Gimmick(int gimmickID)
-    : FlfGameObj(ObjectCategory::Gimmick)
+    : FlfGameObj(FlfGameObj::eObjectCategory_Gimmick)
     , mGimmickID(gimmickID)
     , mBuildInfoPtr(nullptr)
     , mWaterRenderManager(nullptr)
@@ -24,7 +24,7 @@ Gimmick::Gimmick(int gimmickID)
 }
 
 Gimmick::Gimmick(int gimmickID, const char* pTaskName)
-    : FlfGameObj(ObjectCategory::Gimmick)
+    : FlfGameObj(FlfGameObj::eObjectCategory_Gimmick)
     , mGimmickID(gimmickID)
     , mBuildInfoPtr(nullptr)
     , mWaterRenderManager(nullptr)
@@ -42,7 +42,7 @@ Gimmick::Gimmick(int gimmickID, const char* pTaskName)
 
 
 Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo, const char* pTaskName)
-    : FlfGameObj(ObjectCategory::Gimmick)
+    : FlfGameObj(FlfGameObj::eObjectCategory_Gimmick)
     , mWaterRenderManager(nullptr)
     , mTask(nullptr)
     , mCommand(nullptr)
@@ -73,7 +73,7 @@ Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo, const char* pTaskName)
 void Gimmick::Update() const { }
 
 Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo)
-    : FlfGameObj(ObjectCategory::Gimmick)
+    : FlfGameObj(FlfGameObj::eObjectCategory_Gimmick)
     , mWaterRenderManager(nullptr)
     , mTask(nullptr)
     , mCommand(nullptr)

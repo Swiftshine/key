@@ -33,7 +33,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     mMaxDistance = buildInfo->GetFloatParam(Parameter::MaxDistance);
     mNumTurtles = buildInfo->GetIntParam(Parameter::NumTurtles);
     mShouldMoveRight = buildInfo->GetBoolParam(Parameter::ShouldMoveRight);
-    m_13D = buildInfo->GetBoolParam(ParameterID::FOURTH);
+    m_13D = buildInfo->GetBoolParam(Gimmick::eParameterID_Param3);
 
     if (mShouldMoveRight) {
         mPosition.x = 60.0f + mBuildInfoPtr->mPosition.x;
@@ -108,7 +108,7 @@ void GmkTurtle::Update() {
                 }
             }
 
-            if (0 == mBuildInfoPtr->GetIntParam(ParameterID::FIRST)) {
+            if (0 == mBuildInfoPtr->GetIntParam(Gimmick::eParameterID_Param0)) {
                 mAnmCtrl->SetCurrentAnimationIndex(6);
             } else {
                 mAnmCtrl->SetCurrentAnimationIndex(7);

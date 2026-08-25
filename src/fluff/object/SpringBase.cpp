@@ -125,7 +125,7 @@ SpringBase::Spring::~Spring() { }
 /* SpringBase */
 
 SpringBase::SpringBase(FullSortScene* pScene, const char* pTaskName)
-    : FlfGameObj(ObjectCategory::Spring)
+    : FlfGameObj(FlfGameObj::eObjectCategory_Spring)
     , mTask(this, SpringBase::Update, pTaskName)
     , mResFileObject(nullptr)
     , mKeyFrameX()
@@ -510,7 +510,7 @@ void SpringBase::fn_80009678(float scale) {
     }
 
     CopyParticles(mParticleArray2, mParticleArray3, st);
-    
+
     for (uint i = 0; i < st->mParticleCount; i++) {
         Particle* pa = &mParticleArray2[i];
         Particle* pb = &mParticleArray3[i];

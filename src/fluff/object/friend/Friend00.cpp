@@ -92,7 +92,7 @@ bool Friend00::vfDC() const {
 DECL_WEAK DONT_INLINE PlayerBase* CutFunction(PlayerBase* p) { return p; }
 
 void Friend00::StartMission(PlayerBase* pPlayer, bool arg2) {
-    if (pPlayer->mCategory == ObjectCategory::Player) {
+    if (pPlayer->mCategory == FlfGameObj::eObjectCategory_Player) {
         CutFunction(pPlayer);
         SetPlayer(pPlayer);
         InStageWork* work = WorkManager::GetInStageWork();
@@ -175,7 +175,7 @@ void Friend00::vf204() {
             unk = false;
         }
 
-        if (GetPlayer() != nullptr && GetPlayer()->mCategory == ObjectCategory::Player) {
+        if (GetPlayer() != nullptr && GetPlayer()->mCategory == FlfGameObj::eObjectCategory_Player) {
             fn_80342DE4(CutFunction(GetPlayer()), unk);
         }
     }
@@ -193,7 +193,7 @@ void Friend00::fn_803431E4() {
     } else {
         gfl::Vec3 unused;
         unused = mSpeed;
-        if (GetPlayer() != nullptr && GetPlayer()->mCategory == ObjectCategory::Player) {
+        if (GetPlayer() != nullptr && GetPlayer()->mCategory == FlfGameObj::eObjectCategory_Player) {
             unused = CutFunction(GetPlayer())->mSpeed;
         }
 
@@ -205,7 +205,7 @@ void Friend00::fn_803431E4() {
         SetNURBSAnimationInfo(20, reset);
     }
 
-    if (GetPlayer() != nullptr && GetPlayer()->mCategory == ObjectCategory::Player) {
+    if (GetPlayer() != nullptr && GetPlayer()->mCategory == FlfGameObj::eObjectCategory_Player) {
         CutFunction(GetPlayer());
         vf208();
     } else {
