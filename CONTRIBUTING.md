@@ -100,15 +100,18 @@ void MyClass::SomeFunction() {
 ```
 
 ### Enums
-C++98/03 does not allow you to refer to an enum by the name of its enumeration. To get around this, use the `ENUM_CLASS` macro.
-```cpp
-ENUM_CLASS(EnumName,
-    EnumValue0 = 0,
-    EnumValue1 = 1,
-    ...
-);
+Use the following structure:
 
-int x = EnumName::EnumValue0;
+```cpp
+class OwningClass {
+public:
+    enum EnumName {
+        eEnumName_EnumeratorName1,
+        eEnumName_EnumeratorName2,
+    };
+};
+
+int x = OwningClass::eEnumName_EnumeratorName1;
 ```
 
 ### Structures
@@ -118,7 +121,9 @@ int x = EnumName::EnumValue0;
 For the purpose of making decompilation easier, assume all class methods and member fields on a class are public.
 
 Data entered into a class definition must be placed in the following order:
+- access specifier
 - enum and structure definitions
+- access specifier
 - `static` variables
 - constructor
 - destructor*
@@ -143,15 +148,15 @@ the start of the vtable respectively must be commented.
 /// @note Size: `0x8`
 class MyClass {
 public:
-    ENUM_CLASS(MyEnum,
-        EnumValue0,
-        EnumValue1,
-    );
-
+    enum MyEnum {
+        eMyEnum_MyValue1,
+        eMyEnum_MyValue2,
+    };
+    
     struct MySubstructure {
         int mSubstructureValue;
     };  
-
+public:
     MyClass();
     ~MyClass();
 
