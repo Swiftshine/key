@@ -6,7 +6,7 @@
 namespace FullSortSceneUtil {
     const char* GetSceneLabelByIndex(u32 index);
     const char* GetNearSceneLabelByIndex(u32 index);
-    float GetZOrder(u32 sceneIndex, u32 order);
+    f32 GetZOrder(u32 sceneIndex, u32 order);
 
     enum SceneID {
         eSceneID_Far_05  = 0,

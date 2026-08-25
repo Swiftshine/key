@@ -14,7 +14,7 @@ public:
     /* 0xD0 */ virtual void SetModelResource(const GimmickModelResource& rResource);
 
     /* Class Methods */
-    void fn_80143A58(bool, float);
+    void fn_80143A58(bool, f32);
     bool fn_80143A98();
     
     STRUCT_FILL(0x210 - 0x1FC);

@@ -24,9 +24,9 @@ GmkMsCarrierGoal::~GmkMsCarrierGoal() { }
 
 extern "C" {
     static bool lbl_808E5A00;
-    static float lbl_808FB1E8[4];
+    static f32 lbl_808FB1E8[4];
 
-    float ZeroFloat;
+    f32 ZeroFloat;
 }
 
 

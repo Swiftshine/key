@@ -26,7 +26,7 @@ public:
     /// @note Size: `0x3C`
     struct MapdataParams {
         /* 0x00 */ s32 mIntParams[3];
-        /* 0x0C */ float mFloatParams[3];
+        /* 0x0C */ f32 mFloatParams[3];
         /* 0x18 */ std::string mStringParams[3];
     };
 
@@ -163,7 +163,7 @@ ASSERT_SIZE(Mapdata, 0x4C);
 /// @brief A representation of stage entity data stored on disk.
 /// @note Size: `0x58`
 struct Mapbin {
-    /* 0x00 */ float mVersion; // the game checks against 3.1 and 3.3 (but most (all?) levels are 3.3)
+    /* 0x00 */ f32 mVersion; // the game checks against 3.1 and 3.3 (but most (all?) levels are 3.3)
     /* 0x04 */ nw4r::math::VEC2 mBoundsMin;
     /* 0x0C */ nw4r::math::VEC2 mBoundsMax;
     /* 0x14 */ u32 mNumWalls;

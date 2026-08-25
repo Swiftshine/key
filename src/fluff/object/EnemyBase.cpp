@@ -36,7 +36,7 @@ void EnemyBase::SetZOrder(s32 zOrder) {
     static_cast<FlfGameObj*>(this)->SetPosition(pos);
 }
 
-float EnemyBase::GetZOrder() const {
+f32 EnemyBase::GetZOrder() const {
     s32 sceneIndex = GetSceneIndex();
     return FullSortSceneUtil::GetZOrder(sceneIndex, mSceneZOrder);
 }
@@ -46,7 +46,7 @@ void EnemyBase::fn_80123B90() {
     mFlags &= ~0x60000;
 }
 
-void EnemyBase::SetScene(s32 selectType, s32 sceneIndex, float zPos) {
+void EnemyBase::SetScene(s32 selectType, s32 sceneIndex, f32 zPos) {
     switch (selectType) {
         case 1: { // custom
             SetScene(sceneIndex);

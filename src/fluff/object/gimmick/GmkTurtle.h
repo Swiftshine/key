@@ -37,9 +37,9 @@ public:
         eParameter_NumTurtles = 1, // s32 1
         eParameter_ShouldMoveRight = 2, // s32 (bool) 2
 
-        eParameter_CounterDefaultValue = 0, // float 0
-        eParameter_Speed = 1, // float 1
-        eParameter_MaxDistance = 2, // float 2
+        eParameter_CounterDefaultValue = 0, // f32 0
+        eParameter_Speed = 1, // f32 1
+        eParameter_MaxDistance = 2, // f32 2
 
         eParameter_TargetGimmick = 0, // string 0
     };
@@ -64,8 +64,8 @@ public:
     void Turn(s32 turnDir) DONT_INLINE_CLASS;
 public:
     u32 mCounterDefaultValue;
-    float mSpeed;
-    float mMaxDistance;
+    f32 mSpeed;
+    f32 mMaxDistance;
     bool mShouldMoveRight;
     bool m_13D;
     u16 m_13E;

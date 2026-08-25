@@ -6,7 +6,7 @@
 
 typedef gfl::FunctorClassMethod0<void, SpringBase*, void (SpringBase::*)() const> FunctorType;
 
-const KeyFrame<float>::FrameTemplate SpringBase_FrameTemplates[] = {
+const KeyFrame<f32>::FrameTemplate SpringBase_FrameTemplates[] = {
     {
         /* mCount */ 5,
         /* mStartFrames */ {
@@ -264,9 +264,9 @@ void SpringBase::fn_80008A68(gfl::Vec3& rVec, s32 arg2) {
 }
 
 gfl::Vec3 SpringBase::GetKeyFrames() {
-    float x = 0.0f;
-    float y = 0.0f;
-    float z = 0.0f;
+    f32 x = 0.0f;
+    f32 y = 0.0f;
+    f32 z = 0.0f;
 
     if (mKeyFrameX.mInnerKeyFrames.size() != 0) {
         x = mKeyFrameX.GetFrame(nullptr);
@@ -300,7 +300,7 @@ void SpringBase::fn_80008BB0(nw4r::math::MTX34& rMtx) {
     unk.y = -1.0f;
     unk.z = 0.0f;
 
-    float angle = 0.0f;
+    f32 angle = 0.0f;
     if (!offs.IsInvalid()) {
         angle = gfl::Vec3::AngleRad(offs, unk);
     }
@@ -328,7 +328,7 @@ void SpringBase::fn_80008DC0(nw4r::math::MTX34& rMtx) {
     unk.y = -1.0f;
     unk.z = 0.0f;
 
-    float angle = 0.0f;
+    f32 angle = 0.0f;
     if (!offs.IsInvalid()) {
         angle = gfl::Vec3::AngleRad(offs, unk);
     }
@@ -344,8 +344,8 @@ void SpringBase::fn_80008DC0(nw4r::math::MTX34& rMtx) {
     rMtx[2][3] = offs0.z;
 }
 
-float SpringBase::vf68() {
-    float ret = 0.0f;
+f32 SpringBase::vf68() {
+    f32 ret = 0.0f;
 
     for (u32 i = 0; i < mSpringTemplate->mSpringCount; i++) {
         ret += mSpringArray[i].m_8;
@@ -355,9 +355,9 @@ float SpringBase::vf68() {
 }
 
 void SpringBase::ResetKeyFrames(
-    KeyFrame<float>::FrameTemplate* pFTX,
-    KeyFrame<float>::FrameTemplate* pFTY,
-    KeyFrame<float>::FrameTemplate* pFTZ
+    KeyFrame<f32>::FrameTemplate* pFTX,
+    KeyFrame<f32>::FrameTemplate* pFTY,
+    KeyFrame<f32>::FrameTemplate* pFTZ
 ) {
     mKeyFrameX.Reset();
     if (pFTX != nullptr) {
@@ -396,11 +396,11 @@ void SpringBase::ResetKeyFrames(
     }
 }
 
-float SpringBase::fn_80009248(u32 index) {
+f32 SpringBase::fn_80009248(u32 index) {
     return mSpringArray[index].m_8;
 }
 
-float SpringBase::fn_8000925C(u32 index) {
+f32 SpringBase::fn_8000925C(u32 index) {
     return mSpringArray[index].m_10;
 }
 
@@ -416,7 +416,7 @@ void SpringBase::fn_800092A4() {
     fn_80009568(mSpringTemplate);
 }
 
-void SpringBase::fn_800092AC(float scale) {
+void SpringBase::fn_800092AC(f32 scale) {
     for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
         mParticleArray1[i].m_28 = mParticleArray1[i].mEffectPosition;
     }
@@ -424,7 +424,7 @@ void SpringBase::fn_800092AC(float scale) {
     if (mSpringTemplate->m_41) {
         for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
             Particle* particle = &mParticleArray1[i];
-            float dot = gfl::Vec3::Dot2(particle->mEffectPosition, mParticleEffectMultiplier);
+            f32 dot = gfl::Vec3::Dot2(particle->mEffectPosition, mParticleEffectMultiplier);
 
             if (m_144 + dot < 0.0f) {
                 particle->m_6C = true;
@@ -474,7 +474,7 @@ void SpringBase::fn_800092AC(float scale) {
     }
 }
 
-void SpringBase::vf78(float, Particle*, gfl::Vec3&) { }
+void SpringBase::vf78(f32, Particle*, gfl::Vec3&) { }
 
 void SpringBase::fn_80009568(SpringTemplate* pSpringTemplate) {
     for (u32 i = 0; i < pSpringTemplate->mParticleCount; i++) {
@@ -497,7 +497,7 @@ void SpringBase::Update() const {
 
 
 // https://decomp.me/scratch/JZ88z
-void SpringBase::fn_80009678(float scale) {
+void SpringBase::fn_80009678(f32 scale) {
     SpringTemplate* st = mSpringTemplate;
 
     CopyParticles(mParticleArray1, mParticleArray2, st);
@@ -505,7 +505,7 @@ void SpringBase::fn_80009678(float scale) {
 
     for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray2[i];
-        float rate = 1.0f / particle->mScaleFactor;
+        f32 rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
     }
 
@@ -523,7 +523,7 @@ void SpringBase::fn_80009678(float scale) {
 
     for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray3[i];
-        float rate = 1.0f / particle->mScaleFactor;
+        f32 rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
     }
 
@@ -541,7 +541,7 @@ void SpringBase::fn_80009678(float scale) {
 
     for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray4[i];
-        float rate = 1.0f / particle->mScaleFactor;
+        f32 rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
     }
 
@@ -559,12 +559,12 @@ void SpringBase::fn_80009678(float scale) {
 
     for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray5[i];
-        float rate = 1.0f / particle->mScaleFactor;
+        f32 rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
     }
 
     for (u32 i = 0; i < st->mParticleCount; i++) {
-        float one = 1.0f;
+        f32 one = 1.0f;
         Particle* p1 = &mParticleArray1[i];
 
         if (p1->mIsInvalid) {
@@ -576,7 +576,7 @@ void SpringBase::fn_80009678(float scale) {
         Particle* p4 = &mParticleArray4[i];
         Particle* p5 = &mParticleArray5[i];
 
-        const float rate = one / 6.0f;
+        const f32 rate = one / 6.0f;
         gfl::Vec3 temp(0);
         temp = temp + p2->m_48;
         temp = temp + p3->m_48 * 2.0f;
@@ -594,7 +594,7 @@ void SpringBase::fn_80009678(float scale) {
     }
 }
 
-void SpringBase::fn_80009E28(float scale) {
+void SpringBase::fn_80009E28(f32 scale) {
     SpringTemplate* springTemplate = mSpringTemplate;
 
     SetupParticles(mParticleArray1);
@@ -607,7 +607,7 @@ void SpringBase::fn_80009E28(float scale) {
             continue;
         }
 
-        float rate = 1.0f / particle->mScaleFactor;
+        f32 rate = 1.0f / particle->mScaleFactor;
 
         gfl::Vec3 temp = particle->m_34 * rate * scale;
         particle->m_4 += temp;
@@ -651,7 +651,7 @@ inline VEC3* VEC3Scale_(register VEC3* pOut, register const VEC3* pIn,
 
 // matching, but fakematch
 // todo - use this instead: https://decomp.me/scratch/m730M
-void SpringBase::fn_80009F64(float scale) {
+void SpringBase::fn_80009F64(f32 scale) {
     SpringTemplate* st = mSpringTemplate;
 
     SetupParticles(mParticleArray1);
@@ -672,7 +672,7 @@ void SpringBase::fn_80009F64(float scale) {
             continue;
         }
 
-        float rate = 1.0f / particle->mScaleFactor;
+        f32 rate = 1.0f / particle->mScaleFactor;
 
         ClearVec(vec_44);
         ClearVec(vec_50);
@@ -702,12 +702,12 @@ void SpringBase::fn_80009F64(float scale) {
 
 
 // https://decomp.me/scratch/rYtUO
-void SpringBase::fn_8000A148(float scale) {
+void SpringBase::fn_8000A148(f32 scale) {
     SpringTemplate* st = mSpringTemplate;
 
     fn_8000AC6C(mParticleArray1);
 
-    float unk1 = (100.0f - st->mPercentage) * 0.01f;
+    f32 unk1 = (100.0f - st->mPercentage) * 0.01f;
 
     for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
@@ -716,7 +716,7 @@ void SpringBase::fn_8000A148(float scale) {
             continue;
         }
 
-        float rate = 1.0f / particle->mScaleFactor;
+        f32 rate = 1.0f / particle->mScaleFactor;
         particle->m_60 = (particle->mEffectPosition - particle->mPosition) * unk1 + particle->m_34 * rate * scale * scale;
     }
 
@@ -737,7 +737,7 @@ void SpringBase::fn_8000A148(float scale) {
         if (!p1->mIsInvalid || !p2->mIsInvalid) {
             gfl::Vec3 temp = (p2->mEffectPosition + p2->m_60) - (p1->mEffectPosition + p1->m_60);
 
-            float unk2;
+            f32 unk2;
 
 
             if (temp.IsInvalid()) {
@@ -753,7 +753,7 @@ void SpringBase::fn_8000A148(float scale) {
             }
 
 
-            float unk3 = -(spring->m_8 * spring->m_10 - unk2);
+            f32 unk3 = -(spring->m_8 * spring->m_10 - unk2);
 
             if (0.0f > unk3) {
 
@@ -805,8 +805,8 @@ void SpringBase::SetupParticles(Particle* pParticles) {
             gfl::Vec3 temp = particle->m_54 - particle->mEffectPosition;
 
             if (st->m_48 > 0.0f) {
-                float mag = temp.Length();
-                float unk = 1.0f / st->m_48;
+                f32 mag = temp.Length();
+                f32 unk = 1.0f / st->m_48;
 
                 temp = temp * mag * unk;
             }
@@ -828,18 +828,18 @@ void SpringBase::SetupParticles(Particle* pParticles) {
 
         gfl::Vec3 diff = p1->mEffectPosition - p2->mEffectPosition;
 
-        float mag = diff.Length();
+        f32 mag = diff.Length();
 
         if (mag <= 0.0f) {
             gfl::Vec3 temp1(0.0f);
             gfl::Vec3::Normalize(diff, temp1);
-            float rate = 1.0f / mag;
+            f32 rate = 1.0f / mag;
 
             gfl::Vec3 temp2 = p1->m_4 - p2->m_4;
 
-            float dot = gfl::Vec3::Dot1(temp2, diff);
+            f32 dot = gfl::Vec3::Dot1(temp2, diff);
 
-            float unk = -(
+            f32 unk = -(
                 st->m_4[spring->mActiveParticleIndex] *
                 mag - spring->m_8 *
                 st->mPercentage *
@@ -886,8 +886,8 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
             gfl::Vec3 temp = particle->m_54 - particle->mEffectPosition;
 
             if (st->m_48 > 0.0f) {
-                float mag = temp.Length();
-                float unk = 1.0f / st->m_48;
+                f32 mag = temp.Length();
+                f32 unk = 1.0f / st->m_48;
 
                 temp = temp * mag * unk;
             }
@@ -911,7 +911,7 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
             gfl::Vec3 diff = p1->mEffectPosition - p2->mEffectPosition;
 
             gfl::Vec3(0.0f); // not used?
-            float mag = diff.Length();
+            f32 mag = diff.Length();
 
             if (mag <= 0.0f) {
                 continue;
@@ -920,9 +920,9 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
             gfl::Vec3 zero(0.0f);
             gfl::Vec3::Normalize(diff, zero);
 
-            float rate = 1.0f / mag;
+            f32 rate = 1.0f / mag;
 
-            float unk = -(
+            f32 unk = -(
                 st->m_4[spring->mActiveParticleIndex] *
                 (mag - spring->m_8)
             );
@@ -974,8 +974,8 @@ void SpringBase::fn_8000B270() {
         if (VEC3LenSq(&keyFrames) == 0.0f) {
             unk = true;
         } else {
-            float rad = gfl::Vec3::AngleRad(keyFrames, mCurrentKeyFrames);
-            float degrees = 180.0f * (rad / NW4R_MATH_PI);
+            f32 rad = gfl::Vec3::AngleRad(keyFrames, mCurrentKeyFrames);
+            f32 degrees = 180.0f * (rad / NW4R_MATH_PI);
             if (degrees > 10.0f) {
                 unk = true;
             }
@@ -995,18 +995,18 @@ void SpringBase::fn_8000B270() {
 
 // no idea what tu this belongs to
 bool fn_80012914(
-    float,
+    f32,
     gfl::Vec3&,
     gfl::Vec3&,
     gfl::Vec3&,
     gfl::Vec3&,
-    float*
+    f32*
 );
 
 using gfl::Vec3;
 
 // https://decomp.me/scratch/94H5I
-void SpringBase::vf74(float scale, Particle* pParticle, gfl::Vec3& rVec) {
+void SpringBase::vf74(f32 scale, Particle* pParticle, gfl::Vec3& rVec) {
     gfl::Vec3 v1(0.0f);
     v1.y = 1.0f;
 
@@ -1017,7 +1017,7 @@ void SpringBase::vf74(float scale, Particle* pParticle, gfl::Vec3& rVec) {
         return;
     }
 
-    float dot = VEC3Dot(&pParticle->m_4, &v1);
+    f32 dot = VEC3Dot(&pParticle->m_4, &v1);
 
     gfl::Vec3 temp1 = -(v1 * dot) * 0.5f;
     gfl::Vec3 temp2 = (pParticle->m_4 - v1 * dot) * 0.8f;
@@ -1070,7 +1070,7 @@ bool SpringBase::fn_8000B74C() {
     return true;
 }
 
-bool SpringBase::fn_8000B888(float mag, gfl::Vec3& rArg2, const gfl::Vec3& rArg3) {
+bool SpringBase::fn_8000B888(f32 mag, gfl::Vec3& rArg2, const gfl::Vec3& rArg3) {
     gfl::Vec3 v1 = rArg3 - rArg2;
 
     if (v1.Length() <= mag) {
@@ -1095,7 +1095,7 @@ bool SpringBase::fn_8000B888(float mag, gfl::Vec3& rArg2, const gfl::Vec3& rArg3
 
 // https://decomp.me/scratch/Hb6IE
 void SpringBase::LoadDefaultKeyFrames() {
-    KeyFrame<float>::FrameTemplate ftX, ftY, ftZ;
+    KeyFrame<f32>::FrameTemplate ftX, ftY, ftZ;
 
     ftX = SpringBase_FrameTemplates[0];
     ftY = SpringBase_FrameTemplates[1];
@@ -1154,11 +1154,11 @@ void SpringBase::CreateParticleArrays() {
 
 // void FlfGameObj::vf64(bool) { }
 
-// float FlfGameObj::GetCullThreshold() {
+// f32 FlfGameObj::GetCullThreshold() {
 //     return mCullThreshold;
 // }
 
-// void FlfGameObj::SetCullThreshold(float thresh) {
+// void FlfGameObj::SetCullThreshold(f32 thresh) {
 //     mCullThreshold = thresh;
 // }
 
@@ -1232,6 +1232,6 @@ void SpringBase::CreateParticleArrays() {
 //     return pos;
 // }
 
-// float SpringBase::GetZPos() {
+// f32 SpringBase::GetZPos() {
 //     return mPosition.z;
 // }

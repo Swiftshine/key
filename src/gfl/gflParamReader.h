@@ -154,7 +154,7 @@ public:
 
     /* 0x000 */ FixedMemoryStream* mFixedMemoryStream;
     /* 0x004 */ s32 mIntValue;
-    /* 0x008 */ float mFloatValue;
+    /* 0x008 */ f32 mFloatValue;
     /* 0x00C */ char mWorkingBuffer[512];
     /* 0x20C */ size_t mWorkingBufferLength;
     /* 0x210 */ char mBuffer[512];

@@ -8,9 +8,9 @@
 #include "object/collision/ColDataWrapper.h"
 #include "util/FullSortSceneUtil.h"
 
-float GmkWindCurrent_DirectionMultiplier    = 1.0f;
-float DEFAULT_WIDTH     = 2.0f;
-float DEFAULT_HEIGHT    = 5.0f;
+f32 GmkWindCurrent_DirectionMultiplier    = 1.0f;
+f32 DEFAULT_WIDTH     = 2.0f;
+f32 DEFAULT_HEIGHT    = 5.0f;
 
 /* GmkWindCurrent */
 
@@ -58,7 +58,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
     , mIsActive(true)
     , mWindDirection(eOrientation_Up)
 {
-    float strength = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_WindStrength);
+    f32 strength = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_WindStrength);
 
     if (strength > 0.0f) {
         mWindStrength = strength;
@@ -68,7 +68,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
 
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, GetBuildInfo()->mSceneOrder);
 
-    float width = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_Width);
+    f32 width = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_Width);
 
     mDimensions.x = width;
 
@@ -76,7 +76,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
         mDimensions.x = DEFAULT_WIDTH;
     }
 
-    float height = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_Height);
+    f32 height = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_Height);
 
     mDimensions.y = height;
 
@@ -144,7 +144,7 @@ void GmkWindCurrent::Update() const {
 
 void GmkWindCurrent::DecreasePushSpeed() {
     if (mPushSpeed > 0.0f) {
-        float temp = 1.0f / 30.0f;
+        f32 temp = 1.0f / 30.0f;
         mPushSpeed -= temp;
 
         if (mPushSpeed < 0.0f) {
@@ -155,7 +155,7 @@ void GmkWindCurrent::DecreasePushSpeed() {
 
 void GmkWindCurrent::IncreasePushSpeed() {
     if (mPushSpeed < 1.0f) {
-        float temp = 1.0f / 30.0f;
+        f32 temp = 1.0f / 30.0f;
         mPushSpeed += temp;
 
         if (mPushSpeed > 1.0f) {
@@ -168,11 +168,11 @@ void GmkWindCurrent::IncreasePushSpeed() {
 nw4r::math::VEC2 GmkWindCurrent::GetPushDirection() const {
     nw4r::math::VEC2 vec;
 
-    float mult = mPushSpeedMultiplier;
-    float strength = mWindStrength;
+    f32 mult = mPushSpeedMultiplier;
+    f32 strength = mWindStrength;
 
-    float x = mPushDirection.x * GmkWindCurrent_DirectionMultiplier * (1.0f / 60.0f) * mult * strength;
-    float y = mPushDirection.y * GmkWindCurrent_DirectionMultiplier * (1.0f / 60.0f) * mult * strength;
+    f32 x = mPushDirection.x * GmkWindCurrent_DirectionMultiplier * (1.0f / 60.0f) * mult * strength;
+    f32 y = mPushDirection.y * GmkWindCurrent_DirectionMultiplier * (1.0f / 60.0f) * mult * strength;
 
     vec.x = x;
     vec.y = y;
@@ -235,7 +235,7 @@ void GmkWindCurrentSwitch::Update() const {
         case 1: {
             self->mState.mCounter++;
 
-            float frame = mState.mCounter * (1.0f / 60.0f);
+            f32 frame = mState.mCounter * (1.0f / 60.0f);
 
             if (frame > GetBuildInfo()->mFloatParams[Gimmick::eParameterID_Param0]) {
                 self->mButton->fn_80143A58(true, 3.0f);
@@ -280,18 +280,18 @@ WoolGroupUnit::~WoolGroupUnit() { }
 
 #define SOME_CONST 0.000030518509f
 
-float lbl_808E3C44 = 15.0f;
-float lbl_808E3C48 = 0.25f;
-float lbl_808E3C4C = 2.0f;
+f32 lbl_808E3C44 = 15.0f;
+f32 lbl_808E3C48 = 0.25f;
+f32 lbl_808E3C4C = 2.0f;
 
 // https://decomp.me/scratch/7XnFf
 void WoolGroupUnit::Reset() {
-    float dimX = mWindCurrent->mDimensions.x;
-    float nDimX = -dimX * 0.5f;
+    f32 dimX = mWindCurrent->mDimensions.x;
+    f32 nDimX = -dimX * 0.5f;
 
     m_B8.x = (dimX * 0.5f * nDimX) * rand() * SOME_CONST + nDimX;
 
-    float dimY = -mWindCurrent->mDimensions.y;
+    f32 dimY = -mWindCurrent->mDimensions.y;
     m_C0 = 0.0f;
 
     m_B8.y = ((dimY + 1.0f) - dimY) * rand() * SOME_CONST + dimY;
@@ -299,14 +299,14 @@ void WoolGroupUnit::Reset() {
 
     m_C0 = m_C0 * (1.0f / 60.0f);
 
-    float unk1 = lbl_808E3C44;
-    float unk2 = lbl_808E3C44 * 0.5f;
+    f32 unk1 = lbl_808E3C44;
+    f32 unk2 = lbl_808E3C44 * 0.5f;
 
     m_C4 = ((unk1 - unk2) * rand() * SOME_CONST + unk2) * (1.0f / 60.0f);
     m_D4 = 0.0f;
 
-    float unk3 = lbl_808E3C48;
-    float unk4 = -lbl_808E3C48;
+    f32 unk3 = lbl_808E3C48;
+    f32 unk4 = -lbl_808E3C48;
 
     m_D0 = ((unk3 - unk4) * rand() * SOME_CONST + unk4) * (1.0f / 60.0f);
 
@@ -316,7 +316,7 @@ void WoolGroupUnit::Reset() {
     m_CC = 0;
     m_A0 = 0;
 
-    float unk5 = lbl_808E3C4C;
+    f32 unk5 = lbl_808E3C4C;
 
     m_C8 = (unk5 - 0.0f) * rand() * SOME_CONST + 0.0f;
 
@@ -416,8 +416,8 @@ void WindCurrentWoolGroup::DrawXlu() {
 
 /* GmkWindCurrent_AnimWrapper */
 
-float GmkWindCurrent_AnimWrapper_WidthMult  = 7.0f;
-float GmkWindCurrent_AnimWrapper_HeightMult = 3.0f;
+f32 GmkWindCurrent_AnimWrapper_WidthMult  = 7.0f;
+f32 GmkWindCurrent_AnimWrapper_HeightMult = 3.0f;
 
 // https://decomp.me/scratch/LzdHD
 GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurrent)
@@ -465,10 +465,10 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
         }
     }
 
-    const float widthMult = GmkWindCurrent_AnimWrapper_WidthMult;
-    const float heightMult = GmkWindCurrent_AnimWrapper_HeightMult;
+    const f32 widthMult = GmkWindCurrent_AnimWrapper_WidthMult;
+    const f32 heightMult = GmkWindCurrent_AnimWrapper_HeightMult;
 
-    float width = pWindCurrent->mDimensions.x / widthMult;
+    f32 width = pWindCurrent->mDimensions.x / widthMult;
 
     u32 numUnits = static_cast<u32>(pWindCurrent->mDimensions.x / heightMult) + 1;
 
@@ -490,7 +490,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
     u32 sceneID = mWindCurrent->GetBuildInfo()->mSceneID;
 
     FullSortScene* scene = Stage::Instance()->GetSceneByID(sceneID);
-    float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mSceneOrder);
+    f32 zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mSceneOrder);
 
     for (u32 i = 0; i < numUnits; i++) {
         GmkPartsMdlSet* part = new (gfl::eHeapID_Work) GmkPartsMdlSet;
@@ -532,10 +532,10 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
 
         nw4r::math::VEC2 partPos = mWindCurrent->mPosition;
 
-        // float unk1 = orientation.x * GmkWindCurrent_AnimWrapper_HeightMult;
-        // float unk2 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
-        // float unk3 = orientation.x * GmkWindCurrent_AnimWrapper_HeightMult;
-        // float unk4 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
+        // f32 unk1 = orientation.x * GmkWindCurrent_AnimWrapper_HeightMult;
+        // f32 unk2 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
+        // f32 unk3 = orientation.x * GmkWindCurrent_AnimWrapper_HeightMult;
+        // f32 unk4 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
 
         gfl::Vec2 vec2(
             ((static_cast<s32>(orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f,
@@ -629,7 +629,7 @@ void GmkWindCurrent_SoundMng::CheckClosestWindCurrent() const {
     bool found = false;
     size_t index;
 
-    float lastFloat;
+    f32 lastFloat;
 
     bool unk = false;
 
@@ -676,7 +676,7 @@ void GmkWindCurrent_SoundMng::CheckClosestWindCurrent() const {
 
             gfl::Vec3 vec3 = cameraPos - windSearchPos;
 
-            float len = 0.0f;
+            f32 len = 0.0f;
 
             nw4r::math::VEC2 vec2 = vec3;
 

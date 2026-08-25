@@ -15,11 +15,11 @@ public:
 
     /* Class Methods */
 
-    void SetMatrix(const float zOffset, nw4r::math::MTX34& rMatrix, bool arg3);
+    void SetMatrix(const f32 zOffset, nw4r::math::MTX34& rMatrix, bool arg3);
     bool GetPrimaryMatrix(nw4r::math::MTX34& rDestMatrix);
     void RegisterResources(gfl::ResFileObject& rFileInfo, const char* pModelName, const char* pShadowName, FullSortScene* pFullSortScene, u32 flags);
     void SetUpdate(bool shouldUpdate);
-    void fn_802374D4(float);
+    void fn_802374D4(f32);
     void SetScene(gfl::Scene* pScene);
 
     /* Class Members */

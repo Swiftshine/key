@@ -50,10 +50,10 @@ void GmkWoolRope::SetHooks(GmkWoolHook* first, GmkWoolHook* second) {
 // https://decomp.me/scratch/D7so7 - regswaps
 
 // sdata
-float lbl_808E14E0 = 0.7f;
-float lbl_808E14E4 = 5.0f;
-float lbl_808E14E8 = 5.0f;
-float lbl_808E14EC = 50.0f;
+f32 lbl_808E14E0 = 0.7f;
+f32 lbl_808E14E4 = 5.0f;
+f32 lbl_808E14E8 = 5.0f;
+f32 lbl_808E14EC = 50.0f;
 
 void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const char* pFilepath) {
     if (pBuildInfo == nullptr) {
@@ -69,18 +69,18 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const ch
     if (pBuildInfo->m_34 >= 2) {
         gfl::Vec3 diff = mFirstWoolHook->mPosition - mSecondWoolHook->mPosition;
 
-        float mag = diff.Length();
+        f32 mag = diff.Length();
 
         unk = pBuildInfo->m_34;
-        lbl_808E14E0 = mag / static_cast<float>(unk - 1);
+        lbl_808E14E0 = mag / static_cast<f32>(unk - 1);
     } else {
         gfl::Vec3 diff = mFirstWoolHook->mPosition - mSecondWoolHook->mPosition;
 
-        float magf = diff.Length();
+        f32 magf = diff.Length();
         unk = static_cast<u32>(magf / lbl_808E14E0);
 
         if (magf > 5.0f) {
-            float magf2 = lbl_808E14E8 * static_cast<float>(
+            f32 magf2 = lbl_808E14E8 * static_cast<f32>(
                 static_cast<u32>(magf / lbl_808E14E4)
             );
 
@@ -88,16 +88,16 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const ch
                 magf2 = lbl_808E14EC;
             }
 
-            float val = 1.0f - magf2 / 100.0f;
+            f32 val = 1.0f - magf2 / 100.0f;
             unk *= val;
         }
     }
 
     if (mMapdataGimmick != nullptr) {
-        float f = mMapdataGimmick->mParams.mFloatParams[0];
+        f32 f = mMapdataGimmick->mParams.mFloatParams[0];
 
         if (f > 0.0f) {
-            unk = static_cast<u32>(static_cast<float>(unk) / f);
+            unk = static_cast<u32>(static_cast<f32>(unk) / f);
         }
     }
 

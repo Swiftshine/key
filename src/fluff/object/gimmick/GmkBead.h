@@ -23,7 +23,7 @@ public:
     };
 public:
     s32 GetBeadValue();
-    void fn_800B0658(float);
+    void fn_800B0658(f32);
 };
 
 #endif

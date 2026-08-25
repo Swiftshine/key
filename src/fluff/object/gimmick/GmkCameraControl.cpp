@@ -54,7 +54,7 @@ void GmkCameraControl::Init(GimmickBuildInfo* buildInfo) {
 
     m_13C = MAXEQ(buildInfo->GetFloatParam(Gimmick::eParameterID_Param2), 0.0f);
 
-    float temp;
+    f32 temp;
     if (buildInfo->GetFloatParam(Gimmick::eParameterID_Param3) > 0.0f) {
         temp = buildInfo->GetFloatParam(Gimmick::eParameterID_Param3);
     } else {
@@ -77,7 +77,7 @@ void GmkCameraControl::Update() {
     struct dummy {
         u8 m_0[0x18C];
         nw4r::math::VEC2 mCameraMax;
-        float m_194;
+        f32 m_194;
         bool m_198;
         bool m_199;
     };
@@ -92,7 +92,7 @@ void GmkCameraControl::Update() {
         }
 
         case 1: {
-            const float unk = 0.016666668f;
+            const f32 unk = 0.016666668f;
             if (mCameraInfo.GetUnk14() != 1) {
                 SetState(0);
             } else {

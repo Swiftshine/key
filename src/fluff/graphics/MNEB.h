@@ -67,7 +67,7 @@ namespace MNEB {
 
     struct KnotTable {
         u32 mNumKnots;
-        float mKnots[];
+        f32 mKnots[];
     };
 
     struct CurveBlock {
@@ -75,21 +75,21 @@ namespace MNEB {
         size_t mBlockSize;
         char mName[0x20];
         char m_28[100];
-        float m_8C;
+        f32 m_8C;
         u32 m_90;
         bool m_94;
         s32 m_98;
         gfl::Offset<ControlPoint> mControlPointOffset;
         gfl::Offset<KnotTable> mKnotOffset;
         gfl::Offset<KeyFrameInfo> mKeyFrameInfoOffset;
-        float m_A8[4];
+        f32 m_A8[4];
 
         /* additional data comes after this but it's not always part of this struct */
     };
 
     struct DemoOption {
         ~DemoOption();
-        s16 GetOption(float);
+        s16 GetOption(f32);
         char mName[0x10];
         size_t mOptionLength;
         char mOption[];
@@ -132,7 +132,7 @@ namespace MNEB {
 
         /* 0x00 */ u32 mFlags;
         /* 0x04 */ bool mIsLocked;
-        /* 0x08 */ float mNumFrames;
+        /* 0x08 */ f32 mNumFrames;
         /* 0x0C */ bool mIsLooped;
         /* 0x10 */ void* mRawData;
     };

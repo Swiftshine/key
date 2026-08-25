@@ -27,9 +27,9 @@ void PlayerBase::SetupGlobalParams() {
 void PlayerBase::fn_8006B2C0() { }
 
 const char player_normal4_GRAV_GMK_GRAV_COR[] = "player/normal4/GRAV_GMK_GRAV_COR";
-float PlayerBase::GetGravityCorrection() {
+f32 PlayerBase::GetGravityCorrection() {
     if (m_78C & 0x80000) {
-        float val = gfl::ParamGroup::GetGlobalParam(
+        f32 val = gfl::ParamGroup::GetGlobalParam(
             player_normal4_GRAV_GMK_GRAV_COR
         )->ToParamF32()->mValue;
 
@@ -155,7 +155,7 @@ FullSortScene* PlayerBase::ResetScene(FullSortScene* pScene, bool resetPosition)
 
     if (resetPosition) {
         u32 index = Stage::Instance()->GetSceneIndex(pScene);
-        float z = FullSortSceneUtil::GetZOrder(index, 4);
+        f32 z = FullSortSceneUtil::GetZOrder(index, 4);
 
         gfl::Vec3 pos(0.0f);
         GetSavedPosition(pos);

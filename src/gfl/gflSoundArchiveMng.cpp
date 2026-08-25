@@ -57,7 +57,7 @@ void SoundArchiveMng::ConfigureSound3DListener(const SoundListenerSettings& src)
     mSound3DListener.SetInteriorSize(src.mInteriorSize);
 }
 
-void SoundArchiveMng::GetSound3DListenerConfiguration(float dst[3]) {
+void SoundArchiveMng::GetSound3DListenerConfiguration(f32 dst[3]) {
     dst[0] = m_2F4;
     dst[1] = m_2F8;
     dst[2] = m_2F0;

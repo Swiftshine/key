@@ -15,7 +15,7 @@ namespace SimpleMdlCommon {
 
     Gimmick* Build(Gimmick::GimmickBuildInfo* pBuildInfo);
     void AddGimmickName(Gimmick::GimmickBuildInfo* pBuildInfo);
-    float GetInitialAnimFrame(s32 frameIndex);
+    f32 GetInitialAnimFrame(s32 frameIndex);
 }
 
 

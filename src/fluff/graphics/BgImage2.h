@@ -22,8 +22,8 @@ public:
     /* Class Methods */
 
     void fn_80168DA0(nw4r::math::VEC3& rArg1);
-    void fn_80168E3C(float& rXScale, nw4r::math::VEC2& rArg2);
-    void fn_80168EE8(float& rXScale, nw4r::math::VEC2& rArg2);
+    void fn_80168E3C(f32& rXScale, nw4r::math::VEC2& rArg2);
+    void fn_80168EE8(f32& rXScale, nw4r::math::VEC2& rArg2);
     void fn_80168F94(nw4r::math::VEC2& rArg1, nw4r::math::VEC2& rArg2);
     void fn_80169054();
     void fn_80169150();

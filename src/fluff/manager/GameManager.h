@@ -201,7 +201,7 @@ public:
     /* 0x50 */ u32 m_50;
     /* 0x54 */ u32 mPlayerCount;
     /* 0x58 */ u32 mCurrentPlayerID;
-    /* 0x5C */ float m_5C;
+    /* 0x5C */ f32 m_5C;
     /* 0x60 */ nw4r::math::VEC3 mPlayerStartPosition;
     /* 0x6C */ Stage* mStageManager;
     /* 0x70 */ CamMng* mCamMng;

@@ -11,7 +11,7 @@
 // size: 0x34
 class KdTreeNode {
 public:
-    inline KdTreeNode(KdTreeNode* pParent, float minX, float minY) {
+    inline KdTreeNode(KdTreeNode* pParent, f32 minX, f32 minY) {
         mDepth = pParent->GetDepth() + 1;
         mParent = pParent;
         mChild1 = nullptr;
@@ -71,35 +71,35 @@ public:
         return mChild2;
     }
 
-    inline float GetMinX() {
+    inline f32 GetMinX() {
         return mBounds.mMinX;
     }
 
-    inline float GetMinY() {
+    inline f32 GetMinY() {
         return mBounds.mMinY;
     }
 
-    inline float GetMaxX() {
+    inline f32 GetMaxX() {
         return mBounds.mMaxX;
     }
 
-    inline float GetMaxY() {
+    inline f32 GetMaxY() {
         return mBounds.mMaxX;
     }
 
-    inline void SetMinX(float val) {
+    inline void SetMinX(f32 val) {
         mBounds.mMinX = val;
     }
 
-    inline void SetMinY(float val) {
+    inline void SetMinY(f32 val) {
         mBounds.mMinY = val;
     }
 
-    inline void SetMaxX(float val) {
+    inline void SetMaxX(f32 val) {
         mBounds.mMaxX = val;
     }
 
-    inline void SetMaxY(float val) {
+    inline void SetMaxY(f32 val) {
         mBounds.mMaxY = val;
     }
 

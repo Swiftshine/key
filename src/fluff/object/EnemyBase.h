@@ -383,10 +383,10 @@ public:
     void StateDispatch();
     bool fn_80124538() const;
 
-    float GetZOrder() const;
+    f32 GetZOrder() const;
     void fn_80123B90();
 
-    void SetScene(s32 selectType, s32 sceneIndex, float zPos);
+    void SetScene(s32 selectType, s32 sceneIndex, f32 zPos);
     /* Class Members */
 
     /* 0x0098 */ s32 m_98;

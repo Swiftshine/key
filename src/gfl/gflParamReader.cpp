@@ -195,11 +195,11 @@ END:
         UpdateWorkingBuffer('\0');
 
         if (isFloat) {
-            mFloatValue = static_cast<float>(strtod(mWorkingBuffer, nullptr));
+            mFloatValue = static_cast<f32>(strtod(mWorkingBuffer, nullptr));
             return ParamReader::eTokenType_ValueF32;
         }
 
-        mFloatValue = static_cast<float>(strtol(mWorkingBuffer, nullptr, 10));
+        mFloatValue = static_cast<f32>(strtol(mWorkingBuffer, nullptr, 10));
         return ParamReader::eTokenType_ValueS32;
     }
 }

@@ -82,7 +82,7 @@ void EnemyMdlManager::Update() const {
     self->fn_8011224C();
 }
 
-void EnemyMdlManager::fn_801121E4(float arg1) {
+void EnemyMdlManager::fn_801121E4(f32 arg1) {
     if (arg1 < 0.0f) {
         arg1 *= -1.0f;
     }
@@ -91,7 +91,7 @@ void EnemyMdlManager::fn_801121E4(float arg1) {
     m_5C = arg1;
 }
 
-void EnemyMdlManager::fn_80112208(float arg1) {
+void EnemyMdlManager::fn_80112208(f32 arg1) {
     if (arg1 > 0.0f) {
         arg1 *= -1.0f;
     }
@@ -104,7 +104,7 @@ void EnemyMdlManager::fn_8011222C(u32 arg1) {
     m_58 = arg1;
 }
 
-void EnemyMdlManager::fn_80112234(float arg1) {
+void EnemyMdlManager::fn_80112234(f32 arg1) {
     m_5C = arg1;
 }
 
@@ -116,8 +116,8 @@ void EnemyMdlManager::fn_80112244() {
     fn_8011222C(0);
 }
 
-inline float clamp(float f, float min, float max) {
-    float ret = f;
+inline f32 clamp(f32 f, f32 min, f32 max) {
+    f32 ret = f;
 
     if (f <= min) {
         ret = min;
@@ -131,7 +131,7 @@ inline float clamp(float f, float min, float max) {
 void EnemyMdlManager::fn_8011224C() {
     FlfMdlDraw* draw = mFlfMdlDraw;
 
-    float unk = draw->fn_800252AC();
+    f32 unk = draw->fn_800252AC();
 
     if (m_58 - 1 > 1) {
         return;
@@ -139,7 +139,7 @@ void EnemyMdlManager::fn_8011224C() {
 
     unk += m_5C;
 
-    float f = clamp(unk, 0, 1.0f);
+    f32 f = clamp(unk, 0, 1.0f);
 
     draw->SetOpacity(f);
 }
@@ -180,7 +180,7 @@ void EnemyMdlManager::fn_80112334() {
 
     FlfMdlDraw* draw = mFlfMdlDraw;
 
-    float unk = 1.0f / static_cast<float>(m_6C);
+    f32 unk = 1.0f / static_cast<f32>(m_6C);
 
     switch (m_60) {
         case 1: {
@@ -238,7 +238,7 @@ nw4r::g3d::G3dObj* EnemyMdlManager::SetupGraphics(
     return anim;
 }
 
-void EnemyMdlManager::fn_801124DC(float arg1, float arg2, s32 arg3) {
+void EnemyMdlManager::fn_801124DC(f32 arg1, f32 arg2, s32 arg3) {
     mFlfMdlDraw->m_13C = arg3;
     mFlfMdlDraw->m_138 = arg1;
     mFlfMdlDraw->m_140 = arg2;
@@ -350,11 +350,11 @@ void EnemyMdlManager::fn_8011286C() {
     }
 }
 
-float EnemyMdlManager::GetCurrentFrame() {
+f32 EnemyMdlManager::GetCurrentFrame() {
     return mFlfMdlDraw->GetCurrentFrame();
 }
 
-void EnemyMdlManager::SetCurrentFrame(float frame) {
+void EnemyMdlManager::SetCurrentFrame(f32 frame) {
     mFlfMdlDraw->SetCurrentNURBSFrame(frame);
 }
 
@@ -362,11 +362,11 @@ bool EnemyMdlManager::IsAnimationDone() {
     return mFlfMdlDraw->IsAnimationDone();
 }
 
-void EnemyMdlManager::SetUpdateRate(float rate) {
+void EnemyMdlManager::SetUpdateRate(f32 rate) {
     mFlfMdlDraw->SetUpdateRate(rate);
 }
 
-float EnemyMdlManager::GetUpdateRate() {
+f32 EnemyMdlManager::GetUpdateRate() {
     return mFlfMdlDraw->mUpdateRate;
 }
 

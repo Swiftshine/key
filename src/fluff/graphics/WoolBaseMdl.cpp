@@ -128,16 +128,16 @@ WoolBaseMdl::BackupBuff::~BackupBuff() {
     }
 }
 
-void WoolBaseMdl::fn_8001AA00(float arg1) {
+void WoolBaseMdl::fn_8001AA00(f32 arg1) {
     m_140 = arg1;
     mFlfWoolDraw->fn_80026DFC(arg1);
 }
 
-void WoolBaseMdl::fn_8001AA0C(float arg1) {
+void WoolBaseMdl::fn_8001AA0C(f32 arg1) {
     mFlfWoolDraw->m_18 = arg1;
 }
 
-void WoolBaseMdl::fn_8001AA18(float arg1) {
+void WoolBaseMdl::fn_8001AA18(f32 arg1) {
     mFlfWoolDraw->m_1C = arg1;
 }
 
@@ -197,13 +197,13 @@ void WoolBaseMdl::fn_8001AB58() {
     // m_134 = (vec2 - vec1) * 0.5f + vec1;
     // m_134.z = 0.0f;
 
-    float f1 = (vec2.x - vec1.x) * (vec2.x - vec1.x) + (vec2.y - vec1.y) * (vec2.y - vec1.y);
+    f32 f1 = (vec2.x - vec1.x) * (vec2.x - vec1.x) + (vec2.y - vec1.y) * (vec2.y - vec1.y);
 
     if (f1 < 0.0f) {
         NW4R_MATH_WARNING("arithmetic.h", 0x273, "FSqrt: Input is out of the domain.");
     }
 
-    float f2 = 0.0f;
+    f32 f2 = 0.0f;
     if (f1 > 0.0f) {
         f2 = nw4r::math::FrSqrt(f1);
         f2 = f1 * f2;
@@ -217,7 +217,7 @@ gfl::Vec2::Vec2() {
     y = 0.0f;
 }
 
-void WoolBaseMdl::fn_8001AD5C(float arg1) {
+void WoolBaseMdl::fn_8001AD5C(f32 arg1) {
     mFlfWoolDraw->fn_80026E74(arg1, 0);
 }
 
@@ -229,7 +229,7 @@ void WoolBaseMdl::fn_8001AD74(s32 arg1) {
     mFlfWoolDraw->m_58 = arg1;
 }
 
-void WoolBaseMdl::fn_8001AD80(float arg1) {
+void WoolBaseMdl::fn_8001AD80(f32 arg1) {
     mFlfWoolDraw->m_5C = arg1;
 }
 

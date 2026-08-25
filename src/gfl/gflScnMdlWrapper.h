@@ -40,7 +40,7 @@ namespace gfl {
             void* mPtr;
         };
     public:
-        static float DefaultUpdateRate;
+        static f32 DefaultUpdateRate;
 
         ScnMdlWrapper(void* pData, u32 bufferOptions, const char* pName);
 
@@ -73,7 +73,7 @@ namespace gfl {
         void GetShadowOffset(nw4r::math::VEC2& dst, const char*);
         inline nw4r::g3d::ScnMdl* GetScnMdl() { return mScnMdl; }
         void fn_8004DB94(nw4r::math::VEC3&);
-        void fn_8065DCDC(float);
+        void fn_8065DCDC(f32);
         nw4r::g3d::ResMdl GetResMdl(const char* modelName);
         
         void SetCullMode(GXCullMode mode) {
@@ -86,7 +86,7 @@ namespace gfl {
         
         /* Static Methods */
 
-        static void SetDefaultUpdateRate(float rate);
+        static void SetDefaultUpdateRate(f32 rate);
 
         /* 0x18 */ ByteCodeBuf mByteCodeXlu;
         /* 0x1C */ bool mOptionsSet;

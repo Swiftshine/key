@@ -20,9 +20,9 @@
 struct ColNurbsTemplate {
     /* 0x00 */ u32 mIndex;
     /* 0x04 */ u32 mMaxIndex;
-    /* 0x08 */ float m_8;
+    /* 0x08 */ f32 m_8;
     /* 0x0C */ bool m_C;
-    /* 0x10 */ float m_10;
+    /* 0x10 */ f32 m_10;
     /* 0x14 */ MTX34* mMatrix;
     /* 0x18 */ bool mUseSecondary;
     /* 0x19 */ bool mUseTertiary;
@@ -92,7 +92,7 @@ public:
     /* 0xB0 */ bool mIsSpaceAvailable;
     /* 0xB4 */ u32 mNumHandles;
     /* 0xB8 */ bool m_B8;
-    /* 0xBC */ float m_BC;
+    /* 0xBC */ f32 m_BC;
     /* 0xC0 */ std::bitset<8 /* ? */> mFlags;
 } ALIGN(4);
 

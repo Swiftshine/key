@@ -13,7 +13,7 @@ public:
 
     /* 0x00 */ nw4r::math::VEC2 mStart;
     /* 0x08 */ nw4r::math::VEC2 mEnd;
-    /* 0x10 */ float mSpeed;
+    /* 0x10 */ f32 mSpeed;
 
     LinearMoveTarget();
 
@@ -24,12 +24,12 @@ public:
     /* 0xC */ virtual bool Move();
 
     /* Class Methods */
-    void SetSpeed(float speed);
+    void SetSpeed(f32 speed);
     
     /* Static Methods */
 
     /// @return If the movement was complete.
-    static bool Move(float speed, nw4r::math::VEC2& rDst, const nw4r::math::VEC2& rStart, const nw4r::math::VEC2& rEnd);
+    static bool Move(f32 speed, nw4r::math::VEC2& rDst, const nw4r::math::VEC2& rStart, const nw4r::math::VEC2& rEnd);
 };
 
 

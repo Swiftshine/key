@@ -26,10 +26,10 @@ public:
     /* Class Methods */
 
     void SetModelWrapper(gfl::ScnMdlWrapper* pScnMdlWrapper, bool);
-    float GetCurrentFrame();
-    void SetCurrentFrame(float);
-    void SetUpdateRate(float);
-    float GetUpdateRate();
+    f32 GetCurrentFrame();
+    void SetCurrentFrame(f32);
+    void SetUpdateRate(f32);
+    f32 GetUpdateRate();
     bool IsAnimationDone();
     bool HasAnim();
     void Play(gfl::ResFileObject& rResFileObject, const char* pResMdlName, const char* pAnimName, nw4r::g3d::ResName* pResName /* ?*/ );
@@ -43,7 +43,7 @@ public:
     /* Class Members */
 
     /* 0x04 */ u32 mFlags;
-    /* 0x08 */ float mAnimationEndFrame;
+    /* 0x08 */ f32 mAnimationEndFrame;
     /* 0x0C */ u32 m_C;
     /* 0x10 */ nw4r::g3d::AnmObj* mTexPatAnim;  // TexPatRes
     /* 0x14 */ nw4r::g3d::AnmObj* mMatClrAnim;  // MatClrRes

@@ -12,7 +12,7 @@ public:
     /* Class Methods */
 
     void fn_800A0A84();
-    void SetUpdateRate(float rate);
+    void SetUpdateRate(f32 rate);
     void SetVisibility(bool visibility);
     void ResetUpdateRate();
     void ResetScene(FullSortScene*);

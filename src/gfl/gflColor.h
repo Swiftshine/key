@@ -26,7 +26,7 @@ public:
         : val(v)
     { }
 
-    void Interpolate(float fromWeight, float toWeight, const Color& rFrom, const Color& rTo);
+    void Interpolate(f32 fromWeight, f32 toWeight, const Color& rFrom, const Color& rTo);
 
     union {
         struct {

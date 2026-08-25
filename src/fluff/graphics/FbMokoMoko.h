@@ -8,7 +8,7 @@
 class FbMokoMoko : public gfl::CustomRenderObj {
 public:
     
-    FbMokoMoko(float, float, float, const char*, gfl::ScnMdlWrapper*, u32, const char*, const char*);
+    FbMokoMoko(f32, f32, f32, const char*, gfl::ScnMdlWrapper*, u32, const char*, const char*);
 
     /* Virtual Methods */
 

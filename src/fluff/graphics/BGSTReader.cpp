@@ -187,12 +187,12 @@ void Reader::FillVector(
 
 // https://decomp.me/scratch/JZBB4
 bool Reader::EntryObject::Compare(EntryObject* pA, EntryObject* pB) {
-    float rowA = __abs(pB->mEntryInfo->mRow - pA->mLayer->m_18);
-    float rowB = __abs(pA->mEntryInfo->mRow - pB->mLayer->m_18);
+    f32 rowA = __abs(pB->mEntryInfo->mRow - pA->mLayer->m_18);
+    f32 rowB = __abs(pA->mEntryInfo->mRow - pB->mLayer->m_18);
     // s32 a = pA->mEntryInfo->mRow - pA->mLayer->m_18;
-    // float rowA = a >= 0 ? a : -a;
+    // f32 rowA = a >= 0 ? a : -a;
     // s32 b = pB->mEntryInfo->mRow - pB->mLayer->m_18;
-    // float rowB = b >= 0 ? b : -b;
+    // f32 rowB = b >= 0 ? b : -b;
 
     if (rowA != rowB) {
         return rowA < rowB;

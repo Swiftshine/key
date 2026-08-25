@@ -15,17 +15,17 @@ PathInfo::PathInfo(Mapdata::MapdataPath* pPath, bool looped)
 PathInfo::~PathInfo() { }
 
 // https://decomp.me/scratch/S3VP6
-gfl::Vec2 PathInfo::GetPointAtPercentage(float percentage) const {
+gfl::Vec2 PathInfo::GetPointAtPercentage(f32 percentage) const {
     if (percentage >= 1.0f) {
         // const gfl::Vec2& ret = GetPoint(mNumSegments - 1);
         // return ret;
     }
         
-    float targetDist = mPathLength * percentage;
-    float curDist = 0.0f;
-    float foundDist = 0.0f;
+    f32 targetDist = mPathLength * percentage;
+    f32 curDist = 0.0f;
+    f32 foundDist = 0.0f;
     u32 pointIndex = 0;
-    float prevDist = 0.0f;
+    f32 prevDist = 0.0f;
 
     for (u32 i = 0; i < mNumSegments; i++) {
         if (targetDist < curDist) {
@@ -52,13 +52,13 @@ gfl::Vec2 PathInfo::GetPointAtPercentage(float percentage) const {
 
 // https://decomp.me/scratch/nqqF8
 // i hate this compiler
-gfl::Vec2 PathInfo::fn_802FF9B8(float arg1) const {
+gfl::Vec2 PathInfo::fn_802FF9B8(f32 arg1) const {
     // const gfl::Vec2& vec = fn_802FF9FC(arg1);
     // return gfl::Vec2(vec.x, -vec.y);
     return gfl::Vec2();
 }
 
-float PathInfo::GetPathLength() const {
+f32 PathInfo::GetPathLength() const {
     return mPathLength;
 }
 
@@ -88,8 +88,8 @@ bool PathInfo::IsLooped() const {
     return mIsLooped;
 }
 
-void PathInfo::fn_80300214(float arg1) {
-    float val = (float)mPathLength * (float)(double)arg1;
+void PathInfo::fn_80300214(f32 arg1) {
+    f32 val = (f32)mPathLength * (f32)(double)arg1;
     m_14 = arg1;
     m_18 = val;
 }

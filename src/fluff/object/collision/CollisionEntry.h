@@ -31,7 +31,7 @@ public:
 
     void Copy(CollisionTemplate* pCollisionTemplate, IObjHitCB* pCallbacks, FlfGameObj* pOwner, nw4r::math::MTX34& rMatrix);
     void Reset();
-    void SetDimensions(float& rX, float& rY);
+    void SetDimensions(f32& rX, f32& rY);
     s32 UpdateOwner();
     void ValidateBounds(s32 arg1, nw4r::math::VEC2& rArg2);
     CollisionBounds3D* Get3DBounds();

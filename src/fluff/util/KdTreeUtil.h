@@ -7,13 +7,13 @@
 
 #include <nw4r/math.h>
 
-typedef std::pair<bool, float> SplitInfo;
+typedef std::pair<bool, f32> SplitInfo;
 typedef std::pair<nw4r::math::VEC2, nw4r::math::VEC2> PointPair;
 
 /// @note Size: `0x8`
 struct KdTreeSplitInfo {
     /* 0x0 */ bool mSplitY;
-    /* 0x4 */ float mMidpoint;
+    /* 0x4 */ f32 mMidpoint;
 };
 
 struct KdTreeBounds {
@@ -24,10 +24,10 @@ struct KdTreeBounds {
         mMaxY = 0.0f;
     }
 
-    /* 0x0 */ float mMinX;
-    /* 0x4 */ float mMinY;
-    /* 0x8 */ float mMaxX;
-    /* 0xC */ float mMaxY;
+    /* 0x0 */ f32 mMinX;
+    /* 0x4 */ f32 mMinY;
+    /* 0x8 */ f32 mMaxX;
+    /* 0xC */ f32 mMaxY;
 };
 
 namespace KdTreeUtil {

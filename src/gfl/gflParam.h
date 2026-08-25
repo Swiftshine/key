@@ -74,7 +74,7 @@ namespace gfl {
 
         /* Class Methods */
 
-        /* 0x28 */ float mValue;
+        /* 0x28 */ f32 mValue;
     };
 
 

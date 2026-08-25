@@ -28,8 +28,8 @@ public:
     void fn_800267B0(s32 index, s32);
     void fn_80026A54(s32);
     s32 fn_80026B54(s32 index);
-    void fn_80026DFC(float);
-    void fn_80026E74(float, u32 index);
+    void fn_80026DFC(f32);
+    void fn_80026E74(f32, u32 index);
     void fn_80026E88(s32);
     void fn_80026AB0(s32, u32);
     void fn_80026A9C(u32 index, nw4r::math::VEC2*);
@@ -39,13 +39,13 @@ public:
     /* Class Members */
 
     /* 0x00 */ STRUCT_FILL(0x14);
-    /* 0x18 */ float m_18;
-    /* 0x1C */ float m_1C;
+    /* 0x18 */ f32 m_18;
+    /* 0x1C */ f32 m_1C;
     /* 0x20 */ STRUCT_FILL(0x48 - 0x20);
     /* 0x48 */ Substruct* m_48;
     /* 0x4C */ STRUCT_FILL(0xC);
     /* 0x58 */ s32 m_58;
-    /* 0x5C */ float m_5C;
+    /* 0x5C */ f32 m_5C;
 };
 
 #endif

@@ -122,7 +122,7 @@ bool PlTransMdl::IsAnimationDone() const {
     return mFlfMdlDraw->IsAnimationDone();
 }
 
-void PlTransMdl::SetUpdateRate(float rate) {
+void PlTransMdl::SetUpdateRate(f32 rate) {
     if (mFlfMdlDraw != nullptr) {
         mFlfMdlDraw->SetUpdateRate(rate);
     }
@@ -134,7 +134,7 @@ void PlTransMdl::SetDefaultUpdateRate() {
     }
 }
 
-float PlTransMdl::GetUpdateRate() const {
+f32 PlTransMdl::GetUpdateRate() const {
     return mFlfMdlDraw != nullptr ? mFlfMdlDraw->GetUpdateRate() : -1.0f;
 }
 
@@ -210,8 +210,8 @@ s32 PlTransMdl::ResetScene(FullSortScene* pScene) {
     return 1;
 }
 
-inline float clamp(float f, float min, float max) {
-    float ret = f;
+inline f32 clamp(f32 f, f32 min, f32 max) {
+    f32 ret = f;
 
     if (f <= min) {
         ret = min;
@@ -223,14 +223,14 @@ inline float clamp(float f, float min, float max) {
 }
 
 // https://decomp.me/scratch/PZVCN
-void PlTransMdl::SetOpacity(float opacity) {
+void PlTransMdl::SetOpacity(f32 opacity) {
     mFlfMdlDraw->SetOpacity(opacity);
 
     if (mWoolBaseMdl == nullptr) {
         return;
     }
 
-    float alpha1 = 1.0f;
+    f32 alpha1 = 1.0f;
     if (opacity <= 1.0f) {
         alpha1 = opacity;
         if (opacity < 0.0f) {
@@ -238,7 +238,7 @@ void PlTransMdl::SetOpacity(float opacity) {
         }
     }
     mWoolBaseMdl->mColor.a = static_cast<u8>(alpha1 * 255.0f);
-    float alpha2 = 1.0f;
+    f32 alpha2 = 1.0f;
     if (opacity <= 1.0f) {
         alpha2= opacity;
         if (opacity < 0.0f) {
@@ -249,13 +249,13 @@ void PlTransMdl::SetOpacity(float opacity) {
 }
 
 // https://decomp.me/scratch/OqI9A - nonmatching due to std::vector::clear
-void PlTransMdl::SetKeyFrames(float frame, s32 arg2) {
+void PlTransMdl::SetKeyFrames(f32 frame, s32 arg2) {
     FlfMdlDraw* mdlDraw = mFlfMdlDraw;
 
     mKeyFrames.Reset();
 
-    const float start = mdlDraw->mShadowOffsets.mStartFrame;
-    float end = 0.25f * (1.0f - start);
+    const f32 start = mdlDraw->mShadowOffsets.mStartFrame;
+    f32 end = 0.25f * (1.0f - start);
 
     if (frame == 0.0f) {
         mKeyFrames.Add(start, 0.0f);

@@ -25,12 +25,12 @@ public:
     /* 0x0C */ DECL_WEAK virtual void vfC();
     /* 0x10 */ DECL_WEAK virtual void vf10();
     /* 0x14 */ virtual void SetMatrix(nw4r::math::MTX34* matrices);
-    /* 0x18 */ virtual void SetOptions(float);
+    /* 0x18 */ virtual void SetOptions(f32);
     /* 0x1C */ virtual void UpdateFrame();
     /* 0x20 */ DECL_WEAK virtual u32 vf20();
     /* 0x24 */ virtual void vf24(s32);
     /* 0x28 */ virtual void SetCurrentFrame(s32 frame);
-    /* 0x2C */ virtual void SetUpdateRate(float rate);
+    /* 0x2C */ virtual void SetUpdateRate(f32 rate);
     /* 0x30 */ virtual void SetFullSortScene(u32 sceneID);
     /* 0x34 */ virtual void SetVisibility(bool visibility);
     /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& matrix);
@@ -80,7 +80,7 @@ public:
     /* 0x20 */ virtual u32 vf20() override;
     /* 0x24 */ virtual void vf24(s32) override;
     /* 0x28 */ virtual void SetCurrentFrame(s32 frame) override;
-    /* 0x2C */ virtual void SetUpdateRate(float rate) override;
+    /* 0x2C */ virtual void SetUpdateRate(f32 rate) override;
     /* 0x30 */ virtual void SetFullSortScene(u32 sceneID) override;
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
     /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& mtx) override;
@@ -100,12 +100,12 @@ public:
 
     /* 0x08 */ virtual ~FlfDemoPlayerCtrl();
 
-    /* 0x18 */ virtual void SetOptions(float) override;
+    /* 0x18 */ virtual void SetOptions(f32) override;
     /* 0x1C */ virtual void UpdateFrame() override;
     /* 0x20 */ virtual u32 vf20() override;
     /* 0x24 */ virtual void vf24(s32) override;
     /* 0x28 */ virtual void SetCurrentFrame(s32 frame) override;
-    /* 0x2C */ virtual void SetUpdateRate(float rate) override;
+    /* 0x2C */ virtual void SetUpdateRate(f32 rate) override;
     /* 0x30 */ virtual void SetFullSortScene(u32 sceneID) override;
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
     /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& mtx) override;
@@ -245,8 +245,8 @@ public:
     void fn_802BB920();
     void fn_802BBA4C(s32 animID, nw4r::math::VEC2* vec);
     u32 fn_802BBB28() DONT_INLINE_CLASS;
-    float GetCurrentFrame();
-    float GetEndFrame();
+    f32 GetCurrentFrame();
+    f32 GetEndFrame();
     bool IsAnimationDone();
     void SetMatrix(nw4r::math::VEC2*);
     void SetScnMdlWrapper();

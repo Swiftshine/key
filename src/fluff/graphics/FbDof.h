@@ -31,7 +31,7 @@ public:
     /* 0x108 */ GXTexFmt mFormat;
     /* 0x10C */ u16 mYPosition;
     /* 0x110 */ void* mImage;
-    /* 0x114 */ float m_114;
+    /* 0x114 */ f32 m_114;
     /* 0x118 */ bool m_118;
 };
 

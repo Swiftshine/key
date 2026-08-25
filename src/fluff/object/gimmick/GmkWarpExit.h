@@ -25,8 +25,8 @@ public:
     void Update();
 private:
     u32 mFullSortSceneIndex; // @ 0x130
-    float mZOrder3; // @ 0x134
-    float mZOrder4; // @ 0x138
+    f32 mZOrder3; // @ 0x134
+    f32 mZOrder4; // @ 0x138
     gfl::Pointer<NwAnmCtrl> mAnimCtrl; // @ 0x13C
     G3dObjPointer<FbMokoMoko> mFbMokoMoko; // @ 0x140
 };

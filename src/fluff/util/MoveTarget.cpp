@@ -17,11 +17,11 @@ LinearMoveTarget::LinearMoveTarget() {
 
 LinearMoveTarget::~LinearMoveTarget() { }
 
-void LinearMoveTarget::SetSpeed(float speed) {
+void LinearMoveTarget::SetSpeed(f32 speed) {
     mSpeed = speed * SPEED_MULTIPLIER;
 }
 
-bool LinearMoveTarget::Move(float speed, nw4r::math::VEC2& rDst, const nw4r::math::VEC2& rStart, const nw4r::math::VEC2& rEnd) {
+bool LinearMoveTarget::Move(f32 speed, nw4r::math::VEC2& rDst, const nw4r::math::VEC2& rStart, const nw4r::math::VEC2& rEnd) {
     return false;
 }
 
@@ -32,7 +32,7 @@ bool LinearMoveTarget::Move() {
     nw4r::math::VEC2 diff = mEnd - mStart;
 
     if (!gfl::Vec2::Sanitize(diff)) {
-        float len = nw4r::math::VEC2Len(&diff);
+        f32 len = nw4r::math::VEC2Len(&diff);
         
         if (mSpeed < len) {
             nw4r::math::VEC2Normalize(&diff, &diff);

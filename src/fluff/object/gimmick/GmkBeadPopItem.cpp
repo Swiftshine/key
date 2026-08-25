@@ -5,7 +5,7 @@
 #include "manager/GmkBeadManager.h"
 #include "sound/GameSound.h"
 
-const std::pair<const char*, float> StringFloatPairs[] = {
+const std::pair<const char*, f32> StringFloatPairs[] = {
     {"beadPopItem", 0.5f},
     {"beadPopItem", 0.5f},
     {"beadPopItem", 0.5f},
@@ -35,7 +35,7 @@ GmkBeadPopItem::~GmkBeadPopItem() { }
 
 struct StringFloatPair {
     const char* mString;
-    float mFloat;
+    f32 mFloat;
 };
 
 StringFloatPair Pairs[3];
@@ -72,7 +72,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         }
     }
 
-    const float zero = 0.0f;
+    const f32 zero = 0.0f;
 
     mState = GmkBeadPopItem::eState_Init;
     mCompletionPercentage = zero;
@@ -84,7 +84,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     // todo: create inlined ctor for this
     CollisionTemplate cTemplate;
-    // cTemplate.m_14 = Pairs[m_4].mFloat; // todo - replace this with a float from the array
+    // cTemplate.m_14 = Pairs[m_4].mFloat; // todo - replace this with a f32 from the array
     cTemplate.m_14 = -1.0f;
     cTemplate.mCollisionFlags = 1;
     cTemplate.m_4 = 0x19;

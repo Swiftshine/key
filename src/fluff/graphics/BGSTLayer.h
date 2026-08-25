@@ -19,10 +19,10 @@ namespace BGST {
         /* 0x10 */ gfl::Vec2 mMatrixTranslation;
         /* 0x18 */ s32 m_18;
         /* 0x1C */ u32 m_1C;
-        /* 0x20 */ float m_20;
-        /* 0x24 */ float m_24;
-        /* 0x28 */ float m_28;
-        /* 0x2C */ float m_2C;
+        /* 0x20 */ f32 m_20;
+        /* 0x24 */ f32 m_24;
+        /* 0x28 */ f32 m_28;
+        /* 0x2C */ f32 m_2C;
         /* 0x30 */ u32 mSortSceneID;
         /* 0x34 */ bool m_34;
         /* 0x38 */ gfl::Vec2 mPosition;

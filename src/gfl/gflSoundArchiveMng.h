@@ -7,9 +7,9 @@ namespace gfl {
     class SoundArchiveMng {
     public:
         struct SoundListenerSettings {
-            float mMaxVolumeDistance;
-            float mUnitDistance;
-            float mInteriorSize;
+            f32 mMaxVolumeDistance;
+            f32 mUnitDistance;
+            f32 mInteriorSize;
         };
 
     public:
@@ -17,7 +17,7 @@ namespace gfl {
         ~SoundArchiveMng();
 
         virtual void ConfigureSound3DListener(const SoundListenerSettings&);
-        virtual void GetSound3DListenerConfiguration(float dst[3]);
+        virtual void GetSound3DListenerConfiguration(f32 dst[3]);
         
         void OpenArchive(const char* path);
         nw4r::snd::SoundPlayer& GetSoundPlayer(s32);
@@ -40,9 +40,9 @@ namespace gfl {
         s32 m_2E4;
         s32 m_2E8;
         s32 m_2EC;
-        float m_2F0;
-        float m_2F4;
-        float m_2F8;
+        f32 m_2F0;
+        f32 m_2F4;
+        f32 m_2F8;
         s32 m_2FC;
         s32 m_300;
         nw4r::ut::LinkList<nw4r::math::VEC3, 0> mList2;

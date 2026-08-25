@@ -18,7 +18,7 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
     mapdata->mBoundsMin = mapbin->mBoundsMin;
     mapdata->mBoundsMax = mapbin->mBoundsMax;
 
-    float version = mapbin->mVersion;
+    f32 version = mapbin->mVersion;
 
     std::vector<s32> gimmickIDs;
     std::vector<u64> collisionTypes;

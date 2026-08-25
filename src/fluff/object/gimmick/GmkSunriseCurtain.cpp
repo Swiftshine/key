@@ -55,7 +55,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     mFlfMdlDraw2->LoadNURBSFromFileList(&index, 1);
 
     gfl::Mtx34 mtx1;
-    float z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::eSceneID_Far_05, 4);
+    f32 z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::eSceneID_Far_05, 4);
     PSMTXIdentity(mtx1);
 
     gfl::Vec3 tmp1 = mPosition;
@@ -193,7 +193,7 @@ void GmkSunriseCurtain::Update() {
                 gfl::Color from = 0xFFFFFFFF;
                 gfl::Color color;
 
-                float frame = static_cast<float>(mColorChangeFrames);
+                f32 frame = static_cast<f32>(mColorChangeFrames);
 
                 color.Interpolate(
                     frame / 30.0f,
@@ -233,7 +233,7 @@ void GmkSunriseCurtain::Update() {
                 to.a = 0;
                 gfl::Color color;
 
-                float frame = static_cast<float>(mColorChangeFrames);
+                f32 frame = static_cast<f32>(mColorChangeFrames);
 
                 color.Interpolate(
                     frame / 30.0f,

@@ -53,12 +53,12 @@ void RenderObj::vf20(bool arg1) {
     }
 }
 
-bool RenderObj::vf34(float arg0, float arg1, float arg2, float arg3) {
+bool RenderObj::vf34(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     if (!vf1C()) {
         return true;
     }
 
-    float updateRate = GetUpdateRate();
+    f32 updateRate = GetUpdateRate();
 
     if (updateRate <= 0.0f) {
         return false;
@@ -66,15 +66,15 @@ bool RenderObj::vf34(float arg0, float arg1, float arg2, float arg3) {
 
     gfl::Vec3 vec = vf28();
 
-    float temp = (arg0 - vec.x);
-    float temp2 = (arg2 + updateRate);
+    f32 temp = (arg0 - vec.x);
+    f32 temp2 = (arg2 + updateRate);
 
     if (temp * temp > temp2 * temp2) {
         return true;
     }
 
-    float temp3 = (arg1 - vec.y);
-    float temp4 = (arg3 + updateRate);
+    f32 temp3 = (arg1 - vec.y);
+    f32 temp4 = (arg3 + updateRate);
 
     return temp3 * temp3 > temp4 * temp4;
 }

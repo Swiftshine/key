@@ -22,9 +22,9 @@ public:
     MTX34* mOwnerMatrix;
     bool m_20;
     bool m_21;
-    float m_24;
+    f32 m_24;
     s32 mFullSortSceneID;
-    float mZOrder;
+    f32 mZOrder;
     bool m_30;
     bool m_31;
     s32 m_34;

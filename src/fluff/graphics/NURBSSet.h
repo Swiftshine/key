@@ -8,7 +8,7 @@
 // size unk
 class NURBSSet {
 public:
-    void Set(float, u32 count, bool, const gfl::ResFileObject& rResFileObject);
+    void Set(f32, u32 count, bool, const gfl::ResFileObject& rResFileObject);
     NURBSObject* GetObject(u32 index) const;
     /* Class Members */
 

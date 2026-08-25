@@ -123,7 +123,7 @@ public:
         IncrementCurrentFrame(mIncrementAmount);
     }
 
-    float AdvanceFrame(float arg1, std::string* pName = nullptr);
+    f32 AdvanceFrame(f32 arg1, std::string* pName = nullptr);
     
     void Add(T start, T end, const char* pName = nullptr) DONT_INLINE_CLASS {
         size_t count = mInnerKeyFrames.size();
@@ -155,8 +155,8 @@ public:
     /* Class Members */
 
     /* 0x04 */ VectorWrapper<InnerKeyFrame> mInnerKeyFrames;
-    /* 0x10 */ float mCurrentFrame;
-    /* 0x14 */ float mIncrementAmount;
+    /* 0x10 */ f32 mCurrentFrame;
+    /* 0x14 */ f32 mIncrementAmount;
     /* 0x18 */ bool mHasFrames;
 };
 

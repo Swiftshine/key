@@ -45,8 +45,8 @@ private:
     s32 m_134;
     bool m_138;
     s32 mState; // @ 0x13C
-    float mCompletionPercentage; // @ 0x140, on a scale of 0.0 to 1.0
-    float m_144;
+    f32 mCompletionPercentage; // @ 0x140, on a scale of 0.0 to 1.0
+    f32 m_144;
     bool mCollisionEnabled; // @ 0x148
     bool m_149;
     std::string m_14C; // size: 0xC

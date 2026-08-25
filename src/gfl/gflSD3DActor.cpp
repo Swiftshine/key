@@ -68,8 +68,8 @@ SoundHandle SD3DActor::GetSoundHandle(s32 soundID, s32 arg2, s32 arg3) {
 }
 
 SoundHandle SD3DActorWrapper::fn_802CFEBC(
-    float arg1,
-    float arg2,
+    f32 arg1,
+    f32 arg2,
     s32 soundID,
     s32 arg5,
     s32 arg6

@@ -35,11 +35,11 @@ public:
     /* 0x08C */ virtual bool IsPlayerSavedPositionInFront() const;
 	/* 0x090 */ virtual bool IsPositionInFront(const gfl::Vec2& rPos) const;
 	/* 0x094 */ virtual bool vf94(const gfl::Vec2& rPos) const; // related to checking position against some camera bounds
-	/* 0x098 */ virtual bool vf98(float, float, const gfl::Vec2&) const;
-	/* 0x09C */ virtual bool IsInRange(const gfl::Vec3& rTarget, float* pDistance) const;
+	/* 0x098 */ virtual bool vf98(f32, f32, const gfl::Vec2&) const;
+	/* 0x09C */ virtual bool IsInRange(const gfl::Vec3& rTarget, f32* pDistance) const;
 	/* 0x0A0 */ virtual void vfA0(ScreenPosition& rPos);
-	/* 0x0A4 */ virtual void vfA4(float, gfl::Vec3, bool);
-	/* 0x0A8 */ virtual void vfA8(float, float, gfl::Vec3, bool);
+	/* 0x0A4 */ virtual void vfA4(f32, gfl::Vec3, bool);
+	/* 0x0A8 */ virtual void vfA8(f32, f32, gfl::Vec3, bool);
 	/* 0x0AC */ virtual void vfAC();
 	/* 0x0B0 */ virtual void ResetScreen(const ScreenPosition& rPos);
 	/* 0x0B4 */ virtual void ResetCollision();
@@ -50,7 +50,7 @@ public:
 	/* 0x0C8 */ virtual void vfC8();
 	/* 0x0CC */ virtual void vfCC();
 	/* 0x0D0 */ virtual void StartMission(PlayerBase* pPlayer, bool) = 0;
-	/* 0x0D4 */ virtual void vfD4(float, const gfl::Vec3&);
+	/* 0x0D4 */ virtual void vfD4(f32, const gfl::Vec3&);
 	/* 0x0D8 */ virtual bool vfD8() const;
 	/* 0x0DC */ DECL_WEAK virtual bool vfDC() const;
 	/* 0x0E0 */ virtual bool vfE0() const;
@@ -68,7 +68,7 @@ public:
 	/* 0x110 */ virtual void SetNURBSAnimationInfo(s32 id, bool isReset);
 	/* 0x114 */ virtual u32 GetCurrentNURBSAnimationID() const;
 	/* 0x118 */ virtual void PlayNURBSAnimation(s32, bool);
-	/* 0x11C */ virtual void SetCurrentNURBSAnimationFrame(float frame);
+	/* 0x11C */ virtual void SetCurrentNURBSAnimationFrame(f32 frame);
 	/* 0x120 */ DECL_WEAK virtual u32 GetCurrentAnimationID() const;
 	/* 0x124 */ virtual void vf124();
 	/* 0x128 */ virtual bool vf128() const;
@@ -135,13 +135,13 @@ public:
 	// Switch direction to face the target.
 	/* 0x21C */ virtual void LookAt(const ScreenPosition& rPos);
 	/* 0x220 */ DECL_WEAK virtual void vf220(/* unk args (it's not void) */);
-	/* 0x224 */ virtual void vf224(float arg1);
-	/* 0x228 */ virtual float vf228() const;
-	/* 0x22C */ virtual void vf22C(float arg1);
-	/* 0x230 */ virtual float vf230() const;
-	/* 0x234 */ virtual void vf234(float arg1);
-	/* 0x238 */ virtual float vf238() const;
-	/* 0x23C */ virtual void vf23C(float arg1);
+	/* 0x224 */ virtual void vf224(f32 arg1);
+	/* 0x228 */ virtual f32 vf228() const;
+	/* 0x22C */ virtual void vf22C(f32 arg1);
+	/* 0x230 */ virtual f32 vf230() const;
+	/* 0x234 */ virtual void vf234(f32 arg1);
+	/* 0x238 */ virtual f32 vf238() const;
+	/* 0x23C */ virtual void vf23C(f32 arg1);
 	/* 0x240 */ virtual void vf240();
 	/* 0x244 */ virtual bool IsAnimationDone() const;
 	/* 0x248 */ virtual void vf248();
@@ -166,7 +166,7 @@ public:
 	bool fn_8033BE64() DONT_INLINE_CLASS;
     void fn_8033BF8C(s32);
     void fn_8033BFC8(s32 targetState, s32 currentState);
-	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const DONT_INLINE_CLASS;
+	bool fn_8033C004(f32 arg1, const gfl::Vec2& rVec) const DONT_INLINE_CLASS;
 	void SetTransform(gfl::Mtx34& rMtx);
 	void fn_8033C488();
 	void fn_8033C580(u32);
@@ -186,8 +186,8 @@ public:
 
     /* Static Methods */
 
-    static float Square(float val);
-    static float fn_8033B710();
+    static f32 Square(f32 val);
+    static f32 fn_8033B710();
 	static s32 fn_8033BEFC(std::tree<placeholder_t>& rTree, s32*);
 
     /* Class Members */
@@ -205,16 +205,16 @@ public:
     /* 0x0C4 */ StateObject mState;
     /* 0x0D8 */ std::tree<placeholder_t> m_D8;
     /* 0x0E4 */ gfl::Vec3 mSpeed;
-    /* 0x0F0 */ float m_F0;
+    /* 0x0F0 */ f32 m_F0;
     /* 0x0F4 */ gfl::Vec3 m_F4;
-    /* 0x100 */ float m_100;
-    /* 0x104 */ float m_104;
-    /* 0x108 */ float m_108;
-    /* 0x10C */ float m_10C;
-    /* 0x110 */ float m_110;
-    /* 0x114 */ float m_114;
+    /* 0x100 */ f32 m_100;
+    /* 0x104 */ f32 m_104;
+    /* 0x108 */ f32 m_108;
+    /* 0x10C */ f32 m_10C;
+    /* 0x110 */ f32 m_110;
+    /* 0x114 */ f32 m_114;
     /* 0x118 */ ScreenPosition mScreenPosition1;
-    /* 0x124 */ float m_124;
+    /* 0x124 */ f32 m_124;
     /* 0x128 */ ScreenPosition mScreenPosition2;
     /* 0x134 */ s32 m_134;
     /* 0x138 */ bool mUpdateFrame;

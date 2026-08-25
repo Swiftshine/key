@@ -14,12 +14,12 @@ public:
 
     /// @note Size: `0x50`
     struct WoolBuildInfo {
-        /* 0x00 */ float m_0;
-        /* 0x04 */ float m_4;
-        /* 0x08 */ float m_8;
-        /* 0x0C */ float m_C;
-        /* 0x10 */ float m_10;
-        /* 0x14 */ float m_14;
+        /* 0x00 */ f32 m_0;
+        /* 0x04 */ f32 m_4;
+        /* 0x08 */ f32 m_8;
+        /* 0x0C */ f32 m_C;
+        /* 0x10 */ f32 m_10;
+        /* 0x14 */ f32 m_14;
         /* 0x18 */ s32 m_18;
         /* 0x1C */ s32 m_1C;
         /* 0x20 */ s32 m_20;

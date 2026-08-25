@@ -57,8 +57,8 @@ public:
     DECL_WEAK void SetNumZekeFound(s32 num);
     DECL_WEAK s32 GetNumZekeFound();
     s32 GetMaxZekeFound();
-    void fn_801FF428(float arg1, s32 index);
-    float fn_801FF448(s32 index) const;
+    void fn_801FF428(f32 arg1, s32 index);
+    f32 fn_801FF448(s32 index) const;
     bool fn_801FF46C(s32 arg1) const;
     void SetTimeAttackStatus(s32 status);
     s32 GetTimeAttackStatus() const;
@@ -101,7 +101,7 @@ public:
     /* 0x044 */ s32 mNumEnemiesDefeated;
     /* 0x048 */ s32 mNumZekeFound;
     /* 0x04C */ s32 mMaxZekeFound;
-    /* 0x050 */ float m_50[3];
+    /* 0x050 */ f32 m_50[3];
     /* 0x05C */ s32 mTimeAttackStatus;
     /// @brief The number of beads required to get a
     /// wood, bronze, silver, or gold medal, in that order.

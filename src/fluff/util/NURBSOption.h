@@ -11,7 +11,7 @@ public:
 
     /* Class Methods */
 
-    s16 GetOption(float arg0);
+    s16 GetOption(f32 arg0);
 
     inline void SetCount(size_t count) {
         mCount = count;

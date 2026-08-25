@@ -10,7 +10,7 @@ namespace gfl {
             , mBottom(0.0f)
         { }
         
-        float mLeft, mTop, mRight, mBottom;
+        f32 mLeft, mTop, mRight, mBottom;
     };
 }
 

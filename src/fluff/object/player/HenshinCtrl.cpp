@@ -104,7 +104,7 @@ void HenshinCtrl::vfB0() {
 
 void HenshinCtrl::vfB4() { }
 
-bool HenshinCtrl::vfD8(float arg1, PlayerBase* pPlayer, PlTransMdl* pPlTransMdl) {
+bool HenshinCtrl::vfD8(f32 arg1, PlayerBase* pPlayer, PlTransMdl* pPlTransMdl) {
     // not decompiled
     return true;
 }

@@ -16,13 +16,13 @@
 
 const CollisionTemplate ColTemplate;
 
-float lbl_808E9D94 = 0.0001f;
+f32 lbl_808E9D94 = 0.0001f;
 
-float FlfFriend::Square(float val) {
+f32 FlfFriend::Square(f32 val) {
     return val * val;
 }
 
-float FlfFriend::fn_8033B710() {
+f32 FlfFriend::fn_8033B710() {
     return 10.0f;
 }
 
@@ -169,7 +169,7 @@ bool FlfFriend::fn_8033BD68(const gfl::Vec3& rV1, const gfl::Vec3& rV2, const gf
 #pragma push
 #pragma global_optimizer off
 bool FlfFriend::fn_8033BE24(const gfl::Vec3& rV1, const gfl::Vec3& rV2) const {
-    float diff = rV2.x - rV1.x;
+    f32 diff = rV2.x - rV1.x;
     if (0.0f < diff) {
         return false;
     }
@@ -206,7 +206,7 @@ void FlfFriend::fn_8033BFC8(s32 targetState, s32 currentState) {
     // not decompiled
 }
 
-bool FlfFriend::fn_8033C004(float arg1, const gfl::Vec2& rVec) const {
+bool FlfFriend::fn_8033C004(f32 arg1, const gfl::Vec2& rVec) const {
     if (IsPositionInFront(rVec)) {
         // not decompiled
         return false;
@@ -232,20 +232,20 @@ void FlfFriend::GetTransform(gfl::Mtx34& rMtx, gfl::Vec3& rPos, gfl::Vec3& rRot,
     gfl::Mtx34 mtx = rMtx;
     rPos = rMtx.GetTranslation();
 
-    float* f = rMtx.m[0];
-    float* sf = &rScale.x;
+    f32* f = rMtx.m[0];
+    f32* sf = &rScale.x;
 
     for (u32 i = 0; i < 3; i++) {
-        float f1 = Square(*f);
-        float f2 = Square(*(f + 1));
-        float f3 = Square(*(f + 3));
+        f32 f1 = Square(*f);
+        f32 f2 = Square(*(f + 1));
+        f32 f3 = Square(*(f + 3));
 
-        float root = sqrt(f1 + f2 + f3);
+        f32 root = sqrt(f1 + f2 + f3);
 
         sf[i] = root;
 
         if (root != 0.0f) {
-            float unk = 1.0f / *sf;
+            f32 unk = 1.0f / *sf;
             *f = *f * unk;
             *(f + 1) = unk;
             *(f + 2) = unk;
@@ -286,7 +286,7 @@ void FlfFriend::PlayNURBSAnimation(s32 id, bool resetFrame) {
     SetNURBSAnimationInfo(id, resetFrame);
 }
 
-void FlfFriend::SetCurrentNURBSAnimationFrame(float frame) {
+void FlfFriend::SetCurrentNURBSAnimationFrame(f32 frame) {
     mFlfMdlDraw->SetCurrentNURBSFrame(frame);
 }
 
@@ -361,13 +361,13 @@ bool FlfFriend::vf94(const gfl::Vec2& rPos) const {
     return false;
 }
 
-bool FlfFriend::vf98(float, float, const gfl::Vec2&) const {
+bool FlfFriend::vf98(f32, f32, const gfl::Vec2&) const {
     // not decompiled
     return false;
 }
 
 // https://decomp.me/scratch/UexL5
-bool FlfFriend::IsInRange(const gfl::Vec3& rTarget, float* pDistance) const {
+bool FlfFriend::IsInRange(const gfl::Vec3& rTarget, f32* pDistance) const {
     return (rTarget - mPosition).Length() <= *pDistance;
 }
 
@@ -446,7 +446,7 @@ void FlfFriend::ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl md
 
 // https://decomp.me/scratch/QqYhN
 void FlfFriend::SetScreenPosition(s32* pDirection) {
-    float x, y, w, h;
+    f32 x, y, w, h;
     CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::eSceneID_Game);
 
     if (*pDirection == eDirection_Forward) {
@@ -475,8 +475,8 @@ PlayerBase* FlfFriend::GetClosestPlayer() const {
             gfl::Vec3 retPos = gfl::Vec3::SubXY(ret->mPosition, pos);
             gfl::Vec3 playerPos = gfl::Vec3::SubXY(player->mPosition, pos);
 
-            float retDist = retPos.Length();
-            float playerDist = playerPos.Length();
+            f32 retDist = retPos.Length();
+            f32 playerDist = playerPos.Length();
 
             if (playerDist < retDist) {
                 ret = player;
@@ -487,35 +487,35 @@ PlayerBase* FlfFriend::GetClosestPlayer() const {
     return ret;
 }
 
-void FlfFriend::vfD4(float, const gfl::Vec3&) {
+void FlfFriend::vfD4(f32, const gfl::Vec3&) {
     // not decompiled
 }
 
-void FlfFriend::vf23C(float arg1) {
+void FlfFriend::vf23C(f32 arg1) {
     m_108 = arg1;
 }
 
-float FlfFriend::vf238() const {
+f32 FlfFriend::vf238() const {
     return m_108;
 }
 
-void FlfFriend::vf234(float arg1) {
+void FlfFriend::vf234(f32 arg1) {
     m_104 = arg1;
 }
 
-float FlfFriend::vf230() const {
+f32 FlfFriend::vf230() const {
     return m_104;
 }
 
-void FlfFriend::vf22C(float arg1) {
+void FlfFriend::vf22C(f32 arg1) {
     m_100 = arg1;
 }
 
-float FlfFriend::vf228() const {
+f32 FlfFriend::vf228() const {
     return m_100;
 }
 
-void FlfFriend::vf224(float arg1) {
+void FlfFriend::vf224(f32 arg1) {
     m_F0 = arg1;
 }
 
@@ -571,10 +571,10 @@ void FlfFriend::vfAC() {
 }
 
 // sdata2
-float lbl_808E9D90 = 10.0f;
+f32 lbl_808E9D90 = 10.0f;
 
 // https://decomp.me/scratch/kBHxR
-// this matches if you swap x and y and make lbl_808E9D90 a const float,
+// this matches if you swap x and y and make lbl_808E9D90 a const f32,
 // but that's not correct
 void FlfFriend::ResetScreen(const ScreenPosition& rPos) {
     if (mEffect != nullptr) {
@@ -733,8 +733,8 @@ void FlfFriend::SetPositionToPlayerSavedPosition() {
         gfl::Vec3 pos;
         pos = player->mSavedPosition;
 
-        float xOffs = 1.5f;
-        float yOffs = 2.5f;
+        f32 xOffs = 1.5f;
+        f32 yOffs = 2.5f;
         if (dir == eDirection_Forward) {
             pos.x -= xOffs;
             pos.y += yOffs;
@@ -813,8 +813,8 @@ void FlfFriend::fn_8033E570() {
     // not decompiled
 }
 
-float lbl_808E1814 = 1.8f;
-float lbl_808E1818 = 1.5f;
+f32 lbl_808E1814 = 1.8f;
+f32 lbl_808E1818 = 1.5f;
 
 bool FlfFriend::fn_8033E648() {
     if (!fn_8033E84C()) {
@@ -906,7 +906,7 @@ bool FlfFriend::fn_8033E8A8() const {
 }
 
 gfl::Vec3 FlfFriend::fn_8033E940() const {
-    float x, y, w, h;
+    f32 x, y, w, h;
     CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::eSceneID_Game);
     gfl::Vec3 ret;
     ret.Set(w * 0.5f + x, -(h * 0.5f - y), 0.0f);
@@ -931,11 +931,11 @@ void FlfFriend::vfA0(ScreenPosition& rPos) {
     // not decompiled
 }
 
-void FlfFriend::vfA4(float, gfl::Vec3, bool) {
+void FlfFriend::vfA4(f32, gfl::Vec3, bool) {
     // not decompiled
 }
 
-void FlfFriend::vfA8(float, float, gfl::Vec3, bool) {
+void FlfFriend::vfA8(f32, f32, gfl::Vec3, bool) {
     // not decompiled
 }
 
@@ -943,7 +943,7 @@ void FlfFriend::vfA8(float, float, gfl::Vec3, bool) {
 void FlfFriend::vf240() {
     mSpeed *= vf230();
 
-    float thresh = 0.0001f;
+    f32 thresh = 0.0001f;
 
     if (fabsf(mSpeed.x) < thresh) {
         mSpeed.x = 0.0f;

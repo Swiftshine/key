@@ -34,16 +34,16 @@ public:
 
     void PlayNURBSAnimation(s32 animID, bool resetFrame) const;
     bool IsAnimationDone() const;
-    void SetUpdateRate(float rate);
+    void SetUpdateRate(f32 rate);
     void SetDefaultUpdateRate();
-    float GetUpdateRate() const;
+    f32 GetUpdateRate() const;
     void SetMatrix(const gfl::Mtx34& rMtx);
     void SetMatrix(const gfl::Mtx34& rMtx, s32 direction);
     void GetMatrix(gfl::Mtx34& rMtx);
     bool GetMatrix(const char* pName, gfl::Mtx34& rMtx);
     s32 ResetScene(FullSortScene* pScene);
-    void SetOpacity(float opacity);
-    void SetKeyFrames(float frame, s32 arg2);
+    void SetOpacity(f32 opacity);
+    void SetKeyFrames(f32 frame, s32 arg2);
     void UpdateKeyFrames();
     void Init();
 
@@ -51,7 +51,7 @@ public:
     /* 0x08 */ s32 mNumModels;
     /* 0x0C */ gfl::Pointer<FlfMdlDraw> mFlfMdlDraw;
     /* 0x10 */ G3dObjPointer<WoolBaseMdl> mWoolBaseMdl;
-    /* 0x14 */ KeyFrame<float> mKeyFrames;
+    /* 0x14 */ KeyFrame<f32> mKeyFrames;
 };
 
 #endif

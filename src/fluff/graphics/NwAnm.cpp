@@ -1,7 +1,7 @@
 #include "graphics/NwAnm.h"
 #include <nw4r/g3d/g3d_anmobj.h>
 
-float NwAnm::GetCurrentFrame() {
+f32 NwAnm::GetCurrentFrame() {
     if (mTexPatAnim != nullptr) {
         return mTexPatAnim->GetFrame();
     }
@@ -29,7 +29,7 @@ float NwAnm::GetCurrentFrame() {
     return 0.0f;
 }
 
-void NwAnm::SetCurrentFrame(float frame) {
+void NwAnm::SetCurrentFrame(f32 frame) {
     if (mTexPatAnim != nullptr) {
         mTexPatAnim->SetFrame(frame);
     }
@@ -55,7 +55,7 @@ void NwAnm::SetCurrentFrame(float frame) {
     }
 }
 
-void NwAnm::SetUpdateRate(float rate) {
+void NwAnm::SetUpdateRate(f32 rate) {
     if (mTexPatAnim != nullptr) {
         mTexPatAnim->SetUpdateRate(rate);
     }
@@ -81,7 +81,7 @@ void NwAnm::SetUpdateRate(float rate) {
     }
 }
 
-float NwAnm::GetUpdateRate() {
+f32 NwAnm::GetUpdateRate() {
     if (mTexPatAnim != nullptr) {
         return mTexPatAnim->GetUpdateRate();
     }

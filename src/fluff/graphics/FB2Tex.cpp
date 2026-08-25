@@ -45,7 +45,7 @@ void FB2Tex::Blit(bool setBlendMode) {
     GXSetCurrentMtx(0);
     nw4r::math::MTX44 proj;
 
-    float one = 1.0f;
+    f32 one = 1.0f;
 
     C_MTXOrtho(proj, one, -one, -one, one, 0.0, 10000.0f);
     GXSetProjection(proj, (GXProjectionType)1);
@@ -122,7 +122,7 @@ void FB2Tex::RefreshTexture() {
     GXCopyTex(mImage, m_135);
     GXPixModeSync();
     GXInitTexObj(&mTexObj, mImage, mDestWidth, mDestHeight, mTextureFormat, (GXTexWrapMode)0, (GXTexWrapMode)0, FALSE);
-    float zero = 0.0f;
+    f32 zero = 0.0f;
     GXInitTexObjLOD(&mTexObj, (GXTexFilter)1, (GXTexFilter)0, zero, zero, zero, FALSE, FALSE, (GXAnisotropy)0);
 }
 
@@ -134,7 +134,7 @@ void FB2Tex::DrawXlu() {
 
 void FB2Tex::InitTexObj() {
     GXInitTexObj(&mTexObj, mImage, mDestWidth, mDestHeight, mTextureFormat, (GXTexWrapMode)0, (GXTexWrapMode)0, FALSE);
-    float zero = 0.0f;
+    f32 zero = 0.0f;
     GXInitTexObjLOD(&mTexObj, (GXTexFilter)1, (GXTexFilter)0, zero, zero, zero, FALSE, FALSE, (GXAnisotropy)0);
     u32 len = GXGetTexBufferSize(mDestWidth, mDestHeight, mTextureFormat, 0, 0);
 

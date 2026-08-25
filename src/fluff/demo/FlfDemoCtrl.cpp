@@ -67,14 +67,14 @@ void FlfDemoNodeCtrl::ResetOptions(gfl::Offset<MNEB::DemoOptionSet>& rDemoOption
     }
 }
 
-void FlfDemoNodeCtrl::SetOptions(float arg0) {
+void FlfDemoNodeCtrl::SetOptions(f32 arg0) {
     if (mBlendFrame.IsValid()) {
         s16 opt = mBlendFrame->GetOption(arg0);
         SetCurrentFrame(static_cast<s32>(opt));
     }
 
     if (mUpdateRate.IsValid()) {
-        SetUpdateRate(0.01f * static_cast<float>(static_cast<s32>(mUpdateRate->GetOption(arg0))));
+        SetUpdateRate(0.01f * static_cast<f32>(static_cast<s32>(mUpdateRate->GetOption(arg0))));
     }
 
     if (mLayer.IsValid()) {
@@ -106,7 +106,7 @@ void FlfDemoNodeCtrl::SetCurrentFrame(s32 frame) {
     return;
 }
 
-void FlfDemoNodeCtrl::SetUpdateRate(float rate) {
+void FlfDemoNodeCtrl::SetUpdateRate(f32 rate) {
     return;
 }
 
@@ -198,7 +198,7 @@ u32 FlfDemoCharCtrl::vf20() {
     return mFlfMdlDraw->mCurrentAnimationID;
 }
 
-void FlfDemoCharCtrl::SetUpdateRate(float rate) {
+void FlfDemoCharCtrl::SetUpdateRate(f32 rate) {
     mFlfMdlDraw->SetUpdateRate(rate);
 }
 
@@ -283,7 +283,7 @@ void FlfDemoPlayerCtrl::UpdateFrame() {
     }
 }
 
-void FlfDemoPlayerCtrl::SetOptions(float arg0) {
+void FlfDemoPlayerCtrl::SetOptions(f32 arg0) {
     FlfDemoNodeCtrl::SetOptions(arg0);
 
     if (mPlayer != nullptr && mPlayer->mFlfMdlCollision != nullptr) {
@@ -332,7 +332,7 @@ void FlfDemoPlayerCtrl::SetCurrentFrame(s32 frame) {
     }
 }
 
-void FlfDemoPlayerCtrl::SetUpdateRate(float rate) {
+void FlfDemoPlayerCtrl::SetUpdateRate(f32 rate) {
     if (mPlayer != nullptr) {
         mPlayer->mPlayerMdlMng->SetUpdateRate(rate);
     }
@@ -677,12 +677,12 @@ void FlfDemoCtrl::ClearNodeControls() {
 //         s32 someFrame = m_34->GetUnk24();
 
 //         if (someFrame != 0) {
-//             float end = mFlfMdlDraw->GetEndFrame();
-//             mFlfMdlDraw->SetCurrentNURBSFrame(end - static_cast<float>(someFrame));
+//             f32 end = mFlfMdlDraw->GetEndFrame();
+//             mFlfMdlDraw->SetCurrentNURBSFrame(end - static_cast<f32>(someFrame));
 //         }
 //     }
 
-//     float current = mFlfMdlDraw->GetCurrentFrame();
+//     f32 current = mFlfMdlDraw->GetCurrentFrame();
 
 //     FlfDemoNodeCtrl* nodeCtrl;
 
@@ -739,11 +739,11 @@ u32 FlfDemoCtrl::fn_802BBB28() {
     return mFlfMdlDraw->mCurrentAnimationID;
 }
 
-float FlfDemoCtrl::GetCurrentFrame() {
+f32 FlfDemoCtrl::GetCurrentFrame() {
     return mFlfMdlDraw->GetCurrentFrame();
 }
 
-float FlfDemoCtrl::GetEndFrame() {
+f32 FlfDemoCtrl::GetEndFrame() {
     return mFlfMdlDraw->GetEndFrame();
 }
 

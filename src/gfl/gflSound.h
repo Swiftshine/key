@@ -28,8 +28,8 @@ namespace gfl {
         void DestroySD3DActorInner(SD3DActorInner* pActor);
         void PlaySoundEffect(u32 sfxID, u32 arg2);
         void PlaySoundEffect(SoundHandle&, nw4r::math::VEC3& rPos);
-        void fn_8064D288(float, SoundHandleInner*, s32);
-        void fn_8064D2B4(float, SoundHandleInner*);
+        void fn_8064D288(f32, SoundHandleInner*, s32);
+        void fn_8064D2B4(f32, SoundHandleInner*);
         bool ValidateSoundHandleSound(SoundHandleInner*);
         static void fn_8000781C(s32, s32 /* duration? */);
     };

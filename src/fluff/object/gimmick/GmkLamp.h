@@ -10,7 +10,7 @@ public:
     GmkLamp(GimmickBuildInfo* buildInfo);
     virtual ~GmkLamp();
 
-    float fn_805B6DB4();
+    f32 fn_805B6DB4();
 private:
     STRUCT_FILL(0x168 - sizeof(Gimmick));
 };

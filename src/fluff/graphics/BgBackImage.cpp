@@ -26,21 +26,21 @@ BgBackImage::BgBackImage()
     u16 width;
     u16 height;
     GXTexFmt format;
-    float minLod;
-    float maxLod;
+    f32 minLod;
+    f32 maxLod;
     GXBool mipMap;
 
     tex.GetTexObjParam(&image, &width, &height, &format, &minLod, &maxLod, &mipMap);
     GXInitTexObj(&mTexObj, image, width, height, format, GX_REPEAT, GX_REPEAT, mipMap);
 
-    mWidth = static_cast<float>(width);
-    mHeight = static_cast<float>(height);
+    mWidth = static_cast<f32>(width);
+    mHeight = static_cast<f32>(height);
 
     MTX34 matrix; // never used
     ZERO_MTX_34(matrix);
     PSMTXIdentity(matrix);
 
-    float zOrder = FullSortSceneUtil::GetZOrder(0, 1) - 105.0f - 100.0f;
+    f32 zOrder = FullSortSceneUtil::GetZOrder(0, 1) - 105.0f - 100.0f;
 
     gfl::Vec3 vec(0.0f);
     vec.z = zOrder;
@@ -55,7 +55,7 @@ BgBackImage::BgBackImage()
 
 BgBackImage::~BgBackImage() { }
 
-#define FLOOR(x) static_cast<float>(static_cast<s32>(x))
+#define FLOOR(x) static_cast<f32>(static_cast<s32>(x))
 #define SCALE_FACTOR 46.0f
 
 void BgBackImage::DrawXlu() {
@@ -94,8 +94,8 @@ void BgBackImage::DrawXlu() {
     GXSetVtxAttrFmt((GXVtxFmt)0, (GXAttr)0xd, (GXCompCnt)1, (GXCompType)4, 0);
 
     struct Vec2f_swapped {
-        float y;
-        float x;
+        f32 y;
+        f32 x;
     };
 
     Vec2f_swapped pos;
@@ -105,14 +105,14 @@ void BgBackImage::DrawXlu() {
 
     CamMng::Instance()->GetScreenBounds(&pos.x, &pos.y, &offs.x, &offs.y, 6);
 
-    float width = mWidth / SCALE_FACTOR;
-    float height = mHeight / SCALE_FACTOR;
+    f32 width = mWidth / SCALE_FACTOR;
+    f32 height = mHeight / SCALE_FACTOR;
 
-    float minX = pos.x / width - FLOOR(pos.x / width);
-    float minY = 1.0f - (pos.y / height - FLOOR(pos.y / height));
+    f32 minX = pos.x / width - FLOOR(pos.x / width);
+    f32 minY = 1.0f - (pos.y / height - FLOOR(pos.y / height));
 
-    float w = offs.x / width;
-    float h = offs.y / height;
+    f32 w = offs.x / width;
+    f32 h = offs.y / height;
 
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 

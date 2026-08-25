@@ -177,8 +177,8 @@ void KdTreeNode::TryPropagate(ColData* pColData) {
 
 // https://decomp.me/scratch/3HOVE
 void KdTreeNode::CreateChildren() {
-    float xDiff;
-    float yDiff;
+    f32 xDiff;
+    f32 yDiff;
 
     xDiff = GetMinX() - GetMaxX();
     if (0.0f > xDiff) {
@@ -192,12 +192,12 @@ void KdTreeNode::CreateChildren() {
 
     nw4r::math::VEC2 v0;
     nw4r::math::VEC2 v1;
-    const float* p;
+    const f32* p;
 
     if (xDiff <= yDiff) {
         p = &mBounds.mMinY;
 
-        float mid = 0.5f * yDiff + GetMinX();
+        f32 mid = 0.5f * yDiff + GetMinX();
 
         v0.y = GetMinY();
         v0.x = mid;
@@ -210,7 +210,7 @@ void KdTreeNode::CreateChildren() {
     } else {
         p = &mBounds.mMinX;
 
-        float mid = 0.5f * xDiff + GetMinY();
+        f32 mid = 0.5f * xDiff + GetMinY();
 
         v0.x = GetMinX();
         v0.y = mid;

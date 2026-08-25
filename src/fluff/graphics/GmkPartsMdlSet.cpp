@@ -24,7 +24,7 @@ GmkPartsMdlSet::~GmkPartsMdlSet() {
     mShadowModel = nullptr;
 }
 
-void GmkPartsMdlSet::SetMatrix(const float zOffset, nw4r::math::MTX34& rSrcMatrix, bool arg3) {
+void GmkPartsMdlSet::SetMatrix(const f32 zOffset, nw4r::math::MTX34& rSrcMatrix, bool arg3) {
     nw4r::math::MTX34 mtx = rSrcMatrix;
     mPrimaryModel->SetMatrix_thunk(mtx);
 
@@ -87,7 +87,7 @@ void GmkPartsMdlSet::SetUpdate(bool update) {
     }
 }
 
-void GmkPartsMdlSet::fn_802374D4(float arg1) {
+void GmkPartsMdlSet::fn_802374D4(f32 arg1) {
     mPrimaryModel->fn_8065DCDC(arg1);
 
     if (mShadowModel != nullptr) {

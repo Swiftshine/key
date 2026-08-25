@@ -5,7 +5,7 @@
 #include "manager/Stage.h"
 
 extern "C" {
-    float lbl_808E697C;
+    f32 lbl_808E697C;
 }
 
 void GmkVictoryStand::AddDecorativeBallResources() {
@@ -146,7 +146,7 @@ void GmkVictoryStand::AwardBeads() {
 
         nw4r::math::VEC2 beadPosition(0.0f, 0.0f);
         GmkBead* bead = BeadUtil::CreateBead(beadType, beadColor % 7, beadPosition);
-        bead->fn_800B0658((float)rand());
+        bead->fn_800B0658((f32)rand());
         bead->SetPosition(*(nw4r::math::VEC3*)&beadPosition);
 
         // unfinished

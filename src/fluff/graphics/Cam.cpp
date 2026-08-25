@@ -20,7 +20,7 @@ extern "C" {
     void SomeMTX34Trans(MTX34, nw4r::math::MTX34&, nw4r::math::VEC3&);
 
     // code merging. returns (r3 + 0x14)
-    float* fn_8059F64C(void*);
+    f32* fn_8059F64C(void*);
 }
 
 #define DEG_TO_RAD(deg) (NW4R_MATH_PI / 180.0f) * deg
@@ -53,14 +53,14 @@ Cam::~Cam() { }
 
 // nonmatching
 void Cam::Reset() {
-    const float baseZ = BASE_Z;
+    const f32 baseZ = BASE_Z;
     m_8 = CamStructInstance.m_0;
     m_C = CamStructInstance.m_4;
     mCameraTwist = CamStructInstance.mCameraTwist;
 
-    float x = CamStructInstance.mCameraTarget.x;
-    float y = CamStructInstance.mCameraTarget.y;
-    float z = CamStructInstance.mCameraTarget.z;
+    f32 x = CamStructInstance.mCameraTarget.x;
+    f32 y = CamStructInstance.mCameraTarget.y;
+    f32 z = CamStructInstance.mCameraTarget.z;
 
     mCameraPosition = nw4r::math::VEC3(x, y, z + BASE_Z);
     mFullSortScene = nullptr;
@@ -92,9 +92,9 @@ void Cam::UpdateCameraMatrix() {
     sin(DEG_TO_RAD(mCameraTwist));
     cos(DEG_TO_RAD(mCameraTwist));
 
-    float camPosZ = mBaseZPosition * unkX1;
-    float camPosY = mBaseZPosition * unkY1 + mCameraTarget.y;
-    float camPosX = unkY2 * camPosZ + mCameraTarget.x;
+    f32 camPosZ = mBaseZPosition * unkX1;
+    f32 camPosY = mBaseZPosition * unkY1 + mCameraTarget.y;
+    f32 camPosX = unkY2 * camPosZ + mCameraTarget.x;
     camPosZ = unkX2 * camPosZ + mCameraTarget.z;
 
     nw4r::g3d::Camera camera = GetCamera();
@@ -183,7 +183,7 @@ void CamOrtho::Reset() {
     Set(mMultiplier);
 }
 
-void CamOrtho::Set(float multiplier) {
+void CamOrtho::Set(f32 multiplier) {
     mMultiplier = multiplier;
 
     if (!mUpdateCamera) {
@@ -214,10 +214,10 @@ void CamOrtho::Set(float multiplier) {
 }
 
 // nonmatching
-void CamOrtho::fn_8001A318(float multiplier, float* pLeft, float* pTop, float* arg4, float* arg5) {
-    float top;
-    float ntwo;
-    float two;
+void CamOrtho::fn_8001A318(f32 multiplier, f32* pLeft, f32* pTop, f32* arg4, f32* arg5) {
+    f32 top;
+    f32 ntwo;
+    f32 two;
 
     ntwo = -2.0f;
     two  = 2.0f;
@@ -229,12 +229,12 @@ void CamOrtho::fn_8001A318(float multiplier, float* pLeft, float* pTop, float* a
     *arg5  = two * *pTop;
 }
 
-void CamOrtho::fn_8001A354(float* arg1, float* arg2, float* arg3, float* arg4) {
+void CamOrtho::fn_8001A354(f32* arg1, f32* arg2, f32* arg3, f32* arg4) {
     fn_8001A318(1.0f, arg1, arg2, arg3, arg4);
 }
 
 
-void CamOrtho::fn_8001A35C(float arg1, float* arg2, float* arg3, float* arg4, float* arg5) {
+void CamOrtho::fn_8001A35C(f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5) {
     fn_8001A318(arg1, arg2, arg3, arg4, arg5);
     
     *arg2 = fn_8059F64C(this)[0] + *arg2;
@@ -257,8 +257,8 @@ void CamOrtho::GetScreenDimensions(s32* arg0, s32* arg1, s32* pDestW, s32* pDest
 }
 
 void CamOrtho::fn_8001A470() {
-    float left = BASE_LEFT * mMultiplier;
-    float top = BASE_TOP_WIDE * mMultiplier;
+    f32 left = BASE_LEFT * mMultiplier;
+    f32 top = BASE_TOP_WIDE * mMultiplier;
 
     m_48 = left;
     m_4C = top;

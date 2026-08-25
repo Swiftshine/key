@@ -41,7 +41,7 @@ struct CollisionInfo {
     /* 0x44 */ s32 m_44;
     /* 0x48 */ s32 m_48;
     /* 0x4C */ s32 m_4C;
-    /* 0x50 */ float m_50;
+    /* 0x50 */ f32 m_50;
     /* 0x54 */ FlfGameObj* mOwner;
     /* 0x58 */ nw4r::math::MTX34 mMatrix;
 };

@@ -496,15 +496,15 @@ void ColDataWrapper::AdjustBounds() {
         gfl::Vec3 info;
         info = circle->mInfo;
 
-        float x = info.x;
-        float y = info.y;
-        float radius = info.z;
+        f32 x = info.x;
+        f32 y = info.y;
+        f32 radius = info.z;
 
-        float left = x - radius;
-        float right = x + radius;
+        f32 left = x - radius;
+        f32 right = x + radius;
 
-        float top = y + radius;
-        float bottom = y - radius;
+        f32 top = y + radius;
+        f32 bottom = y - radius;
 
         if (left < mBoundsMin.x) {
             mBoundsMin.x = left;

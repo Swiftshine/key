@@ -10,10 +10,10 @@ public:
     /* Class Members */
 
     /* 0x104 */ FlfMdlDraw* mOwner;
-    /* 0x108 */ float m_108;
-    /* 0x10C */ float m_10C;
-    /* 0x110 */ float m_110;
-    /* 0x114 */ float m_114;
+    /* 0x108 */ f32 m_108;
+    /* 0x10C */ f32 m_10C;
+    /* 0x110 */ f32 m_110;
+    /* 0x114 */ f32 m_114;
 };
 
 #endif

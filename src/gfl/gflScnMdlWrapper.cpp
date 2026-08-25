@@ -3,7 +3,7 @@
 
 using namespace gfl;
 
-void ScnMdlWrapper::SetDefaultUpdateRate(float rate) {
+void ScnMdlWrapper::SetDefaultUpdateRate(f32 rate) {
     DefaultUpdateRate = rate;
 }
 

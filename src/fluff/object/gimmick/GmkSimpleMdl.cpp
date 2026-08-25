@@ -19,8 +19,8 @@ const char off[] = "OFF";
 
 // function declarations
 void fn_8003D93C(void*, s16);
-float GetZOrder(s32 sceneIndex, s32 arg1);
-extern "C" float ZeroFloat;
+f32 GetZOrder(s32 sceneIndex, s32 arg1);
+extern "C" f32 ZeroFloat;
 
 
 GmkSimpleMdl::GmkSimpleMdl()
@@ -72,7 +72,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 
 
         if (mBuildInfo.GetIntParam(GmkSimpleMdl::eParameter_InitialFrameIndex) != 0) {
-            float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(GmkSimpleMdl::eParameter_InitialFrameIndex));
+            f32 frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(GmkSimpleMdl::eParameter_InitialFrameIndex));
 
             if (mAnim.IsValid()) {
                 mAnim->SetCurrentFrame(frame);
@@ -84,7 +84,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
         }
     }
 
-    float rate = mBuildInfo.GetFloatParam(GmkSimpleMdl::eParameter_AnimationSpeed);
+    f32 rate = mBuildInfo.GetFloatParam(GmkSimpleMdl::eParameter_AnimationSpeed);
 
     if (rate == 0.0f) {
         return;

@@ -10,7 +10,7 @@ namespace gfl {
 
         Vec2();
 
-        Vec2(float nx, float ny) {
+        Vec2(f32 nx, f32 ny) {
             x = nx;
             y = ny;
         }
@@ -23,11 +23,11 @@ namespace gfl {
             return Vec2(x - rhs.x, y - rhs.y);
         }
 
-        inline Vec2 operator*(float scalar) const {
+        inline Vec2 operator*(f32 scalar) const {
             return Vec2(x * scalar, y * scalar);
         }
 
-        inline void operator=(float val) {
+        inline void operator=(f32 val) {
             x = val;
             y = val;
         }
@@ -37,7 +37,7 @@ namespace gfl {
             y = rOther.y;
         }
 
-        inline void Set(float nx, float ny) {
+        inline void Set(f32 nx, f32 ny) {
             x = nx;
             y = ny;
         }

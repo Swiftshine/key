@@ -8,7 +8,7 @@
 namespace Colbin {
 
 struct Header {
-    /* 0x0 */ float m_0;
+    /* 0x0 */ f32 m_0;
     /* 0x4 */ u32 mNumEntries;
     /* 0x8 */ u32 mEntryOffset;
     /* 0xC */ u32 mFooterOffset;

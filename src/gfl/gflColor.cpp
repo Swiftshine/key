@@ -2,9 +2,9 @@
 
 using namespace gfl;
 
-#define CALC(weight, color, chan) (weight * (static_cast<float>(color.chan) / 255.0f))
+#define CALC(weight, color, chan) (weight * (static_cast<f32>(color.chan) / 255.0f))
 
-inline float Clamp(float val, float min, float max) {
+inline f32 Clamp(f32 val, f32 min, f32 max) {
     if (val < min) {
         return min;
     }
@@ -16,8 +16,8 @@ inline float Clamp(float val, float min, float max) {
     return val;
 }
 
-inline float Clamp2(float val, float max, float min) {
-    float ret = val;
+inline f32 Clamp2(f32 val, f32 max, f32 min) {
+    f32 ret = val;
     
     if (val > min) {
         ret = min;
@@ -29,18 +29,18 @@ inline float Clamp2(float val, float max, float min) {
 }
 
 // https://decomp.me/scratch/v4mHZ regswaps
-void gfl::Color::Interpolate(float fromWeight, float toWeight, const Color& rFrom, const Color& rTo) {
-    float r_to = CALC(toWeight, rTo, r);
-    float rf = Clamp(CALC(fromWeight, rFrom, r) + r_to, 0.0f, 1.0f);
+void gfl::Color::Interpolate(f32 fromWeight, f32 toWeight, const Color& rFrom, const Color& rTo) {
+    f32 r_to = CALC(toWeight, rTo, r);
+    f32 rf = Clamp(CALC(fromWeight, rFrom, r) + r_to, 0.0f, 1.0f);
 
-    float g_to = CALC(toWeight, rTo, g);
-    float gf = Clamp(CALC(fromWeight, rFrom, g) + g_to, 0.0f, 1.0f);
+    f32 g_to = CALC(toWeight, rTo, g);
+    f32 gf = Clamp(CALC(fromWeight, rFrom, g) + g_to, 0.0f, 1.0f);
 
-    float b_to = CALC(toWeight, rTo, b);
-    float bf = Clamp(CALC(fromWeight, rFrom, b) + b_to, 0.0f, 1.0f);
+    f32 b_to = CALC(toWeight, rTo, b);
+    f32 bf = Clamp(CALC(fromWeight, rFrom, b) + b_to, 0.0f, 1.0f);
 
-    float a_to = CALC(toWeight, rTo, a);
-    float af = Clamp(a_to + CALC(fromWeight, rFrom, a), 0.0f, 1.0f);
+    f32 a_to = CALC(toWeight, rTo, a);
+    f32 af = Clamp(a_to + CALC(fromWeight, rFrom, a), 0.0f, 1.0f);
 
     rf = Clamp2(rf, 0.0f, 1.0f);
     this->r = static_cast<u8>(rf * 255.0f);

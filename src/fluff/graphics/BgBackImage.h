@@ -22,8 +22,8 @@ public:
     /* Class Members */
 
     /* 0x104 */ GXTexObj mTexObj;
-    /* 0x124 */ float mWidth;
-    /* 0x128 */ float mHeight;
+    /* 0x124 */ f32 mWidth;
+    /* 0x128 */ f32 mHeight;
     /* 0x12C */ gfl::ResFileObject mResFileObject;
 };
 

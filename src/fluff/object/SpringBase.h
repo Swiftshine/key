@@ -21,7 +21,7 @@ public:
     public:
         /* Class Members */
 
-        /* 0x00 */ float mScaleFactor;
+        /* 0x00 */ f32 mScaleFactor;
         /* 0x04 */ gfl::Vec3 m_4;
         /* 0x10 */ gfl::Vec3 mEffectPosition;
         /* 0x1C */ gfl::Vec3 mPosition;
@@ -52,9 +52,9 @@ public:
 
         /* 0x00 */ u32 mParticleIndex1;
         /* 0x04 */ u32 mParticleIndex2;
-        /* 0x08 */ float m_8;
+        /* 0x08 */ f32 m_8;
         /* 0x0C */ s32 mActiveParticleIndex; // 0 for neither, 1 for the first, 2 for the second
-        /* 0x10 */ float m_10;
+        /* 0x10 */ f32 m_10;
 
         
 
@@ -68,22 +68,22 @@ public:
 
     /// @note size unk (`0x4C`?)
     struct SpringTemplate {
-        /* 0x00 */ float m_0;
-        /* 0x04 */ float m_4[3];
-        /* 0x10 */ float mPercentage;
-        /* 0x14 */ float m_14;
+        /* 0x00 */ f32 m_0;
+        /* 0x04 */ f32 m_4[3];
+        /* 0x10 */ f32 mPercentage;
+        /* 0x14 */ f32 m_14;
         /* 0x18 */ gfl::Vec3 m_18;
         /* 0x24 */ s32 m_24;
         /* 0x28 */ bool m_28;
-        /* 0x2C */ float m_2C;
+        /* 0x2C */ f32 m_2C;
         /* 0x30 */ s32 m_30;
         /* 0x34 */ u32 mParticleCount;
         /* 0x38 */ u32 mSpringCount;
         /* 0x3C */ u32 m_3C;
         /* 0x40 */ bool m_40;
         /* 0x41 */ bool m_41;
-        /* 0x44 */ float m_44;
-        /* 0x48 */ float m_48;
+        /* 0x44 */ f32 m_44;
+        /* 0x48 */ f32 m_48;
     };
 
     /// @note Size: `0x10`
@@ -105,11 +105,11 @@ public:
 
     /* SpringBase */
 
-    /* 0x68 */ virtual float vf68();
-    /* 0x6C */ virtual float GetZPos();
+    /* 0x68 */ virtual f32 vf68();
+    /* 0x6C */ virtual f32 GetZPos();
     /* 0x70 */ virtual void Update() const;
-    /* 0x74 */ virtual void vf74(float scale, Particle* pParticle, gfl::Vec3& rDst);
-    /* 0x78 */ virtual void vf78(float, Particle*, gfl::Vec3&);
+    /* 0x74 */ virtual void vf74(f32 scale, Particle* pParticle, gfl::Vec3& rDst);
+    /* 0x78 */ virtual void vf78(f32, Particle*, gfl::Vec3&);
     /* 0x7C */ virtual void vf7C(Particle*);
 
     /* Class Methods */
@@ -131,25 +131,25 @@ public:
     gfl::Vec3 GetKeyFrames() DONT_INLINE_CLASS;
     void fn_80008BB0(nw4r::math::MTX34& rMtx);
     void fn_80008DC0(nw4r::math::MTX34& rMtx);
-    void ResetKeyFrames(KeyFrame<float>::FrameTemplate* pFTX, KeyFrame<float>::FrameTemplate* pFTY, KeyFrame<float>::FrameTemplate* pFTZ);
-    float fn_80009248(u32 index);
-    float fn_8000925C(u32 index);
+    void ResetKeyFrames(KeyFrame<f32>::FrameTemplate* pFTX, KeyFrame<f32>::FrameTemplate* pFTY, KeyFrame<f32>::FrameTemplate* pFTZ);
+    f32 fn_80009248(u32 index);
+    f32 fn_8000925C(u32 index);
     s32 GetSpringActiveParticleIndex(u32 index);
     void fn_80009284(gfl::Vec3& rVec);
     void fn_800092A4();
-    void fn_800092AC(float scale);
+    void fn_800092AC(f32 scale);
     void fn_80009568(SpringTemplate* pSpringTemplate) DONT_INLINE_CLASS;
-    void fn_80009678(float scale) DONT_INLINE_CLASS;
-    void fn_80009E28(float scale);
-    void fn_80009F64(float scale);
-    void fn_8000A148(float scale);
+    void fn_80009678(f32 scale) DONT_INLINE_CLASS;
+    void fn_80009E28(f32 scale);
+    void fn_80009F64(f32 scale);
+    void fn_8000A148(f32 scale);
     void SetupParticles(Particle* pParticles) DONT_INLINE_CLASS;
     void fn_8000AC6C(Particle* pParticle) DONT_INLINE_CLASS;
     void CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* pSpringTemplate) DONT_INLINE_CLASS;
     void fn_8000B270() DONT_INLINE_CLASS;
     void fn_8000B6BC();
     bool fn_8000B74C();
-    static bool fn_8000B888(float, gfl::Vec3&, const gfl::Vec3&);
+    static bool fn_8000B888(f32, gfl::Vec3&, const gfl::Vec3&);
     void LoadDefaultKeyFrames();
     void fn_8000BB50() DONT_INLINE_CLASS;
     void CreateParticleArrays() DONT_INLINE_CLASS;
@@ -165,17 +165,17 @@ public:
     /* 0x0AC */ Particle* mParticleArray4;
     /* 0x0B0 */ Particle* mParticleArray5;
     /* 0x0B4 */ Spring* mSpringArray;
-    /* 0x0B8 */ KeyFrame<float> mKeyFrameX;
-    /* 0x0D4 */ KeyFrame<float> mKeyFrameY;
-    /* 0x0F0 */ KeyFrame<float> mKeyFrameZ;
+    /* 0x0B8 */ KeyFrame<f32> mKeyFrameX;
+    /* 0x0D4 */ KeyFrame<f32> mKeyFrameY;
+    /* 0x0F0 */ KeyFrame<f32> mKeyFrameZ;
     /* 0x10C */ SpringTemplate* mSpringTemplate;
     /* 0x110 */ gfl::Vec3 mCurrentKeyFrames;
     /* 0x11C */ gfl::Vec3 m_11C;
     /* 0x128 */ gfl::Vec3 m_128;
-    /* 0x134 */ float m_134;
+    /* 0x134 */ f32 m_134;
     /* 0x138 */ gfl::Vec3 mParticleEffectMultiplier;
-    /* 0x144 */ float m_144;
-    /* 0x148 */ float m_148;
+    /* 0x144 */ f32 m_144;
+    /* 0x148 */ f32 m_148;
     /* 0x14C */ UnkStruct2* m_14C;
 };
 

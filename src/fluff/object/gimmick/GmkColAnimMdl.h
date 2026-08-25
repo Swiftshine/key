@@ -17,10 +17,10 @@ class GmkColAnimMdl : public Gimmick, public GmkAnimChg {
 public:
     enum Parameter {
         eParameter_SortSceneIndex = 0, // s32 0
-        eParameter_ZRotation = 0,      // float 0
+        eParameter_ZRotation = 0,      // f32 0
         eParameter_AnimationName = 0,  // string 0
         eParameter_InitialFrameIndex = 2, // s32 2
-        eParameter_AnimationSpeed = 2, // float 2
+        eParameter_AnimationSpeed = 2, // f32 2
     };
 public:
     static GmkColAnimMdl* Build(GimmickBuildInfo* buildInfo);

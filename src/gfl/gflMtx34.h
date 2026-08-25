@@ -9,22 +9,22 @@ namespace gfl {
 
 #define MTX34_INIT(mtx, pos, rot, scale) \
     do { \
-    float scaleZ;\
-    float scaleY;\
-    float scaleX;\
-    float sx;\
-    float cx;\
-    float sy;\
-    float cy;\
-    float cz;\
-    float sz;\
-    float posZ;\
-    float posY;\
-    float posX;\
-    float cx_cz;\
-    float sx_sz;\
-    float sx_cz;\
-    float cx_sz;\
+    f32 scaleZ;\
+    f32 scaleY;\
+    f32 scaleX;\
+    f32 sx;\
+    f32 cx;\
+    f32 sy;\
+    f32 cy;\
+    f32 cz;\
+    f32 sz;\
+    f32 posZ;\
+    f32 posY;\
+    f32 posX;\
+    f32 cx_cz;\
+    f32 sx_sz;\
+    f32 sx_cz;\
+    f32 cx_sz;\
     \
     scaleX = scale.x;\
     scaleY = scale.y;\
@@ -63,14 +63,14 @@ namespace gfl {
 } while (0);\
 
 class Mtx34 : public nw4r::math::MTX34 {
-    typedef float (*MtxRef)[4];
-    typedef const float (*MtxRefConst)[4];
+    typedef f32 (*MtxRef)[4];
+    typedef const f32 (*MtxRefConst)[4];
 
-    inline bool Finite(float f) {
+    inline bool Finite(f32 f) {
         return isfinite(f);
     }
 
-    inline bool Nan(float f) {
+    inline bool Nan(f32 f) {
         return isnan(f);
     }
 public:

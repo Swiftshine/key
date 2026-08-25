@@ -14,10 +14,10 @@ public:
     virtual void vf10();
     virtual void vf14();
     
-    inline float GetValue() const { return mValue; }
-    inline void SetValue(float value) { mValue = value; }
+    inline f32 GetValue() const { return mValue; }
+    inline void SetValue(f32 value) { mValue = value; }
 private:
-    float mValue;
+    f32 mValue;
     s32 m_8;
     s32 m_C;
 };

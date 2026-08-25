@@ -31,13 +31,13 @@ namespace gfl {
             return m_D;
         }
         /* 0x28 */ virtual gfl::Vec3 vf28() = 0;
-        /* 0x2C */ virtual float GetUpdateRate() {
+        /* 0x2C */ virtual f32 GetUpdateRate() {
             return mUpdateRate;
         }
-        /* 0x30 */ virtual void SetUpdateRate(float rate) {
+        /* 0x30 */ virtual void SetUpdateRate(f32 rate) {
             mUpdateRate = rate;
         }
-        /* 0x34 */ virtual bool vf34(float arg0, float arg1, float arg2, float arg3);
+        /* 0x34 */ virtual bool vf34(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
         /* 0x38 */ virtual void Update(bool shouldUpdate);
         /* 0x3C */ virtual bool ShouldUpdate() {
             return mShouldUpdate;
@@ -57,7 +57,7 @@ namespace gfl {
         /* 0x0D */ bool m_D;
         /* 0x0E */ bool mShouldUpdate;
         /* 0x0F */ bool mIsActive;
-        /* 0x10 */ float mUpdateRate;
+        /* 0x10 */ f32 mUpdateRate;
         /* 0x14 */ s32 m_14;
     };
 };

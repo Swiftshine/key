@@ -373,8 +373,8 @@ bool GmkMng::IsGimmickInSpawnRadius(
 // https://decomp.me/scratch/flFmV
 bool GmkMng::IsGimmickOnScreen(const nw4r::math::VEC2& rOffs, Gimmick* pGimmick) {
     ScreenPosition pos = pGimmick->GetScreenPosition();
-    const float x = pos.mX - rOffs.x;
-    const float y = pos.mY - rOffs.y;
+    const f32 x = pos.mX - rOffs.x;
+    const f32 y = pos.mY - rOffs.y;
 
     return 5575.1108f < (x * x) + (y * y);
 }

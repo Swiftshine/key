@@ -66,18 +66,18 @@ public:
 
     /* Class Methods */
 
-    void fn_8001AA00(float);
-    void fn_8001AA0C(float);
-    void fn_8001AA18(float);
+    void fn_8001AA00(f32);
+    void fn_8001AA0C(f32);
+    void fn_8001AA18(f32);
     void fn_8001AA24(bool);
     void fn_8001AA5C(bool);
     s32 ResetScene(FullSortScene* pScene);
     void fn_8001AB34(s32);
     void fn_8001AB58();
-    void fn_8001AD5C(float);
+    void fn_8001AD5C(f32);
     void fn_8001AD68();
     void fn_8001AD74(s32);
-    void fn_8001AD80(float);
+    void fn_8001AD80(f32);
     void fn_8001AD8C(s32, s32);
     void fn_8001AEE4();
     void fn_8001B4DC();
@@ -94,10 +94,10 @@ public:
         GXColor mColor;
     };
     /* 0x128 */ gfl::Vec3 m_128;
-    /* 0x134 */ float m_134;
+    /* 0x134 */ f32 m_134;
     /* 0x138 */ GXColor mColor2;
-    /* 0x13C */ float m_13C;
-    /* 0x140 */ float m_140;
+    /* 0x13C */ f32 m_13C;
+    /* 0x140 */ f32 m_140;
     /* 0x144 */ std::vector<BackupBuff*> mBackupBuffs;
     /* 0x150 */ s32 m_150;
     /* 0x154 */ s32 m_154;

@@ -84,7 +84,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     }
 
     if (mBuildInfo.GetIntParam(GmkColAnimMdl::eParameter_InitialFrameIndex) != 0) {
-        float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(GmkColAnimMdl::eParameter_InitialFrameIndex));
+        f32 frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(GmkColAnimMdl::eParameter_InitialFrameIndex));
 
         if (mAnimCtrl.IsValid()) {
             mAnimCtrl->SetCurrentFrame(frame);
@@ -98,7 +98,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     mColAnimCtrlGmk.Create(new (gfl::eHeapID_Work) GmkColAnimCtrl(this, mBuildInfo.GetIntParam(Gimmick::eParameterID_Param1), buildInfo));
     mColAnimCtrlGmk->fn_800D5130((void*)mBuildInfo.GetStringParam(0).c_str());
 
-    float rate = mBuildInfo.GetFloatParam(GmkColAnimMdl::eParameter_AnimationSpeed);
+    f32 rate = mBuildInfo.GetFloatParam(GmkColAnimMdl::eParameter_AnimationSpeed);
 
     if (rate != 0.0f) {
         mAnimCtrl->mScnMdlWrapper->SetUpdateRate(rate);

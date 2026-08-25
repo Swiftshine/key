@@ -52,7 +52,7 @@ u32 File::CopyHeader(void* pData) {
     mFlags = header->mFlags;
     mIsLocked = header->mLock != MNEB::eLockState_Unlocked;
     header->mLock = MNEB::eLockState_Locked;
-    mNumFrames = static_cast<float>(header->mNumFrames);
+    mNumFrames = static_cast<f32>(header->mNumFrames);
     mIsLooped = header->mIsLooped != 0 ? true : false;
     return header->mCurveBlockCount;
 }

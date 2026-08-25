@@ -6,7 +6,7 @@
 #include "util/GimmickUtil.h"
 
 extern "C" {
-    float fn_802C1EA4(void*);
+    f32 fn_802C1EA4(void*);
 }
 
 GmkBeadDrop* GmkBeadDrop::Build(GimmickBuildInfo* buildInfo) {
@@ -161,19 +161,19 @@ void GmkBeadDrop::SpawnBeads() {
 
 // https://decomp.me/scratch/fVbAz
 bool GmkBeadDrop::CanSpawnBeads() {
-    const float unk1 = -0.18f;
+    const f32 unk1 = -0.18f;
     nw4r::math::VEC3 vec1;
     vec1 = mPosition;
 
-    const float xOffs = mOffset.x;
-    const float xPos = mPosition.x;
+    const f32 xOffs = mOffset.x;
+    const f32 xPos = mPosition.x;
     mOffset.y += unk1;
-    float finalY = mPosition.y + mOffset.y * (1.0f / 60.0f);
-    const float zOffs = mOffset.z;
-    const float zPos = mPosition.z;
+    f32 finalY = mPosition.y + mOffset.y * (1.0f / 60.0f);
+    const f32 zOffs = mOffset.z;
+    const f32 zPos = mPosition.z;
 
-    const float unk2 = fn_802E1AEC(0.1f, 1.0f + -(finalY - vec1.y), vec1);
-    const float unk3 = finalY;
+    const f32 unk2 = fn_802E1AEC(0.1f, 1.0f + -(finalY - vec1.y), vec1);
+    const f32 unk3 = finalY;
 
     if (unk3 <= unk2) {
         finalY = unk2;
@@ -207,7 +207,7 @@ void GmkBeadDrop::UpdateFlfMdl() {
     }
 }
 
-float GmkBeadDrop::fn_802E1AEC(float, float, nw4r::math::VEC3&) {
+f32 GmkBeadDrop::fn_802E1AEC(f32, f32, nw4r::math::VEC3&) {
     // not decompiled
     return 0.0f;
 }

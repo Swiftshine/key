@@ -21,9 +21,9 @@ class NwBlendAnmWrapper;
 struct FlfMdlVec {
     FlfMdlVec();
 
-    float x;
-    float y;
-    float z;
+    f32 x;
+    f32 y;
+    f32 z;
 };
 
 // size: 0x1C8
@@ -34,11 +34,11 @@ public:
     struct Substruct {
         void Init();
 
-        float m_0;
-        float m_4;
-        float m_8;
-        float m_C;
-        float m_10;
+        f32 m_0;
+        f32 m_4;
+        f32 m_8;
+        f32 m_C;
+        f32 m_10;
     };
 
     struct Callback {
@@ -73,16 +73,16 @@ public:
         void Init();
 
         /* 0x00 */ GXColor m_0;
-        /* 0x04 */ float m_4;
-        /* 0x08 */ float m_8;
-        /* 0x0C */ float m_C;
+        /* 0x04 */ f32 m_4;
+        /* 0x08 */ f32 m_8;
+        /* 0x0C */ f32 m_C;
         /* 0x10 */ bool m_10;
         /* 0x11 */ bool m_11;
         /* 0x12 */ bool m_12;
         /* 0x13 */ bool m_13;
         /* 0x14 */ bool m_14;
         /* 0x18 */ s32 m_18;
-        /* 0x1C */ float mStartFrame;
+        /* 0x1C */ f32 mStartFrame;
         /* 0x20 */ bool m_20;
         /* 0x21 */ bool m_21;
         /* 0x22 */ bool m_22;
@@ -113,9 +113,9 @@ public:
 
     void Update(bool shouldUpdate);
     nw4r::g3d::G3dObj* GetBlendAnmMatCtrlAnim(u32 index);
-    void fn_80147C28(s32, float);
-    void SetOpacity(float);
-    float fn_800252AC();
+    void fn_80147C28(s32, f32);
+    void SetOpacity(f32);
+    f32 fn_800252AC();
     void LoadNURBSFromFileList();
     void LoadNURBSFromFileList(s32* pIndices /* ? */, s32 count);
     void SetVisibility(bool visible);
@@ -123,14 +123,14 @@ public:
     void SetWoolDrawMatrix(const nw4r::math::MTX34&);
     bool fn_800239CC();
     void UpdateFrame();
-    void SetUpdateRate(float rate);
+    void SetUpdateRate(f32 rate);
     s32 SetScene(FullSortScene* pFullSortScene);
-    void SetBlendUpdateRate(float);
+    void SetBlendUpdateRate(f32);
     bool IsAnimationDone() const;
-    float GetCurrentFrame();
-    float GetEndFrame();
-    float GetEndFrame(s32 id);
-    void SetCurrentNURBSFrame(float);
+    f32 GetCurrentFrame();
+    f32 GetEndFrame();
+    f32 GetEndFrame(s32 id);
+    void SetCurrentNURBSFrame(f32);
     gfl::ScnMdlWrapper* GetNURBSAnimWrapperModelWrapper();
     NURBSSet* GetNURBSAnimWrapperNURBSSet();
     void LoadWoolTextures();
@@ -148,7 +148,7 @@ public:
         return *reinterpret_cast<s32*>(reinterpret_cast<u8*>(this) + 0x60);
     }
 
-    inline float GetUpdateRate() const {
+    inline f32 GetUpdateRate() const {
         return mUpdateRate;
     }
 
@@ -163,19 +163,19 @@ public:
     /* 0x010 */ std::string mRawFilepath;
     /* 0x01C */ FullSortScene* mFullSortScene;
     /* 0x020 */ u32 mCurrentAnimationID;
-    /* 0x024 */ float mUpdateRate;
+    /* 0x024 */ f32 mUpdateRate;
     /* 0x028 */ bool mIsVisible;
-    /* 0x02C */ float m_2C;
+    /* 0x02C */ f32 m_2C;
     /* 0x030 */ nw4r::math::VEC3 m_30;
     /* 0x03C */ bool mShouldUpdate;
     /* 0x040 */ s32 m_40;
     /* 0x044 */ bool m_44;
-    /* 0x048 */ float m_48;
+    /* 0x048 */ f32 m_48;
     /* 0x04C */ NURBSModelWrapper* m_4C;
     /* 0x050 */ NURBSAnimWrapper* mNURBSAnimWrapper;
     /* 0x054 */ NURBSAnimWrapper* mNURBSAnimWrapper2;
     /* 0x058 */ u32 mFlags;
-    /* 0x05C */ float mCurrentFrame;
+    /* 0x05C */ f32 mCurrentFrame;
     /* 0x060 */ u32 mCurrentFrameInt;
     /* 0x064 */ s32 m_64;
     /* 0x068 */ s32 m_68;
@@ -187,13 +187,13 @@ public:
     /* 0x0C4 */ nw4r::math::MTX34 m_C4;
     /* 0x0F4 */ nw4r::math::MTX34 m_F4;
     /* 0x124 */ bool m_124;
-    /* 0x128 */ float m_128;
-    /* 0x12C */ float m_12C;
-    /* 0x130 */ float m_130;
-    /* 0x134 */ float m_134;
-    /* 0x138 */ float m_138;
+    /* 0x128 */ f32 m_128;
+    /* 0x12C */ f32 m_12C;
+    /* 0x130 */ f32 m_130;
+    /* 0x134 */ f32 m_134;
+    /* 0x138 */ f32 m_138;
     /* 0x13C */ s32 m_13C;
-    /* 0x140 */ float m_140;
+    /* 0x140 */ f32 m_140;
     /* 0x144 */ s32 m_144;
     /* 0x148 */ s32 m_148;
     /* 0x14C */ nw4r::math::VEC2 m_14C;

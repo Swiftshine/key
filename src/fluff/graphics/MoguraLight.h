@@ -16,12 +16,12 @@ public:
 
     void SetUpdate(bool doUpdate);
     void UpdateMatrix();
-    void SetZPosition(float pos);
+    void SetZPosition(f32 pos);
     void SetPosition(nw4r::math::VEC2& rPosition);
 
     /* Class Members */
 
-    /* 0x00 */ float mZPosition;
+    /* 0x00 */ f32 mZPosition;
     /* 0x04 */ nw4r::math::VEC2 mPosition;
     /* 0x0C */ gfl::ResFileInfo* mFileInfo;
     /* 0x10 */ GmkMoleHoleRender::RenderUser* mRenderUser;

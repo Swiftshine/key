@@ -9,9 +9,9 @@ namespace gfl {
     struct Vec3 : public nw4r::math::VEC3 {
         typedef nw4r::math::VEC3 Base;
 
-        static inline float DotProduct1(register const Vec3* pA, register const Vec3* pB) {
-            register float dot;
-            register float work0, work3, work2, work1;
+        static inline f32 DotProduct1(register const Vec3* pA, register const Vec3* pB) {
+            register f32 dot;
+            register f32 work0, work3, work2, work1;
 
             // clang-format off
             asm {
@@ -34,9 +34,9 @@ namespace gfl {
         }
 
         // swapping around values is necessary for a function to match
-        static inline float DotProduct2(register const Vec3* pA, register const Vec3* pB) {
-            register float dot;
-            register float work3, work2, work1, work0;
+        static inline f32 DotProduct2(register const Vec3* pA, register const Vec3* pB) {
+            register f32 dot;
+            register f32 work3, work2, work1, work0;
 
             // clang-format off
             asm {
@@ -58,7 +58,7 @@ namespace gfl {
             return dot;
         }
 
-        static inline float FloatAbs(float f) {
+        static inline f32 FloatAbs(f32 f) {
             return f < 0.0f ? -f : f;
         }
     public:
@@ -69,13 +69,13 @@ namespace gfl {
 
         Vec3() { }
 
-        Vec3(float nx, float ny, float nz) {
+        Vec3(f32 nx, f32 ny, f32 nz) {
             x = nx;
             y = ny;
             z = nz;
         }
 
-        Vec3(float, nw4r::math::VEC2&);
+        Vec3(f32, nw4r::math::VEC2&);
         Vec3(const nw4r::math::VEC2&);
         Vec3(const Vec2&);
 
@@ -85,7 +85,7 @@ namespace gfl {
             z = rOther.z;
         }
 
-        inline Vec3(float val) {
+        inline Vec3(f32 val) {
             x = val;
             y = val;
             z = val;
@@ -99,7 +99,7 @@ namespace gfl {
             z = rOther.z;
         }
 
-        inline void operator=(float val) {
+        inline void operator=(f32 val) {
             x = val;
             y = val;
             z = val;
@@ -115,7 +115,7 @@ namespace gfl {
 
         static inline Vec3 SubXY(const Vec3& lhs, const Vec3& rhs);
 
-        inline void Set(float nx, float ny, float nz) {
+        inline void Set(f32 nx, f32 ny, f32 nz) {
             x = nx;
             y = ny;
             z = nz;
@@ -129,13 +129,13 @@ namespace gfl {
         // Vec3 operator-(const Base& rhs) const;
         Vec3 operator-(const Vec3& other) const;
 
-        Vec3 operator*(float scalar) const;
+        Vec3 operator*(f32 scalar) const;
 
         inline void operator+=(const Base& rhs) {
             VEC3Add(this, this, &rhs);
         }
 
-        inline void operator*=(float scalar) {
+        inline void operator*=(f32 scalar) {
             VEC3Scale(this, this, scalar);
         }
 
@@ -182,8 +182,8 @@ namespace gfl {
         bool Sanitize();
         bool Sanitize2(); // the same, but only checks x and y
 
-        static inline float AngleRad(const Vec3& lhs, const Vec3& rhs) {
-            float angle = VEC3Dot(&lhs, &rhs) / (VEC3Len(&lhs) * VEC3Len(&rhs));
+        static inline f32 AngleRad(const Vec3& lhs, const Vec3& rhs) {
+            f32 angle = VEC3Dot(&lhs, &rhs) / (VEC3Len(&lhs) * VEC3Len(&rhs));
 
             // clamp
 
@@ -210,7 +210,7 @@ namespace gfl {
             return false;
         }
 
-        inline float Length() const {
+        inline f32 Length() const {
             return PSVECMag(*this);
         }
 
@@ -222,8 +222,8 @@ namespace gfl {
             VEC3Normalize(this, &other);
         }
 
-        static inline float Dot1(const Vec3& a, const Vec3& b);
-        static inline float Dot2(const Vec3& a, const Vec3& b);
+        static inline f32 Dot1(const Vec3& a, const Vec3& b);
+        static inline f32 Dot2(const Vec3& a, const Vec3& b);
         static inline Vec3 Cross(const Vec3& a, const Vec3& b);
         static inline void Normalize(Vec3& out, const Vec3& in);
     };
@@ -263,7 +263,7 @@ namespace gfl {
         return v;
     }
 
-    inline Vec3 Vec3::operator*(float scalar) const {
+    inline Vec3 Vec3::operator*(f32 scalar) const {
         Vec3 v(0);
         VEC3Scale(&v, this, scalar);
         return v;
@@ -275,14 +275,14 @@ namespace gfl {
         return v;
     }
 
-    inline float Vec3::Dot1(const Vec3& a, const Vec3& b) {
+    inline f32 Vec3::Dot1(const Vec3& a, const Vec3& b) {
         // i guess they wrote the assembly themselves?
         const Vec3* l = &a;
         const Vec3* r = &b;
         return DotProduct1(l, r);
     }
 
-    inline float Vec3::Dot2(const Vec3& a, const Vec3& b) {
+    inline f32 Vec3::Dot2(const Vec3& a, const Vec3& b) {
         const Vec3* l = &a;
         const Vec3* r = &b;
         return DotProduct2(l, r);

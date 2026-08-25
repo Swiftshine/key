@@ -2,16 +2,16 @@
 #define FLUFF_SCREENPOSITION_H
 
 struct ScreenPosition {
-    ScreenPosition(float x, float y, float c)
+    ScreenPosition(f32 x, f32 y, f32 c)
         : mX(x)
         , mY(y)
         , mCullThreshold(c)
     { }
 
     struct {
-        float mX;
-        float mY;
-        float mCullThreshold;
+        f32 mX;
+        f32 mY;
+        f32 mCullThreshold;
     };
 };
 

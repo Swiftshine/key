@@ -14,7 +14,7 @@ public:
     
     /* Class Methods */
 
-    void Init(float arg0);
+    void Init(f32 arg0);
     void SetPosition(nw4r::math::VEC3& rPos);
     void fn_805C46D0(bool);
     void fn_805C46FC(bool);
@@ -23,8 +23,8 @@ public:
     /* Class Members */
 
     /* 0x0 */ bool m_0;
-    /* 0x4 */ float m_4;
-    /* 0x8 */ float mZPosition;
+    /* 0x4 */ f32 m_4;
+    /* 0x8 */ f32 mZPosition;
     /* 0xC */ MoguraLight* mMoleLight;
 };
 

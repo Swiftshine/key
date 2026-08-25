@@ -18,8 +18,8 @@ namespace env {
         /* Structures */
 
         struct Substruct {
-            float m_0;
-            float m_4;
+            f32 m_0;
+            f32 m_4;
             s32 m_8;
             s32 m_C;
         };
@@ -68,7 +68,7 @@ namespace env {
         /* 0x40 */ s32 m_40;
         /* 0x44 */ s32 m_44;
         /* 0x48 */ s32 m_48;
-        /* 0x4C */ float m_4C;
+        /* 0x4C */ f32 m_4C;
         /* 0x50 */ s32 m_50;
         /* 0x54 */ EnvFadeSimple* mEnvFadeSimple;
         /* 0x58 */ EnvParts_Curtain* mEnvPartsCurtain;

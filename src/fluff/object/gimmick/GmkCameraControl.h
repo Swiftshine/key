@@ -16,8 +16,8 @@ public:
     enum Parameter {
         eParameter_CameraType = 0, // s32 0
 
-        eParameter_MaxBoundsX = 0, // float 0
-        eParameter_MaxBoundsY = 1, // float 1
+        eParameter_MaxBoundsX = 0, // f32 0
+        eParameter_MaxBoundsY = 1, // f32 1
     };
 
 public:
@@ -37,11 +37,11 @@ public:
 private:
     s32 mCameraType; // @ 0x130
     s32 mState; // @ 0x134
-    float m_138;
-    float m_13C;
-    float m_140;
-    float mCameraMaxX; // @ 0x144
-    float mCameraMaxY; // @ 0x148
+    f32 m_138;
+    f32 m_13C;
+    f32 m_140;
+    f32 mCameraMaxX; // @ 0x144
+    f32 mCameraMaxY; // @ 0x148
     GeneratorInfo mCameraInfo; // @ 0x14C
 };
 

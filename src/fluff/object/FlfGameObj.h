@@ -81,8 +81,8 @@ public:
     /* 0x50 */ virtual void SetIsInMission(bool inMission);
     /* 0x54 */ virtual bool IsInMission() const;
     /* 0x58 */ virtual void vf58();
-    /* 0x5C */ virtual void SetCullThreshold(float threshold);
-    /* 0x60 */ virtual float GetCullThreshold();
+    /* 0x5C */ virtual void SetCullThreshold(f32 threshold);
+    /* 0x60 */ virtual f32 GetCullThreshold();
     /* 0x64 */ virtual void UpdateWater(bool);
 
     /* Class Methods */
@@ -107,7 +107,7 @@ public:
     /* 0x6D */ bool mIsCulled;
     /* 0x6E */ bool mShouldUpdateWater;
     /* 0x6F */ bool m_6F;
-    /* 0x70 */ float mCullThreshold;
+    /* 0x70 */ f32 mCullThreshold;
     /* 0x74 */ s32 mDirection;
     /* 0x78 */ u32 m_78;
     /* 0x7C */ bool m_7C;

@@ -39,10 +39,10 @@ class PlayerBase : public FlfGameObj, public IObjHitCB {
 public:
     /* Static Variables */
 
-    static float sQUICK_SAND_SPDY_COR;
+    static f32 sQUICK_SAND_SPDY_COR;
     static s32 sWAIT_FRAME_ROLLED_GET;
     static s32 sZ_ATK_TEST;
-    static float sSECOND_ATTACK_MOT_FRAME;
+    static f32 sSECOND_ATTACK_MOT_FRAME;
 
     /* Structures */
 
@@ -113,7 +113,7 @@ public:
 
     void SetupGlobalParams();
     void fn_8006B2C0(); // likely cut
-    float GetGravityCorrection();
+    f32 GetGravityCorrection();
     void ResetState();
     void SetPlayerState(s32 newState);
     void fn_80081158();
@@ -151,26 +151,26 @@ public:
     /* 0x50C */ PlayerMdlMng* mPlayerMdlMng;
     /* 0x510 */ MTX34 m_510;
     /* 0x540 */ STRUCT_FILL(0x1C);
-    /* 0x55C */ float mWalkAnimSpeed;
+    /* 0x55C */ f32 mWalkAnimSpeed;
     /* 0x560 */ STRUCT_FILL(0x48);
     /// Used for determining where the player gets placed should they, e.g., fall into a hole.
     /* 0x5A8 */ gfl::Vec3 mSavedPosition;
     /* 0x5B4 */ STRUCT_FILL(0x28);
     /* 0x5DC */ gfl::Vec3 mSpeed;
     /* 0x5E8 */ STRUCT_FILL(0x18);
-    /* 0x600 */ float mGravityMultiplier;
-    /* 0x604 */ float mModifiedGravity;
-    /* 0x608 */ float mBaseGravity;
-    /* 0x60C */ float m_60C;
-    /* 0x610 */ float m_610;
+    /* 0x600 */ f32 mGravityMultiplier;
+    /* 0x604 */ f32 mModifiedGravity;
+    /* 0x608 */ f32 mBaseGravity;
+    /* 0x60C */ f32 m_60C;
+    /* 0x610 */ f32 m_610;
     /// "Hovering Ascent Altitude (m) (This parameter is incomplete.)"
-    /* 0x614 */ float mHoveringAscentAltitude;
-    /* 0x618 */ float mParachuteYVelocityCorrection;
+    /* 0x614 */ f32 mHoveringAscentAltitude;
+    /* 0x618 */ f32 mParachuteYVelocityCorrection;
     /* 0x61C */ s32 mQuickTurn;
     /* 0x620 */ s32 mQuickTurnAir; // ?
-    /* 0x624 */ float m_624;
-    /* 0x628 */ float m_628;
-    /* 0x62C */ float mGravityCorrection;
+    /* 0x624 */ f32 m_624;
+    /* 0x628 */ f32 m_628;
+    /* 0x62C */ f32 mGravityCorrection;
     /* 0x630 */ STRUCT_FILL(0x14);
     /* 0x644 */ u32 mCurrentAnimationID;
     /* 0x648 */ s32 m_648;
@@ -187,33 +187,33 @@ public:
     /* 0x678 */ STRUCT_FILL(0x8);
     /* 0x680 */ gfl::Param* mMoveSpeedTornado;
     /* 0x684 */ STRUCT_FILL(0x20);
-    /* 0x6A4 */ float mWoolWhipRange;
+    /* 0x6A4 */ f32 mWoolWhipRange;
     /* 0x6A8 */ STRUCT_FILL(0x8);
     /* 0x6B0 */ gfl::Param* mBallRiseSlopeCrt;
     /* 0x6B4 */ STRUCT_FILL(0x18);
     /// Per frame.
-    /* 0x6CC */ float mDashSpeed;
+    /* 0x6CC */ f32 mDashSpeed;
     /// Per frame.
-    /* 0x6D0 */ float mWalkSpeed;
+    /* 0x6D0 */ f32 mWalkSpeed;
     /// Hovering horizontal movement, per frame.
-    /* 0x6D4 */ float mHoveringSpeed;
+    /* 0x6D4 */ f32 mHoveringSpeed;
     /* 0x6D8 */ STRUCT_FILL(0x14);
-    /* 0x6EC */ float mDashMotRate; // does "mot" stand for "motion?"
-    /* 0x6F0 */ float mDashMotRateCor; // does "cor" stand for "correction?"
-    /* 0x6F4 */ float mHoveringMotRate;
-    /* 0x6F8 */ float mParachuteMotRate;
+    /* 0x6EC */ f32 mDashMotRate; // does "mot" stand for "motion?"
+    /* 0x6F0 */ f32 mDashMotRateCor; // does "cor" stand for "correction?"
+    /* 0x6F4 */ f32 mHoveringMotRate;
+    /* 0x6F8 */ f32 mParachuteMotRate;
     /* 0x6FC */ STRUCT_FILL(0x10);
-    /* 0x70C */ float mJumpHeight;
+    /* 0x70C */ f32 mJumpHeight;
     /// A `.15` meter correction is added.
-    /* 0x710 */ float mJumpHeightLimit;
+    /* 0x710 */ f32 mJumpHeightLimit;
     /* 0x714 */ STRUCT_FILL(0xC);
-    /* 0x720 */ float mMaxFallingVelocity;
-    /* 0x724 */ float mDashInertiaCorrection;
-    /* 0x728 */ float mAirBraking;
-    /* 0x72C */ float m_72C;
+    /* 0x720 */ f32 mMaxFallingVelocity;
+    /* 0x724 */ f32 mDashInertiaCorrection;
+    /* 0x728 */ f32 mAirBraking;
+    /* 0x72C */ f32 m_72C;
     /* 0x730 */ s32 m_730;
     /// "Yarn range Upper limit"
-    /* 0x734 */ float mMaxWoolWhipRange;
+    /* 0x734 */ f32 mMaxWoolWhipRange;
     /* 0x738 */ s32 m_738;
     /* 0x73C */ s32 m_73C;
     /* 0x740 */ s32 m_740;
@@ -237,7 +237,7 @@ public:
     /* 0x820 */ STRUCT_FILL(0x14);
     /* 0x834 */ u32 mInvincibilityFrameTimer;
     /* 0x838 */ STRUCT_FILL(0x370);
-    /* 0xBA8 */ float m_BA8[25];
+    /* 0xBA8 */ f32 m_BA8[25];
     /* 0xC0C */ s32 mCurrentTransformationType;
     /* 0xC10 */ StateObject mState;
     /* 0xC20 */ s32 m_C24;
@@ -247,7 +247,7 @@ public:
     /// is reset.
     /* 0xC2C */ u32 mTimeIdle;
     /* 0xC30 */ STRUCT_FILL(0x2C);
-    /* 0xC5C */ float m_C5C[10];
+    /* 0xC5C */ f32 m_C5C[10];
     /* 0xC84 */ STRUCT_FILL(0x14);
     /* 0xC98 */ s32 m_C98;
     /* 0xC9C */ KeyFrame<gfl::Vec3> mKeyFrames;

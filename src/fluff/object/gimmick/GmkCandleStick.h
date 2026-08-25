@@ -36,7 +36,7 @@ public:
     
 
 private:
-    float mRadius;
+    f32 mRadius;
     bool mEffectCreated;
     gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry; // @ 0x13C
     gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x140

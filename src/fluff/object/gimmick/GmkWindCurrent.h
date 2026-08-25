@@ -31,9 +31,9 @@ public:
     enum Parameter {
         eParameter_WindDirection   = 0, // s32 0
         eParameter_Disabled        = 1, // bool (s32) 1
-        eParameter_Width           = 0, // float 0
-        eParameter_Height          = 1, // float 1
-        eParameter_WindStrength    = 2, // float 2
+        eParameter_Width           = 0, // f32 0
+        eParameter_Height          = 1, // f32 1
+        eParameter_WindStrength    = 2, // f32 2
     };
 
     enum State {
@@ -71,9 +71,9 @@ public:
     /* 0x130 */ StateObject mState;
     /* 0x144 */ gfl::Vec2 mDimensions;
     /* 0x14C */ gfl::Vec2 mPushDirection;
-    /* 0x154 */ float mPushSpeed;
-    /* 0x158 */ float mPushSpeedMultiplier;
-    /* 0x15C */ float mWindStrength;
+    /* 0x154 */ f32 mPushSpeed;
+    /* 0x158 */ f32 mPushSpeedMultiplier;
+    /* 0x15C */ f32 mWindStrength;
     /* 0x160 */ gfl::Pointer<GmkWindCurrent_AnimWrapper> mAnimWrapper;
     /* 0x164 */ G3dObjPointer<WindCurrentWoolGroup> mWoolGroup;
     /* 0x168 */ gfl::Pointer<ColObjTrans> mColObjTrans;
@@ -120,7 +120,7 @@ public:
             y = 0;
         }
 
-        float x, y;
+        f32 x, y;
     };
 
     WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWoolName, GmkWindCurrent* pWindCurrent);
@@ -138,16 +138,16 @@ public:
     /* 0xA0 */ u32 m_A0;
     /* 0xA4 */ u32 m_A4;
     /* 0xA8 */ u32 mMax;
-    /* 0xAC */ float m_AC;
-    /* 0xB0 */ float m_B0;
-    /* 0xB4 */ float m_B4;
+    /* 0xAC */ f32 m_AC;
+    /* 0xB0 */ f32 m_B0;
+    /* 0xB4 */ f32 m_B4;
     /* 0xB8 */ Vec2 m_B8;
-    /* 0xC0 */ float m_C0;
-    /* 0xC4 */ float m_C4;
+    /* 0xC0 */ f32 m_C0;
+    /* 0xC4 */ f32 m_C4;
     /* 0xC8 */ s32 m_C8;
     /* 0xCC */ s32 m_CC;
-    /* 0xD0 */ float m_D0;
-    /* 0xD4 */ float m_D4;
+    /* 0xD0 */ f32 m_D0;
+    /* 0xD4 */ f32 m_D4;
     /* 0xD8 */ GmkWindCurrent* mWindCurrent;
     /* 0xDC */ gfl::Pointer<FlfWoolDraw> mFlfWoolDraw;
 };

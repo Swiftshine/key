@@ -1,7 +1,7 @@
 #include "util/FullSortSceneUtil.h"
 #pragma readonly_strings on
 
-float ZOrders[12] = {
+f32 ZOrders[12] = {
     -1290.0f,
     -1080.0f,
     -870.0,
@@ -16,7 +16,7 @@ float ZOrders[12] = {
     1080.0f,
 };
 
-float PriorityOffsets[9] = {
+f32 PriorityOffsets[9] = {
     -120.0f,
     -90.0f,
     -60.0f,
@@ -51,6 +51,6 @@ const char* FullSortSceneUtil::GetNearSceneLabelByIndex(u32 index) {
     return SceneLabels[index] + 9;
 }
 
-float FullSortSceneUtil::GetZOrder(u32 sceneIndex, u32 priority) {
+f32 FullSortSceneUtil::GetZOrder(u32 sceneIndex, u32 priority) {
     return ZOrders[sceneIndex] + PriorityOffsets[priority];
 }

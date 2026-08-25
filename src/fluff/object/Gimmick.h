@@ -83,7 +83,7 @@ public:
             return mIntParams[index];
         }
 
-        inline float GetFloatParam(s32 index) {
+        inline f32 GetFloatParam(s32 index) {
             return mFloatParams[index];
         }
 
@@ -112,7 +112,7 @@ public:
         /* 0x2C */ u32 mSceneOrder;
         /* 0x30 */ u32 m_30;
         /* 0x34 */ s32 mIntParams[5];
-        /* 0x48 */ float mFloatParams[5];
+        /* 0x48 */ f32 mFloatParams[5];
         /* 0x5C */ std::string mStringParams[5];
         /* 0x98 */ GimmickInfo* mGimmickInfo;
     };

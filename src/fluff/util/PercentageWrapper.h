@@ -12,12 +12,12 @@ struct PercentageWrapper {
     /* Members */
 
     s32 m_0;
-    float m_4;
-    float m_8;
-    float m_C;
-    float m_10;
-    float m_14;
-    float m_18;
+    f32 m_4;
+    f32 m_8;
+    f32 m_C;
+    f32 m_10;
+    f32 m_14;
+    f32 m_18;
     bool mUpdate;
 };
 

@@ -33,7 +33,7 @@ void GmkArrowSign::Update() {
 }
 
 const char* GmkArrowSign::GetOrientationAnimationName() {
-    float angle = static_cast<float>(mBuildInfoPtr->GetIntParam(GmkArrowSign::eParameter_Angle));
+    f32 angle = static_cast<f32>(mBuildInfoPtr->GetIntParam(GmkArrowSign::eParameter_Angle));
 
     while (angle < 0.0f) {
         angle += 360.0f;

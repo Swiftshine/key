@@ -39,21 +39,21 @@
 // NURBSOption::~NURBSOption() { }
 
 // // https://decomp.me/scratch/WL2Uc
-// s16 NURBSOption::GetOption(float arg0) {
+// s16 NURBSOption::GetOption(f32 arg0) {
 //     s16 result;
 
 //     if (mCount == 0) {
 //         result = 0;
 //     } else {
 //         u16* arr = mArray;
-//         if (static_cast<float>(*arr) <= arg0) {
+//         if (static_cast<f32>(*arr) <= arg0) {
 //             s32 i = mCount;
 //             result = 0;
 
 //             while (i != 0) {
 //                 if (
-//                     static_cast<float>(*arr) <= arg0 &&
-//                     arg0 < static_cast<float>(arr[(result + 1) * 2])
+//                     static_cast<f32>(*arr) <= arg0 &&
+//                     arg0 < static_cast<f32>(arr[(result + 1) * 2])
 //                 ) {
 //                     return arr[result * 2 + 1];
 //                 }

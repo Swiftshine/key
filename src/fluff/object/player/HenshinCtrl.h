@@ -75,7 +75,7 @@ public:
     /* 0x0CC */ virtual void vfCC();
     /* 0x0D0 */ virtual void vfD0();
     /* 0x0D4 */ virtual void vfD4();
-    /* 0x0D8 */ virtual bool vfD8(float, PlayerBase* pPlayer, PlTransMdl* pPlTransMdl);
+    /* 0x0D8 */ virtual bool vfD8(f32, PlayerBase* pPlayer, PlTransMdl* pPlTransMdl);
     /* 0x0DC */ virtual void vfDC(FlfMdlDraw* pFlfMdlDraw);
     /* 0x0E0 */ virtual void vfE0();
     /* 0x0E4 */ virtual void vfE4();

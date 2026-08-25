@@ -120,8 +120,8 @@ void GmkTurtle::Update() {
         }
 
         case GmkTurtle::eState_MoveLeft: {
-            float curX = mPosition.x;
-            float initialX = mBuildInfoPtr->mPosition.x;
+            f32 curX = mPosition.x;
+            f32 initialX = mBuildInfoPtr->mPosition.x;
             if (initialX < curX) {
                 mPosition.x = curX - mSpeed;
             } else {
@@ -151,8 +151,8 @@ void GmkTurtle::Update() {
         }
 
         case GmkTurtle::eState_MoveRight: {
-            float curX = mPosition.x;
-            float initialX = mMaxDistance + mBuildInfoPtr->mPosition.x;
+            f32 curX = mPosition.x;
+            f32 initialX = mMaxDistance + mBuildInfoPtr->mPosition.x;
             if (curX < initialX) {
                 mPosition.x = curX = mSpeed;
             } else {

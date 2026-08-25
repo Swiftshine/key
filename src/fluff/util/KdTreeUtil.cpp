@@ -1,7 +1,7 @@
 #include "util/KdTreeUtil.h"
 
 s32 KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, nw4r::math::VEC2& point) {
-    float coordinate;
+    f32 coordinate;
     if (rSplitInfo.mSplitY) {
         // the node is split on the Y axis
         coordinate = point.y;
@@ -52,8 +52,8 @@ s32 KdTreeUtil::DetermineNodePlacementByProximity(
     KdTreeSplitInfo& rSplitInfo,
     PointPair& rPoints
 ) {
-    float two;
-    float one;
+    f32 two;
+    f32 one;
 
     if (rSplitInfo.mSplitY) {
         // y axis

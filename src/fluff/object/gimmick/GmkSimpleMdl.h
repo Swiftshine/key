@@ -19,13 +19,13 @@ public:
 
     enum Parameter {
         eParameter_SortSceneIndex = 0, // s32 0
-        eParameter_ZRotation = 0,     // float 0
+        eParameter_ZRotation = 0,     // f32 0
         eParameter_ResourceName = 0,   // string 0
 
         eParameter_PlayAnim = 1,       // s32 1
 
         eParameter_InitialFrameIndex = 2, // s32 2
-        eParameter_AnimationSpeed = 2, // float 2
+        eParameter_AnimationSpeed = 2, // f32 2
     };
 public:
     GmkSimpleMdl();

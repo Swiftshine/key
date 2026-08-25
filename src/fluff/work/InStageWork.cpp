@@ -38,7 +38,7 @@ void InStageWork::Init() {
     SetBeadCount(1, 0);
     SetDefaultMedalThresholds(0);
 
-    float zero = 0.0f;
+    f32 zero = 0.0f;
     mTreasuresCollected = 0;
     mStageClear = false;
     m_93 = false;
@@ -167,9 +167,9 @@ void InStageWork::DistributeBeads(s32 beadCount, u32 arg2) {
         s32 p2 = mBeadsCollected[1];
         s32 count = p1 + p2;
 
-        float ratio = count > 0 ? static_cast<float>(p1) / static_cast<float>(p2) : 0.5f;
+        f32 ratio = count > 0 ? static_cast<f32>(p1) / static_cast<f32>(p2) : 0.5f;
 
-        s32 amt = static_cast<s32>(static_cast<float>(static_cast<s32>(arg2)) * ratio);
+        s32 amt = static_cast<s32>(static_cast<f32>(static_cast<s32>(arg2)) * ratio);
 
         AddBeads(0, arg2 - amt, 0);
         AddBeads(1, amt, 0);
@@ -179,19 +179,19 @@ void InStageWork::DistributeBeads(s32 beadCount, u32 arg2) {
 void InStageWork::SetDefaultMedalThresholds(s32 arg1) {
     m_28 = arg1;
     SetMedalThreshold(InStageWork::eMedalType_Wood, 0);
-    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<s32>(static_cast<float>(m_28) * 0.3f));
-    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<s32>(static_cast<float>(m_28) * 0.6f));
-    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<s32>(static_cast<float>(m_28) * 0.9f));
+    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<s32>(static_cast<f32>(m_28) * 0.3f));
+    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<s32>(static_cast<f32>(m_28) * 0.6f));
+    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<s32>(static_cast<f32>(m_28) * 0.9f));
     m_74 = -1;
 }
 
 void InStageWork::SetAlternativeMedalThresholds(s32 arg1) {
     m_28 = arg1;
     SetMedalThreshold(InStageWork::eMedalType_Wood, 0);
-    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<s32>(static_cast<float>(m_28) * 0.15f));
-    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<s32>(static_cast<float>(m_28) * 0.3f));
-    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<s32>(static_cast<float>(m_28) * 0.7f));
-    m_74 = static_cast<s32>(static_cast<float>(m_28) * 0.7f);
+    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<s32>(static_cast<f32>(m_28) * 0.15f));
+    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<s32>(static_cast<f32>(m_28) * 0.3f));
+    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<s32>(static_cast<f32>(m_28) * 0.7f));
+    m_74 = static_cast<s32>(static_cast<f32>(m_28) * 0.7f);
 }
 
 void InStageWork::SetMissionProgressFlags(u32 flags) {
@@ -240,7 +240,7 @@ s32 InStageWork::GetMaxZekeFound() {
     return mMaxZekeFound;
 }
 
-void InStageWork::fn_801FF428(float arg1, s32 index) {
+void InStageWork::fn_801FF428(f32 arg1, s32 index) {
     if (index < 0) {
         return;
     } else if (index >= 3) {
@@ -250,8 +250,8 @@ void InStageWork::fn_801FF428(float arg1, s32 index) {
     m_50[index] = arg1;
 }
 
-float InStageWork::fn_801FF448(s32 index) const {
-    float zero = 0.0f;
+f32 InStageWork::fn_801FF448(s32 index) const {
+    f32 zero = 0.0f;
 
     if (index < 0) {
         return zero;

@@ -104,10 +104,10 @@ public:
     /* Class Methods */
     
     void Update() const;
-    void fn_801121E4(float);
-    void fn_80112208(float);    
+    void fn_801121E4(f32);
+    void fn_80112208(f32);    
     void fn_8011222C(u32) DONT_INLINE_CLASS;
-    void fn_80112234(float);
+    void fn_80112234(f32);
     s32 fn_8011223C();
     void fn_80112244();
     void fn_8011224C();
@@ -122,7 +122,7 @@ public:
         s32 count,
         s32* pIndices
     );
-    void fn_801124DC(float arg1, float arg2, s32 arg3);
+    void fn_801124DC(f32 arg1, f32 arg2, s32 arg3);
     void fn_801124FC();
     void fn_8011250C();
     void fn_8011251C(s32, bool resetFrames);
@@ -136,11 +136,11 @@ public:
     void fn_8011285C(bool arg1);
     void fn_80112864(bool arg1);
     void fn_8011286C() DONT_INLINE_CLASS;
-    float GetCurrentFrame();
-    void SetCurrentFrame(float frame);
+    f32 GetCurrentFrame();
+    void SetCurrentFrame(f32 frame);
     bool IsAnimationDone();
-    void SetUpdateRate(float rate);
-    float GetUpdateRate();
+    void SetUpdateRate(f32 rate);
+    f32 GetUpdateRate();
     bool SetScene(FullSortScene* pScene);
     
     /* Class Members */
@@ -152,30 +152,30 @@ public:
     /* 0x014 */ FlfMdlDraw* mFlfMdlDraw;
     /* 0x018 */ s32 m_18;
     /* 0x01C */ s32 m_1C;
-    /* 0x020 */ float m_20;
+    /* 0x020 */ f32 m_20;
     /* 0x024 */ s32 mCurrentState;
     /* 0x028 */ s32 mPreviousState;
     /* 0x02C */ s32 m_2C;
     /* 0x030 */ bool mResetFrames;
     /* 0x034 */ DummyPointer_C m_34;
-    /* 0x038 */ KeyFrame<float> mKeyFrames;
+    /* 0x038 */ KeyFrame<f32> mKeyFrames;
     /* 0x054 */ bool mGraphicsSetup;
     /* 0x055 */ bool m_55;
     /* 0x056 */ bool m_56;
     /* 0x058 */ u32 m_58;
-    /* 0x05C */ float m_5C;
+    /* 0x05C */ f32 m_5C;
     /* 0x060 */ s32 m_60;
-    /* 0x064 */ float m_64;
+    /* 0x064 */ f32 m_64;
     /* 0x068 */ s32 m_68;
     /* 0x06C */ s32 m_6C;
     /* 0x070 */ s32 m_70;
-    /* 0x074 */ float m_74;
+    /* 0x074 */ f32 m_74;
     /* 0x078 */ gfl::Mtx34 mMatrix;
     /* 0x0A8 */ gfl::Vec3 m_A8;
     /* 0x0B4 */ gfl::Vec3 m_B4;
     /* 0x0C0 */ gfl::Vec3 m_C0;
     /* 0x0CC */ s32 m_CC; // some kind of limit?
-    /* 0x0D0 */ float m_D0;
+    /* 0x0D0 */ f32 m_D0;
     /* 0x0D4 */ MdlParts mMdlParts;
     /* 0x0174 */ s32 m_174;
 };

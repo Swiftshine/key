@@ -46,7 +46,7 @@ void GmkCandleStick::SetState(FlfGameObj* setter, const std::string& state) {
         GmkLamp* lamp = dynamic_cast<GmkLamp*>(setter);
 
         if (lamp != nullptr) {
-            float pos = lamp->fn_805B6DB4();
+            f32 pos = lamp->fn_805B6DB4();
             mMoleLight->SetZPosition(mRadius * pos);
         }
     }
