@@ -178,19 +178,19 @@ void InStageWork::DistributeBeads(int beadCount, uint arg2) {
 
 void InStageWork::SetDefaultMedalThresholds(int arg1) {
     m_28 = arg1;
-    SetMedalThreshold(MedalType::Wood, 0);
-    SetMedalThreshold(MedalType::Bronze, static_cast<int>(static_cast<float>(m_28) * 0.3f));
-    SetMedalThreshold(MedalType::Silver, static_cast<int>(static_cast<float>(m_28) * 0.6f));
-    SetMedalThreshold(MedalType::Gold, static_cast<int>(static_cast<float>(m_28) * 0.9f));
+    SetMedalThreshold(InStageWork::eMedalType_Wood, 0);
+    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<int>(static_cast<float>(m_28) * 0.3f));
+    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<int>(static_cast<float>(m_28) * 0.6f));
+    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<int>(static_cast<float>(m_28) * 0.9f));
     m_74 = -1;
 }
 
 void InStageWork::SetAlternativeMedalThresholds(int arg1) {
     m_28 = arg1;
-    SetMedalThreshold(MedalType::Wood, 0);
-    SetMedalThreshold(MedalType::Bronze, static_cast<int>(static_cast<float>(m_28) * 0.15f));
-    SetMedalThreshold(MedalType::Silver, static_cast<int>(static_cast<float>(m_28) * 0.3f));
-    SetMedalThreshold(MedalType::Gold, static_cast<int>(static_cast<float>(m_28) * 0.7f));
+    SetMedalThreshold(InStageWork::eMedalType_Wood, 0);
+    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<int>(static_cast<float>(m_28) * 0.15f));
+    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<int>(static_cast<float>(m_28) * 0.3f));
+    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<int>(static_cast<float>(m_28) * 0.7f));
     m_74 = static_cast<int>(static_cast<float>(m_28) * 0.7f);
 }
 
@@ -308,7 +308,7 @@ void InStageWork::SetDefaultBeadMedals() {
         threshold += 300;
     }
 
-    mBeadMedal = MedalType::Wood;
+    mBeadMedal = InStageWork::eMedalType_Wood;
 }
 
 void InStageWork::SetMedalThreshold(uint medalType, int threshold) {
@@ -327,18 +327,18 @@ int InStageWork::GetMedalThreshold(uint medalType) const {
 }
 
 int InStageWork::GetBeadMedal() {
-    int type = MedalType::None;
+    int type = InStageWork::eMedalType_None;
 
     int total = mBeadsCollected[0] + mBeadsCollected[1];
 
-    if (mMedalThresholds[MedalType::Wood] <= total) {
-        type = MedalType::Wood;
-        if (mMedalThresholds[MedalType::Bronze] <= total) {
-            type = MedalType::Bronze;
-            if (mMedalThresholds[MedalType::Silver] <= total) {
-                type = MedalType::Silver;
-                if (mMedalThresholds[MedalType::Gold] <= total) {
-                    type = MedalType::Gold;
+    if (mMedalThresholds[InStageWork::eMedalType_Wood] <= total) {
+        type = InStageWork::eMedalType_Wood;
+        if (mMedalThresholds[InStageWork::eMedalType_Bronze] <= total) {
+            type = InStageWork::eMedalType_Bronze;
+            if (mMedalThresholds[InStageWork::eMedalType_Silver] <= total) {
+                type = InStageWork::eMedalType_Silver;
+                if (mMedalThresholds[InStageWork::eMedalType_Gold] <= total) {
+                    type = InStageWork::eMedalType_Gold;
                 }
             }
         }
@@ -347,14 +347,14 @@ int InStageWork::GetBeadMedal() {
     if (type != mBeadMedal) {
         if (mBeadMedal < type) {
             mBeadMedal = type;
-            return MedalType::Bronze;
+            return InStageWork::eMedalType_Bronze;
         }
 
         mBeadMedal = type;
-        return MedalType::Silver;
+        return InStageWork::eMedalType_Silver;
     }
 
-    return MedalType::Wood;
+    return InStageWork::eMedalType_Wood;
 }
 
 void InStageWork::fn_801FF600() {

@@ -139,10 +139,10 @@ float PlTransMdl::GetUpdateRate() const {
 }
 
 void PlTransMdl::SetMatrix(const gfl::Mtx34& rMtx) {
-    int direction = Direction::Forward;
+    int direction = eDirection_Forward;
 
-    if (mPlayer != nullptr && mPlayer->mDirection == Direction::Backward) {
-        direction = Direction::Backward;
+    if (mPlayer != nullptr && mPlayer->mDirection == eDirection_Backward) {
+        direction = eDirection_Backward;
     }
 
     SetMatrix(rMtx, direction);
@@ -153,7 +153,7 @@ void PlTransMdl::SetMatrix(const gfl::Mtx34& rMtx, int direction) {
     GXCullMode cullMode = GX_CULL_BACK;
     gfl::Mtx34 mtx = rMtx;
 
-    if (direction != Direction::Forward) {
+    if (direction != eDirection_Forward) {
         cullMode = GX_CULL_FRONT;
         gfl::Mtx34 backMtx = mtx;
         backMtx[2][2] *= -1.0f;
@@ -188,7 +188,7 @@ bool PlTransMdl::GetMatrix(const char* pName, gfl::Mtx34& rMtx) {
     u32 id = resNode.GetID();
 
     rMtx = blendAnim->GetMatrix(mFlfMdlDraw->GetNURBSAnimWrapperModelWrapper(), id);
-    
+
     if (!rMtx.IsValid()) {
         NW4R_RESNODE_ASSERT_VALID(resNode, 0x38);
         u32 id = resNode.GetID();
@@ -202,7 +202,7 @@ bool PlTransMdl::GetMatrix(const char* pName, gfl::Mtx34& rMtx) {
 
 int PlTransMdl::ResetScene(FullSortScene* pScene) {
     mFlfMdlDraw->SetScene(pScene);
-    
+
     if (mWoolBaseMdl != nullptr) {
         mWoolBaseMdl->ResetScene(pScene);
     }
@@ -212,7 +212,7 @@ int PlTransMdl::ResetScene(FullSortScene* pScene) {
 
 inline float clamp(float f, float min, float max) {
     float ret = f;
-    
+
     if (f <= min) {
         ret = min;
     } else if (f >= max) {

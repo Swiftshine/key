@@ -138,7 +138,7 @@ int MissionTimeAttackClearChecker::Process() {
     int tas = work->GetTimeAttackStatus();
 
     if (tas >= 0 && 3 > tas) {
-        if (tas == InStageWork::TimeAttackStatus::Failed) {
+        if (tas == InStageWork::eTimeAttackStatus_Failed) {
             EndMission(MissionClearCheckerBase::eMissionStatus_Failed, MissionClearCheckerBase::eMissionEndReason_TimeAttackFailed);
         } else {
             EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
@@ -149,11 +149,11 @@ int MissionTimeAttackClearChecker::Process() {
 }
 
 void MissionTimeAttackClearChecker::CauseMissionSuccess() {
-    WorkManager::GetInStageWork()->SetTimeAttackStatus(InStageWork::TimeAttackStatus::Success);
+    WorkManager::GetInStageWork()->SetTimeAttackStatus(InStageWork::eTimeAttackStatus_Success);
 }
 
 void MissionTimeAttackClearChecker::CauseMissionFailure() {
-    WorkManager::GetInStageWork()->SetTimeAttackStatus(InStageWork::TimeAttackStatus::Failed);
+    WorkManager::GetInStageWork()->SetTimeAttackStatus(InStageWork::eTimeAttackStatus_Failed);
 }
 
 /* Defeat Enemy */
@@ -190,7 +190,7 @@ void MissionDefeatEnemyClearChecker::CauseMissionSuccess() {
 }
 
 void MissionDefeatEnemyClearChecker::CauseMissionFailure() {
-    WorkManager::GetInStageWork()->SetTimeAttackStatus(InStageWork::TimeAttackStatus::Failed);
+    WorkManager::GetInStageWork()->SetTimeAttackStatus(InStageWork::eTimeAttackStatus_Failed);
 }
 
 /* Carry */

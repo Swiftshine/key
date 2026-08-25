@@ -56,7 +56,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
     , mSD3DActorObject1()
     , mSD3DActorObject2()
     , mIsActive(true)
-    , mWindDirection(Orientation::Up)
+    , mWindDirection(eOrientation_Up)
 {
     float strength = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_WindStrength);
 
@@ -432,7 +432,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
     const char* endAnimName;
 
     switch (pWindCurrent->GetBuildInfo()->GetIntParam(GmkWindCurrent::GmkWindCurrent::eParameter_WindDirection)) {
-        case Orientation::Up: {
+        case eOrientation_Up: {
             startAnimName   = "c_000_start";
             loopAnimName    = "c_000_loop";
             endAnimName     = "c_000_end";
@@ -440,7 +440,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
             break;
         }
 
-        case Orientation::Down: {
+        case eOrientation_Down: {
             startAnimName   = "c_180_start";
             loopAnimName    = "c_180_loop";
             endAnimName     = "c_180_end";
@@ -448,7 +448,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
             break;
         }
 
-        case Orientation::Left: {
+        case eOrientation_Left: {
             startAnimName   = "c_090_start";
             loopAnimName    = "c_090_loop";
             endAnimName     = "c_090_end";
@@ -456,7 +456,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
             break;
         }
 
-        case Orientation::Right: {
+        case eOrientation_Right: {
             startAnimName   = "c_270_start";
             loopAnimName    = "c_270_loop";
             endAnimName     = "c_270_end";
@@ -517,14 +517,14 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
         PSMTXIdentity(mtx);
 
         switch (mWindCurrent->GetBuildInfo()->GetIntParam(GmkWindCurrent::GmkWindCurrent::eParameter_WindDirection)) {
-            case Orientation::Up:
-            case Orientation::Down: {
+            case eOrientation_Up:
+            case eOrientation_Down: {
                 mtx[0][0] = width;
                 break;
             };
 
-            case Orientation::Left:
-            case Orientation::Right: {
+            case eOrientation_Left:
+            case eOrientation_Right: {
                 mtx[1][1] = width;
                 break;
             };

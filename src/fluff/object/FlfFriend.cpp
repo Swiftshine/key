@@ -339,7 +339,7 @@ bool FlfFriend::IsPlayerSavedPositionInFront() const {
 
     gfl::Vec3 temp;
     temp = mPosition;
-    if ((pos.x - temp.x > 0.0f && mDirection == Direction::Forward) || (pos.x - temp.x < 0.0f && mDirection == Direction::Backward)) {
+    if ((pos.x - temp.x > 0.0f && mDirection == eDirection_Forward) || (pos.x - temp.x < 0.0f && mDirection == eDirection_Backward)) {
         return true;
     }
 
@@ -350,7 +350,7 @@ bool FlfFriend::IsPlayerSavedPositionInFront() const {
 bool FlfFriend::IsPositionInFront(const gfl::Vec2& rPos) const {
     gfl::Vec3 temp(0.0f);
     temp = mPosition;
-    if ((rPos.x - temp.x > 0.0f && mDirection == Direction::Forward) || (rPos.x - temp.x < 0.0f && mDirection == Direction::Backward)) {
+    if ((rPos.x - temp.x > 0.0f && mDirection == eDirection_Forward) || (rPos.x - temp.x < 0.0f && mDirection == eDirection_Backward)) {
         return true;
     }
     return false;
@@ -372,10 +372,10 @@ bool FlfFriend::IsInRange(const gfl::Vec3& rTarget, float* pDistance) const {
 }
 
 void FlfFriend::SwitchDirection() {
-    if (mDirection == Direction::Backward) {
-        mDirection = Direction::Forward;
-    } else if (mDirection == Direction::Forward) {
-        mDirection = Direction::Backward;
+    if (mDirection == eDirection_Backward) {
+        mDirection = eDirection_Forward;
+    } else if (mDirection == eDirection_Forward) {
+        mDirection = eDirection_Backward;
     }
 }
 
@@ -411,14 +411,14 @@ void FlfFriend::vf16C() {
     if (isnan(mtx1[1][3])) {
         mtx1 = mMatrix;
 
-        if (mDirection == Direction::Forward) {
+        if (mDirection == eDirection_Forward) {
             mtx1[0][3] = mMatrix[0][3] + 0.01f;
         } else {
             mtx1[0][3] = mMatrix[0][3] - 0.01f;
         }
     }
 
-    if (mDirection == Direction::Forward) {
+    if (mDirection == eDirection_Forward) {
         gfl::Mtx34 mtx2 = mtx1;
         nw4r::math::MTX34 mtx3(
             -1.0f, 0.0f, 0.0f, 0.0f,
@@ -449,11 +449,11 @@ void FlfFriend::SetScreenPosition(int* pDirection) {
     float x, y, w, h;
     CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::eSceneID_Game);
 
-    if (*pDirection == Direction::Forward) {
+    if (*pDirection == eDirection_Forward) {
         mScreenPosition1.mCullThreshold = mPosition.z;
         mScreenPosition1.mX = x + w + 3.0f;
         mScreenPosition1.mY = y + 3.0f;
-    } else if (*pDirection == Direction::Backward) {
+    } else if (*pDirection == eDirection_Backward) {
         mScreenPosition1.mCullThreshold = mPosition.z;
         mScreenPosition1.mX = x - 3.0f;
         mScreenPosition1.mY = y + 3.0f;
@@ -697,7 +697,7 @@ bool FlfFriend::vfD8() const {
 }
 
 // sdata
-int lbl_808E1810 = Direction::Forward;
+int lbl_808E1810 = eDirection_Forward;
 
 void FlfFriend::vf13C() {
     SetScreenPosition(&lbl_808E1810);
@@ -735,10 +735,10 @@ void FlfFriend::SetPositionToPlayerSavedPosition() {
 
         float xOffs = 1.5f;
         float yOffs = 2.5f;
-        if (dir == Direction::Forward) {
+        if (dir == eDirection_Forward) {
             pos.x -= xOffs;
             pos.y += yOffs;
-        } else if (dir == Direction::Backward) {
+        } else if (dir == eDirection_Backward) {
             pos.x += xOffs;
             pos.y += yOffs;
         }
@@ -921,9 +921,9 @@ void FlfFriend::LookAt(const ScreenPosition& rPos) {
     if (fabsf(pos.x - rPos.mX) < 0.03f) { // prevent "jittering"
         return;
     } else if (pos.x < rPos.mX) {
-        mDirection = Direction::Forward;
+        mDirection = eDirection_Forward;
     } else if (rPos.mX < pos.x) {
-        mDirection = Direction::Backward;
+        mDirection = eDirection_Backward;
     }
 }
 

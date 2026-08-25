@@ -16,22 +16,20 @@ struct InStageWork_Substruct {
 /// @note Size: `0x1E4`
 class InStageWork {
 public:
-    /* Enums */
+    enum TimeAttackStatus {
+        eTimeAttackStatus_Success         = 0,
+        eTimeAttackStatus_InProgress      = 1, // assumed
+        eTimeAttackStatus_Failed          = 2,
+    };
 
-    ENUM_CLASS(TimeAttackStatus,
-        Success         = 0,
-        InProgress      = 1, // assumed
-        Failed          = 2,
-    );
-
-    ENUM_CLASS(MedalType,
-        None    = -1,
-        Wood    = 0,
-        Bronze  = 1,
-        Silver  = 2,
-        Gold    = 3,
-    );
-
+    enum MedalType {
+        eMedalType_None    = -1,
+        eMedalType_Wood    = 0,
+        eMedalType_Bronze  = 1,
+        eMedalType_Silver  = 2,
+        eMedalType_Gold    = 3,
+    };
+public:
     InStageWork();
     DECL_WEAK virtual ~InStageWork();
 

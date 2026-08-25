@@ -237,12 +237,12 @@ bool Friend00::vf218() {
     if (GetCurrentNURBSAnimationID() == 12) {
         if (IsAnimationDone()) {
             switch (mDirection) {
-                case Direction::Forward: {
-                    mDirection = Direction::Backward;
+                case eDirection_Forward: {
+                    mDirection = eDirection_Backward;
                     break;
                 }
-                case Direction::Backward: {
-                    mDirection = Direction::Forward;
+                case eDirection_Backward: {
+                    mDirection = eDirection_Forward;
                     break;
                 }
             }

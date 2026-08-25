@@ -72,13 +72,13 @@ void KdTreeNode::Propagate(ColData* pColData) {
     }
 
     switch (pColData->GetNodePlacement(mSplitInfo)) {
-        case KdTreeUtil::NodePlacement::Child1:
+        case KdTreeUtil::eNodePlacement_Child1:
             mChild1->Propagate(pColData);
             break;
-        case KdTreeUtil::NodePlacement::Child2:
+        case KdTreeUtil::eNodePlacement_Child2:
             mChild2->Propagate(pColData);
             break;
-        case KdTreeUtil::NodePlacement::Self:
+        case KdTreeUtil::eNodePlacement_Self:
             temp = mColData;
             mColData = pColData;
             pColData->SetNext(temp);

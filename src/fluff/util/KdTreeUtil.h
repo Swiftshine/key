@@ -23,7 +23,7 @@ struct KdTreeBounds {
         mMaxX = 0.0f;
         mMaxY = 0.0f;
     }
-    
+
     /* 0x0 */ float mMinX;
     /* 0x4 */ float mMinY;
     /* 0x8 */ float mMaxX;
@@ -31,11 +31,11 @@ struct KdTreeBounds {
 };
 
 namespace KdTreeUtil {
-    ENUM_CLASS(NodePlacement,
-        Child1  = 0,
-        Child2  = 1,
-        Self    = 2
-    );
+    enum NodePlacement {
+        eNodePlacement_Child1  = 0,
+        eNodePlacement_Child2  = 1,
+        eNodePlacement_Self    = 2
+    };
 
     /**
      * @note Address: 0x80048354

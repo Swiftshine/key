@@ -7,45 +7,45 @@ int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, nw4r::math::
         coordinate = point.y;
 
         if (coordinate > rSplitInfo.mMidpoint) {
-            return NodePlacement::Child1;
+            return KdTreeUtil::eNodePlacement_Child1;
         } else if (coordinate < rSplitInfo.mMidpoint) {
-            return NodePlacement::Child2;
+            return KdTreeUtil::eNodePlacement_Child2;
         }
-        
-        return NodePlacement::Self;
+
+        return KdTreeUtil::eNodePlacement_Self;
     }
 
     // the node is split on the X axis
     coordinate = point.x;
     if (coordinate > rSplitInfo.mMidpoint) {
-        return NodePlacement::Child1;
+        return KdTreeUtil::eNodePlacement_Child1;
     } else if (coordinate < rSplitInfo.mMidpoint) {
-        return NodePlacement::Child2;
+        return KdTreeUtil::eNodePlacement_Child2;
     }
 
-    return NodePlacement::Self;
+    return KdTreeUtil::eNodePlacement_Self;
 }
 int KdTreeUtil::DetermineNodePlacementStrictly(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints) {
     if (rSplitInfo.mSplitY) {
         // y axis
         if (rPoints.first.y > rSplitInfo.mMidpoint && rPoints.second.y > rSplitInfo.mMidpoint) {
-            return NodePlacement::Child1;
+            return KdTreeUtil::eNodePlacement_Child1;
         } else if (
             rPoints.first.y < rSplitInfo.mMidpoint
             && rPoints.second.y < rSplitInfo.mMidpoint
         ) {
-            return NodePlacement::Child2;
+            return KdTreeUtil::eNodePlacement_Child2;
         }
 
-        return NodePlacement::Self;
+        return KdTreeUtil::eNodePlacement_Self;
     }
     // x axis
     if (rPoints.first.x > rSplitInfo.mMidpoint && rPoints.second.x > rSplitInfo.mMidpoint) {
-        return NodePlacement::Child1;
+        return KdTreeUtil::eNodePlacement_Child1;
     } else if (rPoints.first.x < rSplitInfo.mMidpoint && rPoints.second.x < rSplitInfo.mMidpoint) {
-        return NodePlacement::Child2;
+        return KdTreeUtil::eNodePlacement_Child2;
     }
-    return NodePlacement::Self;
+    return KdTreeUtil::eNodePlacement_Self;
 }
 
 int KdTreeUtil::DetermineNodePlacementByProximity(
@@ -61,12 +61,12 @@ int KdTreeUtil::DetermineNodePlacementByProximity(
         two = rPoints.second.x;
 
         if (one - two > rSplitInfo.mMidpoint) {
-            return NodePlacement::Child1;
+            return KdTreeUtil::eNodePlacement_Child1;
         } else if (one + two < rSplitInfo.mMidpoint) {
-            return NodePlacement::Child2;
+            return KdTreeUtil::eNodePlacement_Child2;
         }
 
-        return NodePlacement::Self;
+        return KdTreeUtil::eNodePlacement_Self;
     }
 
     // x axis
@@ -74,12 +74,12 @@ int KdTreeUtil::DetermineNodePlacementByProximity(
     one = rPoints.second.x;
 
     if (two - one > rSplitInfo.mMidpoint) {
-        return NodePlacement::Child1;
+        return KdTreeUtil::eNodePlacement_Child1;
     } else if (two + one < rSplitInfo.mMidpoint) {
-        return NodePlacement::Child2;
+        return KdTreeUtil::eNodePlacement_Child2;
     }
 
-    return NodePlacement::Self;
+    return KdTreeUtil::eNodePlacement_Self;
 }
 
 int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints) {
@@ -87,21 +87,21 @@ int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, PointPair& r
         // y axis
 
         if (rPoints.first.y > rSplitInfo.mMidpoint) {
-            return NodePlacement::Child1;
+            return KdTreeUtil::eNodePlacement_Child1;
         } else if (rPoints.second.y < rSplitInfo.mMidpoint) {
-            return NodePlacement::Child2;
+            return KdTreeUtil::eNodePlacement_Child2;
         }
-    
-        return NodePlacement::Self;
+
+        return KdTreeUtil::eNodePlacement_Self;
     }
 
     // x axis
-    
+
     if (rPoints.first.x > rSplitInfo.mMidpoint) {
-        return NodePlacement::Child1;
+        return KdTreeUtil::eNodePlacement_Child1;
     } else if (rPoints.second.x < rSplitInfo.mMidpoint) {
-        return NodePlacement::Child2;
+        return KdTreeUtil::eNodePlacement_Child2;
     }
 
-    return NodePlacement::Self;
+    return KdTreeUtil::eNodePlacement_Self;
 }
