@@ -30,15 +30,14 @@ namespace gfl {
             : mOwner(owner)
             , mFunction(function)
         { }
-        
+
         /* 0x08 */ DECL_WEAK virtual ReturnT operator()() {
             (mOwner->*mFunction)();
         }
-        
+
         /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone() const {
             return new (gfl::HeapID::LIB1) FunctorType(*this);
         }
-        
 
         /* 0x10 */ DECL_WEAK virtual ~FunctorClassMethod0() { }
 
@@ -53,8 +52,24 @@ namespace gfl {
     class FunctorImpl {
     public:
         /* Virtual Methods */
-    
-        /* 0x8 */ virtual ~FunctorImpl() { }
+
+        /* 0x8 */ virtual ~FunctorImpl() {
+            delete mFunctor;
+        }
+
+        inline void operator()() {
+            mFunctor->operator();
+        }
+
+        FunctorT* getFunctor() {
+            return mFunctor;
+        }
+
+        void setFunctor(FunctorT* f) {
+            mFunctor = f;
+        }
+    private:
+        /* 0x4 */ FunctorT* mFunctor;
     };
 
     template <typename ReturnT>
@@ -130,7 +145,7 @@ namespace gfl {
         /* Class Members */
 
         /* 0x0 */ Pointer<FunctorImpl<FunctorBase2<ReturnT, Arg1T, Arg2T> > > mFunctorImpl;
-        // /* 0x4 */ FunctorClassMethod2<ReturnT, Arg1T, Arg2T, 
+        // /* 0x4 */ FunctorClassMethod2<ReturnT, Arg1T, Arg2T,
         void* m_4;
         /* 0x8 */ void* m_8;
     };

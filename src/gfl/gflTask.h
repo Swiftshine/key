@@ -18,7 +18,7 @@ namespace gfl {
             Inactive = 0,
             Active = 1
         );
-        
+
     public:
         inline Task()
             : mFunctor()
@@ -45,7 +45,7 @@ namespace gfl {
         // {
         //     Init(pTaskName);
         // }
-        
+
         void Init(const char* newname);
 
         virtual ~Task();
@@ -69,17 +69,18 @@ namespace gfl {
         inline void SetUnk14(uint value) {
             mSuspendFlags = value;
         }
-        
+
         inline void OrUnk14(int value) {
             mSuspendFlags |= value;
         }
-        
+
         template <typename ReturnT, typename OwnerT, typename FunctionT>
         inline Functor0<void> CreateTaskFunctor(OwnerT owner, FunctionT function) {
             FunctorClassMethod0<ReturnT, OwnerT, FunctionT>* fcm0
                 = new (gfl::HeapID::LIB1) FunctorClassMethod0<ReturnT, OwnerT, FunctionT>(owner, function);
 
-            mFunctorBase = static_cast<FunctorBase0<ReturnT>*>(fcm0);
+            mFunctor.setFunctor(fcm0);
+            // mFunctorBase = static_cast<FunctorBase0<ReturnT>*>(fcm0);
             Functor0<ReturnT> f;
             return f;
         }
@@ -96,7 +97,6 @@ namespace gfl {
 
         /* 0x04 */ TaskInfo* mTaskInfo;
         /* 0x08 */ Functor0<void> mFunctor;
-        /* 0x0C */ FunctorBase0<void>* mFunctorBase;
         /* 0x10 */ uint mFlags;
         /* 0x14 */ uint mSuspendFlags;
     };

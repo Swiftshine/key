@@ -34,11 +34,11 @@ Task::~Task() {
 uint Task::PollTask() {
     TaskInfo* myTaskInfo = mTaskInfo;
     Task* childTask;
-    
+
     // if the task is about to execute and it has the means to do so, it will
-    if (!(mFlags & ~mSuspendFlags) && mFunctorBase != nullptr) {
+    if (!(mFlags & ~mSuspendFlags) && mFunctor.getFunctor() != nullptr) {
         TaskInfo::SetCurrentTask(this);
-        mFunctorBase->operator()();
+        mFunctor.getFunctor()->operator()();
         TaskInfo::ClearCurrentTask();
 
         // after executing, check the task's information to see if the task still exists
@@ -52,7 +52,7 @@ uint Task::PollTask() {
     // so get the next child
     // childTask = TaskInfo::GetNextChildTask(mTaskInfo);
     childTask = mTaskInfo->GetNextChildTask();
-    
+
     while (childTask) {
         TaskInfo* childTaskInfo = childTask->mTaskInfo;
 
@@ -160,7 +160,7 @@ void Task::Replace(Task* other) {
     }
 
     TaskInfo* myChildSiblingInfo = myChildInfo->GetSiblingInfo();
-    
+
     while (myTaskInfo != theirTaskInfo) {
         myTaskInfo = myChildSiblingInfo;
 
@@ -186,7 +186,7 @@ u8 Task::GetFlags() {
 }
 
 void Task::CreateSubtask(u8 a) {
-    
+
 }
 
 void Task::SetTaskName(const char* newname) {
