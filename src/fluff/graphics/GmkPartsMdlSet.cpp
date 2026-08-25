@@ -36,8 +36,8 @@ void GmkPartsMdlSet::SetMatrix(const float zOffset, nw4r::math::MTX34& rSrcMatri
     mtx[1][3] += mShadowOffset.y;
     mtx[2][3] -= zOffset;
 
-    
-    if (arg3) {        
+
+    if (arg3) {
         mtx[0][2] = 0.0f;
         mtx[1][2] = 0.0f;
         mtx[2][2] = 0.0f;
@@ -55,13 +55,13 @@ bool GmkPartsMdlSet::GetPrimaryMatrix(nw4r::math::MTX34& rDstMatrix) {
 void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& rFileInfo, const char* pModelName, const char* pShadowName, FullSortScene* pScene, uint flags) {
     nw4r::g3d::ResFile resFile(rFileInfo.IsValid() ? rFileInfo->GetGfArch() : nullptr);
     NW4R_G3D_RESFILE_AC_ASSERT(resFile);
-    
+
     resFile.Release();
     resFile.Bind();
 
     nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(pModelName);
 
-    mPrimaryModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl.ptr(), flags, pModelName);
+    mPrimaryModel = new (gfl::eHeapID_Work) gfl::ScnMdlWrapper(resMdl.ptr(), flags, pModelName);
     pScene->AddRenderObj(mPrimaryModel);
 
     nw4r::g3d::ResMdl shadowResMdl = resFile.GetResMdl(pShadowName);
@@ -70,7 +70,7 @@ void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& rFileInfo, const char
         return;
     }
 
-    mShadowModel = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(shadowResMdl.ptr(), flags, pShadowName);
+    mShadowModel = new (gfl::eHeapID_Work) gfl::ScnMdlWrapper(shadowResMdl.ptr(), flags, pShadowName);
     pScene->AddRenderObj(mShadowModel);
 
     std::string partsStr = "GmkPartsMdlSet ";

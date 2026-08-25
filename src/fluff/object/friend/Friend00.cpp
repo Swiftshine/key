@@ -14,7 +14,7 @@ const char* Friend00::GetResourceName() {
 }
 
 Friend00* Friend00::Build(gfl::Task *pParentTask, FullSortScene *pScene, const char* pTaskName) {
-    return new (gfl::HeapID::Work) Friend00(pParentTask, pScene, pTaskName);
+    return new (gfl::eHeapID_Work) Friend00(pParentTask, pScene, pTaskName);
 }
 
 void Friend00::AddResourceName() {
@@ -33,7 +33,7 @@ Friend00::Friend00(gfl::Task* pParentTask, FullSortScene* pScene, const char* pT
     , mCollisionEntry2(nullptr)
     , mCollisionEntry3(nullptr)
 {
-    mFlfMdlDraw = new (gfl::HeapID::Work) FlfMdlDraw(pScene, ResourceName, nullptr, true);
+    mFlfMdlDraw = new (gfl::eHeapID_Work) FlfMdlDraw(pScene, ResourceName, nullptr, true);
     mFlfMdlDraw->LoadNURBSFromFileList();
     mFlfMdlDraw->mShadowOffsets.m_14 = true;
 

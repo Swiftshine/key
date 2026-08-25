@@ -60,7 +60,7 @@ MissionGameCtrl* MissionClearCheckerBase::GetMissionGameCtrl() {
 /* Bead */
 
 MissionBeadClearChecker* MissionBeadClearChecker::Build(MissionGameCtrl* pMissionGameCtrl) {
-    MissionBeadClearChecker* checker = new (gfl::HeapID::Work) MissionBeadClearChecker;
+    MissionBeadClearChecker* checker = new (gfl::eHeapID_Work) MissionBeadClearChecker;
     InitChecker(checker, pMissionGameCtrl);
     return checker;
 }
@@ -114,7 +114,7 @@ void MissionBeadClearChecker::CauseMissionFailure() {
 MissionTimeAttackClearChecker* MissionTimeAttackClearChecker::Build(
     MissionGameCtrl* pMissionGameCtrl
 ) {
-    MissionTimeAttackClearChecker* checker = new (gfl::HeapID::Work) MissionTimeAttackClearChecker();
+    MissionTimeAttackClearChecker* checker = new (gfl::eHeapID_Work) MissionTimeAttackClearChecker();
     checker->SetMissionGameCtrl(pMissionGameCtrl);
     return checker;
 }
@@ -161,7 +161,7 @@ void MissionTimeAttackClearChecker::CauseMissionFailure() {
 MissionDefeatEnemyClearChecker* MissionDefeatEnemyClearChecker::Build(
     MissionGameCtrl *pMissionGameCtrl
 ) {
-    MissionDefeatEnemyClearChecker* checker = new (gfl::HeapID::Work) MissionDefeatEnemyClearChecker();
+    MissionDefeatEnemyClearChecker* checker = new (gfl::eHeapID_Work) MissionDefeatEnemyClearChecker();
     InitChecker(checker, pMissionGameCtrl);
     return checker;
 }
@@ -196,7 +196,7 @@ void MissionDefeatEnemyClearChecker::CauseMissionFailure() {
 /* Carry */
 
 MissionCarrierClearChecker* MissionCarrierClearChecker::Build(MissionGameCtrl *pMissionGameCtrl) {
-    MissionCarrierClearChecker* checker = new (gfl::HeapID::Work) MissionCarrierClearChecker();
+    MissionCarrierClearChecker* checker = new (gfl::eHeapID_Work) MissionCarrierClearChecker();
     checker->SetMissionGameCtrl(pMissionGameCtrl);
     return checker;
 }
@@ -244,7 +244,7 @@ MissionHideAndSeekClearChecker* MissionHideAndSeekClearChecker::Build(
     MissionGameCtrl *pMissionGameCtrl
 ) {
     MissionHideAndSeekClearChecker* checker
-        = new (gfl::HeapID::Work) MissionHideAndSeekClearChecker();
+        = new (gfl::eHeapID_Work) MissionHideAndSeekClearChecker();
 
     InitChecker(checker, pMissionGameCtrl);
     return checker;

@@ -35,8 +35,8 @@ void DemoObject::DoUpdate() {
 // i don't know how to structure the gfl::Task ctor to support
 // the construction of these templated functors
 gfl::Task* DemoObject::InitTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, uint arg4) {
-    gfl::Task* task = new (gfl::HeapID::Work) gfl::Task(this, Update, pTaskName);
-    
+    gfl::Task* task = new (gfl::eHeapID_Work) gfl::Task(this, Update, pTaskName);
+
     if (task != nullptr) {
         task->SetFlags(flags);
         pParentTask->MakeChild(task);

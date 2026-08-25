@@ -63,7 +63,7 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const ch
     if (pFilepath == nullptr) {
         pFilepath = "gimmick/wool_bridge/wool_bridge.brres";
     }
-    
+
     uint unk;
 
     if (pBuildInfo->m_34 >= 2) {
@@ -110,11 +110,11 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const ch
 
     gfl::ResFileObject resFileObject = gfl::ResFileObject::FromArchive(pFilepath);
     nw4r::g3d::ResFile resFile = resFileObject.GetResFile();
-    
+
     char woolTexName[0x20];
     sprintf(woolTexName, "wool_%02d", mWoolTextureType);
 
-    mWoolLink = new (gfl::HeapID::Work) WoolLinkObjBase(
+    mWoolLink = new (gfl::eHeapID_Work) WoolLinkObjBase(
         this,
         pBuildInfo,
         resFileObject,

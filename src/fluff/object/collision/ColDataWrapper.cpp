@@ -111,7 +111,7 @@ void ColDataWrapper::CreateColDataPoints(uint count) {
         return;
     }
 
-    mColDataPoints = new (gfl::HeapID::Work) ColDataPoint[count];
+    mColDataPoints = new (gfl::eHeapID_Work) ColDataPoint[count];
     mNumPoints = count;
 
     for (uint i = 0; i < count; i++) {
@@ -131,7 +131,7 @@ void ColDataWrapper::CreateColDataSegs(uint count) {
         return;
     }
 
-    mColDataSegs = new (gfl::HeapID::Work) ColDataSeg[count];
+    mColDataSegs = new (gfl::eHeapID_Work) ColDataSeg[count];
     mNumSegs = count;
 
     for (uint i = 0; i < count; i++) {
@@ -144,7 +144,7 @@ void ColDataWrapper::CreateColDataCircles(uint count) {
         return;
     }
 
-    mColDataCircles = new (gfl::HeapID::Work) ColDataCircle[count];
+    mColDataCircles = new (gfl::eHeapID_Work) ColDataCircle[count];
     mNumCircles = count;
 
     for (uint i = 0; i < count; i++) {
@@ -164,7 +164,7 @@ void ColDataWrapper::CreateColDataRects(uint count) {
         return;
     }
 
-    mColDataRects = new (gfl::HeapID::Work) ColDataRect[count];
+    mColDataRects = new (gfl::eHeapID_Work) ColDataRect[count];
     mNumRects = count;
 
     for (uint i = 0; i < count; i++) {

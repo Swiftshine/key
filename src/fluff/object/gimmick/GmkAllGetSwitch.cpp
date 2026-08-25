@@ -1,7 +1,7 @@
 #include "object/gimmick/GmkAllGetSwitch.h"
 
 GmkAllGetSwitch* GmkAllGetSwitch::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkAllGetSwitch(buildInfo);
+    return new (gfl::eHeapID_Work) GmkAllGetSwitch(buildInfo);
 }
 
 // https://decomp.me/scratch/ae6x5

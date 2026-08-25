@@ -225,8 +225,8 @@ void KdTreeNode::CreateChildren() {
     // there are more than one inline constructor.
     // i need to figure out what the signature is
 
-    mChild1 = new (gfl::HeapID::Work) KdTreeNode(this, v0.x, v0.y);
-    mChild2 = new (gfl::HeapID::Work) KdTreeNode(this, v1.x, v1.y);
+    mChild1 = new (gfl::eHeapID_Work) KdTreeNode(this, v0.x, v0.y);
+    mChild2 = new (gfl::eHeapID_Work) KdTreeNode(this, v1.x, v1.y);
 
     ColData* cur;
     ColData* ColData = mColData;
@@ -385,5 +385,5 @@ KdTree::~KdTree() {
 }
 
 void KdTree::CreateRootNode(const nw4r::math::VEC2& min, const nw4r::math::VEC2& max) {
-    mRootNode = new (gfl::HeapID::Work) KdTreeNode(min, max);
+    mRootNode = new (gfl::eHeapID_Work) KdTreeNode(min, max);
 }

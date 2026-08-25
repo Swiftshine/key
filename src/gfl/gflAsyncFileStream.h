@@ -59,8 +59,8 @@ public:
         : mFileStream(nullptr)
         , mMutex()
     {
-        mCompressedBuffer = Alloc(HeapID::LIB1, BPE_BLOCK_SIZE, 0x20);
-        mDecompressedBuffer = Alloc(HeapID::LIB1, BPE_BLOCK_SIZE, 0x20);
+        mCompressedBuffer = Alloc(gfl::eHeapID_LIB1, BPE_BLOCK_SIZE, 0x20);
+        mDecompressedBuffer = Alloc(gfl::eHeapID_LIB1, BPE_BLOCK_SIZE, 0x20);
     }
 
     inline ~AsyncFileStreamManager() {

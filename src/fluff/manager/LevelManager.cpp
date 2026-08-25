@@ -9,7 +9,7 @@ LevelManager::LevelManager(StageInfo& rStage)
     , mColObjTree(nullptr)
     , mGimmickManager(nullptr)
 {
-    mGimmickManager.Create(gfl::HeapID::Work);
+    mGimmickManager.Create(gfl::eHeapID_Work);
 }
 
 LevelManager::~LevelManager() {
@@ -48,7 +48,7 @@ void LevelManager::InitColObjTree() {
         Stage::Instance()->mStageInfo.GetSectionID()
     );
 
-    mColObjTree.Create(gfl::HeapID::Work);
+    mColObjTree.Create(gfl::eHeapID_Work);
 
     mColObjTree->SetSection(mapdata);
     mColObjTree->fn_800CBCF4();

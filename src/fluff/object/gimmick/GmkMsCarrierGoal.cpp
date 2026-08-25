@@ -9,7 +9,7 @@
 #include "sound/GameSound.h"
 
 GmkMsCarrierGoal* GmkMsCarrierGoal::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkMsCarrierGoal(buildInfo, "GmkMsCarrierGoal");
+    return new (gfl::eHeapID_Work) GmkMsCarrierGoal(buildInfo, "GmkMsCarrierGoal");
 }
 
 GmkMsCarrierGoal::GmkMsCarrierGoal(GimmickBuildInfo* pBuildInfo, const char* taskName)
@@ -156,7 +156,7 @@ void GmkMsCarrierGoal::PlayEffect() {
 }
 
 NwAnmCtrl* GmkMsCarrierGoal::CreateAnimCtrl(const char* animName, gfl::ResFileObject& resFileObject) {
-    NwAnmCtrl* animCtrl = new (gfl::HeapID::Work) NwAnmCtrl(3, resFileObject, animName);
+    NwAnmCtrl* animCtrl = new (gfl::eHeapID_Work) NwAnmCtrl(3, resFileObject, animName);
 
     for (int i = 0; i < 3; i++) {
         char animNameBuf[64];

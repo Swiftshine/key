@@ -11,29 +11,29 @@ using namespace gfl;
 void SoundArchiveMng::OpenArchive(const char* brsarPath) {
     mSoundArchive.Open(brsarPath);
     u32 memSize = mSoundArchive.GetHeaderSize();
-    mFileInfo = gfl::Alloc(HeapID::Sound, memSize, 0x20);
+    mFileInfo = gfl::Alloc(gfl::eHeapID_Sound, memSize, 0x20);
     mSoundArchive.LoadHeader(mFileInfo, memSize);
-    
+
     memSize = mSoundArchive.GetLabelStringDataSize();
-    mSymbolData = gfl::Alloc(HeapID::Sound, memSize, 0x20);
+    mSymbolData = gfl::Alloc(gfl::eHeapID_Sound, memSize, 0x20);
     mSoundArchive.LoadLabelStringData(mSymbolData, memSize);
 
     memSize = mSoundArchivePlayer.GetRequiredMemSize(&mSoundArchive);
     mSoundArchivePlayer.GetRequiredStrmBufferSize(&mSoundArchive);
-    mSoundArchivePlayerMem = gfl::Alloc(HeapID::Sound, memSize, 0x20);
-    mStrmBuffer = gfl::Alloc(HeapID::Sound, STRM_BUFFER_SIZE, 0x20);
+    mSoundArchivePlayerMem = gfl::Alloc(gfl::eHeapID_Sound, memSize, 0x20);
+    mStrmBuffer = gfl::Alloc(gfl::eHeapID_Sound, STRM_BUFFER_SIZE, 0x20);
 
     mSoundArchivePlayer.Setup(&mSoundArchive, mSoundArchivePlayerMem, memSize, mStrmBuffer, STRM_BUFFER_SIZE);
-    
+
     memSize = mSound3DManager->GetRequiredMemSize(&mSoundArchive);
-    void* buf = gfl::Alloc(HeapID::Sound, memSize, 0x20);
+    void* buf = gfl::Alloc(gfl::eHeapID_Sound, memSize, 0x20);
     mSound3DManager->Setup(&mSoundArchive, buf, memSize);
 
     m_298 = 0x20;
 
     // todo - update Sound3DListener header with the ss one
     mSound3DListeners.Insert(mSound3DListeners.GetBeginIter(), &mSound3DListener);
-    
+
     gfl::Vec3 vec3(0.0f);
     vec3.z = 1.0f;
 

@@ -10,7 +10,7 @@
 
 
 #define GFL_ALLOC_WORK(dest, type) \
-    type* temporary_pointer = new (gfl::HeapID::Work) type; \
+    type* temporary_pointer = new (gfl::eHeapID_Work) type; \
     if (nullptr == temporary_pointer ) { delete dest; dest = nullptr; } else { dest = temporary_pointer ; }
 
 namespace gfl {
@@ -18,7 +18,7 @@ namespace gfl {
     inline char* Strcpy(const char* dst, size_t len, const char* src) {
         return Strcpy(const_cast<char*>(dst), len, src);
     }
-    
+
     // this function:
     // - appends chars from `src` to `dst` while ensuring that the result is null-terminated
     // - always assigns 0 to `dst[len - 1]`

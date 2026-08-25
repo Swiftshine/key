@@ -12,7 +12,7 @@ const char GmkTurtle_ColbinSinglePath[] = "gimmick/sea_turtle_01/turtle.colbin";
 const char GmkTurtle_ColbinTriplePath[] = "gimmick/sea_turtle_01/turtle3stack.colbin";
 
 GmkTurtle* GmkTurtle::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkTurtle(buildInfo);
+    return new (gfl::eHeapID_Work) GmkTurtle(buildInfo);
 }
 // https://decomp.me/scratch/QPVs1
 GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
@@ -48,7 +48,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     gfl::ResFileObject fileInfo;
     GetResFileObject(fileInfo, this);
 
-    mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(8, fileInfo, resourceName));
+    mAnmCtrl.Create(new (gfl::eHeapID_Work) NwAnmCtrl(8, fileInfo, resourceName));
 
     for (uint i = 0; i < 8; i++) {
         char path[0x100];
@@ -60,7 +60,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
 
     mAnmCtrl->mScnMdlWrapper->SetMatrix_thunk(mMatrix);
 
-    mColObjTrans.Create(gfl::HeapID::Work);
+    mColObjTrans.Create(gfl::eHeapID_Work);
 
     if (3 == mNumTurtles) {
         mColObjTrans->SetColDataWrapper(GmkTurtle_ColbinSinglePath);
@@ -74,7 +74,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     mColObjTrans->mOwner = this;
     mColObjTrans->AddToTree();
 
-    mRideHitCtrlTrans.Create(new (gfl::HeapID::Work) FlfRideHitCtrlTrans(mColObjTrans.ptr(), this));
+    mRideHitCtrlTrans.Create(new (gfl::eHeapID_Work) FlfRideHitCtrlTrans(mColObjTrans.ptr(), this));
     mRideHitCtrlTrans->m_34 = 0x20000;
     mRideHitCtrlTrans->m_30 = 0;
     mRideHitCtrlTrans->m_38 = 1;

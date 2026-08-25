@@ -64,7 +64,7 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendI
     , mMoleLight(nullptr)
     , mPlayerHandle()
     , m_164(0.0f)
-    , mEffect(new (gfl::HeapID::Work) FriendEffect)
+    , mEffect(new (gfl::eHeapID_Work) FriendEffect)
     , mFriendID(friendID)
 {
     fn_8033BF8C(33);
@@ -85,7 +85,7 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendI
     mPosition.z = 10.0f;
 
     if (GameManager::IsInMission() && GameManager::GetCurrentStageInfo().GetStageID() == eStageID_DarkManor) {
-        mMoleLight = new (gfl::HeapID::Work) MoguraLight;
+        mMoleLight = new (gfl::eHeapID_Work) MoguraLight;
         mMoleLight->SetUpdate(true);
         mMoleLight->SetZPosition(1.5f);
     }

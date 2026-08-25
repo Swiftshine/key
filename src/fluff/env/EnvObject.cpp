@@ -38,7 +38,7 @@ void EnvObject::DoUpdate() {
 }
 
 gfl::Task* EnvObject::GetNewTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, uint suspend) {
-    gfl::Task* task = new (gfl::HeapID::Work) gfl::Task(this, DoUpdate, pTaskName);
+    gfl::Task* task = new (gfl::eHeapID_Work) gfl::Task(this, DoUpdate, pTaskName);
 
     if (task != nullptr) {
         task->SetFlags(flags);
@@ -96,7 +96,7 @@ void EnvObject::SetDescendantFlags(uint flag, bool set) {
         if (child != nullptr) {
             SET_CHILD_FLAGS(child, set, newFlag);
             child = child->GetNextChild();
-            
+
             // grandchildren
             if (child != nullptr) {
                 SET_CHILD_FLAGS(child, set, newFlag);

@@ -36,11 +36,6 @@
 
 #define ASSERT_SIZE(t, size) STATIC_ASSERT(sizeof(t) == size)
 
-#define ENUM_CLASS(name, ...)              \
-    class name {virtual void This_error_means_you_forgot_to_write___type___in_an_object_instantiation()=0;public: \
-        enum __type__ { __VA_ARGS__ };     \
-    }
-
 #define SET_FLAG(x, flag) x |= flag;
 #define CLEAR_FLAG(x, flag) x &= ~flag;
 #define CHECK_FLAG(x, flag) (x & flag) != 0;

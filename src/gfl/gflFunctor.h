@@ -36,7 +36,7 @@ namespace gfl {
         }
 
         /* 0x0C */ virtual FunctorBase0<ReturnT>* Clone() const {
-            return new (gfl::HeapID::LIB1) FunctorType(*this);
+            return new (gfl::eHeapID_LIB1) FunctorType(*this);
         }
 
         /* 0x10 */ DECL_WEAK virtual ~FunctorClassMethod0() { }

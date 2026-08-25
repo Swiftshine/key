@@ -4,7 +4,7 @@
 #include "manager/CamMng.h"
 
 GmkCamRectCtrl* GmkCamRectCtrl::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkCamRectCtrl(buildInfo);
+    return new (gfl::eHeapID_Work) GmkCamRectCtrl(buildInfo);
 }
 
 Gimmick* GmkCamRectCtrl::SetCameraZoom(GimmickBuildInfo* buildInfo) {

@@ -14,7 +14,7 @@ bool Scene::XluSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB) {
     if (xluA < xluB) {
         return true;
     }
-    
+
     if (xluA > xluB) {
         return false;
     }
@@ -26,7 +26,7 @@ bool Scene::XluSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB) {
     if (pA->GetValueForSortXlu() > pB->GetValueForSortXlu()) {
         return false;
     }
-    
+
     return pB > pA;
 }
 
@@ -37,7 +37,7 @@ bool Scene::OpaSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB) {
     if (opaA < opaB) {
         return true;
     }
-    
+
     if (opaA > opaB) {
         return false;
     }
@@ -49,7 +49,7 @@ bool Scene::OpaSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB) {
     if (pA->GetValueForSortOpa() > pB->GetValueForSortOpa()) {
         return false;
     }
-    
+
     return pB > pA;
 }
 
@@ -83,15 +83,15 @@ void Scene::Init(const char* pSceneLabel, u8 gameTaskFlags, u8 worldMtxTaskFlags
     std::string worldLabel  = baseLabel + "/W";
     std::string drawLabel   = baseLabel + "/D";
 
-    mGameTask.Create(new (gfl::HeapID::LIB1) Task(this, Scene::GameUpdate, gameLabel.c_str()));
+    mGameTask.Create(new (gfl::eHeapID_LIB1) Task(this, Scene::GameUpdate, gameLabel.c_str()));
     mGameTask->SetFlags(gameTaskFlags);
 
-    mWorldMtxTask.Create(new (gfl::HeapID::LIB1) Task(this, Scene::GameUpdate, worldLabel.c_str()));
+    mWorldMtxTask.Create(new (gfl::eHeapID_LIB1) Task(this, Scene::GameUpdate, worldLabel.c_str()));
     mWorldMtxTask->SetFlags(worldMtxTaskFlags);
 
-    mDrawTask.Create(new (gfl::HeapID::LIB1) Task(this, Scene::GameUpdate, drawLabel.c_str()));
+    mDrawTask.Create(new (gfl::eHeapID_LIB1) Task(this, Scene::GameUpdate, drawLabel.c_str()));
     mDrawTask->SetFlags(drawTaskFlags);
-    
+
     if (pParentGameTask != nullptr) {
         pParentGameTask->MakeChild(mGameTask);
     } else {
@@ -155,7 +155,7 @@ void Scene::DrawUpdate() const {
             mScnRoot->CalcView();
             mScnRoot->GatherDrawScnObj();
             mScnRoot->Sort(OpaSortCheck, XluSortCheck);
-            
+
             nw4r::g3d::G3dReset();
 
             DrawOpa();
@@ -170,7 +170,7 @@ void Scene::AddRenderObj(RenderObj* pRenderObj) {
     // which means it was probably compiled with different compile settings
 
     pRenderObj->SetScene(this);
-    
+
     bool doInsert = true;
 
     if ((!pRenderObj->vf1C() || !pRenderObj->vf24()) && !pRenderObj->ShouldUpdate()) {
@@ -197,7 +197,7 @@ bool Scene::RemoveRenderObj(RenderObj* pRenderObj) {
     if (pRenderObj->GetObject() == nullptr || pRenderObj->GetObject()->GetParent() == nullptr) {
         return true;
     }
-    
+
     return Remove(static_cast<nw4r::g3d::ScnObj*>(pRenderObj->GetObject()));
 }
 

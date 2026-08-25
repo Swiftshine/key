@@ -9,18 +9,18 @@ namespace gfl {
     class Array {
     public:
         inline Array() { }
-        
+
         inline Array(T* ptr)
             : mArray(ptr)
         { }
-        
+
         inline ~Array() {
             delete[] mArray;
             mArray = nullptr;
         }
 
         inline void Create(size_t len) {
-            T* temp = new (gfl::HeapID::Work) T[len];
+            T* temp = new (gfl::eHeapID_Work) T[len];
 
             if (temp == nullptr) {
                 Destroy();
@@ -53,7 +53,7 @@ namespace gfl {
         operator T*() const {
             return mArray;
         }
-        
+
     private:
         T* mArray;
     };

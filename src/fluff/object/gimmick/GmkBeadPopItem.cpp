@@ -12,7 +12,7 @@ const std::pair<const char*, float> StringFloatPairs[] = {
 };
 
 GmkBeadPopItem* GmkBeadPopItem::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkBeadPopItem(buildInfo, "GmkBeadPopItem");
+    return new (gfl::eHeapID_Work) GmkBeadPopItem(buildInfo, "GmkBeadPopItem");
 }
 
 GmkBeadPopItem::GmkBeadPopItem(GimmickBuildInfo* buildInfo, const char* taskName)
@@ -102,7 +102,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         gfl::ResFileObject resFileInfo;
         GetResFileObject(resFileInfo, this);
 
-        NwAnmCtrl* anmCtrl = new (gfl::HeapID::Work) NwAnmCtrl(1, resFileInfo, "todo: make this string correct");
+        NwAnmCtrl* anmCtrl = new (gfl::eHeapID_Work) NwAnmCtrl(1, resFileInfo, "todo: make this string correct");
         char animNameBuf[0x40];
         snprintf(animNameBuf, sizeof(animNameBuf), "%s__%02d", "make this correct as well", 1);
         animNameBuf[0x3F] = 0;
@@ -118,7 +118,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     }
 
     if (param0 && !m_138) {
-        mPopItemInfo.Create(gfl::HeapID::Work);
+        mPopItemInfo.Create(gfl::eHeapID_Work);
         mPopItemInfo->Init(1.5f);
         mPopItemInfo->SetPosition(mPosition);
         mPopItemInfo->fn_805C46D0(false);

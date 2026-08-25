@@ -148,7 +148,7 @@ FlfNandMng::FlfNandMng()
     mData3 = nullptr;
     mData3Size = 0;
     mData2Size = 0x4000;
-    gfl::Heap* heap = gfl::Memory::TryGetHeapByID(gfl::HeapID::LIB1);
+    gfl::Heap* heap = gfl::Memory::TryGetHeapByID(gfl::eHeapID_LIB1);
     mData2 = gfl::Alloc(heap, mData2Size, 0x20);
     memset(mFilename, 0, sizeof(mFilename));
     mFilesize = 0;

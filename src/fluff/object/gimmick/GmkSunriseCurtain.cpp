@@ -7,7 +7,7 @@
 #include "object/gimmick/GmkUpdownWater.h"
 
 GmkSunriseCurtain* GmkSunriseCurtain::Build(GimmickBuildInfo* pBuildInfo) {
-    return new (gfl::HeapID::Work) GmkSunriseCurtain(pBuildInfo);
+    return new (gfl::eHeapID_Work) GmkSunriseCurtain(pBuildInfo);
 }
 
 // rodata
@@ -34,7 +34,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     , mFbAlpha(nullptr)
 {
     FullSortScene* scene = Stage::Instance()->GetSceneByID(pBuildInfo->mSceneID);
-    mFlfMdlDraw1.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
+    mFlfMdlDraw1.Create(new (gfl::eHeapID_Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
 
     int indices[] = {
         lbl_8080AA20,
@@ -49,7 +49,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     mFlfMdlDraw1->SetWoolDrawMatrix(mMatrix);
 
     scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
-    mFlfMdlDraw2.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
+    mFlfMdlDraw2.Create(new (gfl::eHeapID_Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
 
     int index = lbl_808EA238;
     mFlfMdlDraw2->LoadNURBSFromFileList(&index, 1);
@@ -70,7 +70,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     mDayBackgroundBGSTLayer = pBuildInfo->GetIntParam(GmkSunriseCurtain::eParameter_DayBackgroundBGSTLayer) + 6;
     mDayForegroundBGSTLayer = pBuildInfo->GetIntParam(GmkSunriseCurtain::eParameter_DayForegroundBGSTLayer) + 6;
 
-    mFbAlpha.Create(::new (gfl::HeapID::Work) FbAlpha);
+    mFbAlpha.Create(::new (gfl::eHeapID_Work) FbAlpha);
 
     scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
     scene->AddRenderObj(static_cast<gfl::RenderObj*>(mFbAlpha));

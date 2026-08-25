@@ -10,7 +10,7 @@ extern "C" {
 }
 
 GmkBeadDrop* GmkBeadDrop::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkBeadDrop(buildInfo, "GmkBeadDrop");
+    return new (gfl::eHeapID_Work) GmkBeadDrop(buildInfo, "GmkBeadDrop");
 }
 
 GmkBeadDrop::GmkBeadDrop(GimmickBuildInfo* buildInfo, const char* taskName)
@@ -86,7 +86,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
         std::string resourceName = "gimmick/";
         resourceName += GimmickUtil::GetResourceNameByGimmickID(buildInfo->mGimmickID);
 
-        FlfMdlDraw* mdlDraw = new (gfl::HeapID::Work) FlfMdlDraw(scene, resourceName.c_str(), 0, 0);
+        FlfMdlDraw* mdlDraw = new (gfl::eHeapID_Work) FlfMdlDraw(scene, resourceName.c_str(), 0, 0);
         mdlDraw->LoadNURBSFromFileList();
         mdlDraw->SetVisibility(true);
         mdlDraw->PlayNURBSAnimation(0, true);

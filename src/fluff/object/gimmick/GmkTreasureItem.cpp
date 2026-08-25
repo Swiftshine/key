@@ -10,7 +10,7 @@ GmkTreasureItem* GmkTreasureItem::Build(GimmickBuildInfo* pBuildInfo) {
         return nullptr;
     }
 
-    return new (gfl::HeapID::Work) GmkTreasureItem(pBuildInfo, "GmkTreasureItem");
+    return new (gfl::eHeapID_Work) GmkTreasureItem(pBuildInfo, "GmkTreasureItem");
 }
 
 void GmkTreasureItem::SetState(FlfGameObj* pSetter, const std::string& rState) {

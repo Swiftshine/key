@@ -66,7 +66,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 
         // GmkSimpleMdl uses an auxiliary gimmick for Z rotation if it's needed
         if (mBuildInfo.GetFloatParam(GmkSimpleMdl::eParameter_ZRotation) != 0.0f) {
-            mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mModelWrapper->GetScnMdl()));
+            mZRotationGmk.Create(new (gfl::eHeapID_Work) GmkSimpleMdlRotZ(mModelWrapper->GetScnMdl()));
             mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(GmkSimpleMdl::eParameter_ZRotation));
         }
 
@@ -215,13 +215,13 @@ gfl::ScnMdlWrapper* GmkSimpleMdl::CreateModelWrapper(nw4r::g3d::ResFile& resFile
     char name[0x100];
     snprintf(name, 0x100, MdlWrapperStr, filepath);
 
-    gfl::ScnMdlWrapper* modelWrapper = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags);
+    gfl::ScnMdlWrapper* modelWrapper = new (gfl::eHeapID_Work) gfl::ScnMdlWrapper(resMdl, flags);
     modelWrapper->SetUpdate(true);
     return modelWrapper;
 }
 
 NwAnm* GmkSimpleMdl::CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName) {
-    NwAnm* anim = new (gfl::HeapID::Work) NwAnm;
+    NwAnm* anim = new (gfl::eHeapID_Work) NwAnm;
 
     if (anim->Init(resFile, resMdlName, animName, nullptr)) {
         return anim;

@@ -5,7 +5,7 @@ using namespace gfl;
 AsyncFileStreamManager* AsyncFileStreamManager::sInstance;
 
 void AsyncFileStreamManager::InitInstance() {
-    sInstance = new (HeapID::LIB1) AsyncFileStreamManager;
+    sInstance = new (gfl::eHeapID_LIB1) AsyncFileStreamManager;
 }
 
 void AsyncFileStreamManager::DestroyInstance() {

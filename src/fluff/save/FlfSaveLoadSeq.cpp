@@ -7,7 +7,7 @@ FlfSaveLoadSeq* FlfSaveLoadSeq::GetInstance() {
 }
 
 FlfSaveLoadSeq* FlfSaveLoadSeq::Build() {
-    return new (gfl::HeapID::LIB1) FlfSaveLoadSeq;
+    return new (gfl::eHeapID_LIB1) FlfSaveLoadSeq;
 }
 
 void FlfSaveLoadSeq::DestroyInstance() {
@@ -32,7 +32,7 @@ FlfSaveLoadSeq::FlfSaveLoadSeq()
     , mTask(this, Update, "SaveLoad")
     , mLoadSaveInfo()
     , mSaveSaveInfo()
-    , m_74(new (gfl::HeapID::LIB1) FlfSaveLoadSeq_Substruct(&mNandManager))
+    , m_74(new (gfl::eHeapID_LIB1) FlfSaveLoadSeq_Substruct(&mNandManager))
     , mNandManager()
     , mBannerManager(&mNandManager)
 {

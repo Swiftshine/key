@@ -4,7 +4,7 @@
 #include "manager/GameManager.h"
 
 GmkUnderseaSound* GmkUnderseaSound::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkUnderseaSound(buildInfo, "GmkUnderseaSound");
+    return new (gfl::eHeapID_Work) GmkUnderseaSound(buildInfo, "GmkUnderseaSound");
 }
 
 GmkUnderseaSound::GmkUnderseaSound(GimmickBuildInfo* buildInfo, const char* taskName)

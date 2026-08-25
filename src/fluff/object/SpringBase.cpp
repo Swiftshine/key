@@ -242,7 +242,7 @@ gfl::Vec3 SpringBase::fn_80008930(uint index) {
 
 void SpringBase::fn_800089A0() {
     if (m_14C == nullptr) {
-        m_14C = new (gfl::HeapID::Work) UnkStruct2[mSpringTemplate->mParticleCount];
+        m_14C = new (gfl::eHeapID_Work) UnkStruct2[mSpringTemplate->mParticleCount];
         fn_8000BB50();
     }
 }
@@ -1037,7 +1037,7 @@ void SpringBase::fn_8000B6BC() {
 }
 
 bool SpringBase::fn_8000B74C() {
-    mParticleArray1 = new (gfl::HeapID::Work) Particle[mSpringTemplate->mParticleCount];
+    mParticleArray1 = new (gfl::eHeapID_Work) Particle[mSpringTemplate->mParticleCount];
 
     if (mParticleArray1 == nullptr) {
         return false;
@@ -1047,7 +1047,7 @@ bool SpringBase::fn_8000B74C() {
             CreateParticleArrays();
         }
 
-        mSpringArray = new (gfl::HeapID::Work) Spring[mSpringTemplate->mSpringCount];
+        mSpringArray = new (gfl::eHeapID_Work) Spring[mSpringTemplate->mSpringCount];
 
         // is an inline involved? it doesn't make sense to
         // check the spring template for nullptr after it was used
@@ -1142,7 +1142,7 @@ void SpringBase::fn_8000BB50() {
 void SpringBase::CreateParticleArrays() {
     for (uint i = 0; i < 4; i++) {
         Particle** arr = &mParticleArray2;
-        arr[i] = new (gfl::HeapID::Work) Particle[mSpringTemplate->mParticleCount];
+        arr[i] = new (gfl::eHeapID_Work) Particle[mSpringTemplate->mParticleCount];
     }
 }
 

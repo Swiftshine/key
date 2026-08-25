@@ -7,7 +7,7 @@ TaskList* TaskList::sInstance;
 Task* TaskInfo::sCurrentTask;
 
 void TaskList::InitInstance() {
-    sInstance = new (gfl::HeapID::LIB1) TaskList;
+    sInstance = new (gfl::eHeapID_LIB1) TaskList;
 }
 
 TaskInfo::TaskInfo()

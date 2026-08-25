@@ -18,7 +18,7 @@ const char ShadowAnimNameIndexedTemplate[] = "%s_00_%03d_shadow";
 const char BRRESPathTemplate[] = "bggimmick/%s/%s.brres";
 
 GmkColAnimMdl* GmkColAnimMdl::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkColAnimMdl(buildInfo);
+    return new (gfl::eHeapID_Work) GmkColAnimMdl(buildInfo);
 }
 
 void GimmickUtil::AddGimmickName(Gimmick::GimmickBuildInfo* buildInfo) {
@@ -48,7 +48,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
 
     mResFileObject = gfl::ResFileObject::FromArchive(brresPath);
 
-    mAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, animName));
+    mAnimCtrl.Create(new (gfl::eHeapID_Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, animName));
 
     for (uint i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
         char animNameTemp[0x200];
@@ -66,7 +66,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     snprintf(shadowAnimName, sizeof(shadowAnimName), ShadowAnimNameTemplate, name);
 
     if (resFile.GetResMdl(shadowAnimName).ptr() != nullptr) {
-        mShadowAnimCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, shadowAnimName));
+        mShadowAnimCtrl.Create(new (gfl::eHeapID_Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, shadowAnimName));
 
         for (uint i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
             char animNameTemp[0x200];
@@ -79,7 +79,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     }
 
     if (mBuildInfo.GetFloatParam(GmkColAnimMdl::eParameter_ZRotation) != 0.0f) {
-        mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mAnimCtrl->mScnMdlWrapper->GetScnMdl()));
+        mZRotationGmk.Create(new (gfl::eHeapID_Work) GmkSimpleMdlRotZ(mAnimCtrl->mScnMdlWrapper->GetScnMdl()));
         mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(GmkColAnimMdl::eParameter_ZRotation));
     }
 
@@ -95,7 +95,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
         }
     }
 
-    mColAnimCtrlGmk.Create(new (gfl::HeapID::Work) GmkColAnimCtrl(this, mBuildInfo.GetIntParam(Gimmick::eParameterID_Param1), buildInfo));
+    mColAnimCtrlGmk.Create(new (gfl::eHeapID_Work) GmkColAnimCtrl(this, mBuildInfo.GetIntParam(Gimmick::eParameterID_Param1), buildInfo));
     mColAnimCtrlGmk->fn_800D5130((void*)mBuildInfo.GetStringParam(0).c_str());
 
     float rate = mBuildInfo.GetFloatParam(GmkColAnimMdl::eParameter_AnimationSpeed);

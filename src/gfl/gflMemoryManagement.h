@@ -8,17 +8,17 @@
 namespace gfl {
     class Heap;
 
-    ENUM_CLASS(HeapID,
-        None        = 0,
-        LIB1        = 1,
-        LIB2        = 2,
-        String      = 3,
-        ETC         = 4,
-        Sound       = 5,
+    enum HeapID {
+        eHeapID_None        = 0,
+        eHeapID_LIB1        = 1,
+        eHeapID_LIB2        = 2,
+        eHeapID_String      = 3,
+        eHeapID_ETC         = 4,
+        eHeapID_Sound       = 5,
 
-        Work        = 10,
-        Resource    = 11,
-    );
+        eHeapID_Work        = 10,
+        eHeapID_Resource    = 11,
+    };
 
     void* Alloc(u8 heapID, size_t size, uint align);
     void* Alloc(Heap* heap, size_t size, uint align);

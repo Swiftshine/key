@@ -7,7 +7,7 @@ const char* exit_B_MT = "exit_B_MT";
 const char* exit_F_MT = "exit_F_MT";
 
 GmkWarpExit* GmkWarpExit::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkWarpExit(buildInfo);
+    return new (gfl::eHeapID_Work) GmkWarpExit(buildInfo);
 }
 
 GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
@@ -25,7 +25,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     gfl::ResFileObject resFileObject;
     GetResFileObject(resFileObject, this);
 
-    NwAnmCtrl* animCtrl = new (gfl::HeapID::Work) NwAnmCtrl(0, resFileObject, "warpExit_01");
+    NwAnmCtrl* animCtrl = new (gfl::eHeapID_Work) NwAnmCtrl(0, resFileObject, "warpExit_01");
     mAnimCtrl.Create(animCtrl);
     animCtrl = mAnimCtrl.Get();
 
@@ -37,7 +37,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     gfl::ScnMdlWrapper* modelWrapper = mAnimCtrl->mScnMdlWrapper;
 
     // note to self; this calls a thunk to the version of operator new seen above
-    FbMokoMoko* fbMokoMoko = ::new (gfl::HeapID::Work) FbMokoMoko(mZOrder3, 10.0f, 10.0f, "GmkWarpExit", modelWrapper, mFullSortSceneIndex, exit_B_MT, exit_F_MT);
+    FbMokoMoko* fbMokoMoko = ::new (gfl::eHeapID_Work) FbMokoMoko(mZOrder3, 10.0f, 10.0f, "GmkWarpExit", modelWrapper, mFullSortSceneIndex, exit_B_MT, exit_F_MT);
     mFbMokoMoko.Create(fbMokoMoko);
     fbMokoMoko = mFbMokoMoko.Get();
 

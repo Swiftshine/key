@@ -2,7 +2,7 @@
 #include "gfl/gflAlloc.h"
 
 void FlfMsgMng::InitInstance() {
-    sInstance = new (gfl::HeapID::Work) FlfMsgMng;
+    sInstance = new (gfl::eHeapID_Work) FlfMsgMng;
 }
 
 void FlfMsgMng::DestroyInstance() {

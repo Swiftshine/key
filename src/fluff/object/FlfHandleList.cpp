@@ -7,7 +7,7 @@
 FlfHandleList* FlfHandleList::sInstance;
 
 void FlfHandleList::InitInstance() {
-    sInstance = new (gfl::HeapID::LIB1) FlfHandleList;
+    sInstance = new (gfl::eHeapID_LIB1) FlfHandleList;
 }
 
 void FlfHandleList::DestroyInstance() {
@@ -76,4 +76,3 @@ void FlfHandleList::Set(uint index, FlfHandleObj* pObject) {
     mHandleCount = index + 1;
     mLastHandleID++;
 }
-

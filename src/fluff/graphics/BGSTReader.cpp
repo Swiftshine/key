@@ -116,7 +116,7 @@ void Reader::PushEntryObject(Layer* pLayer, EntryInfo* pEntryInfo) {
         pEntryInfo->mState = 2;
     }
 
-    EntryObject* obj = new (gfl::HeapID::Work) EntryObject;
+    EntryObject* obj = new (gfl::eHeapID_Work) EntryObject;
     memset(obj, 0, sizeof(EntryObject));
 
     obj->mLayer = pLayer;

@@ -10,7 +10,7 @@
 
 namespace gfl {
     class BpeDecoderFile {
-    public:   
+    public:
         /**
          * @note Address: 0x80644FFC
          * @note Size: 0x2C
@@ -34,7 +34,7 @@ namespace gfl {
          * at US Address 0x8001E740
          */
         inline void PrepareDecode() {
-            void* rawCompressionHeader = Alloc(HeapID::LIB1, 0x20, 0x20);
+            void* rawCompressionHeader = Alloc(gfl::eHeapID_LIB1, 0x20, 0x20);
 		    mFile->Read(rawCompressionHeader, 0x20, mInputStreamPos);
 		    gfl::GfCompressionWrapper gfcpWrapper(rawCompressionHeader);
 		    mDecodedSize = gfcpWrapper.GetDecompressedSize();

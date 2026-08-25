@@ -10,7 +10,7 @@
 
 GmkCameraControl* GmkCameraControl::Build(GimmickBuildInfo* buildInfo) {
     if (gfl::ParamGroup::GetGlobalBool("test/CAM_CTRL")) {
-        return new (gfl::HeapID::Work) GmkCameraControl(buildInfo, "GmkCameraControl");
+        return new (gfl::eHeapID_Work) GmkCameraControl(buildInfo, "GmkCameraControl");
     }
 
     return nullptr;

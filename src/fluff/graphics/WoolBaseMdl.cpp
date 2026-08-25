@@ -26,10 +26,10 @@ WoolBaseMdl::WoolBaseMdl(
     mFlfWoolDraw = nullptr;
 
     pScene->AddRenderObj(static_cast<gfl::RenderObj*>(this));
-    
+
     mHermiteCurve.fn_806602EC(mWoolBaseTask->mSpringTemplate->mParticleCount);
 
-    mFlfWoolDraw = new (gfl::HeapID::Work) FlfWoolDraw;
+    mFlfWoolDraw = new (gfl::eHeapID_Work) FlfWoolDraw;
 
     int index = mFlfWoolDraw->Register(&rResFileObject, pWoolName1, pWoolName2);
 
@@ -64,11 +64,11 @@ WoolBaseMdl::WoolBaseMdl(
     mFlfWoolDraw = nullptr;
 
     pScene->AddRenderObj(static_cast<gfl::RenderObj*>(this));
-    
+
     mHermiteCurve.fn_806602EC(mWoolBaseTask->mSpringTemplate->mParticleCount);
 
-    mFlfWoolDraw = new (gfl::HeapID::Work) FlfWoolDraw;
-    
+    mFlfWoolDraw = new (gfl::eHeapID_Work) FlfWoolDraw;
+
     int index = -1;
     int idx = 0;
 
@@ -239,8 +239,8 @@ void WoolBaseMdl::fn_8001AD8C(int arg1, int arg2) {
     int num = mFlfWoolDraw->fn_80026B54(0);
 
     for (uint i = 0; i < m_154; i++) {
-        BackupBuff* buf = new (gfl::HeapID::Work) BackupBuff;
-        buf->mPoints = new (gfl::HeapID::Work) gfl::Vec2[num];
+        BackupBuff* buf = new (gfl::eHeapID_Work) BackupBuff;
+        buf->mPoints = new (gfl::eHeapID_Work) gfl::Vec2[num];
         mBackupBuffs.push_back(buf);
     }
 
@@ -314,7 +314,7 @@ void WoolBaseMdl::fn_8001BCD0(nw4r::math::MTX34* pMtx) {
     }
 
     BackupBuff* buf = mBackupBuffs[m_150];
-    
+
     for (uint i = 0; i < mFlfWoolDraw->fn_80026B54(0); i++) {
         buf->mPoints[i] = *mFlfWoolDraw->fn_80026A60(0, i);
     }

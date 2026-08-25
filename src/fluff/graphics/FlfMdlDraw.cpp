@@ -57,8 +57,8 @@ FlfMdlDraw::FlfMdlDraw(
     , m_194(0)
     , mAnimFileInfo(nullptr)
     , mFileInfo(nullptr)
-    , m_1A0(new (gfl::HeapID::Work) FlfMdlVec)
-    , m_1A4(new (gfl::HeapID::Work) FlfMdlVec)
+    , m_1A0(new (gfl::eHeapID_Work) FlfMdlVec)
+    , m_1A4(new (gfl::eHeapID_Work) FlfMdlVec)
     , m_1A8(0)
     , mNwBlendAnmWrappers(nullptr)
     , mNwBlendAnmWrapperCount(0)
@@ -98,5 +98,5 @@ FlfMdlDraw::Callback::Callback() {
 }
 
 FlfMdlDraw::Callback::~Callback() {
-    
+
 }

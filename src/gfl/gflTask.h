@@ -76,7 +76,7 @@ namespace gfl {
         template <typename ReturnT, typename OwnerT, typename FunctionT>
         inline Functor0<void> CreateTaskFunctor(OwnerT owner, FunctionT function) {
             FunctorClassMethod0<ReturnT, OwnerT, FunctionT>* fcm0
-                = new (gfl::HeapID::LIB1) FunctorClassMethod0<ReturnT, OwnerT, FunctionT>(owner, function);
+                = new (gfl::eHeapID_LIB1) FunctorClassMethod0<ReturnT, OwnerT, FunctionT>(owner, function);
 
             mFunctor.setFunctor(fcm0);
             // mFunctorBase = static_cast<FunctorBase0<ReturnT>*>(fcm0);
@@ -86,7 +86,7 @@ namespace gfl {
 
         // template <typename FunctionT, typename ReturnT>
         // inline Functor0<void> CreateTaskFunctor_(FunctionT function) {
-        //     FunctorFunc0<FunctionT, ReturnT>* ff0 = new (gfl::HeapID::LIB1) FunctorFunc0<FunctionT, ReturnT>(function);
+        //     FunctorFunc0<FunctionT, ReturnT>* ff0 = new (gfl::eHeapID_LIB1) FunctorFunc0<FunctionT, ReturnT>(function);
         //     mFunctorBase = (FunctorBase0<ReturnT>*)(ff0);
         //     Functor0<ReturnT> f;
         //     return f;

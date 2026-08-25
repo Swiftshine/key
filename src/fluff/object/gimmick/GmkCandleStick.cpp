@@ -5,7 +5,7 @@
 
 
 GmkCandleStick* GmkCandleStick::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkCandleStick(buildInfo);
+    return new (gfl::eHeapID_Work) GmkCandleStick(buildInfo);
 }
 
 GmkCandleStick::GmkCandleStick(GimmickBuildInfo* buildInfo)

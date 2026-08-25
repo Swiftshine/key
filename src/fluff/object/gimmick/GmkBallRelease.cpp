@@ -5,7 +5,7 @@ const char* GmkBallRelease::GetZoneName() {
 }
 
 GmkBallRelease* GmkBallRelease::Build(GimmickBuildInfo* pBuildInfo) {
-    return new (gfl::HeapID::Work) GmkBallRelease(pBuildInfo);
+    return new (gfl::eHeapID_Work) GmkBallRelease(pBuildInfo);
 }
 
 GmkBallRelease::GmkBallRelease(GimmickBuildInfo* pBuildInfo)
@@ -27,7 +27,7 @@ GmkBallRelease::GmkBallRelease(GimmickBuildInfo* pBuildInfo)
 
     cdw.SetFlags(0x20000000);
 
-    mColObjTrans.Create(new (gfl::HeapID::Work) ColObjTrans);
+    mColObjTrans.Create(new (gfl::eHeapID_Work) ColObjTrans);
 
     mColObjTrans->SetColDataWrapper(&cdw);
     mColObjTrans->mOwner = this;

@@ -7,7 +7,7 @@ using namespace gfl;
 
 Thread::Thread(OSThreadFunc pThreadFunc, size_t stackSize, int priority)
     : mThreadFunc(pThreadFunc)
-    , mStack(Alloc(HeapID::LIB1, stackSize, 0x20))
+    , mStack(Alloc(gfl::eHeapID_LIB1, stackSize, 0x20))
 {
     OSCreateThread(&mThread, pThreadFunc, nullptr, (void*)((u32)mStack + stackSize), stackSize, priority, 1);
 }

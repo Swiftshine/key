@@ -11,12 +11,12 @@ Gimmick* SimpleMdlCommon::Build(Gimmick::GimmickBuildInfo* pBuildInfo) {
 
     bool cmp = prefix.compare(NurbsPrefix) == 0;
     if (cmp) {
-        return new (gfl::HeapID::Work) GmkSimpleNurbs(pBuildInfo);
+        return new (gfl::eHeapID_Work) GmkSimpleNurbs(pBuildInfo);
     } else if (pBuildInfo->GetIntParam(SimpleMdlCommon::eParameter_UnkInt1) < 10) {
-        return new (gfl::HeapID::Work) GmkSimpleMdl(pBuildInfo);
+        return new (gfl::eHeapID_Work) GmkSimpleMdl(pBuildInfo);
     }
 
-    return new (gfl::HeapID::Work) GmkColAnimMdl(pBuildInfo);
+    return new (gfl::eHeapID_Work) GmkColAnimMdl(pBuildInfo);
 }
 
 void SimpleMdlCommon::AddGimmickName(Gimmick::GimmickBuildInfo* pBuildInfo) {

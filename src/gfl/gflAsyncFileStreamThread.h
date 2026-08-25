@@ -15,11 +15,11 @@ public:
 
     static AsyncFileStreamThread* sInstance;
     static Thread* sThread;
-    
+
     inline AsyncFileStreamThread()
         : mLoadTaskList()
     {
-        sThread = new (HeapID::LIB1) Thread(ProcessLoadTasks, 0x10000, 21);
+        sThread = new (gfl::eHeapID_LIB1) Thread(ProcessLoadTasks, 0x10000, 21);
         sThread->ResumeThread();
     }
 
@@ -34,7 +34,7 @@ public:
     static AsyncFileStreamThread* GetInstance();
     static AsyncFileStreamThread* InitInstance();
     static void DestroyInstance();
-    static void* ProcessLoadTasks(void*);    
+    static void* ProcessLoadTasks(void*);
 
     /* Class Members */
     /* 0x00 */ Mutex mMutex;

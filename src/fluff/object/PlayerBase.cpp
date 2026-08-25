@@ -99,7 +99,7 @@ PlayerBase* PlayerBase::Build(
     FullSortScene* pScene,
     int arg4
 ) {
-    PlayerBase* player = new (gfl::HeapID::Work) PlayerBase(
+    PlayerBase* player = new (gfl::eHeapID_Work) PlayerBase(
         pParentTask,
         flags,
         pScene,
@@ -118,7 +118,7 @@ PlayerBase* PlayerBase::BuildCloned(
     uint flags,
     int arg4
 ) {
-    PlayerBase* player = new (gfl::HeapID::Work) PlayerBase(
+    PlayerBase* player = new (gfl::eHeapID_Work) PlayerBase(
         pParentTask,
         flags,
         pScene,

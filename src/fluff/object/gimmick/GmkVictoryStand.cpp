@@ -15,7 +15,7 @@ void GmkVictoryStand::AddDecorativeBallResources() {
 }
 
 GmkVictoryStand* GmkVictoryStand::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkVictoryStand(buildInfo, "GmkVictoryStand");
+    return new (gfl::eHeapID_Work) GmkVictoryStand(buildInfo, "GmkVictoryStand");
 }
 
 void GmkVictoryStand::SetRankingInfo(uint playerRanking, nw4r::math::VEC2& position) {
@@ -92,12 +92,12 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
     gfl::ResFileObject fileInfo;
     GetResFileObject(fileInfo, this);
 
-    mModel.Create(gfl::HeapID::Work);
+    mModel.Create(gfl::eHeapID_Work);
     mModel->RegisterResources(fileInfo, victoryStand, 0, scene, 0);
     mModel->SetMatrix(lbl_808E697C, mMatrix, true);
     mModel->SetUpdate(false);
 
-    mColObj.Create(gfl::HeapID::Work);
+    mColObj.Create(gfl::eHeapID_Work);
 
     char colbinPath[0x200];
     snprintf(colbinPath, sizeof(colbinPath), hitColbin, victoryStand_01);

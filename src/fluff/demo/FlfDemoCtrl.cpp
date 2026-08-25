@@ -49,15 +49,15 @@ void FlfDemoNodeCtrl::ResetOptions(gfl::Offset<MNEB::DemoOptionSet>& rDemoOption
         MNEB::DemoOption* opt = set->mDemoOptions.pointer();
 
         if (strcmp(opt->mName, "anim_no") == 0) {
-            mAnimNo.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+            mAnimNo.Create(new (gfl::eHeapID_Work) NURBSOption(opt->mOption));
         } else if (strcmp(opt->mName, "blend_frame") == 0) {
-            mBlendFrame.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+            mBlendFrame.Create(new (gfl::eHeapID_Work) NURBSOption(opt->mOption));
         } else if (strcmp(opt->mName, "update_rate") == 0) {
-            mUpdateRate.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+            mUpdateRate.Create(new (gfl::eHeapID_Work) NURBSOption(opt->mOption));
         } else if (strcmp(opt->mName, "layer") == 0) {
-            mLayer.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+            mLayer.Create(new (gfl::eHeapID_Work) NURBSOption(opt->mOption));
         } else if (strcmp(opt->mName, "visibility") == 0) {
-            mVisibility.Create(new (gfl::HeapID::Work) NURBSOption(opt->mOption));
+            mVisibility.Create(new (gfl::eHeapID_Work) NURBSOption(opt->mOption));
         } else {
             // likely cut
             strcmp(opt->mName, "option");
@@ -180,7 +180,7 @@ FlfDemoCharCtrl::FlfDemoCharCtrl(nw4r::g3d::ResNode resNode, std::string& name)
         mResourcePath += n;
     }
 
-    mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
+    mFlfMdlDraw.Create(new (gfl::eHeapID_Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
 
     mFlfMdlDraw->LoadNURBSFromFileList();
     mFlfMdlDraw->SetCurrentFrameInt(0);
@@ -564,7 +564,7 @@ void FlfDemoCtrl::ResetFlfMdlDraw(const char* resourcePath) {
 
     FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Game);
 
-    mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, resourcePath, 0, 0));
+    mFlfMdlDraw.Create(new (gfl::eHeapID_Work) FlfMdlDraw(scene, resourcePath, 0, 0));
     mFlfMdlDraw->LoadNURBSFromFileList();
     mFlfMdlDraw->SetCurrentFrameInt(0);
     mFlfMdlDraw->SetUpdateRate(0.0f);
@@ -625,7 +625,7 @@ void FlfDemoCtrl::ClearNodeControls() {
 //             if (create) {
 //                 FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::eSceneID_Game);
 
-//                 mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
+//                 mFlfMdlDraw.Create(new (gfl::eHeapID_Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
 //             }
 
 //             mFlfMdlDraw->LoadNURBSFromFileList();

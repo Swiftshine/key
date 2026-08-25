@@ -6,7 +6,7 @@
 #include "util/GimmickUtil.h"
 
 void GmkBeadManager::InitInstance(gfl::Task* pParentTask) {
-    sInstance = new (gfl::HeapID::Work) GmkBeadManager(pParentTask);
+    sInstance = new (gfl::eHeapID_Work) GmkBeadManager(pParentTask);
 }
 
 void GmkBeadManager::DestroyInstance() {

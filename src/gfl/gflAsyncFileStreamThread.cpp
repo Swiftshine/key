@@ -8,7 +8,7 @@ AsyncFileStreamThread* AsyncFileStreamThread::GetInstance() {
 }
 
 AsyncFileStreamThread* AsyncFileStreamThread::InitInstance() {
-    sInstance = new (HeapID::LIB1) AsyncFileStreamThread();
+    sInstance = new (gfl::eHeapID_LIB1) AsyncFileStreamThread();
     return sInstance;
 }
 

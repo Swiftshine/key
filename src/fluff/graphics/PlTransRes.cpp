@@ -9,7 +9,7 @@
 /* PlTransResMng */
 
 void PlTransResMng::InitInstance() {
-    sInstance = new (gfl::HeapID::Work) PlTransResMng;
+    sInstance = new (gfl::eHeapID_Work) PlTransResMng;
 }
 
 void PlTransResMng::DestroyInstance() {

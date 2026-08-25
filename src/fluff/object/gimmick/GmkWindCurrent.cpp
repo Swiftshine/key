@@ -19,7 +19,7 @@ std::string GmkWindCurrent::GetResourceName() {
 }
 
 GmkWindCurrent* GmkWindCurrent::Build(GimmickBuildInfo* pBuildInfo) {
-    return new (gfl::HeapID::Work) GmkWindCurrent(pBuildInfo, "GmkWindCurrent");
+    return new (gfl::eHeapID_Work) GmkWindCurrent(pBuildInfo, "GmkWindCurrent");
 }
 
 nw4r::math::VEC2 GmkWindCurrent::GetPushDirection_thunk() const {
@@ -84,7 +84,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
         mDimensions.y = DEFAULT_HEIGHT;
     }
 
-    mColObjTrans.Create(gfl::HeapID::Work);
+    mColObjTrans.Create(gfl::eHeapID_Work);
 
     {
         ColDataWrapper cdw;
@@ -103,12 +103,12 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
     // nothing is ever done with this result
     Stage::Instance()->GetSceneByID(sceneIndex);
 
-    mAnimWrapper.Create(new (gfl::HeapID::Work) GmkWindCurrent_AnimWrapper(this));
+    mAnimWrapper.Create(new (gfl::eHeapID_Work) GmkWindCurrent_AnimWrapper(this));
 
     gfl::ResFileObject resFileObject;
     GetResFileObject(resFileObject, this);
 
-    mWoolGroup.Create(::new (gfl::HeapID::Work) WindCurrentWoolGroup(&resFileObject, this));
+    mWoolGroup.Create(::new (gfl::eHeapID_Work) WindCurrentWoolGroup(&resFileObject, this));
 
     mShouldUpdateWater = false;
 
@@ -194,7 +194,7 @@ void GmkWindCurrent::SetEnabled(bool enabled) {
 /* GmkWindCurrentSwitch */
 
 GmkWindCurrentSwitch* GmkWindCurrentSwitch::Build(GimmickBuildInfo* pBuildInfo) {
-    return new (gfl::HeapID::Work) GmkWindCurrentSwitch(pBuildInfo);
+    return new (gfl::eHeapID_Work) GmkWindCurrentSwitch(pBuildInfo);
 }
 
 GmkWindCurrentSwitch::GmkWindCurrentSwitch(GimmickBuildInfo* pBuildInfo)
@@ -202,7 +202,7 @@ GmkWindCurrentSwitch::GmkWindCurrentSwitch(GimmickBuildInfo* pBuildInfo)
     , mState(0)
     , mButton(nullptr)
 {
-    mButton.Create(gfl::HeapID::Work);
+    mButton.Create(gfl::eHeapID_Work);
 
     GimmickModelResource res;
     res.mBRRESPath = "gimmick/windCurrent/windCurrent.brres";
@@ -270,7 +270,7 @@ WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWo
 {
     Reset();
 
-    mFlfWoolDraw.Create(gfl::HeapID::Work);
+    mFlfWoolDraw.Create(gfl::eHeapID_Work);
     int index = mFlfWoolDraw->Register(pResFileObject, pWoolName, nullptr);
     mFlfWoolDraw->fn_800267B0(index, 20);
     mFlfWoolDraw->m_18 = 0.5f;
@@ -374,7 +374,7 @@ WindCurrentWoolGroup::WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, G
 
     const char* name = "wool_00";
     for (uint i = 0; i < 5; i++) {
-        mWoolGroupUnits[i].Create(new (gfl::HeapID::Work) WoolGroupUnit(mResFileObject, name, pWindCurrent));
+        mWoolGroupUnits[i].Create(new (gfl::eHeapID_Work) WoolGroupUnit(mResFileObject, name, pWindCurrent));
     }
 }
 
@@ -493,7 +493,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
     float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mSceneOrder);
 
     for (uint i = 0; i < numUnits; i++) {
-        GmkPartsMdlSet* part = new (gfl::HeapID::Work) GmkPartsMdlSet;
+        GmkPartsMdlSet* part = new (gfl::eHeapID_Work) GmkPartsMdlSet;
 
         const char* modelName = endAnimName;
         if (i != 0) {
@@ -506,7 +506,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
         char animName[0x80];
         snprintf(animName, sizeof(animName), "%s_000", modelName);
 
-        NwAnm* anim = new (gfl::HeapID::Work) NwAnm;
+        NwAnm* anim = new (gfl::eHeapID_Work) NwAnm;
 
         anim->Play(resFileObject, modelName, animName, nullptr);
 
@@ -573,7 +573,7 @@ GmkWindCurrent_AnimWrapper::~GmkWindCurrent_AnimWrapper() {
 
 void GmkWindCurrent_SoundMng::AddUser() {
     if (sInstance == nullptr) {
-        sInstance = new (gfl::HeapID::Work) GmkWindCurrent_SoundMng();
+        sInstance = new (gfl::eHeapID_Work) GmkWindCurrent_SoundMng();
     }
     sUserCount++;
 }
@@ -608,7 +608,7 @@ GmkWindCurrent_SoundMng::GmkWindCurrent_SoundMng()
     , mWindCurrents()
 {
     mTask.Create(
-        new (gfl::HeapID::Work) gfl::Task(this, CheckClosestWindCurrent, "GmkWindCurrent_SoundMng")
+        new (gfl::eHeapID_Work) gfl::Task(this, CheckClosestWindCurrent, "GmkWindCurrent_SoundMng")
     );
 
     GameManager::Instance()->mTask.MakeChild(mTask);

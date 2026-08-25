@@ -18,7 +18,7 @@ void FbMem::Setup() {
     Buf3 = FrameBuffer(size);
 
     // need to fix this later
-    // sClearFlagTask = new (gfl::HeapID::Work) gfl::Task(ClearFlag, "FbMem::ClearFlag");
+    // sClearFlagTask = new (gfl::eHeapID_Work) gfl::Task(ClearFlag, "FbMem::ClearFlag");
     sClearFlagTask->SetFlags(0x78);
     Stage::sDrawRootTask->MakeChild(sClearFlagTask);
 }
@@ -37,7 +37,7 @@ void FbMem::Shutdown() {
 
 void* FbMem::GetFrameBufferData(int id, size_t size, bool refresh) {
     FrameBuffer* buf = GetFrameBuffer(id);
-    
+
     void* ret;
 
     if (buf == nullptr) {

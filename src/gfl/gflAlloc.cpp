@@ -1,7 +1,7 @@
 #include "gflAlloc.h"
 
 void* operator new(size_t size) {
-    return gfl::Alloc(gfl::HeapID::ETC, size, 4);
+    return gfl::Alloc(gfl::eHeapID_ETC, size, 4);
 }
 
 void* operator new(size_t size, u8 heapID) {

@@ -81,17 +81,17 @@ bool GfArch::Validate() {
     File* f = mFile;
     GfArch::CompressionHeader* header;
     bool valid;
-    header = (GfArch::CompressionHeader*)gfl::Alloc(gfl::HeapID::LIB1, sizeof(GfArch::CompressionHeader), 0x20);
+    header = (GfArch::CompressionHeader*)gfl::Alloc(gfl::eHeapID_LIB1, sizeof(GfArch::CompressionHeader), 0x20);
 
     f->Read((void*)header, sizeof(GfArch::CompressionHeader), 0);
-    
+
     valid = SetHeader(header);
 
     if (valid) {
         if (header) {
             gfl::Free(header);
         }
-		
+
         return true;
     } else {
         if (header) {
@@ -114,9 +114,9 @@ void GfArch::DeleteDirEntryGfArch(DirEntryGfArch* dirEntry) {
 
 
 bool GfArch::SetHeader(GfArch::CompressionHeader* header) {
-    if (!(header->mMagic[0] == lbl_808E4350[0] && 
-          header->mMagic[1] == lbl_808E4350[1] && 
-          header->mMagic[2] == lbl_808E4350[2] && 
+    if (!(header->mMagic[0] == lbl_808E4350[0] &&
+          header->mMagic[1] == lbl_808E4350[1] &&
+          header->mMagic[2] == lbl_808E4350[2] &&
           header->mMagic[3] == lbl_808E4350[3])) {
 
         return false;
@@ -130,7 +130,7 @@ bool GfArch::SetHeader(GfArch::CompressionHeader* header) {
             mCompressionHeaderOffset = SwapEndianness32(header->mCompressionHeaderOffset);
             mArchiveSize = SwapEndianness32(header->mCompressedBlockSize);
             return true;
-            
+
         }
     }
 

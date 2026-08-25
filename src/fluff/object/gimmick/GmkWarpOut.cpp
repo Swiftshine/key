@@ -3,7 +3,7 @@
 #include "manager/Stage.h"
 
 GmkWarpOut* GmkWarpOut::Build(GimmickBuildInfo* pBuildInfo) {
-    return new (gfl::HeapID::Work) GmkWarpOut(pBuildInfo);
+    return new (gfl::eHeapID_Work) GmkWarpOut(pBuildInfo);
 }
 
 GmkWarpOut::GmkWarpOut(GimmickBuildInfo* pBuildInfo)
@@ -17,7 +17,7 @@ GmkWarpOut::GmkWarpOut(GimmickBuildInfo* pBuildInfo)
     GetResFileObject(resFileObject, this);
 
     const char* name = "warp_02";
-    mAnmCtrl.Create(new (gfl::HeapID::Work) NwAnmCtrl(1, resFileObject, name));
+    mAnmCtrl.Create(new (gfl::eHeapID_Work) NwAnmCtrl(1, resFileObject, name));
     mAnmCtrl->PlayAnimationByNameAndIndex(0, "warp_02_000");
 
     NwAnmCtrl* anmCtrl = mAnmCtrl;

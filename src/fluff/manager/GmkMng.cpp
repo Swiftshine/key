@@ -178,7 +178,7 @@ void GmkMng::RegisterResources(const char* pGimmickName, Gimmick* pGimmick) {
     // })
 
     // gfl::LinkedList<GimmickResource*>::Modifier mod;
-    // mod.SetData(new (gfl::HeapID::Work) GimmickResource(pGimmickName));
+    // mod.SetData(new (gfl::eHeapID_Work) GimmickResource(pGimmickName));
     // mod.GetData()->RegisterGimmick(pGimmick);
     // mod.SetNode1(mGimmickResources.GetNode());
     // mod.AddToListAfterNode1(mGimmickResources);

@@ -32,7 +32,7 @@ Gimmick::Gimmick(int gimmickID, const char* pTaskName)
     , mCommand(nullptr)
 {
     mTask.Create(
-        new (gfl::HeapID::Work) gfl::Task(this, Gimmick::Update, pTaskName)
+        new (gfl::eHeapID_Work) gfl::Task(this, Gimmick::Update, pTaskName)
     );
 
     GmkMng::Instance()->mTask->MakeChild(mTask);
@@ -62,7 +62,7 @@ Gimmick::Gimmick(GimmickBuildInfo* pBuildInfo, const char* pTaskName)
     }
 
     mTask.Create(
-        new (gfl::HeapID::Work) gfl::Task(this, Gimmick::Update, pTaskName)
+        new (gfl::eHeapID_Work) gfl::Task(this, Gimmick::Update, pTaskName)
     );
 
     GmkMng::Instance()->mTask->MakeChild(mTask);
@@ -111,7 +111,7 @@ Gimmick::~Gimmick() {
 
 gfl::Task* Gimmick::InitTask(const char* pTaskName) {
     mTask.Create(
-        new (gfl::HeapID::Work) gfl::Task(this, Gimmick::Update, pTaskName)
+        new (gfl::eHeapID_Work) gfl::Task(this, Gimmick::Update, pTaskName)
     );
 
     GmkMng::Instance()->mTask->MakeChild(mTask);
@@ -155,7 +155,7 @@ gfl::ScnMdlWrapper* Gimmick::CreateScnMdlWrapper(
     nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(pResMdlName);
 
     gfl::ScnMdlWrapper* scnMdlWrapper
-        = new (gfl::HeapID::Work) gfl::ScnMdlWrapper(resMdl, flags);
+        = new (gfl::eHeapID_Work) gfl::ScnMdlWrapper(resMdl, flags);
 
     scnMdlWrapper->SetUpdate(true);
 

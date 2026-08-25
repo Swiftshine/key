@@ -12,7 +12,7 @@ void GmkArrowSign::AddResourceName(GimmickBuildInfo* buildInfo) {
 }
 
 GmkArrowSign* GmkArrowSign::Build(GimmickBuildInfo* buildInfo) {
-    return new (gfl::HeapID::Work) GmkArrowSign(buildInfo, GimmickName);
+    return new (gfl::eHeapID_Work) GmkArrowSign(buildInfo, GimmickName);
 }
 
 GmkArrowSign::GmkArrowSign(GimmickBuildInfo* buildInfo, const char* taskName)

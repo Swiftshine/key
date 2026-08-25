@@ -40,7 +40,7 @@ HenshinCtrl::~HenshinCtrl() {
 void HenshinCtrl::vfDC(FlfMdlDraw* pFlfMdlDraw) {
     pFlfMdlDraw->PlayNURBSAnimation(1, true);
 
-    mFlfMdlCollision = new (gfl::HeapID::Work) FlfMdlCollision(pFlfMdlDraw, mPlayerHandle.TryGetHandleObj<FlfHandleObj>());
+    mFlfMdlCollision = new (gfl::eHeapID_Work) FlfMdlCollision(pFlfMdlDraw, mPlayerHandle.TryGetHandleObj<FlfHandleObj>());
 
     size_t index = mFlfMdlCollision->fn_800f09D8("cv_hitShape", 0, 0, -1, 1.0f);
 

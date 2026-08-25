@@ -30,7 +30,7 @@ EnemyMdlManager::EnemyMdlManager(
     , mMdlParts()
 {
 
-    mTask = new (gfl::HeapID::Work) gfl::Task(this, Update, "EnemyMdlManger::Update");
+    mTask = new (gfl::eHeapID_Work) gfl::Task(this, Update, "EnemyMdlManger::Update");
     mTask->SetFlags(0);
     pParentTask->MakeChild(mTask);
 
@@ -59,13 +59,13 @@ EnemyMdlManager::~EnemyMdlManager() {
     if (mFlfMdlDraw != nullptr) {
         delete mFlfMdlDraw;
     }
-    
+
     mFlfMdlDraw = nullptr;
 
     if (m_8 != nullptr) {
         delete m_8;
     }
-    
+
     m_8 = nullptr;
 
     if (mTask != nullptr) {
@@ -118,7 +118,7 @@ void EnemyMdlManager::fn_80112244() {
 
 inline float clamp(float f, float min, float max) {
     float ret = f;
-    
+
     if (f <= min) {
         ret = min;
     } else if (f >= max) {
@@ -169,7 +169,7 @@ void EnemyMdlManager::fn_8011232C(int arg1) {
 }
 
 void EnemyMdlManager::fn_80112334() {
-    
+
     if (m_60 == 0) {
         return;
     }
@@ -179,13 +179,13 @@ void EnemyMdlManager::fn_80112334() {
     }
 
     FlfMdlDraw* draw = mFlfMdlDraw;
-    
+
     float unk = 1.0f / static_cast<float>(m_6C);
 
     switch (m_60) {
         case 1: {
             m_64 += unk;
-    
+
             if (m_64 >= 1.0f) {
                 m_64 = 1.0f;
                 m_60 = 2;
@@ -196,8 +196,8 @@ void EnemyMdlManager::fn_80112334() {
 
         case 2: {
             m_64 -= unk;
-    
-            if (m_64 <= 0.0f) {            
+
+            if (m_64 <= 0.0f) {
                 m_64 = 0.0f;
                 m_60 = 1;
             }
@@ -221,16 +221,16 @@ nw4r::g3d::G3dObj* EnemyMdlManager::SetupGraphics(
     int count,
     int* pIndices
 ) {
-    mFlfMdlDraw = new (gfl::HeapID::Work) FlfMdlDraw(pScene, pResourcePath, nullptr, true);
+    mFlfMdlDraw = new (gfl::eHeapID_Work) FlfMdlDraw(pScene, pResourcePath, nullptr, true);
 
     mFlfMdlDraw->mFlags |= drawFlags;
-    
+
     if (count == 0) {
         mFlfMdlDraw->LoadNURBSFromFileList();
     } else {
         mFlfMdlDraw->LoadNURBSFromFileList(pIndices, count);
     }
-    
+
     mFlfMdlDraw->mShadowOffsets.m_14 = true;
 
     nw4r::g3d::G3dObj* anim = mFlfMdlDraw->GetBlendAnmMatCtrlAnim(0);
@@ -272,14 +272,14 @@ void EnemyMdlManager::Reset() {
     if (m_1C < 0) {
         return;
     }
-    
+
     int old = m_1C;
 
     m_18 = m_1C;
     m_1C = -1;
     mCurrentState = m_2C;
     m_2C = 0x244;
-    
+
     mFlfMdlDraw->PlayNURBSAnimation(old, mResetFrames);
 }
 
@@ -328,12 +328,12 @@ bool EnemyMdlManager::fn_80112854() {
 
 void EnemyMdlManager::fn_8011285C(bool arg1) {
     m_55 = arg1;
-    fn_8011286C();   
+    fn_8011286C();
 }
 
 void EnemyMdlManager::fn_80112864(bool arg1) {
     m_56 = arg1;
-    fn_8011286C();   
+    fn_8011286C();
 }
 
 void EnemyMdlManager::fn_8011286C() {
@@ -374,7 +374,7 @@ bool EnemyMdlManager::SetScene(FullSortScene* pScene) {
     if (mFlfMdlDraw == nullptr) {
         return false;
     }
-    
+
     mFlfMdlDraw->SetScene(pScene);
     return true;
 }

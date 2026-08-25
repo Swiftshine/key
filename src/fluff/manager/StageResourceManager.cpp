@@ -32,7 +32,7 @@ StageResourceManager::StageResourceManager()
     , mPreviewBgLoadStage(-1, -1, 1)
     , mMapdataResFileObject(nullptr)
 {
-    mStageResources.Create(gfl::HeapID::Work);
+    mStageResources.Create(gfl::eHeapID_Work);
     memset(mCurrentSections, 0, 0x78);
 }
 
