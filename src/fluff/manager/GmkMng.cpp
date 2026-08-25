@@ -7,9 +7,8 @@
 #include "util/GimmickResource.h"
 #include "util/FullSortSceneUtil.h"
 
-
 GmkMng::GmkMng()
-    : mState(State::None)
+    : mState(GmkMng::eState_None)
     , mMapdata(nullptr)
     , mTask(nullptr)
 {
@@ -61,7 +60,7 @@ void GmkMng::CreateGimmicksFromMapdata(Mapdata* pMapdata) {
 void GmkMng::SetMapdata(Mapdata* pMapdata) {
     mMapdata = pMapdata;
     mNumCommonGimmicks = 0;
-    mState = State::CreateCommonGimmicks;
+    mState = GmkMng::eState_CreateCommonGimmicks;
 }
 
 void GmkMng::AddGimmick(Gimmick* pGimmick) {

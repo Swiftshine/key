@@ -29,14 +29,14 @@ public:
 
     /* Enums */
 
-    ENUM_CLASS(State,
-        None = 0,
-        CreateCommonGimmicks = 1,
-        CutAction2 = 2,
-        ConstructMapdataObjects = 3, // Construct paths, zones, and friend gimmicks.
-        CutAction4 = 4,
-        ManageGimmickCulling = 5, // Spawn or cull gimmicks based on position relative to the camera.
-    );
+    enum State {
+        eState_None                     = 0,
+        eState_CreateCommonGimmicks     = 1,
+        eState_Cut2 = 2,
+        eState_ConstructMapdataObjects  = 3,     // Construct paths, zones, and friend gimmicks.
+        eState_Cut4 = 4,
+        eState_ManageGimmickCulling,            // Spawn or cull gimmicks based on position relative to the camera.
+    };
 
     GmkMng();
     ~GmkMng();
@@ -68,7 +68,7 @@ public:
 
     /* Class Members */
 
-    /* 0x00 */ int mState;
+    /* 0x00 */ s32 mState;
     /* 0x04 */ uint mNumCommonGimmicks;
     /* 0x08 */ std::list<Gimmick*> mGimmicks;
     /* 0x14 */ std::list<FlfHandle> mEffects;

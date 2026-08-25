@@ -36,35 +36,35 @@ class GameManager {
 public:
     /* Structures */
 
-    ENUM_CLASS(LoadPhase,
-        StageResource = 1,
-        StageSections = 2,
-        StageContents = 3,
-    );
+    enum LoadPhase {
+        eLoadPhase_StageResource = 1,
+        eLoadPhase_StageSections = 2,
+        eLoadPhase_StageContents = 3,
+    };
 
-    // ENUM_CLASS(LoadState,
-    //     WaitStage = 0,
-    //     LoadState_1,
-    //     GameCreate,
-    //     SetupGimmick,
-    //     WaitSecInit,
-    //     GameStart,
-    //     SetupPlayersA,
-    //     SetupPlayersB,
-    // );
+    enum LoadState {
+        eLoadState_WaitStage        = 0,
+        eLoadState_State1           = 1,
+        eLoadState_GameCreate       = 2,
+        eLoadState_SetupGimmick     = 3,
+        eLoadState_WaitSecInit      = 4,
+        eLoadState_GameStart        = 5,
+        eLoadState_SetupPlayersA    = 6,
+        eLoadState_SetupPlayersB    = 7,
+    };
 
     // In order of execution:
     // 1, 2, 4, 3, 5, 6, 7
-    ENUM_CLASS(LoadStatus,
-        BeginLoad       = 0,
-        ProcessLoad     = 1,
-        GameCreate      = 2,
-        GameInit        = 3,
-        PrepareInit     = 4,
-        GameStart       = 5,
-        PlayerRelatedA  = 6,
-        PlayerRelatedB  = 7,
-    );
+    enum LoadStatus {
+        eLoadStatus_BeginLoad   = 0,
+        eLoadStatus_ProcessLoad = 1,
+        eLoadStatus_GameCreate  = 2,
+        eLoadStatus_GameInit    = 3,
+        eLoadStatus_PrepareInit = 4,
+        eLoadStatus_GameStart   = 5,
+        eLoadStatus_Status6     = 6, // player related A
+        eLoadStatus_Status7     = 7, // player related B
+    };
 
     /* Static Variables */
 
@@ -73,8 +73,6 @@ public:
     static inline GameManager* Instance() {
         return sInstance;
     }
-
-
 
     GameManager();
 

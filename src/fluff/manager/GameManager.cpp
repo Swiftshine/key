@@ -2,7 +2,6 @@
 
 GameManager::GameManager() { }
 
-
 PointerManagerWrapper::PointerManagerWrapper()
     : mManager(nullptr)
 { }
@@ -26,14 +25,14 @@ PlayerBase* GameManager::GetPlayerByID(uint playerID) {
     if (GameManager::sInstance == nullptr) {
         return nullptr;
     }
-    
+
     // we're trying to get Prince Fluff, but he doesn't exist
     if (PlayerBase::PlayerID::PrinceFluff == playerID && GameManager::GetPlayerCount() == 1) {
         return nullptr;
     }
 
     return GameManager::sInstance->mPlayers[playerID];
-} 
+}
 
 PlayerBase* GameManager::GetPrinceFluff() {
     if (GameManager::sInstance != nullptr) {
