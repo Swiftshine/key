@@ -562,7 +562,7 @@ FlfDemoCtrl::~FlfDemoCtrl() {
 void FlfDemoCtrl::ResetFlfMdlDraw(const char* resourcePath) {
     DestroyResources();
 
-    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Game);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Game);
 
     mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, resourcePath, 0, 0));
     mFlfMdlDraw->LoadNURBSFromFileList();
@@ -623,7 +623,7 @@ void FlfDemoCtrl::ClearNodeControls() {
 //             }
 
 //             if (create) {
-//                 FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::SceneID::Game);
+//                 FullSortScene* scene = Stage::Instance()->GetFullSortSceneByID(FullSortSceneUtil::eSceneID_Game);
 
 //                 mFlfMdlDraw.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, mResourcePath.c_str(), 0, 0));
 //             }

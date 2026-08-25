@@ -24,7 +24,7 @@ void GmkTreasureItem::CreateEffect() {
         return;
     }
 
-    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
     EffectObj* effect = scene->CreateEffectObject("ef_dm_01a", 0, 0);
 
     if (effect != nullptr) {
@@ -122,13 +122,13 @@ void GmkTreasureItem::ProcessClothPull() {
     GmkMekuri2* patch = dynamic_cast<GmkMekuri2*>(mClothPatch);
 
     if (mClothPatchState == "ON") {
-        FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
+        FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
         StageInfo stageInfo = GameManager::GetCurrentStageInfo();
 
         if (stageInfo.GetResourceID() == eResourceID_DarkManor) {
-            scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Game);
+            scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Game);
         } else if (patch == nullptr && mFlfMdlDraw != nullptr) {
-            mFlfMdlDraw->SetScene(Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05));
+            mFlfMdlDraw->SetScene(Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05));
         }
 
         if (mPlayAnimation) {

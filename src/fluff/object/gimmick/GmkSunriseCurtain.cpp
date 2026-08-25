@@ -48,14 +48,14 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     UpdateMatrix();
     mFlfMdlDraw1->SetWoolDrawMatrix(mMatrix);
 
-    scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
+    scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
     mFlfMdlDraw2.Create(new (gfl::HeapID::Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
 
     int index = lbl_808EA238;
     mFlfMdlDraw2->LoadNURBSFromFileList(&index, 1);
 
     gfl::Mtx34 mtx1;
-    float z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::SceneID::Far_05, 4);
+    float z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::eSceneID_Far_05, 4);
     PSMTXIdentity(mtx1);
 
     gfl::Vec3 tmp1 = mPosition;
@@ -72,14 +72,14 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
 
     mFbAlpha.Create(::new (gfl::HeapID::Work) FbAlpha);
 
-    scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
+    scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
     scene->AddRenderObj(static_cast<gfl::RenderObj*>(mFbAlpha));
 
     gfl::Mtx34 mtx2;
     PSMTXIdentity(mtx2);
 
     gfl::Vec3 tmp2(0.0f);
-    tmp2.z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::SceneID::Far_05, 7);
+    tmp2.z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::eSceneID_Far_05, 7);
     mtx2.SetTranslation(tmp2);
 
 

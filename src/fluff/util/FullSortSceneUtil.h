@@ -8,32 +8,32 @@ namespace FullSortSceneUtil {
     const char* GetNearSceneLabelByIndex(uint index);
     float GetZOrder(uint sceneIndex, uint order);
 
-    ENUM_CLASS(SceneID,
-        Far_05  = 0,
-        Far_04  = 1,
-        Far_03  = 2,
-        Far_02  = 3,
-        Far_01  = 4,
-        Map     = 5,
-        Game    = 6,
-        Near_01 = 7,
-        Near_02 = 8,
-        Near_03 = 9,
-        Near_04 = 10,
-        Near_05 = 11
-    );
+    enum SceneID {
+        eSceneID_Far_05  = 0,
+        eSceneID_Far_04  = 1,
+        eSceneID_Far_03  = 2,
+        eSceneID_Far_02  = 3,
+        eSceneID_Far_01  = 4,
+        eSceneID_Map     = 5,
+        eSceneID_Game    = 6,
+        eSceneID_Near_01 = 7,
+        eSceneID_Near_02 = 8,
+        eSceneID_Near_03 = 9,
+        eSceneID_Near_04 = 10,
+        eSceneID_Near_05 = 11
+    };
 
-    ENUM_CLASS(Order,
-        Far_04  = 0,
-        Far_03  = 1,
-        Far_02  = 2,
-        Far_01  = 3,
-        Center  = 4,
-        Near_01 = 5,
-        Near_02 = 6,
-        Near_03 = 7,
-        Near_04 = 8
-    );
+    enum SceneOrder {
+        eSceneOrder_Far_04  = 0,
+        eSceneOrder_Far_03  = 1,
+        eSceneOrder_Far_02  = 2,
+        eSceneOrder_Far_01  = 3,
+        eSceneOrder_Center  = 4,
+        eSceneOrder_Near_01 = 5,
+        eSceneOrder_Near_02 = 6,
+        eSceneOrder_Near_03 = 7,
+        eSceneOrder_Near_04 = 8
+    };
 }
 
 #endif

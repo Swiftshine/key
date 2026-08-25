@@ -144,11 +144,11 @@ bool FlfFriendManager::fn_804FA7D8() {
 
 void GmkMsCarrierGoal::PlayEffect() {
     gfl::Vec3 pos = GetEffectPosition();
-    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Game);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Game);
     EffectObj* effectObj = scene->CreateEffectObject("ef_gk_09a", 0, 0);
 
     if (effectObj != nullptr) {
-        pos.z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::SceneID::Game, 5);
+        pos.z = FullSortSceneUtil::GetZOrder(FullSortSceneUtil::eSceneID_Game, 5);
         effectObj->SetPosition(pos);
     }
 

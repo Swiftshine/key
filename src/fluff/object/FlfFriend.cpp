@@ -447,7 +447,7 @@ void FlfFriend::ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl md
 // https://decomp.me/scratch/QqYhN
 void FlfFriend::SetScreenPosition(int* pDirection) {
     float x, y, w, h;
-    CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::SceneID::Game);
+    CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::eSceneID_Game);
 
     if (*pDirection == Direction::Forward) {
         mScreenPosition1.mCullThreshold = mPosition.z;
@@ -907,7 +907,7 @@ bool FlfFriend::fn_8033E8A8() const {
 
 gfl::Vec3 FlfFriend::fn_8033E940() const {
     float x, y, w, h;
-    CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::SceneID::Game);
+    CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::eSceneID_Game);
     gfl::Vec3 ret;
     ret.Set(w * 0.5f + x, -(h * 0.5f - y), 0.0f);
     return ret;

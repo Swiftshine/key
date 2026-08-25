@@ -12,7 +12,7 @@ const char* FriendResourceNames[NUM_FRIEND_TYPES] = {
 };
 
 FriendEffect::FriendEffect() {
-    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
+    FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
 
     for (uint i = 0; i < NUM_FRIEND_TYPES; i++) {
         mEffects[i] = new (gfl::HeapID::Work) FlfMdlDraw(scene, FriendResourceNames[i], nullptr, true);
