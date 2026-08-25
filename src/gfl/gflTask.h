@@ -65,13 +65,6 @@ namespace gfl {
             return mTaskInfo;
         }
 
-        inline void SetUnk14(u32 value) {
-            mSuspendFlags = value;
-        }
-
-        inline void OrUnk14(s32 value) {
-            mSuspendFlags |= value;
-        }
 
         template <typename ReturnT, typename OwnerT, typename FunctionT>
         inline Functor0<void> CreateTaskFunctor(OwnerT owner, FunctionT function) {
@@ -91,6 +84,14 @@ namespace gfl {
         //     Functor0<ReturnT> f;
         //     return f;
         // }
+
+        void setSuspendFlags(u32 flags) {
+            mSuspendFlags = flags;
+        }
+
+        inline void applySuspendFlags(u32 value) {
+            mSuspendFlags |= value;
+        }
 
         /* Class Members */
 

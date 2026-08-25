@@ -52,15 +52,15 @@ gfl::Task* EnvObject::GetNewTask(gfl::Task* pParentTask, u8 flags, const char* p
 DONT_INLINE void EnvObject::SetTaskFlags(u32 flags) {
     mTaskFlags = flags;
     if (nullptr != mTask) {
-        mTask->SetUnk14(0);
-        mTask->OrUnk14(mTaskFlags);
+        mTask->setSuspendFlags(0);
+        mTask->applySuspendFlags(mTaskFlags);
     }
 }
 
 void EnvObject::ApplyTaskFlags(u32 flags) {
     mTaskFlags |= flags;
     if (nullptr != mTask) {
-        mTask->OrUnk14(mTaskFlags);
+        mTask->applySuspendFlags(mTaskFlags);
     }
 }
 
