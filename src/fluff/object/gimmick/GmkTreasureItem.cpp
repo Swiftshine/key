@@ -125,7 +125,7 @@ void GmkTreasureItem::ProcessClothPull() {
         FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05);
         StageInfo stageInfo = GameManager::GetCurrentStageInfo();
 
-        if (stageInfo.GetResourceID() == ResourceIDs::DarkManor) {
+        if (stageInfo.GetResourceID() == eResourceID_DarkManor) {
             scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Game);
         } else if (patch == nullptr && mFlfMdlDraw != nullptr) {
             mFlfMdlDraw->SetScene(Stage::Instance()->GetSceneByID(FullSortSceneUtil::SceneID::Near_05));

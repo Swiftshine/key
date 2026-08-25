@@ -552,7 +552,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
     }
 
     StageInfo sinfo = GameManager::GetCurrentStageInfo();
-    if (sinfo.GetResourceID() == ResourceIDs::WeirdWoods) {
+    if (sinfo.GetResourceID() == eResourceID_WeirdWoods) {
         for (size_t i = 0; i < mParts.size(); i++) {
             mParts[i]->mPrimaryModel->SetUpdateRate(30.0f);
         }

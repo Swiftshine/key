@@ -95,7 +95,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
 
     StageInfo stageInfo = Stage::Instance()->mStageInfo;
 
-    if (stageInfo.GetStageID() == StageIDs::SplashBeach) {
+    if (stageInfo.GetStageID() == eStageID_SplashBeach) {
         mSplashBeachSoundHandle = mSD3DActorWrapper.GetSoundHandle(0x18B, 0, 0);
     }
 }
@@ -342,7 +342,7 @@ void GmkSunriseCurtain::SetState(FlfGameObj* pSetter, const std::string& rState)
 void GmkSunriseCurtain::RemoveSoundHandle() {
     StageInfo stageInfo = Stage::Instance()->mStageInfo;
 
-    if (stageInfo.GetStageID() == StageIDs::SplashBeach) {
+    if (stageInfo.GetStageID() == eStageID_SplashBeach) {
         gfl::Vec2 pos2 = CamMng::Instance()->GetCurrentPosition();
 
         if (pos2.y > 29.0f) {

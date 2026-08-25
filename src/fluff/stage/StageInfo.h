@@ -75,147 +75,147 @@ private:
     uint mSectionID;
 };
 
-ENUM_CLASS(StageIDs,
+enum StageID {
     // Grass Land
-    FountainGardens   = 1,
-    FlowerFields      = 2,
-    RainbowFalls      = 3,
-    BigBeanVine       = 4,
-    MoleHole          = 5,
-    WeirdWoods        = 6,
+    eStageID_FountainGardens   = 1,
+    eStageID_FlowerFields      = 2,
+    eStageID_RainbowFalls      = 3,
+    eStageID_BigBeanVine       = 4,
+    eStageID_MoleHole          = 5,
+    eStageID_WeirdWoods        = 6,
 
     // Hot Land
-    PyramidSands      = 7,
-    LavaLanding       = 8,
-    CoolCave          = 9,
-    DinoJungle        = 10,
-    TemperTemple      = 11,
-    DuskDunes         = 12,
+    eStageID_PyramidSands      = 7,
+    eStageID_LavaLanding       = 8,
+    eStageID_CoolCave          = 9,
+    eStageID_DinoJungle        = 10,
+    eStageID_TemperTemple      = 11,
+    eStageID_DuskDunes         = 12,
 
     // Treat Land
-    ToyTracks         = 13,
-    MushroomRun       = 14,
-    SweetsPark        = 15,
-    MelodyTown        = 16,
-    CocoaStation      = 17,
-    DarkManor         = 18,
+    eStageID_ToyTracks         = 13,
+    eStageID_MushroomRun       = 14,
+    eStageID_SweetsPark        = 15,
+    eStageID_MelodyTown        = 16,
+    eStageID_CocoaStation      = 17,
+    eStageID_DarkManor         = 18,
 
     // Water Land
-    SplashBeach       = 19,
-    BlubBlubOcean     = 20,
-    SecretIsland      = 21,
-    DeepDiveDeep      = 22,
-    BoomBoatyard      = 23,
-    FossilReef        = 24,
+    eStageID_SplashBeach       = 19,
+    eStageID_BlubBlubOcean     = 20,
+    eStageID_SecretIsland      = 21,
+    eStageID_DeepDiveDeep      = 22,
+    eStageID_BoomBoatyard      = 23,
+    eStageID_FossilReef        = 24,
 
     // Snow Land
-    SnowyFields       = 25,
-    CozyCabin         = 26,
-    MtSlide           = 27,
-    FrostyWheel       = 28,
-    FrigidFjords      = 29,
-    EvergreenLift     = 30,
+    eStageID_SnowyFields       = 25,
+    eStageID_CozyCabin         = 26,
+    eStageID_MtSlide           = 27,
+    eStageID_FrostyWheel       = 28,
+    eStageID_FrigidFjords      = 29,
+    eStageID_EvergreenLift     = 30,
 
     // Space Land
-    FutureCity        = 31,
-    TubeTown          = 32,
-    MysteriousUFO     = 33,
-    StellarWay        = 34,
-    MoonBase          = 35,
-    OuterRings        = 36,
+    eStageID_FutureCity        = 31,
+    eStageID_TubeTown          = 32,
+    eStageID_MysteriousUFO     = 33,
+    eStageID_StellarWay        = 34,
+    eStageID_MoonBase          = 35,
+    eStageID_OuterRings        = 36,
 
     // Dream Land
-    WhispysForest     = 37,
-    TempestTowers     = 38,
-    CloudPalace       = 39,
-    CastleDedede      = 40,
-    MetaMelonIsle     = 41,
-    BattleshipHalberd = 42,
+    eStageID_WhispysForest     = 37,
+    eStageID_TempestTowers     = 38,
+    eStageID_CloudPalace       = 39,
+    eStageID_CastleDedede      = 40,
+    eStageID_MetaMelonIsle     = 41,
+    eStageID_BattleshipHalberd = 42,
 
     // Bossfights
-    Fangora           = 43,
-    HotWings          = 44,
-    Squashini         = 45,
-    Capamari          = 46,
-    KingDedede        = 47,
-    MetaKnight        = 48,
-    YinYarn           = 49,
-    
-    // Misc.
-    WorldMap          = 50,
-);
+    eStageID_Fangora           = 43,
+    eStageID_HotWings          = 44,
+    eStageID_Squashini         = 45,
+    eStageID_Capamari          = 46,
+    eStageID_KingDedede        = 47,
+    eStageID_MetaKnight        = 48,
+    eStageID_YinYarn           = 49,
 
-ENUM_CLASS(ResourceIDs,
     // Misc.
-    WorldMap          = 0,
+    eStageID_WorldMap          = 50,
+};
+
+enum ResourceID {
+    // Misc.
+    eResourceID_WorldMap          = 0,
 
     // Quilty Square
-    PatchCastle       = 100,
+    eResourceID_PatchCastle       = 100,
 
     // Grass Land
-    FountainGardens   = 101,
-    FlowerFields      = 102,
-    RainbowFalls      = 103,
-    BigBeanVine       = 104,
-    MoleHole          = 105,
-    WeirdWoods        = 106,
+    eResourceID_FountainGardens   = 101,
+    eResourceID_FlowerFields      = 102,
+    eResourceID_RainbowFalls      = 103,
+    eResourceID_BigBeanVine       = 104,
+    eResourceID_MoleHole          = 105,
+    eResourceID_WeirdWoods        = 106,
 
     // Hot Land
-    PyramidSands      = 107,
-    LavaLanding       = 108,
-    CoolCave          = 109,
-    DinoJungle        = 110,
-    TemperTemple      = 111,
-    DuskDunes         = 112,
+    eResourceID_PyramidSands      = 107,
+    eResourceID_LavaLanding       = 108,
+    eResourceID_CoolCave          = 109,
+    eResourceID_DinoJungle        = 110,
+    eResourceID_TemperTemple      = 111,
+    eResourceID_DuskDunes         = 112,
 
     // Treat Land
-    ToyTracks         = 113,
-    MushroomRun       = 114,
-    SweetsPark        = 115,
-    MelodyTown        = 116,
-    CocoaStation      = 117,
-    DarkManor         = 118,
+    eResourceID_ToyTracks         = 113,
+    eResourceID_MushroomRun       = 114,
+    eResourceID_SweetsPark        = 115,
+    eResourceID_MelodyTown        = 116,
+    eResourceID_CocoaStation      = 117,
+    eResourceID_DarkManor         = 118,
 
     // Water Land
-    SplashBeach       = 119,
-    BlubBlubOcean     = 120,
-    SecretIsland      = 121,
-    DeepDiveDeep      = 122,
-    BoomBoatyard      = 123,
-    FossilReef        = 124,
+    eResourceID_SplashBeach       = 119,
+    eResourceID_BlubBlubOcean     = 120,
+    eResourceID_SecretIsland      = 121,
+    eResourceID_DeepDiveDeep      = 122,
+    eResourceID_BoomBoatyard      = 123,
+    eResourceID_FossilReef        = 124,
 
     // Snow Land
-    SnowyFields       = 125,
-    CozyCabin         = 126,
-    MtSlide           = 127,
-    FrostyWheel       = 128,
-    FrigidFjords      = 129,
-    EvergreenLift     = 130,
+    eResourceID_SnowyFields       = 125,
+    eResourceID_CozyCabin         = 126,
+    eResourceID_MtSlide           = 127,
+    eResourceID_FrostyWheel       = 128,
+    eResourceID_FrigidFjords      = 129,
+    eResourceID_EvergreenLift     = 130,
 
     // Space Land
-    FutureCity        = 131,
-    TubeTown          = 132,
-    MysteriousUFO     = 133,
-    StellarWay        = 134,
-    MoonBase          = 135,
-    OuterRings        = 136,
+    eResourceID_FutureCity        = 131,
+    eResourceID_TubeTown          = 132,
+    eResourceID_MysteriousUFO     = 133,
+    eResourceID_StellarWay        = 134,
+    eResourceID_MoonBase          = 135,
+    eResourceID_OuterRings        = 136,
 
     // Dream Land
-    WhispysForest     = 137,
-    TempestTowers     = 138,
-    CloudPalace       = 139,
-    CastleDedede      = 140,
-    MetaMelonIsle     = 141,
-    BattleshipHalberd = 142,
+    eResourceID_WhispysForest     = 137,
+    eResourceID_TempestTowers     = 138,
+    eResourceID_CloudPalace       = 139,
+    eResourceID_CastleDedede      = 140,
+    eResourceID_MetaMelonIsle     = 141,
+    eResourceID_BattleshipHalberd = 142,
 
     // Bossfights
-    Fangora           = 301,
-    HotWings          = 302,
-    Squashini         = 303,
-    Capamari          = 304,
-    KingDedede        = 305,
-    MetaKnight        = 306,
-    YinYarn           = 307,
-);
+    eResourceID_Fangora           = 301,
+    eResourceID_HotWings          = 302,
+    eResourceID_Squashini         = 303,
+    eResourceID_Capamari          = 304,
+    eResourceID_KingDedede        = 305,
+    eResourceID_MetaKnight        = 306,
+    eResourceID_YinYarn           = 307,
+};
 
 #endif

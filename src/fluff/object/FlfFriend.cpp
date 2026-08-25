@@ -84,7 +84,7 @@ FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendI
 
     mPosition.z = 10.0f;
 
-    if (GameManager::IsInMission() && GameManager::GetCurrentStageInfo().GetStageID() == StageIDs::DarkManor) {
+    if (GameManager::IsInMission() && GameManager::GetCurrentStageInfo().GetStageID() == eStageID_DarkManor) {
         mMoleLight = new (gfl::HeapID::Work) MoguraLight;
         mMoleLight->SetUpdate(true);
         mMoleLight->SetZPosition(1.5f);
