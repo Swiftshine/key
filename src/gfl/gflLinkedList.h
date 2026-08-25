@@ -203,11 +203,11 @@ namespace gfl {
 
         void Remove(const T& data);
 
-        inline uint GetCount() const {
+        inline u32 GetCount() const {
             return mCount;
         }
     private:
-        uint mCount;
+        u32 mCount;
         NodeBase mNode;
     };
 

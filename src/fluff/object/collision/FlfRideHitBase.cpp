@@ -52,7 +52,7 @@ void FlfRideHitBase::AddObject(FlfGameObj* pObject) {
 bool FlfRideHitBase::HasObject(FlfHandleObj* pObject) {
     FlfHandleObj** obj;
     FlfHandleObj* toCompare;
-    for (uint i = 0; i < mNumHandles; i++) {
+    for (u32 i = 0; i < mNumHandles; i++) {
         obj = mHandles[i].GetObject();
 
         if (
@@ -77,7 +77,7 @@ void FlfRideHitBase::fn_80183F80(FlfHandleObj* pObject) {
     // not decompiled
 }
 
-FlfHandleObj* FlfRideHitBase::GetHandleObj(uint index) {
+FlfHandleObj* FlfRideHitBase::GetHandleObj(u32 index) {
     FlfHandleObj** object = mHandles[index].GetObject();
 
     if (

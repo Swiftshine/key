@@ -159,7 +159,7 @@ void Heap::Init(size_t range, u16 optFlag, s32 heapType) {
     SetMEMAllocatorParameters(&mAllocator2, 0x10, mExpHeap);
 }
 
-void* Heap::Alloc(size_t size, uint alignment) {
+void* Heap::Alloc(size_t size, u32 alignment) {
     return MEMAllocFromExpHeapEx(mExpHeap, size, alignment);
 }
 

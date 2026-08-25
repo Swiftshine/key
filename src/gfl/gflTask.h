@@ -48,7 +48,7 @@ namespace gfl {
         void Init(const char* newname);
 
         virtual ~Task();
-        virtual uint PollTask();
+        virtual u32 PollTask();
 
         Task* GetParent();
         Task* GetNextChild();
@@ -59,13 +59,13 @@ namespace gfl {
         u8    GetFlags();
         void  SetTaskName(const char* newName);
         void  CreateSubtask(u8 groupID);
-        void  SetDescendantFlags(bool set, uint flag);
+        void  SetDescendantFlags(bool set, u32 flag);
 
         inline TaskInfo* GetTaskInfo() {
             return mTaskInfo;
         }
 
-        inline void SetUnk14(uint value) {
+        inline void SetUnk14(u32 value) {
             mSuspendFlags = value;
         }
 
@@ -96,8 +96,8 @@ namespace gfl {
 
         /* 0x04 */ TaskInfo* mTaskInfo;
         /* 0x08 */ Functor0<void> mFunctor;
-        /* 0x10 */ uint mFlags;
-        /* 0x14 */ uint mSuspendFlags;
+        /* 0x10 */ u32 mFlags;
+        /* 0x14 */ u32 mSuspendFlags;
     };
 
     ASSERT_SIZE(Task, 0x18);
@@ -110,10 +110,10 @@ namespace gfl {
     public:
         Subtask* m_0;
         Subtask* m_4;
-        uint m_8;
+        u32 m_8;
         Task* mParent;
         Task* mOwner;
-        uint mGroupID;
+        u32 mGroupID;
     };
 
     ASSERT_SIZE(Subtask, 0x18)

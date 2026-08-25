@@ -95,7 +95,7 @@ void PlayerBase::ResetWalkAnimSpeed() {
 
 PlayerBase* PlayerBase::Build(
     gfl::Task* pParentTask,
-    uint flags,
+    u32 flags,
     FullSortScene* pScene,
     s32 arg4
 ) {
@@ -115,7 +115,7 @@ PlayerBase* PlayerBase::Build(
 PlayerBase* PlayerBase::BuildCloned(
     gfl::Task* pParentTask,
     FullSortScene* pScene,
-    uint flags,
+    u32 flags,
     s32 arg4
 ) {
     PlayerBase* player = new (gfl::eHeapID_Work) PlayerBase(
@@ -154,7 +154,7 @@ FullSortScene* PlayerBase::ResetScene(FullSortScene* pScene, bool resetPosition)
     mFullSortScene = pScene;
 
     if (resetPosition) {
-        uint index = Stage::Instance()->GetSceneIndex(pScene);
+        u32 index = Stage::Instance()->GetSceneIndex(pScene);
         float z = FullSortSceneUtil::GetZOrder(index, 4);
 
         gfl::Vec3 pos(0.0f);

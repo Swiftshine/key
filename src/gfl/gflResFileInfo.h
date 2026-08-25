@@ -110,7 +110,7 @@ namespace gfl {
          * whether the path is a folder (`true`) or an archive (`false`), and `second` is the path itself.
          * @param directory The directory of the requested folder or archive.
          */
-        static void Configure(ResFileInfo* dest, std::pair<bool, const char*>& name, uint checksum, const char* directory);
+        static void Configure(ResFileInfo* dest, std::pair<bool, const char*>& name, u32 checksum, const char* directory);
 
         /**
          * @note Address: 0x8063E38C
@@ -177,9 +177,9 @@ namespace gfl {
 
 
     private:
-        uint mChecksum;
+        u32 mChecksum;
         const char* mDirectory;
-        uint mEntrynum;
+        u32 mEntrynum;
         GfArch* mArchive;
     };
 

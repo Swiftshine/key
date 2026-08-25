@@ -36,7 +36,7 @@ public:
     bool Init(nw4r::g3d::ResFile& rResFileObject, const char* pResMdlName, const char* pAnimName, nw4r::g3d::ResName* pResName /* ? */);
     nw4r::math::VEC3 GetPosition(gfl::ScnMdlWrapper* pScnMdlWrapper, nw4r::g3d::ResMdl& rResMdl);
 
-    inline uint GetFlags() const {
+    inline u32 GetFlags() const {
         return mFlags;
     }
 
@@ -44,7 +44,7 @@ public:
 
     /* 0x04 */ u32 mFlags;
     /* 0x08 */ float mAnimationEndFrame;
-    /* 0x0C */ uint m_C;
+    /* 0x0C */ u32 m_C;
     /* 0x10 */ nw4r::g3d::AnmObj* mTexPatAnim;  // TexPatRes
     /* 0x14 */ nw4r::g3d::AnmObj* mMatClrAnim;  // MatClrRes
     /* 0x18 */ nw4r::g3d::AnmObj* mTexSrtAnim;  // TexSrtRes

@@ -29,11 +29,11 @@ public:
     void fn_80026A54(s32);
     s32 fn_80026B54(s32 index);
     void fn_80026DFC(float);
-    void fn_80026E74(float, uint index);
+    void fn_80026E74(float, u32 index);
     void fn_80026E88(s32);
-    void fn_80026AB0(s32, uint);
-    void fn_80026A9C(uint index, nw4r::math::VEC2*);
-    gfl::Vec2* fn_80026A60(uint index1, uint index2);
+    void fn_80026AB0(s32, u32);
+    void fn_80026A9C(u32 index, nw4r::math::VEC2*);
+    gfl::Vec2* fn_80026A60(u32 index1, u32 index2);
     void fn_80026B68(nw4r::math::MTX34* pMtx, bool);
 
     /* Class Members */

@@ -112,7 +112,7 @@ public:
     /* Class Methods */
 
     void Update(bool shouldUpdate);
-    nw4r::g3d::G3dObj* GetBlendAnmMatCtrlAnim(uint index);
+    nw4r::g3d::G3dObj* GetBlendAnmMatCtrlAnim(u32 index);
     void fn_80147C28(s32, float);
     void SetOpacity(float);
     float fn_800252AC();
@@ -162,7 +162,7 @@ public:
     /* 0x004 */ std::string mResourcePath;
     /* 0x010 */ std::string mRawFilepath;
     /* 0x01C */ FullSortScene* mFullSortScene;
-    /* 0x020 */ uint mCurrentAnimationID;
+    /* 0x020 */ u32 mCurrentAnimationID;
     /* 0x024 */ float mUpdateRate;
     /* 0x028 */ bool mIsVisible;
     /* 0x02C */ float m_2C;
@@ -174,9 +174,9 @@ public:
     /* 0x04C */ NURBSModelWrapper* m_4C;
     /* 0x050 */ NURBSAnimWrapper* mNURBSAnimWrapper;
     /* 0x054 */ NURBSAnimWrapper* mNURBSAnimWrapper2;
-    /* 0x058 */ uint mFlags;
+    /* 0x058 */ u32 mFlags;
     /* 0x05C */ float mCurrentFrame;
-    /* 0x060 */ uint mCurrentFrameInt;
+    /* 0x060 */ u32 mCurrentFrameInt;
     /* 0x064 */ s32 m_64;
     /* 0x068 */ s32 m_68;
     /* 0x06C */ bool mIsCubic;
@@ -210,7 +210,7 @@ public:
     /* 0x1A4 */ FlfMdlVec* m_1A4;
     /* 0x1A8 */ s32 m_1A8;
     /* 0x1AC */ NwBlendAnmWrapper* mNwBlendAnmWrappers;
-    /* 0x1B0 */ uint mNwBlendAnmWrapperCount;
+    /* 0x1B0 */ u32 mNwBlendAnmWrapperCount;
     /* 0x1B4 */ std::vector<NURBSObject> mNURBSObjects;
     /* 0x1C0 */ gfl::Array<NwAnm> mAnims;
     /* 0x1C4 */ NURBSDrawObj* mDrawObj;

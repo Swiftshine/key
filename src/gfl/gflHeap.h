@@ -17,7 +17,7 @@ namespace gfl {
         Heap();
         ~Heap();
         void Init(size_t range, u16 optFlag, s32 heapType);
-        void* Alloc(size_t size, uint alignment);
+        void* Alloc(size_t size, u32 alignment);
         void Free(void* buf);
         size_t GetTotalFreeSizeForExpHeap();
         bool WithinRange(void* address);

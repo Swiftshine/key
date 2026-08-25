@@ -48,7 +48,7 @@ void GmkMsCarrierGoal::Init(GimmickBuildInfo* buildInfo) {
 
     mState = 0;
 
-    uint sceneID = buildInfo->mSceneID;
+    u32 sceneID = buildInfo->mSceneID;
     mCounter = 0;
     mAnimationPosition.x = gfl::Vec3::Zero.x;
     mAnimationPosition.y = gfl::Vec3::Zero.y;

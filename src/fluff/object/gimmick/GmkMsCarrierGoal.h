@@ -26,7 +26,7 @@ public:
     NwAnmCtrl* CreateAnimCtrl(const char* animName, gfl::ResFileObject& resFileObject);
 private:
     s32 mState;
-    uint mCounter;
+    u32 mCounter;
     gfl::Vec3 mAnimationPosition;
     gfl::Pointer<NwAnmCtrl> mAnimCtrl;
 };

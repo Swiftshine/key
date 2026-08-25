@@ -38,7 +38,7 @@ public:
     void SetState(s32 state) DONT_INLINE_CLASS;
     void SetCollisionEnabled(bool enabled) DONT_INLINE_CLASS;
     void SetupCollisionMatrix();
-    std::string& GetStringParam(uint index);
+    std::string& GetStringParam(u32 index);
 
     DECL_WEAK void CutFunction() DONT_INLINE_CLASS;
 private:

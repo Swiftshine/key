@@ -38,7 +38,7 @@ public:
         eObjectCategory_Misc            = 13, // for anything that doesn't fit in the prior categories
     };
 
-    FlfGameObj(uint);
+    FlfGameObj(u32);
 
     /* Virtual Methods */
 

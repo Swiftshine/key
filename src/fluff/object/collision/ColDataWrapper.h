@@ -37,16 +37,16 @@ public:
     ColDataWrapper* Copy(ColDataWrapper* pOther);
 
 
-    void CreateColDataPoints(uint count);
-    void CreateColDataSegs(uint count);
-    void CreateColDataCircles(uint count);
-    void CreateColDataRects(uint count);
-    ColDataPoint* GetColDataPoint(uint index) const;
-    ColDataSeg* GetColDataSeg(uint index) const;
-    ColDataCircle* GetColDataCircle(uint index) const;
-    ColDataRect* GetColDataRect(uint index) const;
-    ColData* GetColData(uint index) const;
-    uint GetNumColData() const;
+    void CreateColDataPoints(u32 count);
+    void CreateColDataSegs(u32 count);
+    void CreateColDataCircles(u32 count);
+    void CreateColDataRects(u32 count);
+    ColDataPoint* GetColDataPoint(u32 index) const;
+    ColDataSeg* GetColDataSeg(u32 index) const;
+    ColDataCircle* GetColDataCircle(u32 index) const;
+    ColDataRect* GetColDataRect(u32 index) const;
+    ColData* GetColData(u32 index) const;
+    u32 GetNumColData() const;
     void SetOwner(ColObjTrans* pColObj);
     void Update();
     void fn_800CFD14(/* args unk */);
@@ -64,13 +64,13 @@ public:
 
     /* Class Members  */
 
-    uint mNumPoints;
+    u32 mNumPoints;
     ColDataPoint* mColDataPoints;
-    uint mNumSegs;
+    u32 mNumSegs;
     ColDataSeg* mColDataSegs;
-    uint mNumCircles;
+    u32 mNumCircles;
     ColDataCircle* mColDataCircles;
-    uint mNumRects;
+    u32 mNumRects;
     ColDataRect* mColDataRects;
     gfl::Vec2 mBoundsMin;
     gfl::Vec2 mBoundsMax;
@@ -110,7 +110,7 @@ public:
     nw4r::math::VEC2 mStart;
     nw4r::math::VEC2 mEnd;
     nw4r::math::VEC2 mNormalizedVector;
-    uint m_3C;
+    u32 m_3C;
 };
 
 // size: 0x48

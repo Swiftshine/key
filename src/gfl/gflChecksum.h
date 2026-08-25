@@ -4,10 +4,10 @@
 #include "types.h"
 
 namespace gfl {
-    uint GetChecksum(const char* str);
+    u32 GetChecksum(const char* str);
 
-    inline uint Checksum(const char* str) {
-        uint result = 0;
+    inline u32 Checksum(const char* str) {
+        u32 result = 0;
 
         char c = *str;
         while (0 != *str) {

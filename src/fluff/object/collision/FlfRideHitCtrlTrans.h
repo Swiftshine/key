@@ -21,17 +21,17 @@ public:
     void AddObject(FlfGameObj* pObject);
 
 
-    inline void SetUnk34(uint value) {
+    inline void SetUnk34(u32 value) {
         m_34 = value;
     }
 
     /* Class Members */
 
     /* 0x2C */ ColObj* mColObj;
-    /* 0x30 */ uint m_30;
-    /* 0x34 */ uint m_34;
-    /* 0x38 */ uint m_38;
-    /* 0x3C */ uint m_3C;
+    /* 0x30 */ u32 m_30;
+    /* 0x34 */ u32 m_34;
+    /* 0x38 */ u32 m_38;
+    /* 0x3C */ u32 m_3C;
 };
 
 // ASSERT_SIZE(FlfRideHitCtrlTrans, 0x40);

@@ -20,8 +20,8 @@ namespace gfl {
         eHeapID_Resource    = 11,
     };
 
-    void* Alloc(u8 heapID, size_t size, uint align);
-    void* Alloc(Heap* heap, size_t size, uint align);
+    void* Alloc(u8 heapID, size_t size, u32 align);
+    void* Alloc(Heap* heap, size_t size, u32 align);
     void Free(void*);
 }
 

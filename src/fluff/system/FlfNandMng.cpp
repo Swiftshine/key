@@ -220,7 +220,7 @@ size_t FlfNandMng::GetNumBlocks(size_t size) {
 }
 
 
-void FlfNandMng::SetFlags(uint flag, bool set) {
+void FlfNandMng::SetFlags(u32 flag, bool set) {
     if (set) {
         mFlags |= 1 << flag;
     } else {

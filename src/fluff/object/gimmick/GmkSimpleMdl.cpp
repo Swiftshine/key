@@ -118,7 +118,7 @@ void GmkSimpleMdl::SetModel(const char* brresPath, const char* modelName, bool p
     resfile.Release();
     resfile.Bind();
 
-    uint flags = 0;
+    u32 flags = 0;
 
     if (playAnim) {
         mAnim.Create(CreateAnim(resfile, modelName, modelName));
@@ -210,7 +210,7 @@ void GmkSimpleMdl::SetState(FlfGameObj* setter, const std::string& rState) {
 }
 
 // https://decomp.me/scratch/3zXZY
-gfl::ScnMdlWrapper* GmkSimpleMdl::CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flags) {
+gfl::ScnMdlWrapper* GmkSimpleMdl::CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, u32 flags) {
     nw4r::g3d::ResMdl resMdl = resFile.GetResMdl(filepath);
     char name[0x100];
     snprintf(name, 0x100, MdlWrapperStr, filepath);
@@ -241,7 +241,7 @@ void GmkSimpleMdl::SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool
         return;
     }
 
-    uint flags = 0;
+    u32 flags = 0;
 
     if (createAnim) {
         mShadowAnim.Create(CreateAnim(resFile, shadowName, shadowName));

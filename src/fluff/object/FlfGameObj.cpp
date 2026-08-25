@@ -3,7 +3,7 @@
 #include <revolution/MTX.h>
 #include <nw4r/math.h>
 
-FlfGameObj::FlfGameObj(uint category)
+FlfGameObj::FlfGameObj(u32 category)
     : mPosition(0.0f)
     , mRotation(0.0f)
     , mScale(1.0f)

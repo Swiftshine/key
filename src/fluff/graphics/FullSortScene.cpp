@@ -4,7 +4,7 @@
 #include "gfl/gflMemory.h"
 #include <nw4r/g3d/g3d_state.h>
 
-FullSortScene::FullSortScene(u8 heapID, uint maxNumChildren, uint maxNumScnObj)
+FullSortScene::FullSortScene(u8 heapID, u32 maxNumChildren, u32 maxNumScnObj)
     : gfl::Scene(heapID, maxNumChildren, maxNumScnObj)
 {
     gfl::Heap* heap = gfl::Memory::TryGetInstance()->GetHeapByID(heapID);

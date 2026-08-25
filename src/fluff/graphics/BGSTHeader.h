@@ -15,11 +15,11 @@ namespace BGST {
         }
 
         /* 0x00 */ char mMagic[4]; // "BGST"
-        /* 0x04 */ uint mFlags;
-        /* 0x08 */ uint mImageWidth;  // in pixels; this value is usually 512
-        /* 0x0C */ uint mImageHeight; // same as above
-        /* 0x10 */ uint mGridWidth;
-        /* 0x14 */ uint mGridHeight;
+        /* 0x04 */ u32 mFlags;
+        /* 0x08 */ u32 mImageWidth;  // in pixels; this value is usually 512
+        /* 0x0C */ u32 mImageHeight; // same as above
+        /* 0x10 */ u32 mGridWidth;
+        /* 0x14 */ u32 mGridHeight;
         /* 0x18 */ u32 mEntryCount;
         /* 0x1C */ bool mLayerEnabled[12];
         /* 0x28 */ u32 mImageDataOffset;

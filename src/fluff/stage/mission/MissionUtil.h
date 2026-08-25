@@ -188,7 +188,7 @@ namespace MissionUtil {
     void GetMissionInfoByID(s32 id, s32* pDestType, s32* pDestIndex);
     s32 DONT_INLINE GetMissionTypeByID(s32 id) ;
     s32 DONT_INLINE GetMissionIndexByID(s32 id) ;
-    uint GetMissionMagicByID(s32 id);
+    u32 GetMissionMagicByID(s32 id);
 } // MissionUtil
 
 #endif

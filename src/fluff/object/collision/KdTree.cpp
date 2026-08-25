@@ -246,7 +246,7 @@ void KdTreeNode::ClearAll() {
     ColData* seg;
     ColData* childseg;
     KdTreeNode* child;
-    uint childsegcount;
+    u32 childsegcount;
 
     for (
         ColData* seg = mChild1->GetColData();
@@ -358,7 +358,7 @@ ColData* KdTree::HitResult::GetCurrentColData() {
     while (mCurrentColData == nullptr) {
         mColDataCount++;
 
-        if ((uint)mColDataCount >= numNodes) {
+        if ((u32)mColDataCount >= numNodes) {
             mColDataCount--;
             result = nullptr;
             goto exit;

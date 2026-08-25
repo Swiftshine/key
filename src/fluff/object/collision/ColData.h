@@ -45,8 +45,8 @@ public:
 
     /* 0x08 */ ColData* mNext;
     /* 0x0C */ ColObjTrans* mOwner;
-    /* 0x10 */ uint m_10;
-    /* 0x14 */ uint mNumEntries;
+    /* 0x10 */ u32 m_10;
+    /* 0x14 */ u32 mNumEntries;
     /* 0x18 */ u64 mFlags;
 };
 

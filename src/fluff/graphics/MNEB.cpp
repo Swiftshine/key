@@ -20,11 +20,11 @@ NURBSSet* File::Load(NURBSSet* pNURBSSet, const char* pFilepath) {
     size_t filesize = res.GetFilesize();
     u8* begin = (u8*)raw;
     u8* end = begin + filesize;
-    uint count = CopyHeader(raw);
+    u32 count = CopyHeader(raw);
     pNURBSSet->Set(mNumFrames, count, mIsLooped, gfl::ResFileObject(res));
 
     block = (CurveBlock*)raw;
-    for (uint i = 0; i < count; i++) {
+    for (u32 i = 0; i < count; i++) {
         block = GetNextCurveBlock(block);
         NURBSObject* obj = pNURBSSet->GetObject(i);
         SetCurveBlock(obj, block);
@@ -47,7 +47,7 @@ CurveBlock* File::GetNextCurveBlock(CurveBlock* pBlock) const {
     return reinterpret_cast<CurveBlock*>(reinterpret_cast<u8*>(pBlock) + pBlock->mBlockSize);
 }
 
-uint File::CopyHeader(void* pData) {
+u32 File::CopyHeader(void* pData) {
     Header* header = reinterpret_cast<Header*>(pData);
     mFlags = header->mFlags;
     mIsLocked = header->mLock != MNEB::eLockState_Unlocked;
@@ -67,7 +67,7 @@ void File::SetCurveBlock(NURBSObject* pObj, CurveBlock* pBlock) {
         if (kfi->mKeyFrameSetTableOffset.offset() != 0) {
             kfi->mKeyFrameSetTableOffset.SetPointer(mRawData);
 
-            for (uint i = 0; i < kfi->mKeyFrameSetTableOffset->mNumKeyFrameSets; i++) {
+            for (u32 i = 0; i < kfi->mKeyFrameSetTableOffset->mNumKeyFrameSets; i++) {
                 kfi->mKeyFrameSetTableOffset->mKeyFrameSetOffsets[i].SetPointer(mRawData);
             }
         }
@@ -75,7 +75,7 @@ void File::SetCurveBlock(NURBSObject* pObj, CurveBlock* pBlock) {
         if (kfi->m_4.offset() != 0) {
             kfi->m_4.SetPointer(mRawData);
 
-            for (uint i = 0; i < kfi->m_4->mUnkCount; i++) {
+            for (u32 i = 0; i < kfi->m_4->mUnkCount; i++) {
                 kfi->m_4->m_4[i].SetPointer(mRawData);
             }
         }
@@ -97,12 +97,12 @@ DemoDataBlock* File::GetDemoDataBlock(void* pData) {
         DemoDataBlock* block = reinterpret_cast<DemoDataBlock*>(pData);
         DemoOptionSet* p;
         DemoOptionSet* p1;
-        for (uint i = 0; i < reinterpret_cast<DemoDataBlock*>(pData)->mDemoOptionSetCount; i++) {
+        for (u32 i = 0; i < reinterpret_cast<DemoDataBlock*>(pData)->mDemoOptionSetCount; i++) {
             block->mDemoOptionSets.SetPointer(mRawData);
             p = block->mDemoOptionSets.pointer();
             p1 = block->mDemoOptionSets.pointer();
 
-            for (uint j = 0; j < p->mNumDemoOptions; j++) {
+            for (u32 j = 0; j < p->mNumDemoOptions; j++) {
                 p1->mDemoOptions.SetPointer(mRawData);
                 p1 = reinterpret_cast<DemoOptionSet*>((char*)p1 + 4);
             }

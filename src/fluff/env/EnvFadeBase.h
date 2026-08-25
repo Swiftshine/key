@@ -15,7 +15,7 @@ namespace env {
 
         
 
-        EnvFadeBase(gfl::Task* pParentTask, s32 arg2, s32 arg3, const char* pTaskName, uint flagIndex);
+        EnvFadeBase(gfl::Task* pParentTask, s32 arg2, s32 arg3, const char* pTaskName, u32 flagIndex);
 
         /* Virtual Methods */
 

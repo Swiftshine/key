@@ -33,7 +33,7 @@ void FixedString::operator=(const std::string& src) {
 }
 
 bool FixedString::HasForwardSlash() {
-    for (uint i = 0; i < mLen; i++) {
+    for (u32 i = 0; i < mLen; i++) {
         if ('/' == mString[i]) {
             return true;
         }

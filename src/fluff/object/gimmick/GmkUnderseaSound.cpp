@@ -39,10 +39,10 @@ void GmkUnderseaSound::Update() {
     // defined every member of PlayerBase yet
     struct dummy {
         u8 m_0[0x78C];
-        uint m_78C;
+        u32 m_78C;
     };
 
-    uint unk = 0;
+    u32 unk = 0;
     dummy* player = (dummy*)GameManager::GetPlayerByID(0);
 
     if (player != nullptr) {

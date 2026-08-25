@@ -26,7 +26,7 @@ FlfHandleList::FlfHandleList()
 DECL_WEAK FlfHandleList::~FlfHandleList() { }
 
 void FlfHandleList::Add(FlfHandleObj* pObject) {
-    uint curCount = mHandleCount;
+    u32 curCount = mHandleCount;
     FlfHandleObj** lastHandleObj = &mObjects[mHandleCount];
 
     // check if there are any empty slots
@@ -43,8 +43,8 @@ void FlfHandleList::Add(FlfHandleObj* pObject) {
 
     // there aren't any empty slots, add to end
 
-    uint curIndex = 0;
-    uint remainingSlots = FLF_HANDLE_LIST_MAX_HANDLES;
+    u32 curIndex = 0;
+    u32 remainingSlots = FLF_HANDLE_LIST_MAX_HANDLES;
     FlfHandleObj** handleObj = mObjects;
 
     while (remainingSlots != 0) {
@@ -69,7 +69,7 @@ void FlfHandleList::Remove(FlfHandleObj* pObject) {
 }
 
 
-void FlfHandleList::Set(uint index, FlfHandleObj* pObject) {
+void FlfHandleList::Set(u32 index, FlfHandleObj* pObject) {
     mObjects[index] = pObject;
     pObject->SetHandleID(mLastHandleID);
     pObject->SetHandleObject(&mObjects[index]);

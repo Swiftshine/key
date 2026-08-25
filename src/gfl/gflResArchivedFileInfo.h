@@ -20,7 +20,7 @@ namespace gfl {
 
     // private:
         void* mDVDDir;
-        uint m_C;
+        u32 m_C;
         void* mData;
         size_t mDataSize;
         ResFileInfo* mOwner;

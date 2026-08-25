@@ -2,7 +2,7 @@
 
 using namespace env;
 
-EnvUnitBase::EnvUnitBase(gfl::Task* pParentTask, const char* pTaskName, uint arg3) 
+EnvUnitBase::EnvUnitBase(gfl::Task* pParentTask, const char* pTaskName, u32 arg3) 
     : EnvObject(pParentTask, 0, pTaskName, arg3)
 { }
 

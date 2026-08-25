@@ -76,10 +76,10 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
 
     // common gimmick names
     StringTable* table = GET_AT_OFFSET(StringTable, mapbin, commonGimmickNameOffset);
-    for (uint i = 0; i < table->mCount; i++) {
+    for (u32 i = 0; i < table->mCount; i++) {
         string32 buf;
 
-        for (uint j = 0; j < sizeof(string32); j++) {
+        for (u32 j = 0; j < sizeof(string32); j++) {
             buf[j] = table->mStrings[i][j];
         }
 
@@ -90,10 +90,10 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
 
     // wall collision types
     table = GET_AT_OFFSET(StringTable, mapbin, wallTypeOffset);
-    for (uint i = 0; i < table->mCount; i++) {
+    for (u32 i = 0; i < table->mCount; i++) {
         string32 buf;
 
-        for (uint j = 0; j < sizeof(string32); j++) {
+        for (u32 j = 0; j < sizeof(string32); j++) {
             buf[j] = table->mStrings[i][j];
         }
 
@@ -104,10 +104,10 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
 
     // wall labels
     table = GET_AT_OFFSET(StringTable, mapbin, wallLabelOffset);
-    for (uint i = 0; i < table->mCount; i++) {
+    for (u32 i = 0; i < table->mCount; i++) {
         string32 buf;
 
-        for (uint j = 0; j < sizeof(string32); j++) {
+        for (u32 j = 0; j < sizeof(string32); j++) {
             buf[j] = table->mStrings[i][j];
         }
 
@@ -119,7 +119,7 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
         ColDataSeg* walls = new ColDataSeg[numWalls];
         MapdataWall* wallArray = GET_AT_OFFSET(MapdataWall, mapbin, wallOffset);
 
-        for (uint i = 0; i < numWalls; i++) {
+        for (u32 i = 0; i < numWalls; i++) {
             size_t* indices = ColDataSeg::CopyFromBinary(&walls[i], wallArray);
             wallArray = (MapdataWall*)(indices + 1);
             walls[i].mFlags = collisionTypes[indices[0]];
@@ -132,7 +132,7 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
         ColDataSegLabel* labeledWalls = new ColDataSegLabel[numLabeledWalls];
         MapdataLabeledWall* labeledWallArray = GET_AT_OFFSET(MapdataLabeledWall, mapbin, labeledWallOffset);
 
-        for (uint i = 0; i < numLabeledWalls; i++) {
+        for (u32 i = 0; i < numLabeledWalls; i++) {
             size_t* indices = ColDataSeg::CopyFromBinary(&labeledWalls[i], labeledWallArray);
             labeledWallArray = (MapdataLabeledWall*)(indices + 2);
             labeledWalls[i].mFlags = collisionTypes[indices[0]];

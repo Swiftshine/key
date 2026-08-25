@@ -8,14 +8,14 @@
 namespace Player {
     PlayerBase* Build(
         gfl::Task* pParentTask,
-        uint flags,
+        u32 flags,
         s32 arg3,
         FullSortScene* pScene
     );
 
     PlayerBase* BuildAndConfigure(
         gfl::Task* pParentTask,
-        uint flags,
+        u32 flags,
         s32 arg3,
         FullSortScene* pScene
     );

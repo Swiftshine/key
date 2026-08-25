@@ -16,7 +16,7 @@ class Scene {
         static bool OpaSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB);
         static void InvalidateG3DState();
         
-        Scene(u8 heapID, uint maxNumChildren, uint maxNumScnObj);
+        Scene(u8 heapID, u32 maxNumChildren, u32 maxNumScnObj);
 
         virtual ~Scene();
         virtual bool AreListsEmpty() const;

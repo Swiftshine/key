@@ -301,6 +301,6 @@ void GmkBeadPopItem::SetupCollisionMatrix() {
     }
 }
 
-std::string& GmkBeadPopItem::GetStringParam(uint index) {
+std::string& GmkBeadPopItem::GetStringParam(u32 index) {
     return mBuildInfoPtr->GetStringParam(index);
 }

@@ -12,7 +12,7 @@ class IObjHitCB;
 struct ButtonBuildInfo {
     /* 0x00 */ nw4r::math::VEC3 mOffset;
     /* 0x0C */ float m_C;
-    /* 0x10 */ uint mSceneIndex;
+    /* 0x10 */ u32 mSceneIndex;
     /* 0x14 */ s32 m_14;
     /* 0x18 */ Gimmick* mOwner;
     /* 0x1C */ IObjHitCB* mCollision;

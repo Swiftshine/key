@@ -24,7 +24,7 @@ namespace BGST {
         bool IsEntryInfoValid(s32 index);
         void* GetByGrid(s32 sceneID, s32 xGridIndex, s32 yGridIndex) DONT_INLINE_CLASS;
         BGST::EntryInfo* GetEntryInfoByIndex(s32 index);
-        size_t GetImageOffset(uint index);
+        size_t GetImageOffset(u32 index);
         void* fn_80165B3C(s32 index);
         // returns if SetHeader() was successful, and updates loading state
         bool TrySetHeader(const char* path);

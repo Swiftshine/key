@@ -10,7 +10,7 @@ class FullSortGroup : public nw4r::g3d::ScnGroup {
 public:
     /* Static Methods */
 
-    static FullSortGroup* Build(MEMAllocator* pAllocator, size_t* pArg1, uint maxNumChildren, uint maxNumScnObj);
+    static FullSortGroup* Build(MEMAllocator* pAllocator, size_t* pArg1, u32 maxNumChildren, u32 maxNumScnObj);
 
     /* Class Members */
 

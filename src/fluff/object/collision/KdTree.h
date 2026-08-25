@@ -55,7 +55,7 @@ public:
     static void AddColData(ColData* pColData);
     static void RemoveColData(ColData* pColData);
 
-    inline uint GetDepth() {
+    inline u32 GetDepth() {
         return mDepth;
     }
 
@@ -111,24 +111,24 @@ public:
         mColData = pColData;
     }
 
-    inline uint GetColDataCount() {
+    inline u32 GetColDataCount() {
         return mColDataCount;
     }
 
-    inline void SetColDataCount(uint val) {
+    inline void SetColDataCount(u32 val) {
         mColDataCount = val;
     }
 
     /* Class Members */
 
     /* 0x04 */ KdTreeSplitInfo mSplitInfo;
-    /* 0x0C */ uint mDepth;
+    /* 0x0C */ u32 mDepth;
     /* 0x10 */ KdTreeBounds mBounds;
     /* 0x20 */ KdTreeNode* mParent;
     /* 0x24 */ KdTreeNode* mChild1;
     /* 0x28 */ KdTreeNode* mChild2;
     /* 0x2C */ ColData* mColData;
-    /* 0x30 */ uint mColDataCount;
+    /* 0x30 */ u32 mColDataCount;
 };
 
 #define KDTREE_HITRESULT_NODE_COUNT 400
@@ -146,7 +146,7 @@ public:
             , mCurrentColData(nullptr)
             , mColDataCount(-1u)
         {
-            for (uint i = 0; i < KDTREE_HITRESULT_NODE_COUNT; i++) {
+            for (u32 i = 0; i < KDTREE_HITRESULT_NODE_COUNT; i++) {
                 mNodes[i] = nullptr;
             }
         }

@@ -14,7 +14,7 @@ const char* FriendResourceNames[NUM_FRIEND_TYPES] = {
 FriendEffect::FriendEffect() {
     FullSortScene* scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
 
-    for (uint i = 0; i < NUM_FRIEND_TYPES; i++) {
+    for (u32 i = 0; i < NUM_FRIEND_TYPES; i++) {
         mEffects[i] = new (gfl::eHeapID_Work) FlfMdlDraw(scene, FriendResourceNames[i], nullptr, true);
         mEffects[i]->LoadNURBSFromFileList();
         mEffects[i]->SetVisibility(false);
@@ -24,7 +24,7 @@ FriendEffect::FriendEffect() {
 }
 
 FriendEffect::~FriendEffect() {
-    for (uint i = 0; i < NUM_FRIEND_TYPES; i++) {
+    for (u32 i = 0; i < NUM_FRIEND_TYPES; i++) {
         if (mEffects[i] != nullptr) {
             delete mEffects[i];
         }
@@ -33,7 +33,7 @@ FriendEffect::~FriendEffect() {
 }
 
 void FriendEffect::AddResources() {
-    for (uint i = 0; i < NUM_FRIEND_TYPES; i++) {
+    for (u32 i = 0; i < NUM_FRIEND_TYPES; i++) {
         StageResources::Instance()->AddCharaResourceName(FriendResourceNames[i]);
     }
 }

@@ -29,12 +29,12 @@ namespace gfl {
 
         virtual void Init();
         virtual void CancelBPEThead();
-        virtual uint GetFilesize(const char* filename);
-        virtual uint fn_80642618(File* file);
-        virtual File* Open(const char* filename, uint unk);
+        virtual u32 GetFilesize(const char* filename);
+        virtual u32 fn_80642618(File* file);
+        virtual File* Open(const char* filename, u32 unk);
         virtual void Close(File* file);
-        virtual void Read(File* file, void* address, uint length, uint fileOffs);
-        virtual void ReadAsync(File* file, void* address, uint len, uint fileOffs, uint callback);
+        virtual void Read(File* file, void* address, u32 length, u32 fileOffs);
+        virtual void ReadAsync(File* file, void* address, u32 len, u32 fileOffs, u32 callback);
         // used to decode Good-Feel's byte-pair-encoded GF Archives
         virtual void StartBPEThread();
 

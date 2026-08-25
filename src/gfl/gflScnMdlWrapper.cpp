@@ -8,7 +8,7 @@ void ScnMdlWrapper::SetDefaultUpdateRate(float rate) {
 }
 
 // https://decomp.me/scratch/OXDbN
-ScnMdlWrapper::ScnMdlWrapper(void* pData, uint bufferOptions, const char* pName)
+ScnMdlWrapper::ScnMdlWrapper(void* pData, u32 bufferOptions, const char* pName)
     : RenderObj()
     , mOptionsSet(true)
     , m_20(0.0f)

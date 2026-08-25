@@ -13,10 +13,10 @@ namespace Game {
     void Run();
     void Cleanup();
 
-    void DisableController(uint);
+    void DisableController(u32);
 
     void fn_8064740C(bool);
-    void fn_8063C450(uint, uint);
+    void fn_8063C450(u32, u32);
 }
 
 #endif

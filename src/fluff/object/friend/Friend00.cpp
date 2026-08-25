@@ -63,7 +63,7 @@ Friend00::~Friend00() {
 }
 
 bool Friend00::vfE8() const {
-    uint state = mState.mCurrentState;
+    u32 state = mState.mCurrentState;
 
     if (state == 102 || state == 103 || state - 18 <= 1) {
         return true;
@@ -96,7 +96,7 @@ void Friend00::StartMission(PlayerBase* pPlayer, bool arg2) {
         CutFunction(pPlayer);
         SetPlayer(pPlayer);
         InStageWork* work = WorkManager::GetInStageWork();
-        uint count = work->mBeadsCollected[0] + work->mBeadsCollected[1];
+        u32 count = work->mBeadsCollected[0] + work->mBeadsCollected[1];
         mBeadsCollected[0] = count;
         mBeadsCollected[1] = count;
     } else {
@@ -113,7 +113,7 @@ void Friend00::StartMission(PlayerBase* pPlayer, bool arg2) {
     vf16C();
 }
 
-void Friend00::IncrementBeadCount(uint amt) {
+void Friend00::IncrementBeadCount(u32 amt) {
     mBeadCount += amt;
 }
 
@@ -154,7 +154,7 @@ void Friend00::Update() const {
 
     FlfFriend::Update();
 
-    uint state = mState.mCurrentState;
+    u32 state = mState.mCurrentState;
 
     if (state != 1) {
         if (state != 104) {

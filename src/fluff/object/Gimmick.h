@@ -108,9 +108,9 @@ public:
         /* 0x1C */ char mIdentifier[8];
 
         /* 0x24 */ u8 m_24;
-        /* 0x28 */ uint mSceneID;
-        /* 0x2C */ uint mSceneOrder;
-        /* 0x30 */ uint m_30;
+        /* 0x28 */ u32 mSceneID;
+        /* 0x2C */ u32 mSceneOrder;
+        /* 0x30 */ u32 m_30;
         /* 0x34 */ s32 mIntParams[5];
         /* 0x48 */ float mFloatParams[5];
         /* 0x5C */ std::string mStringParams[5];
@@ -140,7 +140,7 @@ public:
     /* 0x7C */ virtual s32 vf7C(IObjHitCB* pOther, s32);
     /* 0x80 */ virtual s32 vf80();
     /* 0x84 */ virtual s32 vf84();
-    /* 0x88 */ virtual s32 vf88(FlfGameObj*, uint arg2);
+    /* 0x88 */ virtual s32 vf88(FlfGameObj*, u32 arg2);
     /* 0x8C */ virtual s32 vf8C(IObjHitCB* pOther, s32);
     /* 0x90 */ virtual s32 vf90();
     /* 0x94 */ virtual s32 vf94();
@@ -168,7 +168,7 @@ public:
     gfl::ScnMdlWrapper* CreateScnMdlWrapper(
         nw4r::g3d::ResFile resFile,
         const char* pResMdlName,
-        uint flags,
+        u32 flags,
         FullSortScene* pScene
     );
 

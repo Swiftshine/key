@@ -4,7 +4,7 @@ using namespace demo;
 
 typedef gfl::FunctorClassMethod0<void, DemoObject*, void (DemoObject::*)() const> FuctorType;
 
-const uint lbl_80800FF8[8] = {
+const u32 lbl_80800FF8[8] = {
     0x0,
     0xC0,
     0xE0,
@@ -15,7 +15,7 @@ const uint lbl_80800FF8[8] = {
     0xA0
 };
 
-DemoObject::DemoObject(gfl::Task* pParentTask, const char* pTaskName, uint index)
+DemoObject::DemoObject(gfl::Task* pParentTask, const char* pTaskName, u32 index)
     : mTask(nullptr)
     , m_8(lbl_80800FF8[index])
 {
@@ -34,7 +34,7 @@ void DemoObject::DoUpdate() {
 // not done
 // i don't know how to structure the gfl::Task ctor to support
 // the construction of these templated functors
-gfl::Task* DemoObject::InitTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, uint arg4) {
+gfl::Task* DemoObject::InitTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, u32 arg4) {
     gfl::Task* task = new (gfl::eHeapID_Work) gfl::Task(this, Update, pTaskName);
 
     if (task != nullptr) {

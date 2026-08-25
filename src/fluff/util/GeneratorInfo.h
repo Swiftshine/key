@@ -35,7 +35,7 @@ public:
 
     bool fn_803CB5E8(const char*);
     void fn_803CB458(s32, const char*, s32);
-    uint fn_803CB4B4();
+    u32 fn_803CB4B4();
 
     /* Class Members */
 

@@ -34,15 +34,15 @@ public:
     virtual void UpdateWater(bool) override;
 
     /* Gimmick */
-    virtual s32 vf88(FlfGameObj*, uint) override;
-    virtual bool vfA4(FlfGameObj*, uint) override;
+    virtual s32 vf88(FlfGameObj*, u32) override;
+    virtual bool vfA4(FlfGameObj*, u32) override;
     virtual void Update() override;
 
     /* GmkColAnimMdl */
 
-    virtual void SetAnimationIndex(uint index);
-    virtual bool HasAnimation(uint index);
-    virtual uint GetCurrentAnimationIndex();
+    virtual void SetAnimationIndex(u32 index);
+    virtual bool HasAnimation(u32 index);
+    virtual u32 GetCurrentAnimationIndex();
     virtual bool CheckAnimationProgress();
     virtual bool IsAnimationDone();
     virtual void SetUpdate(bool state);

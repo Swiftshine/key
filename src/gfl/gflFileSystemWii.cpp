@@ -30,7 +30,7 @@ void FileSystemWii::CancelBPEThead() {
     }
 }
 
-uint FileSystemWii::fn_80642618(File* file) {
+u32 FileSystemWii::fn_80642618(File* file) {
     return *reinterpret_cast<u32*>((u8*)file + 0x244);
 }
 

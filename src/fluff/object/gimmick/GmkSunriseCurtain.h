@@ -57,13 +57,13 @@ public:
 
 private:
     /* 0x130 */ s32 mState;
-    /* 0x134 */ uint mStateFrames; // a frame counter
+    /* 0x134 */ u32 mStateFrames; // a frame counter
     /* 0x138 */ s32 mNightBackgroundBGSTLayer;
     /* 0x13C */ s32 mNightForegroundBGSTLayer;
     /* 0x140 */ s32 mDayBackgroundBGSTLayer;
     /* 0x144 */ s32 mDayForegroundBGSTLayer;
     /* 0x148 */ bool mTimeChanged; // never actually used in any meaningful way
-    /* 0x14C */ uint mColorChangeFrames;
+    /* 0x14C */ u32 mColorChangeFrames;
     /* 0x150 */ gfl::Color mScreenTintColor; // a frame counter
     /* 0x154 */ gfl::SoundHandle mMainSoundHandle;
     /* 0x15C */ gfl::SoundHandle mSplashBeachSoundHandle;

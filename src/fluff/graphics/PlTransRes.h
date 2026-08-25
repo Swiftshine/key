@@ -19,8 +19,8 @@ public:
     PlTransResMng();
     DECL_WEAK virtual ~PlTransResMng();
 
-    static void AddPlayerResourceName(uint id);
-    static const char* GetPlayerResourceName(uint id);
+    static void AddPlayerResourceName(u32 id);
+    static const char* GetPlayerResourceName(u32 id);
 
     static void InitInstance();
     static void DestroyInstance();

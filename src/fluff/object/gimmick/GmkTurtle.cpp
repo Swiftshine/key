@@ -27,7 +27,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
 
     f32 f1 = 60.0f;
     f1 *= buildInfo->GetFloatParam(GmkTurtle::eParameter_CounterDefaultValue);
-    mCounterDefaultValue = static_cast<uint>(f1);
+    mCounterDefaultValue = static_cast<u32>(f1);
     const char* resourceName = GmkTurtle_ResourceName;
     mSpeed = buildInfo->GetFloatParam(GmkTurtle::eParameter_Speed) / 60.0f;
     mMaxDistance = buildInfo->GetFloatParam(GmkTurtle::eParameter_MaxDistance);
@@ -50,7 +50,7 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
 
     mAnmCtrl.Create(new (gfl::eHeapID_Work) NwAnmCtrl(8, fileInfo, resourceName));
 
-    for (uint i = 0; i < 8; i++) {
+    for (u32 i = 0; i < 8; i++) {
         char path[0x100];
         snprintf(path, sizeof(path), GmkTurtle_AnimationIndexTemplate, resourceName, i);
         mAnmCtrl->PlayAnimationByNameAndIndex(i, path);
@@ -213,7 +213,7 @@ void GmkTurtle::Update() {
     // FUN_807882f0(param_1->mRideHitCtrlTrans);
 }
 
-s32 GmkTurtle::vf88(FlfGameObj* player, uint arg2) {
+s32 GmkTurtle::vf88(FlfGameObj* player, u32 arg2) {
     s32 playerState = *(s32*)((u8*)player + 0xC10);
 
     // if the player is in the weight state

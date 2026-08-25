@@ -17,7 +17,7 @@ public:
 
     void SetMatrix(const float zOffset, nw4r::math::MTX34& rMatrix, bool arg3);
     bool GetPrimaryMatrix(nw4r::math::MTX34& rDestMatrix);
-    void RegisterResources(gfl::ResFileObject& rFileInfo, const char* pModelName, const char* pShadowName, FullSortScene* pFullSortScene, uint flags);
+    void RegisterResources(gfl::ResFileObject& rFileInfo, const char* pModelName, const char* pShadowName, FullSortScene* pFullSortScene, u32 flags);
     void SetUpdate(bool shouldUpdate);
     void fn_802374D4(float);
     void SetScene(gfl::Scene* pScene);

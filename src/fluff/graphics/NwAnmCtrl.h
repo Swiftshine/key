@@ -20,7 +20,7 @@ class NwAnmCtrl {
 public:
     
 
-    NwAnmCtrl(uint animCount, gfl::ResFileObject& rResFileObject, const char* pAnimName);
+    NwAnmCtrl(u32 animCount, gfl::ResFileObject& rResFileObject, const char* pAnimName);
 
     /* Virtual Methods */
 
@@ -28,20 +28,20 @@ public:
 
     /* Class Methods */
     
-    void PlayAnimationByNameAndIndex(uint animIndex, const char* pAnimName, s32 dummy = 1);
-    gfl::ScnMdlWrapper* SetupModelWrapper(uint flags) DONT_INLINE_CLASS;
-    gfl::ScnMdlWrapper* SetFullSortSceneModelWrapper(FullSortScene* pScene, uint flags) DONT_INLINE_CLASS;
-    void SetStageFullSortSceneModelWrapper(uint flags) DONT_INLINE_CLASS;
-    uint CalculateFlags();
-    NwAnm* GetAnimationByIndex(uint index) DONT_INLINE_CLASS;
-    void SetCurrentAnimationIndex(uint index);
+    void PlayAnimationByNameAndIndex(u32 animIndex, const char* pAnimName, s32 dummy = 1);
+    gfl::ScnMdlWrapper* SetupModelWrapper(u32 flags) DONT_INLINE_CLASS;
+    gfl::ScnMdlWrapper* SetFullSortSceneModelWrapper(FullSortScene* pScene, u32 flags) DONT_INLINE_CLASS;
+    void SetStageFullSortSceneModelWrapper(u32 flags) DONT_INLINE_CLASS;
+    u32 CalculateFlags();
+    NwAnm* GetAnimationByIndex(u32 index) DONT_INLINE_CLASS;
+    void SetCurrentAnimationIndex(u32 index);
     f32 GetEndFrame();
     f32 GetCurrentFrame();
     void SetCurrentFrame(f32);
     void SetUpdateRate(f32);
     f32 GetUpdateRate();
     bool IsAnimationDone();
-    bool HasAnim(uint index);
+    bool HasAnim(u32 index);
     nw4r::math::VEC3 GetCurrentAnimationPosition(nw4r::g3d::ResMdl& rResMdl);
     
     inline NwAnm* GetCurrentAnimation() {
@@ -53,9 +53,9 @@ public:
     /* 0x04 */ gfl::ResFileObject mResFileObject;
     /* 0x08 */ gfl::Pointer<gfl::ScnMdlWrapper> mScnMdlWrapper;
     /* 0x0C */ std::string mResMdlName;
-    /* 0x18 */ uint mCurrentAnimIndex;
+    /* 0x18 */ u32 mCurrentAnimIndex;
     /* 0x1C */ gfl::Array<NwAnm> mAnimations;
-    /* 0x20 */ uint mNumAnims;
+    /* 0x20 */ u32 mNumAnims;
 };
 
 // ASSERT_SIZE(NwAnmCtrl, 0x24);

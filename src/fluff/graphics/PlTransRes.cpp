@@ -17,12 +17,12 @@ void PlTransResMng::DestroyInstance() {
     sInstance = nullptr;
 }
 
-void PlTransResMng::AddPlayerResourceName(uint id) {
+void PlTransResMng::AddPlayerResourceName(u32 id) {
     const char* name = GetPlayerResourceName(id);
     ResourceManager::Instance()->AddCharaResourceName(name);
 }
 
-const char* PlTransResMng::GetPlayerResourceName(uint id) {
+const char* PlTransResMng::GetPlayerResourceName(u32 id) {
     switch (id) {
         case 0:  return "chara/new_player/FORM00/BODY";
         case 1:  return "chara/new_player/FORM00/FOOT";

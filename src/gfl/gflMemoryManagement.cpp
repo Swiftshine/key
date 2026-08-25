@@ -1,12 +1,12 @@
 #include "gflMemoryManagement.h"
 #include "gflMemory.h"
 
-void* gfl::Alloc(u8 heapID, size_t size, uint align) {
+void* gfl::Alloc(u8 heapID, size_t size, u32 align) {
     gfl::Memory::CheckInit();
     return gfl::Memory::TryGetInstance()->GetHeapByID(heapID)->Alloc(size, align);
 }
 
-void* gfl::Alloc(Heap* heap, size_t size, uint align) {
+void* gfl::Alloc(Heap* heap, size_t size, u32 align) {
     gfl::Memory::CheckInit();
     gfl::Memory::TryGetInstance();
     return heap->Alloc(size, align);

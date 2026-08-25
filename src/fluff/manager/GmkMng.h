@@ -69,7 +69,7 @@ public:
     /* Class Members */
 
     /* 0x00 */ s32 mState;
-    /* 0x04 */ uint mNumCommonGimmicks;
+    /* 0x04 */ u32 mNumCommonGimmicks;
     /* 0x08 */ std::list<Gimmick*> mGimmicks;
     /* 0x14 */ std::list<FlfHandle> mEffects;
     /* 0x20 */ std::list<GimmickResource*> mGimmickResources;

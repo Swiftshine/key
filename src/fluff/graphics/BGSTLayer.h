@@ -23,7 +23,7 @@ namespace BGST {
         /* 0x24 */ float m_24;
         /* 0x28 */ float m_28;
         /* 0x2C */ float m_2C;
-        /* 0x30 */ uint mSortSceneID;
+        /* 0x30 */ u32 mSortSceneID;
         /* 0x34 */ bool m_34;
         /* 0x38 */ gfl::Vec2 mPosition;
     };

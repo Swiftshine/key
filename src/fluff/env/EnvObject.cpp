@@ -15,14 +15,14 @@ namespace env {
     };
 }
 
-EnvObject::EnvObject(gfl::Task* ppParentTask, const char* pTaskName, uint flagIndex)
+EnvObject::EnvObject(gfl::Task* ppParentTask, const char* pTaskName, u32 flagIndex)
     : mTask(nullptr)
     , mTaskFlags(TaskFlags[flagIndex])
 {
     mTask.Create(GetNewTask(ppParentTask, 0xF1, pTaskName, mTaskFlags));
 }
 
-EnvObject::EnvObject(gfl::Task* pParentTask, u8 taskFlags, const char* taskName, uint flagIndex)
+EnvObject::EnvObject(gfl::Task* pParentTask, u8 taskFlags, const char* taskName, u32 flagIndex)
     : mTask(nullptr)
     , mTaskFlags(TaskFlags[flagIndex])
 {
@@ -37,7 +37,7 @@ void EnvObject::DoUpdate() {
     Update();
 }
 
-gfl::Task* EnvObject::GetNewTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, uint suspend) {
+gfl::Task* EnvObject::GetNewTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, u32 suspend) {
     gfl::Task* task = new (gfl::eHeapID_Work) gfl::Task(this, DoUpdate, pTaskName);
 
     if (task != nullptr) {
@@ -49,7 +49,7 @@ gfl::Task* EnvObject::GetNewTask(gfl::Task* pParentTask, u8 flags, const char* p
     return task;
 }
 
-DONT_INLINE void EnvObject::SetTaskFlags(uint flags) {
+DONT_INLINE void EnvObject::SetTaskFlags(u32 flags) {
     mTaskFlags = flags;
     if (nullptr != mTask) {
         mTask->SetUnk14(0);
@@ -57,14 +57,14 @@ DONT_INLINE void EnvObject::SetTaskFlags(uint flags) {
     }
 }
 
-void EnvObject::ApplyTaskFlags(uint flags) {
+void EnvObject::ApplyTaskFlags(u32 flags) {
     mTaskFlags |= flags;
     if (nullptr != mTask) {
         mTask->OrUnk14(mTaskFlags);
     }
 }
 
-void EnvObject::SetTaskFlagsByFlagIndex(uint index) {
+void EnvObject::SetTaskFlagsByFlagIndex(u32 index) {
     SetTaskFlags(TaskFlags[index]);
 }
 
@@ -78,11 +78,11 @@ void EnvObject::SetTaskFlagsByFlagIndex(uint index) {
     } \
 
 // nonmatching; probably due to inlining and optimisation
-void EnvObject::SetDescendantFlags(uint flag, bool set) {
+void EnvObject::SetDescendantFlags(u32 flag, bool set) {
     gfl::Task* task = GetTask();
 
     if (task != nullptr) {
-        uint newFlag = (flag & 0x3F);
+        u32 newFlag = (flag & 0x3F);
 
         if (set) {
             task->mFlags |= newFlag;

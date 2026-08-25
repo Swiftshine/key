@@ -3,7 +3,7 @@
 
 s32 GimmickUtil::GetGimmickIDByDescription(const char* pDescription) {
     GimmickEntry* entry = GimmickTable;
-    uint id = 0;
+    u32 id = 0;
 
     while (id < eGimmickID_GimmickTypeCount) {
         if (entry->mDescription != nullptr && strcmp(entry->mDescription, pDescription) == 0) {

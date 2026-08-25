@@ -27,7 +27,7 @@ public:
 
     void Add(FlfHandleObj* pObject);
     void Remove(FlfHandleObj* pObject);
-    void Set(uint index, FlfHandleObj* pObject) DONT_INLINE_CLASS;
+    void Set(u32 index, FlfHandleObj* pObject) DONT_INLINE_CLASS;
 
     /* Static Methods */
 
@@ -37,8 +37,8 @@ public:
     /* Class Members */
 
     /* 0x000 */ FlfHandleObj* mObjects[FLF_HANDLE_LIST_MAX_HANDLES];
-    /* 0xFA0 */ uint mHandleCount;
-    /* 0xFA4 */ uint mLastHandleID;
+    /* 0xFA0 */ u32 mHandleCount;
+    /* 0xFA4 */ u32 mLastHandleID;
 };
 
 #endif

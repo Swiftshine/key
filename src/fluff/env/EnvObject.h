@@ -7,8 +7,8 @@
 namespace env {
     class EnvObject {
     public:
-        EnvObject(gfl::Task* pParentTask, const char* pTaskName, uint flagIndex);
-        EnvObject(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, uint flagIndex);
+        EnvObject(gfl::Task* pParentTask, const char* pTaskName, u32 flagIndex);
+        EnvObject(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, u32 flagIndex);
 
         /* Virtual Methods */
 
@@ -18,11 +18,11 @@ namespace env {
         /* Class Methods */
 
         void DoUpdate(); // called via functor class method
-        gfl::Task* GetNewTask(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, uint suspend);
-        void SetTaskFlags(uint flags); // resets the flags and applies the given flags
-        void ApplyTaskFlags(uint flags); // applies the given flags
-        void SetTaskFlagsByFlagIndex(uint index);
-        void SetDescendantFlags(uint flag, bool set);
+        gfl::Task* GetNewTask(gfl::Task* pParentTask, u8 taskFlags, const char* pTaskName, u32 suspend);
+        void SetTaskFlags(u32 flags); // resets the flags and applies the given flags
+        void ApplyTaskFlags(u32 flags); // applies the given flags
+        void SetTaskFlagsByFlagIndex(u32 index);
+        void SetDescendantFlags(u32 flag, bool set);
 
         inline gfl::Task* GetTask() const {
             return mTask;
@@ -30,7 +30,7 @@ namespace env {
         /* Class Members */
 
         /* 0x04 */ gfl::Pointer<gfl::Task> mTask;
-        /* 0x08 */ uint mTaskFlags;
+        /* 0x08 */ u32 mTaskFlags;
     };
 }
 

@@ -55,7 +55,7 @@ namespace gfl {
          * @note Good-Feel uses byte pair encoding as a form of compression.
          * You can find the decoding function it is based off of here: http://www.pennelynn.com/Documents/CUJ/HTML/94HTML/19940045.HTM
          */
-        void* Decode(u8 heapID, size_t* pDecompressedSize, uint align);
+        void* Decode(u8 heapID, size_t* pDecompressedSize, u32 align);
     private:
         File* mFile;            // @ 0x4
         size_t mInputStreamPos; // @ 0x8

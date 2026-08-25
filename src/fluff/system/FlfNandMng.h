@@ -44,7 +44,7 @@ public:
 
     void SetStateIfBusy(s32 result, s32 state);
 
-    void SetFlags(uint flag, bool set) DONT_INLINE_CLASS;
+    void SetFlags(u32 flag, bool set) DONT_INLINE_CLASS;
     DECL_WEAK s32 GetUnk8() const;
 
     /* Static Methods */

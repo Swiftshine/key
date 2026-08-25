@@ -9,7 +9,7 @@ class Cam {
 public:
     
 
-    Cam(FullSortScene* pFullSortScene, uint arg2) DONT_INLINE_CLASS;
+    Cam(FullSortScene* pFullSortScene, u32 arg2) DONT_INLINE_CLASS;
 
     /* Virtual Methods */
 
@@ -47,7 +47,7 @@ class CamOrtho : public Cam {
 public:
     
 
-    CamOrtho(FullSortScene* pFullSortScene, uint arg2);
+    CamOrtho(FullSortScene* pFullSortScene, u32 arg2);
 
     /* Virtual Methods */
 

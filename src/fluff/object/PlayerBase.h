@@ -34,7 +34,7 @@
 /// describe them as.
 class PlayerBase : public FlfGameObj, public IObjHitCB {
     struct PTMF {
-        uint blah[3];
+        u32 blah[3];
     };
 public:
     /* Static Variables */
@@ -103,7 +103,7 @@ public:
         ePlayerFlags_Invincible = 1 << 3
     };
 
-    PlayerBase(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, s32 arg4, bool isCloned);
+    PlayerBase(gfl::Task* pParentTask, u32 flags, FullSortScene* pScene, s32 arg4, bool isCloned);
 
     /* Virtual Methods */
 
@@ -125,16 +125,16 @@ public:
     void SetStartPosition(const gfl::Vec3& rPos);
     bool IsStateDefault();
     void fn_8009C464(bool);
-    void Reset(uint arg1, s32 playerState, s32 arg3, s32 arg4);
-    uint GetPlayerID();
+    void Reset(u32 arg1, s32 playerState, s32 arg3, s32 arg4);
+    u32 GetPlayerID();
     void PlayAnimation(s32 id);
     /// @return The previous scene.
     FullSortScene* ResetScene(FullSortScene* pScene, bool resetPosition);
 
     /* Static Methods */
 
-    static PlayerBase* Build(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, s32);
-    static PlayerBase* BuildCloned(gfl::Task* pParentTask, FullSortScene* pScene, uint flags, s32);
+    static PlayerBase* Build(gfl::Task* pParentTask, u32 flags, FullSortScene* pScene, s32);
+    static PlayerBase* BuildCloned(gfl::Task* pParentTask, FullSortScene* pScene, u32 flags, s32);
 
     /* Class Members */
 
@@ -172,7 +172,7 @@ public:
     /* 0x628 */ float m_628;
     /* 0x62C */ float mGravityCorrection;
     /* 0x630 */ STRUCT_FILL(0x14);
-    /* 0x644 */ uint mCurrentAnimationID;
+    /* 0x644 */ u32 mCurrentAnimationID;
     /* 0x648 */ s32 m_648;
     /* 0x64C */ gfl::Param* mModelSize;
     /// In milliseconds.
@@ -225,7 +225,7 @@ public:
     /* 0x764 */ STRUCT_FILL(0x20);
     /* 0x784 */ ColObjTrans* mColObjTrans;
     /* 0x788 */ FlfMdlCollision* mFlfMdlCollision;
-    /* 0x78C */ uint m_78C;
+    /* 0x78C */ u32 m_78C;
     /* 0x790 */ STRUCT_FILL(0x64);
     /* 0x7F4 */ CollisionInfo* mColInfo_objHit_Atk_Horizon;
     /* 0x7F8 */ STRUCT_FILL(0x1C);
@@ -235,17 +235,17 @@ public:
     /* 0x818 */ CollisionEntry* mAutoAttackCollision1;
     /* 0x81C */ CollisionEntry* mAutoAttackCollision2;
     /* 0x820 */ STRUCT_FILL(0x14);
-    /* 0x834 */ uint mInvincibilityFrameTimer;
+    /* 0x834 */ u32 mInvincibilityFrameTimer;
     /* 0x838 */ STRUCT_FILL(0x370);
     /* 0xBA8 */ float m_BA8[25];
     /* 0xC0C */ s32 mCurrentTransformationType;
     /* 0xC10 */ StateObject mState;
     /* 0xC20 */ s32 m_C24;
-    /* 0xC28 */ uint m_C28; // flags of some sort
+    /* 0xC28 */ u32 m_C28; // flags of some sort
     /// (Probably) in milliseconds. Refers to player action, not input.
     /// At ~9-10 seconds of inaction, an idle animation will play, and this field
     /// is reset.
-    /* 0xC2C */ uint mTimeIdle;
+    /* 0xC2C */ u32 mTimeIdle;
     /* 0xC30 */ STRUCT_FILL(0x2C);
     /* 0xC5C */ float m_C5C[10];
     /* 0xC84 */ STRUCT_FILL(0x14);

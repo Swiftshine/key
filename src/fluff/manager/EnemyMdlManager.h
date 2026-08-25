@@ -92,7 +92,7 @@ public:
         FullSortScene* pScene,
         EnemyBase* pOwner,
         const char* pResourcePath,
-        uint drawFlags,
+        u32 drawFlags,
         s32 count,
         s32* pIndices
     );
@@ -106,7 +106,7 @@ public:
     void Update() const;
     void fn_801121E4(float);
     void fn_80112208(float);    
-    void fn_8011222C(uint) DONT_INLINE_CLASS;
+    void fn_8011222C(u32) DONT_INLINE_CLASS;
     void fn_80112234(float);
     s32 fn_8011223C();
     void fn_80112244();
@@ -118,7 +118,7 @@ public:
     nw4r::g3d::G3dObj* SetupGraphics(
         FullSortScene* pScene,
         const char* pResourcePath,
-        uint drawFlags,
+        u32 drawFlags,
         s32 count,
         s32* pIndices
     );
@@ -162,7 +162,7 @@ public:
     /* 0x054 */ bool mGraphicsSetup;
     /* 0x055 */ bool m_55;
     /* 0x056 */ bool m_56;
-    /* 0x058 */ uint m_58;
+    /* 0x058 */ u32 m_58;
     /* 0x05C */ float m_5C;
     /* 0x060 */ s32 m_60;
     /* 0x064 */ float m_64;

@@ -50,8 +50,8 @@ public:
     public:
         /* Class Members */
 
-        /* 0x00 */ uint mParticleIndex1;
-        /* 0x04 */ uint mParticleIndex2;
+        /* 0x00 */ u32 mParticleIndex1;
+        /* 0x04 */ u32 mParticleIndex2;
         /* 0x08 */ float m_8;
         /* 0x0C */ s32 mActiveParticleIndex; // 0 for neither, 1 for the first, 2 for the second
         /* 0x10 */ float m_10;
@@ -77,9 +77,9 @@ public:
         /* 0x28 */ bool m_28;
         /* 0x2C */ float m_2C;
         /* 0x30 */ s32 m_30;
-        /* 0x34 */ uint mParticleCount;
-        /* 0x38 */ uint mSpringCount;
-        /* 0x3C */ uint m_3C;
+        /* 0x34 */ u32 mParticleCount;
+        /* 0x38 */ u32 mSpringCount;
+        /* 0x3C */ u32 m_3C;
         /* 0x40 */ bool m_40;
         /* 0x41 */ bool m_41;
         /* 0x44 */ float m_44;
@@ -114,27 +114,27 @@ public:
 
     /* Class Methods */
 
-    uint GetParticleCount() DONT_INLINE_CLASS;
-    void SetParticleInvalid(uint index, bool value) DONT_INLINE_CLASS;
+    u32 GetParticleCount() DONT_INLINE_CLASS;
+    void SetParticleInvalid(u32 index, bool value) DONT_INLINE_CLASS;
     void SetParticlesInvalid(bool value) DONT_INLINE_CLASS;
-    bool IsParticleInvalid(uint index);
-    void SetParticleEffectPositionByIndex(uint index, gfl::Vec3& rPos, bool syncPosition);
-    gfl::Vec3 GetParticleEffectPositionByIndex(uint index) DONT_INLINE_CLASS;
-    void OffsetParticleEffectPositionByIndex(uint index, gfl::Vec3& rOffset, bool syncPosition) DONT_INLINE_CLASS;
-    void OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC2& rOffset, bool syncPosition) DONT_INLINE_CLASS;
-    gfl::Vec3 GetParticleEffectOffsetByIndex(uint index) DONT_INLINE_CLASS;
-    gfl::Vec3 fn_80008908(uint index) DONT_INLINE_CLASS;
-    gfl::Vec3 fn_80008930(uint index) DONT_INLINE_CLASS;
+    bool IsParticleInvalid(u32 index);
+    void SetParticleEffectPositionByIndex(u32 index, gfl::Vec3& rPos, bool syncPosition);
+    gfl::Vec3 GetParticleEffectPositionByIndex(u32 index) DONT_INLINE_CLASS;
+    void OffsetParticleEffectPositionByIndex(u32 index, gfl::Vec3& rOffset, bool syncPosition) DONT_INLINE_CLASS;
+    void OffsetParticleEffectPositionByIndex(u32 index, nw4r::math::VEC2& rOffset, bool syncPosition) DONT_INLINE_CLASS;
+    gfl::Vec3 GetParticleEffectOffsetByIndex(u32 index) DONT_INLINE_CLASS;
+    gfl::Vec3 fn_80008908(u32 index) DONT_INLINE_CLASS;
+    gfl::Vec3 fn_80008930(u32 index) DONT_INLINE_CLASS;
     void fn_800089A0();
-    void fn_80008A34(uint index, const gfl::Vec3& rVec, s32 arg3) DONT_INLINE_CLASS;
+    void fn_80008A34(u32 index, const gfl::Vec3& rVec, s32 arg3) DONT_INLINE_CLASS;
     void fn_80008A68(gfl::Vec3& rVec, s32 arg2) DONT_INLINE_CLASS;
     gfl::Vec3 GetKeyFrames() DONT_INLINE_CLASS;
     void fn_80008BB0(nw4r::math::MTX34& rMtx);
     void fn_80008DC0(nw4r::math::MTX34& rMtx);
     void ResetKeyFrames(KeyFrame<float>::FrameTemplate* pFTX, KeyFrame<float>::FrameTemplate* pFTY, KeyFrame<float>::FrameTemplate* pFTZ);
-    float fn_80009248(uint index);
-    float fn_8000925C(uint index);
-    s32 GetSpringActiveParticleIndex(uint index);
+    float fn_80009248(u32 index);
+    float fn_8000925C(u32 index);
+    s32 GetSpringActiveParticleIndex(u32 index);
     void fn_80009284(gfl::Vec3& rVec);
     void fn_800092A4();
     void fn_800092AC(float scale);

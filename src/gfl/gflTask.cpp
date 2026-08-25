@@ -31,7 +31,7 @@ Task::~Task() {
     mTaskInfo = nullptr;
 }
 
-uint Task::PollTask() {
+u32 Task::PollTask() {
     TaskInfo* myTaskInfo = mTaskInfo;
     Task* childTask;
 
@@ -56,7 +56,7 @@ uint Task::PollTask() {
     while (childTask) {
         TaskInfo* childTaskInfo = childTask->mTaskInfo;
 
-        uint x = childTask->PollTask();
+        u32 x = childTask->PollTask();
         if (nullptr == myTaskInfo->GetOwner()) {
             return Task::Task::ePollStatus_ChildrenExecuted;
         }

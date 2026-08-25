@@ -95,8 +95,8 @@ public:
     void    LoadPhase11();
     void    LoadPhase12();
     void    LoadPhase13(); // this phase is empty
-    s32     SetupPrinceFluff(uint arg0);
-    void    RemovePlayerByID(uint playerID);
+    s32     SetupPrinceFluff(u32 arg0);
+    void    RemovePlayerByID(u32 playerID);
     void    LoadPlayerStartPosition();
     void    fn_80011C30();
     void    fn_80011F5C();
@@ -107,26 +107,26 @@ public:
 
 
     /* Static Methods */
-    static uint  GetPlayerCount();
-    static PlayerBase*  GetPlayerByID(uint playerID);
+    static u32  GetPlayerCount();
+    static PlayerBase*  GetPlayerByID(u32 playerID);
     static PlayerBase*  GetPrinceFluff();
-    static u8   GetByte(uint val);
-    static PointerManagerWrapper GetPlayerPointerManagerWrapperByID(uint id);
+    static u8   GetByte(u32 val);
+    static PointerManagerWrapper GetPlayerPointerManagerWrapperByID(u32 id);
     // PointerManager related.
-    static uint  fn_8000EEB4(uint id);
+    static u32  fn_8000EEB4(u32 id);
     // PointerManager related.
-    static uint  fn_8000EF74(uint id);
+    static u32  fn_8000EF74(u32 id);
     // PointerManager related.
-    static uint  fn_8000EFEC(uint id);
+    static u32  fn_8000EFEC(u32 id);
     // PointerManager related.
-    static bool fn_8000F09C(uint id);
+    static bool fn_8000F09C(u32 id);
     static void fn_8000f0E4();
-    static void SetCurrentSection(uint sectionID);
+    static void SetCurrentSection(u32 sectionID);
     static StageInfo GetStage();
     // Returns *(Instance + 0x30)
-    static uint  fn_8000F51C();
+    static u32  fn_8000F51C();
     static bool IsInLevel();
-    static uint  fn_8000F570();
+    static u32  fn_8000F570();
     static void fn_8000F5E8();
     // Returns Instance->currentLoadPhase == 6
     static bool fn_8000F7A4();
@@ -141,13 +141,13 @@ public:
     static void fn_8000FB08();
     // Sets *(Instance + 0xAC) to 1 depending on some factors.
     static void fn_8000FB38();
-    static void fn_8000FB68(uint arg0);
+    static void fn_8000FB68(u32 arg0);
     // Stage related. Uses a StageManager instance instead of GameManager.
     static bool fn_8000FC24();
     // Returns true if loading PHASE is 3 and loading STATE is 5.
     static bool IsStageReady();
-    static gfl::ParamBool* fn_8000FC64(uint arg0);
-    static void SetupPlayers(nw4r::math::VEC2& rStartPos, uint arg1);
+    static gfl::ParamBool* fn_8000FC64(u32 arg0);
+    static void SetupPlayers(nw4r::math::VEC2& rStartPos, u32 arg1);
     // arg0 determines whether *(Instance + 0xB8) is incremented (true) or decremented (false).
     // Sets *(Instance + 0xB4) to true or false when *(Instance + 0xB8) is specifically 1 or 0, respectively.
     static void UpdatePrinceFluff(bool update);
@@ -176,19 +176,19 @@ public:
 
     /* 0x04 */ bool m_4;
     /* 0x08 */ gfl::FixedString* m_8;
-    /* 0x0C */ uint m_C;
+    /* 0x0C */ u32 m_C;
     /* 0x10 */ bool m_10;
     /* 0x14 */ s32 m_14;
     /* 0x18 */ s32 m_18;
     /* 0x1C */ s32 m_1C;
     /* 0x14 */ s32 mCurrentMissionID;
     /* 0x18 */ StageInfo mStage;
-    /* 0x30 */ uint m_30;
-    /* 0x34 */ uint mCurrentLoadPhase;
-    /* 0x38 */ uint mPreviousLoadPhase;
-    /* 0x3C */ uint mCurrrentLoadState;
-    /* 0x40 */ uint m_40;
-    /* 0x44 */ uint m_44;
+    /* 0x30 */ u32 m_30;
+    /* 0x34 */ u32 mCurrentLoadPhase;
+    /* 0x38 */ u32 mPreviousLoadPhase;
+    /* 0x3C */ u32 mCurrrentLoadState;
+    /* 0x40 */ u32 m_40;
+    /* 0x44 */ u32 m_44;
     /* 0x48 */ u16 m_48;
 
     // It's not quite clear what this does, but setting this to true
@@ -197,10 +197,10 @@ public:
     // as a result. probably debug related.
     /* 0x4A */ bool mManualBGLoad;
     /* 0x4B */ bool mIsInWorldMap;
-    /* 0x4C */ uint m_4C;
-    /* 0x50 */ uint m_50;
-    /* 0x54 */ uint mPlayerCount;
-    /* 0x58 */ uint mCurrentPlayerID;
+    /* 0x4C */ u32 m_4C;
+    /* 0x50 */ u32 m_50;
+    /* 0x54 */ u32 mPlayerCount;
+    /* 0x58 */ u32 mCurrentPlayerID;
     /* 0x5C */ float m_5C;
     /* 0x60 */ nw4r::math::VEC3 mPlayerStartPosition;
     /* 0x6C */ Stage* mStageManager;
@@ -212,11 +212,11 @@ public:
     /* 0xA0 */ void* m_A0;
     /* 0xA4 */ FlfDemoCtrl* mDemoCtrl;
     /* 0xA8 */ class MissionGameCtrl* mMissionGameCtrl;
-    /* 0xAC */ uint m_AC;
-    /* 0xB0 */ uint m_B0;
+    /* 0xAC */ u32 m_AC;
+    /* 0xB0 */ u32 m_B0;
     /* 0xB4 */ bool m_B4;
     /* 0xB8 */ s32 m_B8;
-    /* 0xBC */ uint m_BC;
+    /* 0xBC */ u32 m_BC;
 };
 
 ASSERT_SIZE(GameManager, 0xC0)

@@ -10,8 +10,8 @@ class GmkColAnimCtrl {
 public:
     GmkColAnimCtrl(Gimmick* owner, s32 arg2, Gimmick::GimmickBuildInfo* buildInfo);
     virtual ~GmkColAnimCtrl();
-    virtual bool vfC(FlfGameObj*, uint);
-    virtual bool vf10(FlfGameObj*, uint);
+    virtual bool vfC(FlfGameObj*, u32);
+    virtual bool vf10(FlfGameObj*, u32);
     void SetState(FlfGameObj* pSetter, const std::string& rState);
 
     void Update();

@@ -106,7 +106,7 @@ void InStageWork::SetTimeRemaining(s32 time) {
 
 
 void InStageWork::SetBeadCount(s32 index, s32 max) {
-    if ((uint)index >= 2) {
+    if ((u32)index >= 2) {
         return;
     }
 
@@ -124,7 +124,7 @@ void InStageWork::SetBeadCount(s32 index, s32 max) {
     mBeadsCollected[index] = threshold;
 }
 
-void InStageWork::AddBeads(uint playerIndex, s32 beadCount, uint arg3) {
+void InStageWork::AddBeads(u32 playerIndex, s32 beadCount, u32 arg3) {
     if (playerIndex >= 2) {
         return;
     }
@@ -159,7 +159,7 @@ void InStageWork::AddBeads(uint playerIndex, s32 beadCount, uint arg3) {
 
 
 // https://decomp.me/scratch/PaZoO
-void InStageWork::DistributeBeads(s32 beadCount, uint arg2) {
+void InStageWork::DistributeBeads(s32 beadCount, u32 arg2) {
     if (arg2 == 1) {
         AddBeads(0, beadCount, 0);
     } else {
@@ -194,7 +194,7 @@ void InStageWork::SetAlternativeMedalThresholds(s32 arg1) {
     m_74 = static_cast<s32>(static_cast<float>(m_28) * 0.7f);
 }
 
-void InStageWork::SetMissionProgressFlags(uint flags) {
+void InStageWork::SetMissionProgressFlags(u32 flags) {
     mMissionProgressFlags = flags;
 }
 
@@ -303,7 +303,7 @@ s32 InStageWork::GetTimeAttackStatus() const {
 void InStageWork::SetDefaultBeadMedals() {
     s32 threshold = 0;
 
-    for (uint i = 0; i < 4; i++) {
+    for (u32 i = 0; i < 4; i++) {
         SetMedalThreshold(i, threshold);
         threshold += 300;
     }
@@ -311,14 +311,14 @@ void InStageWork::SetDefaultBeadMedals() {
     mBeadMedal = InStageWork::eMedalType_Wood;
 }
 
-void InStageWork::SetMedalThreshold(uint medalType, s32 threshold) {
+void InStageWork::SetMedalThreshold(u32 medalType, s32 threshold) {
     if (medalType >= 4) {
         return;
     }
     mMedalThresholds[medalType] = threshold;
 }
 
-s32 InStageWork::GetMedalThreshold(uint medalType) const {
+s32 InStageWork::GetMedalThreshold(u32 medalType) const {
     if (medalType >= 4) {
         return -1;
     }
@@ -370,7 +370,7 @@ void InStageWork::fn_801FF600() {
 }
 
 void InStageWork::fn_801FF628() {
-    for (uint i = 0; i < 21; i++) {
+    for (u32 i = 0; i < 21; i++) {
         m_94[i].m_0 = -1u;
         m_94[i].m_4 = -1u;
         m_94[i].m_8 = -1u;
@@ -378,7 +378,7 @@ void InStageWork::fn_801FF628() {
     }
 }
 
-void InStageWork::fn_801FF6B0(uint index, s32 arg2, s32 arg3) {
+void InStageWork::fn_801FF6B0(u32 index, s32 arg2, s32 arg3) {
     if (index >= 21) {
         return;
     }
@@ -390,7 +390,7 @@ void InStageWork::fn_801FF6B0(uint index, s32 arg2, s32 arg3) {
 
 void InStageWork::fn_801FF6CC() {
     s32 total = 0;
-    for (uint i = 0; i < 21; i++) {
+    for (u32 i = 0; i < 21; i++) {
         if (m_94[i].m_0 >= 0) {
             m_94[i].m_4 = total;
             total += m_94[i].m_0;
@@ -424,7 +424,7 @@ void InStageWork::fn_801FF7DC() {
     while (fn_801FF83C() == 1) { }
 }
 
-uint InStageWork::fn_801FF83C() {
+u32 InStageWork::fn_801FF83C() {
     // not decompiled
     return 0;
 }
@@ -443,7 +443,7 @@ void InStageWork::fn_801FF964() {
     m_93 = true;
 }
 
-InStageWork_Substruct InStageWork::fn_801FF9A4(uint index) const {
+InStageWork_Substruct InStageWork::fn_801FF9A4(u32 index) const {
     // not decomiled
     /*
         if (index < 20) {

@@ -153,7 +153,7 @@ SpringBase::~SpringBase() {
         delete[] mParticleArray1;
     }
 
-    for (uint i = 0; i < 4; i++) {
+    for (u32 i = 0; i < 4; i++) {
         Particle** p = &mParticleArray2 + i;
 
         if (*p != nullptr) {
@@ -173,38 +173,38 @@ SpringBase::~SpringBase() {
     }
 }
 
-uint SpringBase::GetParticleCount() {
+u32 SpringBase::GetParticleCount() {
     return mSpringTemplate->mParticleCount;
 }
 
-void SpringBase::SetParticleInvalid(uint index, bool val) {
+void SpringBase::SetParticleInvalid(u32 index, bool val) {
     mParticleArray1[index].mIsInvalid = val;
 }
 
 void SpringBase::SetParticlesInvalid(bool val) {
-    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
         SetParticleInvalid(i, val);
     }
 }
 
-bool SpringBase::IsParticleInvalid(uint index) {
+bool SpringBase::IsParticleInvalid(u32 index) {
     return mParticleArray1[index].mIsInvalid;
 }
 
-void SpringBase::SetParticleEffectPositionByIndex(uint index, gfl::Vec3& rVec, bool syncPos) {
+void SpringBase::SetParticleEffectPositionByIndex(u32 index, gfl::Vec3& rVec, bool syncPos) {
     mParticleArray1[index].mEffectPosition = rVec;
     if (syncPos) {
         mParticleArray1[index].mPosition = rVec;
     }
 }
 
-gfl::Vec3 SpringBase::GetParticleEffectPositionByIndex(uint index) {
+gfl::Vec3 SpringBase::GetParticleEffectPositionByIndex(u32 index) {
     gfl::Vec3 vec;
     vec = mParticleArray1[index].mEffectPosition;
     return vec;
 }
 
-void SpringBase::OffsetParticleEffectPositionByIndex(uint index, gfl::Vec3& rOffset, bool syncPos) {
+void SpringBase::OffsetParticleEffectPositionByIndex(u32 index, gfl::Vec3& rOffset, bool syncPos) {
     Particle* particle = &mParticleArray1[index];
 
     particle->mEffectPosition = rOffset - mPosition;
@@ -214,7 +214,7 @@ void SpringBase::OffsetParticleEffectPositionByIndex(uint index, gfl::Vec3& rOff
     }
 }
 
-void SpringBase::OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC2& rOffset, bool syncPos ) {
+void SpringBase::OffsetParticleEffectPositionByIndex(u32 index, nw4r::math::VEC2& rOffset, bool syncPos ) {
     Particle* particle = &mParticleArray1[index];
 
     particle->mEffectPosition.x = rOffset.x - mPosition.x;
@@ -225,17 +225,17 @@ void SpringBase::OffsetParticleEffectPositionByIndex(uint index, nw4r::math::VEC
     }
 }
 
-gfl::Vec3 SpringBase::GetParticleEffectOffsetByIndex(uint index) {
+gfl::Vec3 SpringBase::GetParticleEffectOffsetByIndex(u32 index) {
     return GetParticleEffectPositionByIndex(index) + mPosition;
 }
 
-gfl::Vec3 SpringBase::fn_80008908(uint index) {
+gfl::Vec3 SpringBase::fn_80008908(u32 index) {
     gfl::Vec3 vec;
     vec = mParticleArray1[index].m_54;
     return vec;
 }
 
-gfl::Vec3 SpringBase::fn_80008930(uint index) {
+gfl::Vec3 SpringBase::fn_80008930(u32 index) {
     gfl::Vec3 offs = fn_80008908(index);
     return offs + mPosition;
 }
@@ -252,13 +252,13 @@ SpringBase::UnkStruct2::UnkStruct2()
     , m_C(0)
 { }
 
-void SpringBase::fn_80008A34(uint index, const gfl::Vec3& rVec, s32 arg3) {
+void SpringBase::fn_80008A34(u32 index, const gfl::Vec3& rVec, s32 arg3) {
     m_14C[index].m_0 = rVec;
     m_14C[index].m_C = arg3;
 }
 
 void SpringBase::fn_80008A68(gfl::Vec3& rVec, s32 arg2) {
-    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
         fn_80008A34(i, rVec, arg2);
     }
 }
@@ -347,7 +347,7 @@ void SpringBase::fn_80008DC0(nw4r::math::MTX34& rMtx) {
 float SpringBase::vf68() {
     float ret = 0.0f;
 
-    for (uint i = 0; i < mSpringTemplate->mSpringCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mSpringCount; i++) {
         ret += mSpringArray[i].m_8;
     }
 
@@ -363,7 +363,7 @@ void SpringBase::ResetKeyFrames(
     if (pFTX != nullptr) {
         mKeyFrameX.mIncrementAmount = 1.0f / 60.0f;
 
-        for (uint i = 0; i < pFTX->mCount; i++) {
+        for (u32 i = 0; i < pFTX->mCount; i++) {
             mKeyFrameX.Add(pFTX->mStartFrames[i], pFTX->mEndFrames[i]);
         }
 
@@ -375,7 +375,7 @@ void SpringBase::ResetKeyFrames(
     if (pFTY != nullptr) {
         mKeyFrameY.mIncrementAmount = 1.0f / 60.0f;
 
-        for (uint i = 0; i < pFTY->mCount; i++) {
+        for (u32 i = 0; i < pFTY->mCount; i++) {
             mKeyFrameY.Add(pFTY->mStartFrames[i], pFTY->mEndFrames[i]);
         }
 
@@ -387,7 +387,7 @@ void SpringBase::ResetKeyFrames(
     if (pFTZ != nullptr) {
         mKeyFrameZ.mIncrementAmount = 1.0f / 60.0f;
 
-        for (uint i = 0; i < pFTZ->mCount; i++) {
+        for (u32 i = 0; i < pFTZ->mCount; i++) {
             mKeyFrameZ.Add(pFTZ->mStartFrames[i], pFTZ->mEndFrames[i]);
         }
 
@@ -396,15 +396,15 @@ void SpringBase::ResetKeyFrames(
     }
 }
 
-float SpringBase::fn_80009248(uint index) {
+float SpringBase::fn_80009248(u32 index) {
     return mSpringArray[index].m_8;
 }
 
-float SpringBase::fn_8000925C(uint index) {
+float SpringBase::fn_8000925C(u32 index) {
     return mSpringArray[index].m_10;
 }
 
-s32 SpringBase::GetSpringActiveParticleIndex(uint index) {
+s32 SpringBase::GetSpringActiveParticleIndex(u32 index) {
     return mSpringArray[index].mActiveParticleIndex;
 }
 
@@ -417,12 +417,12 @@ void SpringBase::fn_800092A4() {
 }
 
 void SpringBase::fn_800092AC(float scale) {
-    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
         mParticleArray1[i].m_28 = mParticleArray1[i].mEffectPosition;
     }
 
     if (mSpringTemplate->m_41) {
-        for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+        for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
             Particle* particle = &mParticleArray1[i];
             float dot = gfl::Vec3::Dot2(particle->mEffectPosition, mParticleEffectMultiplier);
 
@@ -435,7 +435,7 @@ void SpringBase::fn_800092AC(float scale) {
 
         m_144 -= m_148;
     } else {
-        for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+        for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
             mParticleArray1[i].m_6C = true;
         }
     }
@@ -455,11 +455,11 @@ void SpringBase::fn_800092AC(float scale) {
             break;
     }
 
-    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
         mParticleArray1[i].mPosition = mParticleArray1[i].m_28;
     }
 
-    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
 
         if (!particle->mIsInvalid) {
@@ -477,7 +477,7 @@ void SpringBase::fn_800092AC(float scale) {
 void SpringBase::vf78(float, Particle*, gfl::Vec3&) { }
 
 void SpringBase::fn_80009568(SpringTemplate* pSpringTemplate) {
-    for (uint i = 0; i < pSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < pSpringTemplate->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
         particle->m_34 = gfl::Vec3(0.0f);
     }
@@ -489,7 +489,7 @@ void SpringBase::Update() const {
     GET_UNCONST(SpringBase);
     self->fn_8000B270();
 
-    for (uint i = 0; i < mSpringTemplate->m_3C; i++) {
+    for (u32 i = 0; i < mSpringTemplate->m_3C; i++) {
         self->fn_800092AC(1.0f / 60.0f / mSpringTemplate->m_3C);
         self->fn_80009568(mSpringTemplate);
     }
@@ -503,7 +503,7 @@ void SpringBase::fn_80009678(float scale) {
     CopyParticles(mParticleArray1, mParticleArray2, st);
     SetupParticles(mParticleArray2);
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray2[i];
         float rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
@@ -511,7 +511,7 @@ void SpringBase::fn_80009678(float scale) {
 
     CopyParticles(mParticleArray2, mParticleArray3, st);
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* pa = &mParticleArray2[i];
         Particle* pb = &mParticleArray3[i];
 
@@ -521,7 +521,7 @@ void SpringBase::fn_80009678(float scale) {
 
     SetupParticles(mParticleArray3);
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray3[i];
         float rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
@@ -529,7 +529,7 @@ void SpringBase::fn_80009678(float scale) {
 
     CopyParticles(mParticleArray2, mParticleArray4, st);
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* pa = &mParticleArray3[i];
         Particle* pb = &mParticleArray4[i];
 
@@ -539,7 +539,7 @@ void SpringBase::fn_80009678(float scale) {
 
     SetupParticles(mParticleArray4);
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray4[i];
         float rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
@@ -547,7 +547,7 @@ void SpringBase::fn_80009678(float scale) {
 
     CopyParticles(mParticleArray2, mParticleArray5, st);
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* pa = &mParticleArray4[i];
         Particle* pb = &mParticleArray5[i];
 
@@ -557,13 +557,13 @@ void SpringBase::fn_80009678(float scale) {
 
     SetupParticles(mParticleArray5);
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray5[i];
         float rate = 1.0f / particle->mScaleFactor;
         particle->m_48 = particle->m_34 * rate * scale;
     }
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         float one = 1.0f;
         Particle* p1 = &mParticleArray1[i];
 
@@ -600,7 +600,7 @@ void SpringBase::fn_80009E28(float scale) {
     SetupParticles(mParticleArray1);
 
 
-    for (uint i = 0; i < springTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < springTemplate->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
 
         if (particle->mIsInvalid) {
@@ -665,7 +665,7 @@ void SpringBase::fn_80009F64(float scale) {
     nw4r::math::VEC3 vec_08; // 0x08
 
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
 
         if (particle->mIsInvalid) {
@@ -709,7 +709,7 @@ void SpringBase::fn_8000A148(float scale) {
 
     float unk1 = (100.0f - st->mPercentage) * 0.01f;
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &mParticleArray1[i];
 
         if (particle->mIsInvalid) {
@@ -720,11 +720,11 @@ void SpringBase::fn_8000A148(float scale) {
         particle->m_60 = (particle->mEffectPosition - particle->mPosition) * unk1 + particle->m_34 * rate * scale * scale;
     }
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         mParticleArray1[i].m_6D = false;
     }
 
-    for (uint i = 0; i < mSpringTemplate->mSpringCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mSpringCount; i++) {
         Spring* spring = &mSpringArray[i];
 
         if (spring->m_10 < 1.0f) {
@@ -782,7 +782,7 @@ void SpringBase::fn_8000A148(float scale) {
 void SpringBase::SetupParticles(Particle* pParticles) {
     SpringTemplate* st = mSpringTemplate;
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &pParticles[i];
 
         if (particle->mIsInvalid) {
@@ -799,7 +799,7 @@ void SpringBase::SetupParticles(Particle* pParticles) {
 
 
     if (st->m_44 > 0.0f) {
-        for (uint i = 0; i < st->mParticleCount; i++) {
+        for (u32 i = 0; i < st->mParticleCount; i++) {
             Particle* particle = &pParticles[i];
 
             gfl::Vec3 temp = particle->m_54 - particle->mEffectPosition;
@@ -820,7 +820,7 @@ void SpringBase::SetupParticles(Particle* pParticles) {
 
     vf7C(pParticles);
 
-    for (uint i = 0; i < st->mSpringCount; i++) {
+    for (u32 i = 0; i < st->mSpringCount; i++) {
         Spring* spring = &mSpringArray[i];
 
         Particle* p1 = &pParticles[spring->mParticleIndex1];
@@ -863,7 +863,7 @@ void SpringBase::SetupParticles(Particle* pParticles) {
 void SpringBase::fn_8000AC6C(Particle* pParticles) {
     SpringTemplate* st = mSpringTemplate;
 
-    for (uint i = 0; i < st->mParticleCount; i++) {
+    for (u32 i = 0; i < st->mParticleCount; i++) {
         Particle* particle = &pParticles[i];
 
         if (particle->mIsInvalid) {
@@ -880,7 +880,7 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
     }
 
     if (st->m_44 > 0.0f) {
-        for (uint i = 0; i < st->mParticleCount; i++) {
+        for (u32 i = 0; i < st->mParticleCount; i++) {
             Particle* particle = &pParticles[i];
 
             gfl::Vec3 temp = particle->m_54 - particle->mEffectPosition;
@@ -901,7 +901,7 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
 
     vf7C(pParticles);
 
-    for (uint i = 0; i < st->mSpringCount; i++) {
+    for (u32 i = 0; i < st->mSpringCount; i++) {
         Spring* spring = &mSpringArray[i];
 
         Particle* p1 = &pParticles[spring->mParticleIndex1];
@@ -941,7 +941,7 @@ void SpringBase::fn_8000AC6C(Particle* pParticles) {
 }
 
 void SpringBase::CopyParticles(Particle* pSrc, Particle* pDst, SpringTemplate* pSpringTemplate) {
-    for (uint i = 0; i < pSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < pSpringTemplate->mParticleCount; i++) {
         pDst[i] = pSrc[i];
         pDst[i].m_44 = nullptr;
     }
@@ -1030,7 +1030,7 @@ void SpringBase::vf74(float scale, Particle* pParticle, gfl::Vec3& rVec) {
 }
 
 void SpringBase::fn_8000B6BC() {
-    for (uint i = 0; i < GetParticleCount(); i++) {
+    for (u32 i = 0; i < GetParticleCount(); i++) {
         Particle* particle = &mParticleArray1[i];
         particle->m_4 = gfl::Vec3(0.0f);
     }
@@ -1057,7 +1057,7 @@ bool SpringBase::fn_8000B74C() {
         }
 
         if (mSpringTemplate != nullptr) {
-            for (uint i = 0; i < GetParticleCount(); i++) {
+            for (u32 i = 0; i < GetParticleCount(); i++) {
                 Particle* particle = &mParticleArray1[i];
                 particle->CopyVec(gfl::Vec3::Zero);
                 particle->mScaleFactor = mSpringTemplate->m_0;
@@ -1109,7 +1109,7 @@ void SpringBase::vf7C(Particle* pParticles) {
         return;
     }
 
-    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
         UnkStruct2* s = &m_14C[i];
         Particle* particle = &pParticles[i];
 
@@ -1126,7 +1126,7 @@ void SpringBase::fn_8000BB50() {
         return;
     }
 
-    for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < mSpringTemplate->mParticleCount; i++) {
         if (m_14C[i].m_C != 0) {
             m_14C[i].m_C--;
         }
@@ -1140,7 +1140,7 @@ void SpringBase::fn_8000BB50() {
 }
 
 void SpringBase::CreateParticleArrays() {
-    for (uint i = 0; i < 4; i++) {
+    for (u32 i = 0; i < 4; i++) {
         Particle** arr = &mParticleArray2;
         arr[i] = new (gfl::eHeapID_Work) Particle[mSpringTemplate->mParticleCount];
     }

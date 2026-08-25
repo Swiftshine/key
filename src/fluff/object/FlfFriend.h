@@ -24,7 +24,7 @@ class GmkBackDoorCancel;
 /// @note Size: `0x178`
 class FlfFriend : public FlfGameObj, public IObjHitCB, public nw4r::g3d::ICalcWorldCallback {
 public:
-    FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendID, const char* pTaskName);
+    FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, u32 friendID, const char* pTaskName);
 
     /* Virtual Methods */
 
@@ -66,10 +66,10 @@ public:
 	/* 0x108 */ virtual void SetVisibility(bool vis);
 	/* 0x10C */ virtual bool IsVisible() const;
 	/* 0x110 */ virtual void SetNURBSAnimationInfo(s32 id, bool isReset);
-	/* 0x114 */ virtual uint GetCurrentNURBSAnimationID() const;
+	/* 0x114 */ virtual u32 GetCurrentNURBSAnimationID() const;
 	/* 0x118 */ virtual void PlayNURBSAnimation(s32, bool);
 	/* 0x11C */ virtual void SetCurrentNURBSAnimationFrame(float frame);
-	/* 0x120 */ DECL_WEAK virtual uint GetCurrentAnimationID() const;
+	/* 0x120 */ DECL_WEAK virtual u32 GetCurrentAnimationID() const;
 	/* 0x124 */ virtual void vf124();
 	/* 0x128 */ virtual bool vf128() const;
 	/* 0x12C */ virtual void vf12C(s32);
@@ -158,7 +158,7 @@ public:
 
     /* Class Methods */
 
-	void SetTaskFlags(bool set, bool arg2, uint flag);
+	void SetTaskFlags(bool set, bool arg2, u32 flag);
     void ProcessCollision() DONT_INLINE_CLASS;
     void SetCallbackTiming();
 	bool fn_8033BD68(const gfl::Vec3& rV1, const gfl::Vec3& rV2, const gfl::Vec3& rV3) const;
@@ -169,7 +169,7 @@ public:
 	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const DONT_INLINE_CLASS;
 	void SetTransform(gfl::Mtx34& rMtx);
 	void fn_8033C488();
-	void fn_8033C580(uint);
+	void fn_8033C580(u32);
 	s32 fn_8033C5B4();
 	void SetScreenPosition(s32* pDirection) DONT_INLINE_CLASS;
 	PlayerBase* GetClosestPlayer() const;
@@ -195,9 +195,9 @@ public:
     /* 0x088 */ gfl::Task mTask;
     /* 0x0A0 */ FullSortScene* mScene;
     /* 0x0A4 */ FlfMdlDraw* mFlfMdlDraw;
-    /* 0x0A8 */ uint mNextAnimationID;
+    /* 0x0A8 */ u32 mNextAnimationID;
     /* 0x0AC */ bool mIsAnimationReset;
-    /* 0x0B0 */ uint mCurrentAnimationID;
+    /* 0x0B0 */ u32 mCurrentAnimationID;
     /* 0x0B4 */ s32 m_B4;
     /* 0x0B8 */ s32 m_B8;
     /* 0x0BC */ gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry;
@@ -221,7 +221,7 @@ public:
     /* 0x139 */ bool m_139;
     /* 0x13C */ Mapdata::MapdataGimmick* mMapdataGimmick;
     /* 0x140 */ s32 m_140;
-    /* 0x144 */ uint m_144;
+    /* 0x144 */ u32 m_144;
     /* 0x148 */ bool m_148;
     /* 0x149 */ bool m_149;
     /* 0x14C */ FlfHandle mBackDoorHandle;
@@ -231,7 +231,7 @@ public:
     /* 0x15C */ FlfHandle mPlayerHandle;
     /* 0x164 */ gfl::Vec3 m_164;
     /* 0x170 */ FriendEffect* mEffect;
-    /* 0x174 */ uint mFriendID;
+    /* 0x174 */ u32 mFriendID;
 };
 
 #endif

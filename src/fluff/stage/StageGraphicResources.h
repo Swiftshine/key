@@ -22,7 +22,7 @@ public:
     void LoadLevelGraphics();
     bool fn_800C566C();
     void fn_800C56D0();
-    void SetBGSTLayerEnabled(uint index, bool value);
+    void SetBGSTLayerEnabled(u32 index, bool value);
     void fn_800C57C4();
     void fn_800C59A4();
     void fn_800C59BC();
@@ -31,20 +31,20 @@ public:
         m_20 = val;
     }
 private:
-    uint mLoadPhase;
+    u32 mLoadPhase;
     nw4r::math::VEC3 mBGPosition;
     bool m_10;
     bool m_11;
     StageInfo mStage;
     bool m_20;
     ColDataSegLabel* mColDataSegLabel;
-    uint m_28;
-    uint m_2C;
+    u32 m_28;
+    u32 m_2C;
     gfl::ResFileInfo* mResFileInfo;
-    uint m_34;
-    uint m_38;
-    uint m_3C;
-    uint m_40;
+    u32 m_34;
+    u32 m_38;
+    u32 m_3C;
+    u32 m_40;
     BGST::File* mBGSTFile;
     BGST::Layer* mBGSTLayers;
     BgBackImage* mBgBackImage;

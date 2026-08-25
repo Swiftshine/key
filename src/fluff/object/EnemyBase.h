@@ -18,7 +18,7 @@
 /// @note Size: `0x1774`
 class EnemyBase : public FlfGameObj, public IObjHitCB, public demo::EventDemoAttachment {
 public:
-    EnemyBase(gfl::Task* pParentTask, uint arg2, uint arg3, const char* pArg4);
+    EnemyBase(gfl::Task* pParentTask, u32 arg2, u32 arg3, const char* pArg4);
 
     /* EnemyBase */
 
@@ -413,7 +413,7 @@ public:
     /* 0x0180 */ s32 mState;
     /* 0x0184 */ s32 m_184;
     /* 0x0188 */ s32 m_188;
-    /* 0x018C */ uint m_18C; // a count of some kind
+    /* 0x018C */ u32 m_18C; // a count of some kind
     /* 0x0190 */ s32 m_190;
     /* 0x0194 */ u32 m_194;
     /* 0x0198 */ u32 m_198;
@@ -470,7 +470,7 @@ public:
     /* 0x108C */ gfl::Vec3 m_108C;
     /* 0x1098 */ gfl::Vec3 m_1098;
     /* 0x10A4 */ u32 m_10A4;
-    /* 0x10A8 */ uint mEnemyID;
+    /* 0x10A8 */ u32 mEnemyID;
     /* 0x10AC */ STRUCT_FILL(0x10);
     /* 0x10BC */ const char* mName;
     /* 0x10C0 */ STRUCT_FILL(0x1770 - 0x10C0);

@@ -18,8 +18,8 @@
 
 ///@note Size: `0x3C`
 struct ColNurbsTemplate {
-    /* 0x00 */ uint mIndex;
-    /* 0x04 */ uint mMaxIndex;
+    /* 0x00 */ u32 mIndex;
+    /* 0x04 */ u32 mMaxIndex;
     /* 0x08 */ float m_8;
     /* 0x0C */ bool m_C;
     /* 0x10 */ float m_10;
@@ -44,7 +44,7 @@ public:
     void Init(void* pCollisionOwner, const char* pName, bool arg3, ColNurbsTemplate* pTemplate);
     void AddLinkNurbsInfo(const char* pName);
     void fn_800f1C48(/* args unknown */);
-    bool Test(uint) const;
+    bool Test(u32) const;
     void EnableSecondary(bool enabled);
     FlfRideHitCtrl* GetFlfRideHitCtrl() const;
     void fn_800F2130();
@@ -90,7 +90,7 @@ public:
     /* 0xA8 */ gfl::Pointer<FlfRideHitCtrl> mFlfRideHitCtrl;
     /* 0xAC */ nw4r::g3d::G3dObj* m_AC;
     /* 0xB0 */ bool mIsSpaceAvailable;
-    /* 0xB4 */ uint mNumHandles;
+    /* 0xB4 */ u32 mNumHandles;
     /* 0xB8 */ bool m_B8;
     /* 0xBC */ float m_BC;
     /* 0xC0 */ std::bitset<8 /* ? */> mFlags;

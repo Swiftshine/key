@@ -24,7 +24,7 @@ public:
     /* Gimmick */
     void Update();
 private:
-    uint mFullSortSceneIndex; // @ 0x130
+    u32 mFullSortSceneIndex; // @ 0x130
     float mZOrder3; // @ 0x134
     float mZOrder4; // @ 0x138
     gfl::Pointer<NwAnmCtrl> mAnimCtrl; // @ 0x13C

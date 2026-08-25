@@ -7,8 +7,8 @@
 
 const char* lbl_808E4350 = "GFAC";
 
-inline uint SwapEndianness32(uint value) {
-    uint dst;
+inline u32 SwapEndianness32(u32 value) {
+    u32 dst;
 
     *((u8*)&dst + 0) = *((u8*)&value + 3);
     *((u8*)&dst + 1) = *((u8*)&value + 2);
@@ -28,7 +28,7 @@ const char gfl::GfArch::InitialFilename[] = {0, '!', '$', '@', '=', '0', '4', 'e
 // !$@=04e
 // const char gfl::GfArch::InitialFilename[] = "\0!$@=04";
 
-GfArch::GfArch(File* newFile, u8 newHeapID, uint align)
+GfArch::GfArch(File* newFile, u8 newHeapID, u32 align)
     : mFile(newFile)
     , mHeapID(newHeapID)
     , mAlignment(align)
@@ -63,7 +63,7 @@ GfArch::~GfArch() {
 DirEntryGfArch::~DirEntryGfArch() { }
 
 
-uint GfArch::GetEntrySize(const char* filename) {
+u32 GfArch::GetEntrySize(const char* filename) {
     bool matches;
     FileEntryEx entry;
 

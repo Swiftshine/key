@@ -21,12 +21,12 @@ public:
     void AddObject(FlfGameObj* pObject);
     bool HasObject(FlfHandleObj* pObject);
     void fn_80183F80(FlfHandleObj* pObject);
-    FlfHandleObj* GetHandleObj(uint index);
+    FlfHandleObj* GetHandleObj(u32 index);
 
     /* Class Members */
 
     /* 0x04 */ std::vector<FlfHandle> mHandles;
-    /* 0x10 */ uint mNumHandles;
+    /* 0x10 */ u32 mNumHandles;
     /* 0x14 */ FlfGameObj* mOwner;
     /* 0x18 */ bool m_18;
     /* 0x19 */ bool m_19;

@@ -25,10 +25,10 @@ void gfl::File::Close() {
 void gfl::File::Reset() {
     mFilesystem = nullptr;
     mFilename = EmptyFilename;
-    *(uint*)((u8*)this + 0x20C) = 0;
+    *(u32*)((u8*)this + 0x20C) = 0;
 }
 
-void gfl::File::Read(void* addr, uint len, uint fileOffs) {
+void gfl::File::Read(void* addr, u32 len, u32 fileOffs) {
     mFilesystem->Read(this, addr, len, fileOffs);
 }
 

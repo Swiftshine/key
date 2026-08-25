@@ -64,7 +64,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
         mWindStrength = strength;
     }
 
-    uint sceneIndex = GetBuildInfo()->mSceneID;
+    u32 sceneIndex = GetBuildInfo()->mSceneID;
 
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, GetBuildInfo()->mSceneOrder);
 
@@ -332,11 +332,11 @@ void WoolGroupUnit::fn_805CBA44(nw4r::math::MTX34* pMtx) {
     mFlfWoolDraw->fn_80026DFC(m_B0 * m_B4);
     mFlfWoolDraw->fn_80026AB0(0, mMax);
 
-    uint unk1 = m_A4;
-    for (uint i = 0; i < mMax; i++) {
+    u32 unk1 = m_A4;
+    for (u32 i = 0; i < mMax; i++) {
         mFlfWoolDraw->fn_80026A9C(i, (nw4r::math::VEC2*)&m_0[unk1]);
 
-        uint unk2 = 19;
+        u32 unk2 = 19;
 
         if (unk1 != 0) {
             unk2 = unk1 - 1;
@@ -373,7 +373,7 @@ WindCurrentWoolGroup::WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, G
     scene->AddRenderObj(this);
 
     const char* name = "wool_00";
-    for (uint i = 0; i < 5; i++) {
+    for (u32 i = 0; i < 5; i++) {
         mWoolGroupUnits[i].Create(new (gfl::eHeapID_Work) WoolGroupUnit(mResFileObject, name, pWindCurrent));
     }
 }
@@ -381,13 +381,13 @@ WindCurrentWoolGroup::WindCurrentWoolGroup(gfl::ResFileObject* pResFileObject, G
 WindCurrentWoolGroup::~WindCurrentWoolGroup() { }
 
 void WindCurrentWoolGroup::fn_805CBE78() {
-    for (uint i = 0; i < 5; i++) {
+    for (u32 i = 0; i < 5; i++) {
         mWoolGroupUnits[i]->fn_805CBA40();
     }
 }
 
 void WindCurrentWoolGroup::fn_805CBEC4(nw4r::math::MTX34* pMtx) {
-    for (uint i = 0; i < 5; i++) {
+    for (u32 i = 0; i < 5; i++) {
         mWoolGroupUnits[i]->fn_805CBA44(pMtx);
     }
 }
@@ -470,7 +470,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
 
     float width = pWindCurrent->mDimensions.x / widthMult;
 
-    uint numUnits = static_cast<uint>(pWindCurrent->mDimensions.x / heightMult) + 1;
+    u32 numUnits = static_cast<u32>(pWindCurrent->mDimensions.x / heightMult) + 1;
 
     if (numUnits < 3) {
         numUnits = 3;
@@ -487,12 +487,12 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
 
     gfl::ResFileObject resFileObject = gfl::ResFileObject::FromArchive(resName);
 
-    uint sceneID = mWindCurrent->GetBuildInfo()->mSceneID;
+    u32 sceneID = mWindCurrent->GetBuildInfo()->mSceneID;
 
     FullSortScene* scene = Stage::Instance()->GetSceneByID(sceneID);
     float zOrder = FullSortSceneUtil::GetZOrder(sceneID, mWindCurrent->GetBuildInfo()->mSceneOrder);
 
-    for (uint i = 0; i < numUnits; i++) {
+    for (u32 i = 0; i < numUnits; i++) {
         GmkPartsMdlSet* part = new (gfl::eHeapID_Work) GmkPartsMdlSet;
 
         const char* modelName = endAnimName;

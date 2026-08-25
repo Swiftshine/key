@@ -1,11 +1,11 @@
 #include "gflChecksum.h"
 
-uint gfl::GetChecksum(const char* str) {
+u32 gfl::GetChecksum(const char* str) {
     if (!str) {
         return 0;
     }
 
-    uint result = 0;
+    u32 result = 0;
 
     while (*str) {
         result = *str + result * 137;

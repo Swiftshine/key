@@ -13,7 +13,7 @@ struct _vec {
         blah[2] = 0;
     }
     ~_vec();
-    uint blah[3];
+    u32 blah[3];
 };
 
 struct vec : _vec{

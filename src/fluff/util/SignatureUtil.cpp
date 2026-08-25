@@ -2,7 +2,7 @@
 
 // last remaining nonmatching function in this TU
 // https://decomp.me/scratch/yfkZ1
-uint SignatureUtil::GetSignature(const std::string& rStr) {
+u32 SignatureUtil::GetSignature(const std::string& rStr) {
     u32 len = rStr.length();
 
     if (len == 0) {
@@ -13,7 +13,7 @@ uint SignatureUtil::GetSignature(const std::string& rStr) {
         return 'NONE';
     }
 
-    uint signature = 0;
+    u32 signature = 0;
 
     // signature = (c & 0xFF) | (c << 8 & 0xFF00) | (c << 16 & 0xFF0000) | (c << 24 & 0xFF000000);
     signature += rStr[3] << 0 & 0xFF;
@@ -31,7 +31,7 @@ uint SignatureUtil::GetSignature(const std::string& rStr) {
 
 char empty[] = { 0 };
 
-std::string SignatureUtil::GetSignature(uint src) {
+std::string SignatureUtil::GetSignature(u32 src) {
     std::string result = empty;
     result += src >> 0x18 & 0xFF;
     result += src >> 0x10 & 0xFF;
@@ -40,7 +40,7 @@ std::string SignatureUtil::GetSignature(uint src) {
     return result;
 }
 
-void SignatureUtil::GetSignature(uint src, char* dst1, char* dst2, char* dst3, char* dst4) {
+void SignatureUtil::GetSignature(u32 src, char* dst1, char* dst2, char* dst3, char* dst4) {
     *dst1 = src >> 0x18 & 0xFF;
     *dst2 = src >> 0x10 & 0xFF;
     *dst3 = src >> 0x8 & 0xFF;

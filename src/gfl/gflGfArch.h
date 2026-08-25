@@ -36,12 +36,12 @@ namespace gfl {
 
         struct ArchiveHeader {
             char  mMagic[4];      // "GFAC" - GoodFeel ArChive?
-            uint  mVersion;       // 0x0300 in this game - version 3.0
+            u32  mVersion;       // 0x0300 in this game - version 3.0
             bool  mIsCompressed;    // always true
-            uint  mFileInfoOffset;
-            uint  mFileInfoSize;
-            uint  mCompressionHeaderOffset; // the compression header is padded to an offset of 0x20
-            uint  mCompressedBlockSize; // the size of the compressed block, including the compression header
+            u32  mFileInfoOffset;
+            u32  mFileInfoSize;
+            u32  mCompressionHeaderOffset; // the compression header is padded to an offset of 0x20
+            u32  mCompressedBlockSize; // the size of the compressed block, including the compression header
             u8    pad[4]; // explicit padding -- this is part of the structure
         };
 
@@ -49,10 +49,10 @@ namespace gfl {
         // ASSERT_SIZE(ArchiveHeader, 0x20);
 
         struct FileEntry {
-            uint mChecksum;
-            uint mNameOffset; // if this entry is the last one, a flag of 0x80000000 is applied.
-            uint mDecompressedFilesize;
-            uint mDecompressedDataOffset; // calculated as if the compression header was absent from the archive
+            u32 mChecksum;
+            u32 mNameOffset; // if this entry is the last one, a flag of 0x80000000 is applied.
+            u32 mDecompressedFilesize;
+            u32 mDecompressedDataOffset; // calculated as if the compression header was absent from the archive
         };
 
         // ASSERT_SIZE(FileEntry, 0x10);
@@ -60,24 +60,24 @@ namespace gfl {
         // This class is never actually found in-file, it's just used for
         // archive processing in code.
         struct FileEntryEx : public FileEntry {
-            uint mFlags;
+            u32 mFlags;
         };
 
         // ASSERT_SIZE(FileEntryEx, 0x14);
 
         struct CompressionHeader {
             char mMagic[4];      // "GFCP" - GoodFeel ComPression
-            uint mVersion;
+            u32 mVersion;
             s32  mCompressionType;
-            uint mDecompressedDataSize;
-            uint mCompressedDataSize;
+            u32 mDecompressedDataSize;
+            u32 mCompressedDataSize;
         };
 
         // ASSERT_SIZE(CompressionHeader, 0x14);
     public:
         static const char InitialFilename[];
     public:
-        GfArch(File* newFile, u8 newHeapID, uint align);
+        GfArch(File* newFile, u8 newHeapID, u32 align);
         virtual ~GfArch();
         bool Validate();
         bool ReadCompressed();
@@ -85,8 +85,8 @@ namespace gfl {
         void CreateBgArchiveLoadTask();
         void DeleteBgArchiveLoadTask();
         bool EntryExists(const char* filename);
-        virtual uint GetEntrySize(const char* filename);
-        void GetDataAndSize(const char* filename, void* addr, uint* size);
+        virtual u32 GetEntrySize(const char* filename);
+        void GetDataAndSize(const char* filename, void* addr, u32* size);
         virtual DirEntryGfArch* GetDirEntryGfArch(const char* filename);
         virtual void DeleteDirEntryGfArch(DirEntryGfArch* dirEntry);
         bool SetHeader(GfArch::CompressionHeader* header);
@@ -99,13 +99,13 @@ namespace gfl {
     public:
         File* mFile;
         u8 mHeapID;
-        uint mAlignment;
+        u32 mAlignment;
         s32 mCompressionType;
-        uint mFileInfoOffset;
-        uint mFileInfoSize;
-        uint mCompressionHeaderOffset;
-        uint mArchiveSize;
-        uint mCurrentDataSize;
+        u32 mFileInfoOffset;
+        u32 mFileInfoSize;
+        u32 mCompressionHeaderOffset;
+        u32 mArchiveSize;
+        u32 mCurrentDataSize;
         void* mCompressedData;
         void* mCurrentData;
         void* mDecompressedData;

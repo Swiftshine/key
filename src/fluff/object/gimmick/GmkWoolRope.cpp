@@ -64,7 +64,7 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const ch
         pFilepath = "gimmick/wool_bridge/wool_bridge.brres";
     }
 
-    uint unk;
+    u32 unk;
 
     if (pBuildInfo->m_34 >= 2) {
         gfl::Vec3 diff = mFirstWoolHook->mPosition - mSecondWoolHook->mPosition;
@@ -77,11 +77,11 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const ch
         gfl::Vec3 diff = mFirstWoolHook->mPosition - mSecondWoolHook->mPosition;
 
         float magf = diff.Length();
-        unk = static_cast<uint>(magf / lbl_808E14E0);
+        unk = static_cast<u32>(magf / lbl_808E14E0);
 
         if (magf > 5.0f) {
             float magf2 = lbl_808E14E8 * static_cast<float>(
-                static_cast<uint>(magf / lbl_808E14E4)
+                static_cast<u32>(magf / lbl_808E14E4)
             );
 
             if (magf2 > lbl_808E14EC) {
@@ -97,7 +97,7 @@ void GmkWoolRope::LoadTextures(WoolBaseTask::WoolBuildInfo* pBuildInfo, const ch
         float f = mMapdataGimmick->mParams.mFloatParams[0];
 
         if (f > 0.0f) {
-            unk = static_cast<uint>(static_cast<float>(unk) / f);
+            unk = static_cast<u32>(static_cast<float>(unk) / f);
         }
     }
 

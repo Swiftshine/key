@@ -11,7 +11,7 @@ namespace demo {
 
         
 
-        DemoObject(gfl::Task* pParentTask, const char* pTaskName, uint index);
+        DemoObject(gfl::Task* pParentTask, const char* pTaskName, u32 index);
 
         /* Virtual Methods */
 
@@ -21,13 +21,13 @@ namespace demo {
         /* Class Methods */
         
         void DoUpdate();
-        gfl::Task* InitTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, uint arg4) DONT_INLINE_CLASS;
+        gfl::Task* InitTask(gfl::Task* pParentTask, u8 flags, const char* pTaskName, u32 arg4) DONT_INLINE_CLASS;
 
 
         /* Class Members */
 
         /* 0x4 */ gfl::Pointer<gfl::Task> mTask;
-        /* 0x8 */ uint m_8;
+        /* 0x8 */ u32 m_8;
     };
 }
 

@@ -13,7 +13,7 @@ class BgImage2 : public gfl::CustomRenderObj {
 public:
     
 
-    BgImage2(BGSTFile* bgst, uint sortSceneID);
+    BgImage2(BGSTFile* bgst, u32 sortSceneID);
 
     /* Virtual Methods */
 
@@ -31,7 +31,7 @@ public:
     /* Class Members */
 
     /* 0x104 */ nw4r::math::VEC3 mMatrixTranslation;
-    /* 0x110 */ uint mSceneID;
+    /* 0x110 */ u32 mSceneID;
     /* 0x114 */ BGSTFile* mBGSTFile;
     /* 0x118 */ nw4r::math::VEC2 mImagePosition;
     /* 0x120 */ void* mImageData;

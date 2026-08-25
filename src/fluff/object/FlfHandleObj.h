@@ -24,7 +24,7 @@ public:
 
     /* Helpful Inlines */
 
-    inline void SetID(uint id) {
+    inline void SetID(u32 id) {
         mHandleID = id;
     }
 
@@ -32,7 +32,7 @@ public:
         mObject = pObject;
     }
 
-    inline uint GetID() const {
+    inline u32 GetID() const {
         return mHandleID;
     }
 
@@ -65,7 +65,7 @@ public:
     /* Class Members */
 
     /* 0x0 */ FlfHandleObj** mObject;
-    /* 0x4 */ uint mHandleID;
+    /* 0x4 */ u32 mHandleID;
 };
 
 ASSERT_SIZE(FlfHandle, 0x8);
@@ -82,7 +82,7 @@ public:
 
     /* Helpful Inlines */
 
-    inline void SetHandleID(uint id) {
+    inline void SetHandleID(u32 id) {
         mHandle.SetID(id);
     }
 
@@ -90,7 +90,7 @@ public:
         mHandle.SetObject(obj);
     }
 
-    inline uint GetHandleID() {
+    inline u32 GetHandleID() {
         return mHandle.GetID();
     }
 

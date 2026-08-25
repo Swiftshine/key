@@ -14,11 +14,11 @@ s32 Language::GetCurrentRegionType() {
     return CurrentRegionType;
 }
 
-uint Language::GetCurrentRegionCode() {
+u32 Language::GetCurrentRegionCode() {
     return GetRegionCodeByRegionType(GetCurrentRegionType());
 }
 
-uint Language::GetRegionCodeByRegionType(s32 type) {
+u32 Language::GetRegionCodeByRegionType(s32 type) {
     switch (type) {
         case Language::eRegionType_Japan:   return Language::eRegionCode_Japan;
         case Language::eRegionType_US:      return Language::eRegionCode_US;
@@ -30,7 +30,7 @@ uint Language::GetRegionCodeByRegionType(s32 type) {
 
 
 s32 Language::GetLanguageType(s32 regionType, SCLanguage language) {
-    uint lang = language;
+    u32 lang = language;
 
     switch (regionType) {
         case Language::eRegionType_Japan: return Language::eLanguageType_JP_Japanese;

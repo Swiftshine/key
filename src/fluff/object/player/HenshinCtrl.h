@@ -107,7 +107,7 @@ public:
     /* 0x20 */ s32 mCurrentState; // probably a StateObject?
     /* 0x24 */ s32 mPreviousState;
     /* 0x28 */ s32 m_28;
-    /* 0x2C */ uint m_2C;
+    /* 0x2C */ u32 m_2C;
     /* 0x30 */ s32 m_30;
     /* 0x34 */ gfl::Pointer<gfl::SoundFadeCtrl> mSoundFadeCtrl;
     /* 0x38 */ gfl::Vec3 m_38;

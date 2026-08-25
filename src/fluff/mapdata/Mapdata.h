@@ -36,7 +36,7 @@ public:
 
         /* 0x0 */ bool m_0;
         /* 0x1 */ bool m_1;
-        /* 0x4 */ uint m_4;
+        /* 0x4 */ u32 m_4;
         /* 0x8 */ char m_8[32];
     };
 
@@ -103,17 +103,17 @@ public:
         nw4r::math::VEC2 mStartPosition;
         nw4r::math::VEC2 mEndPosition;
         nw4r::math::VEC2 mNormalizedVector;
-        uint mIndex;
-        uint mCollisionTypeIndex;
+        u32 mIndex;
+        u32 mCollisionTypeIndex;
     };
 
     /// @note Size: `0x24`
     struct MapdataLabeledWall : MapdataWall {
-        uint mLabelIndex;
+        u32 mLabelIndex;
     };
 
     struct StringTable {
-        uint mCount;
+        u32 mCount;
         string32 mStrings[];
     };
 
@@ -128,7 +128,7 @@ public:
     void ConstructObjects();
     void ConstructMoleBlocks();
 
-    inline CommonGimmickBuildInfo* GetCommonGimmickBuildInfo(uint index) {
+    inline CommonGimmickBuildInfo* GetCommonGimmickBuildInfo(u32 index) {
         return &mCommonGimmickBuildInfos[index];
     }
 
@@ -141,20 +141,20 @@ public:
 
     /* 0x00 */ nw4r::math::VEC2 mBoundsMin;
     /* 0x08 */ nw4r::math::VEC2 mBoundsMax;
-    /* 0x10 */ uint mNumWalls;
+    /* 0x10 */ u32 mNumWalls;
     /* 0x14 */ ColDataSeg* mWalls;
-    /* 0x18 */ uint mNumLabeledWalls;
+    /* 0x18 */ u32 mNumLabeledWalls;
     /* 0x1C */ ColDataSegLabel* mLabeledWalls;
-    /* 0x20 */ uint mNumCommonGimmicks;
+    /* 0x20 */ u32 mNumCommonGimmicks;
     /* 0x24 */ gfl::Array<CommonGimmickBuildInfo> mCommonGimmickBuildInfos;
     /* 0x28 */ MapdataCommonGimmick* mCommonGimmicks;
-    /* 0x2C */ uint mNumGimmicks;
+    /* 0x2C */ u32 mNumGimmicks;
     /* 0x30 */ MapdataGimmick* mGimmicks;
-    /* 0x34 */ uint mNumPaths;
+    /* 0x34 */ u32 mNumPaths;
     /* 0x38 */ MapdataPath* mPaths;
-    /* 0x3C */ uint mNumZones;
+    /* 0x3C */ u32 mNumZones;
     /* 0x40 */ MapdataZone* mZones;
-    /* 0x44 */ uint mNumCourseInfo;
+    /* 0x44 */ u32 mNumCourseInfo;
     /* 0x48 */ MapdataCourseInfo* mCourseInfos;
 };
 

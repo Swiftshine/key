@@ -7,7 +7,7 @@ EnemyMdlManager::EnemyMdlManager(
     FullSortScene* pScene,
     EnemyBase* pOwner,
     const char* pResourcePath,
-    uint drawFlags,
+    u32 drawFlags,
     s32 count,
     s32* pIndices
 )
@@ -100,7 +100,7 @@ void EnemyMdlManager::fn_80112208(float arg1) {
     m_5C = arg1;
 }
 
-void EnemyMdlManager::fn_8011222C(uint arg1) {
+void EnemyMdlManager::fn_8011222C(u32 arg1) {
     m_58 = arg1;
 }
 
@@ -217,7 +217,7 @@ void EnemyMdlManager::fn_80112334() {
 nw4r::g3d::G3dObj* EnemyMdlManager::SetupGraphics(
     FullSortScene* pScene,
     const char* pResourcePath,
-    uint drawFlags,
+    u32 drawFlags,
     s32 count,
     s32* pIndices
 ) {

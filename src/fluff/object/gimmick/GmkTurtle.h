@@ -53,7 +53,7 @@ public:
     void Interact(FlfGameObj*) override;
 
     /* Gimmick */
-    virtual s32 vf88(FlfGameObj* player, uint arg2) override;
+    virtual s32 vf88(FlfGameObj* player, u32 arg2) override;
     virtual s32 vf98() override;
     virtual void Update() override;
 
@@ -63,7 +63,7 @@ public:
 
     void Turn(s32 turnDir) DONT_INLINE_CLASS;
 public:
-    uint mCounterDefaultValue;
+    u32 mCounterDefaultValue;
     float mSpeed;
     float mMaxDistance;
     bool mShouldMoveRight;

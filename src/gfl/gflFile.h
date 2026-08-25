@@ -18,7 +18,7 @@ namespace gfl {
         static bool Open(const char*);
 
         virtual void Close();
-        virtual void Read(void* addr, uint len, uint filepos);
+        virtual void Read(void* addr, u32 len, u32 filepos);
         virtual void ReadAsync(void* addr, size_t len, size_t offs, u32 callback);
         virtual void vf14();
         virtual void vf18();
@@ -29,22 +29,22 @@ namespace gfl {
     private:
         FileSystemWii* mFilesystem;
         FixedString mFilename;
-        uint m_20C;
+        u32 m_20C;
         void* mDvdFileInfo;
-        uint m_214;
-        uint m_218;
-        uint m_21C;
-        uint m_220;
-        uint m_224;
-        uint m_228;
-        uint m_22C;
-        uint m_230;
-        uint m_234;
-        uint m_238;
-        uint m_23C;
-        uint m_240;
-        uint m_244;
-        uint m_248;
+        u32 m_214;
+        u32 m_218;
+        u32 m_21C;
+        u32 m_220;
+        u32 m_224;
+        u32 m_228;
+        u32 m_22C;
+        u32 m_230;
+        u32 m_234;
+        u32 m_238;
+        u32 m_23C;
+        u32 m_240;
+        u32 m_244;
+        u32 m_248;
         s32 mEntrynum;
     };
 }

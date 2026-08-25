@@ -33,7 +33,7 @@ WoolBaseMdl::WoolBaseMdl(
 
     s32 index = mFlfWoolDraw->Register(&rResFileObject, pWoolName1, pWoolName2);
 
-    uint count = mWoolBaseTask->mSpringTemplate->mParticleCount;
+    u32 count = mWoolBaseTask->mSpringTemplate->mParticleCount;
     mFlfWoolDraw->fn_800267B0(index, count + m_10C * (count - 1));
     mFlfWoolDraw->m_18 = 1.0f;
     fn_8001AA00(1.0f);
@@ -72,7 +72,7 @@ WoolBaseMdl::WoolBaseMdl(
     s32 index = -1;
     s32 idx = 0;
 
-    for (uint i = 0; i < 0x40; i++) {
+    for (u32 i = 0; i < 0x40; i++) {
         char name[0x20];
         sprintf(name, "C8_wool_%02d", i);
         idx = mFlfWoolDraw->Register(&rResFileObject, name, name);
@@ -87,7 +87,7 @@ WoolBaseMdl::WoolBaseMdl(
     }
 
     if (index < 0) {
-        for (uint i = 0; i < 0x40; i++) {
+        for (u32 i = 0; i < 0x40; i++) {
             char name[0x20];
             sprintf(name, wool_string_template, i);
             idx = mFlfWoolDraw->Register(&rResFileObject, name, name);
@@ -102,7 +102,7 @@ WoolBaseMdl::WoolBaseMdl(
         }
     }
 
-    uint count = mWoolBaseTask->mSpringTemplate->mParticleCount;
+    u32 count = mWoolBaseTask->mSpringTemplate->mParticleCount;
     mFlfWoolDraw->fn_800267B0(index, count + m_10C * (count - 1));
     mFlfWoolDraw->m_18 = 1.0f;
     fn_8001AA00(1.0f);
@@ -117,7 +117,7 @@ WoolBaseMdl::~WoolBaseMdl() {
 
     mFlfWoolDraw = nullptr;
 
-    for (uint i = 0; i < mBackupBuffs.size(); i++) {
+    for (u32 i = 0; i < mBackupBuffs.size(); i++) {
         delete mBackupBuffs[i];
     }
 }
@@ -174,7 +174,7 @@ void WoolBaseMdl::fn_8001AB58() {
     gfl::Vec2 vec1(0.0f, 0.0f);
     gfl::Vec2 vec2(0.0f, 0.0f);
 
-    for (uint i = 0; i < mWoolBaseTask->mSpringTemplate->mParticleCount; i++) {
+    for (u32 i = 0; i < mWoolBaseTask->mSpringTemplate->mParticleCount; i++) {
         gfl::Vec3 offset = mWoolBaseTask->GetParticleEffectOffsetByIndex(i);
 
         if (i == 0 || offset.x < vec1.x) {
@@ -238,7 +238,7 @@ void WoolBaseMdl::fn_8001AD8C(s32 arg1, s32 arg2) {
 
     s32 num = mFlfWoolDraw->fn_80026B54(0);
 
-    for (uint i = 0; i < m_154; i++) {
+    for (u32 i = 0; i < m_154; i++) {
         BackupBuff* buf = new (gfl::eHeapID_Work) BackupBuff;
         buf->mPoints = new (gfl::eHeapID_Work) gfl::Vec2[num];
         mBackupBuffs.push_back(buf);
@@ -248,7 +248,7 @@ void WoolBaseMdl::fn_8001AD8C(s32 arg1, s32 arg2) {
 }
 
 void WoolBaseMdl::fn_8001AEE4() {
-    uint count = mWoolBaseTask->GetParticleCount();
+    u32 count = mWoolBaseTask->GetParticleCount();
     gfl::Vec3 pos = mWoolBaseTask->GetParticleEffectOffsetByIndex(count - 1);
 
     nw4r::math::MTX34 mtx;
@@ -268,7 +268,7 @@ void WoolBaseMdl::fn_8001AEE4() {
 void WoolBaseMdl::DrawXlu() {
     if (m_108 || m_158) {
         if (m_10C != 0) {
-            for (uint i = 0; i < mWoolBaseTask->mSpringTemplate->mParticleCount; i++) {
+            for (u32 i = 0; i < mWoolBaseTask->mSpringTemplate->mParticleCount; i++) {
                 gfl::Vec3 pos1 = mWoolBaseTask->GetParticleEffectOffsetByIndex(i);
 
                 gfl::Vec3 vec1(0.0f);
@@ -291,12 +291,12 @@ void WoolBaseMdl::DrawXlu() {
             mHermiteCurve.fn_80660FA8();
         }
 
-        uint count = mWoolBaseTask->GetParticleCount();
+        u32 count = mWoolBaseTask->GetParticleCount();
         gfl::Vec3 pos1 = mWoolBaseTask->GetParticleEffectPositionByIndex(count - 1);
 
         gfl::Vec2 vec(0.0f, 0.0f);
 
-        for (uint i = 0; i < mWoolBaseTask->mSpringTemplate->mParticleCount; i++) {
+        for (u32 i = 0; i < mWoolBaseTask->mSpringTemplate->mParticleCount; i++) {
             gfl::Vec3 pos2 = mWoolBaseTask->GetParticleEffectPositionByIndex(i);
 
             // not done
@@ -315,7 +315,7 @@ void WoolBaseMdl::fn_8001BCD0(nw4r::math::MTX34* pMtx) {
 
     BackupBuff* buf = mBackupBuffs[m_150];
 
-    for (uint i = 0; i < mFlfWoolDraw->fn_80026B54(0); i++) {
+    for (u32 i = 0; i < mFlfWoolDraw->fn_80026B54(0); i++) {
         buf->mPoints[i] = *mFlfWoolDraw->fn_80026A60(0, i);
     }
 

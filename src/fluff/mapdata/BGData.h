@@ -5,9 +5,9 @@
 
 struct BGData {
     /* 0x00 */ char mMagic[4];
-    /* 0x04 */ uint m_4;
-    /* 0x08 */ uint m_8;
-    /* 0x10 */ uint m_10;
+    /* 0x04 */ u32 m_4;
+    /* 0x08 */ u32 m_8;
+    /* 0x10 */ u32 m_10;
 };
 
 #endif

@@ -30,7 +30,7 @@ extern "C" {
 // sinit not matched
 CamStruct CamStructInstance;
 
-Cam::Cam(FullSortScene* pFullSortScene, uint arg2)
+Cam::Cam(FullSortScene* pFullSortScene, u32 arg2)
     : m_8(0.0f)
     , m_C(0.0f)
     , mCameraTwist(0.0f)
@@ -164,7 +164,7 @@ nw4r::math::MTX34* Cam::GetCameraMatrix(nw4r::math::MTX34* dst) {
 
 /* CamOrtho */
 
-CamOrtho::CamOrtho(FullSortScene* pFullSortScene, uint arg2)
+CamOrtho::CamOrtho(FullSortScene* pFullSortScene, u32 arg2)
     : Cam(pFullSortScene, arg2)
 {
     if (arg2 == 1) {
@@ -252,7 +252,7 @@ void CamOrtho::GetScreenDimensions(s32* arg0, s32* arg1, s32* pDestW, s32* pDest
         *arg0 = 0;
         *pDestW = SCREEN_WIDTH;
         *pDestH = SCREEN_HEIGHT;
-        *arg1 = (SCREEN_HEIGHT_WIDESCREEN - static_cast<uint>(*pDestH)) / 2;
+        *arg1 = (SCREEN_HEIGHT_WIDESCREEN - static_cast<u32>(*pDestH)) / 2;
     }
 }
 

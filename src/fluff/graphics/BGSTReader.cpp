@@ -167,7 +167,7 @@ void Reader::FillVector(
     std::list<EntryObject*>::iterator begin,
     std::list<EntryObject*>::iterator end
 ) {
-    uint count = 0;
+    u32 count = 0;
 
     for (std::list<EntryObject*>::iterator it = begin; it != end; it++) {
         count++;

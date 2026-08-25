@@ -26,7 +26,7 @@ namespace gfl {
         void ManageSoundHandleInner(SoundHandleInner* pHandleInner, s32 frames, bool add);
         SD3DActorInner* CreateSD3DActorInner();
         void DestroySD3DActorInner(SD3DActorInner* pActor);
-        void PlaySoundEffect(uint sfxID, uint arg2);
+        void PlaySoundEffect(u32 sfxID, u32 arg2);
         void PlaySoundEffect(SoundHandle&, nw4r::math::VEC3& rPos);
         void fn_8064D288(float, SoundHandleInner*, s32);
         void fn_8064D2B4(float, SoundHandleInner*);

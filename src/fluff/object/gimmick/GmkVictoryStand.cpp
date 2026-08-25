@@ -18,7 +18,7 @@ GmkVictoryStand* GmkVictoryStand::Build(GimmickBuildInfo* buildInfo) {
     return new (gfl::eHeapID_Work) GmkVictoryStand(buildInfo, "GmkVictoryStand");
 }
 
-void GmkVictoryStand::SetRankingInfo(uint playerRanking, nw4r::math::VEC2& position) {
+void GmkVictoryStand::SetRankingInfo(u32 playerRanking, nw4r::math::VEC2& position) {
     GmkVictoryStand* stand = Instance();
     Instance()->mPlayerRanking = playerRanking;
     stand->mBeadAwardPosition = position;
@@ -26,7 +26,7 @@ void GmkVictoryStand::SetRankingInfo(uint playerRanking, nw4r::math::VEC2& posit
     stand->mBeadAwardState.SetCurrentStateAndClearOthers(1);
 }
 
-void GmkVictoryStand::SpawnDecorativeBall(uint rank) {
+void GmkVictoryStand::SpawnDecorativeBall(u32 rank) {
     if (rank - 1 > 2) {
         return;
     }
@@ -123,7 +123,7 @@ void GmkVictoryStand::Update() {
 
 void GmkVictoryStand::AwardBeads() {
     if (mBeadAwardState.mCurrentState == 0) {
-        uint playerRanking = mPlayerRanking;
+        u32 playerRanking = mPlayerRanking;
         s32 beadWinnings;
         switch (mPlayerRanking) {
             case 1:

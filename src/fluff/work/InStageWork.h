@@ -42,11 +42,11 @@ public:
     void SetTimeLimit(s32 limit);
     void SetTimeRemaining(s32 time);
     void SetBeadCount(s32 playerIndex, s32 amt);
-    void AddBeads(uint playerIndex, s32 beadCount, uint arg3);
-    void DistributeBeads(s32 beadCount, uint arg2);
+    void AddBeads(u32 playerIndex, s32 beadCount, u32 arg3);
+    void DistributeBeads(s32 beadCount, u32 arg2);
     void SetDefaultMedalThresholds(s32 arg1);
     void SetAlternativeMedalThresholds(s32 arg1);
-    void SetMissionProgressFlags(uint flags);
+    void SetMissionProgressFlags(u32 flags);
     void fn_801FF3B8(s32 arg1);
     s32 GetTimeElapsed(s32 arg1);
     void AddNumEnemiesDefeated(s32 num);
@@ -65,20 +65,20 @@ public:
     /// @brief Sets medals and the wood, bronze, silver, and gold thresholds
     /// to 0, 300, 600, and 900 respectively.
     void SetDefaultBeadMedals();
-    void SetMedalThreshold(uint medalType, s32 threshold);
-    s32 GetMedalThreshold(uint medalType) const;
+    void SetMedalThreshold(u32 medalType, s32 threshold);
+    s32 GetMedalThreshold(u32 medalType) const;
     /// @return The type of bead medal the player has earned.
     s32 GetBeadMedal();
     void fn_801FF600();
     void fn_801FF628();
-    void fn_801FF6B0(uint index, s32 arg2, s32 arg3);
+    void fn_801FF6B0(u32 index, s32 arg2, s32 arg3);
     void fn_801FF6CC();
     void fn_801FF7B0(s32 arg1);
     s32 GetHighestStreak() const;
     void fn_801FF7DC();
-    uint fn_801FF83C();
+    u32 fn_801FF83C();
     void fn_801FF964();
-    InStageWork_Substruct fn_801FF9A4(uint index) const;
+    InStageWork_Substruct fn_801FF9A4(u32 index) const;
     s32 fn_801FFA24() const;
 
     DECL_WEAK s32 GetUnk3C() const;
@@ -94,9 +94,9 @@ public:
     /* 0x028 */ s32 m_28;
     /* 0x02C */ s32 mCurrentFriendChallengeType;
     /* 0x030 */ bool mGoalRouletteSegmentUnlocked[3];
-    /* 0x034 */ uint mTreasuresCollected; // bitflags, 0-2
+    /* 0x034 */ u32 mTreasuresCollected; // bitflags, 0-2
     /* 0x038 */ bool mStageClear; // doesn't count for bosses
-    /* 0x03C */ uint mMissionProgressFlags; // bit 0, "Flips when victory music begins", bit 1 = "Flips when you fail the challenge"
+    /* 0x03C */ u32 mMissionProgressFlags; // bit 0, "Flips when victory music begins", bit 1 = "Flips when you fail the challenge"
     /* 0x040 */ s32 m_40;
     /* 0x044 */ s32 mNumEnemiesDefeated;
     /* 0x048 */ s32 mNumZekeFound;

@@ -41,7 +41,7 @@ public:
     /* Class Methods */
 
     void InitCollision();
-    void IncrementBeadCount(uint amt);
+    void IncrementBeadCount(u32 amt);
     void fn_80342888() DONT_INLINE_CLASS;
     void fn_80342DE4(PlayerBase* pPlayer, bool isReset);
     void fn_803431E4();

@@ -70,7 +70,7 @@ char MissionUtil::GetMissionIdentifierByType(s32 type) {
 
 bool MissionUtil::HasMissionIndicator(s32 type, const std::string& str) {
     bool ret = false;
-    uint len;
+    u32 len;
     char target;
     s32 charIndex;
     signed long t = static_cast<signed long>(type);
@@ -144,7 +144,7 @@ s32 MissionUtil::GetMissionIndexByID(s32 id) {
 }
 
 const char magic_template[] = "M%c%02d";
-uint MissionUtil::GetMissionMagicByID(s32 id) {
+u32 MissionUtil::GetMissionMagicByID(s32 id) {
     s32 type;
     s32 index;
     GetMissionInfoByID(id, &type, &index);

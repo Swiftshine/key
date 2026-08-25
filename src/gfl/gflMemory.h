@@ -43,7 +43,7 @@ namespace gfl {
             return TryGetInstance()->GetHeapByAddress(addr);
         }
 
-        static inline Heap* TryGetHeapByID(uint id) {
+        static inline Heap* TryGetHeapByID(u32 id) {
             return TryGetInstance()->GetHeapByID(id);
         }
 

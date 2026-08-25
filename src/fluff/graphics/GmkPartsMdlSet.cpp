@@ -52,7 +52,7 @@ bool GmkPartsMdlSet::GetPrimaryMatrix(nw4r::math::MTX34& rDstMatrix) {
 }
 
 // https://decomp.me/scratch/EZvuo
-void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& rFileInfo, const char* pModelName, const char* pShadowName, FullSortScene* pScene, uint flags) {
+void GmkPartsMdlSet::RegisterResources(gfl::ResFileObject& rFileInfo, const char* pModelName, const char* pShadowName, FullSortScene* pScene, u32 flags) {
     nw4r::g3d::ResFile resFile(rFileInfo.IsValid() ? rFileInfo->GetGfArch() : nullptr);
     NW4R_G3D_RESFILE_AC_ASSERT(resFile);
 

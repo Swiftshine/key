@@ -25,8 +25,8 @@ public:
     void AddGimmickBuildInfo(Gimmick::GimmickBuildInfo* buildInfo);
     void AddResourceNameByGimmickID(s32 id);
     void fn_80052228();
-    void fn_800522C4(uint index);
-    void fn_8005234C(uint arg1);
+    void fn_800522C4(u32 index);
+    void fn_8005234C(u32 arg1);
     void fn_800524F8(const char* name, bool arg2);
     void fn_80052560(const char* name, bool arg2);
     void fn_800525C8(const char* name, bool arg2);

@@ -10,7 +10,7 @@ namespace env {
     public:
         
 
-        EnvUnitBase(gfl::Task* pParentTask, const char* pTaskName, uint arg3);
+        EnvUnitBase(gfl::Task* pParentTask, const char* pTaskName, u32 arg3);
 
         /* Virtual Methods */
 
@@ -18,7 +18,7 @@ namespace env {
 
         /* Class Methods */
 
-        void RegisterResource(const char* pResourceName, uint count);
+        void RegisterResource(const char* pResourceName, u32 count);
         void ClearAll();
         bool CheckResources();
 

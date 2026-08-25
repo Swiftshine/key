@@ -45,7 +45,7 @@ void FlfDemoNodeCtrl::ResetOptions(gfl::Offset<MNEB::DemoOptionSet>& rDemoOption
 
     MNEB::DemoOptionSet* set = rDemoOptionSet.pointer();
 
-    for (uint i = 0; i < set->mNumDemoOptions; i++) {
+    for (u32 i = 0; i < set->mNumDemoOptions; i++) {
         MNEB::DemoOption* opt = set->mDemoOptions.pointer();
 
         if (strcmp(opt->mName, "anim_no") == 0) {
@@ -94,7 +94,7 @@ void FlfDemoNodeCtrl::SetOptions(float arg0) {
 
     if (mAnimNo.IsValid()) {
         s16 opt = mAnimNo->GetOption(arg0);
-        uint unk = vf20();
+        u32 unk = vf20();
 
         if (opt != unk) {
             vf24(opt);
@@ -110,7 +110,7 @@ void FlfDemoNodeCtrl::SetUpdateRate(float rate) {
     return;
 }
 
-void FlfDemoNodeCtrl::SetFullSortScene(uint sceneID) {
+void FlfDemoNodeCtrl::SetFullSortScene(u32 sceneID) {
     return;
 }
 
@@ -122,7 +122,7 @@ void FlfDemoNodeCtrl::vf24(s32 arg0) {
     return;
 }
 
-uint FlfDemoNodeCtrl::vf20() {
+u32 FlfDemoNodeCtrl::vf20() {
     return 0;
 }
 
@@ -194,7 +194,7 @@ void FlfDemoCharCtrl::UpdateFrame() {
     }
 }
 
-uint FlfDemoCharCtrl::vf20() {
+u32 FlfDemoCharCtrl::vf20() {
     return mFlfMdlDraw->mCurrentAnimationID;
 }
 
@@ -210,7 +210,7 @@ void FlfDemoCharCtrl::vf24(s32 arg1) {
     mFlfMdlDraw->PlayNURBSAnimation((s32)arg1, mFlfMdlDraw->GetCurrentFrameInt() != 0);
 }
 
-void FlfDemoCharCtrl::SetFullSortScene(uint sceneID) {
+void FlfDemoCharCtrl::SetFullSortScene(u32 sceneID) {
     mFlfMdlDraw->SetScene(Stage::Instance()->GetSceneByID(sceneID));
 }
 
@@ -297,7 +297,7 @@ void FlfDemoPlayerCtrl::SetOptions(float arg0) {
     }
 }
 
-uint FlfDemoPlayerCtrl::vf20() {
+u32 FlfDemoPlayerCtrl::vf20() {
     if (mPlayer != nullptr) {
         return mPlayer->mPlayerMdlMng->GetFlfMdlDraw()->mCurrentAnimationID;
     }
@@ -311,9 +311,9 @@ void FlfDemoPlayerCtrl::vf24(s32 arg0) {
         return;
     }
 
-    uint animationID = 0;
+    u32 animationID = 0;
 
-    for (uint i = 0; i < ARRAY_LENGTH(PlayerMdlMng::PlayerAnimationIDs); i++) {
+    for (u32 i = 0; i < ARRAY_LENGTH(PlayerMdlMng::PlayerAnimationIDs); i++) {
         if (arg0 == PlayerMdlMng::PlayerAnimationIDs[i]) {
             animationID = arg0;
             break;
@@ -338,7 +338,7 @@ void FlfDemoPlayerCtrl::SetUpdateRate(float rate) {
     }
 }
 
-void FlfDemoPlayerCtrl::SetFullSortScene(uint sceneID) {
+void FlfDemoPlayerCtrl::SetFullSortScene(u32 sceneID) {
     if (mPlayer != nullptr) {
         mPlayer->ResetScene(Stage::Instance()->GetSceneByID(sceneID), 0);
     }
@@ -364,7 +364,7 @@ FlfDemoBeadCtrl::FlfDemoBeadCtrl(nw4r::g3d::ResNode resNode, std::string& beadIn
 {
     std::string tempStr(beadInfo, 3, std::string::npos);
 
-    uint beadInt = atoi(tempStr.c_str());
+    u32 beadInt = atoi(tempStr.c_str());
     mBeadType = beadInt / 10;   // leftmost digit
     mBeadColor = beadInt % 10;  // rightmost digit
 
@@ -718,7 +718,7 @@ void FlfDemoCtrl::ClearNodeControls() {
 //         if (entry != nullptr) {
 //             u8* e = (u8*)entry;
 
-//             for (uint i = 0; i < entry->mCount; i++) {
+//             for (u32 i = 0; i < entry->mCount; i++) {
 //                 fn_802BBE08((NURBSStruct2*)((MNEB::DemoDataBlock*)(e))->m_C);
 //                 e += 4;
 //             }
@@ -735,7 +735,7 @@ void FlfDemoCtrl::ClearNodeControls() {
 //     Update();
 // }
 
-uint FlfDemoCtrl::fn_802BBB28() {
+u32 FlfDemoCtrl::fn_802BBB28() {
     return mFlfMdlDraw->mCurrentAnimationID;
 }
 

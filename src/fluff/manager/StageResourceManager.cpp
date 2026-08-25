@@ -38,7 +38,7 @@ StageResourceManager::StageResourceManager()
 
 
 StageResourceManager::~StageResourceManager() {
-    for (uint i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
+    for (u32 i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
         if (mCurrentSections[i]) {
             Mapdata::Delete(mCurrentSections[i]);
         }
@@ -224,7 +224,7 @@ void StageResourceManager::LoadCommonFromFolder(s32 stageID) {
 
 void StageResourceManager::CopyBGData(BGData* bgdata) {
     if (0 == bgdata->m_8) {
-        bgdata->m_10 = (uint)(bgdata->mMagic + bgdata->m_10);
+        bgdata->m_10 = (u32)(bgdata->mMagic + bgdata->m_10);
         bgdata->m_8 = 1;
     }
 
@@ -259,7 +259,7 @@ void StageResourceManager::ProcessLevelData() {
         const char* unk = fStr[1].GetString();
         unkStruct = (unk_struct*)this;
 
-        for (uint i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
+        for (u32 i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
             if (i < fStr->GetLength()) {
                 snprintf(unkPath, sizeof(unkPath), "%s%s", fStr->GetString(), unk);
                 ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = Mapdata::Parse(
@@ -282,7 +282,7 @@ void StageResourceManager::ProcessLevelData() {
         }
 
         unkStruct = (unk_struct*)this;
-        for (uint i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
+        for (u32 i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
 
             snprintf(
                 mapbinPath,

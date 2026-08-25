@@ -23,7 +23,7 @@ namespace gfl {
 
         /* Class Methods */
 
-        // void PlaySound(nw4r::math::VEC3& rPos, uint soundID, s32 arg3, s32 arg4);
+        // void PlaySound(nw4r::math::VEC3& rPos, u32 soundID, s32 arg3, s32 arg4);
 
         inline void SetPosition(nw4r::math::VEC3* pPos) {
             mPosition = pPos;
@@ -59,7 +59,7 @@ namespace gfl {
 
         static SoundHandle CreateSoundHandle(s32 soundID, s32 arg1);
 
-        static SoundHandle PlaySound(const gfl::Vec3& rPos, uint soundID, s32, s32);
+        static SoundHandle PlaySound(const gfl::Vec3& rPos, u32 soundID, s32, s32);
 
     // private:
         /* Class Members */

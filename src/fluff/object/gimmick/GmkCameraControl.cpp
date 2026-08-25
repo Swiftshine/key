@@ -32,7 +32,7 @@ GmkCameraControl::~GmkCameraControl() { }
 
 
 void GmkCameraControl::Init(GimmickBuildInfo* buildInfo) {
-    uint type = buildInfo->GetIntParam(GmkCameraControl::eParameter_CameraType);
+    u32 type = buildInfo->GetIntParam(GmkCameraControl::eParameter_CameraType);
     mCameraType = type;
 
     if (type > GmkCameraControl::eCameraType_Horizontal) {

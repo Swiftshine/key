@@ -35,7 +35,7 @@ public:
     void SetModel(const char* brres, const char* modelName, bool playAnim) DONT_INLINE_CLASS;
     void UpdateModel() DONT_INLINE_CLASS;
     virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
-    gfl::ScnMdlWrapper* CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, uint flag) DONT_INLINE_CLASS;
+    gfl::ScnMdlWrapper* CreateModelWrapper(nw4r::g3d::ResFile& resFile, const char* filepath, u32 flag) DONT_INLINE_CLASS;
     NwAnm* CreateAnim(nw4r::g3d::ResFile& resFile, const char* resMdlName, const char* animName) DONT_INLINE_CLASS;
     void SetShadow(nw4r::g3d::ResFile& resFile, const char* name, bool createAnim) DONT_INLINE_CLASS;
 
@@ -48,7 +48,7 @@ public:
     gfl::Pointer<GmkSimpleMdlRotZ> mZRotationGmk;
     gfl::ResFileObject mResFileObject;
     // gfl::ResFileInfo* mResFileInfo;
-    uint m_154;
+    u32 m_154;
 };
 
 

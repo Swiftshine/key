@@ -29,7 +29,7 @@ void FbMem::Shutdown() {
 
     FrameBuffer* buf = &Buf1;
 
-    for (uint i = 0; i < 3; i++, buf++) {
+    for (u32 i = 0; i < 3; i++, buf++) {
         gfl::Free(buf->mData);
         buf->mData = nullptr;
     }
@@ -54,7 +54,7 @@ void* FbMem::GetFrameBufferData(s32 id, size_t size, bool refresh) {
 void FbMem::DisableFrameBuffer(s32 id) {
     FrameBuffer* buf = &Buf1;
 
-    for (uint i = 0; i < 3; i++, buf++) {
+    for (u32 i = 0; i < 3; i++, buf++) {
         if (buf->m_0 == lbl_80840F38[id] && buf->mID == id) {
             buf->mID = -1;
             buf->mDoRefresh = false;
@@ -66,7 +66,7 @@ void FbMem::DisableFrameBuffer(s32 id) {
 void FbMem::ClearFlag() {
     FrameBuffer* buf = &Buf1;
 
-    for (uint i = 0; i < 3; i++, buf++) {
+    for (u32 i = 0; i < 3; i++, buf++) {
         if (!buf->mDoRefresh) {
             buf->mID = -1;
         }
@@ -78,7 +78,7 @@ FbMem::FrameBuffer* FbMem::GetFrameBuffer(s32 id) {
 
     FrameBuffer* buf = &Buf1;
 
-    for (uint i = 0; i < 3; i++, buf++) {
+    for (u32 i = 0; i < 3; i++, buf++) {
         if (buf->m_0 == unk && (buf->mID == -1 || buf->mID == id)) {
             return buf;
         }

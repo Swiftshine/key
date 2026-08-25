@@ -46,7 +46,7 @@ namespace gfl {
         s32 m_2FC;
         s32 m_300;
         nw4r::ut::LinkList<nw4r::math::VEC3, 0> mList2;
-        uint m_310;
+        u32 m_310;
         void* mFileInfo;
         void* mSymbolData;
         void* mSoundArchivePlayerMem;

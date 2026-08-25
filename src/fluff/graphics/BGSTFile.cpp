@@ -35,7 +35,7 @@ BGST::EntryInfo* BGST::File::GetEntryInfoByIndex(s32 index) {
     return mEntryInfo[index];
 }
 
-size_t BGST::File::GetImageOffset(uint index) {
+size_t BGST::File::GetImageOffset(u32 index) {
     return index * 0x20000 + mHeader->mSomeOffset3;
 }
 
@@ -139,9 +139,9 @@ void BGST::File::SetupImage() {
         return;
     }
 
-    uint gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
-    uint biggerArea = gridArea *0x10 ;
-    uint temp3 = biggerArea * mGridCount;
+    u32 gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
+    u32 biggerArea = gridArea *0x10 ;
+    u32 temp3 = biggerArea * mGridCount;
     mImageFilesize = ROUND_UP(temp3  , 0x20);
     mOutputImage.Create((BGST::Image*)gfl::Alloc(Mem1Heap, mImageFilesize, 0x20));
 }
@@ -151,8 +151,8 @@ void BGST::File::LoadGrid() {
         return;
     }
 
-    uint gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
-    uint totalGridArea = 0;
+    u32 gridArea = mHeader->mGridHeight * mHeader->mGridWidth;
+    u32 totalGridArea = 0;
 
     for (size_t i = 0; i < 12; i++) {
         if (mHeader->mLayerEnabled[i]) {

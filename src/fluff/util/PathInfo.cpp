@@ -24,10 +24,10 @@ gfl::Vec2 PathInfo::GetPointAtPercentage(float percentage) const {
     float targetDist = mPathLength * percentage;
     float curDist = 0.0f;
     float foundDist = 0.0f;
-    uint pointIndex = 0;
+    u32 pointIndex = 0;
     float prevDist = 0.0f;
 
-    for (uint i = 0; i < mNumSegments; i++) {
+    for (u32 i = 0; i < mNumSegments; i++) {
         if (targetDist < curDist) {
             foundDist = targetDist - prevDist;
             pointIndex = i;

@@ -135,9 +135,9 @@ public:
 
     /* Class Members */
     /* 0x00 */ Vec2 m_0[20];
-    /* 0xA0 */ uint m_A0;
-    /* 0xA4 */ uint m_A4;
-    /* 0xA8 */ uint mMax;
+    /* 0xA0 */ u32 m_A0;
+    /* 0xA4 */ u32 m_A4;
+    /* 0xA8 */ u32 mMax;
     /* 0xAC */ float m_AC;
     /* 0xB0 */ float m_B0;
     /* 0xB4 */ float m_B4;
@@ -167,7 +167,7 @@ public:
 
     void fn_805CBE78() DONT_INLINE_CLASS;
     void fn_805CBEC4(nw4r::math::MTX34* pMtx) DONT_INLINE_CLASS;
-    void fn_8076A380(uint mtxID, nw4r::math::MTX34* pMtx);
+    void fn_8076A380(u32 mtxID, nw4r::math::MTX34* pMtx);
 
     /* Class Members */
 

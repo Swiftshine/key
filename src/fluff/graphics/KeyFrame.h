@@ -47,8 +47,8 @@ public:
 
     /* 0x8 */ inline virtual ~KeyFrame() { }
 
-    /* 0xC */ virtual void GetNextStartFrame(T mult, uint index, InnerKeyFrame* pDst);
-    // /* 0xC */ virtual void GetNextStartFrame(T mult, uint index, InnerKeyFrame* pDst) {
+    /* 0xC */ virtual void GetNextStartFrame(T mult, u32 index, InnerKeyFrame* pDst);
+    // /* 0xC */ virtual void GetNextStartFrame(T mult, u32 index, InnerKeyFrame* pDst) {
     //     T cur = mInnerKeyFrames[index].mStart;
     //     T delta = mInnerKeyFrames[index + 1].mStart - mInnerKeyFrames[index].mStart;
     //     pDst->mStart = mInnerKeyFrames[index].mStart + delta * mult;
@@ -79,12 +79,12 @@ public:
         // if (mHasFrames && GetPreviousEndFrame() < start) {
         //     T prev = GetPreviousEndFrame();
 
-        //     uint unk = static_cast<unsigned s32>(start / prev);
+        //     u32 unk = static_cast<unsigned s32>(start / prev);
         //     newFrame = (T)(unk);
         // }
 
-        // uint c = mInnerKeyFrames.size();
-        // uint i = 0;
+        // u32 c = mInnerKeyFrames.size();
+        // u32 i = 0;
 
         // while (true) {
         //     if (c == 0) {

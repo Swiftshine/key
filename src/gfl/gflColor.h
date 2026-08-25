@@ -22,7 +22,7 @@ public:
         , a(na)
     { }
 
-    Color(uint v)
+    Color(u32 v)
         : val(v)
     { }
 
@@ -36,7 +36,7 @@ public:
             u8 a;
         };
 
-        uint val;
+        u32 val;
 
         GXColor col;
     };

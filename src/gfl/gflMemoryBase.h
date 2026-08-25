@@ -10,7 +10,7 @@ namespace gfl {
     class MemoryBase {
     public:
         inline Heap* FindContainingHeap(Heap** heapArr, void* address) {
-            for (uint i = 0; i < GFL_MEMORYBASE_HEAP_COUNT; i++) {
+            for (u32 i = 0; i < GFL_MEMORYBASE_HEAP_COUNT; i++) {
                 if (mHeaps[i] && mHeaps[i]->WithinRange(address)) {
                     return mHeaps[i];
                 }
@@ -28,7 +28,7 @@ namespace gfl {
         Heap* GetHeapByAddress(void*);
         u8 GetHeapIDByAddress(void*);
         void Free(void*);
-        virtual Heap* GetHeapByID(uint heapID);
+        virtual Heap* GetHeapByID(u32 heapID);
     public:
         Heap* mHeaps[GFL_MEMORYBASE_HEAP_COUNT];
     };

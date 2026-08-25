@@ -14,4 +14,4 @@ s32 ParamS32::vf8() {
 
 DONT_OPTIMIZE void ParamS32::vfC() { }
 
-DONT_OPTIMIZE void ParamS32::Print(Console* pConsole, uint numTabs) { }
+DONT_OPTIMIZE void ParamS32::Print(Console* pConsole, u32 numTabs) { }

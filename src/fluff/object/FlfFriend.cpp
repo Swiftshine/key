@@ -27,7 +27,7 @@ float FlfFriend::fn_8033B710() {
 }
 
 // https://decomp.me/scratch/gjGK0
-FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, uint friendID, const char* pTaskName)
+FlfFriend::FlfFriend(gfl::Task* pParentTask, FullSortScene* pScene, u32 friendID, const char* pTaskName)
     : FlfGameObj(FlfGameObj::eObjectCategory_Friend)
     , mTask(this, Update, pTaskName)
     , mScene(pScene)
@@ -128,10 +128,10 @@ void FlfFriend::vfF0(FlfGameObj* pObj) {
     }
 }
 
-void FlfFriend::SetTaskFlags(bool set, bool arg2, uint flag) {
+void FlfFriend::SetTaskFlags(bool set, bool arg2, u32 flag) {
     mUpdateFrame = arg2;
 
-    uint f = 1 << flag;
+    u32 f = 1 << flag;
 
     if (set) {
         mTask.mFlags |= f;
@@ -235,7 +235,7 @@ void FlfFriend::GetTransform(gfl::Mtx34& rMtx, gfl::Vec3& rPos, gfl::Vec3& rRot,
     float* f = rMtx.m[0];
     float* sf = &rScale.x;
 
-    for (uint i = 0; i < 3; i++) {
+    for (u32 i = 0; i < 3; i++) {
         float f1 = Square(*f);
         float f2 = Square(*(f + 1));
         float f3 = Square(*(f + 3));
@@ -272,11 +272,11 @@ void FlfFriend::fn_8033C488() {
 
 void FlfFriend::vf210(bool) { }
 
-uint FlfFriend::GetCurrentNURBSAnimationID() const {
+u32 FlfFriend::GetCurrentNURBSAnimationID() const {
     return mFlfMdlDraw->mCurrentAnimationID;
 }
 
-uint FlfFriend::GetCurrentAnimationID() const {
+u32 FlfFriend::GetCurrentAnimationID() const {
     return mCurrentAnimationID;
 }
 
@@ -290,7 +290,7 @@ void FlfFriend::SetCurrentNURBSAnimationFrame(float frame) {
     mFlfMdlDraw->SetCurrentNURBSFrame(frame);
 }
 
-void FlfFriend::fn_8033C580(uint arg1) {
+void FlfFriend::fn_8033C580(u32 arg1) {
     if (arg1 == 700) {
         mEffect->Reset(3);
     } else if (arg1 == 701) {
@@ -382,14 +382,14 @@ void FlfFriend::SwitchDirection() {
 void FlfFriend::vf168() {
     if (mState.mCurrentState != 1) {
         if (mFlfMdlDraw->fn_80023E2C()) {
-            uint id = mNextAnimationID;
-            uint cur = GetCurrentNURBSAnimationID();
+            u32 id = mNextAnimationID;
+            u32 cur = GetCurrentNURBSAnimationID();
             if (id != cur) {
                 PlayNURBSAnimation(id, mIsAnimationReset);
             }
         } else if (IsAnimationDone()) {
-            uint id = mNextAnimationID;
-            uint cur = GetCurrentNURBSAnimationID();
+            u32 id = mNextAnimationID;
+            u32 cur = GetCurrentNURBSAnimationID();
             if (id != cur) {
                 PlayNURBSAnimation(id, mIsAnimationReset);
             }
@@ -461,13 +461,13 @@ void FlfFriend::SetScreenPosition(s32* pDirection) {
 }
 
 PlayerBase* FlfFriend::GetClosestPlayer() const {
-    uint count = GameManager::GetPlayerCount();
+    u32 count = GameManager::GetPlayerCount();
 
     PlayerBase* ret = nullptr;
     gfl::Vec3 pos;
     pos = mPosition;
 
-    for (uint id = 0; id < count; id++) {
+    for (u32 id = 0; id < count; id++) {
         if (ret == nullptr) {
             ret = GameManager::GetPlayerByID(id);
         } else {
@@ -608,11 +608,11 @@ void FlfFriend::ResetRoomLocator() {
     Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
     if (mapdata != nullptr) {
-        uint numGmk = mapdata->mNumGimmicks;
+        u32 numGmk = mapdata->mNumGimmicks;
         mapdata = Stage::Instance()->GetCurrentLevelSection();
 
         Mapdata::MapdataGimmick* gmk = mapdata->mGimmicks;
-        for (uint i = 0; i < numGmk; i++) {
+        for (u32 i = 0; i < numGmk; i++) {
             if (gmk[i].mName.compare("FriendRoomLocator") == 0) {
                 gmk[i].mParams.mStringParams[0] = Blank;
             }
@@ -869,7 +869,7 @@ bool FlfFriend::fn_8033E648() {
 }
 
 bool FlfFriend::fn_8033E84C() const {
-    uint state = mState.mCurrentState;
+    u32 state = mState.mCurrentState;
 
     if (state == 24 || state == 31) {
         return true;
@@ -879,7 +879,7 @@ bool FlfFriend::fn_8033E84C() const {
 }
 
 bool FlfFriend::fn_8033E870() const {
-    uint state = mState.mCurrentState;
+    u32 state = mState.mCurrentState;
 
     if (state - 23 <= 1 || state - 26 <= 1 || state - 31 <= 1) {
         return true;
@@ -889,12 +889,12 @@ bool FlfFriend::fn_8033E870() const {
 }
 
 bool FlfFriend::fn_8033E8A8() const {
-    uint count = GameManager::GetPlayerCount();
+    u32 count = GameManager::GetPlayerCount();
 
     gfl::Vec3 pos; // cut logic
     pos = mPosition;
 
-    for (uint id = PlayerBase::ePlayerID_Kirby; id < count; id++) {
+    for (u32 id = PlayerBase::ePlayerID_Kirby; id < count; id++) {
         PlayerBase* player = GameManager::GetPlayerByID(id);
 
         if ((s32)player->mState.mCurrentState == 5 && player->mState.mDefaultState == 2) {
@@ -1022,7 +1022,7 @@ void FlfFriend::vf178() {
 void FlfFriend::vf1C0() {
     vf160();
     if (vf218()) {
-        uint id = GetCurrentNURBSAnimationID();
+        u32 id = GetCurrentNURBSAnimationID();
 
         if (id != 100 && mFlfMdlDraw->HasNURBSAnimation(100)) {
             PlayNURBSAnimation(100, true);
@@ -1038,7 +1038,7 @@ void FlfFriend::vf1C0() {
 void FlfFriend::vf1C4() {
     vf160();
     if (vf218()) {
-        uint id = GetCurrentNURBSAnimationID();
+        u32 id = GetCurrentNURBSAnimationID();
 
         if (id != 110 && mFlfMdlDraw->HasNURBSAnimation(110)) {
             PlayNURBSAnimation(110, true);

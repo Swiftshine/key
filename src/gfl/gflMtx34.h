@@ -96,7 +96,7 @@ public:
     /* Class Methods */
 
     bool IsValid() DONT_INLINE_CLASS {
-        for (uint i = 0; i < 12; i++) {
+        for (u32 i = 0; i < 12; i++) {
             if (!Finite(a[i]) || Nan(a[i])) {
                 return false;
             }

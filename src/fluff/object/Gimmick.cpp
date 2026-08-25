@@ -142,7 +142,7 @@ void Gimmick::GetResFileObject(gfl::ResFileObject& rDst, Gimmick* pGimmick, s32 
 gfl::ScnMdlWrapper* Gimmick::CreateScnMdlWrapper(
     nw4r::g3d::ResFile resFile,
     const char* pResMdlName,
-    uint flags,
+    u32 flags,
     FullSortScene* pScene
 ) {
     /* something missing here */

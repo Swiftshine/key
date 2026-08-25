@@ -13,7 +13,7 @@ Param::Param(const char* newLabel) {
 
 Param::~Param() { }
 
-bool Param::Matches(const char* queryLabel, uint queryChecksum) {
+bool Param::Matches(const char* queryLabel, u32 queryChecksum) {
     bool ret;
     
     if (queryChecksum != mChecksum) {
@@ -27,8 +27,8 @@ bool Param::Matches(const char* queryLabel, uint queryChecksum) {
 }
 
 
-void Param::PrintTabs(Console* console, uint count) {
-    for (uint i = 0; i < count; i++) {
+void Param::PrintTabs(Console* console, u32 count) {
+    for (u32 i = 0; i < count; i++) {
         console->Print("\t");
     }
 }

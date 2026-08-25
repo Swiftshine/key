@@ -21,24 +21,24 @@ struct SaveData_StageInfo {
     s32 mBeadStreak;
     s32 m_14;
     s32 mHighestBeadCount;
-    uint mObtainedTreasureFlags;
+    u32 mObtainedTreasureFlags;
     bool m_20; // maybe an indicator of whether or not the stage is completed?
 };
 
 /// @note Size: `0x3884`
 class SaveSlot {
 public:
-    void fn_801FFDB8(uint id);
+    void fn_801FFDB8(u32 id);
 
-    /* 0x0000 */ uint mIndex;
-    /* 0x0004 */ uint mPlaytime; // in ticks; 1 tick * 60 = 1 second
-    /* 0x0008 */ uint mBeadCount;
-    /* 0x000C */ uint m_C;
-    /* 0x0010 */ uint m_10;
-    /* 0x0014 */ uint m_14;
-    /* 0x0018 */ uint mAreaSignature;
-    /* 0x001C */ uint mStageSignature;
-    /* 0x0020 */ uint mStageExitSignature; // as in, the stage that was *just* exited
+    /* 0x0000 */ u32 mIndex;
+    /* 0x0004 */ u32 mPlaytime; // in ticks; 1 tick * 60 = 1 second
+    /* 0x0008 */ u32 mBeadCount;
+    /* 0x000C */ u32 m_C;
+    /* 0x0010 */ u32 m_10;
+    /* 0x0014 */ u32 m_14;
+    /* 0x0018 */ u32 mAreaSignature;
+    /* 0x001C */ u32 mStageSignature;
+    /* 0x0020 */ u32 mStageExitSignature; // as in, the stage that was *just* exited
     /* 0x0024 */ s32 mMissionID;
     /* 0x0028 */ s32 m_28;
     /* 0x002C */ bool m_2C;
@@ -49,11 +49,11 @@ public:
 };
 
 struct SaveData_Header {
-    uint mRegionCode;
-    uint mVersion;
-    uint mChecksum;
-    uint m_C;
-    uint m_10;
+    u32 mRegionCode;
+    u32 mVersion;
+    u32 mChecksum;
+    u32 m_C;
+    u32 m_10;
 };
 
 /// @note Size: `0xA9D4`
@@ -61,7 +61,7 @@ class SaveData {
 public:
     /* Class Methods */
 
-    uint CalculateChecksum(s32 numBytes);
+    u32 CalculateChecksum(s32 numBytes);
     void Init();
     BOOL IsValid(s32 numBytes);
     void InitSaveSlots();
@@ -72,7 +72,7 @@ public:
 
     /* 0x0000 */ SaveData_Header mHeader;
     /* 0x0014 */ SaveSlot mSaveSlots[NUM_SAVE_SLOTS];
-    /* 0xA9A0 */ uint m_A9A0;
+    /* 0xA9A0 */ u32 m_A9A0;
     /* 0xA9A4 */ char mParameter[0x30]; // ?
 };
 

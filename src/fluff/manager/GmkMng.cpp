@@ -47,7 +47,7 @@ void GmkMng::CreateGimmicksFromMapdata(Mapdata* pMapdata) {
     // nw4r::math::VEC2 pos;
     // pos = CamMng::Instance()->GetCurrentPosition();
 
-    // for (uint i = 0; i < pMapdata->mNumCommonGimmicks; i++) {
+    // for (u32 i = 0; i < pMapdata->mNumCommonGimmicks; i++) {
     //     Gimmick::GimmickBuildInfo* buildInfo = pMapdata->GetCommonGimmickBuildInfo(i);
     //     CreateGimmickConditionally(pos, buildInfo);
     // }
@@ -107,7 +107,7 @@ void GmkMng::GetGimmicksByGimmickID(s32 gimmickID, std::vector<Gimmick*>& rDest)
 void GmkMng::GetCommonGimmicksByID(s32 gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest) {
     Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
-    for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
+    for (u32 i = 0; i < mapdata->mNumCommonGimmicks; i++) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
         if (buildInfo->mGimmickID == gimmickID) {
             rDest.push_back(buildInfo);
@@ -149,8 +149,8 @@ Gimmick* GmkMng::GetGimmickByIdentifier(const std::string& rTag) {
 Gimmick::GimmickBuildInfo* GmkMng::GetCommonGimmickBuildInfoByIdentifier(const char* pTag) {
     Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
-    uint i = 0;
-    const uint count = mapdata->mNumCommonGimmicks;
+    u32 i = 0;
+    const u32 count = mapdata->mNumCommonGimmicks;
 
     while (i < count) {
         Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
@@ -199,10 +199,10 @@ void GmkMng::CreateGimmicksFromMapdata() {
     //         nw4r::math::VEC2 pos;
     //         pos = CamMng::Instance()->GetCurrentPosition();
 
-    //         uint a = mNumCommonGimmicks;
-    //         uint b = mMapdata->mNumCommonGimmicks;
+    //         u32 a = mNumCommonGimmicks;
+    //         u32 b = mMapdata->mNumCommonGimmicks;
 
-    //         uint limit;
+    //         u32 limit;
     //         limit = a + 30;
     //         if (a + 30 > b) {
     //             limit = b;
@@ -258,7 +258,7 @@ void GmkMng::CreateGimmicksFromMapdata() {
 
 //         CamMng* camMgr = CamMng::Instance();
 
-//         for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {
+//         for (u32 i = 0; i < mapdata->mNumCommonGimmicks; i++) {
 //             Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
 //             Gimmick::GimmickInfo* gimmickInfo = buildInfo->mGimmickInfo;
 

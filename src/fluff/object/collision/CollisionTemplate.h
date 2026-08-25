@@ -6,7 +6,7 @@
 struct CollisionTemplate {
     // CollisionTemplate() { }
     
-    // CollisionTemplate(uint flags, s32 arg2, s32 arg3, float arg4)
+    // CollisionTemplate(u32 flags, s32 arg2, s32 arg3, float arg4)
     //     : mCollisionFlags(flags)
     //     , m_4(arg2)
     //     , m_8(arg3)
@@ -15,7 +15,7 @@ struct CollisionTemplate {
     //     , mDimensions(0.0f, 0.0f)
     // { }
 
-    /* 0x00 */ uint mCollisionFlags;
+    /* 0x00 */ u32 mCollisionFlags;
     /* 0x04 */ s32 m_4;
     /* 0x08 */ s32 m_8;
     /* 0x0C */ nw4r::math::VEC2 m_C;

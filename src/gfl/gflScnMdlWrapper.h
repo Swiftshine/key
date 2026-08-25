@@ -42,10 +42,10 @@ namespace gfl {
     public:
         static float DefaultUpdateRate;
 
-        ScnMdlWrapper(void* pData, uint bufferOptions, const char* pName);
+        ScnMdlWrapper(void* pData, u32 bufferOptions, const char* pName);
 
         ScnMdlWrapper();
-        ScnMdlWrapper(nw4r::g3d::ResMdl& rResMdl, uint flags);
+        ScnMdlWrapper(nw4r::g3d::ResMdl& rResMdl, u32 flags);
         
         /* Virtual Methods */
 

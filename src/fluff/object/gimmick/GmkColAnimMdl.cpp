@@ -50,7 +50,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
 
     mAnimCtrl.Create(new (gfl::eHeapID_Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, animName));
 
-    for (uint i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
+    for (u32 i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
         char animNameTemp[0x200];
         snprintf(animNameTemp, sizeof(animNameTemp), AnimNameIndexedTemplate, name, i);
         mAnimCtrl->PlayAnimationByNameAndIndex(i, animNameTemp);
@@ -68,7 +68,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     if (resFile.GetResMdl(shadowAnimName).ptr() != nullptr) {
         mShadowAnimCtrl.Create(new (gfl::eHeapID_Work) NwAnmCtrl(GMKCOLANIMMDL_ANIM_COUNT, mResFileObject, shadowAnimName));
 
-        for (uint i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
+        for (u32 i = 0; i < GMKCOLANIMMDL_ANIM_COUNT; i++) {
             char animNameTemp[0x200];
             snprintf(animNameTemp, sizeof(animNameTemp), ShadowAnimNameIndexedTemplate, i);
             mShadowAnimCtrl->PlayAnimationByNameAndIndex(i, animNameTemp);
@@ -122,7 +122,7 @@ asm void fn_800DEE6C(void* arg1) {
 // https://decomp.me/scratch/rpk0B
 GmkColAnimMdl::~GmkColAnimMdl() { }
 
-void GmkColAnimMdl::SetAnimationIndex(uint index) {
+void GmkColAnimMdl::SetAnimationIndex(u32 index) {
     mAnimCtrl->SetCurrentAnimationIndex(index);
 
     if (mShadowAnimCtrl.IsValid()) {
@@ -130,11 +130,11 @@ void GmkColAnimMdl::SetAnimationIndex(uint index) {
     }
 }
 
-bool GmkColAnimMdl::HasAnimation(uint index) {
+bool GmkColAnimMdl::HasAnimation(u32 index) {
     return mAnimCtrl->HasAnim(index);
 }
 
-uint GmkColAnimMdl::GetCurrentAnimationIndex() {
+u32 GmkColAnimMdl::GetCurrentAnimationIndex() {
     return mAnimCtrl->mCurrentAnimIndex;
 }
 
@@ -156,11 +156,11 @@ void GmkColAnimMdl::SetUpdate(bool state) {
     }
 }
 
-s32 GmkColAnimMdl::vf88(FlfGameObj* arg1, uint arg2) {
+s32 GmkColAnimMdl::vf88(FlfGameObj* arg1, u32 arg2) {
     return mColAnimCtrlGmk->vfC(arg1, arg2);
 }
 
-bool GmkColAnimMdl::vfA4(FlfGameObj* arg1, uint arg2) {
+bool GmkColAnimMdl::vfA4(FlfGameObj* arg1, u32 arg2) {
     return mColAnimCtrlGmk->vf10(arg1, arg2);
 }
 

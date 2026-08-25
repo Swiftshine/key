@@ -5,7 +5,7 @@
 #include "types.h"
 
 namespace CollisionFlagUtil {
-    u64 GetFlag(uint a, uint b);
+    u64 GetFlag(u32 a, u32 b);
 }
 
 #endif

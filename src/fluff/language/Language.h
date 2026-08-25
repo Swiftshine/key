@@ -43,8 +43,8 @@ namespace Language {
 
     void SetCurrentRegionType(s32 type);
     s32 GetCurrentRegionType() DONT_INLINE_CLASS;
-    uint GetCurrentRegionCode();
-    uint GetRegionCodeByRegionType(s32 type);
+    u32 GetCurrentRegionCode();
+    u32 GetRegionCodeByRegionType(s32 type);
     s32 GetLanguageType(s32 regionType, SCLanguage language);
     void SetCurrentLanguageType(s32 type);
     s32 GetCurrentLanguageType();

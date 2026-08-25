@@ -22,8 +22,8 @@ public:
     static void AddDecorativeBallResources();
     static GmkVictoryStand* Build(GimmickBuildInfo* buildInfo);
     static void fn_804F1BDC(nw4r::math::VEC2& arg1, s32 rank);
-    static void SpawnDecorativeBall(uint rank);
-    static void SetRankingInfo(uint rank, nw4r::math::VEC2& position);
+    static void SpawnDecorativeBall(u32 rank);
+    static void SetRankingInfo(u32 rank, nw4r::math::VEC2& position);
 
     GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskName);
     virtual ~GmkVictoryStand();
@@ -34,7 +34,7 @@ public:
     void AwardBeads() DONT_INLINE_CLASS;
 private:
     StateObject mBeadAwardState;
-    uint mPlayerRanking;
+    u32 mPlayerRanking;
     gfl::Vec3 mBeadAwardPosition;
     s32 mTotalAwardedBeads;
     gfl::Pointer<GmkPartsMdlSet> mModel;

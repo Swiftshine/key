@@ -17,7 +17,7 @@ namespace MNEB {
         char mMagic[4];
         u32 mCurveBlockOffset;
         u32 mFlags;
-        uint mCurveBlockCount;
+        u32 mCurveBlockCount;
         u32 mLock;
         u16 mNumFrames;
         u8 mIsLooped;
@@ -98,14 +98,14 @@ namespace MNEB {
     struct DemoOptionSet {
         char mName[0x20];
         char m_20[0x20];
-        uint mNumDemoOptions;
+        u32 mNumDemoOptions;
         gfl::Offset<DemoOption> mDemoOptions;
     };
 
     struct DemoDataBlock {
         char mMagic[4];
         size_t mBlockSize;
-        uint mDemoOptionSetCount;
+        u32 mDemoOptionSetCount;
         gfl::Offset<DemoOptionSet> mDemoOptionSets;
     };
 
@@ -115,7 +115,7 @@ namespace MNEB {
         NURBSSet* Load(NURBSSet* pNURBSSet, const char* pFilepath);
         CurveBlock* GetNextCurveBlock(CurveBlock* pBlock) const;
         /// @return The number of curves in the file.
-        uint CopyHeader(void* pData);
+        u32 CopyHeader(void* pData);
         void SetCurveBlock(NURBSObject* pObj, CurveBlock* pBlock);
         DemoDataBlock* GetDemoDataBlock(void* pData);
 
@@ -130,7 +130,7 @@ namespace MNEB {
 
         /* Class Members */
 
-        /* 0x00 */ uint mFlags;
+        /* 0x00 */ u32 mFlags;
         /* 0x04 */ bool mIsLocked;
         /* 0x08 */ float mNumFrames;
         /* 0x0C */ bool mIsLooped;

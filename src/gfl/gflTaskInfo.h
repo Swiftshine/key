@@ -151,7 +151,7 @@ namespace gfl {
 
         // this function is inlined in GFL 2010, but not in GFL 2015
         inline TaskInfo* GetNextAvailableTaskInfo() {
-            for (uint i = 0; i < GFL_TASKLIST_TASK_COUNT; i++) {
+            for (u32 i = 0; i < GFL_TASKLIST_TASK_COUNT; i++) {
                 if (!mTaskActive[i]) {
                     TaskInfo* info = &mTaskInfo[i];
                     mTaskInfo[i].SetParentInfo(nullptr);

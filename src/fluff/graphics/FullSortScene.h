@@ -12,7 +12,7 @@ class FullSortScene : public gfl::Scene {
 public:
     
 
-    FullSortScene(u8 heapID, uint maxNumChildren, uint maxNumScnObj);
+    FullSortScene(u8 heapID, u32 maxNumChildren, u32 maxNumScnObj);
 
     /* Virtual Methods */
 

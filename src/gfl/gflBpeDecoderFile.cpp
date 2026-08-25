@@ -17,7 +17,7 @@ BpeDecoderFile::BpeDecoderFile(File* pFile, size_t inputStreamPos) {
 BpeDecoderFile::~BpeDecoderFile() { }
 
 // nonmatching (unfinished)
-void* BpeDecoderFile::Decode(u8 heapID, size_t* pDecompressedSize, uint align) {
+void* BpeDecoderFile::Decode(u8 heapID, size_t* pDecompressedSize, u32 align) {
 	PrepareDecode();
 
    *pDecompressedSize = mDecodedSize;

@@ -29,16 +29,16 @@ namespace gfl {
             return mString;
         }
 
-        inline uint GetLength() const {
+        inline u32 GetLength() const {
             return mLen;
         }
 
-        inline uint len() const {
+        inline u32 len() const {
             return mLen;
         }
     private:
         char mString[512];
-        uint mLen;
+        u32 mLen;
     };
 
 }

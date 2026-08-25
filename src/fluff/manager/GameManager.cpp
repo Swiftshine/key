@@ -13,7 +13,7 @@ PointerManagerWrapper::~PointerManagerWrapper() {
 
 GameManager::~GameManager() { }
 
-uint GameManager::GetPlayerCount() {
+u32 GameManager::GetPlayerCount() {
     if (sInstance != nullptr) {
         return sInstance->mPlayerCount;
     }
@@ -21,7 +21,7 @@ uint GameManager::GetPlayerCount() {
     return 0;
 }
 
-PlayerBase* GameManager::GetPlayerByID(uint playerID) {
+PlayerBase* GameManager::GetPlayerByID(u32 playerID) {
     if (GameManager::sInstance == nullptr) {
         return nullptr;
     }
@@ -43,10 +43,10 @@ PlayerBase* GameManager::GetPrinceFluff() {
 }
 
 
-u8 GameManager::GetByte(uint val) {
+u8 GameManager::GetByte(u32 val) {
     return val & 0xFF;
 }
 
-PointerManagerWrapper GameManager::GetPlayerPointerManagerWrapperByID(uint id) {
+PointerManagerWrapper GameManager::GetPlayerPointerManagerWrapperByID(u32 id) {
     return GameManager::sInstance->mPlayerPointerManagers[id];
 }

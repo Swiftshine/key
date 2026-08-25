@@ -8,8 +8,8 @@ public:
 
     /* Class Methods */
     
-    void fn_800D0128(uint, uint, uint);
-    void fn_800D01EC(uint arg1, uint arg2, uint flags);
+    void fn_800D0128(u32, u32, u32);
+    void fn_800D01EC(u32 arg1, u32 arg2, u32 flags);
 };
 
 #endif

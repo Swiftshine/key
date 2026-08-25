@@ -43,14 +43,14 @@ const char* SceneLabels[12] = {
     "SCENE_ID_NEAR_05",
 };
 
-const char* FullSortSceneUtil::GetSceneLabelByIndex(uint index) {
+const char* FullSortSceneUtil::GetSceneLabelByIndex(u32 index) {
     return SceneLabels[index];
 }
 
-const char* FullSortSceneUtil::GetNearSceneLabelByIndex(uint index) {
+const char* FullSortSceneUtil::GetNearSceneLabelByIndex(u32 index) {
     return SceneLabels[index] + 9;
 }
 
-float FullSortSceneUtil::GetZOrder(uint sceneIndex, uint priority) {
+float FullSortSceneUtil::GetZOrder(u32 sceneIndex, u32 priority) {
     return ZOrders[sceneIndex] + PriorityOffsets[priority];
 }

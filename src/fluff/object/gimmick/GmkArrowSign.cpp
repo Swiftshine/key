@@ -23,7 +23,7 @@ GmkArrowSign::GmkArrowSign(GimmickBuildInfo* buildInfo, const char* taskName)
 
 
 GmkArrowSign::~GmkArrowSign() {
-    for (uint i = 0; i < mPoleUnitModels.mVec.size(); i++) {
+    for (u32 i = 0; i < mPoleUnitModels.mVec.size(); i++) {
         delete mPoleUnitModels.mVec[i];
     }
 }

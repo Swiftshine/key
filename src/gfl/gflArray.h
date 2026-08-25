@@ -62,7 +62,7 @@ namespace gfl {
         T* mArray;
     };
 
-    template <typename T, uint N>
+    template <typename T, u32 N>
     class FixedArray {
     public:
         inline FixedArray() { }

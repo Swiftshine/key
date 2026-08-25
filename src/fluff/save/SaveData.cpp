@@ -26,8 +26,8 @@ SaveDataInfo::SaveDataInfo()
     lbl_808E5AF4 = 1;
 }
 
-uint SaveData::CalculateChecksum(s32 numBytes) {
-    uint checksum = 0xFFFFFFFF;
+u32 SaveData::CalculateChecksum(s32 numBytes) {
+    u32 checksum = 0xFFFFFFFF;
     u8* data = reinterpret_cast<u8*>(this);
 
     for (s32 i = 0; i < numBytes; i++) {
@@ -78,7 +78,7 @@ BOOL SaveData::IsValid(s32 numBytes) {
 #pragma pop
 
 void SaveData::InitSaveSlots() {
-    for (uint i = 0; i < NUM_SAVE_SLOTS; i++) {
+    for (u32 i = 0; i < NUM_SAVE_SLOTS; i++) {
         mSaveSlots[i].fn_801FFDB8(i);
     }
 
@@ -91,9 +91,9 @@ bool SaveData::IsSizeValid(s32 size) {
 }
 
 bool SaveData::IsChecksumValid() {
-    uint oldChecksum = mHeader.mChecksum;
+    u32 oldChecksum = mHeader.mChecksum;
     mHeader.mChecksum = 0;
-    uint newChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
+    u32 newChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
     mHeader.mChecksum = oldChecksum;
     return oldChecksum == newChecksum;
 }

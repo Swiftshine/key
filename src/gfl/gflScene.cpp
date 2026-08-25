@@ -53,7 +53,7 @@ bool Scene::OpaSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB) {
     return pB > pA;
 }
 
-Scene::Scene(u8 heapID, uint maxNumChildren, uint maxNumScnObj)
+Scene::Scene(u8 heapID, u32 maxNumChildren, u32 maxNumScnObj)
     : mShouldUpdate(true)
     , m_5(false)
     , mIsWorldCalculated(false)
