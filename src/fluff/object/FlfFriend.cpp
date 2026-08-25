@@ -120,7 +120,7 @@ DECL_WEAK DONT_INLINE PlayerBase* CutFunction(PlayerBase* p) { return p; }
 void FlfFriend::vfF0(FlfGameObj* pObj) {
     PlayerBase* player = static_cast<PlayerBase*>(pObj);
     if (pObj->mCategory == ObjectCategory::Player) {
-        if (CutFunction(player)->GetPlayerID() == PlayerBase::PlayerID::Kirby) {
+        if (CutFunction(player)->GetPlayerID() == PlayerBase::ePlayerID_Kirby) {
             StartMission(player, false);
         }
 
@@ -331,7 +331,7 @@ bool FlfFriend::IsAnimationDone() const {
 
 bool FlfFriend::IsPlayerSavedPositionInFront() const {
     gfl::Vec3 pos(0.0f);
-    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::ePlayerID_Kirby);
 
     if (player != nullptr) {
         player->GetSavedPosition(pos);
@@ -726,7 +726,7 @@ void FlfFriend::vf154() {
 }
 
 void FlfFriend::SetPositionToPlayerSavedPosition() {
-    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::ePlayerID_Kirby);
 
     if (player != nullptr) {
         int dir = player->mDirection;
@@ -762,7 +762,7 @@ bool FlfFriend::fn_8033E25C() const {
 }
 
 void FlfFriend::StartMission() {
-    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::ePlayerID_Kirby);
     mMissionStarted = true;
     StartMission(player, false);
 }
@@ -894,7 +894,7 @@ bool FlfFriend::fn_8033E8A8() const {
     gfl::Vec3 pos; // cut logic
     pos = mPosition;
 
-    for (uint id = PlayerBase::PlayerID::Kirby; id < count; id++) {
+    for (uint id = PlayerBase::ePlayerID_Kirby; id < count; id++) {
         PlayerBase* player = GameManager::GetPlayerByID(id);
 
         if ((int)player->mState.mCurrentState == 5 && player->mState.mDefaultState == 2) {
@@ -1058,7 +1058,7 @@ void FlfFriend::vf1B4() {
 void FlfFriend::vf1B8() { }
 
 void FlfFriend::vf1BC() {
-    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+    PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::ePlayerID_Kirby);
 
     if (player != nullptr) {
         StartMission(player, false);

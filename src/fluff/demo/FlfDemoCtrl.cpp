@@ -242,7 +242,7 @@ FlfDemoPlayerCtrl::FlfDemoPlayerCtrl(nw4r::g3d::ResNode resNode, std::string& na
     }
 
     if (!princeFluff) {
-        mPlayer = GameManager::GetPlayerByID(PlayerBase::PlayerID::Kirby);
+        mPlayer = GameManager::GetPlayerByID(PlayerBase::ePlayerID_Kirby);
     } else {
         mPlayer = GameManager::GetPrinceFluff();
         GameManager::UpdatePrinceFluff(true);
@@ -251,7 +251,7 @@ FlfDemoPlayerCtrl::FlfDemoPlayerCtrl(nw4r::g3d::ResNode resNode, std::string& na
     if (mPlayer != nullptr) {
         mIsPlayerStateDefault = mPlayer->IsStateDefault();
         mPlayer->fn_8009C464(true);
-        mPlayer->Reset(1, PlayerBase::PlayerState::TouchGround, 0, 10);
+        mPlayer->Reset(1, PlayerBase::ePlayerState_TouchGround, 0, 10);
         mPlayer->mIsDemoControlled = true;
     }
 }
@@ -259,7 +259,7 @@ FlfDemoPlayerCtrl::FlfDemoPlayerCtrl(nw4r::g3d::ResNode resNode, std::string& na
 FlfDemoPlayerCtrl::~FlfDemoPlayerCtrl() {
     if (mPlayer != nullptr) {
         if (!mIsPlayerStateDefault) {
-            mPlayer->Reset(0, PlayerBase::PlayerState::TouchGround, 0, 10);
+            mPlayer->Reset(0, PlayerBase::ePlayerState_TouchGround, 0, 10);
         }
 
         FlfMdlCollision* flfMdlCollision = mPlayer->mFlfMdlCollision;
@@ -268,7 +268,7 @@ FlfDemoPlayerCtrl::~FlfDemoPlayerCtrl() {
             flfMdlCollision->fn_800F0B48(m_26);
         }
 
-        if (mPlayer->GetPlayerID() == PlayerBase::PlayerID::PrinceFluff) {
+        if (mPlayer->GetPlayerID() == PlayerBase::ePlayerID_PrinceFluff) {
             GameManager::UpdatePrinceFluff(false);
         }
 

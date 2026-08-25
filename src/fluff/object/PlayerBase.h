@@ -50,57 +50,58 @@ public:
         STRUCT_FILL(0x604);
     };
 
-    ENUM_CLASS(PlayerID,
-        Kirby           = 0,
-        PrinceFluff     = 1,
-    );
+    enum PlayerID {
+        ePlayerID_Kirby         = 0,
+        ePlayerID_PrinceFluff   = 1,
+    };
 
-    ENUM_CLASS(PlayerState,
-        Default         = 0,
-        TouchGround     = 1,
-        Jump            = 2, // player is in the air specifically because of a jumping action
+    enum PlayerState {
+        ePlayerState_Default         = 0,
+        ePlayerState_TouchGround     = 1,
+        ePlayerState_Jump            = 2, // player is in the air specifically because of a jumping action
 
-        YarnWhip        = 4,
-        Weight          = 5,
-        Fall            = 6, // player is in the air, but not because of a jumping action
-        JumpParachute   = 7, // player jumps, then becomes parachute (is about to become parachute?)
+        ePlayerState_YarnWhip        = 4,
+        ePlayerState_Weight          = 5,
+        ePlayerState_Fall            = 6, // player is in the air, but not because of a jumping action
+        ePlayerState_JumpParachute   = 7, // player jumps, then becomes parachute (is about to become parachute?)
 
-        TakeDamage      = 9,
-        Sled            = 10,
-        YarnWhipLockOn  = 11,
-        ThrowItem       = 12,
+        ePlayerState_TakeDamage      = 9,
+        ePlayerState_Sled            = 10,
+        ePlayerState_YarnWhipLockOn  = 11,
+        ePlayerState_ThrowItem       = 12,
 
-        Parachute       = 14,
-        Tangled         = 15, // player is damaged and yarn becomes tangled; takes a moment to recover
-        Crumple         = 16, // player crumples up into a little ball
-        SideBumped      = 17, // bumping into an enemy or terrain as a car
-        EntityCollision = 18, // collided with a non-terrain entity, including water
+        ePlayerState_Parachute       = 14,
+        ePlayerState_Tangled         = 15, // player is damaged and yarn becomes tangled; takes a moment to recover
+        ePlayerState_Crumple         = 16, // player crumples up into a little ball
+        ePlayerState_SideBumped      = 17, // bumping into an enemy or terrain as a car
+        ePlayerState_EntityCollision = 18, // collided with a non-terrain entity, including water
 
-        Baseball        = 20, // player becomes a baseball when yarn-whipped by another player
+        ePlayerState_Baseball        = 20, // player becomes a baseball when yarn-whipped by another player
 
-        DropItem        = 22,
-    );
+        ePlayerState_DropItem        = 22,
+    };
 
-    ENUM_CLASS(Transformation,
-        None        = 0,
-        Submarine   = 1,
-        String      = 2, // used in tight spaces
-        Surfboard   = 3, // the penguin on the surfboard; called "Boat" internally
-        Robot       = 4,
-        OffRoader   = 5, // "Vehicle"
-        Firetruck   = 6, // "Splash"
-        Train       = 7, // "TrainFree"
-        Dolphin     = 8, // "AquaRide"
-        Rocket      = 9,
-        WarpStar    = 10,
-        UFO         = 11,
 
-        Digger      = 13, // "BrightRobot"
-    );
+    enum Transformation {
+        eTransformation_None        = 0,
+        eTransformation_Submarine   = 1,
+        eTransformation_String      = 2, // used in tight spaces
+        eTransformation_Surfboard   = 3, // the penguin on the surfboard; called "Boat" internally
+        eTransformation_Robot       = 4,
+        eTransformation_OffRoader   = 5, // "Vehicle"
+        eTransformation_Firetruck   = 6, // "Splash"
+        eTransformation_Train       = 7, // "TrainFree"
+        eTransformation_Dolphin     = 8, // "AquaRide"
+        eTransformation_Rocket      = 9,
+        eTransformation_WarpStar    = 10,
+        eTransformation_UFO         = 11,
 
-    ENUM_CLASS(Flags,
-        Invincible = 1 << 3
-    );
+        eTransformation_Digger      = 13, // "BrightRobot"
+    };
+
+    enum PlayerFlags {
+        ePlayerFlags_Invincible = 1 << 3
+    };
 
     PlayerBase(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, int arg4, bool isCloned);
 

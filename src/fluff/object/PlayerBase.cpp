@@ -40,8 +40,8 @@ float PlayerBase::GetGravityCorrection() {
 }
 
 void PlayerBase::ResetState() {
-    SetPlayerState(PlayerState::Default);
-    mState.mDefaultState = PlayerState::TouchGround;
+    SetPlayerState(PlayerBase::ePlayerState_Default);
+    mState.mDefaultState = PlayerBase::ePlayerState_TouchGround;
     ResetWalkAnimSpeed();
 }
 
@@ -61,15 +61,15 @@ void PlayerBase::fn_80081158() {
             break;
         }
 
-        case Transformation::None: {
-            if (mState.mCurrentState != PlayerState::YarnWhipLockOn) {
+        case PlayerBase::eTransformation_None: {
+            if (mState.mCurrentState != PlayerBase::ePlayerState_YarnWhipLockOn) {
                 mSpringFlf->fn_800B4FE0(5);
             }
 
             break;
         }
 
-        case Transformation::Submarine: {
+        case PlayerBase::eTransformation_Submarine: {
             if (mTransformSubmarine != nullptr) {
                 HenshinSubmarine::Substruct1 s = mTransformSubmarine->m_60;
 
