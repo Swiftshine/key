@@ -7,18 +7,19 @@
 // size: 0x168
 class GmkCameraControl : public Gimmick {
 public:
-    ENUM_CLASS(CameraType,
-        Both = 0,
-        Vertical = 1,
-        Horizontal = 2,
-    );
+    enum CameraType {
+        eCameraType_Both = 0,
+        eCameraType_Vertical = 1,
+        eCameraType_Horizontal = 2,
+    };
 
-    ENUM_CLASS(Parameter,
-        CameraType = 0, // int 0
+    enum Parameter {
+        eParameter_CameraType = 0, // int 0
 
-        MaxBoundsX = 0, // float 0
-        MaxBoundsY = 1, // float 1
-    );
+        eParameter_MaxBoundsX = 0, // float 0
+        eParameter_MaxBoundsY = 1, // float 1
+    };
+
 public:
     static GmkCameraControl* Build(GimmickBuildInfo* buildInfo);
     GmkCameraControl(GimmickBuildInfo* buildInfo, const char* taskName) DONT_INLINE_CLASS;

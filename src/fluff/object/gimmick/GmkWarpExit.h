@@ -10,9 +10,9 @@
 // size: 0x144
 class GmkWarpExit : Gimmick {
 public:
-    ENUM_CLASS(Parameter,
-        FullsortSceneIndex = 0, // int 0
-    );
+    enum Parameter {
+        eParameter_SceneIndex = 0, // int 0
+    };
 public:
     static GmkWarpExit* Build(GimmickBuildInfo* buildInfo);
     GmkWarpExit(GimmickBuildInfo* buildInfo);
@@ -20,7 +20,7 @@ public:
 
     /* FlfGameObj */
     virtual void UpdateWater(bool);
-    
+
     /* Gimmick */
     void Update();
 private:

@@ -33,7 +33,7 @@ void GmkArrowSign::Update() {
 }
 
 const char* GmkArrowSign::GetOrientationAnimationName() {
-    float angle = static_cast<float>(mBuildInfoPtr->GetIntParam(Parameter::Angle));
+    float angle = static_cast<float>(mBuildInfoPtr->GetIntParam(GmkArrowSign::eParameter_Angle));
 
     while (angle < 0.0f) {
         angle += 360.0f;
@@ -56,8 +56,8 @@ std::string GmkArrowSign::GetResourceName(GimmickBuildInfo* buildInfo) {
     char buf[0x80];
     std::string result;
 
-    int texID = buildInfo->GetIntParam(Parameter::Texture);
-    snprintf(buf, 0x80, arrowsign_template, buildInfo->GetIntParam(Parameter::Texture) + 1);
+    int texID = buildInfo->GetIntParam(GmkArrowSign::eParameter_Texture);
+    snprintf(buf, 0x80, arrowsign_template, buildInfo->GetIntParam(GmkArrowSign::eParameter_Texture) + 1);
 
     result = buf;
 

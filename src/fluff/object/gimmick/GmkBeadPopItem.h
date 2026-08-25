@@ -11,13 +11,13 @@
 // this gimmick spawns in beads when touched
 class GmkBeadPopItem : public Gimmick, public IObjHitCB {
 public:
-    ENUM_CLASS(State,
-        Init = 0,
-        Idle = 1,
-        BeginSpawn = 2,
-        State_3 = 3,  
-        DeleteSelf = 4,
-    );
+    enum State {
+        eState_Init = 0,
+        eState_Idle = 1,
+        eState_BeginSpawn = 2,
+        eState_State_3 = 3,
+        eState_DeleteSelf = 4,
+    };
 public:
     static GmkBeadPopItem* Build(GimmickBuildInfo* buildInfo);
     GmkBeadPopItem(GimmickBuildInfo* buildInfo, const char* taskName) DONT_INLINE_CLASS;

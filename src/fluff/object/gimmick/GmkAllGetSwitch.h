@@ -8,10 +8,10 @@
 // size: 0x148
 class GmkAllGetSwitch : public Gimmick {
 public:
-    ENUM_CLASS(State,
-        NotActivated = 0,
-        Activated = 1,
-    );
+    enum State {
+        eState_Deactivated = 0,
+        eState_Activated   = 1,
+    };
 public:
     static GmkAllGetSwitch* Build(GimmickBuildInfo*);
     GmkAllGetSwitch(GimmickBuildInfo*) DONT_INLINE_CLASS;
@@ -21,7 +21,7 @@ public:
     virtual void Update();
 private:
     nw4r::math::VEC2 m_130;
-    int mState;
+    s32 mState;
     std::vector<std::string> mTags;
 };
 

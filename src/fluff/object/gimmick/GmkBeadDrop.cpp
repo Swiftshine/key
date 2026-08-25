@@ -31,26 +31,26 @@ GmkBeadDrop::~GmkBeadDrop() { }
 
 void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
     int initBeadType = 4;
-    if (buildInfo->GetIntParam(Parameter::BeadType) >= 0) {
-        initBeadType = buildInfo->GetIntParam(Parameter::BeadType);
+    if (buildInfo->GetIntParam(GmkBeadDrop::eParameter_BeadType) >= 0) {
+        initBeadType = buildInfo->GetIntParam(GmkBeadDrop::eParameter_BeadType);
     }
 
     int initBeadColor = 7;
-    if (buildInfo->GetIntParam(Parameter::BeadColor) >= 0) {
-        initBeadColor = buildInfo->GetIntParam(Parameter::BeadColor);
+    if (buildInfo->GetIntParam(GmkBeadDrop::eParameter_BeadColor) >= 0) {
+        initBeadColor = buildInfo->GetIntParam(GmkBeadDrop::eParameter_BeadColor);
     }
 
     int initBeadFunds = 1;
-    if (buildInfo->GetIntParam(Parameter::InitialBeadFunds) > 0) {
-        initBeadFunds = buildInfo->GetIntParam(Parameter::InitialBeadFunds);
+    if (buildInfo->GetIntParam(GmkBeadDrop::eParameter_InitialBeadFunds) > 0) {
+        initBeadFunds = buildInfo->GetIntParam(GmkBeadDrop::eParameter_InitialBeadFunds);
     }
 
     int beadType;
 
     if (initBeadType < 0) {
-        beadType = GmkBead::Type::Small;
+        beadType = GmkBead::eBeadType_Small;
     } else {
-        beadType = GmkBead::Type::Huge;
+        beadType = GmkBead::eBeadType_Huge;
         if (initBeadType <= 3) {
             beadType = initBeadType;
         }
@@ -59,7 +59,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
     int beadColor;
 
     if (initBeadColor < 0) {
-        beadColor = GmkBead::Color::White;
+        beadColor = GmkBead::eBeadColor_White;
     } else {
         beadColor = 7; // was there an eighth colour?
         if (initBeadColor <= 7) {
@@ -100,7 +100,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
 }
 
 void GmkBeadDrop::Update() {
-    if (mState == State::Idle && mGeneratorInfo.fn_803CB4B4() != 0) {
+    if (mState == GmkBeadDrop::eState_Idle && mGeneratorInfo.fn_803CB4B4() != 0) {
         SetSpawnState();
         mGeneratorInfo.ResetCounter();
     }
@@ -108,7 +108,7 @@ void GmkBeadDrop::Update() {
     UpdateFlfMdl();
 
     switch (mState) {
-        case State::Idle: {
+        case GmkBeadDrop::eState_Idle: {
             if (mCounter == 0) {
                 mFlfMdlDraw->PlayNURBSAnimation(0, true);
                 mCounter++;
@@ -122,7 +122,7 @@ void GmkBeadDrop::Update() {
             break;
         }
 
-        case State::Spawn: {
+        case GmkBeadDrop::eState_Spawn: {
             if (mCounter == 0) {
                 mFlfMdlDraw->PlayNURBSAnimation(2, true);
                 mCounter++;
@@ -134,7 +134,7 @@ void GmkBeadDrop::Update() {
                 }
             } else {
                 if (mFlfMdlDraw->fn_800239CC()) {
-                    SetState(State::Complete);
+                    SetState(GmkBeadDrop::eState_Complete);
                 }
             }
             break;
@@ -143,7 +143,7 @@ void GmkBeadDrop::Update() {
 
     UpdateMatrix();
     mFlfMdlDraw->SetWoolDrawMatrix(mMatrix);
-    if (mState == State::Complete) {
+    if (mState == GmkBeadDrop::eState_Complete) {
         FlfGameObj::Destroy(this);
     }
 }
@@ -213,8 +213,8 @@ float GmkBeadDrop::fn_802E1AEC(float, float, nw4r::math::VEC3&) {
 }
 
 void GmkBeadDrop::SetSpawnState() {
-    if (mState == State::Idle) {
-        SetState(State::Spawn);
+    if (mState == GmkBeadDrop::eState_Idle) {
+        SetState(GmkBeadDrop::eState_Spawn);
     }
 }
 

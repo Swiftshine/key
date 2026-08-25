@@ -19,20 +19,20 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     : Gimmick(buildInfo, GmkTurtle_Name)
 {
     mCounter = 0;
-    mCurrentState = State::MoveLeft;
+    mCurrentState = GmkTurtle::eState_MoveLeft;
     mWater = nullptr;
     mAnmCtrl = nullptr;
     mColObjTrans = nullptr;
     mRideHitCtrlTrans = nullptr;
 
     f32 f1 = 60.0f;
-    f1 *= buildInfo->GetFloatParam(Parameter::CounterDefaultValue);
+    f1 *= buildInfo->GetFloatParam(GmkTurtle::eParameter_CounterDefaultValue);
     mCounterDefaultValue = static_cast<uint>(f1);
     const char* resourceName = GmkTurtle_ResourceName;
-    mSpeed = buildInfo->GetFloatParam(Parameter::Speed) / 60.0f;
-    mMaxDistance = buildInfo->GetFloatParam(Parameter::MaxDistance);
-    mNumTurtles = buildInfo->GetIntParam(Parameter::NumTurtles);
-    mShouldMoveRight = buildInfo->GetBoolParam(Parameter::ShouldMoveRight);
+    mSpeed = buildInfo->GetFloatParam(GmkTurtle::eParameter_Speed) / 60.0f;
+    mMaxDistance = buildInfo->GetFloatParam(GmkTurtle::eParameter_MaxDistance);
+    mNumTurtles = buildInfo->GetIntParam(GmkTurtle::eParameter_NumTurtles);
+    mShouldMoveRight = buildInfo->GetBoolParam(GmkTurtle::eParameter_ShouldMoveRight);
     m_13D = buildInfo->GetBoolParam(Gimmick::eParameterID_Param3);
 
     if (mShouldMoveRight) {
@@ -86,9 +86,9 @@ GmkTurtle::GmkTurtle(GimmickBuildInfo* buildInfo)
     if (2 == mNumTurtles) {
         mAnmCtrl->mScnMdlWrapper->SetUpdate(false);
         mColObjTrans->SetEnabled(false);
-        mCurrentState = State::State_8;
+        mCurrentState = GmkTurtle::eState_State_8;
     } else {
-        mCurrentState = State::InWater;
+        mCurrentState = GmkTurtle::eState_InWater;
     }
 
 }
@@ -100,9 +100,9 @@ GmkTurtle::~GmkTurtle() {
 void GmkTurtle::Update() {
     switch (mCurrentState) {
 
-        case State::InWater: {
-            if (GmkTurtle_Empty != mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick)) {
-                Gimmick* gimmick = GmkMng::Instance()->GetGimmickByIdentifier(mBuildInfoPtr->GetStringParam(Parameter::TargetGimmick));
+        case GmkTurtle::eState_InWater: {
+            if (GmkTurtle_Empty != mBuildInfoPtr->GetStringParam(GmkTurtle::eParameter_TargetGimmick)) {
+                Gimmick* gimmick = GmkMng::Instance()->GetGimmickByIdentifier(mBuildInfoPtr->GetStringParam(GmkTurtle::eParameter_TargetGimmick));
                 if (gimmick != nullptr) {
                     mWater = dynamic_cast<GmkUpdownWater*>(gimmick);
                 }
@@ -114,24 +114,24 @@ void GmkTurtle::Update() {
                 mAnmCtrl->SetCurrentAnimationIndex(7);
             }
 
-            mCurrentState = State::State_7;
+            mCurrentState = GmkTurtle::eState_State_7;
 
             break;
         }
 
-        case State::MoveLeft: {
+        case GmkTurtle::eState_MoveLeft: {
             float curX = mPosition.x;
             float initialX = mBuildInfoPtr->mPosition.x;
             if (initialX < curX) {
                 mPosition.x = curX - mSpeed;
             } else {
                 mPosition.x = initialX;
-                Turn(TurnDirection::Right);
+                Turn(GmkTurtle::eTurnDirection_Right);
             }
             break;
         }
 
-        case State::TurnRight: {
+        case GmkTurtle::eState_TurnRight: {
             if (0 != mCounter) {
                 mAnmCtrl->SetCurrentAnimationIndex(2);
             } else {
@@ -141,28 +141,28 @@ void GmkTurtle::Update() {
         }
 
         // finalize right turn?
-        case State::State_3: {
+        case GmkTurtle::eState_State_3: {
             if (mAnmCtrl->IsAnimationDone()) {
                 mAnmCtrl->SetCurrentAnimationIndex(3);
-                mCurrentState = State::MoveRight;
+                mCurrentState = GmkTurtle::eState_MoveRight;
             }
 
             break;
         }
 
-        case State::MoveRight: {
+        case GmkTurtle::eState_MoveRight: {
             float curX = mPosition.x;
             float initialX = mMaxDistance + mBuildInfoPtr->mPosition.x;
             if (curX < initialX) {
                 mPosition.x = curX = mSpeed;
             } else {
                 mPosition.x = initialX;
-                Turn(TurnDirection::Left);
+                Turn(GmkTurtle::eTurnDirection_Left);
             }
             break;
         }
 
-        case State::TurnLeft: {
+        case GmkTurtle::eState_TurnLeft: {
             if (0 == mCounter) {
                 mAnmCtrl->SetCurrentAnimationIndex(5);
             } else {
@@ -172,17 +172,17 @@ void GmkTurtle::Update() {
         }
 
         // ?
-        case State::State_6: {
+        case GmkTurtle::eState_State_6: {
             if (mAnmCtrl->IsAnimationDone()) {
                 mAnmCtrl->SetCurrentAnimationIndex(0);
-                mCurrentState = State::MoveLeft;
+                mCurrentState = GmkTurtle::eState_MoveLeft;
             }
 
             break;
         }
     }
 
-    if (State::State_8 == mCurrentState) {
+    if (GmkTurtle::eState_State_8 == mCurrentState) {
         if (nullptr != mWater) {
             mPosition.y = mWater->vfF4() - 0.5f;
         }
@@ -218,10 +218,10 @@ int GmkTurtle::vf88(FlfGameObj* player, uint arg2) {
 
     // if the player is in the weight state
     if (5 == playerState) {
-        if (State::MoveLeft == mCurrentState) {
-            Turn(TurnDirection::Right);
-        } else if (State::MoveRight == mCurrentState) {
-            Turn(TurnDirection::Left);
+        if (GmkTurtle::eState_MoveLeft == mCurrentState) {
+            Turn(GmkTurtle::eTurnDirection_Right);
+        } else if (GmkTurtle::eState_MoveRight == mCurrentState) {
+            Turn(GmkTurtle::eTurnDirection_Left);
         }
     }
 
@@ -239,43 +239,43 @@ void GmkTurtle::BecomeActive() {
         case 3: {
             mAnmCtrl->mScnMdlWrapper->SetUpdate(false);
             mColObjTrans->SetEnabled(false);
-            mCurrentState = State::State_8;
+            mCurrentState = GmkTurtle::eState_State_8;
             break;
         }
 
         case 2: {
             mAnmCtrl->mScnMdlWrapper->SetUpdate(true);
             mColObjTrans->SetEnabled(true);
-            mCurrentState = State::InWater;
+            mCurrentState = GmkTurtle::eState_InWater;
         }
     }
 
 
-    if (State::State_7 == mCurrentState) {
+    if (GmkTurtle::eState_State_7 == mCurrentState) {
         if (mShouldMoveRight) {
-            mCurrentState = State::MoveRight;
+            mCurrentState = GmkTurtle::eState_MoveRight;
         } else {
-            mCurrentState = State::MoveLeft;
+            mCurrentState = GmkTurtle::eState_MoveLeft;
         }
-    } else if (State::InWater == mCurrentState) {
+    } else if (GmkTurtle::eState_InWater == mCurrentState) {
         Update();
         if (mShouldMoveRight) {
-            mCurrentState = State::MoveRight;
+            mCurrentState = GmkTurtle::eState_MoveRight;
         } else {
-            mCurrentState = State::MoveLeft;
+            mCurrentState = GmkTurtle::eState_MoveLeft;
         }
     }
 }
 
 void GmkTurtle::Turn(int turnDir) {
-    if (TurnDirection::Left != turnDir) {
+    if (GmkTurtle::eTurnDirection_Left != turnDir) {
         mCounter = mCounterDefaultValue;
         mAnmCtrl->SetCurrentAnimationIndex(1);
-        mCurrentState = State::TurnRight;
+        mCurrentState = GmkTurtle::eState_TurnRight;
     } else {
         mCounter = mCounterDefaultValue;
         mAnmCtrl->SetCurrentAnimationIndex(4);
-        mCurrentState = State::TurnLeft;
+        mCurrentState = GmkTurtle::eState_TurnLeft;
     }
 }
 

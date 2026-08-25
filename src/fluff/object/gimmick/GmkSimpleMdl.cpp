@@ -53,26 +53,26 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     char resMdlName[0x200];
 
     if (gmkID - 2U <= 2) {
-        const char* resourceName = mBuildInfo.GetStringParam(Parameter::ResourceName).begin();
+        const char* resourceName = mBuildInfo.GetStringParam(GmkSimpleMdl::eParameter_ResourceName).begin();
         snprintf(brresPath, sizeof(brresPath), "bggimmick/%s/%s.brres", resourceName, resourceName);
         snprintf(resMdlName, sizeof(resMdlName), "%s_00_000", resourceName);
 
         SetModel(brresPath, resMdlName, static_cast<bool>(secondVal));
 
-        int sortSceneIndex = mBuildInfo.GetIntParam(Parameter::SortSceneIndex) + 6;
+        int sortSceneIndex = mBuildInfo.GetIntParam(GmkSimpleMdl::eParameter_SortSceneIndex) + 6;
         mPosition.z = FullSortSceneUtil::GetZOrder(sortSceneIndex, 4);
         UpdateModel();
         SetModelWrapperByFullSortSceneIndex(sortSceneIndex);
 
         // GmkSimpleMdl uses an auxiliary gimmick for Z rotation if it's needed
-        if (mBuildInfo.GetFloatParam(Parameter::ZRotation) != 0.0f) {
+        if (mBuildInfo.GetFloatParam(GmkSimpleMdl::eParameter_ZRotation) != 0.0f) {
             mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mModelWrapper->GetScnMdl()));
-            mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::ZRotation));
+            mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(GmkSimpleMdl::eParameter_ZRotation));
         }
 
 
-        if (mBuildInfo.GetIntParam(Parameter::InitialFrameIndex) != 0) {
-            float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(Parameter::InitialFrameIndex));
+        if (mBuildInfo.GetIntParam(GmkSimpleMdl::eParameter_InitialFrameIndex) != 0) {
+            float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(GmkSimpleMdl::eParameter_InitialFrameIndex));
 
             if (mAnim.IsValid()) {
                 mAnim->SetCurrentFrame(frame);
@@ -84,7 +84,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
         }
     }
 
-    float rate = mBuildInfo.GetFloatParam(Parameter::AnimationSpeed);
+    float rate = mBuildInfo.GetFloatParam(GmkSimpleMdl::eParameter_AnimationSpeed);
 
     if (rate == 0.0f) {
         return;

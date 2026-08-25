@@ -74,7 +74,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     const float zero = 0.0f;
 
-    mState = State::Init;
+    mState = GmkBeadPopItem::eState_Init;
     mCompletionPercentage = zero;
     m_144 = 1.0f;
     mCollisionEnabled = true;
@@ -124,7 +124,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
         mPopItemInfo->fn_805C46D0(false);
     }
 
-    SetState(State::Init);
+    SetState(GmkBeadPopItem::eState_Init);
 }
 
 void GmkBeadPopItem::Update() {
@@ -137,30 +137,30 @@ void GmkBeadPopItem::Update() {
     }
 
     switch (mState) {
-        case State::Idle: {
+        case GmkBeadPopItem::eState_Idle: {
             if (mCompletionPercentage <= 0.0f) {
-                SetState(State::Init);
+                SetState(GmkBeadPopItem::eState_Init);
             }
 
             break;
         }
 
-        case State::BeginSpawn: {
+        case GmkBeadPopItem::eState_BeginSpawn: {
             if (Enable()) {
-                SetState(State::State_3);
+                SetState(GmkBeadPopItem::eState_State_3);
             } else {
-                SetState(State::Init);
+                SetState(GmkBeadPopItem::eState_Init);
             }
 
             break;
         }
 
-        case State::State_3: {
+        case GmkBeadPopItem::eState_State_3: {
             if (mAnimCtrl.IsValid()) {
                 mAnimCtrl->mScnMdlWrapper->SetUpdate(false);
             }
 
-            SetState(State::DeleteSelf);
+            SetState(GmkBeadPopItem::eState_DeleteSelf);
             break;
         }
     }
@@ -177,7 +177,7 @@ void GmkBeadPopItem::Update() {
         mPopItemInfo->fn_805C4760();
     }
 
-    if (mState == State::DeleteSelf) {
+    if (mState == GmkBeadPopItem::eState_DeleteSelf) {
         Destroy(this);
     }
 }
@@ -186,7 +186,7 @@ void GmkBeadPopItem::SetState(int state) {
     mState = state;
     mCompletionPercentage = 0.0f;
 
-    if (mState == State::State_3) {
+    if (mState == GmkBeadPopItem::eState_State_3) {
         mCompletionPercentage = 0.2f;
     }
 
@@ -195,7 +195,7 @@ void GmkBeadPopItem::SetState(int state) {
 
 bool GmkBeadPopItem::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gfl::Vec3& pos) {
     if (colSelf->mInteractionType == CollisionInfo::eCollisionInteraction_Bead && colOther->mInteractionType == CollisionInfo::eCollisionInteraction_Player && mState < 2) {
-        SetState(State::BeginSpawn);
+        SetState(GmkBeadPopItem::eState_BeginSpawn);
         return true;
     }
 
@@ -226,8 +226,8 @@ void GmkBeadPopItem::SetState(FlfGameObj* setter, const std::string& state) {
 
         int gimmickID = static_cast<Gimmick*>(setter)->GetGimmickID();
         bool isClothTurnGimmick = GimmickUtil::IsClothTurnGimmick(gimmickID);
-        if (isClothTurnGimmick && mState == State::Init) {
-            SetState(State::Idle);
+        if (isClothTurnGimmick && mState == GmkBeadPopItem::eState_Init) {
+            SetState(GmkBeadPopItem::eState_Idle);
             mCompletionPercentage = 0.25f;
         }
     }
@@ -290,7 +290,7 @@ void GmkBeadPopItem::SetupCollisionMatrix() {
         enabled = false;
     }
 
-    if (mState == State::Idle) {
+    if (mState == GmkBeadPopItem::eState_Idle) {
         enabled = false;
     }
 

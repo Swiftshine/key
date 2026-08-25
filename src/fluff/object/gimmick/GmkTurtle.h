@@ -16,34 +16,33 @@ class GmkUpdownWater;
 // size: 0x15C
 class GmkTurtle : public Gimmick {
 public:
-    ENUM_CLASS(State,
-        InWater,
-        MoveLeft,
-        TurnRight,
-        State_3,
-        MoveRight,
-        TurnLeft,
-        State_6,
-        State_7,
-        State_8,
-    );
+    enum State {
+        eState_InWater,
+        eState_MoveLeft,
+        eState_TurnRight,
+        eState_State_3,
+        eState_MoveRight,
+        eState_TurnLeft,
+        eState_State_6,
+        eState_State_7,
+        eState_State_8,
+    };
 
-    ENUM_CLASS(TurnDirection,
-        Left,
-        Right,
-    );
+    enum TurnDirection {
+        eTurnDirection_Left,
+        eTurnDirection_Right,
+    };
 
-    ENUM_CLASS(Parameter,
-        NumTurtles = 1, // int 1
-        ShouldMoveRight = 2, // int (bool) 2
+    enum Parameter {
+        eParameter_NumTurtles = 1, // int 1
+        eParameter_ShouldMoveRight = 2, // int (bool) 2
 
-        CounterDefaultValue = 0, // float 0
-        Speed = 1, // float 1
-        MaxDistance = 2, // float 2
+        eParameter_CounterDefaultValue = 0, // float 0
+        eParameter_Speed = 1, // float 1
+        eParameter_MaxDistance = 2, // float 2
 
-        TargetGimmick = 0, // string 0
-    );
-
+        eParameter_TargetGimmick = 0, // string 0
+    };
 public:
     static GmkTurtle* Build(GimmickBuildInfo* buildInfo);
     GmkTurtle(GimmickBuildInfo* buildInfo);
@@ -59,7 +58,7 @@ public:
     virtual void Update() override;
 
     /* GmkTurtle */
-    
+
     void BecomeActive();
 
     void Turn(int turnDir) DONT_INLINE_CLASS;

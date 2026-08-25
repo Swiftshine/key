@@ -14,14 +14,14 @@
 
 // size: 0x150
 class GmkColAnimMdl : public Gimmick, public GmkAnimChg {
-private:
-    ENUM_CLASS(Parameter,
-        SortSceneIndex = 0, // int 0
-        ZRotation = 0,      // float 0
-        AnimationName = 0,  // string 0
-        InitialFrameIndex = 2, // int 2
-        AnimationSpeed = 2, // float 2
-    );
+public:
+    enum Parameter {
+        eParameter_SortSceneIndex = 0, // int 0
+        eParameter_ZRotation = 0,      // float 0
+        eParameter_AnimationName = 0,  // string 0
+        eParameter_InitialFrameIndex = 2, // int 2
+        eParameter_AnimationSpeed = 2, // float 2
+    };
 public:
     static GmkColAnimMdl* Build(GimmickBuildInfo* buildInfo);
 
@@ -32,14 +32,14 @@ public:
 
     virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
     virtual void UpdateWater(bool) override;
-    
+
     /* Gimmick */
     virtual int vf88(FlfGameObj*, uint) override;
     virtual bool vfA4(FlfGameObj*, uint) override;
     virtual void Update() override;
 
     /* GmkColAnimMdl */
-    
+
     virtual void SetAnimationIndex(uint index);
     virtual bool HasAnimation(uint index);
     virtual uint GetCurrentAnimationIndex();

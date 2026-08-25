@@ -16,19 +16,19 @@ class GmkArrowSign : public Gimmick {
         std::vector<GmkPartsMdlSet*> mVec;
     };
 public:
-    ENUM_CLASS(Parameter,
-        Angle = 0, // int 0
-        Texture = 1, // int 1
-    );
-    
-    ENUM_CLASS(TextureType,
-        Red = 0,
-        Yellow = 1,
-        TubeTown = 2,
-        Blue = 3,
-        BlubBlubOcean = 4,
-        MysteriousUFO = 5
-    );
+    enum Parameter {
+        eParameter_Angle    = 0, // int 0
+        eParameter_Texture  = 1, // int 1
+    };
+
+    enum TextureType {
+        eTextureType_Red = 0,
+        eTextureType_Yellow = 1,
+        eTextureType_TubeTown = 2,
+        eTextureType_Blue = 3,
+        eTextureType_BlubBlubOcean = 4,
+        eTextureType_MysteriousUFO = 5,
+    };
 public:
     static void AddResourceName(GimmickBuildInfo* buildInfo);
     static GmkArrowSign* Build(GimmickBuildInfo* buildInfo);
@@ -42,12 +42,12 @@ public:
     const char* GetOrientationAnimationName();
     static std::string GetResourceName(GimmickBuildInfo* buildInfo);
 private:
-    gfl::Pointer<GmkPartsMdlSet> mArrowModel; // @ 0x130
-    gfl::Pointer<GmkPartsMdlSet> mBaseModel; // @ 0x134
-    VectorWrapper mPoleUnitModels; // @ 0x138, size: 0xC
-    gfl::Pointer<NwAnm> mAnimations[2]; // @ 0x144
-    gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // @ 0x14C, for NURBS rendering
-    BOOL mIsMysteriousUFO;  // @ 0x150
+    /* 0x130 */ gfl::Pointer<GmkPartsMdlSet> mArrowModel;
+    /* 0x134 */ gfl::Pointer<GmkPartsMdlSet> mBaseModel;
+    /* 0x138 */ VectorWrapper mPoleUnitModels;
+    /* 0x144 */ gfl::Pointer<NwAnm> mAnimations[2];
+    /* 0x14C */ gfl::Pointer<FlfMdlDraw> mFlfMdlDraw; // for NURBS rendering
+    /* 0x150 */ s32 mIsMysteriousUFO;
 };
 
 #endif

@@ -8,7 +8,7 @@ GmkAllGetSwitch* GmkAllGetSwitch::Build(GimmickBuildInfo* buildInfo) {
 GmkAllGetSwitch::GmkAllGetSwitch(GimmickBuildInfo* buildInfo)
     : Gimmick(buildInfo, "GmkAllGetSwitch")
     , m_130(nw4r::math::VEC2(0.0f, 0.0f))
-    , mState(State::NotActivated)
+    , mState(GmkAllGetSwitch::eState_Deactivated)
 {
     GimmickBuildInfo* bInfo = mBuildInfoPtr;
     FlfMsgMng::SplitIdentifiers(bInfo->GetStringParam(Gimmick::eParameterID_Param0).c_str(), mTags);

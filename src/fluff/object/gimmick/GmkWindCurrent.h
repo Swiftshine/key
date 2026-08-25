@@ -28,28 +28,27 @@ class GmkWindCurrent_AnimWrapper;
 /// @note Size: `0x204`
 class GmkWindCurrent : public Gimmick {
 public:
-    /* Structures */
-    ENUM_CLASS(Parameter,
-        WindDirection   = 0, // int 0
-        Disabled        = 1, // bool (int) 1
-        Width           = 0, // float 0
-        Height          = 1, // float 1
-        WindStrength    = 2, // float 2
-    );
+    enum Parameter {
+        eParameter_WindDirection   = 0, // int 0
+        eParameter_Disabled        = 1, // bool (int) 1
+        eParameter_Width           = 0, // float 0
+        eParameter_Height          = 1, // float 1
+        eParameter_WindStrength    = 2, // float 2
+    };
 
-    ENUM_CLASS(State,
-        Disabled        = 0,
-        Enabled         = 1
-    );
-
+    enum State {
+        eState_Disabled = 0,
+        eState_Enabled  = 1,
+    };
+public:
     GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskName);
-    
+
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~GmkWindCurrent();
 
     /* 0x4C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState) override;
-    
+
     /* 0xBC */ virtual void Update() const override;
 
     /* Class Methods */
@@ -89,15 +88,14 @@ public:
 /// @note Size: `0x148`
 class GmkWindCurrentSwitch : public Gimmick {
 public:
-    /* Structures */
-    ENUM_CLASS(Parameter,
-        TagList     = 4, // string 4
-    );
-
+    enum Parameter {
+        eParameter_TagList = 4, // string 4
+    };
+public:
     GmkWindCurrentSwitch(GimmickBuildInfo* pBuildInfo);
 
     /* Virtual Methods */
-    
+
     /* 0x08 */ virtual ~GmkWindCurrentSwitch();
 
     /* 0xBC */ virtual void Update() const override;
@@ -121,7 +119,7 @@ public:
             x = 0;
             y = 0;
         }
-        
+
         float x, y;
     };
 
@@ -172,7 +170,7 @@ public:
     void fn_8076A380(uint mtxID, nw4r::math::MTX34* pMtx);
 
     /* Class Members */
-    
+
     /* 0x104 */ gfl::ResFileObject* mResFileObject;
     /* 0x108 */ GmkWindCurrent* mWindCurrent;
     /* 0x10C */ gfl::Pointer<WoolGroupUnit> mWoolGroupUnits[5];
@@ -190,7 +188,7 @@ public:
 };
 
 class GmkWindCurrent_SoundMng {
-public:    
+public:
     static GmkWindCurrent_SoundMng* sInstance;
     static int sUserCount;
 
@@ -202,7 +200,7 @@ public:
     virtual ~GmkWindCurrent_SoundMng();
 
     /* Class Methods */
-    
+
     void AddWindCurrent(GmkWindCurrent* pWindCurrent);
     bool IsClosestWindCurrent(GmkWindCurrent* pWindCurrent) const;
     void CheckClosestWindCurrent() const;

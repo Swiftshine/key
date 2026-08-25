@@ -35,13 +35,13 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     , mModelScale(0.0f, 0.0f, 0.0f)
 {
     Stage* stageMgr = Stage::Instance();
-    int sceneIndex = mBuildInfo.GetIntParam(Parameter::SortSceneIndex) + 6;
+    int sceneIndex = mBuildInfo.GetIntParam(GmkColAnimMdl::eParameter_SortSceneIndex) + 6;
     FullSortScene* scene = stageMgr->GetSceneByID(sceneIndex);
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, 4);
 
     char animName[0x200];
     char brresPath[0x200];
-    const char* name = mBuildInfo.GetStringParam(Parameter::AnimationName).c_str();
+    const char* name = mBuildInfo.GetStringParam(GmkColAnimMdl::eParameter_AnimationName).c_str();
 
     snprintf(animName, sizeof(animName), AnimNameTemplate, name);
     snprintf(brresPath, sizeof(brresPath), BRRESPathTemplate, name, name);
@@ -78,13 +78,13 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
         mShadowAnimCtrl->mScnMdlWrapper->fn_8004DB94(mModelScale);
     }
 
-    if (mBuildInfo.GetFloatParam(Parameter::ZRotation) != 0.0f) {
+    if (mBuildInfo.GetFloatParam(GmkColAnimMdl::eParameter_ZRotation) != 0.0f) {
         mZRotationGmk.Create(new (gfl::HeapID::Work) GmkSimpleMdlRotZ(mAnimCtrl->mScnMdlWrapper->GetScnMdl()));
-        mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(Parameter::ZRotation));
+        mZRotationGmk->SetValue(mBuildInfo.GetFloatParam(GmkColAnimMdl::eParameter_ZRotation));
     }
 
-    if (mBuildInfo.GetIntParam(Parameter::InitialFrameIndex) != 0) {
-        float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(Parameter::InitialFrameIndex));
+    if (mBuildInfo.GetIntParam(GmkColAnimMdl::eParameter_InitialFrameIndex) != 0) {
+        float frame = SimpleMdlCommon::GetInitialAnimFrame(mBuildInfo.GetIntParam(GmkColAnimMdl::eParameter_InitialFrameIndex));
 
         if (mAnimCtrl.IsValid()) {
             mAnimCtrl->SetCurrentFrame(frame);
@@ -98,7 +98,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     mColAnimCtrlGmk.Create(new (gfl::HeapID::Work) GmkColAnimCtrl(this, mBuildInfo.GetIntParam(Gimmick::eParameterID_Param1), buildInfo));
     mColAnimCtrlGmk->fn_800D5130((void*)mBuildInfo.GetStringParam(0).c_str());
 
-    float rate = mBuildInfo.GetFloatParam(Parameter::AnimationSpeed);
+    float rate = mBuildInfo.GetFloatParam(GmkColAnimMdl::eParameter_AnimationSpeed);
 
     if (rate != 0.0f) {
         mAnimCtrl->mScnMdlWrapper->SetUpdateRate(rate);

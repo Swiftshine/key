@@ -138,10 +138,10 @@ void GmkVictoryStand::AwardBeads() {
         }
 
         int beadColor = rand();
-        int beadType = GmkBead::Type::Medium;
+        int beadType = GmkBead::eBeadType_Medium;
 
         if (beadWinnings - mTotalAwardedBeads > 9 && playerRanking % 2 == 0) {
-            beadType = GmkBead::Type::Large;
+            beadType = GmkBead::eBeadType_Large;
         }
 
         nw4r::math::VEC2 beadPosition(0.0f, 0.0f);

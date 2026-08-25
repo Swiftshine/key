@@ -17,16 +17,16 @@ public:
     static const char BRRES_path_template[];
     static const char MDL0_name_template[];
 
-    ENUM_CLASS(Parameter,
-        SortSceneIndex = 0, // int 0
-        ZRotation = 0,     // float 0
-        ResourceName = 0,   // string 0
+    enum Parameter {
+        eParameter_SortSceneIndex = 0, // int 0
+        eParameter_ZRotation = 0,     // float 0
+        eParameter_ResourceName = 0,   // string 0
 
-        PlayAnim = 1,       // int 1
+        eParameter_PlayAnim = 1,       // int 1
 
-        InitialFrameIndex = 2, // int 2
-        AnimationSpeed = 2, // float 2
-    );
+        eParameter_InitialFrameIndex = 2, // int 2
+        eParameter_AnimationSpeed = 2, // float 2
+    };
 public:
     GmkSimpleMdl();
     GmkSimpleMdl(GimmickBuildInfo* buildInfo);

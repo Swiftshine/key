@@ -17,28 +17,28 @@
 class GmkSunriseCurtain : public Gimmick {
 private:
 public:
-    ENUM_CLASS(TimeType,
-        Night = 0,
-        Day = 1,
-    );
+    enum TimeType {
+        eTimeType_Night = 0,
+        eTimeType_Day   = 1,
+    };
 
-    ENUM_CLASS(State,
-        Start = 0,
-        State_1 = 1,
-        State_2 = 2,
-        AfterNight = 3,
-        Wait = 4,
-        BeforeDay = 5,
-        Day = 6,
-    );
+    enum State {
+        eState_Start = 0,
+        eState_State_1 = 1,
+        eState_State_2 = 2,
+        eState_AfterNight = 3,
+        eState_Wait = 4,
+        eState_BeforeDay = 5,
+        eState_Day = 6,
+    };
 
-    ENUM_CLASS(Parameter,
-        NightBackgroundBGSTLayer = 0, // int 0
-        NightForegroundBGSTLayer = 1, // int 1
-        DayBackgroundBGSTLayer = 2, // int 2
-        DayForegroundBGSTLayer = 3, // int 4
-    );
-
+    enum Parameter {
+        eParameter_NightBackgroundBGSTLayer = 0, // int 0
+        eParameter_NightForegroundBGSTLayer = 1, // int 1
+        eParameter_DayBackgroundBGSTLayer = 2, // int 2
+        eParameter_DayForegroundBGSTLayer = 3, // int 4
+    };
+public:
     static GmkSunriseCurtain* Build(GimmickBuildInfo* pBuildInfo);
 
     GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo) DONT_INLINE_CLASS;

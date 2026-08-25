@@ -21,7 +21,7 @@ int lbl_808EA238; // 3
 // https://decomp.me/scratch/8CZ4w
 GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     : Gimmick(pBuildInfo, "GmkSunriseCurtain")
-    , mState(State::Start)
+    , mState(GmkSunriseCurtain::eState_Start)
     , mStateFrames(0)
     , mTimeChanged(false)
     , mScreenTintColor()
@@ -65,10 +65,10 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     mFlfMdlDraw2->SetWoolDrawMatrix(mtx1);
     mFlfMdlDraw2->SetVisibility(false);
 
-    mNightBackgroundBGSTLayer = pBuildInfo->GetIntParam(Parameter::NightBackgroundBGSTLayer) + 6;
-    mNightForegroundBGSTLayer = pBuildInfo->GetIntParam(Parameter::NightForegroundBGSTLayer) + 6;
-    mDayBackgroundBGSTLayer = pBuildInfo->GetIntParam(Parameter::DayBackgroundBGSTLayer) + 6;
-    mDayForegroundBGSTLayer = pBuildInfo->GetIntParam(Parameter::DayForegroundBGSTLayer) + 6;
+    mNightBackgroundBGSTLayer = pBuildInfo->GetIntParam(GmkSunriseCurtain::eParameter_NightBackgroundBGSTLayer) + 6;
+    mNightForegroundBGSTLayer = pBuildInfo->GetIntParam(GmkSunriseCurtain::eParameter_NightForegroundBGSTLayer) + 6;
+    mDayBackgroundBGSTLayer = pBuildInfo->GetIntParam(GmkSunriseCurtain::eParameter_DayBackgroundBGSTLayer) + 6;
+    mDayForegroundBGSTLayer = pBuildInfo->GetIntParam(GmkSunriseCurtain::eParameter_DayForegroundBGSTLayer) + 6;
 
     mFbAlpha.Create(::new (gfl::HeapID::Work) FbAlpha);
 
@@ -104,21 +104,21 @@ GmkSunriseCurtain::~GmkSunriseCurtain() { }
 
 void GmkSunriseCurtain::SetBGSTLayersBasedOnMission() {
     if (GameManager::IsInMission()) {
-        SetBGSTLayers(TimeType::Day);
+        SetBGSTLayers(GmkSunriseCurtain::eTimeType_Day);
     } else {
-        SetBGSTLayers(TimeType::Night);
+        SetBGSTLayers(GmkSunriseCurtain::eTimeType_Night);
     }
 }
 
 void GmkSunriseCurtain::SwitchStates() {
     mFlfMdlDraw1->PlayNURBSAnimation(1, true);
     Game::Sound::PlaySoundEffect(0xB4, 0);
-    mState = State::State_2;
+    mState = GmkSunriseCurtain::eState_State_2;
 }
 
 void GmkSunriseCurtain::Update() {
     switch (mState) {
-        case State::Start: {
+        case GmkSunriseCurtain::eState_Start: {
             if (mStateFrames != 0) {
                 mStateFrames--;
             } else {
@@ -140,7 +140,7 @@ void GmkSunriseCurtain::Update() {
 
                 if (GameManager::IsInMission()) {
                     DoTimeSwitch();
-                    mState = State::Day;
+                    mState = GmkSunriseCurtain::eState_Day;
                 } else {
                     SetStateForTaggedObjects(
                         "ON",
@@ -150,14 +150,14 @@ void GmkSunriseCurtain::Update() {
                         "OFF",
                         mBuildInfoPtr->GetStringParam(Gimmick::eParameterID_Param1).c_str()
                     );
-                    mState = State::State_1;
+                    mState = GmkSunriseCurtain::eState_State_1;
                 }
             }
 
             break;
         }
 
-        case State::State_2: {
+        case GmkSunriseCurtain::eState_State_2: {
             if (mFlfMdlDraw1->GetCurrentFrame() == 37.0f) {
                 Game::Sound::PlaySoundEffect(mPosition, 0xF5, 0, 0);
             }
@@ -182,13 +182,13 @@ void GmkSunriseCurtain::Update() {
 
             if (mFlfMdlDraw1->IsAnimationDone()) {
                 mColorChangeFrames = 0;
-                mState = State::AfterNight;
+                mState = GmkSunriseCurtain::eState_AfterNight;
             }
 
             break;
         }
 
-        case State::AfterNight: {
+        case GmkSunriseCurtain::eState_AfterNight: {
             if (mColorChangeFrames < 30) {
                 gfl::Color from = 0xFFFFFFFF;
                 gfl::Color color;
@@ -207,26 +207,26 @@ void GmkSunriseCurtain::Update() {
             } else {
                 DoTimeSwitch();
                 mStateFrames = 20;
-                mState = State::Wait;
+                mState = GmkSunriseCurtain::eState_Wait;
             }
 
             break;
         }
 
-        case State::Wait: {
+        case GmkSunriseCurtain::eState_Wait: {
             if (!Stage::Instance()->fn_80044C88()) {
                 if (mStateFrames != 0) {
                     mStateFrames--;
                 } else {
                     mColorChangeFrames = 0;
-                    mState = State::BeforeDay;
+                    mState = GmkSunriseCurtain::eState_BeforeDay;
                 }
             }
 
             break;
         }
 
-        case State::BeforeDay: {
+        case GmkSunriseCurtain::eState_BeforeDay: {
             if (mColorChangeFrames < 60) {
                 gfl::Color from = 0xFFFFFFFF;
                 gfl::Color to = 0xFFFFFFFF;
@@ -245,13 +245,13 @@ void GmkSunriseCurtain::Update() {
                 mColorChangeFrames++;
             } else {
                 mFbAlpha->SetUpdate(false);
-                mState = State::Day;
+                mState = GmkSunriseCurtain::eState_Day;
             }
 
             break;
         }
 
-        case State::Day: {
+        case GmkSunriseCurtain::eState_Day: {
             if (mFlfMdlDraw2->IsVisible() && mFlfMdlDraw2->IsAnimationDone()) {
                 mFlfMdlDraw2->SetVisibility(false);
             }
@@ -333,7 +333,7 @@ void GmkSunriseCurtain::DoTimeSwitch() {
 }
 
 void GmkSunriseCurtain::SetState(FlfGameObj* pSetter, const std::string& rState) {
-    if (rState == "ON" && State::State_1 == mState) {
+    if (rState == "ON" && GmkSunriseCurtain::eState_State_1 == mState) {
         SwitchStates();
     }
 }

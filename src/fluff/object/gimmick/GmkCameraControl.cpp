@@ -32,11 +32,11 @@ GmkCameraControl::~GmkCameraControl() { }
 
 
 void GmkCameraControl::Init(GimmickBuildInfo* buildInfo) {
-    uint type = buildInfo->GetIntParam(Parameter::CameraType);
+    uint type = buildInfo->GetIntParam(GmkCameraControl::eParameter_CameraType);
     mCameraType = type;
 
-    if (type > CameraType::Horizontal) {
-        mCameraType = CameraType::Both;
+    if (type > GmkCameraControl::eCameraType_Horizontal) {
+        mCameraType = GmkCameraControl::eCameraType_Both;
     }
 
     mCameraInfo.fn_803CB458(0, buildInfo->mIdentifier, 0);
@@ -46,9 +46,9 @@ void GmkCameraControl::Init(GimmickBuildInfo* buildInfo) {
     mCameraMaxX = cam.x;
     mCameraMaxY = cam.y;
 
-    if (mCameraType == CameraType::Vertical) {
+    if (mCameraType == GmkCameraControl::eCameraType_Vertical) {
         mCameraMaxX = LOCKED_CAMERA_MAX;
-    } else if (mCameraType == CameraType::Horizontal) {
+    } else if (mCameraType == GmkCameraControl::eCameraType_Horizontal) {
         mCameraMaxY = LOCKED_CAMERA_MAX;
     }
 

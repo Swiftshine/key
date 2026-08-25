@@ -11,17 +11,17 @@
 // size: 0x190
 class GmkBeadDrop : public Gimmick {
 public:
-    ENUM_CLASS(State,
-        Idle        = 1,
-        Spawn       = 2,
-        Complete    = 3,
-    );
-    
-    ENUM_CLASS(Parameter,
-        BeadType            = 0, // int 0
-        BeadColor           = 1, // int 1
-        InitialBeadFunds    = 2, // int 2
-    );
+    enum State {
+        eState_Idle     = 1,
+        eState_Spawn    = 2,
+        eState_Complete = 3,
+    };
+
+    enum Parameter {
+        eParameter_BeadType         = 0, // int 0
+        eParameter_BeadColor        = 1, // int 1
+        eParameter_InitialBeadFunds = 2, // int 2
+    };
 public:
     static GmkBeadDrop* Build(GimmickBuildInfo* buildInfo);
     GmkBeadDrop(GimmickBuildInfo* buildInfo, const char* taskName);
@@ -30,10 +30,10 @@ public:
 
     /* FlfGameObj */
     virtual void SetState(FlfGameObj* setter, const std::string& state);
-    
+
     /* Gimmick */
     virtual void Update();
-    
+
     void SetState(int stateValue) DONT_INLINE_CLASS;
     void SpawnBeads();
     bool CanSpawnBeads();

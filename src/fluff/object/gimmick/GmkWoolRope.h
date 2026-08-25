@@ -15,26 +15,26 @@ class WoolLinkObjBase;
 // size: 0x160
 class GmkWoolRope : public Gimmick {
 public:
-    ENUM_CLASS(WoolTextureType,
-        Brown           = 0,
-        Pink            = 1,
-        White           = 2,
-        Red             = 3,
-        Orange          = 4,
-        Yellow          = 5,
-        LightBlue       = 6,
-        RedWhiteBlue    = 7,
-        LightGreen      = 8,
-        Black           = 9,
-        Tan             = 10,
-        Cyan            = 11,
-        Lavender        = 12,
-        Silver          = 13,
-        GreenCoil       = 50,
-        PinkZipper      = 51,
-    );
+    enum WoolTextureType {
+        eWoolTextureType_Brown           = 0,
+        eWoolTextureType_Pink            = 1,
+        eWoolTextureType_White           = 2,
+        eWoolTextureType_Red             = 3,
+        eWoolTextureType_Orange          = 4,
+        eWoolTextureType_Yellow          = 5,
+        eWoolTextureType_LightBlue       = 6,
+        eWoolTextureType_RedWhiteBlue    = 7,
+        eWoolTextureType_LightGreen      = 8,
+        eWoolTextureType_Black           = 9,
+        eWoolTextureType_Tan             = 10,
+        eWoolTextureType_Cyan            = 11,
+        eWoolTextureType_Lavender        = 12,
+        eWoolTextureType_Silver          = 13,
+        eWoolTextureType_GreenCoil       = 50,
+        eWoolTextureType_PinkZipper      = 51,
+    };
 
-    ENUM_CLASS(HookType,
+    enum HookType {
         Standard        = 0,
         Flower          = 1,
         WhiteBow        = 2,
@@ -42,7 +42,7 @@ public:
         RedButton       = 4,
         BrownSquare     = 8,
         Gizmo           = 49,
-    );
+    };
 
     static GimmickBuildInfo GBuildInfo;
     static WoolBaseTask::WoolBuildInfo WBuildInfo;
@@ -58,7 +58,7 @@ public:
     );
 
     /* Virtual Methods */
-    
+
     /* GmkWoolRope */
 
     /* 0x08 */ virtual ~GmkWoolRope();
@@ -78,7 +78,7 @@ public:
     /* Gimmick */
 
     /* 0xBC */ virtual void Update() override;
-    
+
     /* Class Members */
 
     /* 0x130 */ int m_130;

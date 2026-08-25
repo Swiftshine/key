@@ -15,7 +15,7 @@ GmkWarpExit::GmkWarpExit(GimmickBuildInfo* buildInfo)
     , mAnimCtrl(nullptr)
     , mFbMokoMoko(nullptr)
 {
-    uint index = buildInfo->GetIntParam(Parameter::FullsortSceneIndex) + 5;
+    uint index = buildInfo->GetIntParam(GmkWarpExit::eParameter_SceneIndex) + 5;
     mFullSortSceneIndex = index;
     mZOrder3 = FullSortSceneUtil::GetZOrder(index, 3);
     mZOrder4 = FullSortSceneUtil::GetZOrder(index, 4);

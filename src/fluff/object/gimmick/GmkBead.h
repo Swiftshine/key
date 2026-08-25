@@ -5,22 +5,22 @@
 
 class GmkBead : public Gimmick {
 public:
-    ENUM_CLASS(Type,
-        Small,  // 1 bead
-        Medium, // 5 beads
-        Large,  // 10 beads
-        Huge,   // 100 beads
-    );
+    enum BeadType {
+        eBeadType_Small     = 0, // 1 bead
+        eBeadType_Medium    = 1, // 5 beads
+        eBeadType_Large     = 2, // 10 beads
+        eBeadType_Huge      = 3, // 100 beads
+    };
 
-    ENUM_CLASS(Color,
-        White   = 0,
-        Blue    = 1,
-        Green   = 2,
-        Orange  = 3,
-        Red     = 4,
-        Purple  = 5,
-        Yellow  = 6,
-    );
+    enum BeadColor {
+        eBeadColor_White   = 0,
+        eBeadColor_Blue    = 1,
+        eBeadColor_Green   = 2,
+        eBeadColor_Orange  = 3,
+        eBeadColor_Red     = 4,
+        eBeadColor_Purple  = 5,
+        eBeadColor_Yellow  = 6,
+    };
 public:
     int GetBeadValue();
     void fn_800B0658(float);

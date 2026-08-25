@@ -29,9 +29,9 @@ nw4r::math::VEC2 GmkWindCurrent::GetPushDirection_thunk() const {
 void GmkWindCurrent::SetState(FlfGameObj* pSetter, const std::string& rState) {
     int state = mState.GetCurrentState();
 
-    if (state == State::Disabled) {
+    if (state == GmkWindCurrent::eState_Disabled) {
         SetEnabled(true);
-    } else if (state == State::Enabled) {
+    } else if (state == GmkWindCurrent::eState_Enabled) {
         SetEnabled(false);
     }
 }
@@ -43,7 +43,7 @@ void GmkWindCurrent::Deactivate() {
 
 GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskName)
     : Gimmick(pBuildInfo, pTaskName)
-    , mState(State::Enabled)
+    , mState(GmkWindCurrent::eState_Enabled)
     , mDimensions(0.0f, 0.0f)
     , mPushDirection(0.0f, 1.0f)
     , mPushSpeed(1.0f)
@@ -58,7 +58,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
     , mIsActive(true)
     , mWindDirection(Orientation::Up)
 {
-    float strength = GetBuildInfo()->GetFloatParam(Parameter::WindStrength);
+    float strength = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_WindStrength);
 
     if (strength > 0.0f) {
         mWindStrength = strength;
@@ -68,7 +68,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
 
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, GetBuildInfo()->mSceneOrder);
 
-    float width = GetBuildInfo()->GetFloatParam(Parameter::Width);
+    float width = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_Width);
 
     mDimensions.x = width;
 
@@ -76,7 +76,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
         mDimensions.x = DEFAULT_WIDTH;
     }
 
-    float height = GetBuildInfo()->GetFloatParam(Parameter::Height);
+    float height = GetBuildInfo()->GetFloatParam(GmkWindCurrent::eParameter_Height);
 
     mDimensions.y = height;
 
@@ -98,7 +98,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
         mColObjTrans->AddToTree();
     }
 
-    SetCollisionBounds(GetBuildInfo()->GetIntParam(Parameter::WindDirection));
+    SetCollisionBounds(GetBuildInfo()->GetIntParam(GmkWindCurrent::eParameter_WindDirection));
 
     // nothing is ever done with this result
     Stage::Instance()->GetSceneByID(sceneIndex);
@@ -112,7 +112,7 @@ GmkWindCurrent::GmkWindCurrent(GimmickBuildInfo* pBuildInfo, const char* pTaskNa
 
     mShouldUpdateWater = false;
 
-    if (GetBuildInfo()->CheckBoolParam(Parameter::Disabled)) {
+    if (GetBuildInfo()->CheckBoolParam(GmkWindCurrent::eParameter_Disabled)) {
         SetEnabled(false);
     }
 
@@ -128,12 +128,12 @@ void GmkWindCurrent::Update() const {
     GET_UNCONST(GmkWindCurrent);
 
     switch (mState.GetCurrentState()) {
-        case State::Disabled: {
+        case GmkWindCurrent::eState_Disabled: {
             self->DecreasePushSpeed();
             break;
         }
 
-        case State::Enabled: {
+        case GmkWindCurrent::eState_Enabled: {
             self->IncreasePushSpeed();
             break;
         }
@@ -184,9 +184,9 @@ void GmkWindCurrent::SetEnabled(bool enabled) {
     mColObjTrans->SetEnabled(enabled);
 
     if (enabled) {
-        mState.SetCurrentStateAndClearOthers(State::Enabled);
+        mState.SetCurrentStateAndClearOthers(GmkWindCurrent::eState_Enabled);
     } else {
-        mState.SetCurrentStateAndClearOthers(State::Disabled);
+        mState.SetCurrentStateAndClearOthers(GmkWindCurrent::eState_Disabled);
     }
 }
 
@@ -226,7 +226,7 @@ void GmkWindCurrentSwitch::Update() const {
     switch (mState.GetCurrentState()) {
         case 0: {
             if (mButton->mIsPulled) {
-                self->SetStateForTaggedObjects("switch", GetBuildInfo()->GetStringParam(Parameter::TagList).c_str());
+                self->SetStateForTaggedObjects("switch", GetBuildInfo()->GetStringParam(GmkWindCurrentSwitch::eParameter_TagList).c_str());
                 self->mState.SetCurrentStateAndClearOthers(1);
             }
             break;
@@ -431,7 +431,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
     const char* loopAnimName;
     const char* endAnimName;
 
-    switch (pWindCurrent->GetBuildInfo()->GetIntParam(GmkWindCurrent::Parameter::WindDirection)) {
+    switch (pWindCurrent->GetBuildInfo()->GetIntParam(GmkWindCurrent::GmkWindCurrent::eParameter_WindDirection)) {
         case Orientation::Up: {
             startAnimName   = "c_000_start";
             loopAnimName    = "c_000_loop";
@@ -516,7 +516,7 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
         gfl::Mtx34 mtx;
         PSMTXIdentity(mtx);
 
-        switch (mWindCurrent->GetBuildInfo()->GetIntParam(GmkWindCurrent::Parameter::WindDirection)) {
+        switch (mWindCurrent->GetBuildInfo()->GetIntParam(GmkWindCurrent::GmkWindCurrent::eParameter_WindDirection)) {
             case Orientation::Up:
             case Orientation::Down: {
                 mtx[0][0] = width;
