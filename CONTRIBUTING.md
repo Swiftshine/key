@@ -13,6 +13,7 @@ Sections:
     - [Enums](#enums)
     - [Structures](#structures)
     - [Literals](#literals)
+    - [Notes](#notes)
 
 ## Resources
 - [Ghidra](https://ghidra-sre.org/) - A disassembling, decompiling, and reverse-engineering tool.
@@ -66,7 +67,10 @@ For GFL, do the same, but prefixed with "gfl". e.g. `gflRenderObj.h` instead of 
 No known Good-Feel title was shipped with debug symbols. However, many Good-Feel titles are compiled with [RTTI](https://en.wikipedia.org/wiki/Run-time_type_information). Therefore, all symbol names must be inferred from RTTI or from what the function does.
 
 Function names written by Good-Feel in *Kirby's Epic Yarn* are known to be named with PascalCase.
-To mimic Good-Feel's own programming, functions in this decompilation will, too.
+
+To mimic Good-Feel's own programming, non-inline functions will be named with `PascalCase`.
+
+Inline functions will be named with `camelCase`. Only use the `inline` keyword when necessary.
 
 Unknown virtual functions are to be named based on their offset relative to the start of the [virtual table](https://en.wikipedia.org/wiki/Virtual_method_table), prefixed with "vf".
 
@@ -190,3 +194,6 @@ float myFloat = 1.0; // `1.0` is implicitly a double value, not a float.
 float myFloat = 1.0f;
 double myDouble = 2.0;
 ```
+
+### Notes
+You may notice that some sections of the codebase don't follow this defined structure. If you are editing these files, feel free to make them compliant.
