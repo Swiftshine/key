@@ -10,26 +10,26 @@ MissionClearCheckerBase::MissionClearCheckerBase() { }
 MissionClearCheckerBase::~MissionClearCheckerBase() { }
 
 void MissionClearCheckerBase::SetMissionGameCtrl(MissionGameCtrl* pMissionGameCtrl) {
-    mMissionStatus = MissionStatus::Playing;
-    mMissionEndReason = MissionEndReason::Succeeded;
+    mMissionStatus = MissionClearCheckerBase::eMissionStatus_Playing;
+    mMissionEndReason = MissionClearCheckerBase::eMissionEndReason_Succeeded;
     mMissionGameCtrl = pMissionGameCtrl;
 }
 
 void MissionClearCheckerBase::ResetMissionStatus() {
-    mMissionStatus = MissionStatus::Playing;
-    mMissionEndReason = MissionEndReason::Succeeded;
+    mMissionStatus = MissionClearCheckerBase::eMissionStatus_Playing;
+    mMissionEndReason = MissionClearCheckerBase::eMissionEndReason_Succeeded;
 }
 
 void MissionClearCheckerBase::CauseMissionSuccess() {
-    EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
+    EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
 }
 
 void MissionClearCheckerBase::CauseMissionFailure() {
-    EndMission(MissionStatus::Failed, MissionEndReason::TimeUp);
+    EndMission(MissionClearCheckerBase::eMissionStatus_Failed, MissionClearCheckerBase::eMissionEndReason_TimeUp);
 }
 
 void MissionClearCheckerBase::EndMission(int status, int reason) {
-    if (mMissionStatus != MissionStatus::Playing) {
+    if (mMissionStatus != MissionClearCheckerBase::eMissionStatus_Playing) {
         return;
     }
 
@@ -88,13 +88,13 @@ int MissionBeadClearChecker::Process() {
 
     if (work->mBeadsCollected[0] + work->mBeadsCollected[1] >= mBeadThreshold) {
         // we have succeeded
-        EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
+        EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
     } else {
         // we haven't succeeded...
 
         if (TimeRanOut(work)) {
             // ...because we ran out of time
-            EndMission(MissionStatus::Failed, MissionEndReason::TimeUp);
+            EndMission(MissionClearCheckerBase::eMissionStatus_Failed, MissionClearCheckerBase::eMissionEndReason_TimeUp);
         } // ...because we're not done yet
     }
 
@@ -128,8 +128,8 @@ MissionTimeAttackClearChecker::~MissionTimeAttackClearChecker() { }
 void MissionTimeAttackClearChecker::SetMissionGameCtrl(
     MissionGameCtrl* pMissionGameCtrl
 ) {
-    mMissionStatus = MissionStatus::Playing;
-    mMissionEndReason = MissionEndReason::Succeeded;
+    mMissionStatus = MissionClearCheckerBase::eMissionStatus_Playing;
+    mMissionEndReason = MissionClearCheckerBase::eMissionEndReason_Succeeded;
     mMissionGameCtrl = pMissionGameCtrl;
 }
 
@@ -139,9 +139,9 @@ int MissionTimeAttackClearChecker::Process() {
 
     if (tas >= 0 && 3 > tas) {
         if (tas == InStageWork::TimeAttackStatus::Failed) {
-            EndMission(MissionStatus::Failed, MissionEndReason::TimeAttackFailed);
+            EndMission(MissionClearCheckerBase::eMissionStatus_Failed, MissionClearCheckerBase::eMissionEndReason_TimeAttackFailed);
         } else {
-            EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
+            EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
         }
     }
 
@@ -177,9 +177,9 @@ int MissionDefeatEnemyClearChecker::Process() {
     int numDefeated = work->GetNumEnemiesDefeated();
 
     if (numDefeated >= mEnemyDefeatThreshold) {
-        EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
+        EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
     } else if (TimeRanOut(work)) {
-        EndMission(MissionStatus::Failed, MissionEndReason::TimeUp);
+        EndMission(MissionClearCheckerBase::eMissionStatus_Failed, MissionClearCheckerBase::eMissionEndReason_TimeUp);
     }
 
     return GetMissionStatus();
@@ -204,8 +204,8 @@ MissionCarrierClearChecker* MissionCarrierClearChecker::Build(MissionGameCtrl *p
 void MissionCarrierClearChecker::SetMissionGameCtrl(
     MissionGameCtrl* pMissionGameCtrl
 ) {
-    mMissionStatus = MissionStatus::Playing;
-    mMissionEndReason = MissionEndReason::Succeeded;
+    mMissionStatus = MissionClearCheckerBase::eMissionStatus_Playing;
+    mMissionEndReason = MissionClearCheckerBase::eMissionEndReason_Succeeded;
     mMissionGameCtrl = pMissionGameCtrl;
 }
 
@@ -220,10 +220,10 @@ int MissionCarrierClearChecker::Process() {
     MissionGameCtrl* ctrl = GetMissionGameCtrl();
 
     if (ctrl->CheckMissionSuccess()) {
-        EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
+        EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
     } else {
         if (TimeRanOut(work)) {
-            EndMission(MissionStatus::Failed, MissionEndReason::TimeUp);
+            EndMission(MissionClearCheckerBase::eMissionStatus_Failed, MissionClearCheckerBase::eMissionEndReason_TimeUp);
         }
     }
 
@@ -231,7 +231,7 @@ int MissionCarrierClearChecker::Process() {
 }
 
 void MissionCarrierClearChecker::CauseMissionSuccess() {
-    EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
+    EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
 }
 
 void MissionCarrierClearChecker::CauseMissionFailure() {
@@ -261,9 +261,9 @@ int MissionHideAndSeekClearChecker::Process() {
     int numZekeFound = work->GetNumZekeFound();
 
     if (numZekeFound >= mZekeFoundThreshold) {
-        EndMission(MissionStatus::Succeeded, MissionEndReason::Succeeded);
+        EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
     } else if (TimeRanOut(work)) {
-        EndMission(MissionStatus::Failed, MissionEndReason::TimeUp);
+        EndMission(MissionClearCheckerBase::eMissionStatus_Failed, MissionClearCheckerBase::eMissionEndReason_TimeUp);
     }
 
     return GetMissionStatus();

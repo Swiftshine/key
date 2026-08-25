@@ -10,22 +10,21 @@
 /// @note Size: `0x10`
 class MissionClearCheckerBase {
 public:
-    /* Enums */
+    enum MissionStatus {
+        eMissionStatus_Playing     = 0,
+        eMissionStatus_Succeeded   = 1,
+        eMissionStatus_Failed      = 2,
+    };
 
-    ENUM_CLASS(MissionStatus,
-        Playing     = 0,
-        Succeeded   = 1,
-        Failed      = 2,
-    );
+    // Why did the mission end?
+    enum MissionEndReason {
+        eMissionEndReason_Succeeded           = 0,
 
-    ENUM_CLASS(MissionEndReason,
-        Succeeded           = 0,
+        eMissionEndReason_TimeUp              = 2,
+        eMissionEndReason_TimeAttackFailed    = 3,
+    };
 
-        TimeUp              = 2,
-        TimeAttackFailed    = 3,
-    );
-
-    
+public:
 
     MissionClearCheckerBase() DONT_INLINE_CLASS;
 
@@ -62,7 +61,7 @@ public:
 /// @brief Checks the status of the bead collection mission.
 class MissionBeadClearChecker : public MissionClearCheckerBase {
 public:
-    
+
 
     MissionBeadClearChecker();
 
@@ -86,7 +85,7 @@ public:
 /// @brief Checks the status of the time attack mission.
 class MissionTimeAttackClearChecker : public MissionClearCheckerBase {
 public:
-    
+
 
     MissionTimeAttackClearChecker();
 
@@ -99,7 +98,7 @@ public:
     /* 0x18 */ virtual void CauseMissionFailure() override;
 
     /* Class Methods */
-    
+
     DECL_WEAK void SetMissionGameCtrl(MissionGameCtrl* pMissionGameCtrl) override;
 
     /* Static Methods */
@@ -110,7 +109,7 @@ public:
 /// @brief Checks the status of the "defeat enemies" mission.
 class MissionDefeatEnemyClearChecker : public MissionClearCheckerBase {
 public:
-    
+
 
     MissionDefeatEnemyClearChecker();
 
@@ -136,7 +135,7 @@ public:
 /// @brief Checks the status of the carrier mission.
 class MissionCarrierClearChecker : public MissionClearCheckerBase {
 public:
-    
+
 
     MissionCarrierClearChecker();
 
@@ -161,10 +160,10 @@ public:
 /// @brief Checks the status of the "hide-and-seek" mission.
 class MissionHideAndSeekClearChecker : public MissionClearCheckerBase {
 public:
-    
+
 
     MissionHideAndSeekClearChecker();
-    
+
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~MissionHideAndSeekClearChecker();
@@ -178,14 +177,14 @@ public:
     static MissionHideAndSeekClearChecker* Build(MissionGameCtrl* pMissionGameCtrl);
 
     /* Class Members */
-    
+
     /// @brief The number of times the player needs to find Zeke.
     /// @note This value is usually set to 5.
     /* 0x10 */ int mZekeFoundThreshold;
 };
 
 struct CheckerWithThreshold : MissionClearCheckerBase {
-    /* 0x10 */ int mThreshold;  
+    /* 0x10 */ int mThreshold;
 };
 
 #endif

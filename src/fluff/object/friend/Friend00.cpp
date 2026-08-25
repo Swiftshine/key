@@ -122,7 +122,7 @@ void Friend00::StartMission() {
     mCollisionEntry->mInfo.mPendingCollision = false;
     PlayNURBSAnimation(201, true);
 
-    if (GameManager::GetCurrentMissionID() == MissionUtil::MissionID::MB_MtSlide) {
+    if (GameManager::GetCurrentMissionID() == MissionUtil::eMissionID_MB_MtSlide) {
         vf22C(0.085f);
     }
 
