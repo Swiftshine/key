@@ -251,7 +251,7 @@ void __fill_mem(void *dest, int ch, size_t count) {
         }
 
         /* Copy 4 bytes at a time, first in chunks of 32 bytes */
-        uint *alignDest = (uint *)(byteDest - 3);
+        unsigned int *alignDest = (unsigned int *)(byteDest - 3);
         size_t alignCount = count / 32;
         if (alignCount != 0) {
             do {

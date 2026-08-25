@@ -3,8 +3,8 @@
 
 void* memmove(void* dst, const void* src, size_t n) {
     char* dst2 = dst; char* src2 = *(char**)&src;
-    uint r6 = (uint)dst ^ (uint)src;
-    uint r7 = ((uint)dst << __cntlzw(r6)) >> 31;
+    unsigned int r6 = (unsigned int)dst ^ (unsigned int)src;
+    unsigned int r7 = ((unsigned int)dst << __cntlzw(r6)) >> 31;
     if (n >= 0x20) {
         if (r6 & 3) {
             if (r7 == 0) {
@@ -41,7 +41,7 @@ void* memchr(const void* mem, int c, size_t n) {
     return NULL;
 }
 
-void* __memrchr(const void* mem, uint c, size_t n) {
+void* __memrchr(const void* mem, unsigned int c, size_t n) {
     u8 c2 = c;
     char* m2 = *(char**)&mem + n;
     n++;

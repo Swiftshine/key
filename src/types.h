@@ -16,7 +16,6 @@
 
 typedef float MTX34[3][4];
 
-typedef uint32_t uint;
 typedef unsigned long ulong;
 
 typedef char string32[0x20];
