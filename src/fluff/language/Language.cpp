@@ -1,6 +1,7 @@
 #include "language/Language.h"
 
-int CurrentRegionType = Language::RegionType::US;
+
+int CurrentRegionType = Language::eRegionType_US;
 
 // sbss, but cyclic dependency error
 static int CurrentLanguageType;
@@ -19,12 +20,9 @@ uint Language::GetCurrentRegionCode() {
 
 uint Language::GetRegionCodeByRegionType(int type) {
     switch (type) {
-        case RegionType::Japan:
-            return RegionCode::Japan;
-        case RegionType::US:
-            return RegionCode::US;
-        case RegionType::Europe:
-            return RegionCode::Europe;
+        case Language::eRegionType_Japan:   return Language::eRegionCode_Japan;
+        case Language::eRegionType_US:      return Language::eRegionCode_US;
+        case Language::eRegionType_Europe:  return Language::eRegionCode_Europe;
     }
 
     return 0;
@@ -33,45 +31,40 @@ uint Language::GetRegionCodeByRegionType(int type) {
 
 int Language::GetLanguageType(int regionType, SCLanguage language) {
     uint lang = language;
-    
+
     switch (regionType) {
-        case RegionType::Japan:
-            return LanguageType::JP_Japanese;
-    
-        case RegionType::US: {
+        case Language::eRegionType_Japan: return Language::eLanguageType_JP_Japanese;
+
+        case Language::eRegionType_US: {
             if (SC_LANG_FR != lang) {
                 if (SC_LANG_SP == lang) {
-                    return LanguageType::US_Spanish;
+                    return Language::eLanguageType_US_Spanish;
                 }
-                return LanguageType::US_English;
+
+                return Language::eLanguageType_US_English;
             }
-            return LanguageType::US_French;
+
+            return Language::eLanguageType_US_French;
         }
 
-        case RegionType::Europe: {
+
+        case Language::eRegionType_Europe: {
             switch (lang) {
-                default:
-                    return LanguageType::EU_English;
+                default: return Language::eLanguageType_EU_English;
 
-                case SC_LANG_DE:
-                    return LanguageType::EU_German;
+                case SC_LANG_DE: return Language::eLanguageType_EU_German;
 
-                case SC_LANG_FR:
-                    return LanguageType::EU_French;
+                case SC_LANG_FR: return Language::eLanguageType_EU_French;
 
-                case SC_LANG_SP:
-                    return LanguageType::EU_Spanish;
+                case SC_LANG_SP: return Language::eLanguageType_EU_Spanish;
 
-                case SC_LANG_IT:
-                    return LanguageType::EU_Italian;
+                case SC_LANG_IT: return Language::eLanguageType_EU_Italian;
             }
 
-            return LanguageType::EU_Spanish;
+            return Language::eLanguageType_EU_Spanish;
         }
-        
     }
-
-    return LanguageType::JP_Japanese;
+    return Language::eLanguageType_JP_Japanese;
 }
 
 void Language::SetCurrentLanguageType(int type) {

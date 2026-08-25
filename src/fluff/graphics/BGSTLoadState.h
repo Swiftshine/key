@@ -4,12 +4,12 @@
 #include "types.h"
 
 namespace BGST {
-    ENUM_CLASS(LoadState,
-        BGST_LOADING_NOT_INITED = 0,
-        BGST_LOADING_IMAGE = 1,
-        BGST_LOADING_GRID = 2,
-        BGST_LOADING_STOP = 3
-    );
+    enum LoadState {
+        eLoadState_LoadingNotInited = 0,
+        eLoadState_LoadingImage     = 1,
+        eLoadState_LoadingGrid      = 2,
+        eLoadState_LoadingStop      = 3,
+    };
 }
 
 #endif

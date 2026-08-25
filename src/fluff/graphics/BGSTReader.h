@@ -15,16 +15,16 @@ class Layer;
 /// @note Size: `0x44`
 class Reader {
 public:
-    ENUM_CLASS(State,
-        PopEntryObject        = 0,
-        GetMainImage    = 1,
-        GetMaskImage    = 2
-    );
+    enum ReadState {
+        eReadState_PopEntryObject = 0,
+        eReadState_GetMainImage   = 1,
+        eReadState_GetMaskImage   = 2,
+    };
 
     /// @note Size: `0x20`
     struct EntryObject {
         static bool Compare(EntryObject* pA, EntryObject* pB);
-        
+
         Layer* mLayer;
         EntryInfo* mEntryInfo;
         void* mMainImage;
@@ -58,10 +58,9 @@ public:
         std::list<EntryObject*>::iterator end
     );
 
-
     /* Class Members */
 
-    /* 0x00 */ int mState;
+    /* 0x00 */ s32 mReadState;
     /* 0x04 */ File* mBGSTFile;
     /* 0x08 */ int m_8;
     /* 0x0C */ EntryObject mEntryObject;

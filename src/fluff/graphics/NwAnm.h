@@ -8,16 +8,14 @@
 
 class NwAnm {
 public:
-    /* Structures + Enums */
+    /* Structures */
 
-    ENUM_CLASS(Flags,
-        UseTexPat = 1,
-        UseChr = 2,
-        
-        UseVis = 64,
-    );
+    enum AnimFlags {
+        TexPat  = 1,
+        TexChr  = 2,
 
-    
+        Vis     = 64,
+    };
 
     NwAnm();
 
@@ -41,9 +39,10 @@ public:
     inline uint GetFlags() const {
         return mFlags;
     }
+
     /* Class Members */
 
-    /* 0x04 */ uint mFlags;
+    /* 0x04 */ u32 mFlags;
     /* 0x08 */ float mAnimationEndFrame;
     /* 0x0C */ uint m_C;
     /* 0x10 */ nw4r::g3d::AnmObj* mTexPatAnim;  // TexPatRes

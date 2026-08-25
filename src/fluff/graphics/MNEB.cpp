@@ -50,8 +50,8 @@ CurveBlock* File::GetNextCurveBlock(CurveBlock* pBlock) const {
 uint File::CopyHeader(void* pData) {
     Header* header = reinterpret_cast<Header*>(pData);
     mFlags = header->mFlags;
-    mIsLocked = header->mLock != LockState::Unlocked;
-    header->mLock = LockState::Locked;
+    mIsLocked = header->mLock != MNEB::eLockState_Unlocked;
+    header->mLock = MNEB::eLockState_Locked;
     mNumFrames = static_cast<float>(header->mNumFrames);
     mIsLooped = header->mIsLooped != 0 ? true : false;
     return header->mCurveBlockCount;

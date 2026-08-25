@@ -8,10 +8,10 @@ class NURBSSet;
 class NURBSObject;
 
 namespace MNEB {
-    ENUM_CLASS(LockState,
-        Unlocked = 0,
-        Locked = 1,
-    );
+    enum LockState {
+        eLockState_Unlocked = 0,
+        eLockState_Locked   = 1,
+    };
 
     struct Header {
         char mMagic[4];

@@ -7,7 +7,7 @@ using namespace BGST;
 #define CHUNK_SIZE 0x20000
 
 Reader::Reader(File* pBGSTFile)
-    : mState(State::PopEntryObject)
+    : mReadState(Reader::eReadState_PopEntryObject)
     , mBGSTFile(pBGSTFile)
     , m_8(0)
     , mObjectList()
@@ -22,18 +22,18 @@ Reader::~Reader() {
 }
 
 void Reader::Update() {
-    switch (mState) {
-        case State::PopEntryObject: {
+    switch (mReadState) {
+        case Reader::eReadState_PopEntryObject: {
             PopEntryObject();
             break;
         }
 
-        case State::GetMainImage: {
+        case Reader::eReadState_GetMainImage: {
             GetMainImage();
             break;
         }
 
-        case State::GetMaskImage: {
+        case Reader::eReadState_GetMaskImage: {
             if (mBGSTFile->mFile->GetFileStatus() == DVD_STATE_WAITING) {
                 GetMaskImage();
             }
@@ -52,7 +52,7 @@ void Reader::GetMainImage() {
     }
 
     m_8 = 0;
-    
+
     size_t mainOffs = mBGSTFile->GetImageOffset(info->mFileMainImageIndex);
     void* mainImg = BGST::List::Instance()->GetImageByIndex(info->mMainImageIndex);
 
@@ -78,24 +78,24 @@ void Reader::GetMainImage() {
     _CutFunction();
 
     mEntryObject.mEntryInfo->mState = 4;
-    mState = 2;
+    mReadState = Reader::eReadState_GetMaskImage;
 }
 
 void Reader::GetMaskImage() {
     switch (mEntryObject.mEntryInfo->mState) {
         case 4: {
             mEntryObject.mEntryInfo->mState = 5;
-        
+
             if (mEntryObject.mEntryInfo->mFileMaskImageIndex == 0xFFFE) {
                 mEntryObject.mEntryInfo->mState = 7;
-                mState = State::PopEntryObject;
+                mReadState = Reader::eReadState_PopEntryObject;
                 PopEntryObject();
             } else {
                 _CutFunction();
                 mBGSTFile->mFile->ReadAsync(mEntryObject.mMaskImage, mEntryObject.mMaskImageSize, mEntryObject.mMaskImageOffset, 2);
                 _CutFunction();
                 mEntryObject.mEntryInfo->mState = 6;
-                mState = 2;
+                mReadState = Reader::eReadState_GetMaskImage;
             }
 
             break;
@@ -103,7 +103,7 @@ void Reader::GetMaskImage() {
 
         case 6: {
             mEntryObject.mEntryInfo->mState = 7;
-            mState = State::PopEntryObject;
+            mReadState = eReadState_PopEntryObject;
             PopEntryObject();
 
             break;
@@ -128,8 +128,8 @@ void Reader::PushEntryObject(Layer* pLayer, EntryInfo* pEntryInfo) {
 
 // https://decomp.me/scratch/NXici
 void Reader::EraseEntryObject(EntryInfo* pEntryInfo) {
-    if (mState == State::GetMainImage && mEntryObject.mEntryInfo == pEntryInfo) {
-        mState = State::PopEntryObject;
+    if (mReadState == Reader::eReadState_GetMainImage && mEntryObject.mEntryInfo == pEntryInfo) {
+        mReadState = Reader::eReadState_PopEntryObject;
         PopEntryObject();
     } else {
         for (std::list<EntryObject*>::iterator it = mObjectList.begin(); it != mObjectList.end(); it++) {
@@ -146,18 +146,18 @@ void Reader::EraseEntryObject(EntryInfo* pEntryInfo) {
 }
 
 void Reader::PopEntryObject() {
-    if (mState == State::PopEntryObject && mObjectList.size() != 0) {
+    if (mReadState == Reader::eReadState_PopEntryObject && mObjectList.size() != 0) {
         Sort();
-    
+
         EntryObject* obj = *mObjectList.begin();
-    
+
         mObjectList.pop_front();
-    
+
         mEntryObject = *obj;
-    
+
         delete obj;
-    
-        mState = State::GetMainImage;
+
+        mReadState = Reader::eReadState_GetMainImage;
     }
 }
 
@@ -197,7 +197,7 @@ bool Reader::EntryObject::Compare(EntryObject* pA, EntryObject* pB) {
     if (rowA != rowB) {
         return rowA < rowB;
     }
-    
+
     u16 colA = pA->mEntryInfo->mColumn;
     u16 colB = pB->mEntryInfo->mColumn;
 

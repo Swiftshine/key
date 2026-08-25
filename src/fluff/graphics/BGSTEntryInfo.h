@@ -4,17 +4,17 @@
 #include "types.h"
 
 namespace BGST {
-
     struct EntryInfo {
-        ENUM_CLASS(State,
-            Invalid         = 1,
-            Valid           = 2,
-            LoadMainImage   = 3, // assumed; this is never used
-            MainImageLoaded = 4,
-            LoadMaskImage   = 5,
-            MaskImageLoaded = 6,
-            ReadyToRender   = 7
-        );
+        enum State {
+            eState_Invalid          = 1,
+            eState_Valid            = 2,
+            eState_LoadMainImage    = 3, // assumed; this is n
+            eState_MainImageLoaded  = 4,
+            eState_LoadMaskImage    = 5,
+            eState_MaskImageLoaded  = 6,
+            eState_ReadyToRender    = 7
+        };
+
         /* 0x00 */ u16 mState;
         /* 0x02 */ u16 mLayer;
         /* 0x04 */ u16 mRow;

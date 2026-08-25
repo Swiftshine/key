@@ -7,7 +7,7 @@ extern "C" void* GetBgImageSquare(void*, u16 index);
 extern "C" gfl::Heap* Mem1Heap;
 
 BGST::File::File()
-    : mLoadState(BGST::LoadState::BGST_LOADING_NOT_INITED)
+    : mLoadState(BGST::eLoadState_LoadingNotInited)
     , mHeader(nullptr)
     , mOutputImage(nullptr)
     , mImageFilesize(0)
@@ -16,7 +16,6 @@ BGST::File::File()
 {
     memset(mEntryInfo, 0, 0x30);
 }
-
 
 BGST::File::~File() {
     if (nullptr != mFile) {
@@ -42,38 +41,38 @@ size_t BGST::File::GetImageOffset(uint index) {
 
 bool BGST::File::TrySetHeader(const char* pFilepath) {
     if (SetHeader(pFilepath)) {
-        mLoadState = BGST::LoadState::BGST_LOADING_IMAGE;
+        mLoadState = BGST::eLoadState_LoadingImage;
         return true;
     }
 
-    mLoadState = BGST::LoadState::BGST_LOADING_STOP;
+    mLoadState = BGST::eLoadState_LoadingStop;
     return false;
 }
 
 bool BGST::File::ProcessLoadState() {
     bool result;
 
-    if (BGST::LoadState::BGST_LOADING_STOP == mLoadState) {
+    if (mLoadState == BGST::eLoadState_LoadingStop) {
         return true;
     }
 
     switch (mLoadState) {
-        case BGST::LoadState::BGST_LOADING_IMAGE: {
+        case BGST::eLoadState_LoadingImage: {
             if (DVD_STATE_WAITING == mFile->GetFileStatus()) {
                 SetupImage();
                 ReadImage();
-                mLoadState = BGST::LoadState::BGST_LOADING_GRID;
+                mLoadState = BGST::eLoadState_LoadingGrid;
                 result = false;
             }
             break;
         }
 
-        case BGST::LoadState::BGST_LOADING_GRID: {
+        case BGST::eLoadState_LoadingGrid: {
             if (DVD_STATE_WAITING == mFile->GetFileStatus()) {
                 LoadGrid();
                 return true;
             }
-            
+
         }
 
     }
@@ -85,7 +84,7 @@ bool BGST::File::ProcessLoadState() {
 void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, int id, int xGridIndex, int yGridIndex) {
     BGST::EntryInfo* entryInfo = (BGST::EntryInfo*)GetByGrid(id, xGridIndex, yGridIndex);
     BGST::List* list = BGST::List::Instance();
-    
+
     if (1 >= (unsigned short)(entryInfo->mState + 0xFFF9)) {
         *pCMPRImage = list->GetImageByIndex(entryInfo->mMainImageIndex);
 
@@ -94,18 +93,18 @@ void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, int id, int x
         } else {
             *pI4Image = list->GetImageByIndex(entryInfo->mMaskImageIndex);
         }
-        
+
     } else {
         *pCMPRImage = nullptr;
         *pI4Image = nullptr;
     }
 }
 
-bool BGST::File::SetHeader(const char* pFilepath) {    
+bool BGST::File::SetHeader(const char* pFilepath) {
     mHeader.Create((BGST::Header*)gfl::Alloc(Mem1Heap, 0x40, 0x20));
 
     mFile = gfl::File::Open(pFilepath, 1);
-    
+
     if (nullptr == mFile) {
         return false;
     }

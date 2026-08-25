@@ -8,7 +8,6 @@
 #include "gfl/gflResFileInfo.h"
 
 namespace env {
-
     // these all inherit from EnvObject
     class EnvFadeSimple;
     class EnvParts_Curtain;
@@ -25,18 +24,16 @@ namespace env {
             int m_C;
         };
 
-        ENUM_CLASS(State,
-            LoadSaveDataTex =  0,
-            CreateWipeWindow = 1,
-            State_2 = 2,
-            State_3 = 3
-        );
+        enum State {
+            eState_LoadSaveDataTex  = 0,
+            eState_CreateWipeWindow = 1,
+            eState_State2           = 2,
+            eState_State3           = 3,
+        };
 
         /* Static Variables */
 
         static EnvManager* sInstance;
-
-        
 
         EnvManager();
 
@@ -51,7 +48,6 @@ namespace env {
         /* 0x24 */ virtual void vf24(); // called for state 2
         /* 0x28 */ virtual void vf28(); // called for state 3
 
-
         /* Class Methods */
 
         void InitInstance(gfl::Task* pParentTask);
@@ -63,7 +59,7 @@ namespace env {
         /* 0x0C */ std::string mSaveDataTexPath;
         /* 0x18 */ void* m_18;
         /* 0x1C */ std::deque<gfl::ResFileInfo> mSaveDataTex;
-        /* 0x28 */ int mState;
+        /* 0x28 */ s32 mState;
         /* 0x2C */ gfl::Task* mUpdatePauseTask;
         /* 0x30 */ int m_30;
         /* 0x34 */ int m_34;
@@ -89,7 +85,7 @@ namespace env {
         /* 0x94 */ int m_94;
     };
 
-    // ASSERT_SIZE(EnvManager, 0x98);
+    ASSERT_SIZE(EnvManager, 0x98);
 }
 
 
