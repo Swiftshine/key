@@ -29,7 +29,7 @@ void FlfNandMng::NandError(s32 result) {
 
 FlfNandInfo::FlfNandInfo()
     : mIsSafeMode(false)
-    , mResult(FlfNandMng::Result::Reset)
+    , mResult(FlfNandMng::eResult_Reset)
     , mFileInfo(nullptr)
     , mCommandBlock(nullptr)
 {
@@ -42,17 +42,17 @@ void FlfNandInfo::Init(NANDFileInfo* pFileInfo, NANDCommandBlock* pCommandBlock,
     mFileInfo = pFileInfo;
     mCommandBlock = pCommandBlock;
     mIsSafeMode = safe;
-    mResult = FlfNandMng::Result::Ok;
+    mResult = FlfNandMng::eResult_Ok;
 }
 
 void FlfNandInfo::SetUserData(NANDFileInfo* pFileInfo, NANDCommandBlock* pCommandBlock, bool arg3) {
     NANDSetUserData(pCommandBlock, this);
-    mResult = FlfNandMng::Result::NoExist;
+    mResult = FlfNandMng::eResult_NoExist;
 }
 
 void FlfNandInfo::ClearUserData() {
     NANDSetUserData(mCommandBlock, nullptr);
-    mResult = FlfNandMng::Result::Invalid;
+    mResult = FlfNandMng::eResult_Invalid;
 }
 
 FlfNandInfo::~FlfNandInfo() {
@@ -60,7 +60,7 @@ FlfNandInfo::~FlfNandInfo() {
 }
 
 void FlfNandInfo::Invalidate() {
-    mResult = FlfNandMng::Result::Invalid;
+    mResult = FlfNandMng::eResult_Invalid;
 }
 
 void FlfNandInfo::Update() {
@@ -68,7 +68,7 @@ void FlfNandInfo::Update() {
         OSSleepTicks(OS_USEC_TO_TICKS(1000LL));
     }
 
-    if (mResult != FlfNandMng::Result::Invalid) {
+    if (mResult != FlfNandMng::eResult_Invalid) {
         return;
     }
 
@@ -96,7 +96,7 @@ void FlfNandInfo::Update() {
 }
 
 void FlfNandInfo::Reset() {
-    mResult = FlfNandMng::Result::Reset;
+    mResult = FlfNandMng::eResult_Reset;
     mIsSafeMode = false;
     mFileInfo = nullptr;
     if (mCommandBlock != nullptr) {
@@ -116,13 +116,13 @@ void FlfNandMng::NandCallback(s32 result, NANDCommandBlock* pBlock) {
 
     NANDSetUserData(pBlock, nullptr);
 
-    if (info->mResult == Result::Ok) {
+    if (info->mResult == FlfNandMng::eResult_Ok) {
         if (sNandResult == NAND_RESULT_OK) {
             info->Invalidate();
         } else {
             info->Reset();
         }
-    } else if (info->mResult == Result::NoExist) {
+    } else if (info->mResult == FlfNandMng::eResult_NoExist) {
         if (sNandResult == NAND_RESULT_OK) {
             info->Reset();
         } else {
@@ -136,7 +136,7 @@ FlfNandMng::FlfNandMng()
 {
     NandInfo.Update();
     sInstance = this;
-    mResult = Result::Invalid;
+    mResult = FlfNandMng::eResult_Invalid;
     mState = 0;
     mPhase = 0;
     sNandResult = NAND_RESULT_OK;
@@ -175,7 +175,7 @@ void FlfNandMng::fn_80229170(const char* pFilename, size_t filesize) {
     mFilesize = filesize;
     mPhase = 1;
     mState = 1;
-    mResult = Result::Reset;
+    mResult = FlfNandMng::eResult_Reset;
 }
 
 void FlfNandMng::fn_802291E4(const char* pFilename) {
@@ -183,7 +183,7 @@ void FlfNandMng::fn_802291E4(const char* pFilename) {
     gfl::Strcpy(mFilename, sizeof(mFilename), pFilename);
     mPhase = 2;
     mState = 7;
-    mResult = Result::Reset;
+    mResult = FlfNandMng::eResult_Reset;
 }
 
 void FlfNandMng::fn_8022924C(size_t numChunks, int arg2) {
@@ -192,7 +192,7 @@ void FlfNandMng::fn_8022924C(size_t numChunks, int arg2) {
     mINodeCount = arg2;
     mPhase = 3;
     mState = 9;
-    mResult = Result::Reset;
+    mResult = FlfNandMng::eResult_Reset;
 }
 
 void FlfNandMng::fn_802292B8(const char* pFilename, void* pData, size_t dataSize) {
@@ -202,7 +202,7 @@ void FlfNandMng::fn_802292B8(const char* pFilename, void* pData, size_t dataSize
     mData3Size = dataSize;
     mPhase = 4;
     mState = 11;
-    mResult = Result::Reset;
+    mResult = FlfNandMng::eResult_Reset;
 }
 
 void FlfNandMng::fn_80229340(const char* pFilename, void* pData, size_t dataSize) {
@@ -212,7 +212,7 @@ void FlfNandMng::fn_80229340(const char* pFilename, void* pData, size_t dataSize
     mData3Size = dataSize;
     mPhase = 5;
     mState = 11;
-    mResult = Result::Reset;
+    mResult = FlfNandMng::eResult_Reset;
 }
 
 size_t FlfNandMng::GetNumBlocks(size_t size) {
@@ -307,7 +307,7 @@ void FlfNandMng::fn_80229524() {
                     }
 
                     case NAND_RESULT_NOEXISTS: {
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -359,16 +359,16 @@ void FlfNandMng::fn_80229524() {
                 switch (sNandResult) {
                     case NAND_RESULT_OK: {
                         if (mLength == mFilesize) {
-                            mResult = Result::Ok;
+                            mResult = FlfNandMng::eResult_Ok;
                         } else {
-                            mResult = Result::Invalid;
+                            mResult = FlfNandMng::eResult_Invalid;
                         }
                         Clear();
                         break;
                     }
 
                     case NAND_RESULT_CORRUPT: {
-                        mResult = Result::Corrupt;
+                        mResult = FlfNandMng::eResult_Corrupt;
                         Clear();
                         break;
                     }
@@ -398,19 +398,19 @@ void FlfNandMng::fn_80229788() {
             if (sNandCallbackCalled) {
                 switch (sNandResult) {
                     case NAND_RESULT_OK: {
-                        mResult = Result::Ok;
+                        mResult = FlfNandMng::eResult_Ok;
                         Clear();
                         break;
                     }
 
                     case NAND_RESULT_CORRUPT: {
-                        mResult = Result::Invalid;
+                        mResult = FlfNandMng::eResult_Invalid;
                         Clear();
                         break;
                     }
 
                     case NAND_RESULT_NOEXISTS: {
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -445,11 +445,11 @@ void FlfNandMng::fn_8022987C() {
                 if (sNandResult == NAND_RESULT_OK) {
                     u32 ans = mCheckAnswer;
                     if (ans == 0) {
-                        mResult = Result::Ok;
+                        mResult = FlfNandMng::eResult_Ok;
                     } else if ((ans & NAND_CHECK_TOO_MANY_USER_BLOCKS) != 0 || (ans & NAND_CHECK_TOO_MANY_APP_BLOCKS) != 0) {
-                        mResult = Result::Invalid;
+                        mResult = FlfNandMng::eResult_Invalid;
                     } else if ((ans & NAND_CHECK_TOO_MANY_USER_FILES) != 0 || (ans & NAND_CHECK_TOO_MANY_APP_FILES) != 0) {
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                     }
 
                     Clear();
@@ -510,7 +510,7 @@ void FlfNandMng::fn_80229978() {
                         if (mPhase == 4) {
                             mState = 13;
                         } else if (mPhase == 5) {
-                            mResult = Result::Corrupt;
+                            mResult = FlfNandMng::eResult_Corrupt;
                             Clear();
                         }  else {
                             GFL_HALT();
@@ -520,7 +520,7 @@ void FlfNandMng::fn_80229978() {
 
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -575,7 +575,7 @@ void FlfNandMng::fn_80229978() {
 
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -621,7 +621,7 @@ void FlfNandMng::fn_80229978() {
 
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -667,7 +667,7 @@ void FlfNandMng::fn_80229978() {
 
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -715,7 +715,7 @@ void FlfNandMng::fn_80229978() {
 
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -743,14 +743,14 @@ void FlfNandMng::fn_80229978() {
             if (sNandCallbackCalled) {
                 switch (sNandResult) {
                     case NAND_RESULT_OK: {
-                        mResult = Result::Ok;
+                        mResult = FlfNandMng::eResult_Ok;
                         Clear();
                         break;
                     }
 
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -795,7 +795,7 @@ void FlfNandMng::fn_80229978() {
                     }
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -850,7 +850,7 @@ void FlfNandMng::fn_80229978() {
                     }
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }
@@ -866,13 +866,13 @@ void FlfNandMng::fn_80229978() {
 
                         switch (result) {
                             case NAND_RESULT_OK: {
-                                mResult = Result::Invalid;
+                                mResult = FlfNandMng::eResult_Invalid;
                                 Clear();
                                 break;
                             }
 
                             case NAND_RESULT_CORRUPT: {
-                                mResult = Result::NoExist;
+                                mResult = FlfNandMng::eResult_NoExist;
                                 Clear();
                                 break;
                             }
@@ -915,7 +915,7 @@ void FlfNandMng::fn_80229978() {
             if (sNandCallbackCalled) {
                 switch (sNandResult) {
                     case NAND_RESULT_OK: {
-                        mResult = Result::Ok;
+                        mResult = FlfNandMng::eResult_Ok;
                         Clear();
                         break;
                     }
@@ -927,7 +927,7 @@ void FlfNandMng::fn_80229978() {
 
                     case NAND_RESULT_CORRUPT: {
                         CutFunction2(sNandResult);
-                        mResult = Result::NoExist;
+                        mResult = FlfNandMng::eResult_NoExist;
                         Clear();
                         break;
                     }

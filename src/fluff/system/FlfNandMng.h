@@ -10,18 +10,14 @@
 /// @note Size: `0x248`
 class FlfNandMng {
 public:
-    /* Structures */
-
-    ENUM_CLASS(Result,
-        Reset       = 0,
-        Ok          = 1,
-        Invalid     = 2,
-        NoExist     = 3,
-        Corrupt     = 4
-    );
-    
-    /* Static Variables */
-
+    enum Result {
+        eResult_Reset       = 0,
+        eResult_Ok          = 1,
+        eResult_Invalid     = 2,
+        eResult_NoExist     = 3,
+        eResult_Corrupt     = 4
+    };
+public:
     static s32 sNandResult;
     static bool sNandCallbackCalled;
 
@@ -50,13 +46,13 @@ public:
 
     void SetFlags(uint flag, bool set) DONT_INLINE_CLASS;
     DECL_WEAK int GetUnk8() const;
-    
+
     /* Static Methods */
     static void HandleNandError(s32 result) DONT_INLINE_CLASS;
     static void NandError(s32 result) DONT_INLINE_CLASS;
     static size_t GetNumBlocks(size_t size);
     static void NandCallback(s32 result, NANDCommandBlock* pBlock);
-    
+
     /* Class Members */
 
     /* 0x000 */ int mState;
@@ -93,7 +89,7 @@ public:
     void Reset() DONT_INLINE_CLASS;
 
     /* Class Members */
-    
+
     bool mIsSafeMode;
     int mResult;
     NANDFileInfo* mFileInfo;
