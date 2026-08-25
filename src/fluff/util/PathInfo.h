@@ -30,7 +30,7 @@ public:
     void fn_80300214(float arg1);
 
     void AddPoints();
-    const nw4r::math::VEC2& GetPoint(int index) const;
+    const nw4r::math::VEC2& GetPoint(s32 index) const;
 
     /* Class Members */
 
@@ -39,7 +39,7 @@ public:
     /* 0x08 */ VectorWrapper<PathSegment> mSegments;
     /* 0x14 */ float m_14;
     /* 0x18 */ float m_18;
-    /* 0x1C */ int mNumSegments;
+    /* 0x1C */ s32 mNumSegments;
     /* 0x20 */ bool mIsLooped;
 };
 

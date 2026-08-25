@@ -38,11 +38,11 @@ void* BpeDecoderFile::Decode(u8 heapID, size_t* pDecompressedSize, uint align) {
    // unpack each block until EOF
 
    // set left to itself as literal flag
-	for (int i = 0; i < 256; i++) {
+	for (s32 i = 0; i < 256; i++) {
 		left[i] = i;
 	}
 
-   int count;
+   s32 count;
    
 LAB_80645298:
 	{

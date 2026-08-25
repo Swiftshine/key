@@ -42,7 +42,7 @@ StringFloatPair Pairs[3];
 
 // https://decomp.me/scratch/g4QKw
 void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
-    int _24 = buildInfo->m_24;
+    s32 _24 = buildInfo->m_24;
 
     m_138 = false;
 
@@ -52,7 +52,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
 
     bool param0 = buildInfo->GetBoolParam(Gimmick::eParameterID_Param0);
 
-    int param4 = buildInfo->GetIntParam(Gimmick::eParameterID_Param4);
+    s32 param4 = buildInfo->GetIntParam(Gimmick::eParameterID_Param4);
     if (param4 == 1) {
         SetIsInMission(true);
     }
@@ -60,7 +60,7 @@ void GmkBeadPopItem::Init(GimmickBuildInfo* buildInfo) {
     m_149 = buildInfo->GetBoolParam(Gimmick::eParameterID_Param4);
 
     m_134 = 0;
-    int gmkID = GetGimmickID();
+    s32 gmkID = GetGimmickID();
     if (gmkID == 0x14B) {
         // ShootingBeadPopItem
         m_134 = 1;
@@ -182,7 +182,7 @@ void GmkBeadPopItem::Update() {
     }
 }
 
-void GmkBeadPopItem::SetState(int state) {
+void GmkBeadPopItem::SetState(s32 state) {
     mState = state;
     mCompletionPercentage = 0.0f;
 
@@ -224,7 +224,7 @@ void GmkBeadPopItem::SetState(FlfGameObj* setter, const std::string& state) {
     ) {
         CutFunction();
 
-        int gimmickID = static_cast<Gimmick*>(setter)->GetGimmickID();
+        s32 gimmickID = static_cast<Gimmick*>(setter)->GetGimmickID();
         bool isClothTurnGimmick = GimmickUtil::IsClothTurnGimmick(gimmickID);
         if (isClothTurnGimmick && mState == GmkBeadPopItem::eState_Init) {
             SetState(GmkBeadPopItem::eState_Idle);
@@ -240,7 +240,7 @@ void GmkBeadPopItem::SetCollisionEnabled(bool enabled) {
 
 // https://decomp.me/scratch/qK0M3
 bool GmkBeadPopItem::Enable() {
-    for (int i = 0; i < 5; i++) {
+    for (s32 i = 0; i < 5; i++) {
         const std::string& tagList = GetStringParam(i).c_str();
 
         if (tagList.c_str() != nullptr) {

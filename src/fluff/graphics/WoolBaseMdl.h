@@ -40,18 +40,18 @@ public:
     WoolBaseMdl(
         FullSortScene* pScene,
         WoolBaseTask* pTask,
-        int arg3,
+        s32 arg3,
         gfl::ResFileObject& rResFileObject,
         const char* pWoolName1,
         const char* pWoolName2,
-        int arg7,
+        s32 arg7,
         const char* pName
     );
 
     WoolBaseMdl(
         FullSortScene* pScene,
         WoolBaseTask* pTask,
-        int arg3,
+        s32 arg3,
         gfl::ResFileObject& rResFileObject,
         const char* pName
     );
@@ -71,14 +71,14 @@ public:
     void fn_8001AA18(float);
     void fn_8001AA24(bool);
     void fn_8001AA5C(bool);
-    int ResetScene(FullSortScene* pScene);
-    void fn_8001AB34(int);
+    s32 ResetScene(FullSortScene* pScene);
+    void fn_8001AB34(s32);
     void fn_8001AB58();
     void fn_8001AD5C(float);
     void fn_8001AD68();
-    void fn_8001AD74(int);
+    void fn_8001AD74(s32);
     void fn_8001AD80(float);
-    void fn_8001AD8C(int, int);
+    void fn_8001AD8C(s32, s32);
     void fn_8001AEE4();
     void fn_8001B4DC();
     void fn_8001BCD0(nw4r::math::MTX34* pMtx);
@@ -87,7 +87,7 @@ public:
 
     /* 0x104 */ WoolBaseTask* mWoolBaseTask;
     /* 0x108 */ bool m_108;
-    /* 0x10C */ int m_10C;
+    /* 0x10C */ s32 m_10C;
     /* 0x110 */ HermiteCurve mHermiteCurve;
     /* 0x124 */ union { // ?? why
         FlfWoolDraw* mFlfWoolDraw;
@@ -99,10 +99,10 @@ public:
     /* 0x13C */ float m_13C;
     /* 0x140 */ float m_140;
     /* 0x144 */ std::vector<BackupBuff*> mBackupBuffs;
-    /* 0x150 */ int m_150;
-    /* 0x154 */ int m_154;
+    /* 0x150 */ s32 m_150;
+    /* 0x154 */ s32 m_154;
     /* 0x158 */ bool m_158;
-    /* 0x15C */ int m_15C;
+    /* 0x15C */ s32 m_15C;
 };
 
 #endif

@@ -76,7 +76,7 @@ public:
     /* 0x10 */ const char* mName;
     /* 0x14 */ bool m_14;
     /* 0x18 */ ColNurbsTemplate mTemplate;
-    /* 0x54 */ int m_54;
+    /* 0x54 */ s32 m_54;
     /* 0x58 */ std::vector<LinkNurbsInfo*> mLinkNurbsInfos;
     /* 0x64 */ SpringForFMC* mSpringForFMC;
     /* 0x68 */ bool m_68;

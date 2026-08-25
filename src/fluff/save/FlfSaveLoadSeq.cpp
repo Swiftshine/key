@@ -77,7 +77,7 @@ void FlfSaveLoadSeq::Clear() {
 
 extern "C" {
     size_t fn_80634E2C();
-    int fn_802B69B4();
+    s32 fn_802B69B4();
 }
 
 void FlfSaveLoadSeq::CopyLoadSaveInfo(const LoadSaveInfo& rSaveInfo) {
@@ -729,12 +729,12 @@ void FlfSaveLoadSeq::fn_8022D414() {
     m_1C = 0;
 }
 
-void FlfSaveLoadSeq::fn_8022D430(int arg1) {
+void FlfSaveLoadSeq::fn_8022D430(s32 arg1) {
     m_18 = arg1;
     m_1C = 0;
 }
 
-void FlfSaveLoadSeq::fn_8022D440(int arg1) {
+void FlfSaveLoadSeq::fn_8022D440(s32 arg1) {
     fn_8022D430(arg1);
     mOperation = FlfSaveLoadSeq::eOperation_Op_4;
 }
@@ -765,6 +765,6 @@ bool FlfSaveLoadSeq::IsSaveDataLoaded() const {
 
 /* Code-merged methods */
 
-int FlfSaveLoadSeq::GetUnk18() const {
+s32 FlfSaveLoadSeq::GetUnk18() const {
     return m_18;
 }

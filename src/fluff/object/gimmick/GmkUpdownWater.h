@@ -17,7 +17,7 @@ public:
     virtual float vfF4();
 
     /* Class Methods */
-    void fn_80212B60(int);
+    void fn_80212B60(s32);
 };
 
 #endif

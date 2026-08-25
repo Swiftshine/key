@@ -25,7 +25,7 @@ public:
 
     /// @note Size: `0x3C`
     struct MapdataParams {
-        /* 0x00 */ int mIntParams[3];
+        /* 0x00 */ s32 mIntParams[3];
         /* 0x0C */ float mFloatParams[3];
         /* 0x18 */ std::string mStringParams[3];
     };
@@ -58,13 +58,13 @@ public:
         bool BuildPathDraw();
         bool BuildMsKeepOutLine();
 
-        inline int GetNumSegments() const {
+        inline s32 GetNumSegments() const {
             return mNumSegments;
         }
 
         /* 0x00 */ std::string mName;
         /* 0x0C */ MapdataParams mParams;
-        /* 0x48 */ int mNumSegments;
+        /* 0x48 */ s32 mNumSegments;
         /* 0x4C */ gfl::Array<nw4r::math::VEC2> mPoints;
     };
 

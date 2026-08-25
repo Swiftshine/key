@@ -9,7 +9,7 @@ class WoolLinkObj : public WoolBaseTask {
 public:
     
 
-    WoolLinkObj(u32, WoolBuildInfo* pWoolBuildInfo, int**, u32, u32, u32, u32);
+    WoolLinkObj(u32, WoolBuildInfo* pWoolBuildInfo, s32**, u32, u32, u32, u32);
 
     /* Virtual Methods */
     

@@ -30,7 +30,7 @@ public:
     };
 
     struct FrameTemplate {
-        int mCount; // the number of start/end frames the structure uses
+        s32 mCount; // the number of start/end frames the structure uses
         T mStartFrames[8];
         T mEndFrames[8];
         T mDefaultFrame;
@@ -79,7 +79,7 @@ public:
         // if (mHasFrames && GetPreviousEndFrame() < start) {
         //     T prev = GetPreviousEndFrame();
 
-        //     uint unk = static_cast<unsigned int>(start / prev);
+        //     uint unk = static_cast<unsigned s32>(start / prev);
         //     newFrame = (T)(unk);
         // }
 

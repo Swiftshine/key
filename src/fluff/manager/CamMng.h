@@ -21,9 +21,9 @@ public:
 
     void fn_80056974();
     void fn_800544B4(void*, float);
-    void GetScreenBounds(float* pX, float* pY, float* pWidth, float* pHeight, int sceneID);
-    void fn_800545B4(int, int);
-    void fn_800545D8(int);
+    void GetScreenBounds(float* pX, float* pY, float* pWidth, float* pHeight, s32 sceneID);
+    void fn_800545B4(s32, s32);
+    void fn_800545D8(s32);
     bool ShouldCull(ScreenPosition&);
     const gfl::Vec2& GetCurrentPosition() const;
     void SetAllPositions(const nw4r::math::VEC2&);

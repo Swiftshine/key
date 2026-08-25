@@ -3,7 +3,7 @@
 #include "manager/Stage.h"
 #include "util/FullSortSceneUtil.h"
 
-void EnemyBase::SetScene(int sceneIndex) {
+void EnemyBase::SetScene(s32 sceneIndex) {
     if (GetSceneIndex() != sceneIndex) {
         EnemyMdlManager* mgr = mModelManager;
         Stage* stage = Stage::Instance();
@@ -18,7 +18,7 @@ void EnemyBase::SetScene(int sceneIndex) {
     }
 }
 
-int EnemyBase::GetSceneIndex() const {
+s32 EnemyBase::GetSceneIndex() const {
     Stage* stage = Stage::Instance();
 
     if (stage != nullptr) {
@@ -28,7 +28,7 @@ int EnemyBase::GetSceneIndex() const {
     return -1;
 }
 
-void EnemyBase::SetZOrder(int zOrder) {
+void EnemyBase::SetZOrder(s32 zOrder) {
     mSceneZOrder = zOrder;
     gfl::Vec3 pos;
     pos = mSavedPosition;
@@ -37,7 +37,7 @@ void EnemyBase::SetZOrder(int zOrder) {
 }
 
 float EnemyBase::GetZOrder() const {
-    int sceneIndex = GetSceneIndex();
+    s32 sceneIndex = GetSceneIndex();
     return FullSortSceneUtil::GetZOrder(sceneIndex, mSceneZOrder);
 }
 
@@ -46,7 +46,7 @@ void EnemyBase::fn_80123B90() {
     mFlags &= ~0x60000;
 }
 
-void EnemyBase::SetScene(int selectType, int sceneIndex, float zPos) {
+void EnemyBase::SetScene(s32 selectType, s32 sceneIndex, float zPos) {
     switch (selectType) {
         case 1: { // custom
             SetScene(sceneIndex);
@@ -155,7 +155,7 @@ void EnemyBase::StateDispatch() {
 #pragma push
 #pragma optimization_level 0
 bool EnemyBase::fn_80124538() const {
-    int val = mState;
+    s32 val = mState;
 
     if (
         (val >= 46 && val <= 49) ||

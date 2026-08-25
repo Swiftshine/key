@@ -6,11 +6,11 @@
 class MissionClearCheckerBase;
 
 struct MissionInfo {
-    DECL_WEAK int GetCompletionThreshold();
+    DECL_WEAK s32 GetCompletionThreshold();
     
-    /* 0x0 */ int m_0;
+    /* 0x0 */ s32 m_0;
     /// @brief The number of actions needed to be done in order for the mission to be successful.
-    /* 0x4 */ int mCompletionThreshold;
+    /* 0x4 */ s32 mCompletionThreshold;
 };
 
 #endif

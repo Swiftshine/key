@@ -25,7 +25,7 @@ public:
     void PlayEffect();
     NwAnmCtrl* CreateAnimCtrl(const char* animName, gfl::ResFileObject& resFileObject);
 private:
-    int mState;
+    s32 mState;
     uint mCounter;
     gfl::Vec3 mAnimationPosition;
     gfl::Pointer<NwAnmCtrl> mAnimCtrl;

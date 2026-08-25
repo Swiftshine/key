@@ -11,7 +11,7 @@ struct PercentageWrapper {
 
     /* Members */
 
-    int m_0;
+    s32 m_0;
     float m_4;
     float m_8;
     float m_C;

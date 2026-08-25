@@ -35,7 +35,7 @@ void SimpleMdlCommon::AddGimmickName(Gimmick::GimmickBuildInfo* pBuildInfo) {
     }
 }
 
-float SimpleMdlCommon::GetInitialAnimFrame(int frameIndex) {
+float SimpleMdlCommon::GetInitialAnimFrame(s32 frameIndex) {
     // simple model gimmicks set an initial frame index.
     // this is usually set to zero, but it can be set to
     // an actual frame index (index > 0) or something random (index < 0).

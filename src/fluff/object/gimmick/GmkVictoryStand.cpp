@@ -43,7 +43,7 @@ void GmkVictoryStand::SpawnDecorativeBall(uint rank) {
     stand->mDecorativeBallBuildInfo.mSceneID = stand->mBuildInfoPtr->mSceneID;
     stand->mDecorativeBallBuildInfo.mSceneOrder = stand->mBuildInfoPtr->mSceneOrder;
 
-    int num;
+    s32 num;
     switch (rank) {
         case 1:
             num = 101;
@@ -83,7 +83,7 @@ GmkVictoryStand::GmkVictoryStand(GimmickBuildInfo* buildInfo, const char* taskNa
 
     sInstance = this;
     GimmickBuildInfo* buildInfoPtr = mBuildInfoPtr;
-    int sceneID = buildInfoPtr->mSceneID;
+    s32 sceneID = buildInfoPtr->mSceneID;
 
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneID, buildInfoPtr->mSceneOrder);
     UpdateMatrix();
@@ -124,7 +124,7 @@ void GmkVictoryStand::Update() {
 void GmkVictoryStand::AwardBeads() {
     if (mBeadAwardState.mCurrentState == 0) {
         uint playerRanking = mPlayerRanking;
-        int beadWinnings;
+        s32 beadWinnings;
         switch (mPlayerRanking) {
             case 1:
                 beadWinnings = 300;
@@ -137,8 +137,8 @@ void GmkVictoryStand::AwardBeads() {
                 break;
         }
 
-        int beadColor = rand();
-        int beadType = GmkBead::eBeadType_Medium;
+        s32 beadColor = rand();
+        s32 beadType = GmkBead::eBeadType_Medium;
 
         if (beadWinnings - mTotalAwardedBeads > 9 && playerRanking % 2 == 0) {
             beadType = GmkBead::eBeadType_Large;

@@ -19,7 +19,7 @@ const char off[] = "OFF";
 
 // function declarations
 void fn_8003D93C(void*, s16);
-float GetZOrder(int sceneIndex, int arg1);
+float GetZOrder(s32 sceneIndex, s32 arg1);
 extern "C" float ZeroFloat;
 
 
@@ -46,8 +46,8 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
     , mResFileObject(nullptr)
     , mModelScale(0.0f, 0.0f, 0.0f)
 {
-    int secondVal = mBuildInfo.GetIntParam(Gimmick::eParameterID_Param1);
-    int gmkID = GetGimmickID();
+    s32 secondVal = mBuildInfo.GetIntParam(Gimmick::eParameterID_Param1);
+    s32 gmkID = GetGimmickID();
 
     char brresPath[0x200];
     char resMdlName[0x200];
@@ -59,7 +59,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 
         SetModel(brresPath, resMdlName, static_cast<bool>(secondVal));
 
-        int sortSceneIndex = mBuildInfo.GetIntParam(GmkSimpleMdl::eParameter_SortSceneIndex) + 6;
+        s32 sortSceneIndex = mBuildInfo.GetIntParam(GmkSimpleMdl::eParameter_SortSceneIndex) + 6;
         mPosition.z = FullSortSceneUtil::GetZOrder(sortSceneIndex, 4);
         UpdateModel();
         SetModelWrapperByFullSortSceneIndex(sortSceneIndex);
@@ -99,7 +99,7 @@ GmkSimpleMdl::GmkSimpleMdl(GimmickBuildInfo* buildInfo)
 
 GmkSimpleMdl::~GmkSimpleMdl() { }
 
-void GmkSimpleMdl::SetModelWrapperByFullSortSceneIndex(int index) {
+void GmkSimpleMdl::SetModelWrapperByFullSortSceneIndex(s32 index) {
     FullSortScene* scene = Stage::Instance()->GetSceneByID(index);
     scene->AddRenderObj(mModelWrapper.Get());
 

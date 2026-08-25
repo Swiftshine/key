@@ -8,7 +8,7 @@ class PlParabola : public Parabola {
 public:
     /* Class Members */
 
-    /* 0x5C */ int m_5C;
+    /* 0x5C */ s32 m_5C;
 };
 
 #endif

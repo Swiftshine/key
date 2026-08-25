@@ -27,8 +27,8 @@ public:
     /* 0x014 */ virtual void vf14() = 0;
     /* 0x018 */ virtual void vf18() = 0;
     /* 0x01C */ virtual void vf1C();
-    /* 0x020 */ DECL_WEAK virtual int vf20();
-    /* 0x024 */ DECL_WEAK virtual int vf24();
+    /* 0x020 */ DECL_WEAK virtual s32 vf20();
+    /* 0x024 */ DECL_WEAK virtual s32 vf24();
     /* 0x028 */ virtual bool vf28();
     /* 0x02C */ virtual void vf2C();
     /* 0x030 */ virtual void vf30();
@@ -102,16 +102,16 @@ public:
 
     /* 0x04 */ FlfHandle mPlayerHandle;
     /* 0x0C */ gfl::Vec3 mPosition;
-    /* 0x18 */ int m_18;
+    /* 0x18 */ s32 m_18;
     /* 0x1C */ FlfMdlCollision* mFlfMdlCollision;
-    /* 0x20 */ int mCurrentState; // probably a StateObject?
-    /* 0x24 */ int mPreviousState;
-    /* 0x28 */ int m_28;
+    /* 0x20 */ s32 mCurrentState; // probably a StateObject?
+    /* 0x24 */ s32 mPreviousState;
+    /* 0x28 */ s32 m_28;
     /* 0x2C */ uint m_2C;
-    /* 0x30 */ int m_30;
+    /* 0x30 */ s32 m_30;
     /* 0x34 */ gfl::Pointer<gfl::SoundFadeCtrl> mSoundFadeCtrl;
     /* 0x38 */ gfl::Vec3 m_38;
-    /* 0x44 */ int m_44;
+    /* 0x44 */ s32 m_44;
     /* 0x48 */ gfl::Vec2 m_48;
     /* 0x50 */ bool m_50;
     /* 0x54 */ gfl::Pointer<env::EnvParts_PlayGuideIconLocator> mEnvParts_PlayGuideIconLocator;

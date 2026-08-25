@@ -34,8 +34,8 @@ public:
     };
 
     enum Parameter {
-        eParameter_NumTurtles = 1, // int 1
-        eParameter_ShouldMoveRight = 2, // int (bool) 2
+        eParameter_NumTurtles = 1, // s32 1
+        eParameter_ShouldMoveRight = 2, // s32 (bool) 2
 
         eParameter_CounterDefaultValue = 0, // float 0
         eParameter_Speed = 1, // float 1
@@ -53,15 +53,15 @@ public:
     void Interact(FlfGameObj*) override;
 
     /* Gimmick */
-    virtual int vf88(FlfGameObj* player, uint arg2) override;
-    virtual int vf98() override;
+    virtual s32 vf88(FlfGameObj* player, uint arg2) override;
+    virtual s32 vf98() override;
     virtual void Update() override;
 
     /* GmkTurtle */
 
     void BecomeActive();
 
-    void Turn(int turnDir) DONT_INLINE_CLASS;
+    void Turn(s32 turnDir) DONT_INLINE_CLASS;
 public:
     uint mCounterDefaultValue;
     float mSpeed;
@@ -69,9 +69,9 @@ public:
     bool mShouldMoveRight;
     bool m_13D;
     u16 m_13E;
-    int mCounter;
-    int mNumTurtles;
-    int mCurrentState;
+    s32 mCounter;
+    s32 mNumTurtles;
+    s32 mCurrentState;
     GmkUpdownWater* mWater;
     gfl::Pointer<NwAnmCtrl> mAnmCtrl;
     gfl::Pointer<ColObjTrans> mColObjTrans;

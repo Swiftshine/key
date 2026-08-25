@@ -91,7 +91,7 @@ PlTransResMng::~PlTransResMng() { }
 /* PlTransMdl */
 
 // not matching - regswap (std::vector?)
-PlTransMdl::PlTransMdl(FullSortScene*, PlayerBase* pPlayer, int numModels)
+PlTransMdl::PlTransMdl(FullSortScene*, PlayerBase* pPlayer, s32 numModels)
     : mPlayer(pPlayer)
     , mNumModels(numModels)
     , mFlfMdlDraw(nullptr)
@@ -102,7 +102,7 @@ PlTransMdl::PlTransMdl(FullSortScene*, PlayerBase* pPlayer, int numModels)
 }
 
 // same as above
-PlTransMdl::PlTransMdl(FullSortScene*, int numModels)
+PlTransMdl::PlTransMdl(FullSortScene*, s32 numModels)
     : mPlayer(nullptr)
     , mNumModels(numModels)
     , mFlfMdlDraw(nullptr)
@@ -114,7 +114,7 @@ PlTransMdl::PlTransMdl(FullSortScene*, int numModels)
 
 PlTransMdl::~PlTransMdl() { }
 
-void PlTransMdl::PlayNURBSAnimation(int animID, bool resetFrame) const {
+void PlTransMdl::PlayNURBSAnimation(s32 animID, bool resetFrame) const {
     mFlfMdlDraw->PlayNURBSAnimation(animID, resetFrame);
 }
 
@@ -139,7 +139,7 @@ float PlTransMdl::GetUpdateRate() const {
 }
 
 void PlTransMdl::SetMatrix(const gfl::Mtx34& rMtx) {
-    int direction = eDirection_Forward;
+    s32 direction = eDirection_Forward;
 
     if (mPlayer != nullptr && mPlayer->mDirection == eDirection_Backward) {
         direction = eDirection_Backward;
@@ -149,7 +149,7 @@ void PlTransMdl::SetMatrix(const gfl::Mtx34& rMtx) {
 }
 
 // https://decomp.me/scratch/hHWwq - stack
-void PlTransMdl::SetMatrix(const gfl::Mtx34& rMtx, int direction) {
+void PlTransMdl::SetMatrix(const gfl::Mtx34& rMtx, s32 direction) {
     GXCullMode cullMode = GX_CULL_BACK;
     gfl::Mtx34 mtx = rMtx;
 
@@ -200,7 +200,7 @@ bool PlTransMdl::GetMatrix(const char* pName, gfl::Mtx34& rMtx) {
     return true;
 }
 
-int PlTransMdl::ResetScene(FullSortScene* pScene) {
+s32 PlTransMdl::ResetScene(FullSortScene* pScene) {
     mFlfMdlDraw->SetScene(pScene);
 
     if (mWoolBaseMdl != nullptr) {
@@ -249,7 +249,7 @@ void PlTransMdl::SetOpacity(float opacity) {
 }
 
 // https://decomp.me/scratch/OqI9A - nonmatching due to std::vector::clear
-void PlTransMdl::SetKeyFrames(float frame, int arg2) {
+void PlTransMdl::SetKeyFrames(float frame, s32 arg2) {
     FlfMdlDraw* mdlDraw = mFlfMdlDraw;
 
     mKeyFrames.Reset();

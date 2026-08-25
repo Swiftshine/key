@@ -108,7 +108,7 @@ void AsyncFileStream::Update() {
     }
 
     mDecompressedBuffer = mCompressedBuffer;
-    mNumBlocksRead = static_cast<int>(mNumBlocksRead + 1) % 2;
+    mNumBlocksRead = static_cast<s32>(mNumBlocksRead + 1) % 2;
 
     size_t num = mNumBlocksRead;
 
@@ -121,7 +121,7 @@ void AsyncFileStream::Update() {
 
     size_t remaining = mCompressedSize - mCurrentStreamPos;
     blockSize = 0;
-    if (static_cast<int>(remaining) > 0) {
+    if (static_cast<s32>(remaining) > 0) {
         blockSize = BPE_BLOCK_SIZE;
         if (remaining < BPE_BLOCK_SIZE) {
             blockSize = ROUND_UP(remaining, 0x20);

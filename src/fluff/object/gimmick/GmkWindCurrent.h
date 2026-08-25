@@ -29,8 +29,8 @@ class GmkWindCurrent_AnimWrapper;
 class GmkWindCurrent : public Gimmick {
 public:
     enum Parameter {
-        eParameter_WindDirection   = 0, // int 0
-        eParameter_Disabled        = 1, // bool (int) 1
+        eParameter_WindDirection   = 0, // s32 0
+        eParameter_Disabled        = 1, // bool (s32) 1
         eParameter_Width           = 0, // float 0
         eParameter_Height          = 1, // float 1
         eParameter_WindStrength    = 2, // float 2
@@ -58,7 +58,7 @@ public:
     void IncreasePushSpeed();
     nw4r::math::VEC2 GetPushDirection() const;
     void SetEnabled(bool enabled);
-    void SetCollisionBounds(int windDirection);
+    void SetCollisionBounds(s32 windDirection);
     void fn_805CB050();
 
     /* Static Methods */
@@ -81,7 +81,7 @@ public:
     /* 0x17C */ gfl::SD3DActorObject mSD3DActorObject1;
     /* 0x1BC */ gfl::SD3DActorObject mSD3DActorObject2;
     /* 0x1FC */ bool mIsActive;
-    /* 0x200 */ int mWindDirection;
+    /* 0x200 */ s32 mWindDirection;
 };
 
 /// @brief Toggles the wind current.
@@ -144,8 +144,8 @@ public:
     /* 0xB8 */ Vec2 m_B8;
     /* 0xC0 */ float m_C0;
     /* 0xC4 */ float m_C4;
-    /* 0xC8 */ int m_C8;
-    /* 0xCC */ int m_CC;
+    /* 0xC8 */ s32 m_C8;
+    /* 0xCC */ s32 m_CC;
     /* 0xD0 */ float m_D0;
     /* 0xD4 */ float m_D4;
     /* 0xD8 */ GmkWindCurrent* mWindCurrent;
@@ -190,7 +190,7 @@ public:
 class GmkWindCurrent_SoundMng {
 public:
     static GmkWindCurrent_SoundMng* sInstance;
-    static int sUserCount;
+    static s32 sUserCount;
 
     static inline GmkWindCurrent_SoundMng* Instance() {
         return sInstance;

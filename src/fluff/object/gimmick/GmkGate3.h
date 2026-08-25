@@ -7,7 +7,7 @@ class GmkGate3 : public Gimmick {
 public:
     // blah blah blah
 
-    int fn_8037EFF8();
+    s32 fn_8037EFF8();
 };
 
 #endif

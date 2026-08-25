@@ -3,7 +3,7 @@
 using namespace env;
 
 namespace env {
-    const int TaskFlags[] = {
+    const s32 TaskFlags[] = {
         0x0,
         0xC0,
         0xE0,

@@ -13,7 +13,7 @@ namespace Sound {
     /// @brief Plays a sound effect from the BRSAR.
     /// @param rPos The position to play the sound at.
     /// @param sfxID The BRSAR sound effect ID.
-    gfl::SoundHandle PlaySoundEffect(const gfl::Vec3& rPos, uint sfxID, int, int);
+    gfl::SoundHandle PlaySoundEffect(const gfl::Vec3& rPos, uint sfxID, s32, s32);
 }
 }
 #endif

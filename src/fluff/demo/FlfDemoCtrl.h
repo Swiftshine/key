@@ -28,8 +28,8 @@ public:
     /* 0x18 */ virtual void SetOptions(float);
     /* 0x1C */ virtual void UpdateFrame();
     /* 0x20 */ DECL_WEAK virtual uint vf20();
-    /* 0x24 */ virtual void vf24(int);
-    /* 0x28 */ virtual void SetCurrentFrame(int frame);
+    /* 0x24 */ virtual void vf24(s32);
+    /* 0x28 */ virtual void SetCurrentFrame(s32 frame);
     /* 0x2C */ virtual void SetUpdateRate(float rate);
     /* 0x30 */ virtual void SetFullSortScene(uint sceneID);
     /* 0x34 */ virtual void SetVisibility(bool visibility);
@@ -57,8 +57,8 @@ public:
 
     /* Class Members */
 
-    /* 0x04 */ int m_4;
-    /* 0x08 */ int mFullSortSceneID;
+    /* 0x04 */ s32 m_4;
+    /* 0x08 */ s32 mFullSortSceneID;
     /* 0x0C */ nw4r::g3d::ResNode mResNode;
     /* 0x10 */ gfl::Pointer<NURBSOption> mAnimNo;
     /* 0x14 */ gfl::Pointer<NURBSOption> mBlendFrame;
@@ -78,8 +78,8 @@ public:
 
     /* 0x1C */ virtual void UpdateFrame() override;
     /* 0x20 */ virtual uint vf20() override;
-    /* 0x24 */ virtual void vf24(int) override;
-    /* 0x28 */ virtual void SetCurrentFrame(int frame) override;
+    /* 0x24 */ virtual void vf24(s32) override;
+    /* 0x28 */ virtual void SetCurrentFrame(s32 frame) override;
     /* 0x2C */ virtual void SetUpdateRate(float rate) override;
     /* 0x30 */ virtual void SetFullSortScene(uint sceneID) override;
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
@@ -103,8 +103,8 @@ public:
     /* 0x18 */ virtual void SetOptions(float) override;
     /* 0x1C */ virtual void UpdateFrame() override;
     /* 0x20 */ virtual uint vf20() override;
-    /* 0x24 */ virtual void vf24(int) override;
-    /* 0x28 */ virtual void SetCurrentFrame(int frame) override;
+    /* 0x24 */ virtual void vf24(s32) override;
+    /* 0x28 */ virtual void SetCurrentFrame(s32 frame) override;
     /* 0x2C */ virtual void SetUpdateRate(float rate) override;
     /* 0x30 */ virtual void SetFullSortScene(uint sceneID) override;
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
@@ -133,8 +133,8 @@ public:
 
     /* Class Members */
 
-    /* 0x24 */ int mBeadType;
-    /* 0x28 */ int mBeadColor;
+    /* 0x24 */ s32 mBeadType;
+    /* 0x28 */ s32 mBeadColor;
     /* 0x2C */ FlfHandle mBeadHandle;
     /* 0x34 */ nw4r::math::VEC3 mBeadPosition;
     /* 0x40 */ bool mBeadCreated;
@@ -149,7 +149,7 @@ public:
 
     /* 0x08 */ DECL_WEAK virtual ~FlfDemoGmkCtrl();
 
-    /* 0x24 */ virtual void vf24(int) override;
+    /* 0x24 */ virtual void vf24(s32) override;
     /* 0x34 */ virtual void SetVisibility(bool visibility) override;
     /* 0x38 */ virtual void SetMatrix(const nw4r::math::MTX34& mtx) override;
 
@@ -186,11 +186,11 @@ public:
 
     /* 0x08 */ DECL_WEAK virtual ~FlfDemoLoopCtrl();
 
-    /* 0x24 */ DECL_WEAK virtual void vf24(int) override;
+    /* 0x24 */ DECL_WEAK virtual void vf24(s32) override;
 
     /* Class Members */
 
-    /* 0x24 */ int m_24;
+    /* 0x24 */ s32 m_24;
 };
 
 // size: 0x8
@@ -220,7 +220,7 @@ public:
 struct FlfDemoCtrlStruct {
     STRUCT_FILL(0x28);
 
-    DECL_WEAK int GetUnk24();
+    DECL_WEAK s32 GetUnk24();
 };
 
 // size: 0x5C
@@ -243,7 +243,7 @@ public:
     void ClearNodeControls();
     void Update() const;
     void fn_802BB920();
-    void fn_802BBA4C(int animID, nw4r::math::VEC2* vec);
+    void fn_802BBA4C(s32 animID, nw4r::math::VEC2* vec);
     uint fn_802BBB28() DONT_INLINE_CLASS;
     float GetCurrentFrame();
     float GetEndFrame();
@@ -256,7 +256,7 @@ public:
 
     /* Class Members */
 
-    /* 0x04 */ int mState;
+    /* 0x04 */ s32 mState;
     /* 0x08 */ std::string mResourcePath;
     /* 0x14 */ bool m_14;
     /* 0x18 */ gfl::ResFileObject mResFileObject;

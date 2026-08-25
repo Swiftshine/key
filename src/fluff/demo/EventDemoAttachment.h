@@ -14,7 +14,7 @@ namespace demo {
         /* 0x08 */ virtual ~EventDemoAttachment();
         /* 0x0C */ virtual void vfC();
         /* 0x10 */ virtual void vf10();
-        /* 0x14 */ virtual int vf14_(); // *
+        /* 0x14 */ virtual s32 vf14_(); // *
         /* 0x18 */ virtual void vf18();
         /* 0x1C */ virtual void vf1C();
 

@@ -15,7 +15,7 @@ public:
     /* Class Members */
     const char* mBRRESPath;
     const char* mResourceName;
-    int m_8;
+    s32 m_8;
     bool m_C;
     gfl::Vec2 m_10;
     Gimmick* mOwner;
@@ -23,11 +23,11 @@ public:
     bool m_20;
     bool m_21;
     float m_24;
-    int mFullSortSceneID;
+    s32 mFullSortSceneID;
     float mZOrder;
     bool m_30;
     bool m_31;
-    int m_34;
+    s32 m_34;
 };
 
 #endif

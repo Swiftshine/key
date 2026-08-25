@@ -189,9 +189,9 @@ void Reader::FillVector(
 bool Reader::EntryObject::Compare(EntryObject* pA, EntryObject* pB) {
     float rowA = __abs(pB->mEntryInfo->mRow - pA->mLayer->m_18);
     float rowB = __abs(pA->mEntryInfo->mRow - pB->mLayer->m_18);
-    // int a = pA->mEntryInfo->mRow - pA->mLayer->m_18;
+    // s32 a = pA->mEntryInfo->mRow - pA->mLayer->m_18;
     // float rowA = a >= 0 ? a : -a;
-    // int b = pB->mEntryInfo->mRow - pB->mLayer->m_18;
+    // s32 b = pB->mEntryInfo->mRow - pB->mLayer->m_18;
     // float rowB = b >= 0 ? b : -b;
 
     if (rowA != rowB) {
@@ -205,8 +205,8 @@ bool Reader::EntryObject::Compare(EntryObject* pA, EntryObject* pB) {
         return colA < colB;
     }
 
-    int sceneA = pA->mLayer->mSortSceneID;
-    int sceneB = pB->mLayer->mSortSceneID;
+    s32 sceneA = pA->mLayer->mSortSceneID;
+    s32 sceneB = pB->mLayer->mSortSceneID;
 
     return sceneA < sceneB;
 }

@@ -22,7 +22,7 @@ public:
         eBeadColor_Yellow  = 6,
     };
 public:
-    int GetBeadValue();
+    s32 GetBeadValue();
     void fn_800B0658(float);
 };
 

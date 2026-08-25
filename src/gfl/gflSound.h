@@ -23,15 +23,15 @@ namespace gfl {
         /// @param pHandleInner The sound handle to be managed.
         /// @param frames If slated for removal, the number of frames to fade the sound out for.
         /// @param add If true, adds the sound to the queue. If false, removes it.
-        void ManageSoundHandleInner(SoundHandleInner* pHandleInner, int frames, bool add);
+        void ManageSoundHandleInner(SoundHandleInner* pHandleInner, s32 frames, bool add);
         SD3DActorInner* CreateSD3DActorInner();
         void DestroySD3DActorInner(SD3DActorInner* pActor);
         void PlaySoundEffect(uint sfxID, uint arg2);
         void PlaySoundEffect(SoundHandle&, nw4r::math::VEC3& rPos);
-        void fn_8064D288(float, SoundHandleInner*, int);
+        void fn_8064D288(float, SoundHandleInner*, s32);
         void fn_8064D2B4(float, SoundHandleInner*);
         bool ValidateSoundHandleSound(SoundHandleInner*);
-        static void fn_8000781C(int, int /* duration? */);
+        static void fn_8000781C(s32, s32 /* duration? */);
     };
 }
 

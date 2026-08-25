@@ -18,9 +18,9 @@ public:
     };
 
     enum Parameter {
-        eParameter_BeadType         = 0, // int 0
-        eParameter_BeadColor        = 1, // int 1
-        eParameter_InitialBeadFunds = 2, // int 2
+        eParameter_BeadType         = 0, // s32 0
+        eParameter_BeadColor        = 1, // s32 1
+        eParameter_InitialBeadFunds = 2, // s32 2
     };
 public:
     static GmkBeadDrop* Build(GimmickBuildInfo* buildInfo);
@@ -34,15 +34,15 @@ public:
     /* Gimmick */
     virtual void Update();
 
-    void SetState(int stateValue) DONT_INLINE_CLASS;
+    void SetState(s32 stateValue) DONT_INLINE_CLASS;
     void SpawnBeads();
     bool CanSpawnBeads();
     void UpdateFlfMdl();
     float fn_802E1AEC(float, float, nw4r::math::VEC3&) DONT_INLINE_CLASS;
     void SetSpawnState() DONT_INLINE_CLASS;
 private:
-    int mState;         // @ 0x130
-    int mCounter;       // @ 0x134
+    s32 mState;         // @ 0x130
+    s32 mCounter;       // @ 0x134
     gfl::Vec3 mOffset;  // @ 0x138
     float mCompletionPercentage; // @ 0x144; on a scale of 0.0 to 1.0
     std::string m_148;  // size: 0xC

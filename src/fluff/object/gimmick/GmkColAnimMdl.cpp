@@ -35,7 +35,7 @@ GmkColAnimMdl::GmkColAnimMdl(GimmickBuildInfo* buildInfo)
     , mModelScale(0.0f, 0.0f, 0.0f)
 {
     Stage* stageMgr = Stage::Instance();
-    int sceneIndex = mBuildInfo.GetIntParam(GmkColAnimMdl::eParameter_SortSceneIndex) + 6;
+    s32 sceneIndex = mBuildInfo.GetIntParam(GmkColAnimMdl::eParameter_SortSceneIndex) + 6;
     FullSortScene* scene = stageMgr->GetSceneByID(sceneIndex);
     mPosition.z = FullSortSceneUtil::GetZOrder(sceneIndex, 4);
 
@@ -156,7 +156,7 @@ void GmkColAnimMdl::SetUpdate(bool state) {
     }
 }
 
-int GmkColAnimMdl::vf88(FlfGameObj* arg1, uint arg2) {
+s32 GmkColAnimMdl::vf88(FlfGameObj* arg1, uint arg2) {
     return mColAnimCtrlGmk->vfC(arg1, arg2);
 }
 

@@ -16,10 +16,10 @@
 class GmkColAnimMdl : public Gimmick, public GmkAnimChg {
 public:
     enum Parameter {
-        eParameter_SortSceneIndex = 0, // int 0
+        eParameter_SortSceneIndex = 0, // s32 0
         eParameter_ZRotation = 0,      // float 0
         eParameter_AnimationName = 0,  // string 0
-        eParameter_InitialFrameIndex = 2, // int 2
+        eParameter_InitialFrameIndex = 2, // s32 2
         eParameter_AnimationSpeed = 2, // float 2
     };
 public:
@@ -34,7 +34,7 @@ public:
     virtual void UpdateWater(bool) override;
 
     /* Gimmick */
-    virtual int vf88(FlfGameObj*, uint) override;
+    virtual s32 vf88(FlfGameObj*, uint) override;
     virtual bool vfA4(FlfGameObj*, uint) override;
     virtual void Update() override;
 

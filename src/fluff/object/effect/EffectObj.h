@@ -8,7 +8,7 @@ class EffectObj : public FlfHandleObj {
 public:
     
 
-    EffectObj(int arg1, int arg2, int arg3, int arg4);
+    EffectObj(s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
     /* Class Methods */
     void SetPosition(const nw4r::math::VEC3&);

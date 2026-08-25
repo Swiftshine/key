@@ -72,12 +72,12 @@ namespace gfl {
     }
 
     template <typename T>
-    static inline bool operator==(int lhs, PointerBase<T>& rhs) {
+    static inline bool operator==(s32 lhs, PointerBase<T>& rhs) {
         return rhs == (T*)lhs;
     }
 
     template <typename T>
-    static inline bool operator!=(int lhs, PointerBase<T>& rhs) {
+    static inline bool operator!=(s32 lhs, PointerBase<T>& rhs) {
         return (T*)lhs != rhs;
     }
 

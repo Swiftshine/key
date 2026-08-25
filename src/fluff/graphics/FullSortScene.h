@@ -26,7 +26,7 @@ public:
 
     /* Class Methods */
 
-    EffectObj* CreateEffectObject(const char* pEffectName, int, int);
+    EffectObj* CreateEffectObject(const char* pEffectName, s32, s32);
 
     /* Class Members */
 

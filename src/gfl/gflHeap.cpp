@@ -15,7 +15,7 @@ inline void Heap::SetMEMAllocatorParameters(MEMAllocator* allocator, size_t alig
     allocator->heapParam2 = (u32)(this);
 }
 
-inline void* Heap::GetArenaHi(int type) {
+inline void* Heap::GetArenaHi(s32 type) {
     void* arena;
     
     switch (type) {
@@ -38,7 +38,7 @@ inline void* Heap::GetArenaHi(int type) {
     return arena;
 }
 
-inline void* Heap::GetArenaLo(int type) {
+inline void* Heap::GetArenaLo(s32 type) {
     void* arena;
 
     switch (type) {
@@ -61,7 +61,7 @@ inline void* Heap::GetArenaLo(int type) {
     return arena;
 }
 
-inline void* Heap::GetArena(int type, size_t* size) {
+inline void* Heap::GetArena(s32 type, size_t* size) {
     void* arenaLo = GetArenaLo(type);
     void* arenaHi = GetArenaHi(type);
     void* start;
@@ -79,7 +79,7 @@ inline void* Heap::GetArena(int type, size_t* size) {
     return arenaLo;
 }
 
-inline void Heap::SetArenaLo(int type, void* arena) {
+inline void Heap::SetArenaLo(s32 type, void* arena) {
     switch (type) {
         case 1: {
             OSSetMEM1ArenaLo(arena);
@@ -93,7 +93,7 @@ inline void Heap::SetArenaLo(int type, void* arena) {
     }
 }
 
-inline void Heap::SetArenaHi(int type, void* arena) {
+inline void Heap::SetArenaHi(s32 type, void* arena) {
     switch (type) {
         case 1: {
             OSSetMEM1ArenaHi(arena);
@@ -108,7 +108,7 @@ inline void Heap::SetArenaHi(int type, void* arena) {
 }
 
 
-inline void Heap::SetArena(int type, void* start, void* end, bool useArenaHi) {
+inline void Heap::SetArena(s32 type, void* start, void* end, bool useArenaHi) {
     void* arenaLo = GetArenaLo(type);
     void* arenaHi = GetArenaHi(type);
 
@@ -133,7 +133,7 @@ Heap::Heap() {
 
 Heap::~Heap() {
     bool useArenaHi;
-    int heapType;
+    s32 heapType;
     void* end;
 
     MEMiHeapHead* expHeap = mExpHeap;
@@ -149,7 +149,7 @@ Heap::~Heap() {
     }
 }
 
-void Heap::Init(size_t range, u16 optFlag, int heapType) {
+void Heap::Init(size_t range, u16 optFlag, s32 heapType) {
     mHeapType = heapType;
     mExpHeap = MEMCreateExpHeapEx(GetArena(mHeapType, &range), range, optFlag);
     
@@ -167,7 +167,7 @@ void Heap::Free(void* address) {
     MEMFreeToExpHeap(mExpHeap, address);
 }
 
-extern "C" int MEMGetTotalFreeSizeForExpHeap(MEMiHeapHead*);
+extern "C" s32 MEMGetTotalFreeSizeForExpHeap(MEMiHeapHead*);
 
 size_t Heap::GetTotalFreeSizeForExpHeap() {
     return MEMGetTotalFreeSizeForExpHeap(mExpHeap);
@@ -181,7 +181,7 @@ bool Heap::WithinRange(void* address) {
     return false;
 }
 
-size_t Heap::GetArenaSize(int type) {
+size_t Heap::GetArenaSize(s32 type) {
     return (u32)GetArenaHi(type) - (u32)GetArenaLo(type);
 }
 

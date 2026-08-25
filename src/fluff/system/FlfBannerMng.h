@@ -15,16 +15,16 @@ public:
     void fn_802A4370();
     void fn_802A4288();
     
-    DECL_WEAK int GetUnk10() const;
+    DECL_WEAK s32 GetUnk10() const;
 
     /* Class Members */
 
-    int m_0;
-    int m_4;
-    int m_8;
-    int m_C;
-    int m_10;
-    int m_14;
+    s32 m_0;
+    s32 m_4;
+    s32 m_8;
+    s32 m_C;
+    s32 m_10;
+    s32 m_14;
     FlfNandMng* mNandManager;
     NANDBanner* mNANDBanner;
     NANDBanner* mFileBanner;

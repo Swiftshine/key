@@ -68,7 +68,7 @@ namespace gfl {
         struct CompressionHeader {
             char mMagic[4];      // "GFCP" - GoodFeel ComPression
             uint mVersion;
-            int  mCompressionType;
+            s32  mCompressionType;
             uint mDecompressedDataSize;
             uint mCompressedDataSize;
         };
@@ -100,7 +100,7 @@ namespace gfl {
         File* mFile;
         u8 mHeapID;
         uint mAlignment;
-        int mCompressionType;
+        s32 mCompressionType;
         uint mFileInfoOffset;
         uint mFileInfoSize;
         uint mCompressionHeaderOffset;

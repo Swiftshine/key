@@ -65,14 +65,14 @@ public:
 	/* 0x104 */ virtual void SetScene(FullSortScene* pScene);
 	/* 0x108 */ virtual void SetVisibility(bool vis);
 	/* 0x10C */ virtual bool IsVisible() const;
-	/* 0x110 */ virtual void SetNURBSAnimationInfo(int id, bool isReset);
+	/* 0x110 */ virtual void SetNURBSAnimationInfo(s32 id, bool isReset);
 	/* 0x114 */ virtual uint GetCurrentNURBSAnimationID() const;
-	/* 0x118 */ virtual void PlayNURBSAnimation(int, bool);
+	/* 0x118 */ virtual void PlayNURBSAnimation(s32, bool);
 	/* 0x11C */ virtual void SetCurrentNURBSAnimationFrame(float frame);
 	/* 0x120 */ DECL_WEAK virtual uint GetCurrentAnimationID() const;
 	/* 0x124 */ virtual void vf124();
 	/* 0x128 */ virtual bool vf128() const;
-	/* 0x12C */ virtual void vf12C(int);
+	/* 0x12C */ virtual void vf12C(s32);
 	/* 0x130 */ virtual bool vf130() const;
 	/* 0x134 */ virtual void vf134();
 	/* 0x138 */ virtual bool vf138() const;
@@ -164,14 +164,14 @@ public:
 	bool fn_8033BD68(const gfl::Vec3& rV1, const gfl::Vec3& rV2, const gfl::Vec3& rV3) const;
 	bool fn_8033BE24(const gfl::Vec3& rV1, const gfl::Vec3& rV2) const;
 	bool fn_8033BE64() DONT_INLINE_CLASS;
-    void fn_8033BF8C(int);
-    void fn_8033BFC8(int targetState, int currentState);
+    void fn_8033BF8C(s32);
+    void fn_8033BFC8(s32 targetState, s32 currentState);
 	bool fn_8033C004(float arg1, const gfl::Vec2& rVec) const DONT_INLINE_CLASS;
 	void SetTransform(gfl::Mtx34& rMtx);
 	void fn_8033C488();
 	void fn_8033C580(uint);
-	int fn_8033C5B4();
-	void SetScreenPosition(int* pDirection) DONT_INLINE_CLASS;
+	s32 fn_8033C5B4();
+	void SetScreenPosition(s32* pDirection) DONT_INLINE_CLASS;
 	PlayerBase* GetClosestPlayer() const;
 	bool fn_8033E25C() const;
 	void TryStartMission(GmkBackDoor* pDoor, bool arg2);
@@ -188,7 +188,7 @@ public:
 
     static float Square(float val);
     static float fn_8033B710();
-	static int fn_8033BEFC(std::tree<placeholder_t>& rTree, int*);
+	static s32 fn_8033BEFC(std::tree<placeholder_t>& rTree, s32*);
 
     /* Class Members */
 
@@ -198,10 +198,10 @@ public:
     /* 0x0A8 */ uint mNextAnimationID;
     /* 0x0AC */ bool mIsAnimationReset;
     /* 0x0B0 */ uint mCurrentAnimationID;
-    /* 0x0B4 */ int m_B4;
-    /* 0x0B8 */ int m_B8;
+    /* 0x0B4 */ s32 m_B4;
+    /* 0x0B8 */ s32 m_B8;
     /* 0x0BC */ gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry;
-    /* 0x0C0 */ int m_C0;
+    /* 0x0C0 */ s32 m_C0;
     /* 0x0C4 */ StateObject mState;
     /* 0x0D8 */ std::tree<placeholder_t> m_D8;
     /* 0x0E4 */ gfl::Vec3 mSpeed;
@@ -216,11 +216,11 @@ public:
     /* 0x118 */ ScreenPosition mScreenPosition1;
     /* 0x124 */ float m_124;
     /* 0x128 */ ScreenPosition mScreenPosition2;
-    /* 0x134 */ int m_134;
+    /* 0x134 */ s32 m_134;
     /* 0x138 */ bool mUpdateFrame;
     /* 0x139 */ bool m_139;
     /* 0x13C */ Mapdata::MapdataGimmick* mMapdataGimmick;
-    /* 0x140 */ int m_140;
+    /* 0x140 */ s32 m_140;
     /* 0x144 */ uint m_144;
     /* 0x148 */ bool m_148;
     /* 0x149 */ bool m_149;

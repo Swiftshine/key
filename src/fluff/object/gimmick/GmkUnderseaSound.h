@@ -32,7 +32,7 @@ public:
     /* Gimmick */
     virtual void Update();
 private:
-    int m_130;
+    s32 m_130;
     bool mSoundPlayed; // @ 0x134
     gfl::SoundHandle mSoundHandle; // @ 0x138
 };

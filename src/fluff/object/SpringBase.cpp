@@ -252,12 +252,12 @@ SpringBase::UnkStruct2::UnkStruct2()
     , m_C(0)
 { }
 
-void SpringBase::fn_80008A34(uint index, const gfl::Vec3& rVec, int arg3) {
+void SpringBase::fn_80008A34(uint index, const gfl::Vec3& rVec, s32 arg3) {
     m_14C[index].m_0 = rVec;
     m_14C[index].m_C = arg3;
 }
 
-void SpringBase::fn_80008A68(gfl::Vec3& rVec, int arg2) {
+void SpringBase::fn_80008A68(gfl::Vec3& rVec, s32 arg2) {
     for (uint i = 0; i < mSpringTemplate->mParticleCount; i++) {
         fn_80008A34(i, rVec, arg2);
     }
@@ -404,7 +404,7 @@ float SpringBase::fn_8000925C(uint index) {
     return mSpringArray[index].m_10;
 }
 
-int SpringBase::GetSpringActiveParticleIndex(uint index) {
+s32 SpringBase::GetSpringActiveParticleIndex(uint index) {
     return mSpringArray[index].mActiveParticleIndex;
 }
 
@@ -1174,13 +1174,13 @@ void SpringBase::CreateParticleArrays() {
 
 // void FlfGameObj::SetState(FlfGameObj* pSetter, std::string& rState) { }
 
-// int FlfGameObj::vf44() {
+// s32 FlfGameObj::vf44() {
 //     return 1;
 // }
 
 // void FlfGameObj::vf40(FlfGameObj*) { }
 
-// int FlfGameObj::vf3C() {
+// s32 FlfGameObj::vf3C() {
 //     return 0;
 // }
 

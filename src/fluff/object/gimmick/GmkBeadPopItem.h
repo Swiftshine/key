@@ -35,16 +35,16 @@ public:
 
 
     void Init(GimmickBuildInfo* buildInfo) DONT_INLINE_CLASS;
-    void SetState(int state) DONT_INLINE_CLASS;
+    void SetState(s32 state) DONT_INLINE_CLASS;
     void SetCollisionEnabled(bool enabled) DONT_INLINE_CLASS;
     void SetupCollisionMatrix();
     std::string& GetStringParam(uint index);
 
     DECL_WEAK void CutFunction() DONT_INLINE_CLASS;
 private:
-    int m_134;
+    s32 m_134;
     bool m_138;
-    int mState; // @ 0x13C
+    s32 mState; // @ 0x13C
     float mCompletionPercentage; // @ 0x140, on a scale of 0.0 to 1.0
     float m_144;
     bool mCollisionEnabled; // @ 0x148

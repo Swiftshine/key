@@ -95,7 +95,7 @@ public:
     void    LoadPhase11();
     void    LoadPhase12();
     void    LoadPhase13(); // this phase is empty
-    int     SetupPrinceFluff(uint arg0);
+    s32     SetupPrinceFluff(uint arg0);
     void    RemovePlayerByID(uint playerID);
     void    LoadPlayerStartPosition();
     void    fn_80011C30();
@@ -130,7 +130,7 @@ public:
     static void fn_8000F5E8();
     // Returns Instance->currentLoadPhase == 6
     static bool fn_8000F7A4();
-    static void fn_8000F7CC(int);
+    static void fn_8000F7CC(s32);
     // Returns Instance->currentLoadPhase == 5
     static bool fn_8000F930();
     static bool fn_8000F958();
@@ -159,16 +159,16 @@ public:
     static bool GetPlayerStartPosition(nw4r::math::VEC3& rDest);
     static void fn_80011B18();
     static bool IsInMission();
-    static int  GetCurrentMissionID();
-    static int  GetCurrentMissionType();
+    static s32  GetCurrentMissionID();
+    static s32  GetCurrentMissionType();
     // Returns a string related to the current mission type.
     static const char* GetCurrentMissionString();
     static bool HasCurrentMissionIndicator(std::string& str);
     static class MissionGameCtrl* GetMissionGameCtrl();
     // Mission related.
-    static void fn_800123D8(int, int, int, int);
+    static void fn_800123D8(s32, s32, s32, s32);
     static StageInfo GetCurrentStageInfo();
-    static int GetCurrentAreaID();
+    static s32 GetCurrentAreaID();
 
     inline gfl::FixedString* GetUnk8() { return m_8; }
 
@@ -178,10 +178,10 @@ public:
     /* 0x08 */ gfl::FixedString* m_8;
     /* 0x0C */ uint m_C;
     /* 0x10 */ bool m_10;
-    /* 0x14 */ int m_14;
-    /* 0x18 */ int m_18;
-    /* 0x1C */ int m_1C;
-    /* 0x14 */ int mCurrentMissionID;
+    /* 0x14 */ s32 m_14;
+    /* 0x18 */ s32 m_18;
+    /* 0x1C */ s32 m_1C;
+    /* 0x14 */ s32 mCurrentMissionID;
     /* 0x18 */ StageInfo mStage;
     /* 0x30 */ uint m_30;
     /* 0x34 */ uint mCurrentLoadPhase;
@@ -215,7 +215,7 @@ public:
     /* 0xAC */ uint m_AC;
     /* 0xB0 */ uint m_B0;
     /* 0xB4 */ bool m_B4;
-    /* 0xB8 */ int m_B8;
+    /* 0xB8 */ s32 m_B8;
     /* 0xBC */ uint m_BC;
 };
 

@@ -32,16 +32,16 @@ public:
 
     /* Class Methods */
 
-    void LoadStage(int stageID);
+    void LoadStage(s32 stageID);
     bool LoadResources();
-    Mapdata* GetLevelSectionByIndex(int sectionID) DONT_INLINE_CLASS;
+    Mapdata* GetLevelSectionByIndex(s32 sectionID) DONT_INLINE_CLASS;
     void ClearMapdata();
-    bool LoadBGFromArchive(int resourceID) DONT_INLINE_CLASS;
-    void LoadBGFromFolder(int resourceID) DONT_INLINE_CLASS;
-    void LoadCommonFromArchive(int stageID) DONT_INLINE_CLASS;
-    void LoadCommonFromFolder(int stageID) DONT_INLINE_CLASS;
+    bool LoadBGFromArchive(s32 resourceID) DONT_INLINE_CLASS;
+    void LoadBGFromFolder(s32 resourceID) DONT_INLINE_CLASS;
+    void LoadCommonFromArchive(s32 stageID) DONT_INLINE_CLASS;
+    void LoadCommonFromFolder(s32 stageID) DONT_INLINE_CLASS;
     void CopyBGData(BGData* pData) DONT_INLINE_CLASS;
-    void LoadMapdataFromFolder(int stageID) DONT_INLINE_CLASS;
+    void LoadMapdataFromFolder(s32 stageID) DONT_INLINE_CLASS;
     void ProcessLevelData() DONT_INLINE_CLASS;
 
     inline bool CheckBGResFileInfo() {
@@ -88,7 +88,7 @@ public:
     /* 0x0C */ gfl::ResFileObject mCommonResFileObject;
     /* 0x10 */ bool mCommonValid;
     /* 0x11 */ bool mLevelProcessed;
-    /* 0x14 */ int mFolderStageID;
+    /* 0x14 */ s32 mFolderStageID;
     /* 0x18 */ bool mPreviewBgLoad;
     /* 0x1C */ StageInfo mPreviewBgLoadStage;
     /* 0x28 */ gfl::ResFileObject mMapdataResFileObject;

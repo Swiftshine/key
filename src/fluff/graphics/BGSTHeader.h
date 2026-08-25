@@ -10,7 +10,7 @@ namespace BGST {
             gfl::Free(this);
         }
 
-        inline bool CheckLayer(int index) {
+        inline bool CheckLayer(s32 index) {
             return mLayerEnabled[index];
         }
 

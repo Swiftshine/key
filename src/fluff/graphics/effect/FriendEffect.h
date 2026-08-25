@@ -17,14 +17,14 @@ public:
     bool IsAnimationDone() DONT_INLINE_CLASS;
     void ResetNURBSFrame();
     void SetVisibility(bool vis);
-    void Reset(int id);
+    void Reset(s32 id);
 
     /* Static Methods */
     static void AddResources();
 
     /* Class Members */
 
-    int mFriendID;
+    s32 mFriendID;
     FlfMdlDraw* mEffects[NUM_FRIEND_TYPES];
 };
 

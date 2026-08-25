@@ -158,7 +158,7 @@ void GmkMsCarrierGoal::PlayEffect() {
 NwAnmCtrl* GmkMsCarrierGoal::CreateAnimCtrl(const char* animName, gfl::ResFileObject& resFileObject) {
     NwAnmCtrl* animCtrl = new (gfl::eHeapID_Work) NwAnmCtrl(3, resFileObject, animName);
 
-    for (int i = 0; i < 3; i++) {
+    for (s32 i = 0; i < 3; i++) {
         char animNameBuf[64];
         snprintf(animNameBuf, sizeof(animNameBuf), "%s__%03d", animName, i);
         animNameBuf[0x3F] = 0;

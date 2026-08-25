@@ -69,7 +69,7 @@ namespace gfl {
             mSuspendFlags = value;
         }
 
-        inline void OrUnk14(int value) {
+        inline void OrUnk14(s32 value) {
             mSuspendFlags |= value;
         }
 

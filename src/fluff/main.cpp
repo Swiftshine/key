@@ -3,7 +3,7 @@
 #include "gfl/gflSound.h"
 #include "fluff/game/Game.h"
 
-void main(int argc, char* argv[]) {
+void main(s32 argc, char* argv[]) {
     OSSetResetCallback(Game::OnReset);
     gfl::Init();
     gfl::SoundFadeCtrl::SetInstance(gfl::Sound::Instance()->GetSoundFadeCtrl());

@@ -17,7 +17,7 @@ public:
     /* 0x04 */ StateObject mState;
     /* 0x18 */ FlfHandle mPlayerHandle;
     /* 0x20 */ gfl::Vec2 m_20;
-    /* 0x28 */ int m_28;
+    /* 0x28 */ s32 m_28;
 };
 
 #endif

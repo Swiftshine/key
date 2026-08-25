@@ -14,7 +14,7 @@ public:
     };
 
     enum Parameter {
-        eParameter_CameraType = 0, // int 0
+        eParameter_CameraType = 0, // s32 0
 
         eParameter_MaxBoundsX = 0, // float 0
         eParameter_MaxBoundsY = 1, // float 1
@@ -26,7 +26,7 @@ public:
     virtual ~GmkCameraControl();
 
     void Init(GimmickBuildInfo* buildInfo) DONT_INLINE_CLASS;
-    void SetState(int state);
+    void SetState(s32 state);
 
     /* FlfGameObj */
     virtual void SetState(FlfGameObj* setter, const std::string& stateName) override;
@@ -35,8 +35,8 @@ public:
     virtual bool vfC0(const char*) override;
 
 private:
-    int mCameraType; // @ 0x130
-    int mState; // @ 0x134
+    s32 mCameraType; // @ 0x130
+    s32 mState; // @ 0x134
     float m_138;
     float m_13C;
     float m_140;

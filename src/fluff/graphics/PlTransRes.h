@@ -28,27 +28,27 @@ public:
 
 class PlTransMdl {
 public:
-    PlTransMdl(FullSortScene* pScene /* unused */, PlayerBase* pPlayer, int numModels);
-    PlTransMdl(FullSortScene* pScene /* unused */, int numModels);
+    PlTransMdl(FullSortScene* pScene /* unused */, PlayerBase* pPlayer, s32 numModels);
+    PlTransMdl(FullSortScene* pScene /* unused */, s32 numModels);
     virtual ~PlTransMdl();
 
-    void PlayNURBSAnimation(int animID, bool resetFrame) const;
+    void PlayNURBSAnimation(s32 animID, bool resetFrame) const;
     bool IsAnimationDone() const;
     void SetUpdateRate(float rate);
     void SetDefaultUpdateRate();
     float GetUpdateRate() const;
     void SetMatrix(const gfl::Mtx34& rMtx);
-    void SetMatrix(const gfl::Mtx34& rMtx, int direction);
+    void SetMatrix(const gfl::Mtx34& rMtx, s32 direction);
     void GetMatrix(gfl::Mtx34& rMtx);
     bool GetMatrix(const char* pName, gfl::Mtx34& rMtx);
-    int ResetScene(FullSortScene* pScene);
+    s32 ResetScene(FullSortScene* pScene);
     void SetOpacity(float opacity);
-    void SetKeyFrames(float frame, int arg2);
+    void SetKeyFrames(float frame, s32 arg2);
     void UpdateKeyFrames();
     void Init();
 
     /* 0x04 */ PlayerBase* mPlayer;
-    /* 0x08 */ int mNumModels;
+    /* 0x08 */ s32 mNumModels;
     /* 0x0C */ gfl::Pointer<FlfMdlDraw> mFlfMdlDraw;
     /* 0x10 */ G3dObjPointer<WoolBaseMdl> mWoolBaseMdl;
     /* 0x14 */ KeyFrame<float> mKeyFrames;

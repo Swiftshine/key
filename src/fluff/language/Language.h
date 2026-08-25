@@ -41,13 +41,13 @@ namespace Language {
         eLanguageType_KR_Korean             = 12,
     };
 
-    void SetCurrentRegionType(int type);
-    int GetCurrentRegionType() DONT_INLINE_CLASS;
+    void SetCurrentRegionType(s32 type);
+    s32 GetCurrentRegionType() DONT_INLINE_CLASS;
     uint GetCurrentRegionCode();
-    uint GetRegionCodeByRegionType(int type);
-    int GetLanguageType(int regionType, SCLanguage language);
-    void SetCurrentLanguageType(int type);
-    int GetCurrentLanguageType();
+    uint GetRegionCodeByRegionType(s32 type);
+    s32 GetLanguageType(s32 regionType, SCLanguage language);
+    void SetCurrentLanguageType(s32 type);
+    s32 GetCurrentLanguageType();
 }
 
 #endif

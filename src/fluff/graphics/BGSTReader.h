@@ -62,7 +62,7 @@ public:
 
     /* 0x00 */ s32 mReadState;
     /* 0x04 */ File* mBGSTFile;
-    /* 0x08 */ int m_8;
+    /* 0x08 */ s32 m_8;
     /* 0x0C */ EntryObject mEntryObject;
     /* 0x2C */ std::list<EntryObject*> mObjectList;
     /* 0x38 */ std::vector<EntryObject*> mObjectVector;

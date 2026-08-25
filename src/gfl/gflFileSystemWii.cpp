@@ -11,7 +11,7 @@ void FileSystemWii::DestroyInstance() {
     sInstance = nullptr;
 }
 
-File* FileSystemWii::GetFileByEntrynum(int entrynum) {
+File* FileSystemWii::GetFileByEntrynum(s32 entrynum) {
     return nullptr;
 }
 

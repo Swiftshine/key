@@ -34,7 +34,7 @@ public:
     
     /* Class Members */
 
-    /* 0x00 */ int mLoadPhase;
+    /* 0x00 */ s32 mLoadPhase;
     /* 0x04 */ StageInfo mStage;
     /* 0x10 */ gfl::Pointer<ColObjTree> mColObjTree;
     /* 0x14 */ gfl::Pointer<GmkMng> mGimmickManager;

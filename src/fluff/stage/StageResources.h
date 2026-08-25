@@ -23,7 +23,7 @@ public:
     void AddGimmickName(const char* name);
     void AddCharaResourceName(const char* name);
     void AddGimmickBuildInfo(Gimmick::GimmickBuildInfo* buildInfo);
-    void AddResourceNameByGimmickID(int id);
+    void AddResourceNameByGimmickID(s32 id);
     void fn_80052228();
     void fn_800522C4(uint index);
     void fn_8005234C(uint arg1);
@@ -35,7 +35,7 @@ private:
     gfl::LinkedList<std::string*> mGimmickNameList;
     gfl::LinkedList<std::string*> mCharaResourceNameList;
     gfl::LinkedList<Gimmick::GimmickBuildInfo*> mGimmickBuildInfoList;
-    gfl::LinkedList<int> mGimmickIDList;
+    gfl::LinkedList<s32> mGimmickIDList;
 };
 
 ASSERT_SIZE(StageResources, 0x3C);

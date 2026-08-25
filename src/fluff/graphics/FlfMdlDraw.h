@@ -81,7 +81,7 @@ public:
         /* 0x12 */ bool m_12;
         /* 0x13 */ bool m_13;
         /* 0x14 */ bool m_14;
-        /* 0x18 */ int m_18;
+        /* 0x18 */ s32 m_18;
         /* 0x1C */ float mStartFrame;
         /* 0x20 */ bool m_20;
         /* 0x21 */ bool m_21;
@@ -89,8 +89,8 @@ public:
         /* 0x23 */ u8 m_23;
         /* 0x24 */ nw4r::math::VEC2 m_24;
         /* 0x2C */ GXColor m_2C;
-        /* 0x30 */ int m_30;
-        /* 0x34 */ int m_34;
+        /* 0x30 */ s32 m_30;
+        /* 0x34 */ s32 m_34;
     };
 
 
@@ -113,23 +113,23 @@ public:
 
     void Update(bool shouldUpdate);
     nw4r::g3d::G3dObj* GetBlendAnmMatCtrlAnim(uint index);
-    void fn_80147C28(int, float);
+    void fn_80147C28(s32, float);
     void SetOpacity(float);
     float fn_800252AC();
     void LoadNURBSFromFileList();
-    void LoadNURBSFromFileList(int* pIndices /* ? */, int count);
+    void LoadNURBSFromFileList(s32* pIndices /* ? */, s32 count);
     void SetVisibility(bool visible);
-    void PlayNURBSAnimation(int id, bool resetFrame);
+    void PlayNURBSAnimation(s32 id, bool resetFrame);
     void SetWoolDrawMatrix(const nw4r::math::MTX34&);
     bool fn_800239CC();
     void UpdateFrame();
     void SetUpdateRate(float rate);
-    int SetScene(FullSortScene* pFullSortScene);
+    s32 SetScene(FullSortScene* pFullSortScene);
     void SetBlendUpdateRate(float);
     bool IsAnimationDone() const;
     float GetCurrentFrame();
     float GetEndFrame();
-    float GetEndFrame(int id);
+    float GetEndFrame(s32 id);
     void SetCurrentNURBSFrame(float);
     gfl::ScnMdlWrapper* GetNURBSAnimWrapperModelWrapper();
     NURBSSet* GetNURBSAnimWrapperNURBSSet();
@@ -137,15 +137,15 @@ public:
     bool IsVisible() const;
     bool fn_80023E2C() const;
     void GetWoolDrawMatrix(nw4r::math::MTX34& rDst) const;
-    bool HasNURBSAnimation(int id) const;
-    NwBlendAnm* GetBlendAnm(int id) const;
+    bool HasNURBSAnimation(s32 id) const;
+    NwBlendAnm* GetBlendAnm(s32 id) const;
 
-    inline void SetCurrentFrameInt(int value) {
-        *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60) = value;
+    inline void SetCurrentFrameInt(s32 value) {
+        *reinterpret_cast<s32*>(reinterpret_cast<u8*>(this) + 0x60) = value;
     }
 
-    inline int GetCurrentFrameInt() {
-        return *reinterpret_cast<int*>(reinterpret_cast<u8*>(this) + 0x60);
+    inline s32 GetCurrentFrameInt() {
+        return *reinterpret_cast<s32*>(reinterpret_cast<u8*>(this) + 0x60);
     }
 
     inline float GetUpdateRate() const {
@@ -168,7 +168,7 @@ public:
     /* 0x02C */ float m_2C;
     /* 0x030 */ nw4r::math::VEC3 m_30;
     /* 0x03C */ bool mShouldUpdate;
-    /* 0x040 */ int m_40;
+    /* 0x040 */ s32 m_40;
     /* 0x044 */ bool m_44;
     /* 0x048 */ float m_48;
     /* 0x04C */ NURBSModelWrapper* m_4C;
@@ -177,11 +177,11 @@ public:
     /* 0x058 */ uint mFlags;
     /* 0x05C */ float mCurrentFrame;
     /* 0x060 */ uint mCurrentFrameInt;
-    /* 0x064 */ int m_64;
-    /* 0x068 */ int m_68;
+    /* 0x064 */ s32 m_64;
+    /* 0x068 */ s32 m_68;
     /* 0x06C */ bool mIsCubic;
-    /* 0x070 */ int m_70;
-    /* 0x074 */ int m_74;
+    /* 0x070 */ s32 m_70;
+    /* 0x074 */ s32 m_74;
     /* 0x078 */ Substruct m_78;
     /* 0x08C */ ShadowOffsetWrapper mShadowOffsets;
     /* 0x0C4 */ nw4r::math::MTX34 m_C4;
@@ -192,23 +192,23 @@ public:
     /* 0x130 */ float m_130;
     /* 0x134 */ float m_134;
     /* 0x138 */ float m_138;
-    /* 0x13C */ int m_13C;
+    /* 0x13C */ s32 m_13C;
     /* 0x140 */ float m_140;
-    /* 0x144 */ int m_144;
-    /* 0x148 */ int m_148;
+    /* 0x144 */ s32 m_144;
+    /* 0x148 */ s32 m_148;
     /* 0x14C */ nw4r::math::VEC2 m_14C;
     /* 0x154 */ nw4r::math::VEC2 m_154;
     /* 0x15C */ nw4r::math::VEC2 m_15C;
-    /* 0x164 */ int m_164;
+    /* 0x164 */ s32 m_164;
     /* 0x168 */ Callback mCallbacks[3];
-    /* 0x18C */ int m_18C;
-    /* 0x190 */ int m_190;
-    /* 0x194 */ int m_194;
+    /* 0x18C */ s32 m_18C;
+    /* 0x190 */ s32 m_190;
+    /* 0x194 */ s32 m_194;
     /* 0x198 */ gfl::ResFileObject mAnimFileInfo;
     /* 0x19C */ gfl::ResFileObject mFileInfo;
     /* 0x1A0 */ FlfMdlVec* m_1A0;
     /* 0x1A4 */ FlfMdlVec* m_1A4;
-    /* 0x1A8 */ int m_1A8;
+    /* 0x1A8 */ s32 m_1A8;
     /* 0x1AC */ NwBlendAnmWrapper* mNwBlendAnmWrappers;
     /* 0x1B0 */ uint mNwBlendAnmWrapperCount;
     /* 0x1B4 */ std::vector<NURBSObject> mNURBSObjects;

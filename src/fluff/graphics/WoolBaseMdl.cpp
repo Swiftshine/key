@@ -3,11 +3,11 @@
 WoolBaseMdl::WoolBaseMdl(
     FullSortScene* pScene,
     WoolBaseTask* pTask,
-    int arg3,
+    s32 arg3,
     gfl::ResFileObject& rResFileObject,
     const char* pWoolName1,
     const char* pWoolName2,
-    int arg6,
+    s32 arg6,
     const char* pName
 )
     : CustomRenderObj(false, true, pName)
@@ -31,7 +31,7 @@ WoolBaseMdl::WoolBaseMdl(
 
     mFlfWoolDraw = new (gfl::eHeapID_Work) FlfWoolDraw;
 
-    int index = mFlfWoolDraw->Register(&rResFileObject, pWoolName1, pWoolName2);
+    s32 index = mFlfWoolDraw->Register(&rResFileObject, pWoolName1, pWoolName2);
 
     uint count = mWoolBaseTask->mSpringTemplate->mParticleCount;
     mFlfWoolDraw->fn_800267B0(index, count + m_10C * (count - 1));
@@ -45,7 +45,7 @@ const char wool_string_template[] = "wool_%02d";
 WoolBaseMdl::WoolBaseMdl(
     FullSortScene* pScene,
     WoolBaseTask* pTask,
-    int arg3,
+    s32 arg3,
     gfl::ResFileObject& rResFileObject,
     const char* pName
 )
@@ -69,8 +69,8 @@ WoolBaseMdl::WoolBaseMdl(
 
     mFlfWoolDraw = new (gfl::eHeapID_Work) FlfWoolDraw;
 
-    int index = -1;
-    int idx = 0;
+    s32 index = -1;
+    s32 idx = 0;
 
     for (uint i = 0; i < 0x40; i++) {
         char name[0x20];
@@ -155,13 +155,13 @@ void WoolBaseMdl::fn_8001AA5C(bool arg1) {
     SetUpdate(m_108 || m_158);
 }
 
-int WoolBaseMdl::ResetScene(FullSortScene* pScene) {
+s32 WoolBaseMdl::ResetScene(FullSortScene* pScene) {
     GetScene()->RemoveRenderObj(this);
     pScene->AddRenderObj(this);
     return 1;
 }
 
-void WoolBaseMdl::fn_8001AB34(int arg1) {
+void WoolBaseMdl::fn_8001AB34(s32 arg1) {
     mFlfWoolDraw->fn_80026A54(arg1);
 }
 
@@ -225,7 +225,7 @@ void WoolBaseMdl::fn_8001AD68() {
     mFlfWoolDraw->fn_80026E88(0);
 }
 
-void WoolBaseMdl::fn_8001AD74(int arg1) {
+void WoolBaseMdl::fn_8001AD74(s32 arg1) {
     mFlfWoolDraw->m_58 = arg1;
 }
 
@@ -233,10 +233,10 @@ void WoolBaseMdl::fn_8001AD80(float arg1) {
     mFlfWoolDraw->m_5C = arg1;
 }
 
-void WoolBaseMdl::fn_8001AD8C(int arg1, int arg2) {
+void WoolBaseMdl::fn_8001AD8C(s32 arg1, s32 arg2) {
     m_154 = arg1;
 
-    int num = mFlfWoolDraw->fn_80026B54(0);
+    s32 num = mFlfWoolDraw->fn_80026B54(0);
 
     for (uint i = 0; i < m_154; i++) {
         BackupBuff* buf = new (gfl::eHeapID_Work) BackupBuff;

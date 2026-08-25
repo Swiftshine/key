@@ -25,7 +25,7 @@ namespace gfl {
 
         /* Virtual Methods */
 
-        /* 0x08 */ DECL_WEAK virtual int vf8() = 0;
+        /* 0x08 */ DECL_WEAK virtual s32 vf8() = 0;
         /* 0x0C */ virtual void vfC() = 0;
         /* 0x10 */ DECL_WEAK virtual ~Param();
         /* 0x14 */ virtual void Print(Console* pConsole, uint numTabs) = 0;
@@ -51,14 +51,14 @@ namespace gfl {
 
         /* Virtual Methods */
 
-        /* 0x08 */ DECL_WEAK virtual int vf8();
+        /* 0x08 */ DECL_WEAK virtual s32 vf8();
         /* 0x0C */ DONT_OPTIMIZE virtual void vfC();
         /* 0x10 */ DECL_WEAK virtual ~ParamS32();
         /* 0x14 */ DONT_OPTIMIZE virtual void Print(Console* pConsole, uint numTabs);
 
         /* Class Members */
 
-        /* 0x28 */ int mValue;
+        /* 0x28 */ s32 mValue;
     };
 
     class ParamF32 : public Param {
@@ -67,7 +67,7 @@ namespace gfl {
 
         /* Virtual Methods */
 
-        /* 0x08 */ DECL_WEAK virtual int vf8();
+        /* 0x08 */ DECL_WEAK virtual s32 vf8();
         /* 0x0C */ DONT_OPTIMIZE virtual void vfC();
         /* 0x10 */ DECL_WEAK virtual ~ParamF32();
         /* 0x14 */ DONT_OPTIMIZE virtual void Print(Console* pConsole, uint numTabs);
@@ -91,7 +91,7 @@ namespace gfl {
         ParamStrA(const char* label, uint count);
         virtual ~ParamStrA();
 
-        DECL_WEAK virtual int vf8() override;
+        DECL_WEAK virtual s32 vf8() override;
         virtual void vfC() override;
         virtual void Print(Console* console, uint numTabs) override;
 

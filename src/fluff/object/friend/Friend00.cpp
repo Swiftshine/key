@@ -253,7 +253,7 @@ bool Friend00::vf218() {
     return true;
 }
 
-int Friend00::GetBeadGimmickID(GmkBead* pBead) const {
+s32 Friend00::GetBeadGimmickID(GmkBead* pBead) const {
     return pBead->GetGimmickID();
 }
 

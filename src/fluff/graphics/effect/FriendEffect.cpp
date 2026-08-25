@@ -70,8 +70,8 @@ void FriendEffect::SetVisibility(bool vis) {
     }
 }
 
-void FriendEffect::Reset(int id) {
-    for (int i = 0; i < NUM_FRIEND_TYPES; i++) {
+void FriendEffect::Reset(s32 id) {
+    for (s32 i = 0; i < NUM_FRIEND_TYPES; i++) {
         if (mEffects[i] != nullptr) {
             mEffects[i]->SetVisibility(false);
         }

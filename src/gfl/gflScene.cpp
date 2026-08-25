@@ -8,8 +8,8 @@
 using namespace gfl;
 
 bool Scene::XluSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB) {
-    int xluB = pB->GetPriorityDrawXlu();
-    int xluA = pA->GetPriorityDrawXlu();
+    s32 xluB = pB->GetPriorityDrawXlu();
+    s32 xluA = pA->GetPriorityDrawXlu();
 
     if (xluA < xluB) {
         return true;
@@ -31,8 +31,8 @@ bool Scene::XluSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB) {
 }
 
 bool Scene::OpaSortCheck(nw4r::g3d::ScnLeaf* pA, nw4r::g3d::ScnLeaf* pB) {
-    int opaB = pB->GetPriorityDrawOpa();
-    int opaA = pA->GetPriorityDrawOpa();
+    s32 opaB = pB->GetPriorityDrawOpa();
+    s32 opaA = pA->GetPriorityDrawOpa();
 
     if (opaA < opaB) {
         return true;

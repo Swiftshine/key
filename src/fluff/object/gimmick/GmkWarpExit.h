@@ -11,7 +11,7 @@
 class GmkWarpExit : Gimmick {
 public:
     enum Parameter {
-        eParameter_SceneIndex = 0, // int 0
+        eParameter_SceneIndex = 0, // s32 0
     };
 public:
     static GmkWarpExit* Build(GimmickBuildInfo* buildInfo);

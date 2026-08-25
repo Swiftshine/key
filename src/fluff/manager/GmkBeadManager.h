@@ -29,7 +29,7 @@ public:
         void ResetUserHandles(FlfHandleObj* pHandleObj);
         void SetUserHandle(FlfHandleObj* pHandleObj);
 
-        /* 0x00 */ int mNumUserHandles;
+        /* 0x00 */ s32 mNumUserHandles;
         /* 0x04 */ gfl::SoundHandle mSoundHandle;
         /* 0x0C */ FlfHandle mUserHandles[8];
         /* 0x4C */ u32 m_4C[2][128];

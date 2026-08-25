@@ -17,7 +17,7 @@ public:
 
     /* Class Methods */
     
-    FlfFriend* fn_8039DAF8(int);
+    FlfFriend* fn_8039DAF8(s32);
 };
 
 #endif

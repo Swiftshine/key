@@ -28,8 +28,8 @@ public:
             return *reinterpret_cast<std::string*>(this);
         }
 
-        unsigned int m_0;
-        unsigned int m_4;
+        s32 m_0;
+        s32 m_4;
         const char* mString;
 
     };
@@ -68,10 +68,10 @@ public:
 
     /* Class Methods */
     /// @return a `TokenType`.
-    int ParseToken();
-    const char* GetTokenString(int tokenType);
+    s32 ParseToken();
+    const char* GetTokenString(s32 tokenType);
     void fn_80652EC8();
-    void Reset(int unused = 1) DONT_INLINE_CLASS;
+    void Reset(s32 unused = 1) DONT_INLINE_CLASS;
     Param* GetNextParam(ParamGroup* pParamGroup);
     ParamGroup* GetParamGroup(ParamGroup* pParamGroup);
     ParamS32* GetParamS32(ParamGroup* pParamGroup);
@@ -97,7 +97,7 @@ public:
         return true;
     }
 
-    inline int ReadCharacter() {
+    inline s32 ReadCharacter() {
         if (mBufferSeekPosition == mBufferLength) {
             if (!Read()) {
                 return -1;
@@ -113,7 +113,7 @@ public:
     }
 
 
-    bool IsAlphabetic(int character) {
+    bool IsAlphabetic(s32 character) {
         if (character - 'A' < 26 || character - 'a' < 26) {
             return true;
         }
@@ -121,7 +121,7 @@ public:
         return false;
     }
 
-    bool IsNumeric(int character) {
+    bool IsNumeric(s32 character) {
         if (character - '0' <= 9 || character == '.') {
             return true;
         }
@@ -129,7 +129,7 @@ public:
         return false;
     }
 
-    bool IsNewline(int character) {
+    bool IsNewline(s32 character) {
         if (character == '\r' || character == '\n') {
             return true;
         }
@@ -137,7 +137,7 @@ public:
         return false;
     }
 
-    bool IsWhitespace(int character) {
+    bool IsWhitespace(s32 character) {
         if (character == ' ' || character == '\t') {
             return true;
         }
@@ -153,20 +153,20 @@ public:
     /* Class Members */
 
     /* 0x000 */ FixedMemoryStream* mFixedMemoryStream;
-    /* 0x004 */ int mIntValue;
+    /* 0x004 */ s32 mIntValue;
     /* 0x008 */ float mFloatValue;
     /* 0x00C */ char mWorkingBuffer[512];
     /* 0x20C */ size_t mWorkingBufferLength;
     /* 0x210 */ char mBuffer[512];
-    /* 0x410 */ int mBufferLength;
-    /* 0x414 */ int mBufferSeekPosition;
-    /* 0x418 */ int mLastReadCharacter; // specifically an int, not a char
+    /* 0x410 */ s32 mBufferLength;
+    /* 0x414 */ s32 mBufferSeekPosition;
+    /* 0x418 */ s32 mLastReadCharacter; // specifically an s32, not a char
     /* 0x41C */ char mCurrentLineContents[512];
     /* 0x61C */ size_t mCurrentColumn; // refers to the file
     /* 0x620 */ size_t mCurrentLineNumber; // refers to the file
     /* 0x624 */ String mFilename;
     /* 0x630 */ bool m_630;
-    /* 0x634 */ int mCurrentTokenType;
+    /* 0x634 */ s32 mCurrentTokenType;
 };
 
 }

@@ -11,7 +11,7 @@
 
 typedef gfl::FunctorClassMethod0<void, Gimmick*, void (Gimmick::*)() const> FunctorType;
 
-Gimmick::Gimmick(int gimmickID)
+Gimmick::Gimmick(s32 gimmickID)
     : FlfGameObj(FlfGameObj::eObjectCategory_Gimmick)
     , mGimmickID(gimmickID)
     , mBuildInfoPtr(nullptr)
@@ -23,7 +23,7 @@ Gimmick::Gimmick(int gimmickID)
     InitCommand();
 }
 
-Gimmick::Gimmick(int gimmickID, const char* pTaskName)
+Gimmick::Gimmick(s32 gimmickID, const char* pTaskName)
     : FlfGameObj(FlfGameObj::eObjectCategory_Gimmick)
     , mGimmickID(gimmickID)
     , mBuildInfoPtr(nullptr)
@@ -126,7 +126,7 @@ void Gimmick::GetResFileObject(gfl::ResFileObject& rDst, Gimmick* pGimmick) {
 const char Slash[] = "/";
 const char BRRES[] = ".brres";
 
-void Gimmick::GetResFileObject(gfl::ResFileObject& rDst, Gimmick* pGimmick, int gimmickID) {
+void Gimmick::GetResFileObject(gfl::ResFileObject& rDst, Gimmick* pGimmick, s32 gimmickID) {
     std::string path = "gimmick/";
 
     path += GimmickUtil::GetResourceNameByGimmickID(gimmickID);
@@ -171,4 +171,4 @@ gfl::ScnMdlWrapper* Gimmick::CreateScnMdlWrapper(
 
 
 
-void Gimmick::vfB0(int arg0) { /*(this->*state1)();*/ return; }
+void Gimmick::vfB0(s32 arg0) { /*(this->*state1)();*/ return; }

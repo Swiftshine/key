@@ -79,13 +79,13 @@ void GmkMng::ClearAll(bool arg1) {
 }
 
 // https://decomp.me/scratch/g7Bxu - regswaps
-void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& rDest) {
+void GmkMng::GetGimmicksByGimmickID(s32 gimmickID, std::vector<Gimmick*>& rDest) {
     // gfl::LinkedList<Gimmick*>::NodeBase* node = mGimmicks.GetNode()->GetNext();
     // gfl::LinkedList<Gimmick*>::NodeBase* end = mGimmicks.GetNode();
 
     // while (node != end) {
     //     Gimmick* gimmick = node->ToNode()->GetData();
-    //     int id = gimmick->GetGimmickID();
+    //     s32 id = gimmick->GetGimmickID();
 
     //     if (gimmickID == id) {
     //         rDest.push_back(gimmick);
@@ -96,7 +96,7 @@ void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& rDest)
 
     for (std::list<Gimmick*>::iterator it = mGimmicks.begin(); it != mGimmicks.end(); it++) {
         Gimmick* gmk = *it;
-        int id = gmk->GetGimmickID();
+        s32 id = gmk->GetGimmickID();
 
         if (gimmickID == id) {
             rDest.push_back(gmk);
@@ -104,7 +104,7 @@ void GmkMng::GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& rDest)
     }
 }
 
-void GmkMng::GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest) {
+void GmkMng::GetCommonGimmicksByID(s32 gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest) {
     Mapdata* mapdata = Stage::Instance()->GetCurrentLevelSection();
 
     for (uint i = 0; i < mapdata->mNumCommonGimmicks; i++) {

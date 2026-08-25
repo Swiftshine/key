@@ -45,7 +45,7 @@ StageResourceManager::~StageResourceManager() {
     }
 }
 
-void StageResourceManager::LoadStage(int stageID) {
+void StageResourceManager::LoadStage(s32 stageID) {
     mFolderStageID = stageID;
 
     bool preview;
@@ -71,7 +71,7 @@ bool StageResourceManager::LoadResources() {
 
         Mapdata* mapdata = GetLevelSectionByIndex(0);
 
-        for (int i = 0; i < mapdata->mNumCommonGimmicks; i++) {
+        for (s32 i = 0; i < mapdata->mNumCommonGimmicks; i++) {
             Gimmick::GimmickBuildInfo* buildInfo = mapdata->GetCommonGimmickBuildInfo(i);
 
             // "PreviewBgLoad"
@@ -125,11 +125,11 @@ bool StageResourceManager::LoadResources() {
 }
 
 
-Mapdata* StageResourceManager::GetLevelSectionByIndex(int sectionID) {
+Mapdata* StageResourceManager::GetLevelSectionByIndex(s32 sectionID) {
     return mCurrentSections[sectionID];
 }
 
-bool StageResourceManager::LoadBGFromArchive(int resourceID) {
+bool StageResourceManager::LoadBGFromArchive(s32 resourceID) {
     BGData* bgdata;
     gfl::ResFileInfo* fileInfo;
     char path[0x200];
@@ -154,7 +154,7 @@ bool StageResourceManager::LoadBGFromArchive(int resourceID) {
     return true;
 }
 
-void StageResourceManager::LoadBGFromFolder(int resourceID) {
+void StageResourceManager::LoadBGFromFolder(s32 resourceID) {
     gfl::ResFileInfo* resFileInfo;
     char path[0x200];
 
@@ -162,7 +162,7 @@ void StageResourceManager::LoadBGFromFolder(int resourceID) {
     mBGResFileObject = layout::LayoutResource::GetResFileObjectFromFolder(path);
 }
 
-void StageResourceManager::LoadCommonFromArchive(int stageID) {
+void StageResourceManager::LoadCommonFromArchive(s32 stageID) {
     char resourceName[0x100];
     char stageCommonPath[0x200];
     bool preview;
@@ -198,7 +198,7 @@ void StageResourceManager::LoadCommonFromArchive(int stageID) {
     }
 }
 
-void StageResourceManager::LoadCommonFromFolder(int stageID) {
+void StageResourceManager::LoadCommonFromFolder(s32 stageID) {
     char stageName[0x100];
     bool preview;
     preview = nullptr != GameManager::Instance() ? GameManager::Instance()->mManualBGLoad : false;
@@ -231,7 +231,7 @@ void StageResourceManager::CopyBGData(BGData* bgdata) {
     mBGData = bgdata;
 }
 
-void StageResourceManager::LoadMapdataFromFolder(int resourceID) {
+void StageResourceManager::LoadMapdataFromFolder(s32 resourceID) {
     gfl::ResFileInfo* fileInfo;
     char mapdataPath[0x100];
 

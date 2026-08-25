@@ -22,7 +22,7 @@ namespace gfl {
         static void InitInstance();
         static void DestroyInstance();
 
-        File* GetFileByEntrynum(int entrynum);
+        File* GetFileByEntrynum(s32 entrynum);
 
         FileSystemWii();
         ~FileSystemWii();
@@ -38,7 +38,7 @@ namespace gfl {
         // used to decode Good-Feel's byte-pair-encoded GF Archives
         virtual void StartBPEThread();
 
-        virtual File* GetFileByEntryNumImpl(int entrynum);
+        virtual File* GetFileByEntryNumImpl(s32 entrynum);
     public:
         DirEntryWii mEntries[10];
     };

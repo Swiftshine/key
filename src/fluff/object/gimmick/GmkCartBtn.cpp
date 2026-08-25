@@ -80,8 +80,8 @@ bool GmkCartBtn::OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gf
     return ret;
 }
 
-int GmkCartBtn::vf74(IObjHitCB* other) {
-    int ret = 1;
+s32 GmkCartBtn::vf74(IObjHitCB* other) {
+    s32 ret = 1;
 
     m_134 = true;
 
@@ -94,8 +94,8 @@ int GmkCartBtn::vf74(IObjHitCB* other) {
 }
 
 
-int GmkCartBtn::vf78(IObjHitCB* other) {
-    int ret = 1;
+s32 GmkCartBtn::vf78(IObjHitCB* other) {
+    s32 ret = 1;
 
     m_134 = true;
 
@@ -108,8 +108,8 @@ int GmkCartBtn::vf78(IObjHitCB* other) {
 }
 
 
-int GmkCartBtn::vf7C(IObjHitCB* other, int arg2) {
-    int ret = 1;
+s32 GmkCartBtn::vf7C(IObjHitCB* other, s32 arg2) {
+    s32 ret = 1;
 
     m_134 = true;
 
@@ -122,8 +122,8 @@ int GmkCartBtn::vf7C(IObjHitCB* other, int arg2) {
 }
 
 
-int GmkCartBtn::vf8C(IObjHitCB* other, int arg2) {
-    int ret = 1;
+s32 GmkCartBtn::vf8C(IObjHitCB* other, s32 arg2) {
+    s32 ret = 1;
 
     m_134 = true;
 

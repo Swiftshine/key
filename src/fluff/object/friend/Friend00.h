@@ -46,7 +46,7 @@ public:
     void fn_80342DE4(PlayerBase* pPlayer, bool isReset);
     void fn_803431E4();
     /// @note The result of this function is never used.
-    int GetBeadGimmickID(GmkBead* pBead) const;
+    s32 GetBeadGimmickID(GmkBead* pBead) const;
     void fn_80343534();
     void fn_803436C8();
 
@@ -58,12 +58,12 @@ public:
 
     /* Class Members */
 
-    /* 0x178 */ int mBeadCount;
+    /* 0x178 */ s32 mBeadCount;
     /* 0x17C */ std::vector<GatherBeadFriend00*> mGathers;
     /* 0x188 */ bool m_188;
     /* 0x18C */ gfl::Vec3 m_18C;
     /* 0x198 */ gfl::Vec3 m_198;
-    /* 0x1A4 */ int mBeadsCollected[2];
+    /* 0x1A4 */ s32 mBeadsCollected[2];
     /* 0x1AC */ gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry1;
     /* 0x1B0 */ gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry2;
     /* 0x1B4 */ gfl::ReleasedPointer<CollisionEntry, CollisionEntry::Remove> mCollisionEntry3;

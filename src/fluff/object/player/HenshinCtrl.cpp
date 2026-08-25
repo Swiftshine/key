@@ -64,7 +64,7 @@ void HenshinCtrl::vfB0() {
         return;
     }
 
-    int state = mCurrentState;
+    s32 state = mCurrentState;
 
     switch (state) {
         case 1: {

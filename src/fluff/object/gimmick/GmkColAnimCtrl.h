@@ -8,7 +8,7 @@
 
 class GmkColAnimCtrl {
 public:
-    GmkColAnimCtrl(Gimmick* owner, int arg2, Gimmick::GimmickBuildInfo* buildInfo);
+    GmkColAnimCtrl(Gimmick* owner, s32 arg2, Gimmick::GimmickBuildInfo* buildInfo);
     virtual ~GmkColAnimCtrl();
     virtual bool vfC(FlfGameObj*, uint);
     virtual bool vf10(FlfGameObj*, uint);
@@ -17,7 +17,7 @@ public:
     void Update();
     void fn_800D5130(void*);
 private:
-    int m_4;
+    s32 m_4;
     void* m_8;
     Gimmick::GimmickBuildInfo* mBuildInfo;
     ColObjTrans mColObj;
@@ -25,7 +25,7 @@ private:
     bool m_35;
     nw4r::math::VEC2 m_38;
     nw4r::math::VEC2 m_40;
-    int m_48;
+    s32 m_48;
 };
 
 #endif

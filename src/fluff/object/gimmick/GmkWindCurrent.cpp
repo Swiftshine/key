@@ -27,7 +27,7 @@ nw4r::math::VEC2 GmkWindCurrent::GetPushDirection_thunk() const {
 }
 
 void GmkWindCurrent::SetState(FlfGameObj* pSetter, const std::string& rState) {
-    int state = mState.GetCurrentState();
+    s32 state = mState.GetCurrentState();
 
     if (state == GmkWindCurrent::eState_Disabled) {
         SetEnabled(true);
@@ -271,7 +271,7 @@ WoolGroupUnit::WoolGroupUnit(gfl::ResFileObject* pResFileObject, const char* pWo
     Reset();
 
     mFlfWoolDraw.Create(gfl::eHeapID_Work);
-    int index = mFlfWoolDraw->Register(pResFileObject, pWoolName, nullptr);
+    s32 index = mFlfWoolDraw->Register(pResFileObject, pWoolName, nullptr);
     mFlfWoolDraw->fn_800267B0(index, 20);
     mFlfWoolDraw->m_18 = 0.5f;
 }
@@ -538,8 +538,8 @@ GmkWindCurrent_AnimWrapper::GmkWindCurrent_AnimWrapper(GmkWindCurrent* pWindCurr
         // float unk4 = orientation.y * GmkWindCurrent_AnimWrapper_HeightMult;
 
         gfl::Vec2 vec2(
-            ((static_cast<int>(orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f,
-            ((static_cast<int>(orientation.y * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.y * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f
+            ((static_cast<s32>(orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.x * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f,
+            ((static_cast<s32>(orientation.y * GmkWindCurrent_AnimWrapper_HeightMult) * i) + partPos.x) + (orientation.y * GmkWindCurrent_AnimWrapper_HeightMult) * 0.5f
         );
 
         gfl::Vec3 vec3 = vec2;

@@ -11,12 +11,12 @@ GmkSunriseCurtain* GmkSunriseCurtain::Build(GimmickBuildInfo* pBuildInfo) {
 }
 
 // rodata
-const int lbl_8080AA20 = 0; // 0
-const int lbl_8080AA24 = 1; // 1
-const int lbl_8080AA28 = 2; // 2
+const s32 lbl_8080AA20 = 0; // 0
+const s32 lbl_8080AA24 = 1; // 1
+const s32 lbl_8080AA28 = 2; // 2
 
 // sdata2
-int lbl_808EA238; // 3
+s32 lbl_808EA238; // 3
 
 // https://decomp.me/scratch/8CZ4w
 GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
@@ -36,7 +36,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     FullSortScene* scene = Stage::Instance()->GetSceneByID(pBuildInfo->mSceneID);
     mFlfMdlDraw1.Create(new (gfl::eHeapID_Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
 
-    int indices[] = {
+    s32 indices[] = {
         lbl_8080AA20,
         lbl_8080AA24,
         lbl_8080AA28
@@ -51,7 +51,7 @@ GmkSunriseCurtain::GmkSunriseCurtain(GimmickBuildInfo* pBuildInfo)
     scene = Stage::Instance()->GetSceneByID(FullSortSceneUtil::eSceneID_Near_05);
     mFlfMdlDraw2.Create(new (gfl::eHeapID_Work) FlfMdlDraw(scene, "gimmick/SunriseCurtain_01", nullptr, false));
 
-    int index = lbl_808EA238;
+    s32 index = lbl_808EA238;
     mFlfMdlDraw2->LoadNURBSFromFileList(&index, 1);
 
     gfl::Mtx34 mtx1;

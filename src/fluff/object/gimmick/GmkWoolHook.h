@@ -17,11 +17,11 @@ public:
 
     virtual ~GmkWoolHook();
 private:
-    int m_134;
-    int m_138;
-    int m_13C;
-    int m_140;
-    int m_144;
+    s32 m_134;
+    s32 m_138;
+    s32 m_13C;
+    s32 m_140;
+    s32 m_144;
     CollisionInfo* mCollisionInfo;
 };
 

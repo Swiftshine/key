@@ -28,7 +28,7 @@ void MissionClearCheckerBase::CauseMissionFailure() {
     EndMission(MissionClearCheckerBase::eMissionStatus_Failed, MissionClearCheckerBase::eMissionEndReason_TimeUp);
 }
 
-void MissionClearCheckerBase::EndMission(int status, int reason) {
+void MissionClearCheckerBase::EndMission(s32 status, s32 reason) {
     if (mMissionStatus != MissionClearCheckerBase::eMissionStatus_Playing) {
         return;
     }
@@ -38,7 +38,7 @@ void MissionClearCheckerBase::EndMission(int status, int reason) {
 }
 
 bool MissionClearCheckerBase::TimeRanOut(InStageWork* pStageWork) {
-    int remain = pStageWork->mTimeRemaining;
+    s32 remain = pStageWork->mTimeRemaining;
 
     bool ret = false;
 
@@ -49,7 +49,7 @@ bool MissionClearCheckerBase::TimeRanOut(InStageWork* pStageWork) {
     return ret;
 }
 
-int MissionClearCheckerBase::GetMissionStatus() {
+s32 MissionClearCheckerBase::GetMissionStatus() {
     return mMissionStatus;
 }
 
@@ -79,11 +79,11 @@ void MissionClearCheckerBase::InitChecker(
 ) {
     pChecker->SetMissionGameCtrl(pMissionGameCtrl);
     MissionInfo* missionInfo = pMissionGameCtrl->GetMissionInfo();
-    int threshold = missionInfo->GetCompletionThreshold();
+    s32 threshold = missionInfo->GetCompletionThreshold();
     static_cast<CheckerWithThreshold*>(pChecker)->mThreshold = threshold;
 }
 
-int MissionBeadClearChecker::Process() {
+s32 MissionBeadClearChecker::Process() {
     InStageWork* work = WorkManager::GetInStageWork();
 
     if (work->mBeadsCollected[0] + work->mBeadsCollected[1] >= mBeadThreshold) {
@@ -133,9 +133,9 @@ void MissionTimeAttackClearChecker::SetMissionGameCtrl(
     mMissionGameCtrl = pMissionGameCtrl;
 }
 
-int MissionTimeAttackClearChecker::Process() {
+s32 MissionTimeAttackClearChecker::Process() {
     InStageWork* work = WorkManager::GetInStageWork();
-    int tas = work->GetTimeAttackStatus();
+    s32 tas = work->GetTimeAttackStatus();
 
     if (tas >= 0 && 3 > tas) {
         if (tas == InStageWork::eTimeAttackStatus_Failed) {
@@ -172,9 +172,9 @@ MissionDefeatEnemyClearChecker::MissionDefeatEnemyClearChecker()
 
 MissionDefeatEnemyClearChecker::~MissionDefeatEnemyClearChecker() { }
 
-int MissionDefeatEnemyClearChecker::Process() {
+s32 MissionDefeatEnemyClearChecker::Process() {
     InStageWork* work = WorkManager::GetInStageWork();
-    int numDefeated = work->GetNumEnemiesDefeated();
+    s32 numDefeated = work->GetNumEnemiesDefeated();
 
     if (numDefeated >= mEnemyDefeatThreshold) {
         EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);
@@ -215,7 +215,7 @@ MissionCarrierClearChecker::MissionCarrierClearChecker()
 
 MissionCarrierClearChecker::~MissionCarrierClearChecker() { }
 
-int MissionCarrierClearChecker::Process() {
+s32 MissionCarrierClearChecker::Process() {
     InStageWork* work = WorkManager::GetInStageWork();
     MissionGameCtrl* ctrl = GetMissionGameCtrl();
 
@@ -256,9 +256,9 @@ MissionHideAndSeekClearChecker::MissionHideAndSeekClearChecker()
 
 MissionHideAndSeekClearChecker::~MissionHideAndSeekClearChecker() { }
 
-int MissionHideAndSeekClearChecker::Process() {
+s32 MissionHideAndSeekClearChecker::Process() {
     InStageWork* work = WorkManager::GetInStageWork();
-    int numZekeFound = work->GetNumZekeFound();
+    s32 numZekeFound = work->GetNumZekeFound();
 
     if (numZekeFound >= mZekeFoundThreshold) {
         EndMission(MissionClearCheckerBase::eMissionStatus_Succeeded, MissionClearCheckerBase::eMissionEndReason_Succeeded);

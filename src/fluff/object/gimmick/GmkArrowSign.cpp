@@ -56,7 +56,7 @@ std::string GmkArrowSign::GetResourceName(GimmickBuildInfo* buildInfo) {
     char buf[0x80];
     std::string result;
 
-    int texID = buildInfo->GetIntParam(GmkArrowSign::eParameter_Texture);
+    s32 texID = buildInfo->GetIntParam(GmkArrowSign::eParameter_Texture);
     snprintf(buf, 0x80, arrowsign_template, buildInfo->GetIntParam(GmkArrowSign::eParameter_Texture) + 1);
 
     result = buf;

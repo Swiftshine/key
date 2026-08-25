@@ -160,10 +160,10 @@ public:
 
         /* Class Members */
 
-        /* 0x004 */ int mNumNodes;
+        /* 0x004 */ s32 mNumNodes;
         /* 0x008 */ KdTreeNode* mNodes[KDTREE_HITRESULT_NODE_COUNT];
         /* 0x648 */ ColData* mCurrentColData;
-        /* 0x64C */ int mColDataCount;
+        /* 0x64C */ s32 mColDataCount;
     };
 
     KdTree();

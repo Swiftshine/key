@@ -18,7 +18,7 @@ FlfNandMng* FlfNandMng::sInstance;
 extern "C" s32 fn_806AD4A0(NANDFileInfo*);
 
 DECL_WEAK DONT_INLINE void CutFunction() { }
-DECL_WEAK DONT_INLINE void CutFunction2(int) { }
+DECL_WEAK DONT_INLINE void CutFunction2(s32) { }
 
 void FlfNandMng::NandError(s32 result) {
     if (result != NAND_RESULT_OK) {
@@ -186,7 +186,7 @@ void FlfNandMng::fn_802291E4(const char* pFilename) {
     mResult = FlfNandMng::eResult_Reset;
 }
 
-void FlfNandMng::fn_8022924C(size_t numChunks, int arg2) {
+void FlfNandMng::fn_8022924C(size_t numChunks, s32 arg2) {
     NandInfo.Update();
     mNandBlockCount = numChunks;
     mINodeCount = arg2;
@@ -954,7 +954,7 @@ void FlfNandMng::Clear() {
     mState = 0;
 }
 
-void FlfNandMng::SetStateIfBusy(s32 result, int state) {
+void FlfNandMng::SetStateIfBusy(s32 result, s32 state) {
     if (result == NAND_RESULT_BUSY) {
         mState = state;
     } else if (result != NAND_RESULT_OK) {

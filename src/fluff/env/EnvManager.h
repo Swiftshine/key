@@ -20,8 +20,8 @@ namespace env {
         struct Substruct {
             float m_0;
             float m_4;
-            int m_8;
-            int m_C;
+            s32 m_8;
+            s32 m_C;
         };
 
         enum State {
@@ -61,28 +61,28 @@ namespace env {
         /* 0x1C */ std::deque<gfl::ResFileInfo> mSaveDataTex;
         /* 0x28 */ s32 mState;
         /* 0x2C */ gfl::Task* mUpdatePauseTask;
-        /* 0x30 */ int m_30;
-        /* 0x34 */ int m_34;
-        /* 0x38 */ int m_38;
-        /* 0x3C */ int m_3C;
-        /* 0x40 */ int m_40;
-        /* 0x44 */ int m_44;
-        /* 0x48 */ int m_48;
+        /* 0x30 */ s32 m_30;
+        /* 0x34 */ s32 m_34;
+        /* 0x38 */ s32 m_38;
+        /* 0x3C */ s32 m_3C;
+        /* 0x40 */ s32 m_40;
+        /* 0x44 */ s32 m_44;
+        /* 0x48 */ s32 m_48;
         /* 0x4C */ float m_4C;
-        /* 0x50 */ int m_50;
+        /* 0x50 */ s32 m_50;
         /* 0x54 */ EnvFadeSimple* mEnvFadeSimple;
         /* 0x58 */ EnvParts_Curtain* mEnvPartsCurtain;
-        /* 0x5C */ int m_5C;
-        /* 0x60 */ int m_60;
-        /* 0x64 */ int m_64;
-        /* 0x68 */ int m_68;
-        /* 0x6C */ int m_6C;
-        /* 0x70 */ int m_70;
+        /* 0x5C */ s32 m_5C;
+        /* 0x60 */ s32 m_60;
+        /* 0x64 */ s32 m_64;
+        /* 0x68 */ s32 m_68;
+        /* 0x6C */ s32 m_6C;
+        /* 0x70 */ s32 m_70;
         /* 0x74 */ nw4r::math::VEC2 m_74;
         /* 0x7C */ Substruct m_7C;
         /* 0x8C */ bool m_8C;
         /* 0x90 */ EnvCtrl_WipeWindow* mEnvCtrlWipeWindow;
-        /* 0x94 */ int m_94;
+        /* 0x94 */ s32 m_94;
     };
 
     ASSERT_SIZE(EnvManager, 0x98);

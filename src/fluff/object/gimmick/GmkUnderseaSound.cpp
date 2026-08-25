@@ -19,13 +19,13 @@ GmkUnderseaSound::~GmkUnderseaSound() {
     ManageSoundHandle();
 }
 
-inline int dumb_clamp(const int v, const int min, const int max) {
+inline s32 dumb_clamp(const s32 v, const s32 min, const s32 max) {
     return v < min ? min : ( v > max ? max : v);
 }
 
 // https://decomp.me/scratch/QjNvG
 void GmkUnderseaSound::Init(GimmickBuildInfo* buildInfo) {
-    const int unk = buildInfo->GetIntParam(Gimmick::eParameterID_Param0);
+    const s32 unk = buildInfo->GetIntParam(Gimmick::eParameterID_Param0);
     m_130 = dumb_clamp(unk, 0, 0);
     mSoundPlayed = false;
     mPosition.z = FullSortSceneUtil::GetZOrder(buildInfo->mSceneID, buildInfo->mSceneOrder);

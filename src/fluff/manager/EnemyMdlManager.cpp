@@ -8,8 +8,8 @@ EnemyMdlManager::EnemyMdlManager(
     EnemyBase* pOwner,
     const char* pResourcePath,
     uint drawFlags,
-    int count,
-    int* pIndices
+    s32 count,
+    s32* pIndices
 )
     : mTask(nullptr)
     , m_8(0)
@@ -108,7 +108,7 @@ void EnemyMdlManager::fn_80112234(float arg1) {
     m_5C = arg1;
 }
 
-int EnemyMdlManager::fn_8011223C() {
+s32 EnemyMdlManager::fn_8011223C() {
     return m_58;
 }
 
@@ -144,7 +144,7 @@ void EnemyMdlManager::fn_8011224C() {
     draw->SetOpacity(f);
 }
 
-void EnemyMdlManager::fn_801122D4(bool arg1, int arg2, int arg3) {
+void EnemyMdlManager::fn_801122D4(bool arg1, s32 arg2, s32 arg3) {
     if (arg1) {
         m_60 = 1;
         m_64 = 0.0f;
@@ -160,11 +160,11 @@ void EnemyMdlManager::fn_801122D4(bool arg1, int arg2, int arg3) {
     }
 }
 
-int EnemyMdlManager::fn_80112324() {
+s32 EnemyMdlManager::fn_80112324() {
     return m_60;
 }
 
-void EnemyMdlManager::fn_8011232C(int arg1) {
+void EnemyMdlManager::fn_8011232C(s32 arg1) {
     m_6C = arg1;
 }
 
@@ -218,8 +218,8 @@ nw4r::g3d::G3dObj* EnemyMdlManager::SetupGraphics(
     FullSortScene* pScene,
     const char* pResourcePath,
     uint drawFlags,
-    int count,
-    int* pIndices
+    s32 count,
+    s32* pIndices
 ) {
     mFlfMdlDraw = new (gfl::eHeapID_Work) FlfMdlDraw(pScene, pResourcePath, nullptr, true);
 
@@ -238,7 +238,7 @@ nw4r::g3d::G3dObj* EnemyMdlManager::SetupGraphics(
     return anim;
 }
 
-void EnemyMdlManager::fn_801124DC(float arg1, float arg2, int arg3) {
+void EnemyMdlManager::fn_801124DC(float arg1, float arg2, s32 arg3) {
     mFlfMdlDraw->m_13C = arg3;
     mFlfMdlDraw->m_138 = arg1;
     mFlfMdlDraw->m_140 = arg2;
@@ -253,13 +253,13 @@ void EnemyMdlManager::fn_8011250C() {
     mFlfMdlDraw->m_138 = m_74;
 }
 
-void EnemyMdlManager::fn_8011251C(int arg1, bool resetFrames) {
+void EnemyMdlManager::fn_8011251C(s32 arg1, bool resetFrames) {
     m_1C = mOwner->vf314();
     m_2C = arg1;
     mResetFrames = resetFrames;
 }
 
-void EnemyMdlManager::fn_8011257C(int arg1, bool resetFrames) {
+void EnemyMdlManager::fn_8011257C(s32 arg1, bool resetFrames) {
     m_1C = mOwner->vf314();
     m_2C = arg1;
     mResetFrames = resetFrames;
@@ -273,7 +273,7 @@ void EnemyMdlManager::Reset() {
         return;
     }
 
-    int old = m_1C;
+    s32 old = m_1C;
 
     m_18 = m_1C;
     m_1C = -1;
@@ -283,7 +283,7 @@ void EnemyMdlManager::Reset() {
     mFlfMdlDraw->PlayNURBSAnimation(old, mResetFrames);
 }
 
-void EnemyMdlManager::Reset(int arg1, bool resetFrames) {
+void EnemyMdlManager::Reset(s32 arg1, bool resetFrames) {
     mPreviousState = mCurrentState;
     mCurrentState = 0x243;
     m_1C = -1;

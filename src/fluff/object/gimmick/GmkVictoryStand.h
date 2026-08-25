@@ -21,7 +21,7 @@ public:
 
     static void AddDecorativeBallResources();
     static GmkVictoryStand* Build(GimmickBuildInfo* buildInfo);
-    static void fn_804F1BDC(nw4r::math::VEC2& arg1, int rank);
+    static void fn_804F1BDC(nw4r::math::VEC2& arg1, s32 rank);
     static void SpawnDecorativeBall(uint rank);
     static void SetRankingInfo(uint rank, nw4r::math::VEC2& position);
 
@@ -36,7 +36,7 @@ private:
     StateObject mBeadAwardState;
     uint mPlayerRanking;
     gfl::Vec3 mBeadAwardPosition;
-    int mTotalAwardedBeads;
+    s32 mTotalAwardedBeads;
     gfl::Pointer<GmkPartsMdlSet> mModel;
     gfl::Pointer<ColObjTrans> mColObj;
     GimmickBuildInfo mDecorativeBallBuildInfo;

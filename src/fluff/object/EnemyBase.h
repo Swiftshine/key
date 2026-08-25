@@ -182,7 +182,7 @@ public:
     /* 0x308 */ virtual void vf308();
     /* 0x30C */ virtual void vf30C();
     /* 0x310 */ virtual void vf310();
-    /* 0x314 */ virtual int vf314();
+    /* 0x314 */ virtual s32 vf314();
     /* 0x318 */ virtual void vf318();
     /* 0x31C */ virtual void vf31C();
     /* 0x320 */ virtual void vf320();
@@ -318,7 +318,7 @@ public:
     /* 0x528 */ virtual void vf528();
     /* 0x52C */ virtual void vf52C();
     /* 0x530 */ virtual void vf530();
-    /* 0x534 */ virtual void ResetModelManager(int, bool resetFrames, EnemyMdlManager* pMdlManager);
+    /* 0x534 */ virtual void ResetModelManager(s32, bool resetFrames, EnemyMdlManager* pMdlManager);
     /* 0x538 */ virtual void vf538();
     /* 0x53C */ virtual void vf53C();
     /* 0x540 */ virtual void vf540();
@@ -344,9 +344,9 @@ public:
     /* 0x590 */ virtual void vf590();
     /* 0x594 */ virtual void vf594();
     /* 0x598 */ virtual void vf598();
-    /* 0x59C */ virtual void SetScene(int sceneIndex);
-    /* 0x5A0 */ virtual int GetSceneIndex() const;
-    /* 0x5A4 */ virtual void SetZOrder(int);
+    /* 0x59C */ virtual void SetScene(s32 sceneIndex);
+    /* 0x5A0 */ virtual s32 GetSceneIndex() const;
+    /* 0x5A4 */ virtual void SetZOrder(s32);
 
     /* overrides */
 
@@ -361,19 +361,19 @@ public:
     /* 0x028 */ void Interact() override;
     /* 0x02C */ void vf2C(nw4r::math::VEC3& rArg1, nw4r::math::VEC3& rArg2, nw4r::math::VEC3& rArg3) override;
     /* 0x034 */ bool ShouldCull(CamMng* pCamMgr) override;
-    /* 0x03C */ int vf3C() override;
+    /* 0x03C */ s32 vf3C() override;
     /* 0x04C */ void SetState(FlfGameObj* pSetter, const std::string& rState) override;
     /* 0x064 */ void UpdateWater(bool) override;
 
     /* -> IObjHitCB */
 
-    /* 0x70 */ int vf8() override;
+    /* 0x70 */ s32 vf8() override;
 
     /* -> demo::EventDemoAttachment */
 
     /* 0x080 */ void vfC() override;
     /* 0x084 */ void vf10() override;
-    /* 0x088 */ int  vf14_() override;
+    /* 0x088 */ s32  vf14_() override;
     /* 0x08C */ void vf18() override;
     /* 0x090 */ void vf1C() override;
 
@@ -386,35 +386,35 @@ public:
     float GetZOrder() const;
     void fn_80123B90();
 
-    void SetScene(int selectType, int sceneIndex, float zPos);
+    void SetScene(s32 selectType, s32 sceneIndex, float zPos);
     /* Class Members */
 
-    /* 0x0098 */ int m_98;
-    /* 0x009C */ int m_9C;
-    /* 0x00A0 */ int m_A0;
-    /* 0x00A4 */ int m_A4;
-    /* 0x00A8 */ int m_A8;
-    /* 0x00AC */ int m_AC;
-    /* 0x00B0 */ int m_B0;
+    /* 0x0098 */ s32 m_98;
+    /* 0x009C */ s32 m_9C;
+    /* 0x00A0 */ s32 m_A0;
+    /* 0x00A4 */ s32 m_A4;
+    /* 0x00A8 */ s32 m_A8;
+    /* 0x00AC */ s32 m_AC;
+    /* 0x00B0 */ s32 m_B0;
     /* 0x00B4 */ nw4r::math::VEC3 m_B4;
-    /* 0x00C0 */ int m_C0;
-    /* 0x00C4 */ int m_C4;
-    /* 0x00C8 */ int m_C8;
-    /* 0x00CC */ int m_CC;
-    /* 0x00D0 */ int m_D0;
-    /* 0x00D4 */ int m_D4;
-    /* 0x00D8 */ int m_D8;
-    /* 0x00DC */ int m_DC;
-    /* 0x00E0 */ int m_E0;
-    /* 0x00E4 */ int m_E4;
-    /* 0x00E8 */ int mNumMoveTargets;
+    /* 0x00C0 */ s32 m_C0;
+    /* 0x00C4 */ s32 m_C4;
+    /* 0x00C8 */ s32 m_C8;
+    /* 0x00CC */ s32 m_CC;
+    /* 0x00D0 */ s32 m_D0;
+    /* 0x00D4 */ s32 m_D4;
+    /* 0x00D8 */ s32 m_D8;
+    /* 0x00DC */ s32 m_DC;
+    /* 0x00E0 */ s32 m_E0;
+    /* 0x00E4 */ s32 m_E4;
+    /* 0x00E8 */ s32 mNumMoveTargets;
     /* 0x00EC */ MoveTarget* mCurrentMoveTarget;
     /* 0x00F0 */ MoveTarget mMoveTargets[2];
-    /* 0x0180 */ int mState;
-    /* 0x0184 */ int m_184;
-    /* 0x0188 */ int m_188;
+    /* 0x0180 */ s32 mState;
+    /* 0x0184 */ s32 m_184;
+    /* 0x0188 */ s32 m_188;
     /* 0x018C */ uint m_18C; // a count of some kind
-    /* 0x0190 */ int m_190;
+    /* 0x0190 */ s32 m_190;
     /* 0x0194 */ u32 m_194;
     /* 0x0198 */ u32 m_198;
     /* 0x019C */ u32 m_19C;
@@ -474,7 +474,7 @@ public:
     /* 0x10AC */ STRUCT_FILL(0x10);
     /* 0x10BC */ const char* mName;
     /* 0x10C0 */ STRUCT_FILL(0x1770 - 0x10C0);
-    /* 0x1770 */ int mSceneZOrder;
+    /* 0x1770 */ s32 mSceneZOrder;
 };
 
 // ASSERT_SIZE(EnemyBase, 0x1774);

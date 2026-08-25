@@ -2,7 +2,7 @@
 #include "gfl/gflMemoryManagement.h"
 #include <cstring>
 
-extern "C" int lbl_808E0368; // actually in sdata
+extern "C" s32 lbl_808E0368; // actually in sdata
 extern "C" void* GetBgImageSquare(void*, u16 index);
 extern "C" gfl::Heap* Mem1Heap;
 
@@ -23,15 +23,15 @@ BGST::File::~File() {
     }
 }
 
-bool BGST::File::IsEntryInfoValid(int index) {
+bool BGST::File::IsEntryInfoValid(s32 index) {
     return mEntryInfo[index] != nullptr;
 }
 
-void* BGST::File::GetByGrid(int sceneID, int xGridIndex, int yGridIndex) {
+void* BGST::File::GetByGrid(s32 sceneID, s32 xGridIndex, s32 yGridIndex) {
     return this->mEntryInfo[sceneID] + xGridIndex + yGridIndex * this->mHeader->mGridWidth;
 }
 
-BGST::EntryInfo* BGST::File::GetEntryInfoByIndex(int index) {
+BGST::EntryInfo* BGST::File::GetEntryInfoByIndex(s32 index) {
     return mEntryInfo[index];
 }
 
@@ -81,7 +81,7 @@ bool BGST::File::ProcessLoadState() {
 }
 
 
-void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, int id, int xGridIndex, int yGridIndex) {
+void BGST::File::CopyImageData(void** pCMPRImage, void** pI4Image, s32 id, s32 xGridIndex, s32 yGridIndex) {
     BGST::EntryInfo* entryInfo = (BGST::EntryInfo*)GetByGrid(id, xGridIndex, yGridIndex);
     BGST::List* list = BGST::List::Instance();
 
@@ -125,9 +125,9 @@ void BGST::File::SetupImage() {
 
     BGST::Header* header = mHeader.Get();
 
-    int gridCount = 0;
+    s32 gridCount = 0;
 
-    for (int i = 0; i < 12; i++) {
+    for (s32 i = 0; i < 12; i++) {
         if (header->mLayerEnabled[i]) {
             gridCount++;
         }

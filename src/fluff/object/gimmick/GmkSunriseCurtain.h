@@ -33,10 +33,10 @@ public:
     };
 
     enum Parameter {
-        eParameter_NightBackgroundBGSTLayer = 0, // int 0
-        eParameter_NightForegroundBGSTLayer = 1, // int 1
-        eParameter_DayBackgroundBGSTLayer = 2, // int 2
-        eParameter_DayForegroundBGSTLayer = 3, // int 4
+        eParameter_NightBackgroundBGSTLayer = 0, // s32 0
+        eParameter_NightForegroundBGSTLayer = 1, // s32 1
+        eParameter_DayBackgroundBGSTLayer = 2, // s32 2
+        eParameter_DayForegroundBGSTLayer = 3, // s32 4
     };
 public:
     static GmkSunriseCurtain* Build(GimmickBuildInfo* pBuildInfo);
@@ -56,12 +56,12 @@ public:
     virtual void Update() override;
 
 private:
-    /* 0x130 */ int mState;
+    /* 0x130 */ s32 mState;
     /* 0x134 */ uint mStateFrames; // a frame counter
-    /* 0x138 */ int mNightBackgroundBGSTLayer;
-    /* 0x13C */ int mNightForegroundBGSTLayer;
-    /* 0x140 */ int mDayBackgroundBGSTLayer;
-    /* 0x144 */ int mDayForegroundBGSTLayer;
+    /* 0x138 */ s32 mNightBackgroundBGSTLayer;
+    /* 0x13C */ s32 mNightForegroundBGSTLayer;
+    /* 0x140 */ s32 mDayBackgroundBGSTLayer;
+    /* 0x144 */ s32 mDayForegroundBGSTLayer;
     /* 0x148 */ bool mTimeChanged; // never actually used in any meaningful way
     /* 0x14C */ uint mColorChangeFrames;
     /* 0x150 */ gfl::Color mScreenTintColor; // a frame counter

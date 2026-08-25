@@ -19,8 +19,8 @@ namespace FbMem {
             , mDoRefresh(false)
         { }
         
-        /* 0x00 */ int m_0;
-        /* 0x04 */ int mID;
+        /* 0x00 */ s32 m_0;
+        /* 0x04 */ s32 mID;
         /* 0x08 */ void* mData;
         /* 0x0C */ size_t mSize;
         /* 0x10 */ bool mDoRefresh;
@@ -32,14 +32,14 @@ namespace FbMem {
 
     static gfl::Task* sClearFlagTask;
 
-    int lbl_80840F38[10 /* ? */]; // .data
+    s32 lbl_80840F38[10 /* ? */]; // .data
 
     void Setup();
     void Shutdown();
-    void* GetFrameBufferData(int id, size_t size, bool refresh);
-    void DisableFrameBuffer(int id);
+    void* GetFrameBufferData(s32 id, size_t size, bool refresh);
+    void DisableFrameBuffer(s32 id);
     void ClearFlag();
-    FrameBuffer* GetFrameBuffer(int id);
+    FrameBuffer* GetFrameBuffer(s32 id);
 }
 
 #endif

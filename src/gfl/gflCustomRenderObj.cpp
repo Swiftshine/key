@@ -92,7 +92,7 @@ void CustomRenderObj::G3dProc(u32 task, u32 param, void* pInfo) {
         return;
     }
 
-    switch ((int)task) {
+    switch ((s32)task) {
         case G3DPROC_UPDATEFRAME: {
             DoFrameUpdate();
             break;

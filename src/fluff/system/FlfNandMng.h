@@ -32,7 +32,7 @@ public:
     /* Class Methods */
     void fn_80229170(const char* pFilename, size_t filesize);
     void fn_802291E4(const char* pFilename);
-    void fn_8022924C(size_t numChunks, int);
+    void fn_8022924C(size_t numChunks, s32);
     void fn_802292B8(const char* pFilename, void* pData, size_t dataSize);
     void fn_80229340(const char* pFilename, void* pData, size_t dataSize);
     void fn_80229470();
@@ -42,10 +42,10 @@ public:
     void fn_80229978();
     void Clear();
 
-    void SetStateIfBusy(s32 result, int state);
+    void SetStateIfBusy(s32 result, s32 state);
 
     void SetFlags(uint flag, bool set) DONT_INLINE_CLASS;
-    DECL_WEAK int GetUnk8() const;
+    DECL_WEAK s32 GetUnk8() const;
 
     /* Static Methods */
     static void HandleNandError(s32 result) DONT_INLINE_CLASS;
@@ -55,9 +55,9 @@ public:
 
     /* Class Members */
 
-    /* 0x000 */ int mState;
-    /* 0x004 */ int mPhase;
-    /* 0x008 */ int mResult;
+    /* 0x000 */ s32 mState;
+    /* 0x004 */ s32 mPhase;
+    /* 0x008 */ s32 mResult;
     /* 0x00C */ u32 mCheckAnswer;
     /* 0x010 */ u32 mLength;
     /* 0x014 */ void* mData1;
@@ -91,7 +91,7 @@ public:
     /* Class Members */
 
     bool mIsSafeMode;
-    int mResult;
+    s32 mResult;
     NANDFileInfo* mFileInfo;
     NANDCommandBlock* mCommandBlock;
 };

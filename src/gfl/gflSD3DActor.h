@@ -19,7 +19,7 @@ public:
 
     /* Class Methods */
 
-    inline bool CheckSoundID(int id) {
+    inline bool CheckSoundID(s32 id) {
         return mSoundID == id;
     }
 
@@ -31,7 +31,7 @@ public:
 
     /* Class Members */
 
-    /* 0x0 */ int mSoundID;
+    /* 0x0 */ s32 mSoundID;
     /* 0x4 */ SoundHandle mSoundHandle;
 };
 
@@ -49,7 +49,7 @@ class SD3DActor {
     /* 0x08 */ inline virtual ~SD3DActor();
     /* 0x0C */ virtual void SetPosition(const nw4r::math::VEC3&);
     /* 0x10 */ virtual nw4r::math::VEC3 GetPosition();
-    /* 0x14 */ virtual SoundHandle GetSoundHandle(int soundID, int, int);
+    /* 0x14 */ virtual SoundHandle GetSoundHandle(s32 soundID, s32, s32);
 
     /* Class Members  */
     
@@ -69,25 +69,25 @@ public:
     
     void SetPosition(const nw4r::math::VEC2& rSrc);
     nw4r::math::VEC3 GetPosition();
-    SoundHandle GetSoundHandle(int soundID, int arg2, int arg3) DONT_INLINE_CLASS;
+    SoundHandle GetSoundHandle(s32 soundID, s32 arg2, s32 arg3) DONT_INLINE_CLASS;
     SoundHandle fn_802CFEBC(
         float arg1,
         float arg2,
-        int soundID,
-        int arg5,
-        int arg6
+        s32 soundID,
+        s32 arg5,
+        s32 arg6
     );
-    void ManageActorWrapper(int soundID, int arg2, bool add);
-    void ManageActorWrapper(int frames, bool add);
-    bool HasSoundID(int soundID);
+    void ManageActorWrapper(s32 soundID, s32 arg2, bool add);
+    void ManageActorWrapper(s32 frames, bool add);
+    bool HasSoundID(s32 soundID);
     SD3DActorInfo* GetSD3DActorInfo();
     void InvalidateInfoSoundID(SD3DActorInfo* pInfo) DONT_INLINE_CLASS;
-    int GetMatchingIndex(int soundID);
+    s32 GetMatchingIndex(s32 soundID);
     void fn_802D02B0();
 
     /* Helper Methods */
 
-    inline bool InfoHandlePositionValid(int id) {
+    inline bool InfoHandlePositionValid(s32 id) {
         return mInfo[id].HandlePositionValid();
     }
 

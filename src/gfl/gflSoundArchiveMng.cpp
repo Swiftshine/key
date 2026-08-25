@@ -63,6 +63,6 @@ void SoundArchiveMng::GetSound3DListenerConfiguration(float dst[3]) {
     dst[2] = m_2F0;
 }
 
-nw4r::snd::SoundPlayer& SoundArchiveMng::GetSoundPlayer(int arg1) {
-    return mSoundArchivePlayer.GetSoundPlayer(arg1);
+nw4r::snd::SoundPlayer& SoundArchiveMng::GetSoundPlayer(s32 arg1) {
+    return mSoundArchivePlayer.GetSoundPlayer(static_cast<u32>(arg1));
 }

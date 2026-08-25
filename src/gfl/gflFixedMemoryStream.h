@@ -23,7 +23,7 @@ namespace gfl {
         // Returns the number of bytes written.
         virtual size_t Write(void* src, size_t count);
         // Returns if the file seeking operation was successful.
-        virtual bool Seek(size_t pos, int seekType);
+        virtual bool Seek(size_t pos, s32 seekType);
         DECL_WEAK virtual size_t GetStreamPos() const;
         virtual void Reset();
         DECL_WEAK virtual ~FixedMemoryStream();

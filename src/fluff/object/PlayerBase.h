@@ -40,8 +40,8 @@ public:
     /* Static Variables */
 
     static float sQUICK_SAND_SPDY_COR;
-    static int sWAIT_FRAME_ROLLED_GET;
-    static int sZ_ATK_TEST;
+    static s32 sWAIT_FRAME_ROLLED_GET;
+    static s32 sZ_ATK_TEST;
     static float sSECOND_ATTACK_MOT_FRAME;
 
     /* Structures */
@@ -103,7 +103,7 @@ public:
         ePlayerFlags_Invincible = 1 << 3
     };
 
-    PlayerBase(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, int arg4, bool isCloned);
+    PlayerBase(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, s32 arg4, bool isCloned);
 
     /* Virtual Methods */
 
@@ -115,7 +115,7 @@ public:
     void fn_8006B2C0(); // likely cut
     float GetGravityCorrection();
     void ResetState();
-    void SetPlayerState(int newState);
+    void SetPlayerState(s32 newState);
     void fn_80081158();
     void ResetWalkAnimSpeed();
     void fn_8009CA20(bool);
@@ -125,16 +125,16 @@ public:
     void SetStartPosition(const gfl::Vec3& rPos);
     bool IsStateDefault();
     void fn_8009C464(bool);
-    void Reset(uint arg1, int playerState, int arg3, int arg4);
+    void Reset(uint arg1, s32 playerState, s32 arg3, s32 arg4);
     uint GetPlayerID();
-    void PlayAnimation(int id);
+    void PlayAnimation(s32 id);
     /// @return The previous scene.
     FullSortScene* ResetScene(FullSortScene* pScene, bool resetPosition);
 
     /* Static Methods */
 
-    static PlayerBase* Build(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, int);
-    static PlayerBase* BuildCloned(gfl::Task* pParentTask, FullSortScene* pScene, uint flags, int);
+    static PlayerBase* Build(gfl::Task* pParentTask, uint flags, FullSortScene* pScene, s32);
+    static PlayerBase* BuildCloned(gfl::Task* pParentTask, FullSortScene* pScene, uint flags, s32);
 
     /* Class Members */
 
@@ -146,7 +146,7 @@ public:
     /* 0x501 */ bool m_501;
     /* 0x502 */ bool m_502;
     /* 0x503 */ bool m_503;
-    /* 0x504 */ int m_504;
+    /* 0x504 */ s32 m_504;
     /* 0x508 */ bool m_508;
     /* 0x50C */ PlayerMdlMng* mPlayerMdlMng;
     /* 0x510 */ MTX34 m_510;
@@ -166,14 +166,14 @@ public:
     /// "Hovering Ascent Altitude (m) (This parameter is incomplete.)"
     /* 0x614 */ float mHoveringAscentAltitude;
     /* 0x618 */ float mParachuteYVelocityCorrection;
-    /* 0x61C */ int mQuickTurn;
-    /* 0x620 */ int mQuickTurnAir; // ?
+    /* 0x61C */ s32 mQuickTurn;
+    /* 0x620 */ s32 mQuickTurnAir; // ?
     /* 0x624 */ float m_624;
     /* 0x628 */ float m_628;
     /* 0x62C */ float mGravityCorrection;
     /* 0x630 */ STRUCT_FILL(0x14);
     /* 0x644 */ uint mCurrentAnimationID;
-    /* 0x648 */ int m_648;
+    /* 0x648 */ s32 m_648;
     /* 0x64C */ gfl::Param* mModelSize;
     /// In milliseconds.
     /* 0x650 */ gfl::Param* mInvincibilityFrames;
@@ -211,15 +211,15 @@ public:
     /* 0x724 */ float mDashInertiaCorrection;
     /* 0x728 */ float mAirBraking;
     /* 0x72C */ float m_72C;
-    /* 0x730 */ int m_730;
+    /* 0x730 */ s32 m_730;
     /// "Yarn range Upper limit"
     /* 0x734 */ float mMaxWoolWhipRange;
-    /* 0x738 */ int m_738;
-    /* 0x73C */ int m_73C;
-    /* 0x740 */ int m_740;
-    /* 0x744 */ int m_744;
-    /* 0x748 */ int m_748;
-    /* 0x74C */ int m_74C;
+    /* 0x738 */ s32 m_738;
+    /* 0x73C */ s32 m_73C;
+    /* 0x740 */ s32 m_740;
+    /* 0x744 */ s32 m_744;
+    /* 0x748 */ s32 m_748;
+    /* 0x74C */ s32 m_74C;
     /* 0x750 */ STRUCT_FILL(0x10);
     /* 0x760 */ ColObjMod* mColObjMod;
     /* 0x764 */ STRUCT_FILL(0x20);
@@ -238,9 +238,9 @@ public:
     /* 0x834 */ uint mInvincibilityFrameTimer;
     /* 0x838 */ STRUCT_FILL(0x370);
     /* 0xBA8 */ float m_BA8[25];
-    /* 0xC0C */ int mCurrentTransformationType;
+    /* 0xC0C */ s32 mCurrentTransformationType;
     /* 0xC10 */ StateObject mState;
-    /* 0xC20 */ int m_C24;
+    /* 0xC20 */ s32 m_C24;
     /* 0xC28 */ uint m_C28; // flags of some sort
     /// (Probably) in milliseconds. Refers to player action, not input.
     /// At ~9-10 seconds of inaction, an idle animation will play, and this field
@@ -249,13 +249,13 @@ public:
     /* 0xC30 */ STRUCT_FILL(0x2C);
     /* 0xC5C */ float m_C5C[10];
     /* 0xC84 */ STRUCT_FILL(0x14);
-    /* 0xC98 */ int m_C98;
+    /* 0xC98 */ s32 m_C98;
     /* 0xC9C */ KeyFrame<gfl::Vec3> mKeyFrames;
     /* 0xCB8 */ SpringFlf* mSpringFlf;
-    /* 0xCBC */ int m_CBC;
-    /* 0xCC0 */ int m_CC0;
-    /* 0xCC4 */ int m_CC4;
-    /* 0xCC8 */ int m_CC8;
+    /* 0xCBC */ s32 m_CBC;
+    /* 0xCC0 */ s32 m_CC0;
+    /* 0xCC4 */ s32 m_CC4;
+    /* 0xCC8 */ s32 m_CC8;
     /* 0xCCC */ PlParabola mPlParabola;
     /* 0xD2C */ PlConfluenceMng mPlConfluenceMng;
     /* 0xD58 */ PlPathMoveMng mPlPathMoveMng;
@@ -265,7 +265,7 @@ public:
     /* 0xE7C */ PlSeCtrl mPlSeCtrl3;
     /* 0xEAC */ PlSeCtrl mPlSeCtrl4;
     /* 0xEDC */ bool m_EDC;
-    /* 0xEE0 */ int m_EE0;
+    /* 0xEE0 */ s32 m_EE0;
     /* 0xEE4 */ HenshinCtrl* mCurrentTransformation;
     /* 0xEE8 */ HenshinSubmarine* mTransformSubmarine;
     /* 0xEEC */ HenshinString* mTransformString;
@@ -279,7 +279,7 @@ public:
     /* 0xF0C */ HenshinUFO* mTransformUFO;
     /* 0xF10 */ HenshinBrightRobot* mTransformBrightRobot;
     /* 0xF14 */ HenshinTrainFree* mTransformTrainFree;
-    /* 0xF18 */ int m_F18;
+    /* 0xF18 */ s32 m_F18;
     /* 0xF1C */ HelperRobot* mHelperRobot;
     /* 0xF20 */ STRUCT_FILL(0x18);
     /* 0xF38 */ bool mIsCloned;

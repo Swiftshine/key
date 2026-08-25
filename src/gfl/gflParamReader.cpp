@@ -13,7 +13,7 @@ const char* TokenTypes[] = {
 ParamReader::~ParamReader() { }
 
 // https://decomp.me/scratch/FtDVG
-int ParamReader::ParseToken() {
+s32 ParamReader::ParseToken() {
     mWorkingBufferLength = 0;
     mWorkingBuffer[0] = '\0';
 
@@ -23,7 +23,7 @@ int ParamReader::ParseToken() {
 
     fn_80652EC8();
 
-    int lastRead = mLastReadCharacter;
+    s32 lastRead = mLastReadCharacter;
 
     if (lastRead < 0) {
         return ParamReader::eTokenType_End;
@@ -131,7 +131,7 @@ int ParamReader::ParseToken() {
             ReadCharacter();
 
             while (true) {
-                int lastRead = mLastReadCharacter;
+                s32 lastRead = mLastReadCharacter;
                 bool isNewline = IsNewline(lastRead);
 
                 if (isNewline || lastRead < 0) {
@@ -146,7 +146,7 @@ int ParamReader::ParseToken() {
 
         ReadCharacter();
 
-        for (int lastRead = mLastReadCharacter; lastRead != '\"'; ) {
+        for (s32 lastRead = mLastReadCharacter; lastRead != '\"'; ) {
             bool isNewline = IsNewline(lastRead);
 
             if (isNewline || lastRead < 0) {
@@ -172,7 +172,7 @@ int ParamReader::ParseToken() {
         bool isFloat = false;
 
         while (true) {
-            int lastRead = mLastReadCharacter;
+            s32 lastRead = mLastReadCharacter;
 
             if (!IsNumeric(lastRead) && lastRead != 'f') {
                 goto END;
@@ -204,7 +204,7 @@ END:
     }
 }
 
-const char* ParamReader::GetTokenString(int tokenType) {
+const char* ParamReader::GetTokenString(s32 tokenType) {
     switch (tokenType) {
         case ParamReader::eTokenType_Invalid:        return "INVALID TOKEN";
         case ParamReader::eTokenType_LeftBrace:      return "{";
@@ -236,7 +236,7 @@ const char* ParamReader::GetTokenString(int tokenType) {
 // https://decomp.me/scratch/0pegK
 // (not done)
 void ParamReader::fn_80652EC8() {
-    int lastRead;
+    s32 lastRead;
 
     while (true) {
         lastRead = mLastReadCharacter;
@@ -259,15 +259,15 @@ void ParamReader::fn_80652EC8() {
         Reset();
     }
 }
-void ParamReader::Reset(int) { // argument is unused
-    int lastRead = ReadCharacter();
+void ParamReader::Reset(s32) { // argument is unused
+    s32 lastRead = ReadCharacter();
 
     while (!IsNewline(lastRead) && lastRead >= 0) {
         lastRead = ReadCharacter();
     }
 
     if (IsNewline(lastRead)) {
-        int col = mCurrentColumn;
+        s32 col = mCurrentColumn;
         if (col >= 2) {
             mCurrentLineContents[mCurrentColumn - 2] = '\0';
         } else if (col >= 1) {

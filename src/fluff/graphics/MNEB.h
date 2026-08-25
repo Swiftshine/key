@@ -78,7 +78,7 @@ namespace MNEB {
         float m_8C;
         u32 m_90;
         bool m_94;
-        int m_98;
+        s32 m_98;
         gfl::Offset<ControlPoint> mControlPointOffset;
         gfl::Offset<KnotTable> mKnotOffset;
         gfl::Offset<KeyFrameInfo> mKeyFrameInfoOffset;

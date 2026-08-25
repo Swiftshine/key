@@ -38,6 +38,10 @@ namespace gfl {
             return mArray[index];
         }
 
+        inline const T& operator[](u32 index) const {
+            return mArray[index];
+        }
+
         inline void operator=(T* other) {
             mArray = other;
         }
@@ -50,9 +54,9 @@ namespace gfl {
             return mArray;
         }
 
-        operator T*() const {
-            return mArray;
-        }
+        // operator T*() const {
+        //     return mArray;
+        // }
 
     private:
         T* mArray;

@@ -55,7 +55,7 @@ BgBackImage::BgBackImage()
 
 BgBackImage::~BgBackImage() { }
 
-#define FLOOR(x) static_cast<float>(static_cast<int>(x))
+#define FLOOR(x) static_cast<float>(static_cast<s32>(x))
 #define SCALE_FACTOR 46.0f
 
 void BgBackImage::DrawXlu() {

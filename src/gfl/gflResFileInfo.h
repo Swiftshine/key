@@ -89,7 +89,7 @@ namespace gfl {
          * @note Size: 0x1E4
          * @note This configures a pre-existing `gfl::ResFileInfo` object.
          */
-        static void Configure(ResFileInfo* dest, const char* path, int arg2, int* arg3, FixedString* str);
+        static void Configure(ResFileInfo* dest, const char* path, s32 arg2, s32* arg3, FixedString* str);
 
 
         /**

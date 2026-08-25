@@ -213,8 +213,8 @@ void GmkTurtle::Update() {
     // FUN_807882f0(param_1->mRideHitCtrlTrans);
 }
 
-int GmkTurtle::vf88(FlfGameObj* player, uint arg2) {
-    int playerState = *(int*)((u8*)player + 0xC10);
+s32 GmkTurtle::vf88(FlfGameObj* player, uint arg2) {
+    s32 playerState = *(s32*)((u8*)player + 0xC10);
 
     // if the player is in the weight state
     if (5 == playerState) {
@@ -267,7 +267,7 @@ void GmkTurtle::BecomeActive() {
     }
 }
 
-void GmkTurtle::Turn(int turnDir) {
+void GmkTurtle::Turn(s32 turnDir) {
     if (GmkTurtle::eTurnDirection_Left != turnDir) {
         mCounter = mCounterDefaultValue;
         mAnmCtrl->SetCurrentAnimationIndex(1);
@@ -279,6 +279,6 @@ void GmkTurtle::Turn(int turnDir) {
     }
 }
 
-int GmkTurtle::vf98() {
+s32 GmkTurtle::vf98() {
     return 1;
 }

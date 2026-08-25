@@ -70,16 +70,16 @@ void FlfDemoNodeCtrl::ResetOptions(gfl::Offset<MNEB::DemoOptionSet>& rDemoOption
 void FlfDemoNodeCtrl::SetOptions(float arg0) {
     if (mBlendFrame.IsValid()) {
         s16 opt = mBlendFrame->GetOption(arg0);
-        SetCurrentFrame(static_cast<int>(opt));
+        SetCurrentFrame(static_cast<s32>(opt));
     }
 
     if (mUpdateRate.IsValid()) {
-        SetUpdateRate(0.01f * static_cast<float>(static_cast<int>(mUpdateRate->GetOption(arg0))));
+        SetUpdateRate(0.01f * static_cast<float>(static_cast<s32>(mUpdateRate->GetOption(arg0))));
     }
 
     if (mLayer.IsValid()) {
         s16 layer = mLayer->GetOption(arg0);
-        int sceneID = layer + 6;
+        s32 sceneID = layer + 6;
 
         if (sceneID != mFullSortSceneID) {
             SetFullSortScene(sceneID);
@@ -102,7 +102,7 @@ void FlfDemoNodeCtrl::SetOptions(float arg0) {
     }
 }
 
-void FlfDemoNodeCtrl::SetCurrentFrame(int frame) {
+void FlfDemoNodeCtrl::SetCurrentFrame(s32 frame) {
     return;
 }
 
@@ -118,7 +118,7 @@ void FlfDemoNodeCtrl::SetVisibility(bool visibility) {
     return;
 }
 
-void FlfDemoNodeCtrl::vf24(int arg0) {
+void FlfDemoNodeCtrl::vf24(s32 arg0) {
     return;
 }
 
@@ -157,7 +157,7 @@ void FlfDemoNodeCtrl::GetCharaResFileObject(gfl::ResFileObject& resFileObject, n
 std::string FlfDemoNodeCtrl::GetCharaResourceName(std::string& name) {
     std::string temp(name, 3, std::string::npos);
 
-    for (int i = 0; i < temp.length(); i++) {
+    for (s32 i = 0; i < temp.length(); i++) {
         if (temp[i] == '_') {
             char* c = (char*)temp.c_str();
             c[i] = '/';
@@ -202,12 +202,12 @@ void FlfDemoCharCtrl::SetUpdateRate(float rate) {
     mFlfMdlDraw->SetUpdateRate(rate);
 }
 
-void FlfDemoCharCtrl::SetCurrentFrame(int frame) {
+void FlfDemoCharCtrl::SetCurrentFrame(s32 frame) {
     mFlfMdlDraw->SetCurrentFrameInt(frame);
 }
 
-void FlfDemoCharCtrl::vf24(int arg1) {
-    mFlfMdlDraw->PlayNURBSAnimation((int)arg1, mFlfMdlDraw->GetCurrentFrameInt() != 0);
+void FlfDemoCharCtrl::vf24(s32 arg1) {
+    mFlfMdlDraw->PlayNURBSAnimation((s32)arg1, mFlfMdlDraw->GetCurrentFrameInt() != 0);
 }
 
 void FlfDemoCharCtrl::SetFullSortScene(uint sceneID) {
@@ -306,7 +306,7 @@ uint FlfDemoPlayerCtrl::vf20() {
 }
 
 // https://decomp.me/scratch/qCEL9
-void FlfDemoPlayerCtrl::vf24(int arg0) {
+void FlfDemoPlayerCtrl::vf24(s32 arg0) {
     if (mPlayer == nullptr) {
         return;
     }
@@ -324,7 +324,7 @@ void FlfDemoPlayerCtrl::vf24(int arg0) {
 }
 
 
-void FlfDemoPlayerCtrl::SetCurrentFrame(int frame) {
+void FlfDemoPlayerCtrl::SetCurrentFrame(s32 frame) {
     mCurrentFrame = frame;
 
     if (mPlayer != nullptr) {
@@ -442,7 +442,7 @@ void FlfDemoGmkCtrl::SetMatrix(const nw4r::math::MTX34& mtx) {
     }
 }
 
-void FlfDemoGmkCtrl::vf24(int arg0) {
+void FlfDemoGmkCtrl::vf24(s32 arg0) {
     FlfHandleObj** ptr;
 
     FLFHANDLEOBJ_DO_IF_VALID(mGimmickHandle, ptr) {
@@ -488,7 +488,7 @@ FlfDemoLoopCtrl::FlfDemoLoopCtrl(nw4r::g3d::ResNode resNode)
 
 FlfDemoLoopCtrl::~FlfDemoLoopCtrl() { }
 
-void FlfDemoLoopCtrl::vf24(int arg1) {
+void FlfDemoLoopCtrl::vf24(s32 arg1) {
     m_24 = arg1;
 }
 
@@ -674,7 +674,7 @@ void FlfDemoCtrl::ClearNodeControls() {
 
 // void FlfDemoCtrl::fn_802BB920() {
 //     if (mFlfMdlDraw->IsAnimationDone() && m_34 != nullptr) {
-//         int someFrame = m_34->GetUnk24();
+//         s32 someFrame = m_34->GetUnk24();
 
 //         if (someFrame != 0) {
 //             float end = mFlfMdlDraw->GetEndFrame();
@@ -700,7 +700,7 @@ void FlfDemoCtrl::ClearNodeControls() {
 // }
 
 // fake match
-// void FlfDemoCtrl::fn_802BBA4C(int animID, nw4r::math::VEC2* vec) {
+// void FlfDemoCtrl::fn_802BBA4C(s32 animID, nw4r::math::VEC2* vec) {
 //     mFlfMdlDraw->PlayNURBSAnimation(animID, false);
 //     mFlfMdlDraw->SetUpdateRate(1.0f);
 

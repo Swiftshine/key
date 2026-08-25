@@ -94,11 +94,11 @@ void PathInfo::fn_80300214(float arg1) {
     m_18 = val;
 }
 
-const nw4r::math::VEC2& PathInfo::GetPoint(int index) const {
+const nw4r::math::VEC2& PathInfo::GetPoint(s32 index) const {
     if (IsLooped()) {
         index -= index / mPath->GetNumSegments() * mPath->GetNumSegments();
     } else {
-        int last = mPath->GetNumSegments() - 1;
+        s32 last = mPath->GetNumSegments() - 1;
 
         if (index < 0) {
             index = 0;

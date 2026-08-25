@@ -10,7 +10,7 @@ namespace env {
     public:
         
 
-        EnvUtil_FrameBuffer(gfl::Scene* pScene, int translucency, GXTexFmt texFormat, bool refreshTexture);
+        EnvUtil_FrameBuffer(gfl::Scene* pScene, s32 translucency, GXTexFmt texFormat, bool refreshTexture);
 
         /* Virtual Methods */
 
@@ -18,7 +18,7 @@ namespace env {
 
         /* Static Methods */
 
-        static EnvUtil_FrameBuffer* Build(gfl::Scene* pScene, int tranlucency, GXTexFmt texFormat, bool refreshTexture);
+        static EnvUtil_FrameBuffer* Build(gfl::Scene* pScene, s32 tranlucency, GXTexFmt texFormat, bool refreshTexture);
 
         /* Class Members */
 

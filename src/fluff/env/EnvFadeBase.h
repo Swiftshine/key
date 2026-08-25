@@ -10,12 +10,12 @@ namespace env {
         /* Structures */
 
         struct LocalState {
-            int mStateValue;
+            s32 mStateValue;
         };
 
         
 
-        EnvFadeBase(gfl::Task* pParentTask, int arg2, int arg3, const char* pTaskName, uint flagIndex);
+        EnvFadeBase(gfl::Task* pParentTask, s32 arg2, s32 arg3, const char* pTaskName, uint flagIndex);
 
         /* Virtual Methods */
 
@@ -33,10 +33,10 @@ namespace env {
 
         /* Class Members */
 
-        /* 0x18 */ int m_18;
-        /* 0x1C */ int m_1C;
+        /* 0x18 */ s32 m_18;
+        /* 0x1C */ s32 m_1C;
         /* 0x20 */ void* m_20;
-        /* 0x24 */ int m_24;
+        /* 0x24 */ s32 m_24;
         /* 0x28 */ EnvUtil_State<LocalState> mState;
     };
 }

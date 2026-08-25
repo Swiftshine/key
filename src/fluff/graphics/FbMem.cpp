@@ -35,7 +35,7 @@ void FbMem::Shutdown() {
     }
 }
 
-void* FbMem::GetFrameBufferData(int id, size_t size, bool refresh) {
+void* FbMem::GetFrameBufferData(s32 id, size_t size, bool refresh) {
     FrameBuffer* buf = GetFrameBuffer(id);
 
     void* ret;
@@ -51,7 +51,7 @@ void* FbMem::GetFrameBufferData(int id, size_t size, bool refresh) {
     return ret;
 }
 
-void FbMem::DisableFrameBuffer(int id) {
+void FbMem::DisableFrameBuffer(s32 id) {
     FrameBuffer* buf = &Buf1;
 
     for (uint i = 0; i < 3; i++, buf++) {
@@ -73,8 +73,8 @@ void FbMem::ClearFlag() {
     }
 }
 
-FbMem::FrameBuffer* FbMem::GetFrameBuffer(int id) {
-    int unk = lbl_80840F38[id];
+FbMem::FrameBuffer* FbMem::GetFrameBuffer(s32 id) {
+    s32 unk = lbl_80840F38[id];
 
     FrameBuffer* buf = &Buf1;
 

@@ -19,17 +19,17 @@ namespace GimmickUtil {
 
     ASSERT_SIZE(GimmickEntry, 0x10);
 
-    const char* GetResourceNameByGimmickID(int id) DONT_INLINE_CLASS;
-    std::string GetResourcePathByGimmickID(int id) DONT_INLINE_CLASS;
-    GimmickBuildFunction GetBuildFunctionByGimmickID(int id) DONT_INLINE_CLASS;
-    bool CheckCommonByGimmickID(int id) DONT_INLINE_CLASS;
-    bool IsBead(int id) DONT_INLINE_CLASS;
-    int fn_80050700(int id) DONT_INLINE_CLASS;
-    int fn_80050764(int arg0, int arg1) DONT_INLINE_CLASS;
-    bool IsClothTurnGimmick(int id) DONT_INLINE_CLASS;
-    bool fn_800507C8(int id) DONT_INLINE_CLASS;
+    const char* GetResourceNameByGimmickID(s32 id) DONT_INLINE_CLASS;
+    std::string GetResourcePathByGimmickID(s32 id) DONT_INLINE_CLASS;
+    GimmickBuildFunction GetBuildFunctionByGimmickID(s32 id) DONT_INLINE_CLASS;
+    bool CheckCommonByGimmickID(s32 id) DONT_INLINE_CLASS;
+    bool IsBead(s32 id) DONT_INLINE_CLASS;
+    s32 fn_80050700(s32 id) DONT_INLINE_CLASS;
+    s32 fn_80050764(s32 arg0, s32 arg1) DONT_INLINE_CLASS;
+    bool IsClothTurnGimmick(s32 id) DONT_INLINE_CLASS;
+    bool fn_800507C8(s32 id) DONT_INLINE_CLASS;
     void GetButtonBRRES(gfl::ResFileObject& rDest) DONT_INLINE_CLASS;
-    int GetGimmickIDByCommonGimmickName(const char* pName);
+    s32 GetGimmickIDByCommonGimmickName(const char* pName);
     // these are probably actually just defined on a TU by TU basis
     // rather than being part of the GimmickUtil namespace
     bool CheckString_hide(Gimmick::GimmickBuildInfo* pBuildInfo);

@@ -48,8 +48,8 @@ public:
     void AddGimmick(Gimmick* pGmk);
     void RemoveGimmick(Gimmick* pGmk);
     void ClearAll(bool arg1);
-    void GetGimmicksByGimmickID(int gimmickID, std::vector<Gimmick*>& rDest);
-    void GetCommonGimmicksByID(int gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest);
+    void GetGimmicksByGimmickID(s32 gimmickID, std::vector<Gimmick*>& rDest);
+    void GetCommonGimmicksByID(s32 gimmickID, std::vector<Gimmick::GimmickBuildInfo*>& rDest);
     Gimmick* GetGimmickByIdentifier(const std::string& rQuery);
     Gimmick::GimmickBuildInfo* GetCommonGimmickBuildInfoByIdentifier(const char* pQuery);
     void RegisterResources(const char* pName, Gimmick* pGmk);

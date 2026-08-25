@@ -344,7 +344,7 @@ KdTreeNode::~KdTreeNode() {
 ColData* KdTree::HitResult::GetCurrentColData() {
     // maybe an inline somewhere?
 
-    int numNodes = mNumNodes;
+    s32 numNodes = mNumNodes;
     ColData* result;
 
     mColDataCount = 0;

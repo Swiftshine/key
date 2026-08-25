@@ -30,22 +30,22 @@ GmkBeadDrop::GmkBeadDrop(GimmickBuildInfo* buildInfo, const char* taskName)
 GmkBeadDrop::~GmkBeadDrop() { }
 
 void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
-    int initBeadType = 4;
+    s32 initBeadType = 4;
     if (buildInfo->GetIntParam(GmkBeadDrop::eParameter_BeadType) >= 0) {
         initBeadType = buildInfo->GetIntParam(GmkBeadDrop::eParameter_BeadType);
     }
 
-    int initBeadColor = 7;
+    s32 initBeadColor = 7;
     if (buildInfo->GetIntParam(GmkBeadDrop::eParameter_BeadColor) >= 0) {
         initBeadColor = buildInfo->GetIntParam(GmkBeadDrop::eParameter_BeadColor);
     }
 
-    int initBeadFunds = 1;
+    s32 initBeadFunds = 1;
     if (buildInfo->GetIntParam(GmkBeadDrop::eParameter_InitialBeadFunds) > 0) {
         initBeadFunds = buildInfo->GetIntParam(GmkBeadDrop::eParameter_InitialBeadFunds);
     }
 
-    int beadType;
+    s32 beadType;
 
     if (initBeadType < 0) {
         beadType = GmkBead::eBeadType_Small;
@@ -56,7 +56,7 @@ void GmkBeadDrop::Init(GimmickBuildInfo* buildInfo) {
         }
     }
 
-    int beadColor;
+    s32 beadColor;
 
     if (initBeadColor < 0) {
         beadColor = GmkBead::eBeadColor_White;
@@ -148,7 +148,7 @@ void GmkBeadDrop::Update() {
     }
 }
 
-void GmkBeadDrop::SetState(int value) {
+void GmkBeadDrop::SetState(s32 value) {
     mState = value;
     mCounter = 0;
 }

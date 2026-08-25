@@ -50,7 +50,7 @@ size_t FixedMemoryStream::Write(void* src, size_t count) {
     return count;
 }
 
-bool FixedMemoryStream::Seek(size_t pos, int seekType) {
+bool FixedMemoryStream::Seek(size_t pos, s32 seekType) {
     signed long finalPos = 0;
 
     switch (seekType) {

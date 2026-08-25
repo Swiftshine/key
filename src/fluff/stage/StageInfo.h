@@ -13,13 +13,13 @@ public:
         mSectionID = other.mSectionID;
     }
 
-    inline StageInfo(int val) {
+    inline StageInfo(s32 val) {
         mStageID = val;
         mResourceID = val;
         mSectionID = val;
     }
 
-    inline StageInfo(int st, int re, int se) {
+    inline StageInfo(s32 st, s32 re, s32 se) {
         mStageID = st;
         mResourceID = re;
         mSectionID = se;
@@ -43,7 +43,7 @@ public:
         mSectionID = other->mSectionID;
     }
 
-    int GetStageID() const {
+    s32 GetStageID() const {
         return mStageID;
     }
 
@@ -51,24 +51,24 @@ public:
         return mResourceID;
     }
 
-    int GetSectionID() const {
+    s32 GetSectionID() const {
         return mSectionID;
     }
 
-    void SetStageID(int id) {
+    void SetStageID(s32 id) {
         mStageID = id;
     }
 
-    void SetResourceID(int id) {
+    void SetResourceID(s32 id) {
         mResourceID = id;
     }
 
-    void SetSectionID(int id) {
+    void SetSectionID(s32 id) {
         mSectionID = id;
     }
 private:
     // The actual numeric stage number. Level 1 is 1, level 2 is 2...
-    int mStageID;
+    s32 mStageID;
     // This is used for finding files from disk. Level 1 is 101, level 2 is 102...
     uint mResourceID;
     // This is used for stages that span multiple sections that need to be loaded seperately. A notable example is the world map.

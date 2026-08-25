@@ -61,7 +61,7 @@ public:
     /* 0x38 */ virtual ScreenPosition GetScreenPosition();
     /* 0x3C */ virtual ColObj* GetColObj();
     /* 0x40 */ virtual void vf40(FlfGameObj*);
-    /* 0x44 */ virtual int  vf44();
+    /* 0x44 */ virtual s32  vf44();
 
     // looks for gimmicks or enemies with a specific tag and sets their
     // state to the specified one if found. the tag list consists of
@@ -108,7 +108,7 @@ public:
     /* 0x6E */ bool mShouldUpdateWater;
     /* 0x6F */ bool m_6F;
     /* 0x70 */ float mCullThreshold;
-    /* 0x74 */ int mDirection;
+    /* 0x74 */ s32 mDirection;
     /* 0x78 */ u32 m_78;
     /* 0x7C */ bool m_7C;
     /* 0x7D */ bool mIsInMission;

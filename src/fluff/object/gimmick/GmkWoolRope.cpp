@@ -9,8 +9,8 @@ const char WoolColorNameTemplate[] = "wool_%02d";
 GmkWoolRope::GmkWoolRope(
     GmkWoolHook* pFirstHook,
     GmkWoolHook* pSecondHook,
-    int woolTexture,
-    int hookType,
+    s32 woolTexture,
+    s32 hookType,
     Mapdata::MapdataGimmick* pMapdataGimmick,
     const char* pTaskName
 )

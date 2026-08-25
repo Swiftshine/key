@@ -47,7 +47,7 @@
 //     } else {
 //         u16* arr = mArray;
 //         if (static_cast<float>(*arr) <= arg0) {
-//             int i = mCount;
+//             s32 i = mCount;
 //             result = 0;
 
 //             while (i != 0) {

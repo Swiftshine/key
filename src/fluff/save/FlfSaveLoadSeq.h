@@ -17,10 +17,10 @@ struct FlfSaveLoadSeq_Substruct {
     ~FlfSaveLoadSeq_Substruct();
 
     void fn_80634EE8();
-    void fn_80634F08(size_t*, int*);
+    void fn_80634F08(size_t*, s32*);
     void fn_80634F3C();
     void fn_80634F5C();
-    int GetUnk2C();
+    s32 GetUnk2C();
 
     STRUCT_FILL(0x34);
 };
@@ -56,13 +56,13 @@ public:
     void Save();
     void fn_8022D400();
     void fn_8022D414();
-    void fn_8022D430(int) DONT_INLINE_CLASS;
-    void fn_8022D440(int arg1);
+    void fn_8022D430(s32) DONT_INLINE_CLASS;
+    void fn_8022D440(s32 arg1);
     bool IsSaveDataValid(SaveData* pSaveData, size_t numBytes);
     void InitSaveData();
     bool IsSaveDataLoaded() const;
 
-    DECL_WEAK int GetUnk18() const;
+    DECL_WEAK s32 GetUnk18() const;
 
     /* Static Methods */
 
@@ -72,23 +72,23 @@ public:
 
     /* Class Members */
 
-    /* 0x000 */ int mOperation; // nand? SD storage?
-    /* 0x004 */ int mLoadState;
-    /* 0x008 */ int mSaveState;
+    /* 0x000 */ s32 mOperation; // nand? SD storage?
+    /* 0x004 */ s32 mLoadState;
+    /* 0x008 */ s32 mSaveState;
     /* 0x00C */ bool m_C;
-    /* 0x010 */ int m_10;
-    /* 0x014 */ int m_14;
-    /* 0x018 */ int m_18;
-    /* 0x01C */ int m_1C;
+    /* 0x010 */ s32 m_10;
+    /* 0x014 */ s32 m_14;
+    /* 0x018 */ s32 m_18;
+    /* 0x01C */ s32 m_1C;
     /* 0x020 */ bool m_20;
     /* 0x021 */ bool m_21;
     /* 0x022 */ bool mSaveDataLoaded;
     /* 0x024 */ size_t mNumSDChunks;
-    /* 0x028 */ int m_28;
+    /* 0x028 */ s32 m_28;
     /* 0x02C */ size_t mNumNANDChunks;
-    /* 0x030 */ int m_30;
-    /* 0x034 */ int mWaitTime1;
-    /* 0x038 */ int mWaitTime2; // in frames?
+    /* 0x030 */ s32 m_30;
+    /* 0x034 */ s32 mWaitTime1;
+    /* 0x038 */ s32 mWaitTime2; // in frames?
     /* 0x03C */ gfl::FreedPointer<void> mBuffer;
     /* 0x040 */ gfl::Task mTask;
     /* 0x058 */ LoadSaveInfo mLoadSaveInfo;

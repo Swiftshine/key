@@ -26,21 +26,21 @@ struct CollisionInfo {
     /* 0x01 */ bool m_1;
     /* 0x02 */ bool m_2;
     /* 0x03 */ bool mBoundsInited;
-    /* 0x04 */ int m_4;
-    /* 0x08 */ int mBoundsType;
+    /* 0x04 */ s32 m_4;
+    /* 0x08 */ s32 mBoundsType;
     /* 0x0C */ s32 mInteractionType;
-    /* 0x10 */ int m_10;
+    /* 0x10 */ s32 m_10;
     /* 0x14 */ nw4r::math::VEC3 mPosition;
     /* 0x20 */ nw4r::math::VEC2 mDimensions;
     /* 0x28 */ IObjHitCB* mOwnerCallbacks;
     /* 0x2C */ FlfGameObj* mOwnerObject; // maybe redundant?
     /* 0x30 */ nw4r::math::MTX34* mOwnerMatrix;
     /* 0x34 */ nw4r::math::VEC2 mRectStart;
-    /* 0x3C */ int m_3C; // rect end?
-    /* 0x40 */ int m_40;
-    /* 0x44 */ int m_44;
-    /* 0x48 */ int m_48;
-    /* 0x4C */ int m_4C;
+    /* 0x3C */ s32 m_3C; // rect end?
+    /* 0x40 */ s32 m_40;
+    /* 0x44 */ s32 m_44;
+    /* 0x48 */ s32 m_48;
+    /* 0x4C */ s32 m_4C;
     /* 0x50 */ float m_50;
     /* 0x54 */ FlfGameObj* mOwner;
     /* 0x58 */ nw4r::math::MTX34 mMatrix;

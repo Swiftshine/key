@@ -78,7 +78,7 @@ GmkTreasureItem::GmkTreasureItem(GimmickBuildInfo* pBuildInfo, const char* pTask
 GmkTreasureItem::~GmkTreasureItem() { }
 
 void GmkTreasureItem::Update() {
-    int state = mState.mCurrentState;
+    s32 state = mState.mCurrentState;
 
     switch (state) {
         case 0: {
@@ -135,7 +135,7 @@ void GmkTreasureItem::ProcessClothPull() {
             mCollisionEntry->ResetMatrix(true);
         } else {
             if (patch != nullptr) {
-                int sceneID = patch->mSceneID;
+                s32 sceneID = patch->mSceneID;
 
                 mPosition.z = FullSortSceneUtil::GetZOrder(sceneID, patch->m_1A8) - 0.5f;
 

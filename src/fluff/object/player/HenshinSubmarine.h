@@ -9,16 +9,16 @@ public:
     /* Structures */
 
     struct Substruct1 {
-        int m_0;
-        int m_4;
-        int m_8;
-        int m_C;
+        s32 m_0;
+        s32 m_4;
+        s32 m_8;
+        s32 m_C;
     };
 
     /* Class Members */
 
-    int m_58;
-    int m_5C;
+    s32 m_58;
+    s32 m_5C;
     Substruct1 m_60;
     STRUCT_FILL(0xEC - 0x70);
 };

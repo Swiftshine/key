@@ -178,7 +178,7 @@ bool FlfFriend::fn_8033BE24(const gfl::Vec3& rV1, const gfl::Vec3& rV2) const {
 }
 #pragma pop
 
-void FlfFriend::SetNURBSAnimationInfo(int id, bool isReset) {
+void FlfFriend::SetNURBSAnimationInfo(s32 id, bool isReset) {
     mNextAnimationID = id;
     mIsAnimationReset = isReset;
 }
@@ -193,16 +193,16 @@ bool FlfFriend::fn_8033BE64() {
     return false;
 }
 
-int FlfFriend::fn_8033BEFC(std::tree<placeholder_t>& rTree, int*) {
+s32 FlfFriend::fn_8033BEFC(std::tree<placeholder_t>& rTree, s32*) {
     // not decompiled
     return 0;
 }
 
-void FlfFriend::fn_8033BF8C(int) {
+void FlfFriend::fn_8033BF8C(s32) {
     // not decompiled
 }
 
-void FlfFriend::fn_8033BFC8(int targetState, int currentState) {
+void FlfFriend::fn_8033BFC8(s32 targetState, s32 currentState) {
     // not decompiled
 }
 
@@ -280,7 +280,7 @@ uint FlfFriend::GetCurrentAnimationID() const {
     return mCurrentAnimationID;
 }
 
-void FlfFriend::PlayNURBSAnimation(int id, bool resetFrame) {
+void FlfFriend::PlayNURBSAnimation(s32 id, bool resetFrame) {
     mCurrentAnimationID = GetCurrentNURBSAnimationID();
     mFlfMdlDraw->PlayNURBSAnimation(id, resetFrame);
     SetNURBSAnimationInfo(id, resetFrame);
@@ -300,8 +300,8 @@ void FlfFriend::fn_8033C580(uint arg1) {
     }
 }
 
-int FlfFriend::fn_8033C5B4() {
-    int choice = rand() % 2;
+s32 FlfFriend::fn_8033C5B4() {
+    s32 choice = rand() % 2;
 
     switch (choice) {
         case 0: {
@@ -445,7 +445,7 @@ void FlfFriend::ExecCallbackC(nw4r::math::MTX34* pMtxArray, nw4r::g3d::ResMdl md
 }
 
 // https://decomp.me/scratch/QqYhN
-void FlfFriend::SetScreenPosition(int* pDirection) {
+void FlfFriend::SetScreenPosition(s32* pDirection) {
     float x, y, w, h;
     CamMng::Instance()->GetScreenBounds(&x, &y, &w, &h, FullSortSceneUtil::eSceneID_Game);
 
@@ -663,7 +663,7 @@ bool FlfFriend::vf128() const {
     return mState.mCurrentState == 8;
 }
 
-void FlfFriend::vf12C(int) {
+void FlfFriend::vf12C(s32) {
     // not decompiled
 }
 
@@ -697,7 +697,7 @@ bool FlfFriend::vfD8() const {
 }
 
 // sdata
-int lbl_808E1810 = eDirection_Forward;
+s32 lbl_808E1810 = eDirection_Forward;
 
 void FlfFriend::vf13C() {
     SetScreenPosition(&lbl_808E1810);
@@ -729,7 +729,7 @@ void FlfFriend::SetPositionToPlayerSavedPosition() {
     PlayerBase* player = GameManager::GetPlayerByID(PlayerBase::ePlayerID_Kirby);
 
     if (player != nullptr) {
-        int dir = player->mDirection;
+        s32 dir = player->mDirection;
         gfl::Vec3 pos;
         pos = player->mSavedPosition;
 
@@ -897,7 +897,7 @@ bool FlfFriend::fn_8033E8A8() const {
     for (uint id = PlayerBase::ePlayerID_Kirby; id < count; id++) {
         PlayerBase* player = GameManager::GetPlayerByID(id);
 
-        if ((int)player->mState.mCurrentState == 5 && player->mState.mDefaultState == 2) {
+        if ((s32)player->mState.mCurrentState == 5 && player->mState.mDefaultState == 2) {
             return true;
         }
     }
@@ -1110,7 +1110,7 @@ void FlfFriend::vf1F0() {
         return;
     }
 
-    int areaID = GameManager::GetCurrentAreaID();
+    s32 areaID = GameManager::GetCurrentAreaID();
 
     if (areaID != 9) {
         Mapdata::MapdataGimmick* gmk = mMapdataGimmick;

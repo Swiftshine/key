@@ -45,7 +45,7 @@ void PlayerBase::ResetState() {
     ResetWalkAnimSpeed();
 }
 
-void PlayerBase::SetPlayerState(int newState) {
+void PlayerBase::SetPlayerState(s32 newState) {
     if (mState.mCurrentState == newState) {
         return;
     }
@@ -97,7 +97,7 @@ PlayerBase* PlayerBase::Build(
     gfl::Task* pParentTask,
     uint flags,
     FullSortScene* pScene,
-    int arg4
+    s32 arg4
 ) {
     PlayerBase* player = new (gfl::eHeapID_Work) PlayerBase(
         pParentTask,
@@ -116,7 +116,7 @@ PlayerBase* PlayerBase::BuildCloned(
     gfl::Task* pParentTask,
     FullSortScene* pScene,
     uint flags,
-    int arg4
+    s32 arg4
 ) {
     PlayerBase* player = new (gfl::eHeapID_Work) PlayerBase(
         pParentTask,

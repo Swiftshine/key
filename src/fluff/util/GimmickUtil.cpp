@@ -1,7 +1,7 @@
 #include "util/GimmickUtil.h"
 #include "graphics/FlfMdlDraw.h"
 
-int GimmickUtil::GetGimmickIDByDescription(const char* pDescription) {
+s32 GimmickUtil::GetGimmickIDByDescription(const char* pDescription) {
     GimmickEntry* entry = GimmickTable;
     uint id = 0;
 
@@ -16,29 +16,29 @@ int GimmickUtil::GetGimmickIDByDescription(const char* pDescription) {
     return -1;
 }
 
-const char* GimmickUtil::GetResourceNameByGimmickID(int id) {
+const char* GimmickUtil::GetResourceNameByGimmickID(s32 id) {
     return GimmickTable[id].mResourceName;
 }
 
-std::string GimmickUtil::GetResourcePathByGimmickID(int id) {
+std::string GimmickUtil::GetResourcePathByGimmickID(s32 id) {
     std::string str = "gimmick/";
     str += GetResourceNameByGimmickID(id);
     return str;
 }
 
-GimmickBuildFunction GimmickUtil::GetBuildFunctionByGimmickID(int id) {
+GimmickBuildFunction GimmickUtil::GetBuildFunctionByGimmickID(s32 id) {
     return GimmickTable[id].mBuildFunction;
 }
 
-bool GimmickUtil::CheckCommonByGimmickID(int id) {
+bool GimmickUtil::CheckCommonByGimmickID(s32 id) {
     return GimmickTable[id].mIsCommon;
 }
 
-bool GimmickUtil::IsBead(int id) {
+bool GimmickUtil::IsBead(s32 id) {
     return 21 <= id && id <= 42;
 }
 
-int GimmickUtil::fn_80050700(int id) {
+s32 GimmickUtil::fn_80050700(s32 id) {
     switch (id) {
         case 0x15:
         case 0x1C:
@@ -73,7 +73,7 @@ int GimmickUtil::fn_80050700(int id) {
     }
 }
 
-int GimmickUtil::fn_80050764(int arg0, int arg1) {
+s32 GimmickUtil::fn_80050764(s32 arg0, s32 arg1) {
     if (arg0 >= 4) {
         return 0x15;
     }
@@ -86,16 +86,16 @@ int GimmickUtil::fn_80050764(int arg0, int arg1) {
         return 0x2A;
     }
 
-    int temp = arg0 * 7 + 0x15;
+    s32 temp = arg0 * 7 + 0x15;
     temp += arg1;
     return temp;
 }
 
-bool GimmickUtil::IsClothTurnGimmick(int id) {
+bool GimmickUtil::IsClothTurnGimmick(s32 id) {
     return 0x43 <= id && id <= 0x46;
 }
 
-bool GimmickUtil::fn_800507C8(int id) {
+bool GimmickUtil::fn_800507C8(s32 id) {
     return 0x130 <= id && id <= 0x138;
 }
 

@@ -13,7 +13,7 @@ public:
     /* Class Members */
 
     STRUCT_FILL(0x6C);
-    int m_6C;
+    s32 m_6C;
 };
 
 #endif

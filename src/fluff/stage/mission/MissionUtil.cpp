@@ -4,10 +4,10 @@
 
 static const char MissionIndicators[] = "NBTDCS";
 static const char* MissionNameTemplate = "M%c%02d";
-int MissionUtil::GetMissionTypeByCode(int code) {
-    int ret = MissionUtil::eMissionType_None;
-    int curType;
-    int c;
+s32 MissionUtil::GetMissionTypeByCode(s32 code) {
+    s32 ret = MissionUtil::eMissionType_None;
+    s32 curType;
+    s32 c;
 
     for (curType = MissionUtil::eMissionType_Bead; curType < 6; curType++) {
         c = GetMissionCodeByType(curType);
@@ -20,8 +20,8 @@ int MissionUtil::GetMissionTypeByCode(int code) {
     return ret;
 }
 
-int MissionUtil::GetMissionCodeByType(int type) {
-    int ret = MissionUtil::eMissionCode_None;
+s32 MissionUtil::GetMissionCodeByType(s32 type) {
+    s32 ret = MissionUtil::eMissionCode_None;
     switch (type) {
         case MissionUtil::eMissionType_Bead:   ret = MissionUtil::eMissionCode_Bead; break;
         case MissionUtil::eMissionType_Time:   ret = MissionUtil::eMissionCode_Time; break;
@@ -32,8 +32,8 @@ int MissionUtil::GetMissionCodeByType(int type) {
     return ret;
 }
 
-int MissionUtil::GetMissionCountByType(int type) {
-    int ret = MissionUtil::eMissionCount_None;
+s32 MissionUtil::GetMissionCountByType(s32 type) {
+    s32 ret = MissionUtil::eMissionCount_None;
     switch (type) {
         case MissionUtil::eMissionType_Bead:   ret = MissionUtil::eMissionCount_Bead; break;
         case MissionUtil::eMissionType_Time:   ret = MissionUtil::eMissionCount_Time; break;
@@ -44,8 +44,8 @@ int MissionUtil::GetMissionCountByType(int type) {
     return ret;
 }
 
-int MissionUtil::GetMissionIDBaseByType(int type) {
-    int ret = MissionUtil::eMissionIDBase_None;
+s32 MissionUtil::GetMissionIDBaseByType(s32 type) {
+    s32 ret = MissionUtil::eMissionIDBase_None;
     switch (type) {
         case MissionUtil::eMissionType_Bead:   ret = MissionUtil::eMissionIDBase_Bead; break;
         case MissionUtil::eMissionType_Time:   ret = MissionUtil::eMissionIDBase_Time; break;
@@ -56,9 +56,9 @@ int MissionUtil::GetMissionIDBaseByType(int type) {
     return ret;
 }
 
-char MissionUtil::GetMissionIdentifierByType(int type) {
+char MissionUtil::GetMissionIdentifierByType(s32 type) {
     char ret = 0;
-    int t = static_cast<signed long>(type);
+    s32 t = static_cast<signed long>(type);
 
     if (type >= 0 && t<6) {
         ret = MissionIndicators[type];
@@ -68,11 +68,11 @@ char MissionUtil::GetMissionIdentifierByType(int type) {
     return ret;
 }
 
-bool MissionUtil::HasMissionIndicator(int type, const std::string& str) {
+bool MissionUtil::HasMissionIndicator(s32 type, const std::string& str) {
     bool ret = false;
     uint len;
     char target;
-    int charIndex;
+    s32 charIndex;
     signed long t = static_cast<signed long>(type);
 
     if (type >= 0 && t < 6) {
@@ -84,9 +84,9 @@ bool MissionUtil::HasMissionIndicator(int type, const std::string& str) {
     return ret;
 }
 
-int MissionUtil::GetMissionIDByInfo(int type, int index) {
-    int id = GetMissionIDBaseByType(type);
-    int count = GetMissionCountByType(type);
+s32 MissionUtil::GetMissionIDByInfo(s32 type, s32 index) {
+    s32 id = GetMissionIDBaseByType(type);
+    s32 count = GetMissionCountByType(type);
 
     if (index < 0 || count <= index) {
         id = 0;
@@ -98,10 +98,10 @@ int MissionUtil::GetMissionIDByInfo(int type, int index) {
 }
 
 
-void MissionUtil::GetMissionInfoByID(int id, int* destType, int* destIndex) {
+void MissionUtil::GetMissionInfoByID(s32 id, s32* destType, s32* destIndex) {
     signed long t;
-    int type;
-    int index;
+    s32 type;
+    s32 index;
     bool isValid = false;
 
     isValid = false;
@@ -110,7 +110,7 @@ void MissionUtil::GetMissionInfoByID(int id, int* destType, int* destIndex) {
     t = static_cast<signed long>(type);
 
     if (type >= 1 && t < 6) {
-        int count  = GetMissionCountByType(type);
+        s32 count  = GetMissionCountByType(type);
 
         if (index >= 0 && index < count) {
             isValid = true;
@@ -131,22 +131,22 @@ void MissionUtil::GetMissionInfoByID(int id, int* destType, int* destIndex) {
     }
 }
 
-int MissionUtil::GetMissionTypeByID(int id) {
-    int type;
+s32 MissionUtil::GetMissionTypeByID(s32 id) {
+    s32 type;
     GetMissionInfoByID(id, &type, nullptr);
     return type;
 }
 
-int MissionUtil::GetMissionIndexByID(int id) {
-    int index;
+s32 MissionUtil::GetMissionIndexByID(s32 id) {
+    s32 index;
     GetMissionInfoByID(id, nullptr, &index);
     return index;
 }
 
 const char magic_template[] = "M%c%02d";
-uint MissionUtil::GetMissionMagicByID(int id) {
-    int type;
-    int index;
+uint MissionUtil::GetMissionMagicByID(s32 id) {
+    s32 type;
+    s32 index;
     GetMissionInfoByID(id, &type, &index);
 
     if (MissionUtil::eMissionType_None != type) {

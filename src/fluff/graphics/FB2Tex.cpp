@@ -1,7 +1,7 @@
 #include "graphics/FB2Tex.h"
 #include "graphics/FbMem.h"
 
-FB2Tex::FB2Tex(gfl::Scene* pScene, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, int translucency, GXTexFmt texFormat, bool refreshTexture, const char* pName)
+FB2Tex::FB2Tex(gfl::Scene* pScene, u16 sourceW, u16 sourceH, u16 destW, u16 destH, bool arg6, s32 translucency, GXTexFmt texFormat, bool refreshTexture, const char* pName)
     : gfl::CustomRenderObj(false, true, pName)
     , mScene(pScene)
     , mImage(nullptr)

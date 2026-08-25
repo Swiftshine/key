@@ -14,13 +14,13 @@ enum ObtainedTreasureFlags {
 
 /// @note Size: `0x24`
 struct SaveData_StageInfo {
-    int m_0;
-    int m_4;
-    int m_8;
-    int m_C;
-    int mBeadStreak;
-    int m_14;
-    int mHighestBeadCount;
+    s32 m_0;
+    s32 m_4;
+    s32 m_8;
+    s32 m_C;
+    s32 mBeadStreak;
+    s32 m_14;
+    s32 mHighestBeadCount;
     uint mObtainedTreasureFlags;
     bool m_20; // maybe an indicator of whether or not the stage is completed?
 };
@@ -39,8 +39,8 @@ public:
     /* 0x0018 */ uint mAreaSignature;
     /* 0x001C */ uint mStageSignature;
     /* 0x0020 */ uint mStageExitSignature; // as in, the stage that was *just* exited
-    /* 0x0024 */ int mMissionID;
-    /* 0x0028 */ int m_28;
+    /* 0x0024 */ s32 mMissionID;
+    /* 0x0028 */ s32 m_28;
     /* 0x002C */ bool m_2C;
     /* 0x0030 */ void* m_30[15];
     /* 0x006C */ SaveData_StageInfo mStageInfo[STAGE_COUNT];
@@ -61,11 +61,11 @@ class SaveData {
 public:
     /* Class Methods */
 
-    uint CalculateChecksum(int numBytes);
+    uint CalculateChecksum(s32 numBytes);
     void Init();
-    BOOL IsValid(int numBytes);
+    BOOL IsValid(s32 numBytes);
     void InitSaveSlots();
-    bool IsSizeValid(int size);
+    bool IsSizeValid(s32 size);
     bool IsChecksumValid();
 
     /* Class Members */

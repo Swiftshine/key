@@ -1,6 +1,6 @@
 #include "util/KdTreeUtil.h"
 
-int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, nw4r::math::VEC2& point) {
+s32 KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, nw4r::math::VEC2& point) {
     float coordinate;
     if (rSplitInfo.mSplitY) {
         // the node is split on the Y axis
@@ -25,7 +25,7 @@ int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, nw4r::math::
 
     return KdTreeUtil::eNodePlacement_Self;
 }
-int KdTreeUtil::DetermineNodePlacementStrictly(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints) {
+s32 KdTreeUtil::DetermineNodePlacementStrictly(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints) {
     if (rSplitInfo.mSplitY) {
         // y axis
         if (rPoints.first.y > rSplitInfo.mMidpoint && rPoints.second.y > rSplitInfo.mMidpoint) {
@@ -48,7 +48,7 @@ int KdTreeUtil::DetermineNodePlacementStrictly(KdTreeSplitInfo& rSplitInfo, Poin
     return KdTreeUtil::eNodePlacement_Self;
 }
 
-int KdTreeUtil::DetermineNodePlacementByProximity(
+s32 KdTreeUtil::DetermineNodePlacementByProximity(
     KdTreeSplitInfo& rSplitInfo,
     PointPair& rPoints
 ) {
@@ -82,7 +82,7 @@ int KdTreeUtil::DetermineNodePlacementByProximity(
     return KdTreeUtil::eNodePlacement_Self;
 }
 
-int KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints) {
+s32 KdTreeUtil::DetermineNodePlacement(KdTreeSplitInfo& rSplitInfo, PointPair& rPoints) {
     if (rSplitInfo.mSplitY) {
         // y axis
 

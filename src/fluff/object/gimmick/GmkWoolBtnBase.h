@@ -6,7 +6,7 @@
 
 class GmkWoolBtnBase : public Gimmick, public IObjHitCB {
 public:
-    GmkWoolBtnBase(int gimmickID);
+    GmkWoolBtnBase(s32 gimmickID);
     virtual ~GmkWoolBtnBase();
     
     STRUCT_FILL(0x1FC - 0x134);

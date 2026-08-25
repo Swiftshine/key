@@ -20,7 +20,7 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
 
     float version = mapbin->mVersion;
 
-    std::vector<int> gimmickIDs;
+    std::vector<s32> gimmickIDs;
     std::vector<u64> collisionTypes;
     std::vector<std::string> wallLabels;
     size_t zoneOffset = 0;
@@ -84,7 +84,7 @@ Mapdata* Mapdata::Parse(const char* pFilepath, bool isInMission) {
         }
 
         std::string name = buf;
-        int id = GimmickUtil::GetGimmickIDByCommonGimmickName(name.c_str());
+        s32 id = GimmickUtil::GetGimmickIDByCommonGimmickName(name.c_str());
         gimmickIDs.push_back(id);
     }
 

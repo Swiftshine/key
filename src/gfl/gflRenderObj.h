@@ -17,7 +17,7 @@ namespace gfl {
         void SetActive(bool state);
 
         /* 0x08 */ virtual ~RenderObj();
-        /* 0x0C */ DECL_WEAK virtual int vf0C() {
+        /* 0x0C */ DECL_WEAK virtual s32 vf0C() {
             return 0;
         }
         /* 0x10 */ DECL_WEAK virtual nw4r::g3d::G3dObj* GetObject();
@@ -58,7 +58,7 @@ namespace gfl {
         /* 0x0E */ bool mShouldUpdate;
         /* 0x0F */ bool mIsActive;
         /* 0x10 */ float mUpdateRate;
-        /* 0x14 */ int m_14;
+        /* 0x14 */ s32 m_14;
     };
 };
 

@@ -14,9 +14,9 @@ struct SaveDataInfo {
 static SaveDataInfo sSaveDataInfo;
 
 // none of the below fields are ever used
-static int lbl_808E5AEC;
-static int lbl_808E5AF0;
-static int lbl_808E5AF4;
+static s32 lbl_808E5AEC;
+static s32 lbl_808E5AF0;
+static s32 lbl_808E5AF4;
 
 SaveDataInfo::SaveDataInfo()
     : mSaveDataSize(SAVEDATA_SIZE)
@@ -26,14 +26,14 @@ SaveDataInfo::SaveDataInfo()
     lbl_808E5AF4 = 1;
 }
 
-uint SaveData::CalculateChecksum(int numBytes) {
+uint SaveData::CalculateChecksum(s32 numBytes) {
     uint checksum = 0xFFFFFFFF;
     u8* data = reinterpret_cast<u8*>(this);
 
-    for (int i = 0; i < numBytes; i++) {
+    for (s32 i = 0; i < numBytes; i++) {
         checksum ^= data[i];
 
-        for (int bit = 0; bit < 8; bit++) {
+        for (s32 bit = 0; bit < 8; bit++) {
             if (checksum & 1) {
                 checksum = (checksum >> 1) ^ CRC_POLYNOMIAL;
             } else {
@@ -54,7 +54,7 @@ void SaveData::Init() {
 #pragma push
 #pragma global_optimizer off
 
-BOOL SaveData::IsValid(int numBytes) {
+BOOL SaveData::IsValid(s32 numBytes) {
     if (!IsSizeValid(numBytes)) {
         return FALSE;
     }
@@ -86,7 +86,7 @@ void SaveData::InitSaveSlots() {
     mHeader.mChecksum = CalculateChecksum(SAVEDATA_SIZE - 0xC);
 }
 
-bool SaveData::IsSizeValid(int size) {
+bool SaveData::IsSizeValid(s32 size) {
     return size == sSaveDataInfo.mSaveDataSize;
 }
 

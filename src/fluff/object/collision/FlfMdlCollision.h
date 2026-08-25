@@ -16,10 +16,10 @@ public:
 
     /* Class Methods */
 
-    size_t fn_800f09D8(const char* pName, int, int, int, float);
+    size_t fn_800f09D8(const char* pName, s32, s32, s32, float);
     void fn_800f0AD0(float, size_t index, const char* pName);
     void fn_800F0B48(bool);
-    bool fn_800F0BC0(int);
+    bool fn_800F0BC0(s32);
 
     /* Class Members */
 

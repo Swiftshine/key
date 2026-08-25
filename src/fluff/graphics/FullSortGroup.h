@@ -43,7 +43,7 @@ public:
 
     /* ScnObjGatherDiv */
 
-    /* 0x28 */ DECL_WEAK virtual int vf28();
+    /* 0x28 */ DECL_WEAK virtual s32 vf28();
 
 };
 

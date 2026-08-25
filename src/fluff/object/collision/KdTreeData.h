@@ -20,7 +20,7 @@ public:
 
     /* Virtual Methods */
 
-    /* 0x08 */ virtual int GetNodePlacement(KdTreeSplitInfo&);
+    /* 0x08 */ virtual s32 GetNodePlacement(KdTreeSplitInfo&);
     /* 0x0C */ virtual bool ArePointsInRect(KdTreeBounds&);
     /* 0x10 */ virtual ~KdTreeData();
 

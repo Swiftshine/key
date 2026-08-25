@@ -8,7 +8,7 @@ namespace gfl {
         static SoundFadeCtrl* sInstance;
     public:
         virtual ~SoundFadeCtrl();
-        virtual void vfC(float, int, int);
+        virtual void vfC(float, s32, s32);
         
         static inline SoundFadeCtrl* Instance() {
             return sInstance;

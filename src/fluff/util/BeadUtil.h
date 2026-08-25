@@ -4,7 +4,7 @@
 #include "object/gimmick/GmkBead.h"
 
 namespace BeadUtil {
-    GmkBead* CreateBead(int beadType, int beadColor, nw4r::math::VEC2 const& rBeadPosition);
+    GmkBead* CreateBead(s32 beadType, s32 beadColor, nw4r::math::VEC2 const& rBeadPosition);
 }
 
 #endif

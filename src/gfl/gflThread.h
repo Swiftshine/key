@@ -9,7 +9,7 @@ namespace gfl {
 /// @note Size: `0x328`
 class Thread {
 public:
-    Thread(OSThreadFunc pThreadFunc, size_t stackSize, int priority);
+    Thread(OSThreadFunc pThreadFunc, size_t stackSize, s32 priority);
     virtual ~Thread();
 
     /* Class Methods */
@@ -23,7 +23,7 @@ public:
     /* 0x004 */ OSThreadFunc mThreadFunc;
     /* 0x008 */ OSThread mThread;
     /* 0x320 */ void* mStack;
-    /* 0x324 */ int m_324; // never used
+    /* 0x324 */ s32 m_324; // never used
 };
 
 

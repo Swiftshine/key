@@ -15,8 +15,8 @@ public:
     /* Class Members */
 
     /* 0x00 */ gfl::Task mTask;
-    /* 0x18 */ int mCurrentMissionID;
-    /* 0x1C */ int mCurrentMissionType;
+    /* 0x18 */ s32 mCurrentMissionID;
+    /* 0x1C */ s32 mCurrentMissionType;
     /* 0x20 */ MissionInfo mMissionInfo;
     /* 0x28 */ bool mMissionSucceeded;
     /* 0x29 */ STRUCT_FILL(0xA);
@@ -25,7 +25,7 @@ public:
     /* 0x40 */ void* mCurrentMissionStartFlow;
     /* 0x44 */ void* mCurrentMissionClearFlow;
     /* 0x48 */ void* mCurrentMissionFailureFlow;
-    /* 0x4C */ int m_4C;  
+    /* 0x4C */ s32 m_4C;  
 };
 
 #endif

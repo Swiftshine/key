@@ -14,14 +14,14 @@ namespace gfl {
         virtual ~DirEntry() = 0;
 
         bool FileExists(const char* filename);
-        int GetFileIndex(const char* filename, int searchIndexBegin);
+        s32 GetFileIndex(const char* filename, s32 searchIndexBegin);
 
     public:
         FileSystemWii* mFilesystem;
         void* mDvdDir;
-        int mCurEntryIndex;
-        int mPrevEntryIndex;
-        int mFilecount;
+        s32 mCurEntryIndex;
+        s32 mPrevEntryIndex;
+        s32 mFilecount;
         bool mIsValid;
     };
 

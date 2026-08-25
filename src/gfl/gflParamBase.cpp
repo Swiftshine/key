@@ -19,7 +19,7 @@ bool Param::Matches(const char* queryLabel, uint queryChecksum) {
     if (queryChecksum != mChecksum) {
         ret = false;
     } else {
-        int compResult = strcmp(mLabel, queryLabel);
+        s32 compResult = strcmp(mLabel, queryLabel);
         ret = compResult == 0;
     }
 

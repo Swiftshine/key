@@ -8,7 +8,7 @@ ParamS32::ParamS32(const char* pLabel)
 
 ParamS32::~ParamS32() { }
 
-int ParamS32::vf8() {
+s32 ParamS32::vf8() {
     return 0;
 }
 

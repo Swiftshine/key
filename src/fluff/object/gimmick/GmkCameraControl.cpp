@@ -129,7 +129,7 @@ void GmkCameraControl::Update() {
     mCameraInfo.ResetCounter();
 }
 
-void GmkCameraControl::SetState(int state) {
+void GmkCameraControl::SetState(s32 state) {
     mState = state;
     m_138 = 0.0f;
 }

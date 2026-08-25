@@ -53,7 +53,7 @@ public:
         /* 0x00 */ uint mParticleIndex1;
         /* 0x04 */ uint mParticleIndex2;
         /* 0x08 */ float m_8;
-        /* 0x0C */ int mActiveParticleIndex; // 0 for neither, 1 for the first, 2 for the second
+        /* 0x0C */ s32 mActiveParticleIndex; // 0 for neither, 1 for the first, 2 for the second
         /* 0x10 */ float m_10;
 
         
@@ -73,10 +73,10 @@ public:
         /* 0x10 */ float mPercentage;
         /* 0x14 */ float m_14;
         /* 0x18 */ gfl::Vec3 m_18;
-        /* 0x24 */ int m_24;
+        /* 0x24 */ s32 m_24;
         /* 0x28 */ bool m_28;
         /* 0x2C */ float m_2C;
-        /* 0x30 */ int m_30;
+        /* 0x30 */ s32 m_30;
         /* 0x34 */ uint mParticleCount;
         /* 0x38 */ uint mSpringCount;
         /* 0x3C */ uint m_3C;
@@ -91,7 +91,7 @@ public:
         UnkStruct2();
 
         /* 0x0 */ gfl::Vec3 m_0;
-        /* 0xC */ int m_C;
+        /* 0xC */ s32 m_C;
     };
 
 
@@ -126,15 +126,15 @@ public:
     gfl::Vec3 fn_80008908(uint index) DONT_INLINE_CLASS;
     gfl::Vec3 fn_80008930(uint index) DONT_INLINE_CLASS;
     void fn_800089A0();
-    void fn_80008A34(uint index, const gfl::Vec3& rVec, int arg3) DONT_INLINE_CLASS;
-    void fn_80008A68(gfl::Vec3& rVec, int arg2) DONT_INLINE_CLASS;
+    void fn_80008A34(uint index, const gfl::Vec3& rVec, s32 arg3) DONT_INLINE_CLASS;
+    void fn_80008A68(gfl::Vec3& rVec, s32 arg2) DONT_INLINE_CLASS;
     gfl::Vec3 GetKeyFrames() DONT_INLINE_CLASS;
     void fn_80008BB0(nw4r::math::MTX34& rMtx);
     void fn_80008DC0(nw4r::math::MTX34& rMtx);
     void ResetKeyFrames(KeyFrame<float>::FrameTemplate* pFTX, KeyFrame<float>::FrameTemplate* pFTY, KeyFrame<float>::FrameTemplate* pFTZ);
     float fn_80009248(uint index);
     float fn_8000925C(uint index);
-    int GetSpringActiveParticleIndex(uint index);
+    s32 GetSpringActiveParticleIndex(uint index);
     void fn_80009284(gfl::Vec3& rVec);
     void fn_800092A4();
     void fn_800092AC(float scale);

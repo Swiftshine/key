@@ -28,7 +28,7 @@ public:
 
     /* Class Methods */
     
-    void PlayAnimationByNameAndIndex(uint animIndex, const char* pAnimName, int dummy = 1);
+    void PlayAnimationByNameAndIndex(uint animIndex, const char* pAnimName, s32 dummy = 1);
     gfl::ScnMdlWrapper* SetupModelWrapper(uint flags) DONT_INLINE_CLASS;
     gfl::ScnMdlWrapper* SetFullSortSceneModelWrapper(FullSortScene* pScene, uint flags) DONT_INLINE_CLASS;
     void SetStageFullSortSceneModelWrapper(uint flags) DONT_INLINE_CLASS;

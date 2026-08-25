@@ -7,7 +7,7 @@ class PlayerMdlMng {
 public:
     /* Static Variables */
 
-    static const int PlayerAnimationIDs[303]; // not sure how many there are
+    static const s32 PlayerAnimationIDs[303]; // not sure how many there are
 
     /* Class Methods */
 

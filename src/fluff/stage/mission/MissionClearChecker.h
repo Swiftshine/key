@@ -33,7 +33,7 @@ public:
     /* 0x08 */ DECL_WEAK virtual ~MissionClearCheckerBase() DONT_INLINE_CLASS;
     /* 0x0C */ DECL_WEAK virtual void ResetMissionStatus();
     /// @return The completion status.
-    /* 0x10 */ virtual int Process() = 0;
+    /* 0x10 */ virtual s32 Process() = 0;
     /// @brief Causes the mission to succeed.
     /* 0x14 */ virtual void CauseMissionSuccess();
     /// @brief Causes the mission to fail.
@@ -41,10 +41,10 @@ public:
 
     /* Class Methods */
 
-    void EndMission(int status, int reason) DONT_INLINE_CLASS;
+    void EndMission(s32 status, s32 reason) DONT_INLINE_CLASS;
     bool TimeRanOut(InStageWork* pStageWork) DONT_INLINE_CLASS;
     void SetMissionGameCtrl(MissionGameCtrl* missionGameCtrl) DONT_INLINE_CLASS;
-    DECL_WEAK int GetMissionStatus() DONT_INLINE_CLASS;
+    DECL_WEAK s32 GetMissionStatus() DONT_INLINE_CLASS;
     DECL_WEAK MissionGameCtrl* GetMissionGameCtrl() DONT_INLINE_CLASS;
 
     /* Static Methods */
@@ -53,8 +53,8 @@ public:
 
     /* Class Members */
 
-    /* 0x4 */ int mMissionStatus;
-    /* 0x8 */ int mMissionEndReason;
+    /* 0x4 */ s32 mMissionStatus;
+    /* 0x8 */ s32 mMissionEndReason;
     /* 0xC */ MissionGameCtrl* mMissionGameCtrl;
 };
 
@@ -68,7 +68,7 @@ public:
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~MissionBeadClearChecker();
-    /* 0x10 */ virtual int Process() override;
+    /* 0x10 */ virtual s32 Process() override;
     /* 0x14 */ virtual void CauseMissionSuccess() override;
     /* 0x18 */ virtual void CauseMissionFailure() override;
 
@@ -79,7 +79,7 @@ public:
     /* Class Members */
 
     /// @brief The number of beads the player needs to collect.
-    /* 0x10 */ int mBeadThreshold;
+    /* 0x10 */ s32 mBeadThreshold;
 };
 
 /// @brief Checks the status of the time attack mission.
@@ -93,7 +93,7 @@ public:
 
     /* 0x08 */ DECL_WEAK virtual ~MissionTimeAttackClearChecker();
 
-    /* 0x10 */ virtual int Process() override;
+    /* 0x10 */ virtual s32 Process() override;
     /* 0x14 */ virtual void CauseMissionSuccess() override;
     /* 0x18 */ virtual void CauseMissionFailure() override;
 
@@ -117,7 +117,7 @@ public:
 
     /* 0x08 */ DECL_WEAK virtual ~MissionDefeatEnemyClearChecker();
 
-    /* 0x10 */ virtual int Process() override;
+    /* 0x10 */ virtual s32 Process() override;
     /* 0x14 */ virtual void CauseMissionSuccess() override;
     /* 0x18 */ DECL_WEAK virtual void CauseMissionFailure() override;
 
@@ -128,7 +128,7 @@ public:
     /* Class Members */
 
     /// @brief The number of enemies needed to succeed.
-    /* 0x10 */ int mEnemyDefeatThreshold;
+    /* 0x10 */ s32 mEnemyDefeatThreshold;
 };
 
 
@@ -143,7 +143,7 @@ public:
 
     /* 0x08 */ DECL_WEAK virtual ~MissionCarrierClearChecker();
 
-    /* 0x10 */ virtual int Process() override;
+    /* 0x10 */ virtual s32 Process() override;
     /* 0x14 */ DECL_WEAK virtual void CauseMissionSuccess() override;
     /* 0x18 */ DECL_WEAK virtual void CauseMissionFailure() override;
 
@@ -168,7 +168,7 @@ public:
 
     /* 0x08 */ virtual ~MissionHideAndSeekClearChecker();
 
-    /* 0x10 */ virtual int Process() override;
+    /* 0x10 */ virtual s32 Process() override;
     /* 0x14 */ virtual void CauseMissionSuccess() override;
     /* 0x18 */ virtual void CauseMissionFailure() override;
 
@@ -180,11 +180,11 @@ public:
 
     /// @brief The number of times the player needs to find Zeke.
     /// @note This value is usually set to 5.
-    /* 0x10 */ int mZekeFoundThreshold;
+    /* 0x10 */ s32 mZekeFoundThreshold;
 };
 
 struct CheckerWithThreshold : MissionClearCheckerBase {
-    /* 0x10 */ int mThreshold;
+    /* 0x10 */ s32 mThreshold;
 };
 
 #endif

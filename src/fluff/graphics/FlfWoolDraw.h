@@ -24,14 +24,14 @@ public:
     /* Class Methods */
 
     /// @return Some index.
-    int Register(gfl::ResFileObject* pResFileObject, const char* pWoolName1, const char* pWoolName2);
-    void fn_800267B0(int index, int);
-    void fn_80026A54(int);
-    int fn_80026B54(int index);
+    s32 Register(gfl::ResFileObject* pResFileObject, const char* pWoolName1, const char* pWoolName2);
+    void fn_800267B0(s32 index, s32);
+    void fn_80026A54(s32);
+    s32 fn_80026B54(s32 index);
     void fn_80026DFC(float);
     void fn_80026E74(float, uint index);
-    void fn_80026E88(int);
-    void fn_80026AB0(int, uint);
+    void fn_80026E88(s32);
+    void fn_80026AB0(s32, uint);
     void fn_80026A9C(uint index, nw4r::math::VEC2*);
     gfl::Vec2* fn_80026A60(uint index1, uint index2);
     void fn_80026B68(nw4r::math::MTX34* pMtx, bool);
@@ -44,7 +44,7 @@ public:
     /* 0x20 */ STRUCT_FILL(0x48 - 0x20);
     /* 0x48 */ Substruct* m_48;
     /* 0x4C */ STRUCT_FILL(0xC);
-    /* 0x58 */ int m_58;
+    /* 0x58 */ s32 m_58;
     /* 0x5C */ float m_5C;
 };
 

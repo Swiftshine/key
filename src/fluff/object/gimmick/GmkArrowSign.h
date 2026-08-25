@@ -17,8 +17,8 @@ class GmkArrowSign : public Gimmick {
     };
 public:
     enum Parameter {
-        eParameter_Angle    = 0, // int 0
-        eParameter_Texture  = 1, // int 1
+        eParameter_Angle    = 0, // s32 0
+        eParameter_Texture  = 1, // s32 1
     };
 
     enum TextureType {

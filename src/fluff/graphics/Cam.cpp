@@ -241,7 +241,7 @@ void CamOrtho::fn_8001A35C(float arg1, float* arg2, float* arg3, float* arg4, fl
     *arg3 = fn_8059F64C(this)[1] + *arg3;
 }
 
-void CamOrtho::GetScreenDimensions(int* arg0, int* arg1, int* pDestW, int* pDestH) {
+void CamOrtho::GetScreenDimensions(s32* arg0, s32* arg1, s32* pDestW, s32* pDestH) {
     if (IsWidescreen(CurrentRenderModeObj)) {
         *arg0 = 0;
         *arg1 = 0;

@@ -23,10 +23,10 @@ public:
 
     /* Gimmick */
     virtual void Update() override;
-    virtual int  vf74(IObjHitCB* other)   override;
-    virtual int  vf78(IObjHitCB* other)   override;
-    virtual int  vf7C(IObjHitCB* other, int arg2)   override;
-    virtual int  vf8C(IObjHitCB* other, int arg2)   override;
+    virtual s32  vf74(IObjHitCB* other)   override;
+    virtual s32  vf78(IObjHitCB* other)   override;
+    virtual s32  vf7C(IObjHitCB* other, s32 arg2)   override;
+    virtual s32  vf8C(IObjHitCB* other, s32 arg2)   override;
     
     /* IObjHitCB */
     virtual bool OnCollision(CollisionInfo* colSelf, CollisionInfo* colOther, gfl::Vec3& pos) override;

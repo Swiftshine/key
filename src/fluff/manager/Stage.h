@@ -29,7 +29,7 @@ public:
     uint GetSceneIndex(FullSortScene* pScene);
     FullSortScene* GetSceneByID(uint sceneID);
 
-    Mapdata* GetLevelSection(int section);
+    Mapdata* GetLevelSection(s32 section);
 
     inline Mapdata* GetCurrentLevelSection() {
         return GetLevelSection(mStageInfo.GetSectionID());

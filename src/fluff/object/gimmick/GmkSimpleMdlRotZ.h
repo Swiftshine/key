@@ -18,8 +18,8 @@ public:
     inline void SetValue(float value) { mValue = value; }
 private:
     float mValue;
-    int m_8;
-    int m_C;
+    s32 m_8;
+    s32 m_C;
 };
 
 ASSERT_SIZE(GmkSimpleMdlRotZ, 0x10)

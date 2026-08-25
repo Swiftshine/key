@@ -61,8 +61,8 @@ void InStageWork::Init() {
     m_74 = -1;
 }
 
-void InStageWork::SetTimeElapsed(int elapsed) {
-    int set;
+void InStageWork::SetTimeElapsed(s32 elapsed) {
+    s32 set;
     if (elapsed < 0) {
         set = 0;
     } else {
@@ -75,8 +75,8 @@ void InStageWork::SetTimeElapsed(int elapsed) {
     mTimeElapsed = set;
 }
 
-void InStageWork::SetTimeLimit(int limit) {
-    int time;
+void InStageWork::SetTimeLimit(s32 limit) {
+    s32 time;
 
     if (limit < 0) {
         time = 0;
@@ -92,8 +92,8 @@ void InStageWork::SetTimeLimit(int limit) {
     SetTimeRemaining(time);
 }
 
-void InStageWork::SetTimeRemaining(int time) {
-    int curLimit = mTimeLimit;
+void InStageWork::SetTimeRemaining(s32 time) {
+    s32 curLimit = mTimeLimit;
 
     if (time < 0) {
         time = 0;
@@ -105,12 +105,12 @@ void InStageWork::SetTimeRemaining(int time) {
 }
 
 
-void InStageWork::SetBeadCount(int index, int max) {
+void InStageWork::SetBeadCount(s32 index, s32 max) {
     if ((uint)index >= 2) {
         return;
     }
 
-    int threshold;
+    s32 threshold;
 
     if (max < 0) {
         threshold = 0;
@@ -124,7 +124,7 @@ void InStageWork::SetBeadCount(int index, int max) {
     mBeadsCollected[index] = threshold;
 }
 
-void InStageWork::AddBeads(uint playerIndex, int beadCount, uint arg3) {
+void InStageWork::AddBeads(uint playerIndex, s32 beadCount, uint arg3) {
     if (playerIndex >= 2) {
         return;
     }
@@ -147,11 +147,11 @@ void InStageWork::AddBeads(uint playerIndex, int beadCount, uint arg3) {
     mBeadsCollected[playerIndex] += beadCount;
 
     if (mBeadsCollected[playerIndex] < 0) {
-        mBeadsCollected[(static_cast<int>(playerIndex) + 1) % 2]
+        mBeadsCollected[(static_cast<s32>(playerIndex) + 1) % 2]
             += mBeadsCollected[playerIndex];
     }
 
-    for (int i = 0; i < 2; i++) {
+    for (s32 i = 0; i < 2; i++) {
         mBeadsCollected[i] = mBeadsCollected[i] < 0 ? 0 :
             (mBeadsCollected[i] <= 9999 ? mBeadsCollected[i] : 9999);
     }
@@ -159,55 +159,55 @@ void InStageWork::AddBeads(uint playerIndex, int beadCount, uint arg3) {
 
 
 // https://decomp.me/scratch/PaZoO
-void InStageWork::DistributeBeads(int beadCount, uint arg2) {
+void InStageWork::DistributeBeads(s32 beadCount, uint arg2) {
     if (arg2 == 1) {
         AddBeads(0, beadCount, 0);
     } else {
-        int p1 = mBeadsCollected[0];
-        int p2 = mBeadsCollected[1];
-        int count = p1 + p2;
+        s32 p1 = mBeadsCollected[0];
+        s32 p2 = mBeadsCollected[1];
+        s32 count = p1 + p2;
 
         float ratio = count > 0 ? static_cast<float>(p1) / static_cast<float>(p2) : 0.5f;
 
-        int amt = static_cast<int>(static_cast<float>(static_cast<int>(arg2)) * ratio);
+        s32 amt = static_cast<s32>(static_cast<float>(static_cast<s32>(arg2)) * ratio);
 
         AddBeads(0, arg2 - amt, 0);
         AddBeads(1, amt, 0);
     }
 }
 
-void InStageWork::SetDefaultMedalThresholds(int arg1) {
+void InStageWork::SetDefaultMedalThresholds(s32 arg1) {
     m_28 = arg1;
     SetMedalThreshold(InStageWork::eMedalType_Wood, 0);
-    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<int>(static_cast<float>(m_28) * 0.3f));
-    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<int>(static_cast<float>(m_28) * 0.6f));
-    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<int>(static_cast<float>(m_28) * 0.9f));
+    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<s32>(static_cast<float>(m_28) * 0.3f));
+    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<s32>(static_cast<float>(m_28) * 0.6f));
+    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<s32>(static_cast<float>(m_28) * 0.9f));
     m_74 = -1;
 }
 
-void InStageWork::SetAlternativeMedalThresholds(int arg1) {
+void InStageWork::SetAlternativeMedalThresholds(s32 arg1) {
     m_28 = arg1;
     SetMedalThreshold(InStageWork::eMedalType_Wood, 0);
-    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<int>(static_cast<float>(m_28) * 0.15f));
-    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<int>(static_cast<float>(m_28) * 0.3f));
-    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<int>(static_cast<float>(m_28) * 0.7f));
-    m_74 = static_cast<int>(static_cast<float>(m_28) * 0.7f);
+    SetMedalThreshold(InStageWork::eMedalType_Bronze, static_cast<s32>(static_cast<float>(m_28) * 0.15f));
+    SetMedalThreshold(InStageWork::eMedalType_Silver, static_cast<s32>(static_cast<float>(m_28) * 0.3f));
+    SetMedalThreshold(InStageWork::eMedalType_Gold, static_cast<s32>(static_cast<float>(m_28) * 0.7f));
+    m_74 = static_cast<s32>(static_cast<float>(m_28) * 0.7f);
 }
 
 void InStageWork::SetMissionProgressFlags(uint flags) {
     mMissionProgressFlags = flags;
 }
 
-void InStageWork::fn_801FF3B8(int arg1) {
+void InStageWork::fn_801FF3B8(s32 arg1) {
     m_40 = arg1;
 }
 
-int InStageWork::GetTimeElapsed(int arg1) {
+s32 InStageWork::GetTimeElapsed(s32 arg1) {
     if (arg1 == 2) {
         return mTimeElapsed;
     }
 
-    int elapsed = mTimeLimit - mTimeRemaining;
+    s32 elapsed = mTimeLimit - mTimeRemaining;
 
     if (elapsed < 0) {
         elapsed = 0;
@@ -216,31 +216,31 @@ int InStageWork::GetTimeElapsed(int arg1) {
     return elapsed;
 }
 
-void InStageWork::AddNumEnemiesDefeated(int num) {
+void InStageWork::AddNumEnemiesDefeated(s32 num) {
     mNumEnemiesDefeated += num;
 }
 
-void InStageWork::SetNumEnemiesDefeated(int num) {
+void InStageWork::SetNumEnemiesDefeated(s32 num) {
     mNumEnemiesDefeated = num;
 }
 
-int InStageWork::GetNumEnemiesDefeated() const {
+s32 InStageWork::GetNumEnemiesDefeated() const {
     return mNumEnemiesDefeated;
 }
 
-void InStageWork::AddNumZekeFound(int num) {
+void InStageWork::AddNumZekeFound(s32 num) {
     mNumZekeFound += num;
 }
 
-void InStageWork::SetMaxZekeFound(int max) {
+void InStageWork::SetMaxZekeFound(s32 max) {
     mMaxZekeFound = max;
 }
 
-int InStageWork::GetMaxZekeFound() {
+s32 InStageWork::GetMaxZekeFound() {
     return mMaxZekeFound;
 }
 
-void InStageWork::fn_801FF428(float arg1, int index) {
+void InStageWork::fn_801FF428(float arg1, s32 index) {
     if (index < 0) {
         return;
     } else if (index >= 3) {
@@ -250,7 +250,7 @@ void InStageWork::fn_801FF428(float arg1, int index) {
     m_50[index] = arg1;
 }
 
-float InStageWork::fn_801FF448(int index) const {
+float InStageWork::fn_801FF448(s32 index) const {
     float zero = 0.0f;
 
     if (index < 0) {
@@ -262,8 +262,8 @@ float InStageWork::fn_801FF448(int index) const {
     return m_50[index];
 }
 
-bool InStageWork::fn_801FF46C(int arg1) const {
-    int unk = GameRootManager::Instance()->m_6C;
+bool InStageWork::fn_801FF46C(s32 arg1) const {
+    s32 unk = GameRootManager::Instance()->m_6C;
     bool ret = false;
 
     switch (arg1) {
@@ -292,16 +292,16 @@ bool InStageWork::fn_801FF46C(int arg1) const {
     return ret;
 }
 
-void InStageWork::SetTimeAttackStatus(int status) {
+void InStageWork::SetTimeAttackStatus(s32 status) {
     mTimeAttackStatus = status;
 }
 
-int InStageWork::GetTimeAttackStatus() const {
+s32 InStageWork::GetTimeAttackStatus() const {
     return mTimeAttackStatus;
 }
 
 void InStageWork::SetDefaultBeadMedals() {
-    int threshold = 0;
+    s32 threshold = 0;
 
     for (uint i = 0; i < 4; i++) {
         SetMedalThreshold(i, threshold);
@@ -311,14 +311,14 @@ void InStageWork::SetDefaultBeadMedals() {
     mBeadMedal = InStageWork::eMedalType_Wood;
 }
 
-void InStageWork::SetMedalThreshold(uint medalType, int threshold) {
+void InStageWork::SetMedalThreshold(uint medalType, s32 threshold) {
     if (medalType >= 4) {
         return;
     }
     mMedalThresholds[medalType] = threshold;
 }
 
-int InStageWork::GetMedalThreshold(uint medalType) const {
+s32 InStageWork::GetMedalThreshold(uint medalType) const {
     if (medalType >= 4) {
         return -1;
     }
@@ -326,10 +326,10 @@ int InStageWork::GetMedalThreshold(uint medalType) const {
     return mMedalThresholds[medalType];
 }
 
-int InStageWork::GetBeadMedal() {
-    int type = InStageWork::eMedalType_None;
+s32 InStageWork::GetBeadMedal() {
+    s32 type = InStageWork::eMedalType_None;
 
-    int total = mBeadsCollected[0] + mBeadsCollected[1];
+    s32 total = mBeadsCollected[0] + mBeadsCollected[1];
 
     if (mMedalThresholds[InStageWork::eMedalType_Wood] <= total) {
         type = InStageWork::eMedalType_Wood;
@@ -378,7 +378,7 @@ void InStageWork::fn_801FF628() {
     }
 }
 
-void InStageWork::fn_801FF6B0(uint index, int arg2, int arg3) {
+void InStageWork::fn_801FF6B0(uint index, s32 arg2, s32 arg3) {
     if (index >= 21) {
         return;
     }
@@ -389,7 +389,7 @@ void InStageWork::fn_801FF6B0(uint index, int arg2, int arg3) {
 
 
 void InStageWork::fn_801FF6CC() {
-    int total = 0;
+    s32 total = 0;
     for (uint i = 0; i < 21; i++) {
         if (m_94[i].m_0 >= 0) {
             m_94[i].m_4 = total;
@@ -399,12 +399,12 @@ void InStageWork::fn_801FF6CC() {
     }
 }
 
-void InStageWork::fn_801FF7B0(int arg1) {
+void InStageWork::fn_801FF7B0(s32 arg1) {
     m_78 += arg1;
 }
 
-int InStageWork::GetHighestStreak() const {
-    int streak = mCurrentStreak;
+s32 InStageWork::GetHighestStreak() const {
+    s32 streak = mCurrentStreak;
     if (mCurrentStreak < mHighestStreak) {
         streak = mHighestStreak;
     }
@@ -412,7 +412,7 @@ int InStageWork::GetHighestStreak() const {
 }
 
 void InStageWork::fn_801FF7DC() {
-    int streak = mCurrentStreak + m_78;
+    s32 streak = mCurrentStreak + m_78;
     mCurrentStreak = streak;
 
     if (streak > 999) {
@@ -472,7 +472,7 @@ InStageWork_Substruct InStageWork::fn_801FF9A4(uint index) const {
 
 #pragma push
 #pragma global_optimizer off
-int InStageWork::fn_801FFA24() const {
+s32 InStageWork::fn_801FFA24() const {
     if (m_84 < 20) {
         return m_84;
     }

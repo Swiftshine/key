@@ -44,7 +44,7 @@ public:
     /* 0x148 */ gfl::Pointer<FlfMdlDraw> mFlfMdlDraw;
     /* 0x14C */ gfl::Pointer<PercentageWrapper> mPercentageWrapper;
     /* 0x150 */ gfl::Pointer<pvd8_t> m_150;
-    /* 0x154 */ int m_154;
+    /* 0x154 */ s32 m_154;
     /* 0x158 */ bool mPlayAnimation;
     /* 0x15C */ gfl::Pointer<GmkPartsMdlSet> mGmkPartsMdlSet;
     /* 0x160 */ gfl::Pointer<NwAnm> mNwAnm1;

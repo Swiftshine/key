@@ -137,7 +137,7 @@ void ScnMdlWrapper::SetChanAmbColor_Color(gfl::Color color) {
     nw4r::g3d::ResMdl resMdl = mScnMdl->GetResMdl();
     u32 numEntries = resMdl.GetResMatNumEntries();
 
-    for (int id = 0; id < numEntries; id++) {
+    for (s32 id = 0; id < numEntries; id++) {
         nw4r::g3d::ScnMdl::CopiedMatAccess access(mScnMdl, id);
         nw4r::g3d::ResMatChan chan = access.GetResMatChan(false);
         Color col = color;
@@ -155,7 +155,7 @@ void ScnMdlWrapper::SetChanAmbColor_Alpha(u8 alpha) {
     nw4r::g3d::ResMdl resMdl = mScnMdl->GetResMdl();
     u32 numEntries = resMdl.GetResMatNumEntries();
 
-    for (int id = 0; id < numEntries; id++) {
+    for (s32 id = 0; id < numEntries; id++) {
         nw4r::g3d::ScnMdl::CopiedMatAccess access(mScnMdl, id);
         nw4r::g3d::ResMatChan chan = access.GetResMatChan(false);
 

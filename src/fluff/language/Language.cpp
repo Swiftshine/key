@@ -1,16 +1,16 @@
 #include "language/Language.h"
 
 
-int CurrentRegionType = Language::eRegionType_US;
+s32 CurrentRegionType = Language::eRegionType_US;
 
 // sbss, but cyclic dependency error
-static int CurrentLanguageType;
+static s32 CurrentLanguageType;
 
-void Language::SetCurrentRegionType(int type) {
+void Language::SetCurrentRegionType(s32 type) {
     CurrentRegionType = type;
 }
 
-int Language::GetCurrentRegionType() {
+s32 Language::GetCurrentRegionType() {
     return CurrentRegionType;
 }
 
@@ -18,7 +18,7 @@ uint Language::GetCurrentRegionCode() {
     return GetRegionCodeByRegionType(GetCurrentRegionType());
 }
 
-uint Language::GetRegionCodeByRegionType(int type) {
+uint Language::GetRegionCodeByRegionType(s32 type) {
     switch (type) {
         case Language::eRegionType_Japan:   return Language::eRegionCode_Japan;
         case Language::eRegionType_US:      return Language::eRegionCode_US;
@@ -29,7 +29,7 @@ uint Language::GetRegionCodeByRegionType(int type) {
 }
 
 
-int Language::GetLanguageType(int regionType, SCLanguage language) {
+s32 Language::GetLanguageType(s32 regionType, SCLanguage language) {
     uint lang = language;
 
     switch (regionType) {
@@ -67,10 +67,10 @@ int Language::GetLanguageType(int regionType, SCLanguage language) {
     return Language::eLanguageType_JP_Japanese;
 }
 
-void Language::SetCurrentLanguageType(int type) {
+void Language::SetCurrentLanguageType(s32 type) {
     CurrentLanguageType = type;
 }
 
-int Language::GetCurrentLanguageType() {
+s32 Language::GetCurrentLanguageType() {
     return CurrentLanguageType;
 }

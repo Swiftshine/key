@@ -65,7 +65,7 @@ public:
     
     /* Static Methods */
 
-    static void GetScreenDimensions(int*, int*, int* pDestW, int* pDestH);
+    static void GetScreenDimensions(s32*, s32*, s32* pDestW, s32* pDestH);
 
     /* Class Members */
 

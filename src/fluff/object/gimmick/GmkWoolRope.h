@@ -51,8 +51,8 @@ public:
     GmkWoolRope(
         GmkWoolHook* pFirstHook,
         GmkWoolHook* pSecondHook,
-        int woolColor,
-        int hookType,
+        s32 woolColor,
+        s32 hookType,
         Mapdata::MapdataGimmick* pMapdataGimmick,
         const char* pTaskName
     );
@@ -81,14 +81,14 @@ public:
 
     /* Class Members */
 
-    /* 0x130 */ int m_130;
-    /* 0x134 */ int m_134;
-    /* 0x138 */ int m_138;
-    /* 0x13C */ int m_13C;
-    /* 0x140 */ int m_140;
+    /* 0x130 */ s32 m_130;
+    /* 0x134 */ s32 m_134;
+    /* 0x138 */ s32 m_138;
+    /* 0x13C */ s32 m_13C;
+    /* 0x140 */ s32 m_140;
     /* 0x144 */ WoolLinkObjBase* mWoolLink;
-    /* 0x148 */ int mWoolTextureType;
-    /* 0x14C */ int mWoolHookType;
+    /* 0x148 */ s32 mWoolTextureType;
+    /* 0x14C */ s32 mWoolHookType;
     /* 0x150 */ GmkWoolHook* mFirstWoolHook;
     /* 0x154 */ GmkWoolHook* mSecondWoolHook;
     /// The associated "WoolBridge" gimmick. The position of the gimmick in mapdata

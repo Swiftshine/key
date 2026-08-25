@@ -9,14 +9,14 @@ namespace gfl {
     public:
         static const char DefaultName[];
         static MEMAllocatorFuncs AllocFuncs;
-        static size_t GetArenaSize(int type);
+        static size_t GetArenaSize(s32 type);
         static void* HeapAlloc(MEMAllocator* allocator, size_t size);
         static void HeapFree(MEMAllocator* allocator, void* data);
     public:
         void SetName(const char* name) DONT_INLINE_CLASS;
         Heap();
         ~Heap();
-        void Init(size_t range, u16 optFlag, int heapType);
+        void Init(size_t range, u16 optFlag, s32 heapType);
         void* Alloc(size_t size, uint alignment);
         void Free(void* buf);
         size_t GetTotalFreeSizeForExpHeap();
@@ -30,13 +30,13 @@ namespace gfl {
 
         inline void SetMEMAllocatorParameters(MEMAllocator* allocator, size_t alignment, MEMiHeapHead* heap);
 
-        static inline void* GetArena(int type, size_t* size);
-        static inline void* GetArenaLo(int type);
-        static inline void* GetArenaHi(int type);
-        static inline void SetArenaLo(int type, void* arena);
-        static inline void SetArenaHi(int type, void* arena);
+        static inline void* GetArena(s32 type, size_t* size);
+        static inline void* GetArenaLo(s32 type);
+        static inline void* GetArenaHi(s32 type);
+        static inline void SetArenaLo(s32 type, void* arena);
+        static inline void SetArenaHi(s32 type, void* arena);
         static inline void SetAllocFuncs();
-        static inline void SetArena(int type, void* start, void* end, bool useArenaHi);
+        static inline void SetArena(s32 type, void* start, void* end, bool useArenaHi);
     public:
         u8 mHeapID;
         char mHeapName[25];
@@ -44,7 +44,7 @@ namespace gfl {
         MEMiHeapHead* mExpHeap;
         MEMAllocator mAllocator1;
         MEMAllocator mAllocator2;
-        int mHeapType;
+        s32 mHeapType;
     };
 
     ASSERT_SIZE(Heap, 0x44)
