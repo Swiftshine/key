@@ -94,11 +94,11 @@ void SD3DActorWrapper::ManageActorWrapper(s32 soundID, s32 frames, bool add) {
     }
 
     for (s32 i = 0; i < 4; i++) {
-        if (!mInfo[i].CheckSoundID(soundID)) {
+        if (!mInfo[i].doesSoundIDMatch(soundID)) {
             continue;
         }
 
-        if (InfoHandlePositionValid(i)) {
+        if (isInfoHandlePositionValid(i)) {
             if (mInfo[i].mSoundHandle.HandlePositionValid()) {
                 Sound::Instance()->ManageSoundHandleInner(mInfo[i].mSoundHandle.GetInnerSoundHandle(), frames, add);
             }
@@ -110,7 +110,7 @@ void SD3DActorWrapper::ManageActorWrapper(s32 soundID, s32 frames, bool add) {
 
 void SD3DActorWrapper::ManageActorWrapper(s32 frames, bool add) {
     for (s32 i = 0; i < 4; i++) {
-        if (mInfo[i].CheckSoundID(-1)) {
+        if (mInfo[i].doesSoundIDMatch(-1)) {
             continue;
         }
 
@@ -124,7 +124,7 @@ void SD3DActorWrapper::ManageActorWrapper(s32 frames, bool add) {
 
 bool SD3DActorWrapper::HasSoundID(s32 soundID) {
     bool ret = false;
-    
+
     if (soundID == -1) {
         return false;
     }
@@ -132,8 +132,8 @@ bool SD3DActorWrapper::HasSoundID(s32 soundID) {
     SD3DActorInfo* info = &mInfo[0];
 
     for (s32 i = 0; i < 4; i++, info++) {
-        if (info->CheckSoundID(soundID)) {        
-            if (info->HandlePositionValid()) {
+        if (info->doesSoundIDMatch(soundID)) {
+            if (info->isHandlePositionValid()) {
                 ret = true;
                 break;
             }
@@ -182,11 +182,11 @@ s32 SD3DActorWrapper::GetMatchingIndex(s32 soundID) {
 
 void SD3DActorWrapper::fn_802D02B0() {
     for (s32 i = 0; i < 4; i++) {
-        if (mInfo[i].CheckSoundID(-1)) {
+        if (mInfo[i].doesSoundIDMatch(-1)) {
             continue;
         }
 
-        if (!InfoHandlePositionValid(i)) {
+        if (!isInfoHandlePositionValid(i)) {
             InvalidateInfoSoundID(&mInfo[i]);
         }
     }

@@ -12,20 +12,16 @@ namespace gfl {
 /// @note Size: `0xC`
 class SD3DActorInfo {
 public:
-    
-
     SD3DActorInfo() DONT_INLINE_CLASS;
     DECL_WEAK ~SD3DActorInfo() DONT_INLINE_CLASS;
 
     /* Class Methods */
 
-    inline bool CheckSoundID(s32 id) {
+    bool doesSoundIDMatch(s32 id) {
         return mSoundID == id;
     }
 
-    /* Helper Methods */
-
-    inline bool HandlePositionValid() {
+    bool isHandlePositionValid() {
         return mSoundHandle.HandlePositionValid() ? Sound::Instance()->ValidateSoundHandleSound(mSoundHandle.GetInnerSoundHandle()) : false;
     }
 
@@ -37,22 +33,20 @@ public:
 
 /// @note Size: `0x8`
 class SD3DActor {
-    public:    
-    
-    
-    inline SD3DActor() {
+public:
+    SD3DActor() {
         mActorInner = Sound::Instance()->CreateSD3DActorInner();
     }
-    
+
     /* Virtual Methods */
-    
+
     /* 0x08 */ inline virtual ~SD3DActor();
     /* 0x0C */ virtual void SetPosition(const nw4r::math::VEC3&);
     /* 0x10 */ virtual nw4r::math::VEC3 GetPosition();
     /* 0x14 */ virtual SoundHandle GetSoundHandle(s32 soundID, s32, s32);
 
     /* Class Members  */
-    
+
     /* 0x4 */ SD3DActorInner* mActorInner;
 };
 
@@ -60,13 +54,11 @@ class SD3DActor {
 /// @note Size: `0x38`
 class SD3DActorWrapper {
 public:
-    
-
     SD3DActorWrapper();
     ~SD3DActorWrapper();
 
     /* Class Methods */
-    
+
     void SetPosition(const nw4r::math::VEC2& rSrc);
     nw4r::math::VEC3 GetPosition();
     SoundHandle GetSoundHandle(s32 soundID, s32 arg2, s32 arg3) DONT_INLINE_CLASS;
@@ -85,10 +77,8 @@ public:
     s32 GetMatchingIndex(s32 soundID);
     void fn_802D02B0();
 
-    /* Helper Methods */
-
-    inline bool InfoHandlePositionValid(s32 id) {
-        return mInfo[id].HandlePositionValid();
+    inline bool isInfoHandlePositionValid(s32 id) {
+        return mInfo[id].isHandlePositionValid();
     }
 
     /* Class Members */
