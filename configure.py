@@ -546,7 +546,7 @@ config.libs = [
         "progress_category": "fluff",
         "objects": [
             Object(NonMatching, "fluff/layout/LayoutManager.cpp"),
-        ]
+        ],
     },
     {
         "lib": "fluff/manager",
@@ -613,6 +613,7 @@ config.libs = [
             Object(NonMatching, "fluff/graphics/Cam.cpp"),
             Object(NonMatching, "fluff/graphics/FbMem.cpp"),
             Object(NonMatching, "fluff/graphics/FlfMdlDraw.cpp"),
+            Object(Matching, "fluff/graphics/FlfMdlMod.cpp"),
             Object(NonMatching, "fluff/graphics/HermiteCurveBase.cpp"),
             Object(NonMatching, "fluff/graphics/MNEB.cpp"),
             Object(NonMatching, "fluff/graphics/WoolBaseMdl.cpp"),

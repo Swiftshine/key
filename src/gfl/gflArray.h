@@ -34,6 +34,21 @@ namespace gfl {
             mArray = nullptr;
         }
 
+        void create(size_t len) {
+            T* temp = new (gfl::eHeapID_Work) T[len];
+
+            if (temp == nullptr) {
+                destroy();
+            } else {
+                mArray = temp;
+            }
+        }
+
+        void destroy() {
+            delete[] mArray;
+            mArray = nullptr;
+        }
+
         inline T& operator[](unsigned long index) {
             return mArray[index];
         }

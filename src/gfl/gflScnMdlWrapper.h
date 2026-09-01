@@ -46,7 +46,7 @@ namespace gfl {
 
         ScnMdlWrapper();
         ScnMdlWrapper(nw4r::g3d::ResMdl& rResMdl, u32 flags);
-        
+
         /* Virtual Methods */
 
         /* 0x08 */ virtual ~ScnMdlWrapper();
@@ -54,7 +54,7 @@ namespace gfl {
         /* 0x50 */ virtual bool SetMatrix(const gfl::Mtx34& rMtx);
         /* 0x54 */ virtual void SetMatrix_thunk(const gfl::Mtx34& rMtx);
         /* 0x58 */ virtual bool GetMatrix(gfl::Mtx34& rMtx);
-        
+
         /* Overrides */
 
         /* 0x10 */ virtual nw4r::g3d::G3dObj* GetObject() override;
@@ -64,7 +64,7 @@ namespace gfl {
         /* 0x38 */ virtual void Update(bool shouldUpdate) override;
         /* 0x40 */ virtual void UpdateFrame() override;
         /* 0x44 */ virtual void DoG3dProc(void* pInfo) override;
-        
+
         /* Class Methods */
 
         void SetChanAmbColor_Color(gfl::Color color);
@@ -75,7 +75,11 @@ namespace gfl {
         void fn_8004DB94(nw4r::math::VEC3&);
         void fn_8065DCDC(f32);
         nw4r::g3d::ResMdl GetResMdl(const char* modelName);
-        
+
+        nw4r::g3d::ScnMdl* getScnMdl() {
+            return mScnMdl;
+        }
+
         void SetCullMode(GXCullMode mode) {
             u32 numEntries = GetScnMdl()->GetResMdl().GetResMatNumEntries();
             for (u32 i = 0; i < numEntries; i++) {
@@ -83,7 +87,7 @@ namespace gfl {
                 mat.GetResGenMode(false).GXSetCullMode(mode);
             }
         }
-        
+
         /* Static Methods */
 
         static void SetDefaultUpdateRate(f32 rate);

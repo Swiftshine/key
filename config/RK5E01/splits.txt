@@ -278,6 +278,12 @@ fluff/object/gimmick/GmkCandleStick.cpp:
 fluff/object/gimmick/GmkArrowSign.cpp:
 	.text       start:0x804C3244 end:0x804C3CB0
 
+fluff/graphics/FlfMdlMod.cpp:
+	.text       start:0x804C3CB0 end:0x804C3EF0
+	.rodata     start:0x808196A8 end:0x808196B8
+	.data       start:0x8088DD10 end:0x8088DD20
+	.sdata      start:0x808E2CC0 end:0x808E2CC8
+
 fluff/stage/mission/MissionUtil.cpp:
 	.text       start:0x804C49F4 end:0x804C4E60
 	.sdata2     start:0x808EB2C4 end:0x808EB2E0

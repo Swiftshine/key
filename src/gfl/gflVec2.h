@@ -32,10 +32,10 @@ namespace gfl {
             y = val;
         }
 
-        inline void operator=(const nw4r::math::VEC2& rOther) {
-            x = rOther.x;
-            y = rOther.y;
-        }
+        // inline void operator=(const nw4r::math::VEC2& rOther) {
+        //     x = rOther.x;
+        //     y = rOther.y;
+        // }
 
         inline void Set(f32 nx, f32 ny) {
             x = nx;
