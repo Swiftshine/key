@@ -13,7 +13,7 @@ namespace layout {
 // size: 0x138
 class LayoutObject {
 public:
-    
+
     LayoutObject(gfl::Task* pParentTask, const char* pLayoutName);
 
     /* Virtual Methods */
@@ -22,8 +22,8 @@ public:
 
     /* Class Members */
 
-    /* 0x004 */ gfl::Task mTask1;
-    /* 0x01C */ gfl::Task mTask2;
+    /* 0x004 */ gfl::Task mGameTask;
+    /* 0x01C */ gfl::Task mWorldMtxTask;
     /* 0x034 */ s32 m_34;
     /* 0x038 */ s32 m_38;
     /* 0x03C */ nw4r::lyt::DrawInfo mDrawInfo;
