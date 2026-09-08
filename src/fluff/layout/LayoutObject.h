@@ -4,10 +4,11 @@
 #include <types.h>
 #include <string>
 
-#include <nw4r/lyt/lyt_pane.h>
+#include <nw4r/lyt/lyt_layout.h>
 #include <nw4r/lyt/lyt_drawInfo.h>
 
 #include <gfl/gflTask.h>
+#include <gfl/gflPointer.h>
 
 #include "message/MessageTagProcessor.h"
 #include "layout/LayoutObjectRender.h"
@@ -17,7 +18,6 @@ namespace layout {
 // size: 0x138
 class LayoutObject {
 public:
-
     LayoutObject(gfl::Task* pParentTask, const char* pLayoutName);
 
     /* Virtual Methods */
@@ -28,7 +28,7 @@ public:
 
     /* 0x004 */ gfl::Task mGameTask;
     /* 0x01C */ gfl::Task mWorldMtxTask;
-    /* 0x034 */ nw4r::lyt::Pane* mPane;
+    /* 0x034 */ gfl::Pointer<nw4r::lyt::Layout> mLayout;
     /* 0x038 */ gfl::Scene* mScene;
     /* 0x03C */ nw4r::lyt::DrawInfo mDrawInfo;
     /* 0x090 */ u32 mFlags;
