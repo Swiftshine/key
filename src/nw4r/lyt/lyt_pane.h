@@ -273,16 +273,17 @@ protected:
     math::MTX34 mMtx;    // at 0x54
     math::MTX34 mGlbMtx; // at 0x84
 
-    u8 mAlpha;        // at 0xB4
-    u8 mGlbAlpha;     // at 0xB5
-    u8 mBasePosition; // at 0xB6
-    u8 mFlag;         // at 0xB7
+    u32 mExtUserDataList;
+    u8 mAlpha;        // at 0xB8
+    u8 mGlbAlpha;     // at 0xB9
+    u8 mBasePosition; // at 0xBA
+    u8 mFlag;         // at 0xBB
 
-    char mName[NW4R_LYT_RES_NAME_LEN + 1];          // at 0xB8
-    char mUserData[NW4R_LYT_PANE_USERDATA_LEN + 1]; // at 0xC9
+    char mName[NW4R_LYT_RES_NAME_LEN + 1];          // at 0xBC
+    char mUserData[NW4R_LYT_PANE_USERDATA_LEN + 1]; // at 0xCD
 
-    bool mbUserAllocated; // at 0xD2
-    u8 PADDING_0xD3;      // at 0xD3
+    bool mbUserAllocated; // at 0xD6
+    u8 PADDING_0xD3;      // at 0xD7
 
 protected:
     void InsertChild(PaneList::Iterator next, Pane* pChild);

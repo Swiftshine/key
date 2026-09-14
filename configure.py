@@ -648,6 +648,7 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects": [
+            Object(NonMatching, "fluff/env/EnvFade_Base.cpp"),
             Object(NonMatching, "fluff/env/EnvObject.cpp"),
             Object(NonMatching, "fluff/env/EnvUnitBase.cpp"),
         ],

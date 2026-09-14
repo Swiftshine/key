@@ -111,6 +111,12 @@ fluff/object/gimmick/GmkSimpleMdl.cpp:
 fluff/env/EnvObject.cpp:
 	.text       start:0x8005E3B0 end:0x8005E8DC
 
+fluff/env/EnvFade_Base.cpp:
+	.text       start:0x8005F258 end:0x8005F5B0
+	.rodata     start:0x807E7D00 end:0x807E7D50
+	.data       start:0x8083D6E8 end:0x8083D768
+	.sdata      start:0x808DF868 end:0x808DF878
+
 fluff/env/EnvUnitBase.cpp:
 	.text       start:0x80066FF4 end:0x8006728C
 

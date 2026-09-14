@@ -1,5 +1,5 @@
 #ifndef FLUFF_LAYOUT_LAYOUTCALLBACK_H
-#definendef FLUFF_LAYOUT_LAYOUTCALLBACK_H
+#define FLUFF_LAYOUT_LAYOUTCALLBACK_H
 
 namespace layout {
 class LayoutCallbackFuncBase {
@@ -10,7 +10,7 @@ public:
     virtual ~LayoutCallbackFuncBase();
 };
 
-template <typename OwnerT, FunctionT>
+template <typename OwnerT, typename FunctionT>
 class LayoutCallbackFunc : public LayoutCallbackFuncBase {
 public:
     LayoutCallbackFunc();

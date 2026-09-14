@@ -4,16 +4,38 @@
 #include <types.h>
 #include <string>
 
-#include <nw4r/lyt/lyt_layout.h>
-#include <nw4r/lyt/lyt_drawInfo.h>
+#include <nw4r/lyt.h>
 
 #include <gfl/gflTask.h>
 #include <gfl/gflPointer.h>
 
-#include "message/MessageTagProcessor.h"
-#include "layout/LayoutObjectRender.h"
+#include <env/EnvManager_Scene.h>
+#include <layout/LayoutObjectRender.h>
+#include <message/MessageTagProcessor.h>
 
 namespace layout {
+
+struct LayoutBuildInfo {
+    LayoutBuildInfo()
+        : mParentTask(nullptr)
+        , mScene(nullptr)
+        , mPriorityDrawXlu(0)
+        , mTaskFlags(0)
+        , mArchivePath(nullptr)
+        , mLayoutName(nullptr)
+        , m_18_i(0)
+    { }
+    /* 0x00 */ gfl::Task* mParentTask;
+    /* 0x04 */ env::EnvManager_Scene* mScene;
+    /* 0x08 */ s32 mPriorityDrawXlu;
+    /* 0x0C */ u32 mTaskFlags;
+    /* 0x10 */ const char* mArchivePath;
+    /* 0x14 */ const char* mLayoutName;
+    /* 0x18 */ union {
+        bool m_18;
+        u32 m_18_i;
+    };
+};
 
 // size: 0x138
 class LayoutObject {
@@ -23,6 +45,10 @@ public:
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~LayoutObject();
+
+    void TrySetUpdate(bool);
+    nw4r::lyt::Pane* FindPaneByName(const char*) const;
+    static LayoutObject* Build(const LayoutBuildInfo&, const char* pLayoutName);
 
     /* Class Members */
 

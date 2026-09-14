@@ -7,13 +7,19 @@ namespace env {
     template <typename StateT>
     class EnvUtil_State {
     public:
-        
-
         inline EnvUtil_State() { }
+        inline EnvUtil_State(StateT initial) {
+            mStateValue = initial;
+        }
+        /* 0x08 */ DECL_WEAK virtual ~EnvUtil_State() { }
 
-        /* Virtual Methods */
+        void set(StateT value) {
+            mStateValue = value;
+        }
 
-        /* 0x08 */ DECL_WEAK virtual ~EnvUtil_State();
+        inline operator StateT() {
+            return mStateValue;
+        }
 
         /* Class Members */
 
