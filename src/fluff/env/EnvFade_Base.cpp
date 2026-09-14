@@ -45,10 +45,10 @@ layout::LayoutObject* EnvFade_Base::CreateLayout(const char* pArchivePath, const
 
 void EnvFade_Base::Update() {
     switch (mState) {
-        case eState_State0: vf30(); break;
-        case eState_State1: vf34(); break;
-        case eState_State3: vf3C(); break;
-        case eState_State2: vf38(); break;
+        case eState_State0:  vf30(); break;
+        case eState_FadeIn:  FadeIn(); break;
+        case eState_FadeOut: FadeOut(); break;
+        case eState_State2:  vf38(); break;
     }
 
     UpdateLayout();
