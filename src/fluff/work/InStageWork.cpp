@@ -18,15 +18,14 @@ void InStageWork::Reset() {
     Init();
 }
 
-// https://decomp.me/scratch/QkSy6 - regswap
 void InStageWork::CopyStageInfo(const StageInfo& stage, void* arg2) {
-    if (nullptr == arg2) {
+    if (arg2 == nullptr) {
         return;
     }
 
-    mStage = StageInfo(stage.GetStageID(), stage.GetResourceID(), stage.GetSectionID());
-
+    mStage = stage;
     m_10 = arg2;
+
     Init();
 }
 
