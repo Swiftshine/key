@@ -69,7 +69,7 @@ namespace nw4hbm { namespace lyt
 		// cdtors
 		TexCoordGen(): reserve(0)
 		{
-			// TODO: What does 60 mean? GX_TEXMTX_IDENT?
+			// TODO: What does 60 mean? GX_IDENTITY?
 			Set(GX_TG_MTX2x4, GX_TG_TEX0, 60);
 		}
 

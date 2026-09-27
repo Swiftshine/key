@@ -1,33 +1,63 @@
 #ifndef FLUFF_LAYOUTOBJECT_H
 #define FLUFF_LAYOUTOBJECT_H
 
-#include "types.h"
+#include <types.h>
 #include <string>
-#include <nw4r/lyt/lyt_drawInfo.h>
-#include "gfl/gflTask.h"
-#include "message/MessageTagProcessor.h"
-#include "layout/LayoutObjectRender.h"
+
+#include <nw4r/lyt.h>
+
+#include <gfl/gflTask.h>
+#include <gfl/gflPointer.h>
+
+#include <env/EnvManager_Scene.h>
+#include <layout/LayoutObjectRender.h>
+#include <message/MessageTagProcessor.h>
 
 namespace layout {
+
+struct LayoutBuildInfo {
+    LayoutBuildInfo()
+        : mParentTask(nullptr)
+        , mScene(nullptr)
+        , mPriorityDrawXlu(0)
+        , mTaskFlags(0)
+        , mArchivePath(nullptr)
+        , mLayoutName(nullptr)
+        , m_18_i(0)
+    { }
+    /* 0x00 */ gfl::Task* mParentTask;
+    /* 0x04 */ env::EnvManager_Scene* mScene;
+    /* 0x08 */ s32 mPriorityDrawXlu;
+    /* 0x0C */ u32 mTaskFlags;
+    /* 0x10 */ const char* mArchivePath;
+    /* 0x14 */ const char* mLayoutName;
+    /* 0x18 */ union {
+        bool m_18;
+        u32 m_18_i;
+    };
+};
 
 // size: 0x138
 class LayoutObject {
 public:
-    
     LayoutObject(gfl::Task* pParentTask, const char* pLayoutName);
 
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~LayoutObject();
 
+    void TrySetUpdate(bool);
+    nw4r::lyt::Pane* FindPaneByName(const char*) const;
+    static LayoutObject* Build(const LayoutBuildInfo&, const char* pLayoutName);
+
     /* Class Members */
 
-    /* 0x004 */ gfl::Task mTask1;
-    /* 0x01C */ gfl::Task mTask2;
-    /* 0x034 */ s32 m_34;
-    /* 0x038 */ s32 m_38;
+    /* 0x004 */ gfl::Task mGameTask;
+    /* 0x01C */ gfl::Task mWorldMtxTask;
+    /* 0x034 */ gfl::Pointer<nw4r::lyt::Layout> mLayout;
+    /* 0x038 */ gfl::Scene* mScene;
     /* 0x03C */ nw4r::lyt::DrawInfo mDrawInfo;
-    /* 0x090 */ s32 m_90;
+    /* 0x090 */ u32 mFlags;
     /* 0x094 */ message::MessageTagProcessor mMessageTagProcessor;
     /* 0x0A0 */ std::string mArchivePath;
     /* 0x0AC */ std::string mBRLYTPath;
@@ -46,11 +76,11 @@ public:
     /* 0x0E4 */ s32 m_E4;
     /* 0x0E8 */ s32 m_E8;
     /* 0x0EC */ s32* m_EC;
-    /* 0x0F0 */ s32* m_F0[4];
+    /* 0x0F0 */ LayoutCallbackFunc<LayoutObject*, void(LayoutObject::*)()const>* mCallbacks[4];
     /* 0x100 */ u8 m_100[16];
     /* 0x110 */ u8 m_110[32];
     /* 0x130 */ s32 m_130;
-    /* 0x134 */ s32 m_134;
+    /* 0x134 */ u32 mLayoutFlags;
 };
 
 }

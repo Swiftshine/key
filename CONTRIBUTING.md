@@ -1,46 +1,54 @@
 # Contributing
+
 If you have questions or are interested in contributing, consider asking in the [GC/Wii Decompilation Discord](https://discord.gg/hKx3FJJgrV) in the `#kirbys-epic-yarn` channel.
 
 Sections:
+
 - [Resources](#resources)
 - [Code style](#code-style)
-    - [General](#general)
-    - [Headers](#headers)
-    - [Files and includes](#files-and-includes)
-    - [Function signatures](#function-signatures)
-    - [Function parameters](#function-parameters)
-    - [Function matching](#function-matching)
-    - [Enums](#enums)
-    - [Structures](#structures)
-    - [Literals](#literals)
-    - [Notes](#notes)
+  - [General](#general)
+  - [Headers](#headers)
+  - [Files and includes](#files-and-includes)
+  - [Function signatures](#function-signatures)
+  - [Function parameters](#function-parameters)
+  - [Function matching](#function-matching)
+  - [Enums](#enums)
+  - [Structures](#structures)
+  - [Literals](#literals)
+  - [Notes](#notes)
 
 ## Resources
+
 - [Ghidra](https://ghidra-sre.org/) - A disassembling, decompiling, and reverse-engineering tool.
-    - Using these [custom Ghidra builds](https://github.com/encounter/ghidra-ci/releases) is recommended.
-    - Access to the shared Ghidra project for *Kirby's Epic Yarn* (and other Good-Feel titles) can be requested in the `#ghidra` channel in the [GC/Wii Decompilation Discord](https://discord.gg/hKx3FJJgrV).
+  - Using these [custom Ghidra builds](https://github.com/encounter/ghidra-ci/releases) is recommended.
+  - Access to the shared Ghidra project for _Kirby's Epic Yarn_ (and other Good-Feel titles) can be requested in the `#ghidra` channel in the [GC/Wii Decompilation Discord](https://discord.gg/hKx3FJJgrV).
 - [Objdiff](https://github.com/encounter/objdiff) - A local diffing tool.
 
 ## Code style
+
 ### General
+
 Lines should not exceed `100` characters. These can be split into multiple lines.
 
 Use `nullptr` instead of `0` when assigning or comparing a pointer in C++.
 Likewise, use `NULL` in C.
-- Be explicit when comparing pointers.
-    ```cpp
-    // bad
-    if (ptr) { }
 
-    // good
-    if (ptr != nullptr) { }
-    if (ptr != NULL) { }
-    ```
+- Be explicit when comparing pointers.
+  ```cpp
+  // bad
+  if (ptr) { }
+
+  // good
+  if (ptr != nullptr) { }
+  if (ptr != NULL) { }
+  ```
 
 ### Headers
+
 Use forward declared types when possible.
 
 Use proper header guards.
+
 ```cpp
 #ifndef FLUFF_MYHEADER_H
 #define FLUFF_MYHEADER_H
@@ -49,9 +57,9 @@ Use proper header guards.
 ```
 
 ### Files and includes
-For SDK or STL includes, use angled brackets. For game or GFL includes, use quotation marks.
 
 Relative to the source folder, use the full path to a header.
+
 ```cpp
 /* src/fluff/object/gimmick/GmkTurtle.cpp */
 
@@ -64,9 +72,10 @@ Use PascalCase when naming files for game code.
 For GFL, do the same, but prefixed with "gfl". e.g. `gflRenderObj.h` instead of `RenderObj.h`
 
 ### Function signatures
+
 No known Good-Feel title was shipped with debug symbols. However, many Good-Feel titles are compiled with [RTTI](https://en.wikipedia.org/wiki/Run-time_type_information). Therefore, all symbol names must be inferred from RTTI or from what the function does.
 
-Function names written by Good-Feel in *Kirby's Epic Yarn* are known to be named with PascalCase.
+Function names written by Good-Feel in _Kirby's Epic Yarn_ are known to be named with PascalCase.
 
 To mimic Good-Feel's own programming, non-inline functions will be named with `PascalCase`.
 
@@ -78,18 +87,22 @@ Unknown virtual functions are to be named based on their offset relative to the 
 class MyClass {
 public:
     /* 0x08 */ virtual void KnownFunction();
-    /* 0x0C */ virtual void vfC(); 
+    /* 0x0C */ virtual void vfC();
     /* 0x10 */ virtual void vf10();
     /* 0x14 */ virtual void AnotherKnownFunction();
     /* 0x18 */ virtual void vf18();
 };
 ```
+
 ### Function Parameters
+
 Function arguments should have certain prefixes if applicable:
+
 - `p` for pointers
 - `r` for values passed by reference
 
 ### Function Matching
+
 If a function is not 100% matching, leave a comment above the function with a link to the associated [decomp.me](https://decomp.me) scratch. Remove it once the function has been matched.
 
 ```cpp
@@ -100,6 +113,7 @@ void MyClass::SomeFunction() {
 ```
 
 ### Enums
+
 Use the following structure:
 
 ```cpp
@@ -115,12 +129,14 @@ int x = OwningClass::eEnumName_EnumeratorName1;
 ```
 
 ### Structures
+
 - Class and struct members must be prefixed with `m`.
 - Static class instances must be prefixed with `s`.
 
 For the purpose of making decompilation easier, assume all class methods and member fields on a class are public.
 
 Data entered into a class definition must be placed in the following order:
+
 - access specifier
 - enum and structure definitions
 - access specifier
@@ -152,10 +168,10 @@ public:
         eMyEnum_MyValue1,
         eMyEnum_MyValue2,
     };
-    
+
     struct MySubstructure {
         int mSubstructureValue;
-    };  
+    };
 public:
     MyClass();
     ~MyClass();
@@ -170,6 +186,7 @@ public:
 ```
 
 Unknown fields must be referred to by their offset in hex, prefixed by an underscore.
+
 ```cpp
 struct MyStruct {
     /* 0x00 */ int mKnownValue;
@@ -185,6 +202,7 @@ struct MyStruct {
 Avoid using inline functions to get or set a value unless it's known that such a function is inline or if it must be used to match a function.
 
 ### Literals
+
 Be explicit for floating-point values.
 
 ```cpp
@@ -201,4 +219,5 @@ double myDouble = 2.0;
 ```
 
 ### Notes
+
 You may notice that some sections of the codebase don't follow this defined structure. If you are editing these files, feel free to make them compliant.

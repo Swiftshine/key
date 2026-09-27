@@ -111,6 +111,12 @@ fluff/object/gimmick/GmkSimpleMdl.cpp:
 fluff/env/EnvObject.cpp:
 	.text       start:0x8005E3B0 end:0x8005E8DC
 
+fluff/env/EnvFade_Base.cpp:
+	.text       start:0x8005F258 end:0x8005F5B0
+	.rodata     start:0x807E7D00 end:0x807E7D50
+	.data       start:0x8083D6E8 end:0x8083D768
+	.sdata      start:0x808DF868 end:0x808DF878
+
 fluff/env/EnvUnitBase.cpp:
 	.text       start:0x80066FF4 end:0x8006728C
 
@@ -277,6 +283,12 @@ fluff/object/gimmick/GmkCandleStick.cpp:
 
 fluff/object/gimmick/GmkArrowSign.cpp:
 	.text       start:0x804C3244 end:0x804C3CB0
+
+fluff/graphics/FlfMdlMod.cpp:
+	.text       start:0x804C3CB0 end:0x804C3EF0
+	.rodata     start:0x808196A8 end:0x808196B8
+	.data       start:0x8088DD10 end:0x8088DD20
+	.sdata      start:0x808E2CC0 end:0x808E2CC8
 
 fluff/stage/mission/MissionUtil.cpp:
 	.text       start:0x804C49F4 end:0x804C4E60

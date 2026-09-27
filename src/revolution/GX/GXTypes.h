@@ -810,7 +810,7 @@ typedef enum _GXTexMtx {
     GX_TEXMTX7 = 51,
     GX_TEXMTX8 = 54,
     GX_TEXMTX9 = 57,
-    GX_TEXMTX_IDENT = 60,
+    GX_IDENTITY = 60,
 
     // 3x4 matrices (in dual-tex XF matrix memory)
     // Enum represents base row of matrix
