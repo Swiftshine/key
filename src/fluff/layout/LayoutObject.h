@@ -3,6 +3,8 @@
 
 #include <types.h>
 #include <string>
+#include <tree>
+#include <vector>
 
 #include <nw4r/lyt.h>
 
@@ -11,6 +13,7 @@
 
 #include <env/EnvManager_Scene.h>
 #include <layout/LayoutObjectRender.h>
+#include <layout/LayoutAnimation.h>
 #include <message/MessageTagProcessor.h>
 
 namespace layout {
@@ -25,6 +28,7 @@ struct LayoutBuildInfo {
         , mLayoutName(nullptr)
         , m_18_i(0)
     { }
+
     /* 0x00 */ gfl::Task* mParentTask;
     /* 0x04 */ env::EnvManager_Scene* mScene;
     /* 0x08 */ s32 mPriorityDrawXlu;
@@ -61,25 +65,19 @@ public:
     /* 0x094 */ message::MessageTagProcessor mMessageTagProcessor;
     /* 0x0A0 */ std::string mArchivePath;
     /* 0x0AC */ std::string mBRLYTPath;
-    /* 0x0B8 */ s32 m_B8;
-    /* 0x0BC */ s32 m_BC;
-    /* 0x0C0 */ s32 m_C0;
-    /* 0x0C4 */ s32 m_C4;
-    /* 0x0C8 */ layout::LayoutObjectRender* mObjectRender;
+    /* 0x0B8 */ nw4r::lyt::ResourceAccessor* mResourceAccessor;
+    /* 0x0BC */ std::vector<std::string> mLayoutResourceNames;
+    /* 0x0C8 */ LayoutObjectRender* mObjectRender;
     /* 0x0CC */ bool m_CC;
     /* 0x0CD */ bool m_CD;
-    /* 0x0D0 */ s32 m_D0;
-    /* 0x0D0 */ s32 m_D4;
-    /* 0x0D8 */ s32 m_D8;
-    /* 0x0DC */ s32* m_DC;
-    /* 0x0E0 */ s32 m_E0;
-    /* 0x0E4 */ s32 m_E4;
-    /* 0x0E8 */ s32 m_E8;
+    /* 0x0D0 */ LayoutAnimation* mLayoutAnimation;
+    /* 0x0D4 */ std::tree<placeholder_t> m_D4;
+    /* 0x0E0 */ std::tree<std::string> mLayoutNames;
     /* 0x0EC */ s32* m_EC;
     /* 0x0F0 */ LayoutCallbackFunc<LayoutObject*, void(LayoutObject::*)()const>* mCallbacks[4];
     /* 0x100 */ u8 m_100[16];
     /* 0x110 */ u8 m_110[32];
-    /* 0x130 */ s32 m_130;
+    /* 0x130 */ s32 mState;
     /* 0x134 */ u32 mLayoutFlags;
 };
 
