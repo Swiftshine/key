@@ -10,7 +10,7 @@ LayoutAnimeElement::LayoutAnimeElement(nw4r::lyt::Layout* pLayout, nw4r::lyt::Pa
     , mAnimTransform(nullptr)
     , mFrame(0.0f)
     , mIsTransformInited(false)
-    , mIsBackwards(false)
+    , mIsReversed(false)
     , mRate(1.0f)
     , mIsRecursive(true)
     , mAdditionalTransforms()
@@ -29,29 +29,29 @@ void LayoutAnimeElement::Init() {
     mAnimTransform = nullptr;
     mFrame = 0.0f;
     mIsTransformInited = false;
-    mIsBackwards = false;
+    mIsReversed = false;
     mRate = 1.0f;
     mIsRecursive = true;
 }
 
-void LayoutAnimeElement::BindAnimationAndResetAnimTransformInfo(const char* pAnimationName, bool recursive, s32 arg3) {
+void LayoutAnimeElement::BindForward(const char* pAnimationName, bool recursive, s32 arg3) {
     u32 hash = CalcHash(pAnimationName);
     if (
         (arg3 == 0 || mHash != hash) &&
         SetAnimTransform(hash, pAnimationName, recursive) &&
-        ResetAnimTransformInfo() &&
+        InitForward() &&
         BindAnimation()
     ) {
         mHash = hash;
     }
 }
 
-void LayoutAnimeElement::BindAnimationAndInitAnimTransformInfo(const char* pAnimationName, bool recursive, s32 arg3) {
+void LayoutAnimeElement::BindReversed(const char* pAnimationName, bool recursive, s32 arg3) {
     u32 hash = CalcHash(pAnimationName);
     if (
         (arg3 == 0 || mHash != hash) &&
         SetAnimTransform(hash, pAnimationName, recursive) &&
-        InitAnimTransformInfo() &&
+        InitReversed() &&
         BindAnimation()
     ) {
         mHash = hash;
@@ -80,24 +80,24 @@ bool LayoutAnimeElement::SetAnimTransform(u32 hash, const char* pAnimationName, 
     return true;
 }
 
-bool LayoutAnimeElement::ResetAnimTransformInfo() {
+bool LayoutAnimeElement::InitForward() {
     if (mAnimTransform == nullptr) {
         return false;
     }
 
     mFrame = 0.0f;
-    mIsBackwards = false;
+    mIsReversed = false;
 
     return true;
 }
 
-bool LayoutAnimeElement::InitAnimTransformInfo() {
+bool LayoutAnimeElement::InitReversed() {
     if (mAnimTransform == nullptr) {
         return false;
     }
 
     mFrame = static_cast<f32>(mAnimTransform->GetFrameSize()) - 1.0f;
-    mIsBackwards = true;
+    mIsReversed = true;
 
     return true;
 }
