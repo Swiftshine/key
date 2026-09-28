@@ -19,14 +19,17 @@ public:
     void BindReversed(const char* pAnimationName, bool recursive, s32 arg3 = 0);
     bool SetAnimTransform(u32 hash, const char* pAnimationName, bool recursive);
     bool InitForward();
-
-
-    nw4r::lyt::AnimTransform* GetAnimTransform(u32 hash) const;
-    nw4r::lyt::AnimTransform* CreateAnimTransform(const char* pAnimName);
     bool InitReversed();
     bool BindAnimation();
-
     void UnbindAnimation();
+    nw4r::lyt::AnimTransform* CreateAnimTransform(const char* pAnimationName);
+    nw4r::lyt::AnimTransform* GetAnimTransform(u32 hash) const;
+    void SetAnimTransformFrameForward();
+    void SetAnimTransformFrameReversed();
+    void UpdateTransformFrame(f32 mult);
+    void UpdateTransformFrameForward();
+    void UpdateTransformFrameReversed();
+
 private:
     /* 0x04 */ nw4r::lyt::Layout* mLayout;
     /* 0x08 */ nw4r::lyt::Pane* mPane;
@@ -37,7 +40,7 @@ private:
     /* 0x19 */ bool mIsReversed;
     /* 0x1C */ f32 mRate;
     /* 0x20 */ bool mIsRecursive;
-    /* 0x24 */ std::tree<nw4r::lyt::AnimTransform*> mAdditionalTransforms;
+    /* 0x24 */ std::tree<nw4r::lyt::AnimTransform*> mAdditionalTransforms; // probably an std::map<u32, nw4r::lyt::AnimTransform*>?
 };
 
 }
