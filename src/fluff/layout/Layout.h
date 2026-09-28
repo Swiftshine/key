@@ -5,6 +5,7 @@
 
 namespace layout {
     static MEMAllocator* sAllocator;
+    u32 CalcHash(const char* pName);
 }
 
 #endif
