@@ -545,6 +545,7 @@ config.libs = [
         "host": False,
         "progress_category": "fluff",
         "objects": [
+            Object(NonMatching, "fluff/layout/LayoutAnimeElement.cpp"),
             Object(NonMatching, "fluff/layout/LayoutManager.cpp"),
         ],
     },

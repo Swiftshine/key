@@ -61,6 +61,9 @@ fluff/graphics/FullSortScene.cpp:
 	.data       start:0x8083A4A0 end:0x8083A4D0
 	.sdata      start:0x808DF6A8 end:0x808DF6B8
 
+fluff/layout/LayoutAnimeElement.cpp:
+	.text       start:0x80036A88 end:0x800376E0
+
 fluff/layout/LayoutManager.cpp:
 	.text       start:0x80038338 end:0x800388F0
 	.ctors      start:0x807E3448 end:0x807E344C
