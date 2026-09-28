@@ -10,7 +10,7 @@ LayoutAnimeElement::LayoutAnimeElement(nw4r::lyt::Layout* pLayout, nw4r::lyt::Pa
     , mHash(-1u)
     , mAnimTransform(nullptr)
     , mFrame(0.0f)
-    , mIsTransformInited(false)
+    , mIsPlaying(false)
     , mIsReversed(false)
     , mRate(1.0f)
     , mIsRecursive(true)
@@ -29,7 +29,7 @@ void LayoutAnimeElement::Init() {
     mHash = -1u;
     mAnimTransform = nullptr;
     mFrame = 0.0f;
-    mIsTransformInited = false;
+    mIsPlaying = false;
     mIsReversed = false;
     mRate = 1.0f;
     mIsRecursive = true;
@@ -74,7 +74,7 @@ bool LayoutAnimeElement::SetAnimTransform(u32 hash, const char* pAnimationName, 
         mAnimTransform = CreateAnimTransform(pAnimationName);
     }
 
-    mIsTransformInited = false;
+    mIsPlaying = false;
     mRate = 1.0f;
     mIsRecursive = recursive;
 
@@ -185,7 +185,7 @@ void LayoutAnimeElement::SetAnimTransformFrameReversed() {
     }
 }
 
-void LayoutAnimeElement::UpdateTransformFrame(f32 mult) {
+void LayoutAnimeElement::UpdateTransformFrameMultiplied(f32 mult) {
     if (!mIsReversed) {
         mFrame = mult * mRate + mFrame;
         UpdateTransformFrameForward();
@@ -193,4 +193,123 @@ void LayoutAnimeElement::UpdateTransformFrame(f32 mult) {
         mFrame = -(mult * mRate - mFrame);
         UpdateTransformFrameReversed();
     }
+}
+
+void LayoutAnimeElement::UpdateTransformFrameForward() {
+    if (mAnimTransform == nullptr) {
+        return;
+    }
+
+    bool done = false;
+    mIsPlaying = false;
+
+    if (mAnimTransform->IsLoopData()) {
+        while (static_cast<f32>(mAnimTransform->GetFrameSize()) <= mFrame) {
+            mIsPlaying = true;
+            mFrame -= static_cast<f32>(mAnimTransform->GetFrameSize());
+        }
+    } else {
+        if (static_cast<f32>(mAnimTransform->GetFrameSize()) <= mFrame) {
+            mFrame = static_cast<f32>(mAnimTransform->GetFrameSize());
+            mIsPlaying = true;
+            done = true;
+        }
+    }
+
+    if (done) {
+        mAnimTransform->SetFrame(static_cast<f32>(mAnimTransform->GetFrameSize()));
+    } else {
+        mAnimTransform->SetFrame(mFrame);
+    }
+}
+
+void LayoutAnimeElement::UpdateTransformFrameReversed() {
+    if (mAnimTransform == nullptr) {
+        return;
+    }
+
+    bool done = false;
+    mIsPlaying = false;
+
+    if (mAnimTransform->IsLoopData()) {
+        while (mFrame <= 0.0f) {
+            mIsPlaying = true;
+            mFrame += static_cast<f32>(mAnimTransform->GetFrameSize());
+        }
+    } else if (mFrame <= 0.0f) {
+        mFrame = 0.0f;
+        mIsPlaying = true;
+        done = true;
+    }
+
+    if (done) {
+        mAnimTransform->SetFrame(0.0f);
+    } else {
+        mAnimTransform->SetFrame(mFrame);
+    }
+}
+
+void LayoutAnimeElement::UpdateTransformFrameDirectly(f32 frame) {
+    mFrame = frame;
+
+    if (!mIsReversed) {
+        UpdateTransformFrameForward();
+    } else {
+        UpdateTransformFrameReversed();
+    }
+}
+
+f32 LayoutAnimeElement::GetFrame() const {
+    return mFrame;
+}
+
+f32 LayoutAnimeElement::GetAnimTransformFrameSize() {
+    nw4r::lyt::AnimTransform* transform = mAnimTransform;
+    if (transform == nullptr) {
+        return -1.0f;
+    }
+
+    return static_cast<f32>(transform->GetFrameSize());
+}
+
+f32 LayoutAnimeElement::GetAnimationCompletion() const {
+    f32 frame = GetFrame(); // code merging
+    f32 rate = static_cast<f32>(mAnimTransform->GetFrameSize());
+
+    if (rate <= 0.0f) {
+        return 0.0f;
+    }
+
+    f32 percentage = 0.0f;
+    frame /= rate;
+
+    if (frame < 0.0f) {
+        frame = 0.0f;
+    }
+
+    percentage = frame;
+
+    if (1.0f < percentage) {
+        percentage = 1.0f;
+    }
+
+    return percentage;
+}
+
+bool LayoutAnimeElement::ResetForward() {
+    bool ret = mIsReversed != false;
+    mIsReversed = false;
+    mIsPlaying = false;
+    return ret;
+}
+
+bool LayoutAnimeElement::ResetReversed() {
+    bool ret = mIsReversed != true;
+    mIsReversed = true;
+    mIsPlaying = false;
+    return ret;
+}
+
+bool LayoutAnimeElement::IsPlaying() const {
+    return mIsPlaying;
 }
