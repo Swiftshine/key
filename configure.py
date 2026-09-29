@@ -710,6 +710,7 @@ config.libs = [
             Object(NonMatching, "fluff/object/collision/ColDataWrapper.cpp"),
             Object(NonMatching, "fluff/object/collision/ColNurbsInfo.cpp"),
             Object(NonMatching, "fluff/object/collision/ColObj.cpp"),
+            Object(NonMatching, "fluff/object/collision/FlfMdlCollision.cpp"),
             Object(NonMatching, "fluff/object/collision/FlfRideHitBase.cpp"),
             Object(NonMatching, "fluff/object/collision/KdTree.cpp"),
         ],
