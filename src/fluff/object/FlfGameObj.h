@@ -43,25 +43,54 @@ public:
     /* Virtual Methods */
 
     /* 0x08 */ virtual ~FlfGameObj();
-    /* 0x0C */ virtual void SetPosition(const nw4r::math::VEC3& rPosition) DONT_INLINE_CLASS;
+    /* 0x0C */ virtual void SetPosition(const gfl::Vec3& rPosition) DONT_INLINE_CLASS {
+        mPosition = rPosition;
+    }
     /* 0x10 */ virtual void vf10(bool val);
     /* 0x14 */ DECL_WEAK virtual bool vf14();
     /* 0x18 */ virtual void vf18();
-    /* 0x1C */ virtual nw4r::math::VEC3 GetPosition();
-    /* 0x20 */ virtual void SetSecondaryPosition(const nw4r::math::VEC3& rPosition);
-    /* 0x24 */ virtual void Interact(FlfGameObj* pOther);
-    /* 0x28 */ virtual void Interact();
-    /* 0x2C */ virtual void vf2C(
-        nw4r::math::VEC3& rArg1,
-        const nw4r::math::VEC3& rOffset,
-        nw4r::math::VEC3* pDst
-    );
-    /* 0x30 */ virtual void vf30();
+    /* 0x1C */ virtual gfl::Vec3 GetPosition() const {
+        return mPosition;
+    }
+    /* 0x20 */ virtual void SetSecondaryPosition(const gfl::Vec3& rPosition) {
+        FlfGameObj::SetPosition(rPosition);
+    }
+    /* 0x24 */ virtual void Interact(FlfGameObj* pOther) { }
+    /* 0x28 */ virtual void Interact() { }
+    /* 0x2C */ virtual void MoveByOffset(
+        gfl::Vec3& rArg1,
+        const gfl::Vec3& rOffset,
+        gfl::Vec3* pDst
+    ) {
+        if (m_6F) {
+            return;
+        }
+
+        gfl::Vec3 pos;
+        pos = mPosition;
+        pos += rOffset;
+        SetPosition(pos);
+
+        if (pDst != nullptr) {
+            *pDst = rOffset;
+        }
+    }
+    /* 0x30 */ virtual void vf30() { }
     /* 0x34 */ virtual bool ShouldCull(CamMng* pCamMgr);
-    /* 0x38 */ virtual ScreenPosition GetScreenPosition();
-    /* 0x3C */ virtual ColObj* GetColObj();
-    /* 0x40 */ virtual void vf40(FlfGameObj*);
-    /* 0x44 */ virtual s32  vf44();
+    /* 0x38 */ virtual ScreenPosition GetScreenPosition() const { // nonmatching
+        ScreenPosition pos;
+        pos.mX = mPosition.x;
+        pos.mY = mPosition.y;
+        pos.mCullThreshold = mCullThreshold;
+        return pos;
+    }
+    /* 0x3C */ virtual ColObj* GetColObj() const {
+        return nullptr;
+    }
+    /* 0x40 */ virtual void vf40(FlfGameObj*) { }
+    /* 0x44 */ DECL_WEAK virtual s32  vf44() {
+        return 1;
+    }
 
     // looks for gimmicks or enemies with a specific tag and sets their
     // state to the specified one if found. the tag list consists of
@@ -77,13 +106,21 @@ public:
     /// @brief Sets the object state.
     /// @param pSetter A pointer to the object that induced the call.
     /// @param rState The target state.
-    /* 0x4C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState);
-    /* 0x50 */ virtual void SetIsInMission(bool inMission);
-    /* 0x54 */ virtual bool IsInMission() const;
-    /* 0x58 */ virtual void vf58();
-    /* 0x5C */ virtual void SetCullThreshold(f32 threshold);
-    /* 0x60 */ virtual f32 GetCullThreshold();
-    /* 0x64 */ virtual void UpdateWater(bool);
+    /* 0x4C */ virtual void SetState(FlfGameObj* pSetter, const std::string& rState) { }
+    /* 0x50 */ virtual void SetIsInMission(bool inMission) {
+        mIsInMission = inMission;
+    }
+    /* 0x54 */ virtual bool IsInMission() const {
+        return mIsInMission;
+    }
+    /* 0x58 */ virtual void vf58() { }
+    /* 0x5C */ virtual void SetCullThreshold(f32 threshold) {
+        mCullThreshold = threshold;
+    }
+    /* 0x60 */ virtual f32 GetCullThreshold() const {
+        return mCullThreshold;
+    }
+    /* 0x64 */ virtual void UpdateWater(bool) { }
 
     /* Class Methods */
 

@@ -34,9 +34,9 @@ public:
         /* 0x60 */ gfl::Vec3 m_60;
         /* 0x6C */ bool m_6C;
         /* 0x6D */ bool m_6D;
-        
+
         Particle();
-        
+
         /* Virtual Methods */
 
         /* 0x8 */ virtual ~Particle();
@@ -56,7 +56,7 @@ public:
         /* 0x0C */ s32 mActiveParticleIndex; // 0 for neither, 1 for the first, 2 for the second
         /* 0x10 */ f32 m_10;
 
-        
+
 
         Spring();
 
@@ -95,7 +95,7 @@ public:
     };
 
 
-    
+
 
     SpringBase(FullSortScene* pScene, const char* pTaskName);
 
@@ -106,7 +106,9 @@ public:
     /* SpringBase */
 
     /* 0x68 */ virtual f32 vf68();
-    /* 0x6C */ virtual f32 GetZPos();
+    /* 0x6C */ virtual f32 GetZPos() const {
+        return mPosition.z;
+    }
     /* 0x70 */ virtual void Update() const;
     /* 0x74 */ virtual void vf74(f32 scale, Particle* pParticle, gfl::Vec3& rDst);
     /* 0x78 */ virtual void vf78(f32, Particle*, gfl::Vec3&);
@@ -153,7 +155,7 @@ public:
     void LoadDefaultKeyFrames();
     void fn_8000BB50() DONT_INLINE_CLASS;
     void CreateParticleArrays() DONT_INLINE_CLASS;
-    
+
     /* Class Members */
 
     /* 0x080 */ gfl::Task mTask;
