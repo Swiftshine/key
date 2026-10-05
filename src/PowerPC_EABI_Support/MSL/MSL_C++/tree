@@ -36,6 +36,7 @@ namespace std {
         }
         ~tree() { }
 
+        void insert(const T&);
         void clear();
         void destroy();
     private:

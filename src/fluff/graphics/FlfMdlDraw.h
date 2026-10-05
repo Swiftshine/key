@@ -93,8 +93,6 @@ public:
         /* 0x34 */ s32 m_34;
     };
 
-
-
     FlfMdlDraw(
         FullSortScene* pFullSortScene,
         const char* pResourceName,
@@ -139,6 +137,11 @@ public:
     void GetWoolDrawMatrix(nw4r::math::MTX34& rDst) const;
     bool HasNURBSAnimation(s32 id) const;
     NwBlendAnm* GetBlendAnm(s32 id) const;
+    void SetFunctor(u32 index, gfl::Functor2<void, FlfMdlDraw*, void*> arg2, u32 arg3 = 0);
+
+    void SetFunctor(u32 index, u32 arg3 = 0) {
+        SetFunctor(index, gfl::Functor2<void, FlfMdlDraw*, void*>(), arg3);
+    }
 
     inline void SetCurrentFrameInt(s32 value) {
         *reinterpret_cast<s32*>(reinterpret_cast<u8*>(this) + 0x60) = value;

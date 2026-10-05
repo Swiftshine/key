@@ -116,7 +116,7 @@ namespace gfl {
         typedef FunctorBase2<ReturnT, Arg1T, Arg2T> BaseClassT;
         typedef FunctorClassMethod2<ReturnT, Arg1T, Arg2T, OwnerT, FunctionT> ClassT;
     public:
-        inline FunctorClassMethod2(OwnerT* pOwner, FunctionT function) {
+        inline FunctorClassMethod2(OwnerT pOwner, FunctionT function) {
             mOwner = pOwner;
             mFunction = function;
         }
@@ -128,7 +128,7 @@ namespace gfl {
         /* 0x10 */ virtual ~FunctorClassMethod2();
     private:
         /* Class Members */
-        /* 0x4 */ OwnerT* mOwner;
+        /* 0x4 */ OwnerT mOwner;
         /* 0x8 */ FunctionT mFunction;
     };
 
@@ -138,6 +138,7 @@ namespace gfl {
     template <typename ReturnT, typename Arg1T, typename Arg2T>
     class Functor2 {
     public:
+        inline Functor2() { }
         inline ~Functor2() {
 
         }
