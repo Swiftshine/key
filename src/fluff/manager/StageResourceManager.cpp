@@ -240,38 +240,28 @@ void StageResourceManager::LoadMapdataFromFolder(s32 resourceID) {
     mMapdataResFileObject = fluff::GetResFileObjectFromFolder(mapdataPath);
 }
 
-struct unk_struct {
-    u8 m_0[0x2C];
-    // Mapdata::Mapbin::Header* mHeader;
-    void* mHeader;
-};
-
-
 void StageResourceManager::ProcessLevelData() {
     bool inMission = GameManager::IsInMission();
     bool preview;
     preview = nullptr != GameManager::Instance() ? GameManager::Instance()->mManualBGLoad : false;
-    unk_struct* unkStruct;
 
     if (preview) {
         char unkPath[0x200];
         gfl::FixedString* fStr = GameManager::Instance()->GetUnk8();
         const char* unk = fStr[1].GetString();
-        unkStruct = (unk_struct*)this;
 
         for (u32 i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
             if (i < fStr->GetLength()) {
                 snprintf(unkPath, sizeof(unkPath), "%s%s", fStr->GetString(), unk);
-                ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = Mapdata::Parse(
+                mCurrentSections[i] = Mapdata::Parse(
                     unkPath,
                     inMission
                 );
             } else {
-                ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = nullptr;
+                mCurrentSections[i] = nullptr;
             }
 
             unk += 0x400;
-            unkStruct = (unk_struct*)(((u8*)unkStruct) + 4);
         }
     } else {
         char mapbinPath[0x100];
@@ -280,8 +270,6 @@ void StageResourceManager::ProcessLevelData() {
         if (GameManager::IsInMission()) {
             mapbinType = GameManager::GetCurrentMissionString();
         }
-
-        unkStruct = (unk_struct*)this;
         for (u32 i = 0; i < STAGE_RESOURCE_MANAGER_STAGE_COUNT; i++) {
 
             snprintf(
@@ -294,15 +282,13 @@ void StageResourceManager::ProcessLevelData() {
             );
 
             if (gfl::ResFileInfo::FileExists(mapbinPath)) {
-                ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = Mapdata::Parse(
+                mCurrentSections[i] = Mapdata::Parse(
                     mapbinPath,
                     inMission
                 );
             } else {
-                ((StageResourceManager*)(unkStruct))->mCurrentSections[0] = nullptr;
+                mCurrentSections[i] = nullptr;
             }
-
-            unkStruct = (unk_struct*)(((u8*)unkStruct) + 4);
         }
 
     }
