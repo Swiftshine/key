@@ -1,6 +1,8 @@
 #ifndef FLUFF_FBMOKOMOKO_H
 #define FLUFF_FBMOKOMOKO_H
 
+#include <string>
+
 #include <gfl/gflCustomRenderObj.h>
 #include <gfl/gflResFileInfo.h>
 #include <gfl/gflVec2.h>
@@ -47,8 +49,8 @@ public:
     /* Class Methods */
 
     void UpdateMatrix(nw4r::math::VEC2 const &);
-    
-    const gfl::Vec2 getTranslation() const {
+
+    const gfl::Vec3 getTranslation() const {
         return mTranslation;
     }
 
@@ -61,9 +63,18 @@ public:
     }
 
 private:
-    /* 0x104 */ STRUCT_FILL(0x10);
-    /* 0x114 */ gfl::Vec2 mTranslation;
-    /* 0x11C */ STRUCT_FILL(0x150 - 0x11C);
+    /* 0x104 */ u16 mWidescreenHeight;
+    /* 0x106 */ u16 mWidth;
+    /* 0x108 */ u16 mHeight;
+    /* 0x10C */ GXTexFmt mTexFormat;
+    /* 0x110 */ void* mImageBuffer;
+    /* 0x114 */ gfl::Vec3 mTranslation;
+    /* 0x120 */ gfl::Vec2 mPosition;
+    /* 0x12C */ std::string mStartAnimName;
+    /* 0x138 */ std::string mEndAnimName;
+    /* 0x144 */ gfl::Pointer<placeholder_t> m_144;
+    /* 0x148 */ MokoMokoMdl* mMokoMokoMdl;
+    /* 0x14C */ gfl::ScnMdlWrapper* mScnMdlWrapper;
     /* 0x150 */ bool mIsAnimPlaying;
 };
 

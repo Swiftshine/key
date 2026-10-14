@@ -55,44 +55,46 @@ void MokoMokoMdl::Reset(FullSortScene::SceneID sceneID, f32 zPos) {
 
 // https://decomp.me/scratch/ncEKM- there shouldn't be any POD struct copies
 void MokoMokoMdl::PlayAnimation(FbMokoMoko* pFramebuffer) {
-    if (pFramebuffer->isAnimPlaying()) {
-        gfl::ScnMdlWrapper* model = GetScnMdlWrapper();
-
-        if (!model->vf1C()) {
-            mAnim->SetCurrentAnimationIndex(0);
-            mAnim->SetCurrentFrame(0.0f);
-            GetScnMdlWrapper()->SetUpdate(true);
-        }
-
-        mAnim->SetUpdateRate(1.0f);
-        SetMatrix(pFramebuffer->getTranslation());
-        mPlaybackState = MokoMokoMdl::ePlaybackState_Forward;
-    } else {
-        gfl::ScnMdlWrapper* model = GetScnMdlWrapper();
-        if (model->vf1C()) {
-            nw4r::math::VEC2 trans1 = pFramebuffer->getTranslation();
-            nw4r::math::VEC2 trans2 = (const nw4r::math::VEC3&)mTranslation;
-
-            if (trans1 != trans2) {
-                GetScnMdlWrapper()->SetUpdate(false);
-                mPlaybackState = MokoMokoMdl::ePlaybackState_NotPlaying;
-            } else {
-                u32 animIndex = mAnim->getCurrentAnimationIndex();
-
-                if (animIndex == 1) {
-                    mAnim->SetCurrentAnimationIndex(0);
-                    mAnim->SetCurrentFrame(mAnim->GetEndFrame());
-                    mAnim->SetUpdateRate(-1.0f);
-                    mPlaybackState = MokoMokoMdl::ePlaybackState_Reverse;
-                } else if (animIndex == 0) {
-                    if (mAnim->GetCurrentFrame() <= 0.0f) {
-                        GetScnMdlWrapper()->SetUpdate(false);
-                        mPlaybackState = MokoMokoMdl::ePlaybackState_NotPlaying;
-                    }
-                }
-            }
-        }
-    }
+//     if (pFramebuffer->isAnimPlaying()) {
+//         gfl::ScnMdlWrapper* model = GetScnMdlWrapper();
+//
+//         if (!model->vf1C()) {
+//             mAnim->SetCurrentAnimationIndex(0);
+//             mAnim->SetCurrentFrame(0.0f);
+//             GetScnMdlWrapper()->SetUpdate(true);
+//         }
+//
+//         mAnim->SetUpdateRate(1.0f);
+//         // gfl::Vec2 vec;
+//         // vec = (gfl::Vec2) nw4r::math::VEC2(pFramebuffer->getTranslation());
+//         SetMatrix(pFramebuffer->getTranslation());
+//         mPlaybackState = MokoMokoMdl::ePlaybackState_Forward;
+//     } else {
+//         gfl::ScnMdlWrapper* model = GetScnMdlWrapper();
+//         if (model->vf1C()) {
+//             nw4r::math::VEC2 trans1 = pFramebuffer->getTranslation();
+//             nw4r::math::VEC2 trans2 = (const nw4r::math::VEC3&)mTranslation;
+//
+//             if (trans1 != trans2) {
+//                 GetScnMdlWrapper()->SetUpdate(false);
+//                 mPlaybackState = MokoMokoMdl::ePlaybackState_NotPlaying;
+//             } else {
+//                 u32 animIndex = mAnim->getCurrentAnimationIndex();
+//
+//                 if (animIndex == 1) {
+//                     mAnim->SetCurrentAnimationIndex(0);
+//                     mAnim->SetCurrentFrame(mAnim->GetEndFrame());
+//                     mAnim->SetUpdateRate(-1.0f);
+//                     mPlaybackState = MokoMokoMdl::ePlaybackState_Reverse;
+//                 } else if (animIndex == 0) {
+//                     if (mAnim->GetCurrentFrame() <= 0.0f) {
+//                         GetScnMdlWrapper()->SetUpdate(false);
+//                         mPlaybackState = MokoMokoMdl::ePlaybackState_NotPlaying;
+//                     }
+//                 }
+//             }
+//         }
+//     }
 }
 
 void MokoMokoMdl::PlayAnimation() {
