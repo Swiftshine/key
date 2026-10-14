@@ -1,16 +1,31 @@
 #ifndef FLUFF_FULLSORTSCENE_H
 #define FLUFF_FULLSORTSCENE_H
 
-#include "types.h"
-#include "gfl/gflScene.h"
-#include "gfl/gflScnMdlWrapper.h"
-#include "graphics/FullSortGroup.h"
-#include "object/effect/EffectObj.h"
+#include <types.h>
+
+#include <gfl/gflScene.h>
+#include <gfl/gflScnMdlWrapper.h>
+
+#include <graphics/FullSortGroup.h>
+#include <object/effect/EffectObj.h>
 
 // size: 0x34
 class FullSortScene : public gfl::Scene {
 public:
-    
+    enum SceneID {
+        eSceneID_Far_05  = 0,
+        eSceneID_Far_04  = 1,
+        eSceneID_Far_03  = 2,
+        eSceneID_Far_02  = 3,
+        eSceneID_Far_01  = 4,
+        eSceneID_Map     = 5,
+        eSceneID_Game    = 6,
+        eSceneID_Near_01 = 7,
+        eSceneID_Near_02 = 8,
+        eSceneID_Near_03 = 9,
+        eSceneID_Near_04 = 10,
+        eSceneID_Near_05 = 11
+    };
 
     FullSortScene(u8 heapID, u32 maxNumChildren, u32 maxNumScnObj);
 

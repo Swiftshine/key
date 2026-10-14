@@ -4,9 +4,9 @@
 #include <gfl/gflResFileInfo.h>
 
 #include <graphics/FbMokoMoko.h>
+#include <graphics/FullSortScene.h>
 #include <graphics/NwAnmCtrl.h>
 #include <misc/ScopedPointers.h>
-#include <util/FullSortSceneUtil.h>
 
 /// @note Size: `0x20`
 class MokoMokoMdl {
@@ -17,11 +17,11 @@ public:
         ePlaybackState_Reverse    = 2
     };
 
-    MokoMokoMdl(FullSortSceneUtil::SceneID sceneID, const char* pFilepath, f32 zPos);
+    MokoMokoMdl(FullSortScene::SceneID sceneID, const char* pFilepath, f32 zPos);
     virtual ~MokoMokoMdl();
 
     gfl::ScnMdlWrapper* GetScnMdlWrapper() const;
-    void Reset(FullSortSceneUtil::SceneID sceneID, f32 zPos);
+    void Reset(FullSortScene::SceneID sceneID, f32 zPos);
     void PlayAnimation(FbMokoMoko* pFramebuffer);
     void PlayAnimation();
     void SetMatrix(const gfl::Vec2& rTranslation);

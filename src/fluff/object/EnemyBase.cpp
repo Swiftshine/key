@@ -58,7 +58,7 @@ void EnemyBase::SetScene(s32 selectType, s32 sceneIndex, f32 zPos) {
         }
 
         case 0: { // default
-            SetScene(FullSortSceneUtil::eSceneID_Game);
+            SetScene(FullSortScene::eSceneID_Game);
             mSavedPosition.z = 0.0f;
             static_cast<FlfGameObj*>(this)->SetPosition(mSavedPosition);
             break;
