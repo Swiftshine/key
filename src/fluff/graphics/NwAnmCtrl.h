@@ -48,6 +48,14 @@ public:
         return GetAnimationByIndex(mCurrentAnimIndex);
     }
 
+    gfl::ScnMdlWrapper* GetScnMdlWrapper() const {
+        return mScnMdlWrapper.ptr();
+    }
+
+    u32 getCurrentAnimationIndex() const {
+        return mCurrentAnimIndex;
+    }
+
     /* Class Members */
 
     /* 0x04 */ gfl::ResFileObject mResFileObject;

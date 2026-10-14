@@ -613,11 +613,11 @@ config.libs = [
         "objects": [
             Object(NonMatching, "fluff/graphics/Cam.cpp"),
             Object(NonMatching, "fluff/graphics/FbMem.cpp"),
+            Object(NonMatching, "fluff/graphics/FbMokoMoko.cpp"),
             Object(NonMatching, "fluff/graphics/FlfMdlDraw.cpp"),
             Object(Matching, "fluff/graphics/FlfMdlMod.cpp"),
             Object(NonMatching, "fluff/graphics/HermiteCurveBase.cpp"),
             Object(NonMatching, "fluff/graphics/MNEB.cpp"),
-            Object(NonMatching, "fluff/graphics/MokoMokoMdl.cpp"),
             Object(NonMatching, "fluff/graphics/WoolBaseMdl.cpp"),
             Object(Matching, "fluff/graphics/effect/FriendEffect.cpp"),
         ],

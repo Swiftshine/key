@@ -155,8 +155,8 @@ fluff/object/collision/FlfMdlCollision.cpp:
 fluff/object/collision/ColNurbsInfo.cpp:
 	.text       start:0x800F1344 end:0x800F3A70
 
-fluff/graphics/MokoMokoMdl.cpp:
-	.text       start:0x801101CC end:0x80110840
+fluff/graphics/FbMokoMoko.cpp:
+	.text       start:0x801101CC end:0x80111070
 
 fluff/manager/EnemyMdlManager.cpp:
 	.text       start:0x80111B7C end:0x801129BC

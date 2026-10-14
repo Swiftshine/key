@@ -121,7 +121,7 @@ namespace gfl {
             z = nz;
         }
 
-        void operator=(const Vec2& other);
+        // void operator=(const Vec2& other);
 
         // Vec3 operator+(const Base& rhs) const;
         Vec3 operator+(const Vec3& other) const;
